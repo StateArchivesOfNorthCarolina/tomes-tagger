@@ -1,4 +1,4 @@
-from xml.PickleMsg import TomesPickleMsg as tpm
+from tomes_xml.PickleMsg import TomesPickleMsg as tpm
 
 
 class StatPackages:

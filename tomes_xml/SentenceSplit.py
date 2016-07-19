@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from nltk.tokenize import sent_tokenize
-from nltk import pos_tag
 from spacy.en import English
 import re
 from nltk.tag.stanford import StanfordNERTagger
@@ -132,8 +131,8 @@ class SpacySplitter(SentenceSplit):
 
 class StanfordSplitter(SentenceSplit):
     tagger = StanfordNERTagger(
-        'E:\RESOURCES\NLP_TOOLS\stanford-ner-2015-12-09\classifiers\english.all.3class.distsim.crf.ser.gz',
-        'E:\RESOURCES\NLP_TOOLS\stanford-ner-2015-12-09\stanford-ner.jar')
+        '.\stanford\english.all.3class.distsim.crf.ser.gz',
+        '.\stanford\stanford-ner.jar')
 
     def get_sentences(self, text):
         """

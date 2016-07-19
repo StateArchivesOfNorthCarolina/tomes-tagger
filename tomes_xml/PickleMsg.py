@@ -12,10 +12,12 @@ class TomesPickleMsg:
         self.unpickled_messages = msgs
         self.pkl_package = None
 
-    def serialize(self, location=default_loc):
+    def serialize(self, msgs=None, location=default_loc):
         """
          @type location str
         """
+        if msgs:
+            self.unpickled_messages = msgs
         f = gzip.GzipFile(location, 'wb')
         pkl.dump(self.unpickled_messages, f, -1)
         self.unpickled_messages = None

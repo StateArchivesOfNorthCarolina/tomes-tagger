@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
-import re
-import sys
-import xml.etree.ElementTree as ET
-
-import PickleMsg
-from FromStats import FromStat
-from Message import MessageBlock as MesBlock
 import logging
-import gzip
-import shutil
+import re
+import xml.etree.cElementTree as ET
+from Message import MessageBlock as MesBlock
+
 
 class XmlElementSearch:
     """A class to extract elements from XML giving an element name and a namespace
     """
     requested_element = []
 
-    def __init__(self, f, element, namespace, logger=None):
+    def __init__(self, element, namespace, logger=None):
         self.logger = logger or logging.getLogger()
+        self.con_log = logging.getLogger('console_info')
 
         self.search_element = element
         self.ns = "{"+namespace+"}"
@@ -26,38 +22,19 @@ class XmlElementSearch:
         self.msgs = []
         self.count = 0
 
-        self.tree = ET.parse(f)
-        self.root = self.tree.getroot()
-        # self.gzip_xml(f)
-
-    def get_contents_of_element(self):
-        nsp = self.ns + self.search_element
-        elements = list(self.root.iter(nsp))
-        self.count = len(elements)
-        for elem in elements:
-            self.logger.info("Processing: " + str(self.count))
-            self.count -= 1
-            self.msg = MesBlock(elem, self.ns)
-            self.msgs.append(self.msg)
-
-    def get_contents(self, item):
-        context = ET.iterparse(item, events=('start', 'end'))
-        _, root = next(context)
+    def get_contents(self, fi):
+        self.logger.info("Parsing the EAXS file...")
+        context = ET.iterparse(fi, events=('start', 'end'))
+        context = iter(context)
+        event, root = context.next()
         for event, elem in context:
             if event == 'end' and elem.tag == self.tag:
-                yield elem
+                self.count += 1
+                self.con_log.info("Extracting message {}".format(self.count))
+                msg = MesBlock(elem, self.ns)
+                self.msgs.append(msg)
                 root.clear()
 
-    def gzip_xml(self, f):
-        with open(f, 'rb') as f_in, gzip.open('gziped_xml_account.gz', 'wb') as f_out:
-            shutil.copyfileobj(f_in, f_out)
-
-    def gunzip_xml(self, f):
-        file_content = None
-        with gzip.open(f, 'rb') as f:
-            file_content = f.read()
-
-        return file_content
 
 class XmlCleanElements:
     """A class to define methods for cleaning up an elements contents
@@ -69,6 +46,7 @@ class XmlCleanElements:
         @rtype list[Message.MessageBlock]
         """
         self.logger = logger or logging.getLogger()
+        self.console_log = logging.getLogger('console_info')
         self.el = el
         self.cleaned_list = []
 
@@ -78,66 +56,79 @@ class XmlCleanElements:
             self.single_clean(clean_pattern)
 
     def single_clean(self, pattern):
+        count = 0
         for elem in self.el:
             """
             @type elem Message.MessageBlock
             """
+            self.console_log.info('Filtering message {}'.format(elem.message_id))
             try:
                 if not re.match(pattern, elem.content[0]):
                     self.cleaned_list.append(elem)
-            except IndexError as e:
-                self.logger.error(e.message)
-            except AttributeError as e:
-                self.logger.error(e.message)
+                    continue
+                count += 1
+            except IndexError:
+                self.logger.error("This message had no content {}".format(elem.message_id))
+                count += 1
+            except AttributeError:
+                self.logger.error("This message had no content {}".format(elem.message_id))
+                count += 1
+        self.logger.info("{} messages removed based on regexes".format(count))
 
     def multiple_clean(self, patterns):
+        count = 0
         for elem in self.el:
             """
             @type elem Message.MessageBlock
             """
+            no_match = True
+            self.console_log.info('Filtering message {}'.format(elem.message_id))
             for pat in patterns:
                 try:
-                    if not re.match(pat, elem.content[0]):
-                        self.cleaned_list.append(elem)
+                    if re.match(pat, elem.content[0]):
+                        no_match = False
                 except IndexError as e:
-                    self.logger.error(e.message)
+                    self.logger.error("This message had no content {}".format(elem.message_id))
+                    count += 1
                 except AttributeError as e:
-                    self.logger.error(e.message)
+                    self.logger.error("This message had no content {}".format(elem.message_id))
+                    count += 1
+
+            if no_match:
+                # The pattern did not match on the message add message to the list
+                self.cleaned_list.append(elem)
+            else:
+                # The pattern did match
+                count += 1
+        self.logger.info("{} messages removed based on regexes or because no content".format(count))
 
 
-def first_build():
-    print("Searching Elements...\n")
-    xes = XmlElementSearch(sys.argv[1], sys.argv[2], sys.argv[3])
-    print("Cleaning Elements...\n")
-    xce = XmlCleanElements(xes.msgs, '^.*[0-9]+:[0-9]+ [A-Z]+.:')
-    print("Cleaning Elements...\n")
-    xce = XmlCleanElements(xce.cleaned_list, '[A-Z]+:[A-Z]+\\n')
-    print("Cleaning Elements...\n")
-    xce = XmlCleanElements(xce.cleaned_list, '^\\n\\n-+.[a-zA-Z]+ [a-zA-Z]+.-+\\n')
-    print("Serializing Messages...")
+class XmlDedupeElements:
+    """ A class to remove duplicate Messages
 
-    pickler = PickleMsg.TomesPickleMsg(xce.cleaned_list)
-    pickler.serialize()
+    """
 
+    def __init__(self, el, logger=None):
+        """
+        @type el list[Message.MessageBlock]
+        @rtype list[Message.MessageBlock]
+        """
+        self.logger = logger or logging.getLogger()
+        self.console_log = logging.getLogger('console_info')
+        self.el = el
+        self.deduped_list = []
+        self.list_of_ids = []
 
+        for elem in self.el:
+            """
+            @type elem Message.MessageBlock
+            """
+            if elem.message_id in self.list_of_ids:
+                continue
+            else:
+                self.list_of_ids.append(elem.message_id)
+                self.deduped_list.append(elem)
 
-
-
-if __name__ == "__main__":
-    # Run if changes needed such as class modifications
-    # first_build()
-
-    # msgs = unpickle()
-
-    # clean = ContentCleaner(msgs)
-    # clean.set_message_ratios()
-    # msgs = clean.msgs
-    msgs = unpickle()
-    fs = FromStat()
-    for m in msgs:
-        tup = []
-        for a, b in m.sentence_vectors:
-            tup.append(b)
-        fs.set_message_shape(tuple(tup), m.from_id)
-
-    pickle(fs, "from_stats.pkl")
+        self.logger.info("Found {} duplicate messages, and removed them from the corpus."
+                         .format((len(self.el) - len(self.deduped_list))))
+        print()

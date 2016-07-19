@@ -1,5 +1,3 @@
-import logging
-
 
 class MessageBlock:
     def __init__(self, msg, namespace):
