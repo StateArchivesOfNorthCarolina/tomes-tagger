@@ -50,6 +50,9 @@ def cleaner(msg_list=None):
         unpickler.serialize(xce.cleaned_list, 'cleaned_msgs.pkl')
 
 
+def test_answer():
+    assert True
+
 if __name__ == "__main__":
     load_logger()
     log = logging.getLogger()
