@@ -1,0 +1,2753 @@
+From MAILER-DAEMON@iedispatch.maildistiller.com Tue Feb 28 13:29:05 2012
+Date: Thu, 8 Oct 2009 10:20:26 +0100
+From: Mail Delivery System <MAILER-DAEMON@iedispatch.maildistiller.com>
+Subject: [Aid4Mail Trial tag #6399] Undelivered Mail Returned to Sender
+To: governor.office@nc.gov
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 8bit
+Message-ID: <20091008092026.7409D56060@iedispatch.maildistiller.com>
+X-Folder: Undeliverable
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:monstrousm6@royaltool.com>monstrousm6@royaltool.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: a1.royaltool.com.localhost.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: iedispatch.maildistiller.com
+
+monstrousm6@royaltool.com
+a1.royaltool.com.localhost #<a1.royaltool.com.localhost #5.1.1 smtp; 550 5.1.1 User unknown> #SMTP#
+
+Original message headers:
+
+Received: from ies01r01.maildistiller.com (unknown [10.15.14.21])	by
+ iedispatch.maildistiller.com (Mail Distiller ESMTP Server) with ESMTP id
+ 2BED85641D	for &lt;monstrousm6@royaltool.com&gt;; Thu,  8 Oct 2009 10:20:16 +0100
+ (BST)
+Received: from mdac5.dcc.mdlocal (unknown [10.15.14.45])
+	by ies01r01.maildistiller.com (Mail Distiller ESMTP Server) with ESMTP id 32AE13E011
+	for &lt;monstrousm6@royaltool.com&gt;; Thu,  8 Oct 2009 10:20:16 +0100 (BST)
+X-Virus-Scanned: Mail Distiller engine
+Received: from relay3.ncmail.net (relay3.ncmail.net [149.168.220.200])
+	by ies01r01.maildistiller.com (Mail Distiller ESMTP Server) with ESMTP id 16B703E044
+	for &lt;monstrousm6@royaltool.com&gt;; Thu,  8 Oct 2009 10:20:04 +0100 (BST)
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4ABAC6790014EC85 for monstrousm6@royaltool.com; Thu, 8 Oct 2009 05:20:03 -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay3.ncmail.net (7.3.118)
+        id 4ABAC67800145CF4 for monstrousm6@royaltool.com; Thu, 8 Oct 2009 05:20:03 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi; Thu, 8 Oct 2009 05:20:02
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: James Werner &lt;monstrousm6@royaltool.com&gt;
+Date: Thu, 8 Oct 2009 05:20:50 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpH+KCF1cygaNXPRqyyLx4VFu0SKQAAAACF
+Message-ID: &lt;F69BA5A617362147B216EE0298723199102889EB5A@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE0298723199102889EB5ANCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+X-MDID: UCSYd6A3oiIx
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6400] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Mon, 12 Oct 2009 19:08:30 -0400
+Message-ID: <4AD34A8D00015225@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:churchoflaestadius@dc.rr.com>churchoflaestadius@dc.rr.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: cdptpa-smtpin01.mail.rr.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+churchoflaestadius@dc.rr.com
+cdptpa-smtpin01.mail.rr.com #<cdptpa-smtpin01.mail.rr.com #5.1.1 smtp; 550 5.1.1 - Invalid mailbox: churchoflaestadius@dc.rr.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00015221 for churchoflaestadius@dc.rr.com; Mon, 12 Oct 2009
+ 19:08:27 -0400
+Received: from smtp.mail.nc.gov (10.12.5.154) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00011A57 for churchoflaestadius@dc.rr.com; Mon, 12 Oct 2009 19:08:27 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep33.ad.ncmail ([10.12.5.154]) with mapi; Mon, 12 Oct 2009 19:08:27
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: church &lt;churchoflaestadius@dc.rr.com&gt;
+Date: Mon, 12 Oct 2009 19:09:17 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpLkQXFDaF18hAcRJqypL0lddgwfAAAAAAA
+Message-ID: &lt;F69BA5A617362147B216EE029872319910289ACE41@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE029872319910289ACE41NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6401] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Mon, 12 Oct 2009 21:52:13 -0400
+Message-ID: <4AD34A8D000165F4@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mailing@thegrandevents.com>mailing@thegrandevents.com
+A communication failure occurred during the delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+mailing@thegrandevents.com
+#< #5.4.3> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000165F3 for mailing@thegrandevents.com; Mon, 12 Oct 2009
+ 21:52:13 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00012D44 for mailing@thegrandevents.com; Mon, 12 Oct 2009 21:52:13 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Mon, 12 Oct 2009 21:52:13
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;mailing@thegrandevents.com&quot; &lt;mailing@thegrandevents.com&gt;
+Date: Mon, 12 Oct 2009 21:53:03 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpLp+bciNbe9PXISiyxobJfzCgmLgAAAADz
+Message-ID: &lt;F69BA5A617362147B216EE029872319910289AD1F2@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE029872319910289AD1F2NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6402] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Tue, 13 Oct 2009 09:52:45 -0400
+Message-ID: <4AD34D940001FD84@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:support@securitynet.com>support@securitynet.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: smtp.secureserver.net.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+support@securitynet.com
+smtp.secureserver.net #<smtp.secureserver.net #5.1.1 smtp; 550 #5.1.0 Address rejected support@securitynet.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940001FD7A for support@securitynet.com; Tue, 13 Oct 2009
+ 09:52:43 -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940001A2F5 for support@securitynet.com; Tue, 13 Oct 2009 09:52:42 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Tue, 13 Oct 2009 09:52:37
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;support@securitynet.com&quot; &lt;support@securitynet.com&gt;
+Date: Tue, 13 Oct 2009 09:53:27 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpMDIoCPl2ogDU2T1yzBcjZnzYzbwAAAABi
+Message-ID: &lt;F69BA5A617362147B216EE029872319910289BD07D@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE029872319910289BD07DNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6403] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Tue, 13 Oct 2009 13:10:40 -0400
+Message-ID: <4AD34D94000289DA@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mail@feoi.info>mail@feoi.info
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: smtp.secureserver.net.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+mail@feoi.info
+smtp.secureserver.net #<smtp.secureserver.net #5.1.1 smtp; 550 #5.1.0 Address rejected mail@feoi.info> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94000289D8 for mail@feoi.info; Tue, 13 Oct 2009 13:10:39
+ -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400022AD9 for mail@feoi.info; Tue, 13 Oct 2009 13:10:39 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi; Tue, 13 Oct 2009 13:10:38
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Information &lt;mail@feoi.info&gt;
+Date: Tue, 13 Oct 2009 13:11:29 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpMKDRtKbpZxnp1RfqUOPg9CaqSsAAAAACq
+Message-ID: &lt;F69BA5A617362147B216EE029872319910289BD25A@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE029872319910289BD25ANCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postoffice@ncmail.net Tue Feb 28 13:29:05 2012
+Content-Type: text/plain;
+	charset="us-ascii"
+From: <postoffice@ncmail.net>
+Subject: [Aid4Mail Trial tag #6404] Returned mail: User unknown
+To: Office of the Governor <governor.office@nc.gov>
+Date: Tue, 13 Oct 2009 21:42:30 +0000
+Message-ID: <20091013214227853.OSDF16243@cdptpa-omta02.mail.rr.com>
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:moconnell@sc.rr.com>moconnell@sc.rr.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: postoffice.local.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: postoffice.local
+
+moconnell@sc.rr.com
+postoffice.local #<postoffice.local #5.1.1 SMTP;550 5.1.1 unknown or illegal alias: moconnell@sc.rr.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;gov.perdue-bounces@lists.nc.gov&gt;
+Received: from cdptpa-mxlb.mail.rr.com ([10.127.255.85])          by
+ cdptpa-imta07.mail.rr.com with ESMTP          id
+ &lt;20091009224805739.VRUO10428@cdptpa-imta07.mail.rr.com&gt;          for
+ &lt;moconnell@sc.rr.com&gt;; Fri, 9 Oct 2009 22:48:05 +0000
+Return-Path: &lt;gov.perdue-bounces@lists.nc.gov&gt;
+X-Cloudmark-Score: 0
+X-RR-Connecting-IP: 149.168.220.22
+X-Authority-Analysis: v=1.0 c=1 a=n7YeHoEa2ksA:10 a=oBWuD2lKAAAA:8 a=duZ1aHJNAAAA:8 a=pGLkceISAAAA:8 a=Ij5v5rQcAAAA:8 a=aPdedAVyAAAA:8 a=19U4CvMgiLEyg1em93AA:9 a=L4b3_rFaQs9cKKs60PUA:7 a=KONeAGp6LRUBvNA31GlniE1MCVEA:4 a=BTgvLqqBgSIA:10 a=DAtLNFkk-SIA:10 a=kIwKkiR30c4A:10 a=MSl-tDqOz04A:10 a=HxgW4i0b6_kmEniV:21 a=3660-PJXv2pQOJLM:21 a=o4s-i1NbnLOmehQ1-44A:9 a=gGBPpcSeWccNRT6O9yYA:7 a=HAUGu63iyCN4Cy-agseAyv6fK8QA:4 a=Wy2HrkNSukMA:10 a=2PQ6y7Rs1InUeFUA:21 a=4HH6LloGnmFx0WPR:21 a=ZAOpII6hZv2UfgYvQnYA:9 a=oL9MrhkWbJ0hAc6G5H3tQXEpzxQA:4 a=KQqxNPgzF0kA:10 a=zVecN-p9-H5ZChoz:18 a=DfDqtq3RkljCOWub_psA:9 a=JVYZ--cX-lr7885u7Hct7Dry3F4A:4 a=komRu0_8QplsNH6E:18 a=mFHzkSWpBR6d3WwDf1MA:9 a=azUDAjBwDa2ZfzoLl8ZEq5FT0TUA:4
+Received: from [149.168.220.22] ([149.168.220.22:36294] helo=lists.ncmail.net)
+	by cdptpa-iedge05.mail.rr.com (envelope-from &lt;gov.perdue-bounces@lists.nc.gov&gt;)
+	(ecelerity 2.2.2.39 r()) with ESMTP
+	id 2E/2F-21364-4ADBFCA4; Fri, 09 Oct 2009 22:48:05 +0000
+Received: from localhost ([127.0.0.1] helo=admin.ncmail.net)
+	by lists.ncmail.net with esmtp (Exim 4.43)
+	id 1MwMe7-0001ig-Ba; Fri, 09 Oct 2009 17:05:04 -0400
+Received: from relay3.ncmail.net ([149.168.220.200])
+	by lists.ncmail.net with esmtp (Exim 4.43) id 1MwMay-0001XI-Ph
+	for gov.perdue@lists.nc.gov; Fri, 09 Oct 2009 17:01:49 -0400
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+	id 4ABAC6790017F931 for gov.perdue@lists.nc.gov;
+	Fri, 9 Oct 2009 17:00:50 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay3.ncmail.net (7.3.118)
+	id 4ABAC67800175737 for gov.perdue@lists.nc.gov;
+	Fri, 9 Oct 2009 17:00:50 -0400
+Received: from NCWITMXMBEV36.ad.ncmail ([10.12.5.35]) by
+	ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi;
+	Fri, 9 Oct 2009 16:58:41 -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;gov.perdue@lists.nc.gov&quot; &lt;gov.perdue@lists.nc.gov&gt;
+Date: Fri, 9 Oct 2009 17:02:33 -0400
+Thread-Topic: Focusing on Jobs
+Thread-Index: AcpI8VP5GtIEce8/SOOdbxtVqSbdoA==
+Message-ID: &lt;2463CE9EEE8C19409070F859F8F46FE53D98DF93B5@NCWITMXMBEV36.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SeenV-Signature: 2f809ed534b1acb79ac1a8a864f7e791
+X-Mailman-Approved-At: Fri, 09 Oct 2009 17:03:34 -0400
+Subject: [Office of Governor Bev Perdue] Focusing on Jobs
+X-BeenThere: gov.perdue@lists.nc.gov
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: &lt;governor.office@nc.gov&gt;
+List-Id: Office of Governor Bev Perdue Newsletter &lt;gov.perdue.lists.nc.gov&gt;
+List-Unsubscribe: &lt;http://lists.ncmail.net/mailman/options/gov.perdue&gt;,
+	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=unsubscribe&gt;
+List-Archive: &lt;http://lists.ncmail.net/pipermail/gov.perdue&gt;
+List-Post: &lt;mailto:gov.perdue@lists.nc.gov&gt;
+List-Help: &lt;mailto:gov.perdue-request@lists.nc.gov?subject=help&gt;
+List-Subscribe: &lt;http://lists.ncmail.net/mailman/listinfo/gov.perdue&gt;,
+	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=subscribe&gt;
+Content-Type: multipart/mixed; boundary=&quot;===============1386243391==&quot;
+Errors-To: gov.perdue-bounces@lists.nc.gov
+X-SeenV-Signature: 2402f38e58f3b5a495112bad93b6b8a9
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6405] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Wed, 14 Oct 2009 15:47:01 -0400
+Message-ID: <4AD34D940004D60D@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:aida_gon7763@yahoo.com>aida_gon7763@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: c.mx.mail.yahoo.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+aida_gon7763@yahoo.com
+c.mx.mail.yahoo.com #<c.mx.mail.yahoo.com #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940004D608 for aida_gon7763@yahoo.com; Wed, 14 Oct 2009
+ 15:46:59 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400046320 for aida_gon7763@yahoo.com; Wed, 14 Oct 2009 15:46:59 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Wed, 14 Oct 2009 15:46:57
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Aida Gonzalez &lt;aida_gon7763@yahoo.com&gt;
+Date: Wed, 14 Oct 2009 15:47:49 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNBzVusexSfjjWQCO+BMaMnHLMjgAAAAA3
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A0FF7A@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A0FF7ANCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6406] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Wed, 14 Oct 2009 15:47:47 -0400
+Message-ID: <4AD34D940004D692@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:aida_gon7763@yahoo.com>aida_gon7763@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: e.mx.mail.yahoo.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+aida_gon7763@yahoo.com
+e.mx.mail.yahoo.com #<e.mx.mail.yahoo.com #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940004D691 for aida_gon7763@yahoo.com; Wed, 14 Oct 2009
+ 15:47:47 -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94000463A6 for aida_gon7763@yahoo.com; Wed, 14 Oct 2009 15:47:47 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Wed, 14 Oct 2009 15:47:47
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Coco Gonzalez &lt;aida_gon7763@yahoo.com&gt;
+Date: Wed, 14 Oct 2009 15:48:39 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNB1NOSh1IY02vRiOrBBAdYYjmWwAAAAAE
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A0FF7B@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A0FF7BNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6407] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Wed, 14 Oct 2009 15:49:30 -0400
+Message-ID: <4AD34A8D0004AF0C@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:aida_gon7763@yahoo.com>aida_gon7763@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: g.mx.mail.yahoo.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+aida_gon7763@yahoo.com
+g.mx.mail.yahoo.com #<g.mx.mail.yahoo.com #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0004AF06 for aida_gon7763@yahoo.com; Wed, 14 Oct 2009
+ 15:49:26 -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000460D2 for aida_gon7763@yahoo.com; Wed, 14 Oct 2009 15:49:26 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi; Wed, 14 Oct 2009 15:49:25
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Vera Gonzalez &lt;aida_gon7763@yahoo.com&gt;
+Date: Wed, 14 Oct 2009 15:50:17 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNB44o+OTmNDaSSS6MK06r0exLrwAAAACj
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A0FF7D@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A0FF7DNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6408] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Wed, 14 Oct 2009 16:51:19 -0400
+Message-ID: <4AD34DE00004E74B@relay3.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:tjeffersn@lbc4nc.com>tjeffersn@lbc4nc.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mx.mse21.exchange.ms.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay3.ncmail.net
+
+tjeffersn@lbc4nc.com
+mx.mse21.exchange.ms #<mx.mse21.exchange.ms #5.1.1 smtp; 550 5.1.1 User unknown> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE00004E728 for tjeffersn@lbc4nc.com; Wed, 14 Oct 2009
+ 16:51:03 -0400
+Received: from NCWITESSWWB501 (207.192.33.179) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE00004803C for tjeffersn@lbc4nc.com; Wed, 14 Oct 2009 16:51:03 -0400
+Message-ID: &lt;4AD34DE00004803C@relay3.ncmail.net&gt; (added by postmaster@ncmail.net)
+MIME-Version: 1.0
+From: &lt;governor.office@nc.gov&gt;
+To: &lt;tjeffersn@lbc4nc.com&gt;
+Date: Wed, 14 Oct 2009 16:51:03 -0400
+Subject: Your Suggestion
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+Content-Transfer-Encoding: quoted-printable
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6409] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Wed, 14 Oct 2009 19:15:37 -0400
+Message-ID: <4AD34A8D0004EFEF@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:larazablanca@dc.rr.com>larazablanca@dc.rr.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: cdptpa-smtpin01.mail.rr.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+larazablanca@dc.rr.com
+cdptpa-smtpin01.mail.rr.com #<cdptpa-smtpin01.mail.rr.com #5.1.1 smtp; 550 5.1.1 - Invalid mailbox: larazablanca@dc.rr.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0004EFEE for larazablanca@dc.rr.com; Wed, 14 Oct 2009
+ 19:15:34 -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0004A05F for larazablanca@dc.rr.com; Wed, 14 Oct 2009 19:15:34 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi; Wed, 14 Oct 2009 19:15:34
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: blanca &lt;larazablanca@dc.rr.com&gt;
+Date: Wed, 14 Oct 2009 19:16:25 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNJFm0lo8/S9YXTFudDt5sCoF5eAAAAAEA
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A10332@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A10332NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6410] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 15 Oct 2009 01:02:26 -0400
+Message-ID: <4AD34DE000052E7C@relay3.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mailing@thegrandevents.com>mailing@thegrandevents.com
+A communication failure occurred during the delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay3.ncmail.net
+
+mailing@thegrandevents.com
+#< #5.4.3> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE000052E7B for mailing@thegrandevents.com; Thu, 15 Oct 2009
+ 01:02:26 -0400
+Received: from smtp.mail.nc.gov (10.12.5.154) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE00004C6DD for mailing@thegrandevents.com; Thu, 15 Oct 2009 01:02:26 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep33.ad.ncmail ([10.12.5.154]) with mapi; Thu, 15 Oct 2009 01:02:25
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;mailing@thegrandevents.com&quot; &lt;mailing@thegrandevents.com&gt;
+Date: Thu, 15 Oct 2009 01:03:17 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNVM5tZOuU2UfsQoCYro86QW0+TQAAAAB4
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A109A0@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A109A0NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6411] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 15 Oct 2009 01:02:29 -0400
+Message-ID: <4AD34A8D00051622@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:thelmigroup@yahoo.com>thelmigroup@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: d.mx.mail.yahoo.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+thelmigroup@yahoo.com
+d.mx.mail.yahoo.com #<d.mx.mail.yahoo.com #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00051621 for thelmigroup@yahoo.com; Thu, 15 Oct 2009
+ 01:02:28 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0004C603 for thelmigroup@yahoo.com; Thu, 15 Oct 2009 01:02:28 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Thu, 15 Oct 2009 01:02:27
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;thelmigroup@yahoo.com&quot; &lt;thelmigroup@yahoo.com&gt;
+Date: Thu, 15 Oct 2009 01:03:19 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNVNARISBzxTqTTMKnP/034Wo7SAAAAAAn
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A109A1@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A109A1NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From Mailer-Daemon@eigbox.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery System <Mailer-Daemon@eigbox.net>
+To: governor.office@nc.gov
+Subject: [Aid4Mail Trial tag #6412] Mail delivery failed: returning message to sender
+Message-ID: <E1MyQGA-0000D6-Hb@bosmailscan16.eigbox.net>
+Date: Thu, 15 Oct 2009 09:20:50 -0400
+Content-Type: text/plain
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+This message was created automatically by mail delivery software.
+
+A message that you sent could not be delivered to one or more of its
+recipients. This is a permanent error. The following address(es) failed:
+
+  gospeltruth_gtmmedia_if@pop.startlogic.com
+    (generated from gospeltruth@gtmmedia.com)
+    mailbox is full: retry timeout exceeded
+
+------ This is a copy of the message's headers. ------
+
+Return-path: <governor.office@nc.gov>
+Received: from bosimpinc01.eigbox.net ([10.20.13.1])
+	by bosmailscan16.eigbox.net with esmtp (Exim)
+	id 1MyQG9-0002TB-O3
+	for gospeltruth@gtmmedia.com; Thu, 15 Oct 2009 09:20:49 -0400
+Received: from relay1.ncmail.net ([149.168.220.196])
+	by bosimpinc01.eigbox.net with NO UCE
+	id t1Lp1c03K4EqjAD091Lpao; Thu, 15 Oct 2009 09:20:49 -0400
+X-EN-OrigIP: 149.168.220.196
+X-EN-IMPSID: t1Lp1c03K4EqjAD091Lpao
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00057CC9 for gospeltruth@gtmmedia.com; Thu, 15 Oct 2009 09:20:49 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00052A61 for gospeltruth@gtmmedia.com; Thu, 15 Oct 2009 09:20:49 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Thu, 15 Oct 2009 09:20:48
+ -0400
+From: Office of the Governor <governor.office@nc.gov>
+To: "gospeltruth@gtmmedia.com" <gospeltruth@gtmmedia.com>
+Date: Thu, 15 Oct 2009 09:21:40 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNmm49ugxhY42cQkqIQiAa/XptQAAAAACX
+Message-ID: <F69BA5A617362147B216EE02987231991028A35F8D@NCWITMXMBEV42.ad.ncmail>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_F69BA5A617362147B216EE02987231991028A35F8DNCWITMXMBEV42_"
+MIME-Version: 1.0
+X-EN-Class: impinc
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6413] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 15 Oct 2009 09:20:58 -0400
+Message-ID: <4AD34DE0000599F4@relay3.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:Mailer-Daemon@eigbox.net>Mailer-Daemon@eigbox.net
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mx.eigbox.net.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay3.ncmail.net
+
+Mailer-Daemon@eigbox.net
+mx.eigbox.net #<mx.eigbox.net #5.1.1 smtp; 550 5.1.1 <mailer-daemon@eigbox.net> recipient rejected> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE0000599F1 for Mailer-Daemon@eigbox.net; Thu, 15 Oct 2009
+ 09:20:58 -0400
+Received: from smtp.mail.nc.gov (10.12.5.154) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE0000530B0 for Mailer-Daemon@eigbox.net; Thu, 15 Oct 2009 09:20:57 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep33.ad.ncmail ([10.12.5.154]) with mapi; Thu, 15 Oct 2009 09:20:57
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Mail Delivery System &lt;Mailer-Daemon@eigbox.net&gt;
+Date: Thu, 15 Oct 2009 09:21:49 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNmnPpdnFnp8P7T/Wvr/OfTHo9AwAAAADD
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A35F8E@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A35F8ENCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6414] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 15 Oct 2009 09:35:17 -0400
+Message-ID: <4AD34A8D00058720@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:scherry7@suddenlink.ne>scherry7@suddenlink.ne
+A communication failure occurred during the delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+scherry7@suddenlink.ne
+#< #5.4.3> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0005871F for scherry7@suddenlink.ne; Thu, 15 Oct 2009
+ 09:35:17 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00053455 for scherry7@suddenlink.ne; Thu, 15 Oct 2009 09:35:17 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Thu, 15 Oct 2009 09:35:16
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Stevie Cherry &lt;scherry7@suddenlink.ne&gt;
+Date: Thu, 15 Oct 2009 09:36:08 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNnHOiOQDBQJMBQCyTtQD1hx+0HwAAAABm
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A35F90@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A35F90NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6415] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 15 Oct 2009 11:34:59 -0400
+Message-ID: <4AD34D940006094E@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:noreply@myyearbook.com>noreply@myyearbook.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: aspmx.l.google.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+noreply@myyearbook.com
+aspmx.l.google.com #<aspmx.l.google.com #5.1.1 smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try\r\n550-5.1.1 double-checking the recipient's email address for typos or\r\n550-5.1.1 unnecessary spaces. Learn more at \r\n550 5.1.1 http://mail.google.com/support/bin/answer.py?answer=6596 35si356678qyk.96> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400060948 for noreply@myyearbook.com; Thu, 15 Oct 2009
+ 11:34:58 -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400058D4B for noreply@myyearbook.com; Thu, 15 Oct 2009 11:34:58 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Thu, 15 Oct 2009 11:33:26
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: myYearbook &lt;noreply@myyearbook.com&gt;
+Date: Thu, 15 Oct 2009 11:34:19 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpNrPZg+j/DSr4bSvyCfHnC9agvvwAAAAC3
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A360F8@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A360F8NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@streamlined.host Tue Feb 28 13:29:05 2012
+From: <postmaster@streamlined.host>
+To: <governor.office@nc.gov>
+Date: Thu, 15 Oct 2009 09:53:16 -0700
+Content-Type: text/plain;
+	charset="us-ascii"
+Message-ID: <9bef91ad-ef5a-40e6-a10a-1ea82a0dcf72>
+In-Reply-To: <F69BA5A617362147B216EE02987231991028A35F7E@NCWITMXMBEV42.ad.ncmail>
+Subject: [Aid4Mail Trial tag #6416] Delivery Delayed: Auto Response
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery is delayed to these recipients or distribution lists:
+
+<mailto:rlane@bracrtf.com>rlane@bracrtf.com
+
+Subject: Auto Response
+
+This message has not yet been delivered. Microsoft Exchange will continue to try delivering the message on your behalf.
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6417] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 16 Oct 2009 10:40:49 -0400
+Message-ID: <4AD34A8D00074647@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:momma43@ncrr.com>momma43@ncrr.com
+The format of the recipient's e-mail address isn't valid. A valid address looks like this: username@contoso.com. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try sending the message again, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: ncrr.com.inbound10.symantecmail.net.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+momma43@ncrr.com
+ncrr.com.inbound10.symantecmail.net #<ncrr.com.inbound10.symantecmail.net #5.1.3 smtp; 553 mailbox momma43@ncrr.com is restricted (Mode: normal)> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00074642 for momma43@ncrr.com; Fri, 16 Oct 2009 10:40:48
+ -0400
+Received: from NCWITESSWWB501 (207.192.33.179) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0006E713 for momma43@ncrr.com; Fri, 16 Oct 2009 10:40:47 -0400
+Message-ID: &lt;4AD34A8D0006E713@relay1.ncmail.net&gt; (added by postmaster@ncmail.net)
+MIME-Version: 1.0
+From: &lt;governor.office@nc.gov&gt;
+To: &lt;momma43@ncrr.com&gt;
+Date: Fri, 16 Oct 2009 10:40:48 -0400
+Subject: Your Question for Governor
+Content-Type: text/html; charset=&quot;utf-8&quot;
+Content-Transfer-Encoding: base64
+
+From postmaster@ncmail.net Tue Feb 28 13:29:05 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6418] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 16 Oct 2009 10:40:50 -0400
+Message-ID: <4AD34A8D0007464C@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:momma43@ncrr.com>momma43@ncrr.com
+The format of the recipient's e-mail address isn't valid. A valid address looks like this: username@contoso.com. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try sending the message again, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: ncrr.com.inbound10.symantecmail.net.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+momma43@ncrr.com
+ncrr.com.inbound10.symantecmail.net #<ncrr.com.inbound10.symantecmail.net #5.1.3 smtp; 553 mailbox momma43@ncrr.com is restricted (Mode: normal)> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00074649 for momma43@ncrr.com; Fri, 16 Oct 2009 10:40:49
+ -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0006E718 for momma43@ncrr.com; Fri, 16 Oct 2009 10:40:49 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Fri, 16 Oct 2009 10:40:49
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;momma43@ncrr.com&quot; &lt;momma43@ncrr.com&gt;
+Date: Fri, 16 Oct 2009 10:41:41 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpObsZRw62OtBiTRsCYofd2nmH4ogAAAADN
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A36161@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A36161NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From Postmaster@mail.rr.com Tue Feb 28 13:29:05 2012
+To: governor.office@nc.gov
+From: Mail Administrator <Postmaster@mail.rr.com>
+Subject: [Aid4Mail Trial tag #6419] Mail System Error - Returned Mail
+Date: Fri, 16 Oct 2009 23:06:55 +0000
+Message-ID: <20091016230655565.UNOA12700@cdptpa-omta03.mail.rr.com>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:charles@mastschulz.local>charles@mastschulz.local
+The recipient's e-mail address is invalid. Microsoft Exchange will not try to redeliver this message for you. Please check the recipient's e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mastschulz.local.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: cdptpa-omta03.mail.rr.com
+
+charles@mastschulz.local
+mastschulz.local #<mastschulz.local #5.1.2> #SMTP#
+
+Original message headers:
+
+Received: from mail.mastschulz.com ([70.61.84.142])          by
+ cdptpa-omta03.mail.rr.com with SMTP          id
+ &lt;20091016230652719.UNND12700@cdptpa-omta03.mail.rr.com&gt;          for
+ &lt;charles@mastschulz.local&gt;; Fri, 16 Oct 2009 23:06:52 +0000
+Received: from mastmail.MASTFIRM.local ([10.0.0.22]) by mail.mastschulz.com with Microsoft SMTPSVC(6.0.3790.3959);
+	 Fri, 16 Oct 2009 19:06:52 -0400
+Received: from mail pickup service by mastmail.MASTFIRM.local with Microsoft SMTPSVC;
+	 Fri, 16 Oct 2009 19:06:50 -0400
+Received: (qmail 5681 invoked from network); 16 Oct 2009 23:05:52 -0000
+Received: from unknown (HELO p3pismtp01-011.prod.phx3.secureserver.net) ([10.6.12.11])          (envelope-sender &lt;gov.perdue-bounces@lists.nc.gov&gt;)          by smtp05-02.prod.mesa1.secureserver.net (qmail-1.03) with SMTP          for &lt;ksmith@trianglerentacar.com&gt;; 16 Oct 2009 23:05:52 -0000
+Received: from admin.ncmail.net (HELO lists.ncmail.net) ([149.168.220.22])  by p3pismtp01-011.prod.phx3.secureserver.net with ESMTP; 16 Oct 2009 16:05:49 -0700
+Received: from localhost ([127.0.0.1] helo=admin.ncmail.net)	by lists.ncmail.net with esmtp (Exim 4.43)	id 1Mysoi-0002A6-Kk; Fri, 16 Oct 2009 15:50:25 -0400
+Received: from relay1.ncmail.net ([149.168.220.196])	by lists.ncmail.net with esmtp (Exim 4.43) id 1MysjJ-0001VK-K0	for gov.perdue@lists.nc.gov; Fri, 16 Oct 2009 15:44:50 -0400
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)	id 4AD34A8D0007D5A0 for gov.perdue@lists.nc.gov;	Fri, 16 Oct 2009 15:44:49 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)	id 4AD34A8D00077183 for gov.perdue@lists.nc.gov;	Fri, 16 Oct 2009 15:44:49 -0400
+Received: from NCWITMXMBEV36.ad.ncmail ([10.12.5.35]) by	ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi;	Fri, 16 Oct 2009 15:44:48 -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &lt;gov.perdue@lists.nc.gov&gt;
+Date: Fri, 16 Oct 2009 15:48:47 -0400
+Thread-Topic: Gov. Appalled by Court Ruling
+Thread-Index: AcpOmX9ArAaw6HWwTCC47joNIfVAFw==
+Message-ID: &lt;2463CE9EEE8C19409070F859F8F46FE53D98F27B1E@NCWITMXMBEV36.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SeenV-Signature: 5020c34a71127ee37f7faab486c83114
+X-SeenV-Signature: 39beaaf5c89133664aff8acb1338c669
+X-Mailman-Approved-At: Fri, 16 Oct 2009 15:45:58 -0400
+Subject: [Office of Governor Bev Perdue] Gov. Appalled by Court Ruling
+X-BeenThere: gov.perdue@lists.nc.gov
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: &lt;governor.office@nc.gov&gt;
+List-Id: Office of Governor Bev Perdue Newsletter &lt;gov.perdue.lists.nc.gov&gt;
+List-Unsubscribe: &lt;http://lists.ncmail.net/mailman/options/gov.perdue&gt;,	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=unsubscribe&gt;
+List-Archive: &lt;http://lists.ncmail.net/pipermail/gov.perdue&gt;
+List-Post: &lt;mailto:gov.perdue@lists.nc.gov&gt;
+List-Help: &lt;mailto:gov.perdue-request@lists.nc.gov?subject=help&gt;
+List-Subscribe: &lt;http://lists.ncmail.net/mailman/listinfo/gov.perdue&gt;,	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=subscribe&gt;
+Content-Type: multipart/mixed; boundary=&quot;===============0735258641==&quot;
+Errors-To: gov.perdue-bounces@lists.nc.gov
+X-Nonspam: Statistical 63%
+X-OriginalArrivalTime: 16 Oct 2009 23:06:50.0754 (UTC) FILETIME=[5818AE20:01CA4EB5]
+Return-Path: governor.office@nc.gov
+
+From Postmaster@mail.rr.com Tue Feb 28 13:29:04 2012
+To: governor.office@nc.gov
+From: Mail Administrator <Postmaster@mail.rr.com>
+Subject: [Aid4Mail Trial tag #6420] Mail System Error - Returned Mail
+Date: Sat, 17 Oct 2009 01:06:36 +0000
+Message-ID: <20091017010636634.ZNIX16243@cdptpa-omta02.mail.rr.com>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:george@mastschulz.local>george@mastschulz.local
+The recipient's e-mail address is invalid. Microsoft Exchange will not try to redeliver this message for you. Please check the recipient's e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mastschulz.local.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: cdptpa-omta02.mail.rr.com
+
+george@mastschulz.local
+mastschulz.local #<mastschulz.local #5.1.2> #SMTP#
+
+Original message headers:
+
+Received: from mail.mastschulz.com ([70.61.84.142])          by
+ cdptpa-omta02.mail.rr.com with SMTP          id
+ &lt;20091017010633721.ZNHZ16243@cdptpa-omta02.mail.rr.com&gt;          for
+ &lt;george@mastschulz.local&gt;; Sat, 17 Oct 2009 01:06:33 +0000
+Received: from mastmail.MASTFIRM.local ([10.0.0.22]) by mail.mastschulz.com with Microsoft SMTPSVC(6.0.3790.3959);
+	 Fri, 16 Oct 2009 21:06:32 -0400
+Received: from mail pickup service by mastmail.MASTFIRM.local with Microsoft SMTPSVC;
+	 Fri, 16 Oct 2009 21:06:31 -0400
+Received: (qmail 6766 invoked from network); 17 Oct 2009 01:04:53 -0000
+Received: from unknown (HELO p3pismtp01-006.prod.phx3.secureserver.net) ([10.6.12.6])          (envelope-sender &lt;gov.perdue-bounces@lists.nc.gov&gt;)          by smtp09-02.prod.mesa1.secureserver.net (qmail-1.03) with SMTP          for &lt;cstrickland@thecolvillecompany.com&gt;; 17 Oct 2009 01:04:53 -0000
+Received: from admin.ncmail.net (HELO lists.ncmail.net) ([149.168.220.22])  by p3pismtp01-006.prod.phx3.secureserver.net with ESMTP; 16 Oct 2009 18:04:50 -0700
+Received: from localhost ([127.0.0.1] helo=admin.ncmail.net)	by lists.ncmail.net with esmtp (Exim 4.43)	id 1Mysog-0002A6-Nf; Fri, 16 Oct 2009 15:50:23 -0400
+Received: from relay1.ncmail.net ([149.168.220.196])	by lists.ncmail.net with esmtp (Exim 4.43) id 1MysjJ-0001VK-K0	for gov.perdue@lists.nc.gov; Fri, 16 Oct 2009 15:44:50 -0400
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)	id 4AD34A8D0007D5A0 for gov.perdue@lists.nc.gov;	Fri, 16 Oct 2009 15:44:49 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)	id 4AD34A8D00077183 for gov.perdue@lists.nc.gov;	Fri, 16 Oct 2009 15:44:49 -0400
+Received: from NCWITMXMBEV36.ad.ncmail ([10.12.5.35]) by	ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi;	Fri, 16 Oct 2009 15:44:48 -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &lt;gov.perdue@lists.nc.gov&gt;
+Date: Fri, 16 Oct 2009 15:48:47 -0400
+Thread-Topic: Gov. Appalled by Court Ruling
+Thread-Index: AcpOmX9ArAaw6HWwTCC47joNIfVAFw==
+Message-ID: &lt;2463CE9EEE8C19409070F859F8F46FE53D98F27B1E@NCWITMXMBEV36.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SeenV-Signature: 5020c34a71127ee37f7faab486c83114
+X-SeenV-Signature: 39beaaf5c89133664aff8acb1338c669
+X-Mailman-Approved-At: Fri, 16 Oct 2009 15:45:58 -0400
+Subject: [Office of Governor Bev Perdue] Gov. Appalled by Court Ruling
+X-BeenThere: gov.perdue@lists.nc.gov
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: &lt;governor.office@nc.gov&gt;
+List-Id: Office of Governor Bev Perdue Newsletter &lt;gov.perdue.lists.nc.gov&gt;
+List-Unsubscribe: &lt;http://lists.ncmail.net/mailman/options/gov.perdue&gt;,	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=unsubscribe&gt;
+List-Archive: &lt;http://lists.ncmail.net/pipermail/gov.perdue&gt;
+List-Post: &lt;mailto:gov.perdue@lists.nc.gov&gt;
+List-Help: &lt;mailto:gov.perdue-request@lists.nc.gov?subject=help&gt;
+List-Subscribe: &lt;http://lists.ncmail.net/mailman/listinfo/gov.perdue&gt;,	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=subscribe&gt;
+Content-Type: multipart/mixed; boundary=&quot;===============0735258641==&quot;
+Errors-To: gov.perdue-bounces@lists.nc.gov
+X-Nonspam: Statistical 45%
+X-OriginalArrivalTime: 17 Oct 2009 01:06:31.0456 (UTC) FILETIME=[1020DA00:01CA4EC6]
+Return-Path: governor.office@nc.gov
+
+From postmaster@nextel.blackberry.net Tue Feb 28 13:29:04 2012
+Date: Sat, 17 Oct 2009 08:44:52 +0000
+Message-ID: <200910170844.n9H8gj6r022102@srs.bis.na.blackberry.com>
+To: governor.office@nc.gov
+From: <postmaster@nextel.blackberry.net>
+Subject: [Aid4Mail Trial tag #6421] Delivery Status Notification(Failure)
+Content-Type: text/plain;
+	charset="iso-8859-1"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 7bit
+
+Your message:
+To: koloko@nextel.blackberry.net
+Subject: [Office of Governor Bev Perdue] Governor Extends Gift Ban
+Sent Date: 29:33 +0000
+has not been delivered to the recipient's BlackBerry Handheld.
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6422] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 22 Oct 2009 14:01:53 -0400
+Message-ID: <4AD34A8D000F3C65@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mailing@thegrandevents.com>mailing@thegrandevents.com
+A communication failure occurred during the delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+mailing@thegrandevents.com
+#< #5.4.3> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000F3C64 for mailing@thegrandevents.com; Thu, 22 Oct 2009
+ 14:01:52 -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000E9925 for mailing@thegrandevents.com; Thu, 22 Oct 2009 14:01:52 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi; Thu, 22 Oct 2009 14:01:50
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;mailing@thegrandevents.com&quot; &lt;mailing@thegrandevents.com&gt;
+Date: Thu, 22 Oct 2009 14:02:46 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpTQdw3jlO8zw6tR9+FoTh8MiukkAAAAACA
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A365D4@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A365D4NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6423] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 22 Oct 2009 14:01:50 -0400
+Message-ID: <4AD34A8D000F3C4E@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:thelmigroup@yahoo.com>thelmigroup@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: b.mx.mail.yahoo.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+thelmigroup@yahoo.com
+b.mx.mail.yahoo.com #<b.mx.mail.yahoo.com #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000F3C41 for thelmigroup@yahoo.com; Thu, 22 Oct 2009
+ 14:01:49 -0400
+Received: from smtp.mail.nc.gov (10.12.5.154) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000E9912 for thelmigroup@yahoo.com; Thu, 22 Oct 2009 14:01:49 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep33.ad.ncmail ([10.12.5.154]) with mapi; Thu, 22 Oct 2009 14:01:48
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;thelmigroup@yahoo.com&quot; &lt;thelmigroup@yahoo.com&gt;
+Date: Thu, 22 Oct 2009 14:02:44 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpTQdsNFFkSrAkIRdG6RU7Vt5zc1wAAAADf
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A365D3@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A365D3NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6424] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 22 Oct 2009 16:02:37 -0400
+Message-ID: <4AD34D9400101E86@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mlangdon1@nc.rr.com>mlangdon1@nc.rr.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: cdptpa-smtpin01.mail.rr.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+mlangdon1@nc.rr.com
+cdptpa-smtpin01.mail.rr.com #<cdptpa-smtpin01.mail.rr.com #5.1.1 smtp; 550 5.1.1 - Invalid mailbox: mlangdon1@nc.rr.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400101E7E for mlangdon1@nc.rr.com; Thu, 22 Oct 2009 16:02:34
+ -0400
+Received: from NCWITESSWWB501 (207.192.33.179) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94000F331F for mlangdon1@nc.rr.com; Thu, 22 Oct 2009 16:02:34 -0400
+Message-ID: &lt;4AD34D94000F331F@relay2.ncmail.net&gt; (added by postmaster@ncmail.net)
+MIME-Version: 1.0
+From: &lt;governor.office@nc.gov&gt;
+To: &lt;mlangdon1@nc.rr.com&gt;
+Date: Thu, 22 Oct 2009 16:02:34 -0400
+Subject: Your Question for Governor
+Content-Type: text/html; charset=&quot;utf-8&quot;
+Content-Transfer-Encoding: base64
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6425] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 22 Oct 2009 16:02:38 -0400
+Message-ID: <4AD34A8D000F7EAF@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mlangdon1@nc.rr.com>mlangdon1@nc.rr.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: cdptpa-smtpin01.mail.rr.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+mlangdon1@nc.rr.com
+cdptpa-smtpin01.mail.rr.com #<cdptpa-smtpin01.mail.rr.com #5.1.1 smtp; 550 5.1.1 - Invalid mailbox: mlangdon1@nc.rr.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000F7EAE for mlangdon1@nc.rr.com; Thu, 22 Oct 2009 16:02:38
+ -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000EDA09 for mlangdon1@nc.rr.com; Thu, 22 Oct 2009 16:02:38 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Thu, 22 Oct 2009 16:02:38
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;mlangdon1@nc.rr.com&quot; &lt;mlangdon1@nc.rr.com&gt;
+Date: Thu, 22 Oct 2009 16:03:34 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpTUrxHiAnmx5gcRFCKEWbrUbKvkgAAAAB0
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A3661D@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A3661DNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6426] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 22 Oct 2009 16:36:44 -0400
+Message-ID: <4AD34DE00010049B@relay3.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:chriszh2@yahoo.com>chriszh2@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: d.mx.mail.yahoo.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay3.ncmail.net
+
+chriszh2@yahoo.com
+d.mx.mail.yahoo.com #<d.mx.mail.yahoo.com #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE00010048D for chriszh2@yahoo.com; Thu, 22 Oct 2009 16:36:39
+ -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE0000F4D9D for chriszh2@yahoo.com; Thu, 22 Oct 2009 16:36:39 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Thu, 22 Oct 2009 16:36:36
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Chriss &lt;chriszh2@yahoo.com&gt;
+Date: Thu, 22 Oct 2009 16:37:32 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpTV3tRdeupgO1LQZGDGBNiUxk+vgAAAABY
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028A3662D@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028A3662DNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From MAILER-DAEMON@mail.bis.na.blackberry.com Tue Feb 28 13:29:04 2012
+Message-ID: <200910222244.n9MMiE1l022340@smtp11.state.nc.us>
+Date: Thu, 22 Oct 2009 22:44:14 +0000
+To: governor.office@nc.gov
+From: Mail Delivery System <MAILER-DAEMON@mail.bis.na.blackberry.com>
+Subject: [Aid4Mail Trial tag #6427] Delivery Status Notification (Failure)
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:postmaster@uscellular.blackberry.com>postmaster@uscellular.blackberry.com
+An error occurred while trying to deliver this message to the recipient's e-mail address. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: [172.20.192.16].
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: as69.bis.na.blackberry.com
+
+postmaster@uscellular.blackberry.com
+[172.20.192.16] #<[172.20.192.16] #5.0.0 smtp; 5.1.0 - Unknown address error 550-'5.1.1 <postmaster@uscellular.blackberry.com>: Recipient address rejected: User unknown in virtual alias table' (delivery attempts: 0)> #SMTP#
+
+Original message headers:
+
+Received: from relay2.ncmail.net ([149.168.220.198])  by
+ as69.bis.na.blackberry.com with ESMTP; 22 Oct 2009 22:44:14 +0000
+Received: from relay2.ncmail.net ([149.168.220.198])
+  by as69.bis.na.blackberry.com with ESMTP; 22 Oct 2009 22:44:14 +0000
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94001057F4 for postmaster@uscellular.blackberry.com; Thu, 22 Oct 2009 18:44:13 -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94000F6AB6 for postmaster@uscellular.blackberry.com; Thu, 22 Oct 2009 18:44:13 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi; Thu, 22 Oct 2009 18:44:13
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;postmaster@uscellular.blackberry.com&quot;
+	&lt;postmaster@uscellular.blackberry.com&gt;
+Date: Thu, 22 Oct 2009 18:45:10 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpTaU9gZl6+s4BnRXWqDCcsL8/BpAAAAABa
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E29B@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E29BNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From MAILER-DAEMON@devtow.securemail14.com Tue Feb 28 13:29:04 2012
+Date: Fri, 23 Oct 2009 00:10:29 +0000
+From: Mail Delivery Subsystem <MAILER-DAEMON@devtow.securemail14.com>
+Message-ID: <200910230010.n9MNnglA033620@devtow.securemail14.com>
+To: <governor.office@nc.gov>
+Content-Type: text/plain;
+	charset="us-ascii"
+Subject: [Aid4Mail Trial tag #6428] Warning: could not send message for past 4 hours
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery is delayed to these recipients or distribution lists:
+
+<mailto:news@idevnews.com>news@idevnews.com
+
+Subject: Auto Response
+
+This message has not yet been delivered. Microsoft Exchange will continue to try delivering the message on your behalf.
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6429] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Thu, 22 Oct 2009 21:47:06 -0400
+Message-ID: <4AD34D9400106C61@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:Mailer-Daemon@host1.arcdesignnc.com>Mailer-Daemon@host1.arcdesignnc.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: host1.arcdesignnc.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+Mailer-Daemon@host1.arcdesignnc.com
+host1.arcdesignnc.com #<host1.arcdesignnc.com #5.1.1 smtp; 550 "Unknown User"> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400106C60 for Mailer-Daemon@host1.arcdesignnc.com; Thu, 22
+ Oct 2009 21:47:06 -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94000F7E60 for Mailer-Daemon@host1.arcdesignnc.com; Thu, 22 Oct 2009 21:47:06 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Thu, 22 Oct 2009 21:47:06
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Mail Delivery System &lt;Mailer-Daemon@host1.arcdesignnc.com&gt;
+Date: Thu, 22 Oct 2009 21:48:02 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpTgtunqh3ZhocZRoORhSA7yF9/GQAAAAC4
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E313@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E313NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From Mailer-Daemon@eigbox.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery System <Mailer-Daemon@eigbox.net>
+To: governor.office@nc.gov
+Subject: [Aid4Mail Trial tag #6430] Mail delivery failed: returning message to sender
+Message-ID: <E1N1MbR-0001lX-IU@bosmailscan11.eigbox.net>
+Date: Fri, 23 Oct 2009 12:02:57 -0400
+Content-Type: text/plain
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+This message was created automatically by mail delivery software.
+
+A message that you sent could not be delivered to one or more of its
+recipients. This is a permanent error. The following address(es) failed:
+
+  gospeltruth_gtmmedia_if@pop.startlogic.com
+    (generated from gospeltruth@gtmmedia.com)
+    mailbox is full: retry timeout exceeded
+
+------ This is a copy of the message's headers. ------
+
+Return-path: <governor.office@nc.gov>
+Received: from bosimpinc02.eigbox.net ([10.20.13.2])
+	by bosmailscan11.eigbox.net with esmtp (Exim)
+	id 1N1MbP-0004Ag-Ow
+	for gospeltruth@gtmmedia.com; Fri, 23 Oct 2009 12:02:55 -0400
+Received: from relay3.ncmail.net ([149.168.220.200])
+	by bosimpinc02.eigbox.net with NO UCE
+	id wG2v1c02l4L1QXH0AG2vls; Fri, 23 Oct 2009 12:02:55 -0400
+X-EN-OrigIP: 149.168.220.200
+X-EN-IMPSID: wG2v1c02l4L1QXH0AG2vls
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE000110047 for gospeltruth@gtmmedia.com; Fri, 23 Oct 2009 12:02:55 -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE0001042D0 for gospeltruth@gtmmedia.com; Fri, 23 Oct 2009 12:02:54 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Fri, 23 Oct 2009 12:02:55
+ -0400
+From: Office of the Governor <governor.office@nc.gov>
+To: "gospeltruth@gtmmedia.com" <gospeltruth@gtmmedia.com>
+Date: Fri, 23 Oct 2009 12:03:51 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpT+mnS+LLtaF9XTzWuLrrcV3oGBAAAAABJ
+Message-ID: <F69BA5A617362147B216EE02987231991028B1E475@NCWITMXMBEV42.ad.ncmail>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_F69BA5A617362147B216EE02987231991028B1E475NCWITMXMBEV42_"
+MIME-Version: 1.0
+X-EN-Class: impinc
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6431] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 23 Oct 2009 12:19:52 -0400
+Message-ID: <4AD34D9400113D8B@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:Mailer-Daemon@eigbox.net>Mailer-Daemon@eigbox.net
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mx.eigbox.net.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+Mailer-Daemon@eigbox.net
+mx.eigbox.net #<mx.eigbox.net #5.1.1 smtp; 550 5.1.1 <mailer-daemon@eigbox.net> recipient rejected> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400113D89 for Mailer-Daemon@eigbox.net; Fri, 23 Oct 2009
+ 12:19:52 -0400
+Received: from smtp.mail.nc.gov (10.12.5.154) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94001047E7 for Mailer-Daemon@eigbox.net; Fri, 23 Oct 2009 12:19:52 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep33.ad.ncmail ([10.12.5.154]) with mapi; Fri, 23 Oct 2009 12:19:51
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Mail Delivery System &lt;Mailer-Daemon@eigbox.net&gt;
+Date: Fri, 23 Oct 2009 12:20:47 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpT/MeZ/sz1WA2JSWO1V7TB4t6AQwAAAABR
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E476@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E476NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6432] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 23 Oct 2009 13:02:01 -0400
+Message-ID: <4AD34DE00011184D@relay3.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:clarkauction0ffi@bellsouth.net>clarkauction0ffi@bellsouth.net
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: gateway-f1.isp.att.net.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay3.ncmail.net
+
+clarkauction0ffi@bellsouth.net
+gateway-f1.isp.att.net #<gateway-f1.isp.att.net #5.1.1 smtp; 551 not our customer> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE0001116FA for clarkauction0ffi@bellsouth.net; Fri, 23 Oct
+ 2009 12:58:49 -0400
+Received: from NCWITESSWWB501 (207.192.33.179) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE0001058CB for clarkauction0ffi@bellsouth.net; Fri, 23 Oct 2009 12:58:49 -0400
+Message-ID: &lt;4AD34DE0001058CB@relay3.ncmail.net&gt; (added by postmaster@ncmail.net)
+MIME-Version: 1.0
+From: &lt;governor.office@nc.gov&gt;
+To: &lt;clarkauction0ffi@bellsouth.net&gt;
+Date: Fri, 23 Oct 2009 12:58:49 -0400
+Subject: Your Suggestion
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+Content-Transfer-Encoding: quoted-printable
+
+From Postmaster@triad.twcbc.com Tue Feb 28 13:29:04 2012
+To: SRS0=Me8A=GM=nc.gov=governor.office@bounce.secureserver.net
+From: Mail Administrator <Postmaster@triad.twcbc.com>
+Subject: [Aid4Mail Trial tag #6433] Mail System Error - Returned Mail
+Date: Fri, 23 Oct 2009 17:28:26 +0000
+Message-ID: <20091023172826864.FRKU6047@cdptpa-bc-imta02.mail.rr.com>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:vfm-80327103@triad.twcbc.com>vfm-80327103@triad.twcbc.com
+The recipient's mailbox is full and can't accept messages now. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or contact the recipient directly.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: cdptpa-bc-imta02.mail.rr.com
+
+vfm-80327103@triad.twcbc.com
+#< #4.2.2> #SMTP#
+
+Original message headers:
+
+Received: from cdptpa-bc-iedgelb.mail.rr.com ([10.127.255.171])          by
+ cdptpa-bc-imta02.mail.rr.com with ESMTP          id
+ &lt;20091023172826825.FRKT6047@cdptpa-bc-imta02.mail.rr.com&gt;          for
+ &lt;vfm-80327103@triad.twcbc.com&gt;;          Fri, 23 Oct 2009 17:28:26 +0000
+Return-Path: &lt;SRS0=Me8A=GM=nc.gov=governor.office@bounce.secureserver.net&gt;
+X-Cloudmark-Score: 0
+X-RR-Connecting-IP: 64.202.189.203
+X-Authority-Analysis: v=1.0 c=1 a=QZ+Opql8urMIxlNhBWuVVg==:17 a=oBWuD2lKAAAA:8 a=geyo5BXk0YY3kslpOggA:9 a=m-QZCW39l6NbISqDWzkA:7 a=V65W7cdRVYRT9akaELAK1yUs9JAA:4 a=1l9Htw6EbKUA:10 a=DAtLNFkk-SIA:10 a=N_deAA_cecAA:10 a=yMhMjlubAAAA:8 a=SSmOFEACAAAA:8 a=AskTqgryVYTFaTCzk9AA:9 a=xao2ZkJH60mQJxaW7QUA:7 a=EjTqOFaxCXUPBi7BezbaZ7vh68YA:4
+Received: from [64.202.189.203] ([64.202.189.203:35378] helo=smtp15-01.prod.mesa1.secureserver.net)
+	by cdptpa-bc-iedge01.mail.rr.com (envelope-from &lt;SRS0=Me8A=GM=nc.gov=governor.office@bounce.secureserver.net&gt;)
+	(ecelerity 2.2.2.39 r()) with ESMTP
+	id 1D/50-17983-AB7E1EA4; Fri, 23 Oct 2009 17:28:26 +0000
+Received: (qmail 26794 invoked by uid 1000); 23 Oct 2009 17:28:23 -0000
+Delivered-To: jadavis@davisuniqueproperties.com
+Received: (qmail 26789 invoked from network); 23 Oct 2009 17:28:23 -0000
+Received: from unknown (HELO p3plnpre01-15.eml.phx3.secureserver.net) ([72.167.218.100])
+          (envelope-sender &lt;governor.office@nc.gov&gt;)
+          by smtp15-01.prod.mesa1.secureserver.net (qmail-1.03) with SMTP
+          for &lt;jadavis@davisuniqueproperties.com&gt;; 23 Oct 2009 17:28:23 -0000
+Received: (qmail 7835 invoked from network); 23 Oct 2009 17:28:23 -0000
+Received: from relay1.ncmail.net ([149.168.220.196])
+          (envelope-sender &lt;governor.office@nc.gov&gt;)
+          by p3plnpre01-15.eml.phx3.secureserver.net (qmail-ldap-1.03) with SMTP
+          for &lt;jadavis@davisuniqueproperties.com&gt;; 23 Oct 2009 17:28:23 -0000
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0010ABE4 for jadavis@davisuniqueproperties.com; Fri, 23 Oct 2009 13:28:18 -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D000FFF8A for jadavis@davisuniqueproperties.com; Fri, 23 Oct 2009 13:28:18 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Fri, 23 Oct 2009 13:28:17
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;jadavis@davisuniqueproperties.com&quot; &lt;jadavis@davisuniqueproperties.com&gt;
+Date: Fri, 23 Oct 2009 13:29:14 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUBlcMS14R3VVwR5un3KWn3iUYAwAAAADu
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E49B@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E49BNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6434] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 23 Oct 2009 15:02:10 -0400
+Message-ID: <4AD34D94001183F0@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:00000@000000.com>00000@000000.com
+Microsoft Exchange has been trying to deliver this message without success and has stopped trying. Please try sending this message again, or provide the following diagnostic text to your system administrator.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+00000@000000.com
+#< #4.4.7> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94000E3C29 for 00000@000000.com; Wed, 21 Oct 2009 15:00:33
+ -0400
+Received: from NCWITESSWWB501 (207.192.33.179) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94000D61E3 for 00000@000000.com; Wed, 21 Oct 2009 15:00:33 -0400
+Message-ID: &lt;4AD34D94000D61E3@relay2.ncmail.net&gt; (added by postmaster@ncmail.net)
+MIME-Version: 1.0
+From: &lt;governor.office@nc.gov&gt;
+To: &lt;00000@000000.com&gt;
+Date: Wed, 21 Oct 2009 15:00:34 -0400
+Subject: Your Suggestion
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+Content-Transfer-Encoding: quoted-printable
+
+From postmaster@uscellular.blackberry.com Tue Feb 28 13:29:04 2012
+Date: Fri, 23 Oct 2009 20:36:26 +0000
+Message-ID: <200910232036.n9NKLv1l013682@srs.bis.na.blackberry.com>
+To: governor.office@nc.gov
+From: <postmaster@uscellular.blackberry.com>
+Subject: [Aid4Mail Trial tag #6435] Delivery Status Notification(Failure)
+Content-Type: text/plain;
+	charset="iso-8859-1"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 7bit
+
+Your message:
+To: phildixon@uscellular.blackberry.com
+Subject: [Office of Governor Bev Perdue] Governor Says Offenders Will Not Be
+	Turned Loose
+Sent Date: 36:29 +0000
+has not been delivered to the recipient's BlackBerry Handheld.
+
+From MAILER-DAEMON@mail.bis.na.blackberry.com Tue Feb 28 13:29:04 2012
+Message-ID: <200910232036.n9NKacZa024362@smtp11.state.nc.us>
+Date: Fri, 23 Oct 2009 20:36:38 +0000
+To: governor.office@nc.gov
+From: Mail Delivery System <MAILER-DAEMON@mail.bis.na.blackberry.com>
+Subject: [Aid4Mail Trial tag #6436] Delivery Status Notification (Failure)
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:postmaster@uscellular.blackberry.com>postmaster@uscellular.blackberry.com
+An error occurred while trying to deliver this message to the recipient's e-mail address. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: [172.20.192.16].
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: as05.bis.na.blackberry.com
+
+postmaster@uscellular.blackberry.com
+[172.20.192.16] #<[172.20.192.16] #5.0.0 smtp; 5.1.0 - Unknown address error 550-'5.1.1 <postmaster@uscellular.blackberry.com>: Recipient address rejected: User unknown in virtual alias table' (delivery attempts: 0)> #SMTP#
+
+Original message headers:
+
+Received: from relay1.ncmail.net ([149.168.220.196])  by
+ as05.bis.na.blackberry.com with ESMTP; 23 Oct 2009 20:36:37 +0000
+Received: from relay1.ncmail.net ([149.168.220.196])
+  by as05.bis.na.blackberry.com with ESMTP; 23 Oct 2009 20:36:37 +0000
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00110D3F for postmaster@uscellular.blackberry.com; Fri, 23 Oct 2009 16:36:37 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00105899 for postmaster@uscellular.blackberry.com; Fri, 23 Oct 2009 16:36:36 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Fri, 23 Oct 2009 16:36:36
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;postmaster@uscellular.blackberry.com&quot;
+	&lt;postmaster@uscellular.blackberry.com&gt;
+Date: Fri, 23 Oct 2009 16:37:33 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUIKYKGsd0qZB4T4asmEE4Bgfn1wAAAABb
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E4D3@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E4D3NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postoffice@ncmail.net Tue Feb 28 13:29:04 2012
+Content-Type: text/plain;
+	charset="us-ascii"
+From: <postoffice@ncmail.net>
+Subject: [Aid4Mail Trial tag #6437] Returned mail: User unknown
+To: Office of the Governor <governor.office@nc.gov>
+Date: Fri, 23 Oct 2009 21:29:36 +0000
+Message-ID: <20091023212933106.XGWG6016@cdptpa-omta03.mail.rr.com>
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:moconnell@sc.rr.com>moconnell@sc.rr.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: postoffice.local.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: postoffice.local
+
+moconnell@sc.rr.com
+postoffice.local #<postoffice.local #5.1.1 SMTP;550 5.1.1 unknown or illegal alias: moconnell@sc.rr.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;gov.perdue-bounces@lists.nc.gov&gt;
+Received: from cdptpa-mxlb.mail.rr.com ([10.127.255.91])          by
+ cdptpa-imta07.mail.rr.com with ESMTP          id
+ &lt;20091023203421730.DFIU27979@cdptpa-imta07.mail.rr.com&gt;          for
+ &lt;moconnell@sc.rr.com&gt;; Fri, 23 Oct 2009 20:34:21 +0000
+Return-Path: &lt;gov.perdue-bounces@lists.nc.gov&gt;
+X-Cloudmark-Score: 0
+X-RR-Connecting-IP: 149.168.220.22
+X-Authority-Analysis: v=1.0 c=1 a=XdqzoIwyxzYA:10 a=oBWuD2lKAAAA:8 a=Ij5v5rQcAAAA:8 a=LSp5tTr04-Sn6KaL6pQA:9 a=8q88GhCXpS0TrynEL8cA:7 a=NRsNXM9C6HrkLFiqtWiPcqH_kgcA:4 a=BTgvLqqBgSIA:10 a=DAtLNFkk-SIA:10 a=kIwKkiR30c4A:10 a=4m9CAwVcaUBz8OEf:21 a=jOTMw4myYlNF9nwn:21 a=3j4BkbkPAAAA:8 a=JAralIE_AAAA:8 a=JqEG_dyiAAAA:8 a=vnREMb7VAAAA:8 a=Nffk6zqCre9_5uxZQV0A:9 a=738mj3s53dGDLrlYUMkA:7 a=Q_0qAYUpgVdmJQPq6FclaU8wx8YA:4 a=rAypwKER2t07oEx9:21 a=S_omu8e09hmqfSxb:21 a=ALqtft964k2x_e5x0b0A:9 a=87Ow4KcD92xkUzvSssqxJtO160IA:4 a=0bwPlpDAAAAA:8 a=3onIBTnKG_zcC8e48Q0A:9 a=4cDNs_aM5UFyLPSRytb2M7K7pA4A:4 a=KQqxNPgzF0kA:10 a=ocVot1liQebDYRB2:18 a=mFHzkSWpBR6d3WwDf1MA:9 a=azUDAjBwDa2ZfzoLl8ZEq5FT0TUA:4
+Received: from [149.168.220.22] ([149.168.220.22:53426] helo=lists.ncmail.net)
+	by cdptpa-iedge10.mail.rr.com (envelope-from &lt;gov.perdue-bounces@lists.nc.gov&gt;)
+	(ecelerity 2.2.2.39 r()) with ESMTP
+	id 03/1E-00629-C4312EA4; Fri, 23 Oct 2009 20:34:21 +0000
+Received: from localhost ([127.0.0.1] helo=admin.ncmail.net)
+	by lists.ncmail.net with esmtp (Exim 4.43)
+	id 1N1QpM-0000br-0y; Fri, 23 Oct 2009 16:33:36 -0400
+Received: from relay2.ncmail.net ([149.168.220.198])
+	by lists.ncmail.net with esmtp (Exim 4.43) id 1N1PjK-0004YW-LZ
+	for gov.perdue@lists.nc.gov; Fri, 23 Oct 2009 15:23:20 -0400
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+	id 4AD34D940011909C for gov.perdue@lists.nc.gov;
+	Fri, 23 Oct 2009 15:23:18 -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay2.ncmail.net (7.3.118)
+	id 4AD34D940010951F for gov.perdue@lists.nc.gov;
+	Fri, 23 Oct 2009 15:23:18 -0400
+Received: from NCWITMXMBEV36.ad.ncmail ([10.12.5.35]) by
+	ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi;
+	Fri, 23 Oct 2009 15:23:18 -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;gov.perdue@lists.nc.gov&quot; &lt;gov.perdue@lists.nc.gov&gt;
+Date: Fri, 23 Oct 2009 15:27:19 -0400
+Thread-Topic: Governor Says Offenders Will Not Be Turned Loose
+Thread-Index: AcpT+kMB7fNxfEI1QnKWiJDnSoLdmA==
+Message-ID: &lt;2463CE9EEE8C19409070F859F8F46FE53D99030BC6@NCWITMXMBEV36.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SeenV-Signature: acd31fa1f61de69ac395562797f8b9b9
+X-Mailman-Approved-At: Fri, 23 Oct 2009 16:31:27 -0400
+Subject: [Office of Governor Bev Perdue] Governor Says Offenders Will Not Be
+	Turned Loose
+X-BeenThere: gov.perdue@lists.nc.gov
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: &lt;governor.office@nc.gov&gt;
+List-Id: Office of Governor Bev Perdue Newsletter &lt;gov.perdue.lists.nc.gov&gt;
+List-Unsubscribe: &lt;http://lists.ncmail.net/mailman/options/gov.perdue&gt;,
+	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=unsubscribe&gt;
+List-Archive: &lt;http://lists.ncmail.net/pipermail/gov.perdue&gt;
+List-Post: &lt;mailto:gov.perdue@lists.nc.gov&gt;
+List-Help: &lt;mailto:gov.perdue-request@lists.nc.gov?subject=help&gt;
+List-Subscribe: &lt;http://lists.ncmail.net/mailman/listinfo/gov.perdue&gt;,
+	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=subscribe&gt;
+Content-Type: multipart/mixed; boundary=&quot;===============1521552185==&quot;
+Errors-To: gov.perdue-bounces@lists.nc.gov
+X-SeenV-Signature: 98966456cd5614d2cc16c2b835f23c31
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6438] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 23 Oct 2009 17:31:54 -0400
+Message-ID: <4AD34D940011CA35@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mikeb53@triadd.rr.com>mikeb53@triadd.rr.com
+A communication failure occurred during the delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+mikeb53@triadd.rr.com
+#< #5.4.3> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940011CA33 for mikeb53@triadd.rr.com; Fri, 23 Oct 2009
+ 17:31:54 -0400
+Received: from NCWITESSWWB501 (207.192.33.179) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940010C9D9 for mikeb53@triadd.rr.com; Fri, 23 Oct 2009 17:31:54 -0400
+Message-ID: &lt;4AD34D940010C9D9@relay2.ncmail.net&gt; (added by postmaster@ncmail.net)
+MIME-Version: 1.0
+From: &lt;governor.office@nc.gov&gt;
+To: &lt;mikeb53@triadd.rr.com&gt;
+Date: Fri, 23 Oct 2009 17:31:54 -0400
+Subject: Your Question for Governor
+Content-Type: text/html; charset=&quot;utf-8&quot;
+Content-Transfer-Encoding: base64
+
+From postmaster@ncmail.net Tue Feb 28 13:29:04 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6439] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 23 Oct 2009 17:31:55 -0400
+Message-ID: <4AD34DE00011918C@relay3.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:mikeb53@triadd.rr.com>mikeb53@triadd.rr.com
+A communication failure occurred during the delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay3.ncmail.net
+
+mikeb53@triadd.rr.com
+#< #5.4.3> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay3.ncmail.net (127.0.0.1) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE00011918B for mikeb53@triadd.rr.com; Fri, 23 Oct 2009
+ 17:31:55 -0400
+Received: from smtp.mail.nc.gov (10.12.5.154) by relay3.ncmail.net (7.3.118)
+        id 4AD34DE00010CC68 for mikeb53@triadd.rr.com; Fri, 23 Oct 2009 17:31:55 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep33.ad.ncmail ([10.12.5.154]) with mapi; Fri, 23 Oct 2009 17:31:54
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;mikeb53@triadd.rr.com&quot; &lt;mikeb53@triadd.rr.com&gt;
+Date: Fri, 23 Oct 2009 17:32:51 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUKF/04Ma/ysvSSYOQLsYj7Wk2SwAAAADS
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E4E5@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E4E5NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:03 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6440] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 23 Oct 2009 19:16:06 -0400
+Message-ID: <4AD34D940011D700@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:Mailer-Daemon@host1.arcdesignnc.com>Mailer-Daemon@host1.arcdesignnc.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: host1.arcdesignnc.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+Mailer-Daemon@host1.arcdesignnc.com
+host1.arcdesignnc.com #<host1.arcdesignnc.com #5.1.1 smtp; 550 "Unknown User"> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940011D6FF for Mailer-Daemon@host1.arcdesignnc.com; Fri, 23
+ Oct 2009 19:16:06 -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940010D552 for Mailer-Daemon@host1.arcdesignnc.com; Fri, 23 Oct 2009 19:16:06 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Fri, 23 Oct 2009 19:16:06
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Mail Delivery System &lt;Mailer-Daemon@host1.arcdesignnc.com&gt;
+Date: Fri, 23 Oct 2009 19:17:02 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUNu2i/fIWgaiVReazbXlMciws9AAAAAGR
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E4FC@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E4FCNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:03 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6441] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Fri, 23 Oct 2009 19:20:34 -0400
+Message-ID: <4AD34D940011D733@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:larazablanca@dc.rr.com>larazablanca@dc.rr.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: cdptpa-smtpin01.mail.rr.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+larazablanca@dc.rr.com
+cdptpa-smtpin01.mail.rr.com #<cdptpa-smtpin01.mail.rr.com #5.1.1 smtp; 550 5.1.1 - Invalid mailbox: larazablanca@dc.rr.com> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940011D732 for larazablanca@dc.rr.com; Fri, 23 Oct 2009
+ 19:20:32 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay2.ncmail.net (7.3.118)
+        id 4AD34D940010D583 for larazablanca@dc.rr.com; Fri, 23 Oct 2009 19:20:32 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Fri, 23 Oct 2009 19:20:31
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: blanca &lt;larazablanca@dc.rr.com&gt;
+Date: Fri, 23 Oct 2009 19:21:28 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUN4xVKm8b2hgkSL6llaR3A6QWXgAAAAGM
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E4FE@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E4FENCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From Postmaster@mail.rr.com Tue Feb 28 13:29:03 2012
+To: governor.office@nc.gov
+From: Mail Administrator <Postmaster@mail.rr.com>
+Subject: [Aid4Mail Trial tag #6442] Mail System Error - Returned Mail
+Date: Sat, 24 Oct 2009 03:00:12 +0000
+Message-ID: <20091024030012680.GOPM5890@cdptpa-omta01.mail.rr.com>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:george@mastschulz.local>george@mastschulz.local
+The recipient's e-mail address is invalid. Microsoft Exchange will not try to redeliver this message for you. Please check the recipient's e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mastschulz.local.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: cdptpa-omta01.mail.rr.com
+
+george@mastschulz.local
+mastschulz.local #<mastschulz.local #5.1.2> #SMTP#
+
+Original message headers:
+
+Received: from mail.mastschulz.com ([70.61.84.142])          by
+ cdptpa-omta01.mail.rr.com with SMTP          id
+ &lt;20091024030011281.GOPC5890@cdptpa-omta01.mail.rr.com&gt;          for
+ &lt;george@mastschulz.local&gt;; Sat, 24 Oct 2009 03:00:11 +0000
+Received: from mastmail.MASTFIRM.local ([10.0.0.22]) by mail.mastschulz.com with Microsoft SMTPSVC(6.0.3790.3959);
+	 Fri, 23 Oct 2009 23:00:10 -0400
+Received: from mail pickup service by mastmail.MASTFIRM.local with Microsoft SMTPSVC;
+	 Fri, 23 Oct 2009 23:00:09 -0400
+Received: (qmail 21487 invoked from network); 24 Oct 2009 02:57:46 -0000
+Received: from unknown (HELO m1pismtp01-003.prod.mesa1.secureserver.net) ([10.8.12.3])          (envelope-sender &lt;gov.perdue-bounces@lists.nc.gov&gt;)          by smtp20-01.prod.mesa1.secureserver.net (qmail-1.03) with SMTP          for &lt;cstrickland@thecolvillecompany.com&gt;; 24 Oct 2009 02:57:46 -0000
+Received: from admin.ncmail.net (HELO lists.ncmail.net) ([149.168.220.22])  by m1pismtp01-003.prod.mesa1.secureserver.net with ESMTP; 23 Oct 2009 19:57:44 -0700
+Received: from localhost ([127.0.0.1] helo=admin.ncmail.net)	by lists.ncmail.net with esmtp (Exim 4.43)	id 1N1Qqu-0000br-PL; Fri, 23 Oct 2009 16:35:13 -0400
+Received: from relay2.ncmail.net ([149.168.220.198])	by lists.ncmail.net with esmtp (Exim 4.43) id 1N1PjK-0004YW-LZ	for gov.perdue@lists.nc.gov; Fri, 23 Oct 2009 15:23:20 -0400
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)	id 4AD34D940011909C for gov.perdue@lists.nc.gov;	Fri, 23 Oct 2009 15:23:18 -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay2.ncmail.net (7.3.118)	id 4AD34D940010951F for gov.perdue@lists.nc.gov;	Fri, 23 Oct 2009 15:23:18 -0400
+Received: from NCWITMXMBEV36.ad.ncmail ([10.12.5.35]) by	ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi;	Fri, 23 Oct 2009 15:23:18 -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &lt;gov.perdue@lists.nc.gov&gt;
+Date: Fri, 23 Oct 2009 15:27:19 -0400
+Thread-Topic: Governor Says Offenders Will Not Be Turned Loose
+Thread-Index: AcpT+kMB7fNxfEI1QnKWiJDnSoLdmA==
+Message-ID: &lt;2463CE9EEE8C19409070F859F8F46FE53D99030BC6@NCWITMXMBEV36.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SeenV-Signature: acd31fa1f61de69ac395562797f8b9b9
+X-SeenV-Signature: 98966456cd5614d2cc16c2b835f23c31
+X-Mailman-Approved-At: Fri, 23 Oct 2009 16:31:27 -0400
+Subject: [Office of Governor Bev Perdue] Governor Says Offenders Will Not BeTurned Loose
+X-BeenThere: gov.perdue@lists.nc.gov
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: &lt;governor.office@nc.gov&gt;
+List-Id: Office of Governor Bev Perdue Newsletter &lt;gov.perdue.lists.nc.gov&gt;
+List-Unsubscribe: &lt;http://lists.ncmail.net/mailman/options/gov.perdue&gt;,	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=unsubscribe&gt;
+List-Archive: &lt;http://lists.ncmail.net/pipermail/gov.perdue&gt;
+List-Post: &lt;mailto:gov.perdue@lists.nc.gov&gt;
+List-Help: &lt;mailto:gov.perdue-request@lists.nc.gov?subject=help&gt;
+List-Subscribe: &lt;http://lists.ncmail.net/mailman/listinfo/gov.perdue&gt;,	&lt;mailto:gov.perdue-request@lists.nc.gov?subject=subscribe&gt;
+Content-Type: multipart/mixed; boundary=&quot;===============1521552185==&quot;
+Errors-To: gov.perdue-bounces@lists.nc.gov
+X-Nonspam: Statistical 48%
+X-OriginalArrivalTime: 24 Oct 2009 03:00:09.0817 (UTC) FILETIME=[19146C90:01CA5456]
+Return-Path: governor.office@nc.gov
+
+From postmaster@ncmail.net Tue Feb 28 13:29:03 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6443] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Sat, 24 Oct 2009 09:31:10 -0400
+Message-ID: <4AD34A8D001155F7@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:nfffgs@yahoo.com>nfffgs@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: g.mx.mail.YAHOO.COM.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+nfffgs@yahoo.com
+g.mx.mail.YAHOO.COM #<g.mx.mail.YAHOO.COM #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D001155F6 for nfffgs@yahoo.com; Sat, 24 Oct 2009 09:31:09
+ -0400
+Received: from smtp.mail.nc.gov (10.12.5.151) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0010A008 for nfffgs@yahoo.com; Sat, 24 Oct 2009 09:31:09 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep32.ad.ncmail ([10.12.5.151]) with mapi; Sat, 24 Oct 2009 09:31:09
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;nfffgs@yahoo.com&quot; &lt;nfffgs@yahoo.com&gt;
+Date: Sat, 24 Oct 2009 09:32:05 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUrmDPU60ms7duRtKbG9Pb+MxydwAAAAAi
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E572@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E572NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:03 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6444] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Sat, 24 Oct 2009 10:56:46 -0400
+Message-ID: <4AD34D9400120CE8@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:wczbmg@yahoo.com>wczbmg@yahoo.com
+A problem occurred during delivery of this message. Microsoft Exchange will not try to redeliver this message for you. Please try resending this message later, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: b.mx.mail.yahoo.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+wczbmg@yahoo.com
+b.mx.mail.yahoo.com #<b.mx.mail.yahoo.com #5.3.0> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400120CE7 for wczbmg@yahoo.com; Sat, 24 Oct 2009 10:56:45
+ -0400
+Received: from smtp.mail.nc.gov (10.12.5.146) by relay2.ncmail.net (7.3.118)
+        id 4AD34D94001109CB for wczbmg@yahoo.com; Sat, 24 Oct 2009 10:56:45 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxcaep34.ad.ncmail ([10.12.5.146]) with mapi; Sat, 24 Oct 2009 10:56:45
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: &quot;wczbmg@yahoo.com&quot; &lt;wczbmg@yahoo.com&gt;
+Date: Sat, 24 Oct 2009 10:57:42 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUulanZATcm2Q7RcOFcel1kiOnhwAAAAA8
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E585@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E585NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From MAILER-DAEMON@aol.com Tue Feb 28 13:29:03 2012
+From: Mail Delivery Subsystem <MAILER-DAEMON@aol.com>
+Date: Sat, 24 Oct 2009 11:13:48 -0400
+To: <governor.office@nc.gov>
+Subject: [Aid4Mail Trial tag #6445] Mail Delivery Problem
+Message-ID: <200910241114.faa04ae319bc2fc@omr-m12.mx.aol.com>
+Content-Type: text/plain
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+
+
+Your mail to the following recipients could not be delivered because they are not accepting mail from governor.office@nc.gov:
+
+	sckoonce
+
+From postmaster@ncmail.net Tue Feb 28 13:29:03 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6446] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Sat, 24 Oct 2009 11:14:15 -0400
+Message-ID: <4AD34D9400120ED3@relay2.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:MAILER-DAEMON@aol.com>MAILER-DAEMON@aol.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mailin-01.mx.aol.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay2.ncmail.net
+
+MAILER-DAEMON@aol.com
+mailin-01.mx.aol.com #<mailin-01.mx.aol.com #5.1.1 smtp; 550 MAILBOX NOT FOUND> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay2.ncmail.net (127.0.0.1) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400120ED2 for MAILER-DAEMON@aol.com; Sat, 24 Oct 2009
+ 11:14:15 -0400
+Received: from smtp.mail.nc.gov (10.12.5.154) by relay2.ncmail.net (7.3.118)
+        id 4AD34D9400110BA2 for MAILER-DAEMON@aol.com; Sat, 24 Oct 2009 11:14:15 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep33.ad.ncmail ([10.12.5.154]) with mapi; Sat, 24 Oct 2009 11:14:15
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: Mail Delivery Subsystem &lt;MAILER-DAEMON@aol.com&gt;
+Date: Sat, 24 Oct 2009 11:15:12 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUvMiRKjWlFKpwSSCUvE5QfrTIRAAAAAA5
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E58C@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E58CNCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@ncmail.net Tue Feb 28 13:29:03 2012
+From: Mail Delivery Service <postmaster@ncmail.net>
+Subject: [Aid4Mail Trial tag #6447] Delivery Status Notification
+To: governor.office@nc.gov
+Date: Sat, 24 Oct 2009 11:26:20 -0400
+Message-ID: <4AD34A8D00115E2F@relay1.ncmail.net>
+Content-Type: text/plain;
+	charset="us-ascii"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 8bit
+
+Delivery has failed to these recipients or distribution lists:
+
+<mailto:redschick@embarkmail.com>redschick@embarkmail.com
+The recipient's e-mail address was not found in the recipient's e-mail system. Microsoft Exchange will not try to redeliver this message for you. Please check the e-mail address and try resending this message, or provide the following diagnostic text to your system administrator.
+
+The following organization rejected your message: mxb.ctinetworks.com.
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: relay1.ncmail.net
+
+redschick@embarkmail.com
+mxb.ctinetworks.com #<mxb.ctinetworks.com #5.1.1 smtp; 550 5.1.1 <redschick@embarkmail.com>: Recipient address rejected: User unknown in relay recipient table> #SMTP#
+
+Original message headers:
+
+Return-Path: &lt;governor.office@nc.gov&gt;
+Received: from relay1.ncmail.net (127.0.0.1) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D00115CC8 for redschick@embarkmail.com; Sat, 24 Oct 2009
+ 11:06:03 -0400
+Received: from smtp.mail.nc.gov (10.12.5.148) by relay1.ncmail.net (7.3.118)
+        id 4AD34A8D0010A6E0 for redschick@embarkmail.com; Sat, 24 Oct 2009 11:06:03 -0400
+Received: from NCWITMXMBEV42.ad.ncmail ([10.12.5.70]) by
+ ncwitmxhtep31.ad.ncmail ([10.12.5.148]) with mapi; Sat, 24 Oct 2009 11:06:03
+ -0400
+From: Office of the Governor &lt;governor.office@nc.gov&gt;
+To: mary aycock &lt;redschick@embarkmail.com&gt;
+Date: Sat, 24 Oct 2009 11:07:00 -0400
+Subject: Auto Response
+Thread-Topic: Auto Response
+Thread-Index: AcpUu6L9Wi7eN9SfR2eI4+BGYAYZWAAAAAA2
+Message-ID: &lt;F69BA5A617362147B216EE02987231991028B1E588@NCWITMXMBEV42.ad.ncmail&gt;
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+acceptlanguage: en-US
+Content-Type: multipart/alternative;
+	boundary=&quot;_000_F69BA5A617362147B216EE02987231991028B1E588NCWITMXMBEV42_&quot;
+MIME-Version: 1.0
+
+From postmaster@vzw.blackberry.net Tue Feb 28 13:29:03 2012
+Date: Sat, 24 Oct 2009 21:02:58 +0000
+Message-ID: <200910242102.n9OIq4Sl013678@srs.bis.na.blackberry.com>
+To: governor.office@nc.gov
+From: <postmaster@vzw.blackberry.net>
+Subject: [Aid4Mail Trial tag #6448] Delivery Status Notification(Failure)
+Content-Type: text/plain;
+	charset="iso-8859-1"
+X-Folder: Undeliverable
+Content-Transfer-Encoding: 7bit
+
+Your message:
+To: brittanylindeman@vzw.blackberry.net
+Subject: [Office of Governor Bev Perdue] Gov. Appalled by Court Ruling
+Sent Date: 03:05 +0000
+has not been delivered to the recipient's BlackBerry Handheld.
+

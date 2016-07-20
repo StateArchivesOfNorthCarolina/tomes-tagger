@@ -1,6 +1,7 @@
 from tomes_xml.XmlExtract import XmlElementSearch
 from tomes_xml.XmlExtract import XmlCleanElements
 from tomes_xml.XmlExtract import XmlDedupeElements
+from darcmail.CmdDArcMailXml import DarcMail
 
 from tomes_xml.PickleMsg import TomesPickleMsg
 import logging
@@ -19,13 +20,14 @@ def load_logger():
 def create_parser():
     aparser = argparse.ArgumentParser()
     aparser.add_argument('-t', '--toolchain', type=str, nargs=1, help='The part of the toolchain to use.',
-                         choices=['extract', 'clean', 'process'])
+                         choices=['extract', 'clean', 'process', 'build_xml'])
     aparser.add_argument('-f', '--file', type=str, nargs='?', help='a file path, if required by the toolchain.')
     aparser.add_argument('-a', '--arguments', type=str, nargs='+', help='arguments required by the toolchain')
     return aparser
 
 
 def extractor(args):
+    assert len(args) > 1
     log.info("Searching on {} {} {}".format(args.file, args.arguments[0], args.arguments[1]))
     xes = XmlElementSearch(args.arguments[0], args.arguments[1])
     log.info("Beginning Search...")
@@ -50,8 +52,26 @@ def cleaner(msg_list=None):
         unpickler.serialize(xce.cleaned_list, 'cleaned_msgs.pkl')
 
 
+def build_xml(args):
+    dm = DarcMail(args[0], args[1], args[2])
+
+
 def test_answer():
     assert True
+    # load_logger()
+    # log = logging.getLogger()
+    # psr = create_parser()
+    # args = psr.parse_args()
+    # tc = args.toolchain
+    #
+    # if tc[0] == 'extract':
+    #     extractor(args)
+    # elif tc[0] == 'clean':
+    #     cleaner()
+    # elif tc[0] == 'process':
+    #     pass
+    # elif tc[0] == 'build_xml':
+    #     build_xml()
 
 if __name__ == "__main__":
     load_logger()
