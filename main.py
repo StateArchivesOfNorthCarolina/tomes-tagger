@@ -1,7 +1,6 @@
 from tomes_xml.XmlExtract import XmlElementSearch
 from tomes_xml.XmlExtract import XmlCleanElements
 from tomes_xml.XmlExtract import XmlDedupeElements
-from darcmail.CmdDArcMailXml import DarcMail
 
 from tomes_xml.PickleMsg import TomesPickleMsg
 import logging
