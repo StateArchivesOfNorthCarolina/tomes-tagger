@@ -1,3 +1,13 @@
+"""
+TO DO:
+    - refactor code; fix issues/errors raised by pylint.
+    - replace custom _arg_parse with argparse module.
+    - reduce logging of errors by catching error type rather than numerous "except" statements.
+    - define @filename and @logger in "__init__"?
+    - if "logging" is even needed, does @filename need to be fixed? i.e. if class is instantiated again, isn't "logfile.log" going to be overwritten?
+    - have alternative to calling ".exe" file (i.e. if using MAC/Linux).
+"""
+
 import logging
 import subprocess
 import sys
