@@ -1,18 +1,40 @@
+#!/usr/bin/python
 
-class MessageBlock:
+"""
+TO DO:
+
+    - add script docstring and state that an existing ElementTree.Element is required for use.
+    - should "Namespace: http://www.history.ncdcr.gov/SHRAB/ar/EmailPreservation/mail-account/mail-account_single.xsd" be default @namespace value in __init__?
+    - replace use of find_rec() with in-line call to etree's findall().
+    - replace use of get_header with in-line code.
+        - i.e. 'self.ret_path = self.headers.get("Return-Path")'
+    - verify docstring for set_sentence_vector is correct (i.e. do you know what it's doing?)
+"""
+
+class MessageBlock(object):
+    """Creates a Message object from an XML document.
+    Conforms to XML Schema for a Single E-Mail Account XSD.
+
+    XSD: http://www.history.ncdcr.gov/SHRAB/ar/EmailPreservation/mail-account/mail-account.xsd
+    Namespace: http://www.history.ncdcr.gov/SHRAB/ar/EmailPreservation/mail-account/mail-account_single.xsd
+    """
+
     def __init__(self, msg, namespace):
-        """Create a Message object from an xml document conforming to the XML Schema for a Single E-Mail Account XSD.
-        Namespace: http://www.history.ncdcr.gov/SHRAB/ar/EmailPreservation/mail-account/mail-account_single.xsd
-
+        """Creates @msg message object with a given XML @namespace.
+        
         Keyword arguments:
-
+        
         @type msg xml.etree.ElementTree.Element
         @type namespace str
         """
+
+        # establish initial instance attributes.
         self.msg = msg
-        self.sentence_vectors = []
         self.namespace = namespace
+        self.sentence_vectors = []
         self.headers = self.package_headers()
+        
+        # get XML elements; set as instance attributes.
         try:
             self.message_id = self.get_item(self.namespace+"MessageId")
             self.orig_date = self.get_item(self.namespace+"OrigDate")
@@ -25,23 +47,49 @@ class MessageBlock:
         finally:
             self.msg = None
 
+    @staticmethod
+    def find_rec(node, element):
+        """Returns list of all occurrences of @element for a given @node.
+        
+        Keyword arguments:
+        
+        @type node xml.etree.ElementTree.Element
+        @type element str
+        """
+        
+        recs = node.findall(".//"+element)
+        return recs
+
+    def get_header(self, ids):
+        """ Returns value from message object's "headers" dictionary for a given key, @ids.
+        
+        Keyword arguments:
+        
+        @type ids str
+        """
+        
+        item = None
+        item = self.headers.get(ids)
+        return item
+
     def get_item(self, req):
-        """Return an element value from the original message
+        """Returns value of first element @req from message object.
 
         Keyword arguments:
-            @type req str
-
-            Should have the form
-
+        
+        @type req str
         """
+
         item = None
         try:
-            item = self.msg.find(req).text
+            item = self.msg.find(req).text # value of first occurence of element.
         except AttributeError:
             pass
         return item
 
     def package_headers(self):
+        """Returns dictionary with message object's Header Value if Header Name = "Return-Path"."""
+        
         headers = {}
         for elem in self.msg.findall(self.namespace+"Header"):
             if elem.find(self.namespace+"Name").text == "Return-Path":
@@ -51,17 +99,14 @@ class MessageBlock:
                     continue
         return headers
 
-    def get_header(self, ids):
-        item = None
-        item = self.headers.get(ids)
-        return item
-
     def package_msg(self):
+        """Returns list of values from message object's Content elements if ContentType = "text/plain"."""
+        
         contents = []
-        msg = self.find_rec(self.msg, self.namespace+"SingleBody")
-        for n in msg:
-            if n.find(self.namespace+"ContentType").text == "text/plain":
-                content = self.find_rec(n, self.namespace+"Content")
+        messages = self.find_rec(self.msg, self.namespace+"SingleBody")
+        for message in messages:
+            if message.find(self.namespace+"ContentType").text == "text/plain":
+                content = self.find_rec(message, self.namespace+"Content")
                 try:
                     contents.append(content[0].text)
                 except IndexError:
@@ -69,13 +114,13 @@ class MessageBlock:
         return contents
 
     def set_sentence_vector(self, sent, ratio):
+        """Appends (@sent, @ratio) tuple to message object's "sentence_vectors" list.
+        
+        Keyword arguments:
+        
+        @type sent str???
+        @type ratio float???
+        """
+        
         self.sentence_vectors.append((sent, ratio))
-
-    @staticmethod
-    def find_rec(node, element):
-        """
-            @type node xml.etree.ElementTree.Element
-            @type element str
-        :return:
-        """
-        return node.findall(".//"+element)
+        return
