@@ -8,7 +8,7 @@ TO DO:
     - replace use of find_rec() with in-line call to etree's findall().
     - replace use of get_header with in-line code.
         - i.e. 'self.ret_path = self.headers.get("Return-Path")'
-    - verify docstring for set_sentence_vector is correct (i.e. do you know what it's doing?)
+    - verify docstring for set_sentence_vector() is correct (i.e. do you know what it's doing?)
 """
 
 class MessageBlock(object):
