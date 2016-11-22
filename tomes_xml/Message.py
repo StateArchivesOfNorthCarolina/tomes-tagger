@@ -2,7 +2,6 @@
 
 """
 TO DO:
-
     - add script docstring and state that an existing ElementTree.Element is required for use.
     - should "Namespace: http://www.history.ncdcr.gov/SHRAB/ar/EmailPreservation/mail-account/mail-account_single.xsd" be default @namespace value in __init__?
     - replace use of find_rec() with in-line call to etree's findall().
@@ -20,7 +19,7 @@ class MessageBlock(object):
     """
 
     def __init__(self, msg, namespace):
-        """Creates @msg message object with a given XML @namespace.
+        """Creates @msg Message object with a given XML @namespace.
         
         Keyword arguments:
         
@@ -61,7 +60,7 @@ class MessageBlock(object):
         return recs
 
     def get_header(self, ids):
-        """ Returns value from message object's "headers" dictionary for a given key, @ids.
+        """ Returns value from Message object's "headers" dictionary for a given key, @ids.
         
         Keyword arguments:
         
@@ -73,7 +72,7 @@ class MessageBlock(object):
         return item
 
     def get_item(self, req):
-        """Returns value of first element @req from message object.
+        """Returns value of first element @req from Message object.
 
         Keyword arguments:
         
@@ -88,7 +87,7 @@ class MessageBlock(object):
         return item
 
     def package_headers(self):
-        """Returns dictionary with message object's Header Value if Header Name = "Return-Path"."""
+        """Returns dictionary with Message object's Header Value if Header Name = "Return-Path"."""
         
         headers = {}
         for elem in self.msg.findall(self.namespace+"Header"):
@@ -100,7 +99,7 @@ class MessageBlock(object):
         return headers
 
     def package_msg(self):
-        """Returns list of values from message object's Content elements if ContentType = "text/plain"."""
+        """Returns list of values from Message object's Content elements if ContentType = "text/plain"."""
         
         contents = []
         messages = self.find_rec(self.msg, self.namespace+"SingleBody")
@@ -114,7 +113,7 @@ class MessageBlock(object):
         return contents
 
     def set_sentence_vector(self, sent, ratio):
-        """Appends (@sent, @ratio) tuple to message object's "sentence_vectors" list.
+        """Appends (@sent, @ratio) tuple to Message object's "sentence_vectors" list.
         
         Keyword arguments:
         
@@ -122,5 +121,6 @@ class MessageBlock(object):
         @type ratio float???
         """
         
-        self.sentence_vectors.append((sent, ratio))
+        vector = (sent, ratio)
+        self.sentence_vectors.append(vector)
         return
