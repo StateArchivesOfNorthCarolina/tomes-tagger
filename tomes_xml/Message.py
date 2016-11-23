@@ -27,13 +27,13 @@ class MessageBlock(object):
         @type namespace str
         """
 
-        # set initial instance attributes.
+        # set attributes.
         self.msg = msg
         self.namespace = namespace
         self.sentence_vectors = []
         self.headers = self.package_headers()
         
-        # get XML elements; set as instance attributes.
+        # get XML elements; set attributes.
         try:
             self.message_id = self.get_item(self.namespace+"MessageId")
             self.orig_date = self.get_item(self.namespace+"OrigDate")
