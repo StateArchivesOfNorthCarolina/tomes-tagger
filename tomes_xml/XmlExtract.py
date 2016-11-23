@@ -1,9 +1,21 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+
+"""
+TO DO:
+    - add file docstring.
+    - for XmlDedupeElements check if each list member isinstance() Message.MessageBlock; log error if not.
+        - that will help document what needs to be passed to it.
+    - See if you can get rid of the print() statement in XmlDedupeElements.
+        - Try to add new line to logging format per http://stackoverflow.com/a/8735999.
+    - Replace ".format" for logging.info, etc. in favor of old-shool "%s|d", etc.
+        - see: http://stackoverflow.com/a/34634301
+"""
+
+# import modules.
 import logging
 import re
 import xml.etree.cElementTree as ET
-from Message import MessageBlock as MesBlock
-
+from Message import MessageBlock
 
 class XmlElementSearch:
     """A class to extract elements from XML giving an element name and a namespace
@@ -31,7 +43,7 @@ class XmlElementSearch:
             if event == 'end' and elem.tag == self.tag:
                 self.count += 1
                 self.con_log.info("Extracting message {}".format(self.count))
-                msg = MesBlock(elem, self.ns)
+                msg = MessageBlock(elem, self.ns)
                 self.msgs.append(msg)
                 root.clear()
 
@@ -103,32 +115,33 @@ class XmlCleanElements:
         self.logger.info("{} messages removed based on regexes or because no content".format(count))
 
 
-class XmlDedupeElements:
-    """ A class to remove duplicate Messages
-
-    """
+class XmlDedupeElements(object):
+    """Removes duplicate Message.MessageBlock objects from a given list."""
 
     def __init__(self, el, logger=None):
+        """Removes duplicates from a list @el of Message.MessageBlock objects.
+        Logs numbers of duplicate messages that were removed.
+        
+        @type el list
         """
-        @type el list[Message.MessageBlock]
-        @rtype list[Message.MessageBlock]
-        """
+        
+        # set initial instance attributes.
         self.logger = logger or logging.getLogger()
         self.console_log = logging.getLogger('console_info')
         self.el = el
         self.deduped_list = []
         self.list_of_ids = []
 
+        # add message identifier to tracking lists.
         for elem in self.el:
-            """
-            @type elem Message.MessageBlock
-            """
             if elem.message_id in self.list_of_ids:
                 continue
             else:
                 self.list_of_ids.append(elem.message_id)
                 self.deduped_list.append(elem)
 
-        self.logger.info("Found {} duplicate messages, and removed them from the corpus."
-                         .format((len(self.el) - len(self.deduped_list))))
+        # log message about duplicate findings.
+        difference = len(self.el) - len(self.deduped_list)
+        self.logger.info("Found %d duplicate messages, and removed them from the corpus.", difference)
         print()
+        return

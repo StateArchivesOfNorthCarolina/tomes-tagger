@@ -27,7 +27,7 @@ class MessageBlock(object):
         @type namespace str
         """
 
-        # establish initial instance attributes.
+        # set initial instance attributes.
         self.msg = msg
         self.namespace = namespace
         self.sentence_vectors = []
