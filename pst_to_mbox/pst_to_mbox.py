@@ -6,6 +6,7 @@ TO DO:
     - define @filename and @logger in "__init__"?
     - if "logging" is even needed, does @filename need to be fixed? i.e. if class is instantiated again, isn't "logfile.log" going to be overwritten?
     - have alternative to calling ".exe" file (i.e. if using MAC/Linux).
+    - for Windows, check for required DLLs needed by readpst.exe: libiconv2.dll and regex2.dll.
 """
 
 import logging
