@@ -11,6 +11,7 @@ TO DO:
     - @clean_pattern in XmlCleanElements should always be a list (even if there's only one item).
         - this would eliminate need to have two cleaning functions since the cleaning function will always iterate over a list.
         - that way __init__ doesn't need to call one of the cleaners since there will only be one cleaner.
+        - actually: use a tuple instead since it's not mutable.
 """
 
 # import modules.
