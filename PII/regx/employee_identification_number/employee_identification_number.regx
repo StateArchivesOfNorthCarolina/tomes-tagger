@@ -1,0 +1,21 @@
+### employee identification number
+
+### REGEX
+(?x)		# set free spacing mode to make REGEX readable.
+\b      	# word boundary.
+[0-9]{2}	# 2 digits.
+-			# hyphen.
+[0-9]{7}	# 7 digits.
+( [a-zA-Z] | [0-9]{3} )?	# optional letter OR 3 digit token.
+\b     		# word boundary.
+
+
+### TEST DATA (3 PASS)
+12-1234567
+12-1234567A
+12-1234567001
+
+12-1234567 A
+
+12-1234567001A
+
