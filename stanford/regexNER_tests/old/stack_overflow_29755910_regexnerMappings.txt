@@ -1,0 +1,4 @@
+Make Believe Town	figure of speech	ORGANIZATION
+( /Hello/ [{ ner:PERSON }]+ )	salut	PERSON
+Bachelor of (Arts|Laws|Science|Engineering)	DEGREE
+( /University/ /of/ [{ ner:ORGANIZATION }] )	SCHOOL	ORGANIZATION

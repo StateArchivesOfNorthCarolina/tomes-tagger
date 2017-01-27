@@ -1,0 +1,10 @@
+TESTING EMAILS
+
+nitaro74@gmail.com
+nitaro74@gmail.info
+nitaro74@gmail DOT com
+nitaro74@gmail-com
+nitaro74_gmail.com
+foo @gmail.com
+foobar@ncdcr.gov
+

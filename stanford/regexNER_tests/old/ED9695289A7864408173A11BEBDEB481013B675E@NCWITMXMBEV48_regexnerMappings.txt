@@ -1,0 +1,8 @@
+( /Department/ /of/ [{ pos:NNP }] )	DEPARTMENT
+( /Department/ /of/ [{ ner:ORGANIZATION }] )	DEPARTMENT.state_agency	ORGANIZATION
+( [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	DEPARTMENT.state_agency	ORGANIZATION
+( [{ ner:ORGANIZATION }] [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	DEPARTMENT.state_agency	ORGANIZATION
+(.*@.*)(\.gov)	EMAIL.gov
+(.*@.*)(\.)([a-z]{2,4})	EMAIL
+([0-9]{3})([\.-])([0-9]{4})	PHONE.local	NUMBER
+([0-9]{3})([\.-])([0-9]{3})([\.-])([0-9]{4})	PHONE.area_code	NUMBER

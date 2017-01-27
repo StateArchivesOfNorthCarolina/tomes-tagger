@@ -1,0 +1,13 @@
+(?i)deductible	PII.patient_health_information
+(?i)diagnosis	PII.patient_health_information
+(?i)FMLA	PII.patient_health_information
+(?i)health (?i)condition	PII.patient_health_information
+(?i)health (?i)insurance	PII.patient_health_information
+(?i)health (?i)issues	PII.patient_health_information
+(?i)health (?i)problems	PII.patient_health_information
+(?i)HIPPA	PII.patient_health_information
+(?i)medical (?i)leave	PII.patient_health_information
+(?i)medical (?i)records	PII.patient_health_information
+(?i)patient	PII.patient_health_information
+(?i)PHI	PII.patient_health_information
+(?i)policy (?i)number	PII.patient_health_information
