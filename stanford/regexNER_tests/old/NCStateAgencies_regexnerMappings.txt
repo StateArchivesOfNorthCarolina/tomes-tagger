@@ -1,3 +1,0 @@
-( /Department/ /of/ [{ ner:ORGANIZATION }] )	STATE AGENCY	ORGANIZATION
-( [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	STATE AGENCY	ORGANIZATION
-( [{ ner:ORGANIZATION }] [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	STATE AGENCY	ORGANIZATION

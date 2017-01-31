@@ -1,7 +1,0 @@
-mid December
-
-foo
-
-mid-December
-
-mid_December
