@@ -8,6 +8,7 @@ html = glob("*.html")
 html_len = len(html)
 
 for htm in html:
+    print htm
     cmd = "phantomjs html_to_text.js %s" %htm
     subprocess.call(cmd, shell=True)
 
