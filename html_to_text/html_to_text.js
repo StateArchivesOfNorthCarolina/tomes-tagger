@@ -36,10 +36,19 @@ var html = "file:///" + fs.workingDirectory + "/" + system.args[1];
 var page = webpage.create();
 page.open(html, function (status) {
     var modify = page.evaluate(function() {
-        var children = document.body.getElementsByTagName("A");
-        for (i=0; i < children.length; i++) {
-            var child = children[i];
-            child.innerText = child.innerText + " <" + child.href + ">";
+        var links = document.body.getElementsByTagName("A");
+        for (i=0; i < links.length; i++) {
+            var link = links[i];
+			if (link.text === "") { // skip if no immediate child text value.
+				continue;
+			}
+			if (link.href.substr(0,4) !== "http") { // skip if href value doesn't start with "http".
+				continue;
+			}
+			if (link.text === link.href) { // skip if href value equals immediate child text value.
+				continue;
+			}
+            link.innerText = link.innerText + " [" + link.href + "]";
         }
         return;        
     });
