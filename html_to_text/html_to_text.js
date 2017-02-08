@@ -41,7 +41,7 @@ page.open(html, function (status) {
 			var link = links[i];
 			if (link.text === "") { // skip if no immediate child text value.
 				continue;
-		}
+			}
 			if (link.href.substr(0,4) !== "http") { // skip if href value doesn't start with "http".
 				continue;
 			}
