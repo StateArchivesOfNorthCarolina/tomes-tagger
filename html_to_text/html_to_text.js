@@ -6,7 +6,7 @@ DESCRIPTION:
     Converts HTML email file to plain text while retaining hyperlink locations within brackets.
              
     Before: "<a href="http://foo.com">bar</a>"
-    After: "bar <http://foo.com/>"
+    After: "bar [http://foo.com/]"
 	 
 REQUIREMENTS: PhantomJS <http://phantomjs.org/>
 
