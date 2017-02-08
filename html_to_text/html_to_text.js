@@ -15,8 +15,12 @@ USAGE:
     $ phantomjs .\html_to_text.js
     >> You must pass a .html file (from your working folder).
     $ phantomjs .\html_to_text.js test.html
-    >> Writing file: test.html.txt
+    >> created file: .\test.html.txt; processing time (seconds): 0
 */
+
+// get current time (to test script speed).
+var _DATE = new Date();
+var time_in = _DATE.getTime();
 
 // includes.
 var fs = require("fs");
@@ -46,7 +50,14 @@ page.open(html, function (status) {
   
 // write plain text version to file.
 var txt = system.args[1] + ".txt";
-console.log("Writing file: " + txt);
 fs.write(txt, page.plainText, "w");
+
+// get script completion speed; report.
+var time_out = _DATE.getTime();
+var time_results = time_out - time_in;
+var report = "created file: " + txt + "; processing time (seconds): " + time_results; 
+console.log(report);
+
+// exit.
 phantom.exit(); 
 });
