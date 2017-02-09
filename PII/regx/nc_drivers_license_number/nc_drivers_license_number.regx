@@ -6,10 +6,17 @@
 [0-9]{12}	# 12 digits.
 \b     		# word boundary.
 
+### REGEX_2 (forces 4 leading zeros per DOT email)
+(?x)		# set free spacing mode to make REGEX readable.
+\b      	# word boundary.
+[0]{4}		# 4 leading zeros.
+[0-9]{8}	# 8 digits.
+\b     		# word boundary.
 
-### TEST DATA (3 PASS)
+### TEST DATA
 123456789112
 012345678911 123456789112
+000012345678
 
 12345678911 2
 123456
