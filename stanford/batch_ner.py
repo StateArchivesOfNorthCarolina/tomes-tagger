@@ -13,8 +13,11 @@ i = 1
 for email in emails:
     cmd = """java -cp "*" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,lemma,ner,regexner \
 -file %s -regexner.mapping ../%s -outputDirectory %s -outputFormat json""" %(email, MAPPING, DIR)
+<<<<<<< HEAD
     print
     print "*"*10
+=======
+>>>>>>> 24f37da0b616513483743e1c2a59744bea65cd08
     print i, ": ", cmd
     os.system(cmd)
     i += 1
