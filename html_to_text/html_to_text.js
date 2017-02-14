@@ -12,10 +12,8 @@ REQUIREMENTS: PhantomJS <http://phantomjs.org/>
 
 USAGE:
 
-	$ phantomjs .\html_to_text.js
-	>> You must pass a .html file (from your working folder).
-	$ phantomjs .\html_to_text.js test.html
-	>> created file: .\test.html.txt
+	$ phantomjs ./html_to_text.js ./test.html ./test.html.txt
+	>> created file: ./test.html.txt
 */
 
 // includes.
@@ -23,14 +21,29 @@ var fs = require("fs");
 var webpage = require("webpage");
 var system = require("system");
 
-// test for file argument.
-if (system.args.length === 1) {
-	console.log("You must pass a .html file (from your working folder).");
+// test for file arguments.
+if (system.args.length !== 3) {
+	console.log("Error: Illegal number of arguments.");
+	console.log("You must pass an HTML input file and an output filename.");
 	phantom.exit(); 
-} 
+}
+
+// test if input file exists.
+if (fs.isFile(system.args[1]) === false) {
+	console.log("Error: File does not exist:");
+	console.log(system.args[1]);
+	phantom.exit(); 
+}
 
 // create browser path to HTML file.
-var html = "file:///" + fs.workingDirectory + "/" + system.args[1];
+// note: currently local files must be prefixed with "./" OR ".\" so consider adding support for passing local files without those prefixes, too.
+var path = "";
+local_prefixes = ["./", ".\\"]; // test for local file ...
+input_prefix = system.args[1].substring(0,2);
+if (local_prefixes.indexOf(input_prefix) !== -1) {
+	path = fs.workingDirectory;
+}
+var html = "file:///" + path + system.args[1];
 
 // rewrite "A" tag values for plain text version.
 var page = webpage.create();
@@ -54,7 +67,7 @@ page.open(html, function (status) {
 	});
 	
 // write plain text version to file.
-var txt = system.args[1] + ".txt";
+var txt = system.args[2];
 fs.write(txt, page.plainText, "w");
 
 // report; exit.
