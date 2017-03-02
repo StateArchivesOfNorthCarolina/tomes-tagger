@@ -1,0 +1,54 @@
+/* body {
+	max-width: 640px;
+} */
+
+pre {
+	font-family: Consolas;
+	font-size: 13px;
+	white-space: pre-wrap;
+}
+
+[data-ner] {
+	text-decoration: underline wavy;
+}
+
+[data-ner]:hover {
+    text-decoration: underline;
+	border: 2px solid;
+	padding: 1px;
+}
+
+[data-ner]:hover:after {
+     content: " \2192" " " attr(data-ner) " ";
+	 font-family: Consolas;
+     display: inline-block;
+	 background-color: black;
+	 color: white;
+}
+
+/* FLAG */
+[data-ner='PII.bank_account_number'],
+[data-ner='PII.sensitive_document'],
+[data-ner='PII.email_address'],
+[data-ner='PII.patient_health_information'],
+[data-ner='PII.passport_number'] {
+	background-color: yellow;
+}
+
+/* REDACT */
+[data-ner='PII.beacon_id'],
+[data-ner='PII.credit_card_number'],
+[data-ner='PII.employee_taxpayer_identification_number'],
+[data-ner='PII.nc_drivers_license_number'],
+[data-ner='PII.social_security_number'] {
+	background-color: red;
+}
+
+/* CoreNLP Person, Place, or Organization. */
+[data-ner='PERSON'],
+[data-ner='LOCATION'],
+[data-ner='ORGANIZATION'] {
+	background-color: lightgreen;
+}
+
+
