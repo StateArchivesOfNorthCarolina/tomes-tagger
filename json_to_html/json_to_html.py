@@ -18,7 +18,7 @@ except:
 
 fr = open(f).read()
 data = json.loads(fr)
-html = ["<!DOCTYPE html><html><head><meta charset='utf-8' /><link rel='stylesheet' href='style.css'></link></head><body><div><pre>"]
+html = ["<!DOCTYPE html><html><head><meta charset='utf-8' /><link rel='stylesheet' href='style.css'></link></head><body><div><pre><span>"]
 sentences = data["sentences"]
 
 current_ner = ""
@@ -38,7 +38,7 @@ for sentence in sentences:
             span = "{}{}".format(before, originalText)
         html.append(span)
         current_ner = ner
-html.append("</pre></div></body></html>")
+html.append("</span></pre></div></body></html>")
 
 with open(f + ".html", "w") as h:
     h.write("".join(html))
