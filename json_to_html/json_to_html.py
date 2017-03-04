@@ -8,6 +8,7 @@ example usage:
     $ python json_to_html.py example.json # outputs example.json.html
 """
 
+import codecs
 import json
 import sys
 
@@ -16,7 +17,7 @@ try:
 except:
     exit("You must pass a JSON file.")
 
-fr = open(f).read()
+fr = codecs.open(f, encoding="utf-8").read()
 data = json.loads(fr)
 html = ["<!DOCTYPE html><html><head><meta charset='utf-8' /><link rel='stylesheet' href='style.css'></link></head><body><div><pre><span>"]
 sentences = data["sentences"]
@@ -40,6 +41,6 @@ for sentence in sentences:
         current_ner = ner
 html.append("</span></pre></div></body></html>")
 
-with open(f + ".html", "w") as h:
+with codecs.open(f + ".html", "w", encoding="utf-8") as h:
     h.write("".join(html))
 
