@@ -65,6 +65,6 @@ for j_file in j_files:
     html.append("</span></pre></div></body></html>")
 
     # write HTML file.
-    with codecs.open(f + ".html", "w", encoding="utf-8") as h:
+    with codecs.open(j_file + ".html", "w", encoding="utf-8") as h:
         h.write("".join(html))
 
