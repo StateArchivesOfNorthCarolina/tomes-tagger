@@ -11,11 +11,16 @@ example usage:
 import codecs
 import json
 import sys
+import os
 
 try:
     f = sys.argv[1]
 except:
     exit("You must pass a JSON file.")
+
+if os.path.isfile(f + ".html"):
+    print("Exiting: {}.html already exists.".format(f))
+    exit()
 
 fr = codecs.open(f, encoding="utf-8").read()
 data = json.loads(fr)
