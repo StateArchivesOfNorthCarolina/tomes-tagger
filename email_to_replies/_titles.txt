@@ -37,6 +37,7 @@ Cpl
 CPO
 Cpt
 Dean
+Director
 Dr
 Drs
 Duke
