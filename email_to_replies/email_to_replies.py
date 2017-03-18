@@ -13,7 +13,8 @@ Todo:
     - might need to regex a la "[*]{1,0}From:[*]{1,0} " instead of just "From: ", etc. for
       Wiki-type formatting.
     - will this work for all Outlook emails?
-    - how to do this for Gmail? There may be a clue in HTML version of Gmail (div|blockquote.class=3D"gmail_quote").
+    - how to do this for Gmail? There may be a clue in HTML version of Gmail
+      (div|blockquote.class=3D"gmail_quote").
 """
 
 ### import modules.
