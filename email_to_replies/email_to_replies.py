@@ -15,6 +15,7 @@ Todo:
     - will this work for all Outlook emails?
     - how to do this for Gmail? There may be a clue in HTML version of Gmail
       (div|blockquote.class=3D"gmail_quote").
+    - consider using Levenshtein distance to help determine if there's a likely name match.
 """
 
 ### import modules.
@@ -23,15 +24,15 @@ import json
 import re
 
 ### globals.
-TITLES = [t for t in 
-         open("_titles.txt").read().split("\n")
-         if t[0] != "#"]
+TITLES = set([t for t in 
+         open("_titles.txt").read().split()
+         if t[0] != "#"])
 
 
 def sanitize_name(name):
     """ Cleans up a person's name by removing:
             - non-alphabetic characters
-            - capitalized acronyms of at least two letters (MA, CEO, etc.)
+            - capitalized initials and acronyms (J., MA, CEO, etc.)
             - titles and suffixes (Captain, Dr, Jr, etc.)
 
         Args:
@@ -42,7 +43,7 @@ def sanitize_name(name):
 
         Examples:
             >>> print(sanitize_name("Brigadier General John A. B. C. Smith"))
-            John A B C Smith
+            John Smith
     """
 
     sanitized_name = []
