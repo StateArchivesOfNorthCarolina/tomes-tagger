@@ -67,7 +67,7 @@ def sanitize_name(name):
     return sanitized_name
 
 
-def _get_contact(line):
+def get_contact(line):
     """ Parses a line containing a name and email address and returns them as separate values
         along with the sanitized name.
 
@@ -75,10 +75,10 @@ def _get_contact(line):
         line (string): The line from which to extract a name and email address.
 
     Returns:
-        dict: Returns the original "name", the sanitized name, and the email address.
+        dict: The return value.
 
     Examples:
-        >>> print(_get_contact("Poe, Edgar Allan <eapoe@uva.edu>"))
+        >>> print(get_contact("Poe, Edgar Allan <eapoe@uva.edu>"))
         {'name_original': 'Poe, Edgar Allan',
         'name': 'Poe Edgar Allan',
         'address': 'eapoe@uva.edu'}
@@ -103,7 +103,7 @@ def _get_contact(line):
     return contact
 
 
-def _get_replies(message_file, charset="utf-8"):
+def get_replies(message_file, charset="utf-8"):
     """ Finds replies within a message and returns a list containing each reply.
     
     Args:
@@ -112,7 +112,6 @@ def _get_replies(message_file, charset="utf-8"):
     
     Returns:
         list: Each item is a reply consisting of a list of lines.
-              If no replies are found, returns None. 
     """
 
     # place breakpoints for each reply in list. 
@@ -133,10 +132,6 @@ def _get_replies(message_file, charset="utf-8"):
                 breakpoints.append(i)
             i += 1
         
-        # stop if no replies found.
-        if breakpoints == [0]:
-            return None
-        
         # split message into list of replies.
         breakpoints.append(len(lines))
         breakpoint_range = range(0, len(breakpoints) -1)
@@ -146,7 +141,7 @@ def _get_replies(message_file, charset="utf-8"):
 
 
 def get_metadata(reply):
-    """ Gets sender, recipients, timestamp, and subject metadata values from a reply.
+    """ Gets sender, recipients, iimestamp, and subject metadata values from a reply.
         Also returns number of lines in the reply.
     
         Args:
@@ -161,18 +156,19 @@ def get_metadata(reply):
     recipients = None
     sent = None
     subject = None
+    len_reply = len(reply)
 
     # collect metadata.
     i = 0
     for line in reply:
 
         if line[:6] == "From: ":
-            sender = _get_contact(line[6:])
+            sender = get_contact(line[6:])
         elif line[:4] == "To: " or line[:4] == "Cc: ":
             try:
-                recipients.append(_get_contact(line[4:]))
+                recipients.append(get_contact(line[4:]))
             except AttributeError:
-                recipients = [_get_contact(line[4:])]
+                recipients = [get_contact(line[4:])]
         elif line[:6] == "Sent: ":
             sent = line[6:]
         elif line[:9] == "Subject: ":
@@ -184,19 +180,23 @@ def get_metadata(reply):
         i += 1
 
     metadata = {"sender": sender, "recipients": recipients, "timestamp": sent,
-               "subject": subject, "lines": len(reply)}
+               "subject": subject, "lines": len_reply}
     return metadata
 
 
-def get_signature(reply, sender, max_length=12):
-    """ ???
+def get_signature(reply, sender, length_divisor=2):
+    """ Gets signature for a given reply (if exists). Also returns signature text and reply
+        text (sans signature).
 
     Args:
-        reply (list):
-        sender(dict):
-        max_length (int):
+        reply (list): The list of lines for a given reply.
+        sender(dict): The get_contact() value for the reply's sender. 
+        length_divisor (int): The number to divide the reply's length by.
+                              The resulting quotient equals the maximum number of lines for
+                              which to check for a signature.
 
     Returns:
+        dict: The return value.
 
     """
 
@@ -210,7 +210,10 @@ def get_signature(reply, sender, max_length=12):
     reply_reversed = reply[0:]
     reply_reversed.reverse()
 
-    # ???
+    # set maximum length after which to stop searching.
+    max_length = len(reply_reversed)/length_divisor
+    
+    # loop through reply backwards, look for signature.
     i = len(reply_reversed)
     j = 0
     for line in reply_reversed:
@@ -222,7 +225,9 @@ def get_signature(reply, sender, max_length=12):
         if len(tokens) > 1 and found_sender == tokens:
             has_signature = True
             signature = "\n".join(reply[i-1:])
+            signature = signature.strip()
             reply_text = "\n".join(reply[:i-1])
+            reply_text = reply_text.strip()
             if sender["address"]:
                 address_in_signature = sender["address"].lower() in signature.lower()
             break
@@ -237,7 +242,7 @@ def get_signature(reply, sender, max_length=12):
 
 ### TEST.
 if __name__ == "__main__":
-    MS = _get_replies("sample_email.txt")
+    MS = get_replies("sample_email.txt")
     for ms in MS:
         md = get_metadata(ms)
         sender_name = md["sender"]
