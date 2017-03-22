@@ -141,7 +141,7 @@ def get_replies(message_file, charset="utf-8"):
 
 
 def get_metadata(reply):
-    """ Gets sender, recipients, iimestamp, and subject metadata values from a reply.
+    """ Gets sender, recipients, timestamp, and subject metadata values from a reply.
         Also returns number of lines in the reply.
     
         Args:
