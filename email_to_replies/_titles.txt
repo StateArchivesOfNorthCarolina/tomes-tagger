@@ -107,6 +107,7 @@ Revs
 Right Reverend
 RtRev
 S Sgt
+Secretary
 Sen
 Senator
 Senor
