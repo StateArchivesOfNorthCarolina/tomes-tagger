@@ -215,7 +215,7 @@ def get_signature(reply, sender, length_divisor=2):
     # set maximum length after which to stop searching.
     max_length = len(reply_reversed)/length_divisor
     
-    # loop through reply backwards, look for signature.
+    # loop through reply backwards; look for signature.
     i = len(reply_reversed)
     j = 0
     for line in reply_reversed:
