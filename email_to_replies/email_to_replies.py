@@ -200,7 +200,6 @@ def get_signature(reply, sender, length_divisor=2):
 
     Returns:
         dict: The return value.
-
     """
 
     # assume values.
