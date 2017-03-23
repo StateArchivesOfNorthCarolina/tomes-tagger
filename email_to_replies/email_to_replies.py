@@ -16,6 +16,9 @@ Todo:
     - how to do this for Gmail? There may be a clue in HTML version of Gmail
       (div|blockquote.class=3D"gmail_quote").
     - consider using Levenshtein distance to help determine if there's a likely name match.
+    - add function to check for presence of patterns in signature per page 3 of
+      http://www.cs.cmu.edu/~vitor/papers/sigFilePaper_finalversion.pdf. This is to help
+      verify it's a signature.
 """
 
 ### import modules.
