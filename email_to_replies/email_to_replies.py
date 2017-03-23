@@ -219,11 +219,17 @@ def get_signature(reply, sender, length_divisor=2):
     i = len(reply_reversed)
     j = 0
     for line in reply_reversed:
+        
+        # stop upon reaching check limit.
         if j == max_length:
             break
+        
+        # sanitize line and check tokens against tokens in sender's name.
         line = sanitize_name(line)
         tokens = line.split()
         found_sender = [t for t in tokens if t.lower() in sender["name"].lower()]
+        
+        # if 2+ tokens match, assume start of signature.
         if len(tokens) > 1 and found_sender == tokens:
             has_signature = True
             signature = "\n".join(reply[i-1:])
@@ -233,6 +239,7 @@ def get_signature(reply, sender, length_divisor=2):
             if sender["address"]:
                 address_in_signature = sender["address"].lower() in signature.lower()
             break
+        
         i -= 1
         j += 1
 
