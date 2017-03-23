@@ -220,10 +220,6 @@ def get_signature(reply, sender, length_divisor=2):
     j = 0
     for line in reply_reversed:
         
-        # stop upon reaching check limit.
-        if j == max_length:
-            break
-        
         # sanitize line and check tokens against tokens in sender's name.
         line = sanitize_name(line)
         tokens = line.split()
@@ -240,6 +236,9 @@ def get_signature(reply, sender, length_divisor=2):
                 address_in_signature = sender["address"].lower() in signature.lower()
             break
         
+        # stop upon reaching check limit.
+        if j == max_length - 1:
+            break
         i -= 1
         j += 1
 
