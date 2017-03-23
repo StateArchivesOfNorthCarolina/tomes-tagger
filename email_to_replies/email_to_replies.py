@@ -106,12 +106,12 @@ def get_contact(line):
     return contact
 
 
-def get_replies(message_file, charset="utf-8"):
+def get_replies(message_file, charset=None):
     """ Finds replies within a message and returns a list containing each reply.
     
     Args:
         message_file (str): The email's filename.
-        charset (str): The codec to use for opening the file.
+        charset (str): The optional codec to use for opening the file.
     
     Returns:
         list: Each item is a reply consisting of a list of lines.
