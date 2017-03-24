@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env python3
 
 """
 Parses an email into separate replies and attempts to get signatures for each reply.
