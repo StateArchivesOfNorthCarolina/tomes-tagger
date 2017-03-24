@@ -59,7 +59,6 @@ for text in texts:
         output = nlp.annotate(f.read(), properties=options)
         f.close()
         with codecs.open(json_file, mode="w", encoding="utf-8") as j:
-            #output = dict(output)
             output = json.dumps(output, indent=2)
             j.write(output)
 
