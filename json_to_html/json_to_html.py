@@ -36,7 +36,10 @@ for j_file in j_files:
     data = json.loads(fr)
     
     # set HTML headers; prepare to parse.
-    html = ["<!DOCTYPE html><html><head><meta charset='utf-8' /><link rel='stylesheet' href='style.css'></link></head><body><div><pre><span>"]
+    html = ["<!DOCTYPE html><html>",
+            "<head><meta charset='utf-8' />",
+            "<link rel='stylesheet' href='style.css'></link>",
+            "</head><body><div><pre><span>"]
     sentences = data["sentences"]
     current_ner = ""
     
