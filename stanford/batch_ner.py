@@ -25,7 +25,7 @@ if use_server == "True":
 else:
     use_server = False
 
-# glob all .txt files in @folder.
+# glob all .txt files in folder.
 texts = glob.glob(inputs + "/*.txt")
 
 # run CoreNLP on all files.
@@ -54,6 +54,8 @@ for text in texts:
         options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
                   "outputFormat": "json",
                   "regexner.mapping": "mappings.txt"}
+                  # note: mappings file must exist in same dir as CoreNLP
+                  # class path.
         f = codecs.open(text)
         print("Processing {}".format(text))
         output = nlp.annotate(f.read(), properties=options)
