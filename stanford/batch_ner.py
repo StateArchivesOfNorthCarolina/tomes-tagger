@@ -69,7 +69,7 @@ for text in texts:
     #    exit()
     i += 1
     #break
-i
+
 # stop timing; report.
 stop_time = time.time()
 total_time = stop_time - start_time
