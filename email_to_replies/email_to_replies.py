@@ -24,6 +24,7 @@ Todo:
 ### import modules.
 import codecs
 import json
+import math
 import re
 
 ### globals.
@@ -187,16 +188,13 @@ def get_metadata(reply):
     return metadata
 
 
-def get_signature(reply, sender, length_divisor=2):
+def get_signature(reply, sender):
     """ Gets signature for a given reply (if exists). Also returns signature text and reply
         text (sans signature).
 
     Args:
         reply (list): The list of lines for a given reply.
         sender(dict): The get_contact() value for the reply's sender. 
-        length_divisor (int): The number to divide the reply's length by.
-                              The resulting quotient equals the maximum number of lines for
-                              which to check for a signature.
 
     Returns:
         dict: The return value.
@@ -211,13 +209,9 @@ def get_signature(reply, sender, length_divisor=2):
     # reverse reply.
     reply_reversed = reply[0:]
     reply_reversed.reverse()
-
-    # set maximum length after which to stop searching.
-    max_length = len(reply_reversed)/length_divisor
     
     # loop through reply backwards; look for signature.
     i = len(reply_reversed)
-    j = 0
     for line in reply_reversed:
         
         # sanitize line and check tokens against tokens in sender's name.
@@ -235,12 +229,7 @@ def get_signature(reply, sender, length_divisor=2):
             if sender["address"]:
                 address_in_signature = sender["address"].lower() in signature.lower()
             break
-        
-        # stop upon reaching check limit.
-        if j == max_length - 1:
-            break
         i -= 1
-        j += 1
 
     signature_metadata = {"has_signature": has_signature, "signature": signature,
                          "reply_text": reply_text,
