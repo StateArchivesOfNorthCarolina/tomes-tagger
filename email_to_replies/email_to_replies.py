@@ -24,7 +24,6 @@ Todo:
 ### import modules.
 import codecs
 import json
-import math
 import re
 
 ### globals.
