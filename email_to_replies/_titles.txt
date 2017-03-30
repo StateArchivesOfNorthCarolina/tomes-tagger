@@ -30,6 +30,7 @@ Cntss
 Col
 Colonel
 Commander
+Commissioner
 Corporal
 Count
 Countess
@@ -37,6 +38,7 @@ Cpl
 CPO
 Cpt
 Dean
+Deputy
 Director
 Dr
 Drs
