@@ -1,5 +1,6 @@
-# list source: https://mediawiki.middlebury.edu/wiki/LIS/Name_Standards2dLt
-# modified as needed.
+#list_source:https://mediawiki.middlebury.edu/wiki/LIS/Name_Standards2dLt
+#list_modified_as_needed.
+#add_comments_to_this_file_as_tokens_preceeded_with_a_hash_tag.
 2Lt
 2nd Lieutenant
 Abbot
