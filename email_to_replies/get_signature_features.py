@@ -29,16 +29,20 @@ def _countQuotes():
 def _countURLs():
     pattern = "(http|https)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*"
               # pattern based on: http://regexlib.com/REDetails.aspx?regexp_id=146
-			  # needs to also support "www.nccommerce.com" type stuff.
+	      # needs to also support "www.nccommerce.com" type stuff.
     x = re.findall(pattern, SIGNATURE)
     return len(x)
     
-    
+def _countLines():
+    x = SIGNATURE.split("\n")
+    return len(x)
+
 #####
 def getFeatures(tests=[_hasEmail,
                        _countPhones,
                        _countZips,
                        _countQuotes,
-                       _countURLs]):
+                       _countURLs,
+                       _countLines]):
     features = [t() for t in tests]
     return features
