@@ -27,9 +27,8 @@ def _countQuotes():
     return len(x)
 
 def _countURLs():
-    pattern = "(http|https)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*"
+    pattern = "((http|https)\://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*"
               # pattern based on: http://regexlib.com/REDetails.aspx?regexp_id=146
-	      # needs to also support "www.nccommerce.com" type stuff.
     x = re.findall(pattern, SIGNATURE)
     return len(x)
     
