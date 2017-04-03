@@ -1,3 +1,0 @@
-( /Department/ /of/ [{ ner:ORGANIZATION }] )	NC.state_agency	ORGANIZATION
-( [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	NC.state_agency	ORGANIZATION
-( [{ ner:ORGANIZATION }] [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	NC.state_agency	ORGANIZATION
