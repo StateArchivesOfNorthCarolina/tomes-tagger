@@ -1,0 +1,2 @@
+[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}	PII.credit_card_number	NUMBER
+[0-9]{4}-?[0-9]{4}-?[0-9]{4}-?[0-9]{4}	PII.credit_card_number	NUMBER,DURATION
