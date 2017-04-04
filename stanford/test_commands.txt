@@ -1,4 +1,4 @@
-- basic test
+- Basic test
 	java -cp "*" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,lemma,ner,parse,dcoref -file input.txt
 
 - http://nlp.stanford.edu/software/regexner.html
@@ -20,6 +20,17 @@
 
 		java -cp "*" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -file ../tests/NCStateAgencies_regexner.txt -regexner.mapping ../tests/NCStateAgencies_regexnerMappings.txt
 		
-- use TokensRegex per http://stackoverflow.com/questions/40441963/how-to-use-a-custom-tokensregex-rules-annotator-with-stanford-corenlp-server
+- Use TokensRegex per http://stackoverflow.com/questions/40441963/how-to-use-a-custom-tokensregex-rules-annotator-with-stanford-corenlp-server
 	java -cp "*" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -props custom.properties -file ./tokensregex/color.input.txt
 	java -cp "*" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -props ../tests/Nitin.properties -file ../tests/Nitin.txt
+	
+- Server (see: http://stanfordnlp.github.io/CoreNLP/corenlp-server.html#getting-started)
+
+	java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 #basic startup.
+	
+	>>> from pycorenlp import StanfordCoreNLP
+	>>> nlp = StanfordCoreNLP("http://localhost:9000")
+	>>> text = "nitaro74@gmail.com"
+	>>> output = nlp.annotate(text, properties={"annotators":"tokenize, ssplit, pos, ner, regexner", "outputFormat":"json", "regexner.mapping":"mappings.txt"})
+	>>> print(output)
+	{'sentences': [{'index': 0, 'tokens': [{'index': 1, 'word': 'nitaro74@gmail.com', 'originalText': 'nitaro74@gmail.com', 'lemma': 'nitaro74@gmail.com', 'characterOffsetBegin': 0, 'characterOffsetEnd': 18, 'pos': 'NN', 'ner': 'PII.email_address', 'before': '', 'after': ''}]}]}
