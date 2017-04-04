@@ -1,0 +1,11 @@
+### social_security_number
+
+### REGEX
+# note: allows for illegal SSNs such as 000-12-1234, etc. but how many times would emails contain invalid SSNs?
+(?x)        # set free spacing mode to make REGEX readable.
+[0-9]{3}    # any single digit, 3 times.
+[\s|-]      # space OR hyphen.
+[0-9]{2}    # any single digit, 2 times.
+[\s|-]      # space OR hyphen.
+[0-9]{4}    # any single digit, 4 times.
+

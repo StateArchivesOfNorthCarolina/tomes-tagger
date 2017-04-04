@@ -1,0 +1,34 @@
+### sensitive_document
+# keywords mostly from: http://www.thesaurus.com/browse/confidential
+
+### REGEX
+(?x)						# set free spacing mode to make REGEX readable.
+(?i)between\sus|			# case-insensitive keywords and phrases ...
+(?i)classified|
+(?i)confidential|
+(?i)discrete|
+(?i)eyes\sonly|
+(?i)eyes-only|
+(?i)hushed|
+(?i)hush\shush|
+(?i)hush-hush|
+(?i)in\sconfidence|
+(?i)intelligence|
+(?i)legal\sdisclaimer|
+(?i)NDA|
+(?i)non\sdisclosure|
+(?i)non-disclosure|
+(?i)not\sfor\spublication|
+(?i)not\spublic|
+(?i)not\sto\sbe\squoted|
+(?i)off\sthe\srecord|
+(?i)off-the-record|
+(?i)private|
+(?i)restricted|
+(?i)secret|
+(?i)sensitive|
+(?i)strictly\sprohibited|
+(?i)top\ssecret|
+(?i)under\sthe\stable|
+(?i)under-the-table|
+(?i)under\swraps

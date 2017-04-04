@@ -1,0 +1,23 @@
+single@foo.com
+dot.ted@foo.edu
+dot.ted@dot.ted.gov
+d.ot.ted@ws.ws
+ip.address@[127.0.0.1]
+UPPER@CASE.FOO
+cAsE@inSeNsItIvE.cO.uK
+.startsWithDot@foo.com
+dot..@dot.com
+"quoted"@quote.org
+100_total_length___________________________________________________________________________@foo.com
+Arora, Nitin <nitin.a.arora@ncdcr.gov>
+Arora, Nitin "nitin.a.arora@ncdcr.gov"
+Arora, Nitin 'nitin.a.arora@ncdcr.gov'
+Arora, Nitin (nitin.a.arora@ncdcr.gov)
+Arora, Nitin {nitin.a.arora@ncdcr.gov}
+Arora, Nitin [nitin.a.arora@ncdcr.gov]
+foo@test.1
+(comment)foo@foo.com
+mañaña@foo.co.es		
+illegalDomain@fo.o
+dot.ted(comment)@foo.com
+long@doma.iXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXin

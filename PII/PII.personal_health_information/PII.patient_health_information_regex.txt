@@ -1,0 +1,18 @@
+### patient_health_information
+
+### REGEX
+(?x)						# set free spacing mode to make REGEX readable.
+(?i)deductible|				# case-insensitive keywords and phrases ...
+(?i)diagnosis|
+(?i)FMLA|
+(?i)health\scondition|
+(?i)health\sinsurance|
+(?i)health\sissues|
+(?i)health\sproblems|
+(?i)HIPPA|
+(?i)medical\sleave|
+(?i)medical\srecords|
+(?i)patient|
+(?i)PHI|
+(?i)policy\snumber
+

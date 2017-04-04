@@ -1,0 +1,9 @@
+### passport_number
+
+### REGEX
+# currently not allowing 6 and 7 digit passport numbers.
+(?x)                                # set free spacing mode to make REGEX readable.
+\b                                  # word boundary.
+( [0-9]{8,9} | [a-zA-Z][0-9]{7} )   # 8 to 9 digits (visa, passport) OR letter followed by 7 digits (visa).
+\b                                  # word boundary.
+
