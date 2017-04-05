@@ -55,7 +55,7 @@ PII.employee_identification_number	12-1234567A	['PII.employee_identification_num
 PII.employee_identification_number	12-1234567001	['PII.employee_identification_number']	True	1.0	True	True
 PII.employee_identification_number	12-1234567 A	['PII.employee_identification_number']	True	0.5	False	False
 PII.employee_identification_number	12-1234567001A	[]	False	0.0	False	True
-PII.nc_drivers_license_number	123456789112	['PII.nc_drivers_license']	False	1.0	False	True
+PII.nc_drivers_license_number	123456789112	['NUMBER']	False	1.0	False	True
 PII.nc_drivers_license_number	012345678911 123456789112	['NUMBER']	False	0.5	False	True
 PII.nc_drivers_license_number	000012345678	['PII.nc_drivers_license']	False	1.0	True	False
 PII.nc_drivers_license_number	12345678911 2	['NUMBER']	False	0.5	False	True
@@ -64,27 +64,29 @@ PII.nc_drivers_license_number	12345678911	['NUMBER']	False	1.0	False	True
 PII.nc_drivers_license_number	a123456789112	[]	False	0.0	False	True
 PII.nc_drivers_license_number	123456789112a	[]	False	0.0	False	True
 PII.passport_number	462329510	['PII.passport_number']	True	1.0	True	True
-PII.passport_number	925919782 092357332	['NUMBER']	False	0.5	False	True
+PII.passport_number	925919782	['PII.passport_number']	True	1.0	True	True
+PII.passport_number	092357332	['PII.passport_number']	True	1.0	True	True
 PII.passport_number	12345678	['PII.passport_number']	True	1.0	True	True
 PII.passport_number	1234567	['NUMBER']	False	1.0	False	True
 PII.passport_number	a1234567	['PII.passport_number']	True	1.0	True	True
-PII.passport_number	A1234567 z12345678	['PII.passport_number']	True	0.5	False	False
+PII.passport_number	A1234567	['PII.passport_number']	True	1.0	True	True
+PII.passport_number	z12345678	[]	False	0.0	False	True
 PII.passport_number	z12345678	[]	False	0.0	False	True
 PII.passport_number	12345678911	['NUMBER']	False	1.0	False	True
 PII.passport_number	123456	['NUMBER']	False	1.0	False	True
-PII.personal_health_information	DEduCtible	['PII.patient_health_information']	False	1.0	True	False
-PII.personal_health_information	DIAGNOSiS	['PII.patient_health_information']	False	1.0	True	False
-PII.personal_health_information	fMla	['PII.patient_health_information']	False	1.0	True	False
-PII.personal_health_information	HeaLth COnDiTiON	['PII.patient_health_information']	False	0.5	True	False
-PII.personal_health_information	HeALtH InSURaNce	['PII.patient_health_information']	False	0.5	True	False
-PII.personal_health_information	HEALTH isSues	['PII.patient_health_information']	False	0.5	True	False
-PII.personal_health_information	health PrObleMS	['PII.patient_health_information']	False	0.5	True	False
-PII.personal_health_information	hIPpa	['PII.patient_health_information']	False	1.0	True	False
-PII.personal_health_information	mediCal LeAVe	['PII.patient_health_information']	False	0.5	True	False
-PII.personal_health_information	meDICAL recOrDs	['PII.patient_health_information']	False	0.5	True	False
-PII.personal_health_information	PAtieNT	['PII.patient_health_information']	False	1.0	True	False
-PII.personal_health_information	PHi	['PII.patient_health_information']	False	1.0	True	False
-PII.personal_health_information	poLiCY NuMber	['PII.patient_health_information']	False	0.5	True	False
+PII.personal_health_information	DEduCtible	['PII.personal_health_information']	True	1.0	True	True
+PII.personal_health_information	DIAGNOSiS	['PII.personal_health_information']	True	1.0	True	True
+PII.personal_health_information	fMla	['PII.personal_health_information']	True	1.0	True	True
+PII.personal_health_information	HeaLth COnDiTiON	['PII.personal_health_information']	True	0.5	True	True
+PII.personal_health_information	HeALtH InSURaNce	['PII.personal_health_information']	True	0.5	True	True
+PII.personal_health_information	HEALTH isSues	['PII.personal_health_information']	True	0.5	True	True
+PII.personal_health_information	health PrObleMS	['PII.personal_health_information']	True	0.5	True	True
+PII.personal_health_information	hIPpa	['PII.personal_health_information']	True	1.0	True	True
+PII.personal_health_information	mediCal LeAVe	['PII.personal_health_information']	True	0.5	True	True
+PII.personal_health_information	meDICAL recOrDs	['PII.personal_health_information']	True	0.5	True	True
+PII.personal_health_information	PAtieNT	['PII.personal_health_information']	True	1.0	True	True
+PII.personal_health_information	PHi	['PII.personal_health_information']	True	1.0	True	True
+PII.personal_health_information	poLiCY NuMber	['PII.personal_health_information']	True	0.5	True	True
 PII.sensitive_document	BEtwEen us	['PII.sensitive_document']	True	0.5	True	True
 PII.sensitive_document	cLASSIFIeD	['PII.sensitive_document']	True	1.0	True	True
 PII.sensitive_document	cOnfIdeNtiAL	['PII.sensitive_document']	True	1.0	True	True
@@ -97,7 +99,7 @@ PII.sensitive_document	huSh-Hush	['PII.sensitive_document']	True	1.0	True	True
 PII.sensitive_document	IN cONfidencE	['PII.sensitive_document']	True	0.5	True	True
 PII.sensitive_document	inTeLLigeNCE	['PII.sensitive_document']	True	1.0	True	True
 PII.sensitive_document	LEgal DiScLAimeR	['PII.sensitive_document']	True	0.5	True	True
-PII.sensitive_document	NDA	['ORGANIZATION']	False	1.0	True	False
+PII.sensitive_document	NDA	['PII.sensitive_document']	True	1.0	True	True
 PII.sensitive_document	non DiSCLoSure	['PII.sensitive_document']	True	0.5	True	True
 PII.sensitive_document	Non-dISCLOSURE	['PII.sensitive_document']	True	1.0	True	True
 PII.sensitive_document	NOt For pubLicAtIoN	['PII.sensitive_document']	True	0.3333333333333333	True	True
@@ -115,22 +117,22 @@ PII.sensitive_document	UNDEr tHE tabLE	['PII.sensitive_document']	True	0.3333333
 PII.sensitive_document	UnDER-ThE-tAblE	['PII.sensitive_document']	True	1.0	True	True
 PII.sensitive_document	UndEr WRaPs	['PII.sensitive_document']	True	0.5	True	True
 PII.social_security_number	959714676	['NUMBER']	False	1.0	False	True
-PII.social_security_number	700-99-0513	['NUMBER']	False	1.0	True	False
+PII.social_security_number	700-99-0513	['PII.social_security_number']	True	1.0	True	True
 PII.social_security_number	714 89 6228	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	376 87 1396	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	489 71 7878	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	730 04 7552	['PII.social_security_number']	True	0.3333333333333333	True	True
-PII.social_security_number	738-75-2148	['NUMBER']	False	1.0	True	False
-PII.social_security_number	853-06-5240	['NUMBER']	False	1.0	True	False
+PII.social_security_number	738-75-2148	['PII.social_security_number']	True	1.0	True	True
+PII.social_security_number	853-06-5240	['PII.social_security_number']	True	1.0	True	True
 PII.social_security_number	097 80 9084	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	535234337	['NUMBER']	False	1.0	False	True
 PII.social_security_number	433924327	['NUMBER']	False	1.0	False	True
 PII.social_security_number	155 21 7104	['PII.social_security_number']	True	0.3333333333333333	True	True
-PII.social_security_number	319-51-6119	['NUMBER']	False	1.0	True	False
+PII.social_security_number	319-51-6119	['PII.social_security_number']	True	1.0	True	True
 PII.social_security_number	162310293	['NUMBER']	False	1.0	False	True
 PII.social_security_number	996 36 8070	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	944 39 5643	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	907 85 6893	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	364645920	['NUMBER']	False	1.0	False	True
-PII.social_security_number	433-91-9072	['NUMBER']	False	1.0	True	False
+PII.social_security_number	433-91-9072	['PII.social_security_number']	True	1.0	True	True
 PII.social_security_number	915422666	['NUMBER']	False	1.0	False	True
