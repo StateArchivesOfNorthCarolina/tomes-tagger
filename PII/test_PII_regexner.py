@@ -20,10 +20,11 @@ def getNER(phrase, PII_type):
     
     Returns:
         tuple: 
-            - retext (str): the joined tokens analyzed by CoreNLP (str).
+            - phrase (str): the original @phrase.
+            - rephrase (str): the joined tokens analyzed by CoreNLP.
             - ner_tags (list): the list of NER tags found.
             - ner_test (bool): if the only NER tag found equals @PII_type.
-            - accuracy (decimal): the ratio of tokens tagged as PII_type divided by the total
+            - accuracy (decimal): the ratio of tokens tagged as @PII_type divided by the total
               number of tokens analyzed.
 
     Examples:
@@ -45,7 +46,8 @@ def getNER(phrase, PII_type):
     tokens = output["sentences"][0]["tokens"]
     
     # get words from @tokens; re-join into single string.
-    word = [o["word"] for o in tokens]
+    #word = [o["word"] for o in tokens]
+    word = [o["word"] for o in tokens if o["ner"] == PII_type]
     rephrase = " ".join(word)
     
     # get non-empty NER tags; prepare report data.
@@ -55,7 +57,7 @@ def getNER(phrase, PII_type):
     ner_test = ner_tags == [PII_type] 
     accuracy = len(ner_tags)/len(tokens)
     
-    return (rephrase, ner_tags, ner_test, accuracy)
+    return (phrase, rephrase, ner_tags, ner_test, accuracy)
 
 
 def testPII():
@@ -67,8 +69,8 @@ def testPII():
     tsv = []
 
     # append @tsv header.
-    header = ["PII_type", "Test_Data", "NER_tags", "isCorrectNER", "NER_Accuracy",
-             "isMatchData", "isTestPassed"]
+    header = ["PII_type", "Test_Data", "Matched_Test_Data", "NER_tags", "isCorrectNER",
+             "NER_Accuracy", "isMatchData", "isTestPassed"]
     header = "\t".join(header)
     tsv.append(header)
 
@@ -82,22 +84,20 @@ def testPII():
         pii = pii[:-1]
         os.chdir(pii)
         
-        # open/read test and match data files.
+        # open/read test and match data files; remove blank lines.
         test_data = open(pii + "__testData.txt")
         match_data = open(pii + "__matchData.txt")
         test_data = test_data.read().split("\n")
         match_data = match_data.read().split("\n")
+        test_data = [x for x in test_data if x != ""]
+        match_data = [x for x in match_data if x != ""]
 
         # runs tests; determine if each test passed or not; append results to @tsv.
         for line in test_data:
-            
-            # skip blank lines as they will break getNER().
-            if line == "":
-                continue
 
             # run test; determine if test passed.
-            phrase, ner_tags, ner_test, accuracy = getNER(line, pii)
-            match = phrase in match_data
+            phrase, rephrase, ner_tags, ner_test, accuracy = getNER(line, pii)
+            match = rephrase in match_data
             if ner_test and match:
                 passed = True
             elif ner_test and not match:
@@ -108,7 +108,7 @@ def testPII():
                 passed = True
             
             # append test data to @tsv.
-            test = [pii, phrase, ner_tags, ner_test, accuracy, match, passed]
+            test = [pii, phrase, rephrase, ner_tags, ner_test, accuracy, match, passed]
             test = [str(r) for r in test]
             test = "\t".join(test)
             tsv.append(test)
@@ -122,7 +122,7 @@ def testPII():
     return tsv
         
 ### let's test ...
-SCREEN = False
+SCREEN = True
 def main():
     results = testPII()
     if SCREEN == True:
