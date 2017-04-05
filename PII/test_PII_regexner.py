@@ -71,7 +71,7 @@ def testPII():
 
     # append @tsv header.
     header = ["PII_type", "Test_Data", "Matched_Test_Data", "NER_tags", "isCorrectNER",
-             "NER_Accuracy", "isMatchData", "isTestPassed"]
+             "Token_Ratio", "isMatchData", "isTestPassed"]
     header = "\t".join(header)
     tsv.append(header)
 
