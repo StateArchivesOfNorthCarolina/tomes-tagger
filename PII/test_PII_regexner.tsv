@@ -1,136 +1,136 @@
 PII_type	Test_Data	NER_tags	isCorrectNER	NER_Accuracy	isMatchData	isTestPassed
-PII.bank_account_number	123456789-123456	['PII.bank_account_number']	True	1.0	False	False
-PII.bank_account_number	123456789 123456	['PII.bank_account_number']	True	0.5	False	False
+PII.bank_account_number	123456789-123456	['PII.bank_account_number']	True	1.0	True	True
+PII.bank_account_number	123456789 123456	['PII.bank_account_number']	True	0.5	True	True
 PII.bank_account_number	123456789123456	['NUMBER']	False	1.0	False	True
-PII.bank_account_number	1234-5678-9-123456	['PII.bank_account_number']	True	1.0	False	False
-PII.bank_account_number	1234-5678-9 123456	['PII.bank_account_number']	True	0.5	False	False
+PII.bank_account_number	1234-5678-9-123456	['PII.bank_account_number']	True	1.0	True	True
+PII.bank_account_number	1234-5678-9 123456	['PII.bank_account_number']	True	0.5	True	True
 PII.bank_account_number	12345678 9-123456	['NUMBER']	False	0.5	False	True
 PII.bank_account_number	12345678 9 123456	['NUMBER']	False	0.3333333333333333	False	True
-PII.bank_account_number	223456789 123456	['PII.bank_account_number']	True	0.5	False	False
-PII.bank_account_number	223456789-123456	['PII.bank_account_number']	True	1.0	False	False
+PII.bank_account_number	223456789 123456	['PII.bank_account_number']	True	0.5	True	True
+PII.bank_account_number	223456789-123456	['PII.bank_account_number']	True	1.0	True	True
 PII.bank_account_number	223456789 123456789101315171921	['NUMBER']	False	0.5	False	True
-PII.bank_account_number	223456789 12345678910131517	['PII.bank_account_number']	True	0.5	False	False
-PII.bank_account_number	123456789-123456	['PII.bank_account_number']	True	1.0	False	False
-PII.bank_account_number	223456789 123456	['PII.bank_account_number']	True	0.5	False	False
-PII.bank_account_number	223456789-123456	['PII.bank_account_number']	True	1.0	False	False
+PII.bank_account_number	223456789 12345678910131517	['PII.bank_account_number']	True	0.5	True	True
+PII.bank_account_number	123456789-123456	['PII.bank_account_number']	True	1.0	True	True
+PII.bank_account_number	223456789 123456	['PII.bank_account_number']	True	0.5	True	True
+PII.bank_account_number	223456789-123456	['PII.bank_account_number']	True	1.0	True	True
 PII.bank_account_number	223456789 123456789101315171921	['NUMBER']	False	0.5	False	True
-PII.bank_account_number	223456789 12345678910131517	['PII.bank_account_number']	True	0.5	False	False
+PII.bank_account_number	223456789 12345678910131517	['PII.bank_account_number']	True	0.5	True	True
 PII.bank_account_number	133456789-123456	['NUMBER']	False	1.0	False	True
 PII.bank_account_number	1234_5678-9-123456	['NUMBER']	False	1.0	False	True
 PII.beacon_id	12345678 123	['NUMBER']	False	0.5	False	True
-PII.beacon_id	12345678	['PII.beacon_id']	True	1.0	False	False
+PII.beacon_id	12345678	['PII.beacon_id']	True	1.0	True	True
 PII.beacon_id	123456	['NUMBER']	False	1.0	False	True
 PII.beacon_id	1 234567	['NUMBER']	False	0.5	False	True
 PII.beacon_id	123456789	['NUMBER']	False	1.0	False	True
-PII.credit_card_number	1234-1234-1234-1234	['PII.credit_card_number']	True	1.0	False	False
+PII.credit_card_number	1234-1234-1234-1234	['PII.credit_card_number']	True	1.0	True	True
 PII.credit_card_number	1234 1234 1234 1234	['NUMBER']	False	1.0	False	True
 PII.credit_card_number	4465-1234 5467-2341	['DURATION']	False	1.0	False	True
 PII.credit_card_number	1234123412341234	['PII.credit_card_number']	True	1.0	False	False
 PII.credit_card_number	1234 1234 1234 12345	['NUMBER']	False	1.0	False	True
-PII.email_address	single@foo.com	['PII.email_address']	True	1.0	False	False
-PII.email_address	dot.ted@foo.edu	['PII.email_address']	True	1.0	False	False
-PII.email_address	dot.ted@dot.ted.gov	['PII.email_address']	True	1.0	False	False
-PII.email_address	d.ot.ted@ws.ws	['PII.email_address']	True	1.0	False	False
-PII.email_address	ip.address@[127.0.0.1]	['PII.email_address']	True	1.0	False	False
-PII.email_address	UPPER@CASE.FOO	['PII.email_address']	True	1.0	False	False
-PII.email_address	cAsE@inSeNsItIvE.cO.uK	['PII.email_address']	True	1.0	False	False
+PII.email_address	single@foo.com	['PII.email_address']	True	1.0	True	True
+PII.email_address	dot.ted@foo.edu	['PII.email_address']	True	1.0	True	True
+PII.email_address	dot.ted@dot.ted.gov	['PII.email_address']	True	1.0	True	True
+PII.email_address	d.ot.ted@ws.ws	['PII.email_address']	True	1.0	True	True
+PII.email_address	ip.address@[127.0.0.1]	['PII.email_address']	True	1.0	True	True
+PII.email_address	UPPER@CASE.FOO	['PII.email_address']	True	1.0	True	True
+PII.email_address	cAsE@inSeNsItIvE.cO.uK	['PII.email_address']	True	1.0	True	True
 PII.email_address	.	[]	False	0.0	False	True
-PII.email_address	dot..@dot.com	['PII.email_address']	True	1.0	False	False
+PII.email_address	dot..@dot.com	['PII.email_address']	True	1.0	True	True
 PII.email_address	`` quoted '' @quote .	[]	False	0.0	False	True
-PII.email_address	100_total_length___________________________________________________________________________@foo.com	['PII.email_address']	True	1.0	False	False
+PII.email_address	100_total_length___________________________________________________________________________@foo.com	['PII.email_address']	True	1.0	True	True
 PII.email_address	Arora , Nitin <nitin.a.arora@ncdcr.gov>	['PERSON']	False	0.25	False	True
 PII.email_address	Arora , Nitin `` nitin.a.arora@ncdcr.gov ''	['PERSON', 'PII.email_address']	False	0.3333333333333333	False	True
 PII.email_address	Arora , Nitin ` nitin.a.arora@ncdcr.gov'	['PERSON', 'PII.email_address']	False	0.4	False	True
 PII.email_address	Arora , Nitin -LRB- nitin.a.arora@ncdcr.gov -RRB-	['PERSON', 'PII.email_address']	False	0.3333333333333333	False	True
 PII.email_address	Arora , Nitin -LCB- nitin.a.arora@ncdcr.gov -RCB-	['PERSON', 'PII.email_address']	False	0.3333333333333333	False	True
 PII.email_address	Arora , Nitin -LSB- nitin.a.arora@ncdcr.gov]	['PERSON', 'PII.email_address']	False	0.4	False	True
-PII.email_address	foo@test.1	['PII.email_address']	True	1.0	False	False
+PII.email_address	foo@test.1	['PII.email_address']	True	1.0	True	True
 PII.email_address	-LRB- comment -RRB- foo@foo.com	['PII.email_address']	True	0.25	False	False
-PII.email_address	mañaña@foo.co.es	[]	False	0.0	False	True
+PII.email_address	maÃ±aÃ±a@foo.co.es	[]	False	0.0	False	True
 PII.email_address	illegalDomain@fo.o	[]	False	0.0	False	True
 PII.email_address	dot.ted -LRB- comment -RRB- @foo .	[]	False	0.0	False	True
 PII.email_address	long@doma.iXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXin	[]	False	0.0	False	True
-PII.employee_identification_number	12-1234567	['PII.employee_identification_number']	True	1.0	False	False
-PII.employee_identification_number	12-1234567A	['PII.employee_identification_number']	True	1.0	False	False
-PII.employee_identification_number	12-1234567001	['PII.employee_identification_number']	True	1.0	False	False
+PII.employee_identification_number	12-1234567	['PII.employee_identification_number']	True	1.0	True	True
+PII.employee_identification_number	12-1234567A	['PII.employee_identification_number']	True	1.0	True	True
+PII.employee_identification_number	12-1234567001	['PII.employee_identification_number']	True	1.0	True	True
 PII.employee_identification_number	12-1234567 A	['PII.employee_identification_number']	True	0.5	False	False
 PII.employee_identification_number	12-1234567001A	[]	False	0.0	False	True
 PII.nc_drivers_license_number	123456789112	['PII.nc_drivers_license']	False	1.0	False	True
 PII.nc_drivers_license_number	012345678911 123456789112	['NUMBER']	False	0.5	False	True
-PII.nc_drivers_license_number	000012345678	['PII.nc_drivers_license']	False	1.0	False	True
+PII.nc_drivers_license_number	000012345678	['PII.nc_drivers_license']	False	1.0	True	False
 PII.nc_drivers_license_number	12345678911 2	['NUMBER']	False	0.5	False	True
 PII.nc_drivers_license_number	123456	['NUMBER']	False	1.0	False	True
 PII.nc_drivers_license_number	12345678911	['NUMBER']	False	1.0	False	True
 PII.nc_drivers_license_number	a123456789112	[]	False	0.0	False	True
 PII.nc_drivers_license_number	123456789112a	[]	False	0.0	False	True
-PII.passport_number	462329510	['PII.passport_number']	True	1.0	False	False
+PII.passport_number	462329510	['PII.passport_number']	True	1.0	True	True
 PII.passport_number	925919782 092357332	['NUMBER']	False	0.5	False	True
-PII.passport_number	12345678	['PII.passport_number']	True	1.0	False	False
+PII.passport_number	12345678	['PII.passport_number']	True	1.0	True	True
 PII.passport_number	1234567	['NUMBER']	False	1.0	False	True
-PII.passport_number	a1234567	['PII.passport_number']	True	1.0	False	False
+PII.passport_number	a1234567	['PII.passport_number']	True	1.0	True	True
 PII.passport_number	A1234567 z12345678	['PII.passport_number']	True	0.5	False	False
 PII.passport_number	z12345678	[]	False	0.0	False	True
 PII.passport_number	12345678911	['NUMBER']	False	1.0	False	True
 PII.passport_number	123456	['NUMBER']	False	1.0	False	True
-PII.personal_health_information	DEduCtible	['PII.patient_health_information']	False	1.0	False	True
-PII.personal_health_information	DIAGNOSiS	['PII.patient_health_information']	False	1.0	False	True
-PII.personal_health_information	fMla	['PII.patient_health_information']	False	1.0	False	True
-PII.personal_health_information	HeaLth COnDiTiON	['PII.patient_health_information']	False	0.5	False	True
-PII.personal_health_information	HeALtH InSURaNce	['PII.patient_health_information']	False	0.5	False	True
-PII.personal_health_information	HEALTH isSues	['PII.patient_health_information']	False	0.5	False	True
-PII.personal_health_information	health PrObleMS	['PII.patient_health_information']	False	0.5	False	True
-PII.personal_health_information	hIPpa	['PII.patient_health_information']	False	1.0	False	True
-PII.personal_health_information	mediCal LeAVe	['PII.patient_health_information']	False	0.5	False	True
-PII.personal_health_information	meDICAL recOrDs	['PII.patient_health_information']	False	0.5	False	True
-PII.personal_health_information	PAtieNT	['PII.patient_health_information']	False	1.0	False	True
-PII.personal_health_information	PHi	['PII.patient_health_information']	False	1.0	False	True
-PII.personal_health_information	poLiCY NuMber	['PII.patient_health_information']	False	0.5	False	True
-PII.sensitive_document	BEtwEen us	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	cLASSIFIeD	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	cOnfIdeNtiAL	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	dIsCrETE	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	eYEs ONlY	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	EYeS-onLY	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	HUSHed	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	Hush hush	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	huSh-Hush	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	IN cONfidencE	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	inTeLLigeNCE	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	LEgal DiScLAimeR	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	NDA	['ORGANIZATION']	False	1.0	False	True
-PII.sensitive_document	non DiSCLoSure	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	Non-dISCLOSURE	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	NOt For pubLicAtIoN	['PII.sensitive_document']	True	0.3333333333333333	False	False
-PII.sensitive_document	nOt PUBliC	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	not tO bE quOtED	['PII.sensitive_document']	True	0.25	False	False
-PII.sensitive_document	off tHE rEcORD	['PII.sensitive_document']	True	0.3333333333333333	False	False
-PII.sensitive_document	oFF-tHe-REcORd	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	pRivaTE	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	rESTRICtEd	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	secret	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	SEnSItive	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	sTrIcTLy pRohiBited	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	TOP secRet	['PII.sensitive_document']	True	0.5	False	False
-PII.sensitive_document	UNDEr tHE tabLE	['PII.sensitive_document']	True	0.3333333333333333	False	False
-PII.sensitive_document	UnDER-ThE-tAblE	['PII.sensitive_document']	True	1.0	False	False
-PII.sensitive_document	UndEr WRaPs	['PII.sensitive_document']	True	0.5	False	False
+PII.personal_health_information	DEduCtible	['PII.patient_health_information']	False	1.0	True	False
+PII.personal_health_information	DIAGNOSiS	['PII.patient_health_information']	False	1.0	True	False
+PII.personal_health_information	fMla	['PII.patient_health_information']	False	1.0	True	False
+PII.personal_health_information	HeaLth COnDiTiON	['PII.patient_health_information']	False	0.5	True	False
+PII.personal_health_information	HeALtH InSURaNce	['PII.patient_health_information']	False	0.5	True	False
+PII.personal_health_information	HEALTH isSues	['PII.patient_health_information']	False	0.5	True	False
+PII.personal_health_information	health PrObleMS	['PII.patient_health_information']	False	0.5	True	False
+PII.personal_health_information	hIPpa	['PII.patient_health_information']	False	1.0	True	False
+PII.personal_health_information	mediCal LeAVe	['PII.patient_health_information']	False	0.5	True	False
+PII.personal_health_information	meDICAL recOrDs	['PII.patient_health_information']	False	0.5	True	False
+PII.personal_health_information	PAtieNT	['PII.patient_health_information']	False	1.0	True	False
+PII.personal_health_information	PHi	['PII.patient_health_information']	False	1.0	True	False
+PII.personal_health_information	poLiCY NuMber	['PII.patient_health_information']	False	0.5	True	False
+PII.sensitive_document	BEtwEen us	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	cLASSIFIeD	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	cOnfIdeNtiAL	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	dIsCrETE	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	eYEs ONlY	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	EYeS-onLY	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	HUSHed	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	Hush hush	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	huSh-Hush	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	IN cONfidencE	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	inTeLLigeNCE	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	LEgal DiScLAimeR	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	NDA	['ORGANIZATION']	False	1.0	True	False
+PII.sensitive_document	non DiSCLoSure	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	Non-dISCLOSURE	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	NOt For pubLicAtIoN	['PII.sensitive_document']	True	0.3333333333333333	True	True
+PII.sensitive_document	nOt PUBliC	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	not tO bE quOtED	['PII.sensitive_document']	True	0.25	True	True
+PII.sensitive_document	off tHE rEcORD	['PII.sensitive_document']	True	0.3333333333333333	True	True
+PII.sensitive_document	oFF-tHe-REcORd	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	pRivaTE	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	rESTRICtEd	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	secret	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	SEnSItive	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	sTrIcTLy pRohiBited	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	TOP secRet	['PII.sensitive_document']	True	0.5	True	True
+PII.sensitive_document	UNDEr tHE tabLE	['PII.sensitive_document']	True	0.3333333333333333	True	True
+PII.sensitive_document	UnDER-ThE-tAblE	['PII.sensitive_document']	True	1.0	True	True
+PII.sensitive_document	UndEr WRaPs	['PII.sensitive_document']	True	0.5	True	True
 PII.social_security_number	959714676	['NUMBER']	False	1.0	False	True
-PII.social_security_number	700-99-0513	['NUMBER']	False	1.0	False	True
-PII.social_security_number	714 89 6228	['PII.social_security_number']	True	0.3333333333333333	False	False
-PII.social_security_number	376 87 1396	['PII.social_security_number']	True	0.3333333333333333	False	False
-PII.social_security_number	489 71 7878	['PII.social_security_number']	True	0.3333333333333333	False	False
-PII.social_security_number	730 04 7552	['PII.social_security_number']	True	0.3333333333333333	False	False
-PII.social_security_number	738-75-2148	['NUMBER']	False	1.0	False	True
-PII.social_security_number	853-06-5240	['NUMBER']	False	1.0	False	True
-PII.social_security_number	097 80 9084	['PII.social_security_number']	True	0.3333333333333333	False	False
+PII.social_security_number	700-99-0513	['NUMBER']	False	1.0	True	False
+PII.social_security_number	714 89 6228	['PII.social_security_number']	True	0.3333333333333333	True	True
+PII.social_security_number	376 87 1396	['PII.social_security_number']	True	0.3333333333333333	True	True
+PII.social_security_number	489 71 7878	['PII.social_security_number']	True	0.3333333333333333	True	True
+PII.social_security_number	730 04 7552	['PII.social_security_number']	True	0.3333333333333333	True	True
+PII.social_security_number	738-75-2148	['NUMBER']	False	1.0	True	False
+PII.social_security_number	853-06-5240	['NUMBER']	False	1.0	True	False
+PII.social_security_number	097 80 9084	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	535234337	['NUMBER']	False	1.0	False	True
 PII.social_security_number	433924327	['NUMBER']	False	1.0	False	True
-PII.social_security_number	155 21 7104	['PII.social_security_number']	True	0.3333333333333333	False	False
-PII.social_security_number	319-51-6119	['NUMBER']	False	1.0	False	True
+PII.social_security_number	155 21 7104	['PII.social_security_number']	True	0.3333333333333333	True	True
+PII.social_security_number	319-51-6119	['NUMBER']	False	1.0	True	False
 PII.social_security_number	162310293	['NUMBER']	False	1.0	False	True
-PII.social_security_number	996 36 8070	['PII.social_security_number']	True	0.3333333333333333	False	False
-PII.social_security_number	944 39 5643	['PII.social_security_number']	True	0.3333333333333333	False	False
-PII.social_security_number	907 85 6893	['PII.social_security_number']	True	0.3333333333333333	False	False
+PII.social_security_number	996 36 8070	['PII.social_security_number']	True	0.3333333333333333	True	True
+PII.social_security_number	944 39 5643	['PII.social_security_number']	True	0.3333333333333333	True	True
+PII.social_security_number	907 85 6893	['PII.social_security_number']	True	0.3333333333333333	True	True
 PII.social_security_number	364645920	['NUMBER']	False	1.0	False	True
-PII.social_security_number	433-91-9072	['NUMBER']	False	1.0	False	True
+PII.social_security_number	433-91-9072	['NUMBER']	False	1.0	True	False
 PII.social_security_number	915422666	['NUMBER']	False	1.0	False	True

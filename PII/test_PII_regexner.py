@@ -83,8 +83,8 @@ def testPII():
         os.chdir(pii)
         
         # open/read test and match data files.
-        test_data = codecs.open(pii + "__testData.txt")
-        match_data = codecs.open(pii + "__matchData.txt")
+        test_data = open(pii + "__testData.txt")
+        match_data = open(pii + "__matchData.txt")
         test_data = test_data.read().split("\n")
         match_data = match_data.read().split("\n")
 
