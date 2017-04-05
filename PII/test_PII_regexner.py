@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 # import modules.
+import codecs
 import os
 from glob import glob
 from pycorenlp import StanfordCoreNLP
@@ -82,8 +83,8 @@ def testPII():
         os.chdir(pii)
         
         # open/read test and match data files.
-        test_data = open(pii + "__testData.txt")
-        match_data = open(pii + "__matchData.txt")
+        test_data = codecs.open(pii + "__testData.txt")
+        match_data = codecs.open(pii + "__matchData.txt")
         test_data = test_data.read().split("\n")
         match_data = match_data.read().split("\n")
 
@@ -127,7 +128,7 @@ def main():
     if SCREEN == True:
         print(results)
     else:
-        with open("test_PII_regexner.tsv", "w") as f:
+        with codecs.open("test_PII_regexner.tsv", "w", encoding="utf-8") as f:
             f.write(results)
 
 if __name__ == "__main__":
