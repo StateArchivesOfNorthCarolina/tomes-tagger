@@ -10,7 +10,7 @@
 (?i)in (?i)confidence	PII.sensitive_document
 (?i)intelligence	PII.sensitive_document
 (?i)legal (?i)disclaimer	PII.sensitive_document
-NDA	PII.sensitive_document
+NDA	PII.sensitive_document	ORGANIZATION
 (?i)non (?i)disclosure	PII.sensitive_document
 (?i)non-disclosure	PII.sensitive_document
 (?i)not (?i)for (?i)publication	PII.sensitive_document
