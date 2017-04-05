@@ -11,12 +11,13 @@ from pycorenlp import StanfordCoreNLP
 # "$ java -mx2g -cp "*" edu.stanford.NLP.pipeline.StanfordCoreNLPServer -port 9000".
 NLP = StanfordCoreNLP("http://localhost:9000")
 
+
 def getNER(phrase, PII_type):
     """ Gets NER tags for given @phrase and report if it matches @PII_type.
     
     Args:
         phrase (str): The text to apply NLP to.
-        PII_type: The label for the type of PII ("PII.beacon_id", etc.).
+        PII_type (str): The label for the type of PII ("PII.beacon_id", etc.).
     
     Returns:
         tuple: 
@@ -24,12 +25,12 @@ def getNER(phrase, PII_type):
             - rephrase (str): the joined tokens analyzed by CoreNLP.
             - ner_tags (list): the list of NER tags found.
             - ner_test (bool): if the only NER tag found equals @PII_type.
-            - accuracy (decimal): the ratio of tokens tagged as @PII_type divided by the total
+            - ratio (decimal): the ratio of tokens tagged as @PII_type divided by the total
               number of tokens analyzed.
 
     Examples:
         >>> getNER("foo@bar.com", "PII.email_address")
-        ('foo@bar.com', ['PII.email_address'], True, 1.0)
+        ('foo@bar.com', 'foo@bar.com', ['PII.email_address'], True, 1.0)
     """
 
     # set RegexNER mapping file.
@@ -55,14 +56,14 @@ def getNER(phrase, PII_type):
     ner_tags = [n for n in ner if n != "O"]
     ner_tags = list(set(ner_tags))
     ner_test = ner_tags == [PII_type] 
-    accuracy = len(ner_tags)/len(tokens)
+    ratio = len(ner_tags)/len(tokens)
     
-    return (phrase, rephrase, ner_tags, ner_test, accuracy)
+    return (phrase, rephrase, ner_tags, ner_test, ratio)
 
 
 def testPII():
     """ Tests CoreNLP RegexNER PII mappings against test and match data;
-        reports resulst as tab-delimied data.
+        reports results as tab-delimied data.
     """
     
     # create empty output list.
@@ -96,7 +97,7 @@ def testPII():
         for line in test_data:
 
             # run test; determine if test passed.
-            phrase, rephrase, ner_tags, ner_test, accuracy = getNER(line, pii)
+            phrase, rephrase, ner_tags, ner_test, ratio = getNER(line, pii)
             match = rephrase in match_data
             if ner_test and match:
                 passed = True
@@ -108,7 +109,7 @@ def testPII():
                 passed = True
             
             # append test data to @tsv.
-            test = [pii, phrase, rephrase, ner_tags, ner_test, accuracy, match, passed]
+            test = [pii, phrase, rephrase, ner_tags, ner_test, ratio, match, passed]
             test = [str(r) for r in test]
             test = "\t".join(test)
             tsv.append(test)
@@ -121,6 +122,7 @@ def testPII():
     tsv = "\n".join(tsv)
     return tsv
         
+
 ### let's test ...
 SCREEN = True
 def main():
