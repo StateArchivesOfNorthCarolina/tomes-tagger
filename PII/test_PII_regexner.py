@@ -8,7 +8,7 @@ from pycorenlp import StanfordCoreNLP
 
 # set CoreNLP port.
 # note: CoreNLP server must be running a la: 
-# "$ java -mx2g -cp "*" edu.stanford.NLP.pipeline.StanfordCoreNLPServer -port 9000".
+# "$ java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000".
 NLP = StanfordCoreNLP("http://localhost:9000")
 
 
@@ -86,12 +86,12 @@ def testPII():
         os.chdir(pii)
         
         # open/read test and match data files; remove blank lines.
-        test_data = open(pii + "__testData.txt")
-        match_data = open(pii + "__matchData.txt")
-        test_data = test_data.read().split("\n")
-        match_data = match_data.read().split("\n")
-        test_data = [x for x in test_data if x != ""]
-        match_data = [x for x in match_data if x != ""]
+        with open(pii + "__testData.txt") as f:
+            test_data = f.read().split("\n")
+            test_data = [x for x in test_data if x != ""]
+        with open(pii + "__matchData.txt") as f:
+            match_data = f.read().split("\n")
+            match_data = [x for x in match_data if x != ""]
 
         # runs tests; determine if each test passed or not; append results to @tsv.
         for line in test_data:
