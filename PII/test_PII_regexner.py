@@ -97,7 +97,10 @@ def testPII():
         for line in test_data:
 
             # run test; determine if test passed.
-            phrase, rephrase, ner_tags, ner_test, ratio = getNER(line, pii)
+            try:
+                phrase, rephrase, ner_tags, ner_test, ratio = getNER(line, pii)
+            except Exception as e:
+                exit(e)
             match = rephrase in match_data
             if ner_test and match:
                 passed = True
