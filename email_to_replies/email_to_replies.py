@@ -183,7 +183,7 @@ def get_metadata(reply):
     return metadata
 
 
-def get_signature(reply, sender, features=False):
+def get_signature(reply, sender):
     """ Gets signature for a given reply (if exists), signature text and reply text 
         (sans signature).
 
