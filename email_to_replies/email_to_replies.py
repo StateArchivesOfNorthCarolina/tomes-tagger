@@ -16,14 +16,10 @@ Todo:
     - how to do this for Gmail? There may be a clue in HTML version of Gmail
       (div|blockquote.class=3D"gmail_quote").
     - consider using Levenshtein distance to help determine if there's a likely name match.
-    - add function to check for presence of patterns in signature per page 3 of
-      http://www.cs.cmu.edu/~vitor/papers/sigFilePaper_finalversion.pdf. This is to help
-      verify it's a signature.
 """
 
 ### import modules.
 import codecs
-import json
 import re
 
 ### globals.
@@ -187,9 +183,9 @@ def get_metadata(reply):
     return metadata
 
 
-def get_signature(reply, sender):
-    """ Gets signature for a given reply (if exists). Also returns signature text and reply
-        text (sans signature).
+def get_signature(reply, sender, features=False):
+    """ Gets signature for a given reply (if exists), signature text and reply text 
+        (sans signature).
 
     Args:
         reply (list): The list of lines for a given reply.
@@ -201,9 +197,16 @@ def get_signature(reply, sender):
 
     # assume values.
     has_signature = False
-    signature = None
-    reply_text = None
-    address_in_signature = False
+    signature_text = ""
+    reply_text = "\n".join(reply).strip()
+
+    # create output dictionary.
+    signature_data = {"has_signature": has_signature,
+                     "signature_text": signature_text,
+                     "reply_text": reply_text}
+
+    if sender == None:
+        return signature_data
 
     # reverse reply.
     reply_reversed = reply[0:]
@@ -220,20 +223,15 @@ def get_signature(reply, sender):
         
         # if 2+ tokens match, assume start of signature.
         if len(tokens) > 1 and found_sender == tokens:
-            has_signature = True
-            signature = "\n".join(reply[i-1:])
-            signature = signature.strip()
+            signature_data["has_signature"] = True
+            signature_text = "\n".join(reply[i-1:])
+            signature_data["signature_text"] = signature_text.strip()
             reply_text = "\n".join(reply[:i-1])
-            reply_text = reply_text.strip()
-            if sender["address"]:
-                address_in_signature = sender["address"].lower() in signature.lower()
+            signature_data["reply_text"] = reply_text.strip()
             break
         i -= 1
 
-    signature_metadata = {"has_signature": has_signature, "signature": signature,
-                         "reply_text": reply_text,
-                         "address_in_signature": address_in_signature}
-    return signature_metadata
+    return signature_data
 
 
 ### TEST.
@@ -241,9 +239,8 @@ if __name__ == "__main__":
     MS = get_replies("sample_email.txt")
     for ms in MS:
         md = get_metadata(ms)
-        sender_name = md["sender"]
-        if sender_name != None:
-            sig = get_signature(ms, sender_name)["signature"]
-            md["sender"]["signature"] = sig
-            print(json.dumps(md, indent=2))
-            print()
+        sender = md["sender"]
+        sig = get_signature(ms, sender)
+        md["get_signature()"] = sig 
+        import json
+        print(json.dumps(md, indent=2))
