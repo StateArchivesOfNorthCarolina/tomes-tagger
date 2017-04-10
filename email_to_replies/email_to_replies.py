@@ -236,11 +236,11 @@ def get_signature(reply, sender):
 
 ### TEST.
 if __name__ == "__main__":
+    import json
     MS = get_replies("sample_email.txt")
     for ms in MS:
         md = get_metadata(ms)
         sender = md["sender"]
         sig = get_signature(ms, sender)
         md["get_signature()"] = sig 
-        import json
         print(json.dumps(md, indent=2))
