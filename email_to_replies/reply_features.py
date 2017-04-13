@@ -1,8 +1,3 @@
-"""
-Todo:
-    - The regex for _countQuotes() doesn't even allow for letter or numbers. It doesn't work.
-"""
-
 # import modules.
 import re
 
@@ -67,7 +62,9 @@ class Features():
     def _countQuotes(self):
         """ Returns integer count for double-quoted string patterns in self.signature. """
 
-        pattern = "\"[\w]+[\.\?!]\""
+        pattern = "\"[a-zA-Z0-9\s]{10,140}[.?!]\""
+                  # 140 character limit inspired by Twitter and after consulting:
+                  # https://strainindex.wordpress.com/2008/07/28/the-average-sentence-length/
         x = re.findall(pattern, self.signature)
         return len(x)
 
