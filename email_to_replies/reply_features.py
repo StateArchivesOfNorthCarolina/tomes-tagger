@@ -1,3 +1,8 @@
+"""
+Todo:
+    - The regex for _countQuotes() doesn't even allow for letter or numbers. It doesn't work.
+"""
+
 # import modules.
 import re
 
