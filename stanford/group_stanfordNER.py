@@ -1,7 +1,6 @@
-""" groups tokens by their NER tags.
-need to clean up and re-write to work with JSON output since we'll be using that instead of XML.
-"""
+""" Groups tokens by their NER tags. """
 
+# import modules.
 import os
 import sys
 import xml.etree.ElementTree as ET
