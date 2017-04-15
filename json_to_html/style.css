@@ -26,7 +26,7 @@ pre {
 	 color: white;
 }
 
-/* FLAG */
+/* For PII marked "FLAG". */
 [data-ner='PII.bank_account_number'],
 [data-ner='PII.sensitive_document'],
 [data-ner='PII.email_address'],
@@ -35,7 +35,7 @@ pre {
 	background-color: yellow;
 }
 
-/* REDACT */
+/* For PII marked "REDACT". */
 [data-ner='PII.beacon_id'],
 [data-ner='PII.credit_card_number'],
 [data-ner='PII.employee_taxpayer_identification_number'],
@@ -44,7 +44,7 @@ pre {
 	background-color: red;
 }
 
-/* CoreNLP Person, Place, or Organization. */
+/* For built-in CoreNLP tags: Person, Place, or Organization. */
 [data-ner='PERSON'],
 [data-ner='LOCATION'],
 [data-ner='ORGANIZATION'] {

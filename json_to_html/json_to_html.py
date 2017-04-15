@@ -21,8 +21,10 @@ try:
 except:
     exit("No path to JSON files passed.")
 
-### create HTML file for each JSON file.
+### glob all JSON files in folder.
 j_files = glob.glob(f + "/*.json")
+
+### create HTML file for each JSON file.
 for j_file in j_files:
     
     # skip over existing HTML files.
