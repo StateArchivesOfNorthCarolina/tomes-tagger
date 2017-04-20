@@ -4,7 +4,6 @@
 import codecs
 import os
 import subprocess
-import tempfile
 from bs4 import BeautifulSoup
 
 
@@ -47,10 +46,8 @@ class Lynx():
         """ Sets instance attributes.
         
         Args:
-            custom_options (dict): Custom Lynx options per:
-                http://lynx.browser.org/lynx2.8.8/breakout/lynx_help/Lynx_users_guide.html#InteractiveOptions
-                Retrieved: April 2017.
-            temp_file (str): File in which to store raw HTML strings as Lynx only converts files.
+            - custom_options (dict): Custom Lynx options per: http://lynx.browser.org/lynx2.8.8/breakout/lynx_help/Lynx_users_guide.html#InteractiveOptions (Retrieved: April 2017).
+            - temp_file (str): File in which to store raw HTML strings.
         """
 
         # set default options for Lynx.
@@ -82,9 +79,9 @@ class Lynx():
         """ Converts HTML files OR strings to plain text via the Lynx browser.
 
         Args:
-            html (str): The HTML file OR the raw HTML string to convert to text.
-            is_raw (bool): If True, @html is saved to self.temp_file prior to conversion.
-            charset (str): The encoding for the converted text.
+            - html (str): The HTML file OR the raw HTML string to convert to text.
+            - is_raw (bool): If True, @html is saved to self.temp_file prior to conversion.
+            - charset (str): The encoding for the converted text.
 
         Examples:
             >>> lynx.to_text("testLists.html")
@@ -119,10 +116,14 @@ class Lynx():
 
 # TESTS.
 def main():
+    
     lynx = Lynx(custom_options={})
+    
     print(lynx.to_text("testLists.html"))
+    
     print("-----")
     print(lynx.to_text("<p class='hi'>Hello World!</p>", is_raw=True))
+    
     print("-----")
     html = open("test.html").read()
     soup = BeautifulSoup_TOMES(html, "html5lib")
