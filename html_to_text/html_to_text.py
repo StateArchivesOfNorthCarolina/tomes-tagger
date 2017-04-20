@@ -17,7 +17,7 @@ class BeautifulSoup_TOMES(BeautifulSoup):
 
         a_tags = self.find_all("a")
         for a_tag in a_tags:
-            if "href" not in a_tag:
+            if "href" not in a_tag.attrs:
                 continue
             href = a_tag["href"]
             text = a_tag.string + " [" + href + "]"  
