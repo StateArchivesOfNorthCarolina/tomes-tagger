@@ -12,6 +12,9 @@ def main():
     
     print("-----")
     print(h2t.text("sample_files/testLists.html"))
+
+    print("-----")
+    print(h2t.text("sample_files/test_hash#tag.html"))
     
     print("-----")
     print(h2t.text("<p class='hi'>Hello World!</p>", is_raw=True))
