@@ -13,10 +13,11 @@ class ModifyHTML(BeautifulSoup):
     """ A class with tools to modify the HTML DOM via BeautifulSoup.
     
     Example:
-        >>> html = open("sample.html").read()
-        >>> html = ModifyHTML(html, "html5lib")
-        >>> html.shift_links()
-        >>> html.remove_images()
+        >>> html = open("sample.html").read() # string
+        >>> html = ModifyHTML(html, "html5lib") #BeautifulSoup object
+        >>> html.shift_links() # alters DOM
+        >>> html.remove_images() # alters DOM
+        >>> html.raw() # back to string ...
     """
 
 
