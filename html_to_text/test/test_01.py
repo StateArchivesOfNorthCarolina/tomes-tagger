@@ -5,6 +5,7 @@ sys.path.append("..")
 # import module.
 from html_to_text import *
 
+# run simple tests.
 def main():
     
     h2t = HtmlToText()
@@ -17,10 +18,10 @@ def main():
     
     print("-----")
     html = open("sample_files/test.html").read()
-    soup = ModifyHTML(html, "html5lib")
-    soup.shift_links()
-    soup.remove_images()
-    print(h2t.text(str(soup), is_raw=True))
+    html = ModifyHTML(html, "html5lib")
+    html.shift_links()
+    html.remove_images()
+    print(h2t.text(html.raw(), is_raw=True))
 
 if __name__ == "__main__":
     main()
