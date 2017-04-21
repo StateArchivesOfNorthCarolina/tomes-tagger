@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+""" This module has classes for converting HTML strings and files to plain text versions. """
+
 # import modules.
 import codecs
 import os
@@ -7,7 +9,16 @@ import subprocess
 from bs4 import BeautifulSoup
 
 
-class BeautifulSoup_TOMES(BeautifulSoup):
+class ModifyHTML(BeautifulSoup):
+    """ A class with tools to modify the HTML DOM via BeautifulSoup.
+    
+    Example:
+        >>> html = open("sample.html").read()
+        >>> html = ModifyHTML(html, "html5lib")
+        >>> html.shift_links()
+        >>> html.remove_images()
+    """
+
 
     def shift_links(self):
         """ Appends A.href value to A tag's text for A tags in BeautifulSoup instance.
@@ -35,13 +46,17 @@ class BeautifulSoup_TOMES(BeautifulSoup):
         return self
 
 
-class Lynx():
+    def raw(self):
+        """ Returns string version of BeautifulSoup instance. """
 
-    """ A class to convert HTML files OR strings to plain text via the Lynx browser.
-    For more information about Lynx, see: http://lynx.browser.org.
-    """
+        return str(self)
+
+
+class HtmlToText():
+
+    """ A class to convert HTML files OR strings to plain text via the Lynx browser. """
     
-    def __init__(self, custom_options={}, temp_file="_tmp.html"):
+    def __init__(self, custom_options=None, temp_file="_tmp.html"):
 
         """ Sets instance attributes.
         
@@ -51,14 +66,13 @@ class Lynx():
         """
 
         # set default options for Lynx.
-        options = {"nolist":True, "nomargins":True}
+        options = {"nolist":True, "nomargins":True, "dump":True}
 
         # add in custom options.
-        for key, val in custom_options.items():
-            options[key] = val
+        if isinstance(custom_options, dict): 
+            for key, val in custom_options.items():
+                options[key] = val
         self.options = options
-        self.options = [key for key, val in options.items() if val]
-        self.options.append("dump")
 
         # set persistent temporary file name.
         self.temp_file = temp_file
@@ -74,7 +88,7 @@ class Lynx():
                 pass
 
 
-    def to_text(self, html, is_raw=False, charset="utf-8"):
+    def text(self, html, is_raw=False, charset="utf-8"):
 
         """ Converts HTML files OR strings to plain text via the Lynx browser.
 
@@ -84,15 +98,17 @@ class Lynx():
             - charset (str): The encoding for the converted text.
 
         Examples:
-            >>> lynx.to_text("testLists.html")
-            # returns plain text version of "testLists.html".
-            >>> lynx.to_text("<p class='hi'>Hello World!</p>", is_raw=True)
+            >>> h2t = HTMLToText()
+            >>> ht2.text("sample.html")
+            # returns plain text version of "sample.html".
+            >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
             '\nHello World!\n\n'
         """
     
         # create beginning Lynx command line snippet.
+        arg_options = [key for key, val in self.options.items() if val]
         args = "lynx -"
-        args += " -".join(self.options)
+        args += " -".join(arg_options)
 
         # if @is_raw == True, write @html to temporary file.
         # complete command line snippet.
@@ -114,22 +130,4 @@ class Lynx():
 
         return stdout
 
-# TESTS.
-def main():
-    
-    lynx = Lynx(custom_options={})
-    
-    print(lynx.to_text("testLists.html"))
-    
-    print("-----")
-    print(lynx.to_text("<p class='hi'>Hello World!</p>", is_raw=True))
-    
-    print("-----")
-    html = open("test.html").read()
-    soup = BeautifulSoup_TOMES(html, "html5lib")
-    soup.shift_links()
-    soup.remove_images()
-    print(lynx.to_text(str(soup), is_raw=True))
 
-if __name__ == "__main__":
-    main()
