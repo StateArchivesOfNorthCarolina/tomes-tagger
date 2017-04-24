@@ -37,7 +37,7 @@
 
     <xs:element name="entity">
         <xs:complexType>
-            <xs:attribute name="source" form="qualified" use="optional">
+            <xs:attribute name="source" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:token">
                         <xs:enumeration value="stanford.edu"></xs:enumeration>
