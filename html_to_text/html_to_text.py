@@ -127,7 +127,7 @@ class HtmlToText():
 
         # return stdout.
         if cmd.returncode == 0:
-            stdout = cmd.stdout.decode(encoding=charset)
+            stdout = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
         else:
             stdout = None
 
