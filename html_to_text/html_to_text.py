@@ -28,6 +28,8 @@ class ModifyHTML(BeautifulSoup):
 
         a_tags = self.find_all("a")
         for a_tag in a_tags:
+            if a_tag.string == None:
+                continue
             if "href" not in a_tag.attrs:
                 continue
             href = a_tag["href"]
@@ -99,7 +101,7 @@ class HtmlToText():
             - charset (str): The encoding for the converted text.
 
         Examples:
-            >>> h2t = HTMLToText()
+            >>> h2t = HtmlToText()
             >>> ht2.text("sample.html")
             # returns plain text version of "sample.html".
             >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
