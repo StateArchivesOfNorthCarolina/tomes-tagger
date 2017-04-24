@@ -59,7 +59,7 @@ for text in texts:
                   "regexner.mapping": "regexner_TOMES/mappings.txt"}
                   # note: mappings file must exist in same dir as CoreNLP
                   # class path.
-        f = codecs.open(text)
+        f = codecs.open(text, encoding="utf-8")
         print("Processing {}".format(text))
         output = nlp.annotate(f.read(), properties=options)
         f.close()
@@ -68,7 +68,7 @@ for text in texts:
             j.write(output)
 
     # don't process over "i"-many files.
-    #if i > 2:
+    #if i > 1:
 	#    exit()
     i += 1
     #break
