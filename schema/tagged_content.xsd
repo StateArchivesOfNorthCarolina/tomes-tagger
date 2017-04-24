@@ -29,7 +29,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="text" type="xs:token"/>
-                <xs:element name="entity" type="xs:token"/>
+                <xs:element name="entity" type="xs:token" minOccurs="0"/>
                 <xs:element name="separator" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
@@ -37,7 +37,7 @@
 
     <xs:element name="entity">
         <xs:complexType>
-            <xs:attribute name="source" use="optional">
+            <xs:attribute name="authority" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:token">
                         <xs:enumeration value="stanford.edu"></xs:enumeration>
@@ -56,7 +56,7 @@
         <tokens>
             <token>
                 <text></text>
-                <entity source=""></entity>
+                <entity authority=""></entity>
                 <separator></separator>
             </token>
         </tokens>
