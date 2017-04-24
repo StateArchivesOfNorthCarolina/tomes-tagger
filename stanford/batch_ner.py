@@ -56,7 +56,7 @@ for text in texts:
     else:
         options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
                   "outputFormat": "json",
-                  "regexner.mapping": "mappings.txt"}
+                  "regexner.mapping": "regexner_TOMES/mappings.txt"}
                   # note: mappings file must exist in same dir as CoreNLP
                   # class path.
         f = codecs.open(text)
@@ -67,9 +67,9 @@ for text in texts:
             output = json.dumps(output, indent=2)
             j.write(output)
 
-    # don't process over 10k files.
-    #if i > 9999:
-    #    exit()
+    # don't process over "i"-many files.
+    #if i > 2:
+	#    exit()
     i += 1
     #break
 
