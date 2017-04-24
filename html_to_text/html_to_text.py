@@ -28,13 +28,16 @@ class ModifyHTML(BeautifulSoup):
 
         a_tags = self.find_all("a")
         for a_tag in a_tags:
+            
             if a_tag.string == None:
                 continue
             if "href" not in a_tag.attrs:
                 continue
+            
             href = a_tag["href"]
-            text = a_tag.string + " [" + href + "]"  
-            a_tag.string.replace_with(text)
+            if href[0:4] == "http":
+                text = a_tag.string + " [" + href + "]"  
+                a_tag.string.replace_with(text)
 
         return self
 
