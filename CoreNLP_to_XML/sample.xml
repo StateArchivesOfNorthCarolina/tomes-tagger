@@ -1,0 +1,2775 @@
+<tokens xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/">
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORDINAL</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="ncdcr.gov">PII.email_address</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="ncdcr.gov">PII.email_address</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">TIME</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">LOCATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">LOCATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">DATE</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">LOCATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">LOCATION</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">PERSON</entity>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">ORGANIZATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">LOCATION</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">LOCATION</entity>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<entity authority="stanford.edu">NUMBER</entity>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator> </separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator>\n</separator>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+	<token>
+		<text>foo</text>
+		<separator/>
+	</token>
+</tokens>
