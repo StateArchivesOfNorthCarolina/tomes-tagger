@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--
+TODO:
+	- Add documentation.
+		- Make sure to add attribution to Stanford.
+	- Decide fate of "sentences" and "sentence" elements.
+		- They can be eliminated if we're OK with losing Stanford's concept of a sentence.	
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/" elementFormDefault="qualified">
 
     <xs:element name="sentences">
         <xs:complexType>
