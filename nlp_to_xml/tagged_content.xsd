@@ -4,6 +4,8 @@
 TODO:
 	- Add documentation.
 		- Make sure to add attribution to Stanford.
+	- I thinking that for signatures, those would be tokens too.
+	  But they would be appended after-the-fact, using the same Stanford tokenizer (without the NER and regexNER annotators).
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"

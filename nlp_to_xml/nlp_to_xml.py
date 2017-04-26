@@ -32,7 +32,16 @@ class JsonToXML():
                           "PII.social_security_number"]
 
 
-    def xml(self, jdoc, is_raw=False, charset="utf-8", as_string=True, beautify=True):
+    def merge(self, jdocs, are_raw=True):
+        """ """
+        # needs to combine multiple Stanford JSON files for when signature and
+        # non-signature portions of an email need to be merged after NER is run
+        # only on the non-signature part.
+        # @jdocs = list of JSON files or list of JSON strings (@are_raw == True).
+        pass
+
+
+    def xml(self, jdoc, is_raw=True, charset="utf-8", as_string=True, beautify=True):
         """ """
 
         # if @is_raw == False, read JSON file.
@@ -89,7 +98,7 @@ class JsonToXML():
 # TEST.
 def main():
     j2x = JsonToXML()
-    x = j2x.xml("sample.json", as_string=True)
+    x = j2x.xml("sample.json", is_raw=False, as_string=True)
     return x
 
 if __name__ == "__main__":
