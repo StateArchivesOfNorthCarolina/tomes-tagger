@@ -8,7 +8,7 @@ from html_to_text import *
 # run simple tests.
 def main():
     
-    h2t = HtmlToText()
+    h2t = HTMLToText()
     
     print("-----")
     print(h2t.text("sample_files/testLists.html"))

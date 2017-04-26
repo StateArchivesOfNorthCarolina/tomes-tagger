@@ -58,7 +58,7 @@ class ModifyHTML(BeautifulSoup):
         return str(self)
 
 
-class HtmlToText():
+class HTMLToText():
 
     """ A class to convert HTML files OR strings to plain text via the Lynx browser. """
     
@@ -104,7 +104,7 @@ class HtmlToText():
             - charset (str): The encoding for the converted text.
 
         Examples:
-            >>> h2t = HtmlToText()
+            >>> h2t = HTMLToText()
             >>> ht2.text("sample.html")
             # returns plain text version of "sample.html".
             >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)

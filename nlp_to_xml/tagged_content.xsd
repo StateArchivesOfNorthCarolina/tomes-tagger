@@ -24,12 +24,19 @@ xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/" elementFormDefaul
 
 			<xs:attribute name="NER">
                 <xs:simpleType>
+                    <xs:restriction base="xs:boolean">
+                    </xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+			
+			<xs:attribute name="NER.tag">
+                <xs:simpleType>
                     <xs:restriction base="xs:token">
 					</xs:restriction>
                 </xs:simpleType>
 			</xs:attribute>
 
-            <xs:attribute name="NER.authority">
+            <xs:attribute name="NER.tag.authority">
                 <xs:simpleType>
                     <xs:restriction base="xs:token">
                         <xs:enumeration value="stanford.edu"></xs:enumeration>
@@ -38,7 +45,7 @@ xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/" elementFormDefaul
                 </xs:simpleType>
             </xs:attribute>
 
-			<xs:attribute name="suffix" use="required">
+			<xs:attribute name="append" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
 					</xs:restriction>

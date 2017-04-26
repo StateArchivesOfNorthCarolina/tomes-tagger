@@ -12,7 +12,7 @@ import codecs
 import json
 from lxml import etree
 
-class JsonToXML():
+class NLPToXML():
     """ """
 
     def __init__(self):
@@ -69,25 +69,33 @@ class JsonToXML():
                 
                 #
                 originalText = token["originalText"]
-                ner = token["ner"]
-                after = token["after"]
-                
-                #
                 x_token = etree.SubElement(x_tokens, ns_prefix + "token", nsmap=ns_map)
                 x_token.text = originalText
-                x_token.set("suffix", after)
+
+                #
+                after = token["after"]
+                x_token.set("append", after)
     
                 # 
-                if ner != "O":
+                if "ner" in token:
+                    ner = "true"
+                    ner_tag = token["ner"]
+                else:
+                    ner = "false"
+
+                x_token.set("NER", ner)
+                
+                #
+                if ner == "true" and ner_tag != "O":
  
                     if ner in self.custom_ner:
-                        authority = "ncdcr.gov"
+                        tag_authority = "ncdcr.gov"
                     else:
-                        authority = "stanford.edu"
+                        tag_authority = "stanford.edu"
 
-                    x_token.set("NER", ner)
-                    x_token.set("NER.authority", authority)
-                
+                    x_token.set("NER.tag", ner_tag)
+                    x_token.set("NER.tag.authority", tag_authority)
+        
         #
         if as_string:
             x_tokens = etree.tostring(x_tokens, pretty_print=beautify)
@@ -97,8 +105,8 @@ class JsonToXML():
 
 # TEST.
 def main():
-    j2x = JsonToXML()
-    x = j2x.xml("sample.json", is_raw=False, as_string=True)
+    n2x = NLPToXML()
+    x = n2x.xml("sample.json", is_raw=False, as_string=True)
     return x
 
 if __name__ == "__main__":
