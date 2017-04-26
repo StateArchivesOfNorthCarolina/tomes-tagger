@@ -1,0 +1,3 @@
+( /Department/ /of/ [{ ner:ORGANIZATION }] )	GOV.state_agency	ORGANIZATION
+( [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	GOV.state_agency	ORGANIZATION
+( [{ ner:ORGANIZATION }] [{ ner:ORGANIZATION }] /Department/ /of/ [{ ner:ORGANIZATION }] )	GOV.state_agency	ORGANIZATION
