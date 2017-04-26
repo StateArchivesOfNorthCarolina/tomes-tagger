@@ -2,10 +2,10 @@
 
 <!--
 TODO:
-	- Add documentation.
-		- Make sure to add attribution to Stanford.
-	- I thinking that for signatures, those would be tokens too.
-	  But they would be appended after-the-fact, using the same Stanford tokenizer (without the NER and regexNER annotators).
+    - Add documentation.
+        - Make sure to add attribution to Stanford.
+    - I thinking that for signatures, those would be tokens too.
+      But they would be appended after-the-fact, using the same Stanford tokenizer (without the NER and regexNER annotators).
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -22,35 +22,35 @@ xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/" elementFormDefaul
     <xs:element name="token">
         <xs:complexType>
 
-			<xs:attribute name="NER">
+            <xs:attribute name="NER">
                 <xs:simpleType>
                     <xs:restriction base="xs:boolean">
                     </xs:restriction>
                 </xs:simpleType>
-			</xs:attribute>
-			
-			<xs:attribute name="NER.tag">
-                <xs:simpleType>
-                    <xs:restriction base="xs:token">
-					</xs:restriction>
-                </xs:simpleType>
-			</xs:attribute>
+            </xs:attribute>
 
-            <xs:attribute name="NER.tag.authority">
+            <xs:attribute name="NER.tag">
                 <xs:simpleType>
                     <xs:restriction base="xs:token">
-                        <xs:enumeration value="stanford.edu"></xs:enumeration>
-                        <xs:enumeration value="ncdcr.gov"></xs:enumeration>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
 
-			<xs:attribute name="append" use="required">
+            <xs:attribute name="NER.tag.authority">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="stanford.edu"/>
+                        <xs:enumeration value="ncdcr.gov"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+
+            <xs:attribute name="append" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-					</xs:restriction>
+                    </xs:restriction>
                 </xs:simpleType>
-			</xs:attribute>
+            </xs:attribute>
 
         </xs:complexType>
     </xs:element>
