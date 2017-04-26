@@ -16,6 +16,7 @@ class JsonToXML():
     """ """
 
     def __init__(self):
+        """ Sets attributes. """
 
         # custom NER tags.
         self.custom_ner = ["GOV.state_agency",
@@ -31,7 +32,8 @@ class JsonToXML():
                           "PII.social_security_number"]
 
 
-    def xml(self, jdoc, is_raw=False, charset="utf-8"):
+    def xml(self, jdoc, is_raw=False, charset="utf-8", as_string=True):
+        """ """
 
         # if @is_raw == False, read JSON file.
         if not is_raw:
@@ -78,17 +80,20 @@ class JsonToXML():
                     x_entity.set("authority", x_authority)
 
                 x_separator = etree.SubElement(x_token, ns_prefix + "separator",
-                                                                    nsmap=ns_map)
+                                              nsmap=ns_map)
                 x_separator.text = j_after
 
-        x_string = etree.tostring(x_tokens)
-        return x_string
+        if as_string:
+            x_tokens = etree.tostring(x_tokens)
+        return x_tokens
 
-#####
+
+# TEST.
 def main():
     j2h = JsonToXML()
-    x = j2h.xml("sample.json")
+    x = j2h.xml("sample.json", as_string=False)
     return x
 
 if __name__ == "__main__":
-    main()
+    x = main()
+    print(x)
