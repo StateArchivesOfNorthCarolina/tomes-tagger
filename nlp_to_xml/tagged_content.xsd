@@ -19,17 +19,15 @@ xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/" elementFormDefaul
 
     <xs:element name="token">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element name="text" type="xs:token"/>
-                <xs:element name="entity" type="xs:token" minOccurs="0"/>
-                <xs:element name="separator" type="xs:string" minOccurs="0"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
 
-    <xs:element name="entity">
-        <xs:complexType>
-            <xs:attribute name="authority" use="required">
+			<xs:attribute name="NER">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+					</xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+
+            <xs:attribute name="NER.authority">
                 <xs:simpleType>
                     <xs:restriction base="xs:token">
                         <xs:enumeration value="stanford.edu"></xs:enumeration>
@@ -37,17 +35,15 @@ xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/" elementFormDefaul
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+
+			<xs:attribute name="suffix" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+					</xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+
         </xs:complexType>
     </xs:element>
 
 </xs:schema>
-
-<!--
-<tokens>
-	<token>
-		<text></text>
-		<entity authority=""></entity>
-		<separator></separator>
-	</token>
-</tokens>
--->

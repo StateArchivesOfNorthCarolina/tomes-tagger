@@ -2999,7 +2999,7 @@
           "pos": ".",
           "ner": "O",
           "before": "",
-          "after": "\n"
+          "after": "\n\n"
         }
       ]
     }
