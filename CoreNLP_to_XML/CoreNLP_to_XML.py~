@@ -78,7 +78,7 @@ class JsonToXML():
                     x_entity.set("authority", x_authority)
 
                 x_separator = etree.SubElement(x_token, ns_prefix + "separator",
-                                              nsmap=ns_map)
+                                                                    nsmap=ns_map)
                 x_separator.text = j_after
 
         x_string = etree.tostring(x_tokens)
