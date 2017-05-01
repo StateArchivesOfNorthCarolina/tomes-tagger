@@ -123,7 +123,6 @@ def tag_message(message):
     except TypeError: # most likely when content is Base64 encoded.
         print(id.text)
 
-
     return message
 
 
@@ -140,7 +139,4 @@ if __name__ == "__main__":
     import codecs
     with codecs.open("tagged_test.xml", "w", encoding="utf-8") as x:
         x.write(t)
-
-    
-
 
