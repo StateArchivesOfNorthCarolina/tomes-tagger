@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
-""" This module has classes for converting HTML strings and files to plain text versions. """
+""" This module has classes for converting HTML strings and files to plain text versions.
+
+TODO:
+    - Is there any way to use io.StringIO instead of a temp file?
+        - this might help avoid the permision error.
+"""
 
 # import modules.
 import codecs
@@ -60,7 +65,15 @@ class ModifyHTML(BeautifulSoup):
 
 class HTMLToText():
 
-    """ A class to convert HTML files OR strings to plain text via the Lynx browser. """
+    """ A class to convert HTML files OR strings to plain text via the Lynx browser.
+    
+        Examples:
+        >>> h2t = HTMLToText()
+        >>> ht2.text("sample.html")
+        # returns plain text version of "sample.html".
+        >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
+        '\nHello World!\n\n'
+    """
     
     def __init__(self, custom_options=None, temp_file="_tmp.html"):
 
@@ -102,13 +115,6 @@ class HTMLToText():
             - html (str): The HTML file OR the raw HTML string to convert to text.
             - is_raw (bool): If True, @html is saved to self.temp_file prior to conversion.
             - charset (str): The encoding for the converted text.
-
-        Examples:
-            >>> h2t = HTMLToText()
-            >>> ht2.text("sample.html")
-            # returns plain text version of "sample.html".
-            >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
-            '\nHello World!\n\n'
         """
     
         # create beginning Lynx command line snippet.
