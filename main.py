@@ -5,7 +5,8 @@ TODO:
     - Move into class structure; instantiate other classes in __init__.
         - Example: HTMLToText() only needs to be instantiated once.
         - BTW: Is that composition?
-    - Add timeout length to NLP if text is long.
+    - Add timeout length to NLP if text is long.i
+        - For now, setting timeout when starting the server (http://stackoverflow.com/a/36437157).
     - Likely better to write output XML incrementally rather than all at once.
 """
 
