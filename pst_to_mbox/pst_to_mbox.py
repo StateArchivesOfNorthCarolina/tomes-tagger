@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
 """
 TODO:
     - refactor code; fix issues/errors raised by pylint.
     - replace custom _arg_parse with argparse module.
+    - self.argparse() should only run if command line is used (not if class is imported).
     - define @filename and @logger in "__init__"?
     - if "logging" is even needed, does @filename need to be fixed? i.e. if class is instantiated again, isn't "logfile.log" going to be overwritten?
     - have alternative to calling ".exe" file (i.e. if using MAC/Linux).
