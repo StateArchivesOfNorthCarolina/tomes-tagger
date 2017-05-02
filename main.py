@@ -5,9 +5,10 @@ TODO:
     - Move into class structure; instantiate other classes in __init__.
         - Example: HTMLToText() only needs to be instantiated once.
         - BTW: Is that composition?
-    - Add timeout length to NLP if text is long.i
+    - Add timeout length to NLP if text is long.
         - For now, setting timeout when starting the server (http://stackoverflow.com/a/36437157).
     - Likely better to write output XML incrementally rather than all at once.
+        - This will be easier in a class structure.
 """
 
 # import modules.
@@ -41,7 +42,10 @@ def getNLP(text):
     options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
                "outputFormat": "json",
                "regexner.mapping": "regexner_TOMES/mappings.txt"}
-    nlp = nlp.annotate(text, properties=options)
+    try:
+        nlp = nlp.annotate(text, properties=options)
+    except Exception as e:
+        exit(e)
     nlp = json.dumps(nlp)
     
     return nlp
@@ -129,15 +133,24 @@ def tag_message(message):
 
 # TEST.
 def main():
-    return tag_EAXS("D:/TOMES/DATA/zach.ambrose-CA1@nc.gov.xml")
-    
-if __name__ == "__main__":
 
-    t = main()
-    t = etree.tostring(t, pretty_print=True)
-    t = t.decode("utf-8")
-    
     import codecs
-    with codecs.open("tagged_test.xml", "w", encoding="utf-8") as x:
+    import os
+    import sys
+    
+    try:
+        f = sys.argv[1]
+    except:
+        exit("Please pass an EAXS file via the command line.")
+    
+    tagged = tag_EAXS(f)
+    tagged = etree.tostring(tagged, pretty_print=True)
+    tagged = tagged.decode("utf-8")
+    
+    f_tagged = f.replace(".xml", ".tagged.xml")
+    with codecs.open(f_tagged, "w", encoding="utf-8") as x:
         x.write(t)
+ 
+if __name__ == "__main__":
+	main()
 
