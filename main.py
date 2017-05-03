@@ -9,6 +9,9 @@ TODO:
         - For now, setting timeout when starting the server (http://stackoverflow.com/a/36437157).
     - Likely better to write output XML incrementally rather than all at once.
         - This will be easier in a class structure.
+	- You should still create a standalone text-to-NLP module to abstract the process.
+		- Do the same for tagging EAXS - i.e. a module that returns tagged EAXS.
+		- This script should just be a "playlist".
 """
 
 # import modules.
