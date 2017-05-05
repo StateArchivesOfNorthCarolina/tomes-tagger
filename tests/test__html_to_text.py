@@ -3,7 +3,7 @@ import sys
 sys.path.append("..")
 
 # import module.
-from html_to_text import *
+from lib.html_to_text import *
 
 # run simple tests.
 def main():
