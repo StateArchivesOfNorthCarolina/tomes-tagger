@@ -36,9 +36,9 @@ def sanitize_name(name):
         Returns:
             str: The sanitized name.
 
-        Examples:
-            >>> print(sanitize_name("Brigadier General John A. B. C. Smith"))
-            John Smith
+        Example:
+            >>> sanitize_name("Brigadier General John A. B. C. Smith")
+            'John Smith'
     """
 
     sanitized_name = []
@@ -72,8 +72,8 @@ def get_contact(line):
     Returns:
         dict: The return value.
 
-    Examples:
-        >>> print(get_contact("Poe, Edgar Allan <eapoe@uva.edu>"))
+    Example:
+        >>> get_contact("Poe, Edgar Allan <eapoe@uva.edu>")
         {'name_original': 'Poe, Edgar Allan',
         'name': 'Poe Edgar Allan',
         'address': 'eapoe@uva.edu'}
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     #   - get sender value.
     #   - get signature.
     #   - add signature to metadata key.
-    # output metadata as JSON.
+    #   - print metadata as JSON.
     for ms in MS:
         md = get_metadata(ms)
         sender = md["sender"]
