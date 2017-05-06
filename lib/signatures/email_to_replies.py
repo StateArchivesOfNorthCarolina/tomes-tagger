@@ -232,8 +232,18 @@ def get_signature(reply, sender):
 
 ### TEST.
 if __name__ == "__main__":
-    import json
+    
+    import json 
+    
+    # get all replies within email.
     MS = get_replies("sample_email.txt")
+    
+    # for each reply:
+    #   - get metadata dict.
+    #   - get sender value.
+    #   - get signature.
+    #   - add signature to metadata key.
+    # output metadata as JSON.
     for ms in MS:
         md = get_metadata(ms)
         sender = md["sender"]
