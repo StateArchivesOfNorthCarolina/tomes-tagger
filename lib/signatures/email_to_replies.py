@@ -5,7 +5,7 @@ Parses an email into separate replies and attempts to get signatures for each re
 
 Todo:
     - does sanitize_name() need to return a flat case name (all uppercase or all lower)?
-    - does checking against TITLES need to be case-insensitive?
+    - does checking against _titles.titles need to be case-insensitive?
     - work on comments, function docs.
     - make a wrapper function that returns a dict for each reply with the lines,
       sender, and recepients.
@@ -21,11 +21,7 @@ Todo:
 ### import modules.
 import codecs
 import re
-
-### globals.
-TITLES = set([t for t in 
-         open("_titles.txt").read().split()
-         if t[0] != "#"])
+import _titles
 
 
 def sanitize_name(name):
@@ -57,7 +53,7 @@ def sanitize_name(name):
             continue
         
         # skip if token is a title.
-        if name_part in TITLES:
+        if name_part in _titles.titles:
             continue
 
         sanitized_name.append(name_part)
