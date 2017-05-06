@@ -1,6 +1,13 @@
-#list_source:https://mediawiki.middlebury.edu/wiki/LIS/Name_Standards2dLt
-#list_modified_as_needed.
-#add_comments_to_this_file_as_tokens_preceeded_with_a_hash_tag.
+""" This file contains a personal titles and abbreviations.
+
+The original source for the list is:
+    https://mediawiki.middlebury.edu/wiki/LIS/Name Standards2dLt
+"""
+
+# modified as needed.
+_data = """
+A
+An
 2Lt
 2nd Lieutenant
 Abbot
@@ -131,3 +138,8 @@ The Venerable
 Trust(ees)of
 VAdm
 Vice Admiral
+"""
+
+# dedupe.
+titles = set(t for t in _data.split())
+
