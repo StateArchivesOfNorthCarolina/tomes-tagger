@@ -1,4 +1,4 @@
-""" This file contains a personal titles and abbreviations.
+""" This file contains a list of personal titles and abbreviations.
 
 The original source for the list is:
     https://mediawiki.middlebury.edu/wiki/LIS/Name Standards2dLt
