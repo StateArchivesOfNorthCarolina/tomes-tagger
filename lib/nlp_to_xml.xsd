@@ -127,7 +127,6 @@ An example tagged_content document is below.
 	</xs:annotation>
 	<xs:simpleType>
 		<xs:restriction base="xs:string">
-
 		</xs:restriction>
 	</xs:simpleType>
 </xs:element>
