@@ -5,10 +5,12 @@ This module converts Stanford CoreNLP JSON output to XML per the ./tagged_conten
 
 TODO:
     - Need an external, canonical data source for the custom NER tags, perhaps a SKOS file.
+    - XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
 """
 
 # import modules.
 import codecs
+import io
 import json
 from lxml import etree
 
@@ -31,6 +33,9 @@ class NLPToXML():
                           "PII.sensitive_document",
                           "PII.social_security_number"]
 
+        # "tagged_content" XSD file.
+        self.XSD = "nlp_to_xml.xsd"
+
 
     def merge(self, jdocs, are_raw=True):
         """ """
@@ -41,7 +46,28 @@ class NLPToXML():
         pass
 
 
-    def xml(self, jdoc, is_raw=True, charset="utf-8", return_string=True, beautify=True):
+    def validate(self, xdoc, is_raw=True, return_verbose=False):
+
+        # if @is_raw, make XML file-like.
+        if is_raw:
+            xdoc = io.StringIO(xdoc)
+        
+        #
+        xdoc = etree.parse(xdoc)
+
+        #
+        xsd = etree.parse(self.XSD)
+        xsd = etree.XMLSchema(xsd)
+
+        #
+        if return_verbose:
+            valid = xsd.assertValid(xdoc)
+        else:
+            valid = xsd.validate(xdoc)
+        return valid
+
+
+    def xml(self, jdoc, is_raw=True, charset="utf-8", return_string=True, header=False, beautify=True):
         """ """
 
         # if @is_raw == False, read JSON file.
@@ -98,10 +124,10 @@ class NLPToXML():
                 x_token.set("authority", tag_authority)
                 x_token.text = originalText
                 x_token.tail = after
-        
+
         #
         if return_string:
-            x_tokens = etree.tostring(x_tokens, pretty_print=beautify)
+            x_tokens = etree.tostring(x_tokens, xml_declaration=header, encoding=charset, pretty_print=beautify)
             x_tokens = x_tokens.decode(charset)
         return x_tokens
 
@@ -110,7 +136,8 @@ class NLPToXML():
 def main():
     n2x = NLPToXML()
     x = n2x.xml("../tests/sample_files/sample_NER.json", is_raw=False, return_string=True)
-    return x
+    valx = n2x.validate(x, is_raw=True, return_verbose=False)
+    return x, valx
 
 if __name__ == "__main__":
     x = main()

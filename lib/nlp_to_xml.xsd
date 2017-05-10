@@ -69,8 +69,8 @@ elementFormDefault="qualified">
 	</xs:annotation>
 	<xs:complexType mixed="true">
 		<xs:sequence>
-			<xs:element ref="tagged" maxOccurs="unbounded"/>
-			<xs:element ref="raw_text" maxOccurs="unbounded"/>
+			<xs:element name="tagged" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="raw_text" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:element>
@@ -84,6 +84,9 @@ elementFormDefault="qualified">
 	</xs:annotation>
 
 	<xs:complexType>
+	
+	 <xs:simpleContent>
+      <xs:extension base="xs:token">
 
 		<xs:attribute name="entity" type="xs:token" use="required">
 			<xs:annotation>
@@ -110,16 +113,23 @@ elementFormDefault="qualified">
 			</xs:simpleType>
 		</xs:attribute>
 
+		</xs:extension>
+		</xs:simpleContent>
 	</xs:complexType>
 </xs:element>
 
-<xs:element name="raw_text" type="xs:string">
+<xs:element name="raw_text">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
 		Sub-element of "tagged_content" element.
 		Contains raw text not subjected to NLP.
 		</xs:documentation>
 	</xs:annotation>
+<xs:simpleType>
+				<xs:restriction base="xs:string">
+
+				</xs:restriction>
+			</xs:simpleType>
 </xs:element>
 
 </xs:schema>
