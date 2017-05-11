@@ -40,7 +40,7 @@ elementFormDefault="qualified">
 		2)	@authority - the Internet domain of the organization reponsible for
 						 the controlled vocabulary from which the @entity value derives.
 				
-		3) 	@group - the identifier for each token; this value is shared by adjacent
+		3) 	@id - the identifier for each token; this value is shared by adjacent
 					 tokens with the same @entity value.
 
 	An example tagged_content document is below.
@@ -49,10 +49,10 @@ elementFormDefault="qualified">
 
 	<![CDATA[
 	<tagged_content>
-		Good morning <tagged entity="PERSON" authority="stanford.edu" group="1">John</tagged>!
+		Good morning <tagged entity="PERSON" authority="stanford.edu" id="1">John</tagged>!
 		
 		Love,
-		<tagged entity="PERSON" authority="stanford.edu" group="2">Marsha</tagged>
+		<tagged entity="PERSON" authority="stanford.edu" id="2">Marsha</tagged>
 		
 		<raw_text>Marsha B.
 		Los Angeles, CA
@@ -65,11 +65,6 @@ elementFormDefault="qualified">
 </xs:annotation>
 
 <xs:element name="tagged_content">
-	<xs:annotation>
-		<xs:documentation xml:lang="en">
-		Root element.
-		</xs:documentation>
-	</xs:annotation>
 	<xs:complexType mixed="true">
 		<xs:sequence>
 			<xs:element ref="tagged" minOccurs="0" maxOccurs="unbounded"/>
@@ -79,13 +74,6 @@ elementFormDefault="qualified">
 </xs:element>
 
 <xs:element name="tagged">
-	<xs:annotation>
-		<xs:documentation xml:lang="en">
-		Sub-element of "tagged_content".
-		Contains token that was tagged via NLP.
-		</xs:documentation>
-	</xs:annotation>
-
 	<xs:complexType>
 
 		<xs:simpleContent>
@@ -106,16 +94,11 @@ elementFormDefault="qualified">
 
 			</xs:extension>
 		</xs:simpleContent>
+		
 	</xs:complexType>
 </xs:element>
 
 <xs:element name="raw_text">
-	<xs:annotation>
-		<xs:documentation xml:lang="en">
-		Sub-element of "tagged_content" element.
-		Contains raw text not subjected to NLP.
-		</xs:documentation>
-	</xs:annotation>
 	<xs:simpleType>
 		<xs:restriction base="xs:string">
 		</xs:restriction>
