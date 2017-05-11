@@ -100,8 +100,7 @@ elementFormDefault="qualified">
 
 <xs:element name="raw_text">
 	<xs:simpleType>
-		<xs:restriction base="xs:string">
-		</xs:restriction>
+		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
 </xs:element>
 
