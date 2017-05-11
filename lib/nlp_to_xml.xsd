@@ -34,14 +34,14 @@ elementFormDefault="qualified">
 
 	The "tagged" element has three attributes:
 
-		1)	@entity - the name of the entity the token is recognized as
-					  (PERSON, PLACE, etc.)
+		1.	@entity - the name of the entity the token is recognized as
+			(PERSON, PLACE, etc.)
 
-		2)	@authority - the Internet domain of the organization reponsible for
-						 the controlled vocabulary from which the @entity value derives.
+		2.	@authority - the Internet domain of the organization reponsible for
+			the controlled vocabulary from which the @entity value derives.
 				
-		3) 	@id - the identifier for each token; this value is shared by adjacent
-					 tokens with the same @entity value.
+		3. 	@id - the identifier for each token; this value is shared by adjacent
+			tokens with the same @entity value.
 
 	An example tagged_content document is below.
 
