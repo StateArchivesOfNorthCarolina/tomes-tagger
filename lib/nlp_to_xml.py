@@ -67,7 +67,8 @@ class NLPToXML():
         return valid
 
 
-    def xml(self, jdoc, is_raw=True, charset="utf-8", return_string=True, header=False, beautify=True):
+    def xml(self, jdoc, is_raw=True, charset="utf-8", return_string=True, header=False,
+            beautify=True):
         """ """
 
         # if @is_raw == False, read JSON file.
@@ -87,8 +88,12 @@ class NLPToXML():
         x_tokens = etree.Element(ns_prefix + "tagged_content", nsmap=ns_map)
         x_tokens.text = ""
         
-        # parse JSON; write XML.
-        sentences = jsml["sentences"]
+        #
+        tag_id = 0
+        current_tag = ""
+
+        #
+        sentences = jsml["sentences"] 
         for sentence in sentences:
 
             tokens = sentence["tokens"]
@@ -104,6 +109,7 @@ class NLPToXML():
 
                 #
                 if ner_tag == "O":
+                    current_tag = ner_tag
                     try:
                         x_tokens[-1].tail += originalText + after
                     except TypeError: # no previous tail.
@@ -112,6 +118,13 @@ class NLPToXML():
                         x_tokens.text += originalText + after
                     continue
                 
+                # else ...
+
+                #
+                if ner_tag != current_tag:
+                    current_tag = ner_tag
+                    tag_id += 1
+
                 #
                 if ner_tag in self.custom_ner:
                     tag_authority = "ncdcr.gov"
@@ -122,12 +135,14 @@ class NLPToXML():
                 x_token = etree.SubElement(x_tokens, ns_prefix + "tagged", nsmap=ns_map)
                 x_token.set("entity", ner_tag)
                 x_token.set("authority", tag_authority)
+                x_token.set("id", str(tag_id)   )
                 x_token.text = originalText
                 x_token.tail = after
 
         #
         if return_string:
-            x_tokens = etree.tostring(x_tokens, xml_declaration=header, encoding=charset, pretty_print=beautify)
+            x_tokens = etree.tostring(x_tokens, xml_declaration=header, encoding=charset,
+                                     pretty_print=beautify)
             x_tokens = x_tokens.decode(charset)
         return x_tokens
 

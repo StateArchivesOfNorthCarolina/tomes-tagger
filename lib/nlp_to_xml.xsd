@@ -8,69 +8,72 @@ elementFormDefault="qualified">
 
 <xs:annotation>
 	<xs:documentation xml:lang="en">
-This "tagged content" schema defines an XML structure to be inserted into the
-State Archives of North Carolina XML Schema for a Single E-Mail Account
-located at:
-	http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
+	This "tagged content" schema defines an XML structure to be inserted into the
+	State Archives of North Carolina XML Schema for a Single E-Mail Account
+	located at:
+		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
 
-Specifically, it can be inserted within the
-MultiBody/SingleBody/BodyContent/Content element within a CDATA block.
-This element is define within the email account XSD located at:
-	http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd
+	Specifically, it can be inserted within the
+	MultiBody/SingleBody/BodyContent/Content element within a CDATA block.
+	This element is define within the email account XSD located at:
+		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd
 
-The tagged content XML structure serves to annotate a plain-text
-representation of an email message.
+	The tagged content XML structure serves to annotate a plain-text
+	representation of an email message.
 
-Tokens recognized as named entities via Natural Language Processing (NLP)
-techniques are to be enclosed within the "tagged" sub-element. Non-recognized
-tokens and leading/trailing whitespace are not encased within this
-sub-element.
+	Tokens recognized as named entities via Natural Language Processing (NLP)
+	techniques are to be enclosed within the "tagged" sub-element. Non-recognized
+	tokens and leading/trailing whitespace are not encased within this
+	sub-element.
 
-All content not subjected to NLP are to be enclosed in the "raw_text"
-element. This is primarily intended to contain signature blocks.
+	All content not subjected to NLP are to be enclosed in the "raw_text"
+	element. This is primarily intended to contain signature blocks.
 
-The value of a "tagged" element is a token (colloquially equivalent to a
-"word") that has been "tagged" with a named entity via NLP.
+	The value of a "tagged" element is a token (colloquially equivalent to a
+	"word") that has been "tagged" with a named entity via NLP.
 
-The "tagged" element has two attributes:
+	The "tagged" element has three attributes:
 
-	1)	@entity - the name of the entity the token is recognized as
-		(PERSON, PLACE, etc.)
+		1)	@entity - the name of the entity the token is recognized as
+					  (PERSON, PLACE, etc.)
 
-	2)	@authority - the Internet domain of the organization reponsible for
-			the controlled vocabulary from which the @entity value derives.
+		2)	@authority - the Internet domain of the organization reponsible for
+						 the controlled vocabulary from which the @entity value derives.
+				
+		3) 	@group - the identifier for each token; this value is shared by adjacent
+					 tokens with the same @entity value.
 
-An example tagged_content document is below.
+	An example tagged_content document is below.
 
-<!--
+	<!--
 
-<![CDATA[
-<tagged_content>
-	Good morning <tagged entity="PERSON" authority="stanford.edu">John</tagged>!
-	
-	Love,
-	<tagged entity="PERSON" authority="stanford.edu">Marsha</tagged>
-	
-	<raw_text>Marsha B.
-	Los Angeles, CA
-	555-555-5555</raw_text>
-</tagged_content>
-]]>
-	
--->
+	<![CDATA[
+	<tagged_content>
+		Good morning <tagged entity="PERSON" authority="stanford.edu" group="1">John</tagged>!
+		
+		Love,
+		<tagged entity="PERSON" authority="stanford.edu" group="2">Marsha</tagged>
+		
+		<raw_text>Marsha B.
+		Los Angeles, CA
+		555-555-5555</raw_text>
+	</tagged_content>
+	]]>
+		
+	-->
 	</xs:documentation>
 </xs:annotation>
 
 <xs:element name="tagged_content">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-	Root element.
+		Root element.
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType mixed="true">
 		<xs:sequence>
-			<xs:element name="tagged" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="raw_text" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tagged" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="raw_text" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:element>
@@ -78,8 +81,8 @@ An example tagged_content document is below.
 <xs:element name="tagged">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-	Sub-element of "tagged_content".
-	Contains token that was tagged via NLP.
+		Sub-element of "tagged_content".
+		Contains token that was tagged via NLP.
 		</xs:documentation>
 	</xs:annotation>
 
@@ -88,23 +91,9 @@ An example tagged_content document is below.
 		<xs:simpleContent>
 			<xs:extension base="xs:token">
 
-				<xs:attribute name="entity" type="xs:token" use="required">
-					<xs:annotation>
-						<xs:documentation xml:lang="en">
-			Attribute of "tagged" element.
-			Contains entity value (PERSON, PLACE, etc.) derived by NLP.
-						</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
+				<xs:attribute name="entity" type="xs:token" use="required"/>
 
 				<xs:attribute name="authority" use="required">
-					<xs:annotation>
-						<xs:documentation xml:lang="en">
-			Attribute of "tagged" element.
-			Contains Internet domain of organization responsible for the
-			@entity value.
-						</xs:documentation>
-					</xs:annotation>
 					<xs:simpleType>
 						<xs:restriction base="xs:token">
 							<xs:enumeration value="stanford.edu"/>
@@ -112,6 +101,8 @@ An example tagged_content document is below.
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:attribute>
+				
+				<xs:attribute name="id" type="xs:integer" use="required"/>
 
 			</xs:extension>
 		</xs:simpleContent>
@@ -121,8 +112,8 @@ An example tagged_content document is below.
 <xs:element name="raw_text">
 	<xs:annotation>
 		<xs:documentation xml:lang="en">
-	Sub-element of "tagged_content" element.
-	Contains raw text not subjected to NLP.
+		Sub-element of "tagged_content" element.
+		Contains raw text not subjected to NLP.
 		</xs:documentation>
 	</xs:annotation>
 	<xs:simpleType>
