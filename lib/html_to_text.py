@@ -3,8 +3,8 @@
 """ This module has classes for converting HTML strings and files to plain text versions.
 
 TODO:
-    - Is there any way to use io.StringIO instead of a temp file?
-        - this might help avoid the permision error.
+    -   Is there any way to use io.StringIO instead of a temp file?
+            - this might help avoid the permision error.
 """
 
 # import modules.

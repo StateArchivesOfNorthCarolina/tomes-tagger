@@ -67,18 +67,9 @@ class NLPToXML():
         return valid
 
 
-    def xml(self, jdoc, is_raw=True, charset="utf-8", return_string=True, header=False,
-            beautify=True):
+    def xml(self, jdict, charset="utf-8", return_string=True, header=False, beautify=True):
         """ """
 
-        # if @is_raw == False, read JSON file.
-        if not is_raw:
-            with codecs.open(jdoc, "r", encoding=charset) as tmp:
-                jdoc = tmp.read()
-
-        # load JSON.
-        jsml = json.loads(jdoc)
-        
         # create XML namespace.
         ns_url = "http://archives.ncdcr.gov/mail-account/tagged-content/"
         ns_prefix = "{" + ns_url + "}"
@@ -93,7 +84,7 @@ class NLPToXML():
         current_tag = ""
 
         #
-        sentences = jsml["sentences"] 
+        sentences = jdict["sentences"] 
         for sentence in sentences:
 
             tokens = sentence["tokens"]
@@ -150,10 +141,11 @@ class NLPToXML():
 # TEST.
 def main():
     n2x = NLPToXML()
-    x = n2x.xml("../tests/sample_files/sample_NER.json", is_raw=False, return_string=True)
+    j = open("../tests/sample_files/sample_NER.json").read()
+    j = json.loads(j)
+    x = n2x.xml(j, return_string=True)
     valx = n2x.validate(x, is_raw=True, return_verbose=False)
-    return x, valx
+    print (x, valx)
 
 if __name__ == "__main__":
-    x = main()
-    print(x)
+    main()

@@ -12,14 +12,18 @@ TODO:
 	- You should still create a standalone text-to-NLP module to abstract the process.
 		- Do the same for tagging EAXS - i.e. a module that returns tagged EAXS.
 		- This script should just be a "playlist".
+
+    - Currently (May 12, 2017): The tagged demo from main() has XML-entity escaped stuff in the Content element.
+        - Also, the CotentType and TransferEncoding are missing.
+        - Also, I'm seeing line breaks in other elements that were not there before.
 """
 
 # import modules.
 import json
 from pycorenlp import StanfordCoreNLP
-from lxml import etree
-from html_to_text.html_to_text import *
-from nlp_to_xml.nlp_to_xml import *
+from lib.eaxs_to_etree import *
+from lib.html_to_text import *
+from lib.nlp_to_xml import *
 
 
 def getText(html):
@@ -49,96 +53,52 @@ def getNLP(text):
         nlp = nlp.annotate(text, properties=options)
     except Exception as e:
         exit(e)
-    nlp = json.dumps(nlp)
+    #nlp = json.dumps(nlp)
     
     return nlp
     
 
-def getTagged(jdoc):
-    """ Returns tagged version of CoreNLP JSON string: @jdoc (string). """
+def getTagged(jdict):
+    """ Returns tagged version of CoreNLP JSON string: @jdict (dictionary). """
 
     # convert JSON To tagged XML.
     n2x = NLPToXML()
-    tagged = n2x.xml(jdoc, is_raw=True, as_string=True)
+    tagged = n2x.xml(jdict, return_string=True)
     print(tagged) # test.
-    
+
     return tagged
 
 
-def tag_EAXS(eaxs_file):
+def tagEAXS(eaxs_file):
     """ Returns tagged version EAXS file: @eaxs_file (string). """
-    
-    # set EAXS namespace prefix.
-    ncdcr_ns = {"ncdcr": "http://www.archives.ncdcr.gov/mail-account"}
 
-    # parse EAXS; leaving CData intact.
-    parser = etree.XMLParser(strip_cdata=False)
-    with open(eaxs_file, "rb") as eaxs:
-        tree = etree.parse(eaxs, parser=parser)
-    root = tree.getroot()
+    #
+    eaxs = EAXSToEtree(eaxs_file)
 
-    # get folders.
-    folders = root.findall("ncdcr:Folder", ncdcr_ns)
+    #
+    for content, content_type, transfer_encoding in eaxs.messages():
 
-    i = 0
-    for folder in folders: 
+        text = content.text
 
-        # get messages; tag messages.
-        messages = folder.findall("ncdcr:Message", ncdcr_ns)
-        for message in messages:
-            tagged_message = tag_message(message)
-            if tagged_message != None:
-                message = tagged_message
-            i += 1
-            if i > 10: # test.
-                break
-    
-    return tree
-
-
-def tag_message(message):
-    """ Returns tagged string version of @message (<class 'lxml.etree._Element'>)."""
-
-    # set EAXS namespace prefix.
-    ncdcr_ns = {"ncdcr": "http://www.archives.ncdcr.gov/mail-account"}
-
-    # temp ...
-    id = message.find("ncdcr:MessageId", ncdcr_ns)
-    #print(id.text)
-    
-    # only process text and HTML messages. 
-    ctype = message.find("ncdcr:MultiBody/ncdcr:SingleBody/ncdcr:ContentType", ncdcr_ns)
-    ctype = ctype.text
-    if ctype not in ["text/html", "text/plain"]:
-        return None
-    
-    # only process messages with actual text content.
-    content = message.find("ncdcr:MultiBody/ncdcr:SingleBody/ncdcr:BodyContent/ncdcr:Content", ncdcr_ns)
-    if content == None or content.text == None:
-        return None
-    
-    # convert HTML to text if needed.
-    text = content.text
-    if ctype == "text/html":
-        text = getText(text)
-
-    # get NLP; make tagged version of content.
-    nlp = getNLP(text)
-    #stats = getStats(nlp)
-    try:
-        tagged = getTagged(nlp)
-        content.text = etree.CDATA(tagged)
-    except TypeError: # most likely when content is Base64 encoded.
-        print(id.text)
-
-    return message
+        # handle Base64 here ...
+        #if transfer_encoding == "base64":
+        #    continue
+	
+        #
+        if content_type.text == "text/html":
+            text = getText(text)
+	
+        #
+        nlp = getNLP(text)
+        content.text = "<![CDATA[" + getTagged(nlp) + ">]]"
+        break
+    return eaxs
 
 
 # TEST.
 def main():
 
     import codecs
-    import os
     import sys
     
     try:
@@ -146,13 +106,14 @@ def main():
     except:
         exit("Please pass an EAXS file via the command line.")
     
-    tagged = tag_EAXS(f)
-    tagged = etree.tostring(tagged, pretty_print=True)
+    tagged = tagEAXS(f)
+    print(tagged)
+    tagged = etree.tostring(tagged.root, pretty_print=True)
     tagged = tagged.decode("utf-8")
     
     f_tagged = f.replace(".xml", ".tagged.xml")
     with codecs.open(f_tagged, "w", encoding="utf-8") as x:
-        x.write(t)
+        x.write(tagged)
  
 if __name__ == "__main__":
 	main()
