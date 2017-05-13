@@ -4,8 +4,12 @@
 This module converts Stanford CoreNLP JSON output to XML per the ./tagged_content.xsd schema.
 
 TODO:
-    - Need an external, canonical data source for the custom NER tags, perhaps a SKOS file.
-    - XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
+    -   Need an external, canonical data source for the custom NER tags, perhaps a SKOS file.
+    -   XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
+    -   I want xml() to be less verbose. So, move the namespace stuff into _init__() and
+        maybe use a private method to figure out the tag authority value.
+    -   Use better variable names than (x_tokens, etc.) for xml(). They're ugly.
+    
 """
 
 # import modules.
