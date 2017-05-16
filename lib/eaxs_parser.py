@@ -15,15 +15,15 @@ TODO:
 from lxml import etree
 
 
-class EAXSToEtree():
+class EAXSParser():
     """ A class for parsing an EAXS file's message content with lxml. 
     
-        Example:
-        >>> eaxs = EAXSToEtree("sampleEAXS.xml")
-        >>> message_dict = eaxs.messages() # get message elements.
-        >>> for key, value in message_dict.items():
-        >>>   print(key) # dictionary key for element.
-        >>>   print(value) # lxml.etree element or None.
+    Example:
+    >>> eaxs = EAXSParser("sampleEAXS.xml")
+    >>> message_dict = eaxs.messages() # get message elements.
+    >>> for key, value in message_dict.items():
+    >>>   print(key) # dictionary key for element.
+    >>>   print(value) # lxml.etree element or None.
     """
 
 
@@ -120,7 +120,7 @@ class EAXSToEtree():
         return messages
 
 
-# TEST
+# TEST.
 def main():
 
     import sys
@@ -130,7 +130,7 @@ def main():
     except:
         exit("Please pass an EAXS file via the command line.")
     
-    eaxs = EAXSToEtree(f)
+    eaxs = EAXSParser(f)
     mdata = eaxs.messages()[0]
     for k,v in mdata.items():
         print(k, ": ", v)
