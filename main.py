@@ -12,14 +12,10 @@ TODO:
 	- You should still create a standalone text-to-NLP module to abstract the process.
 		- Do the same for tagging EAXS - i.e. a module that returns tagged EAXS.
 		- This script should just be a "playlist".
-
-    - Currently (May 12, 2017): The tagged demo from main() has XML-entity escaped stuff in the Content element.
-        - Also, the CotentType and TransferEncoding are missing.
-        - Also, I'm seeing line breaks in other elements that were not there before.
+    - I'm seeing line breaks in other elements that were not there before.
     - Once a decision is made re: Comments, this would need to udpate ContentTypeComments,
     TransferEncodingComments, Description and/or DescriptionComments to say that this version
     of the EAXS has modifications VS the original.
-    - Base64 decode.decode needs to take an encoding parameter.
 """
 
 # import modules.
@@ -70,7 +66,6 @@ def getTagged(jdict):
     # convert JSON To tagged XML.
     n2x = NLPToXML()
     tagged = n2x.xml(jdict, return_string=True)
-    print(tagged) # test.
 
     return tagged
 
@@ -85,24 +80,21 @@ def tagEAXS(eaxs_file):
     #
     for message in messages:
 
-        #
-        charset = message["charset"]
-        content = message["content"]
-        content_type = message["content_type"]
-        transfer_encoding = message["transfer_encoding"]
+        print(message["message_id"].text) # test line.
 
         #
-        text = content.text
+        text = message["content"].text
         if text == None:
             continue
 
         #
-        if transfer_encoding == "base64":
-            text = base64.decode(content.text)
-            text = text.decode()
+        if message["transfer_encoding"] != None:
+            if message["transfer_encoding"].text == "base64":
+                text = base64.b64decode(text)
+                text = text.decode(encoding=CHARSET, errors="backslashreplace")
 	
         #
-        if content_type.text == "text/html":
+        if message["content_type"].text == "text/html":
             text = getText(text)
 	
         #
@@ -110,12 +102,13 @@ def tagEAXS(eaxs_file):
         tagged = getTagged(nlp)
 
         #
-        charset.text = CHARSET
-        content.text = CDATA(tagged)
-        content_type.text  = "text/xml"
-        transfer_encoding = None
+        message["charset"].text = CHARSET
+        message["content"].text = CDATA(tagged)
+        message["content_type"].text  = "text/xml"
+        message["transfer_encoding"].text = None
         break # test line.
     
+    eaxs = eaxs.root
     return eaxs
 
 
@@ -131,8 +124,7 @@ def main():
         exit("Please pass an EAXS file via the command line.")
     
     tagged = tagEAXS(f)
-    print(tagged)
-    tagged = etree.tostring(tagged.root, pretty_print=True)
+    tagged = etree.tostring(tagged, pretty_print=True)
     tagged = tagged.decode("utf-8")
     
     f_tagged = f.replace(".xml", ".tagged.xml")

@@ -9,8 +9,7 @@ TODO:
         - Just set a validation option in xml() and validate BEFORE adding the header, etc.
     -   I want xml() to be less verbose. So, move the namespace stuff into _init__() and
         maybe use a private method to figure out the tag authority value.
-    -   Use better variable names than (x_tokens, etc.) for xml(). They're ugly.
-    
+    -   if jdict["sentences"] raises a TypeError, you need to handle it.
 """
 
 # import modules.
@@ -18,6 +17,7 @@ import codecs
 import io
 import json
 from lxml import etree
+
 
 class NLPToXML():
     """ """
@@ -81,8 +81,8 @@ class NLPToXML():
         ns_map = {None : ns_url}
 
         # create root element.
-        x_tokens = etree.Element(ns_prefix + "tagged_content", nsmap=ns_map)
-        x_tokens.text = ""
+        tagged_content = etree.Element(ns_prefix + "tagged_content", nsmap=ns_map)
+        tagged_content.text = ""
         
         #
         tag_id = 0
@@ -107,11 +107,11 @@ class NLPToXML():
                 if ner_tag == "O":
                     current_tag = ner_tag
                     try:
-                        x_tokens[-1].tail += originalText + after
+                        tagged_content[-1].tail += originalText + after
                     except TypeError: # no previous tail.
-                        x_tokens[-1].tail = originalText + after
+                        tagged_content[-1].tail = originalText + after
                     except IndexError: # no child elements.
-                        x_tokens.text += originalText + after
+                        tagged_content.text += originalText + after
                     continue
                 
                 # else ...
@@ -128,20 +128,20 @@ class NLPToXML():
                     tag_authority = "stanford.edu"
                 
                 #
-                x_token = etree.SubElement(x_tokens, ns_prefix + "tagged", nsmap=ns_map)
-                x_token.set("entity", ner_tag)
-                x_token.set("authority", tag_authority)
-                x_token.set("id", str(tag_id)   )
-                x_token.text = originalText
-                x_token.tail = after
+                tagged = etree.SubElement(tagged_content, ns_prefix + "tagged", nsmap=ns_map)
+                tagged.set("entity", ner_tag)
+                tagged.set("authority", tag_authority)
+                tagged.set("id", str(tag_id)   )
+                tagged.text = originalText
+                tagged.tail = after
 
         #
         if return_string:
-            x_tokens = etree.tostring(x_tokens, xml_declaration=header, encoding=charset,
+            tagged_content = etree.tostring(tagged_content, xml_declaration=header, encoding=charset,
                                      pretty_print=beautify)
-            x_tokens = x_tokens.decode(charset)
+            tagged_content = tagged_content.decode(charset)
 
-        return x_tokens
+        return tagged_content
 
 
 # TEST.

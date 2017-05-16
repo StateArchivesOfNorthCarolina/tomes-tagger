@@ -21,6 +21,7 @@ class EAXSToEtree():
     >>> for key, value in message_dict.items():
     >>>   print(key) # dictionary key for element.
     >>>   print(value) # lxml.etree element or None.
+    >>> etree.tostring(eaxs.root) # string version of EAXS.
     """
 
 
@@ -73,15 +74,18 @@ class EAXSToEtree():
         # namespace to use.
         ncdcr_ns = self.ncdcr_ns
 
-        # given elements to retrieve via XPath.
-        _path = "ncdcr:MultiBody/ncdcr:SingleBody/"
-        charset = message.find(_path + "ncdcr:Charset", ncdcr_ns)
-        content = message.find(_path + "ncdcr:BodyContent/ncdcr:Content", ncdcr_ns)
-        content_type = message.find(_path + "ncdcr:ContentType", ncdcr_ns)
-        transfer_encoding = message.find(_path + "ncdcr:MultiBody/ncdcr:SingleBody/ncdcr:BodyContent/ncdcr:TransferEncoding", ncdcr_ns)
+        # given elements to retrieve via XPath. 
+        _singleBodyPath = "ncdcr:MultiBody/ncdcr:SingleBody/"
+
+        message_id = message.find("ncdcr:MessageId", ncdcr_ns)
+        charset = message.find(_singleBodyPath + "ncdcr:Charset", ncdcr_ns)
+        content = message.find(_singleBodyPath + "ncdcr:BodyContent/ncdcr:Content", ncdcr_ns)
+        content_type = message.find(_singleBodyPath + "ncdcr:ContentType", ncdcr_ns)
+        transfer_encoding = message.find(_singleBodyPath + "ncdcr:TransferEncoding", ncdcr_ns)
         
         # set and return dictionary.
-        message_dict = {"charset":charset,
+        message_dict = {"message_id":message_id,
+                        "charset":charset,
                         "content":content,
                         "content_type":content_type,
                         "transfer_encoding":transfer_encoding}
