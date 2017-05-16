@@ -6,6 +6,7 @@ This module converts Stanford CoreNLP JSON output to XML per the ./tagged_conten
 TODO:
     -   Need an external, canonical data source for the custom NER tags, perhaps a SKOS file.
     -   XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
+        - Just set a validation option in xml() and validate BEFORE adding the header, etc.
     -   I want xml() to be less verbose. So, move the namespace stuff into _init__() and
         maybe use a private method to figure out the tag authority value.
     -   Use better variable names than (x_tokens, etc.) for xml(). They're ugly.
@@ -139,6 +140,7 @@ class NLPToXML():
             x_tokens = etree.tostring(x_tokens, xml_declaration=header, encoding=charset,
                                      pretty_print=beautify)
             x_tokens = x_tokens.decode(charset)
+
         return x_tokens
 
 

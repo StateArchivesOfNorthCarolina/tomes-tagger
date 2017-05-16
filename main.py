@@ -16,15 +16,22 @@ TODO:
     - Currently (May 12, 2017): The tagged demo from main() has XML-entity escaped stuff in the Content element.
         - Also, the CotentType and TransferEncoding are missing.
         - Also, I'm seeing line breaks in other elements that were not there before.
+    - Once a decision is made re: Comments, this would need to udpate ContentTypeComments,
+    TransferEncodingComments, Description and/or DescriptionComments to say that this version
+    of the EAXS has modifications VS the original.
+    - Base64 decode.decode needs to take an encoding parameter.
 """
 
 # import modules.
+import base64
 import json
+from lxml.etree import CDATA
 from pycorenlp import StanfordCoreNLP
 from lib.eaxs_to_etree import *
 from lib.html_to_text import *
 from lib.nlp_to_xml import *
 
+CHARSET = "utf-8"
 
 def getText(html):
     """ Returns text version of @html (string). """
@@ -53,7 +60,6 @@ def getNLP(text):
         nlp = nlp.annotate(text, properties=options)
     except Exception as e:
         exit(e)
-    #nlp = json.dumps(nlp)
     
     return nlp
     
@@ -74,15 +80,26 @@ def tagEAXS(eaxs_file):
 
     #
     eaxs = EAXSToEtree(eaxs_file)
+    messages = eaxs.messages()
 
     #
-    for content, content_type, transfer_encoding in eaxs.messages():
+    for message in messages:
 
+        #
+        charset = message["charset"]
+        content = message["content"]
+        content_type = message["content_type"]
+        transfer_encoding = message["transfer_encoding"]
+
+        #
         text = content.text
+        if text == None:
+            continue
 
-        # handle Base64 here ...
-        #if transfer_encoding == "base64":
-        #    continue
+        #
+        if transfer_encoding == "base64":
+            text = base64.decode(content.text)
+            text = text.decode()
 	
         #
         if content_type.text == "text/html":
@@ -90,8 +107,15 @@ def tagEAXS(eaxs_file):
 	
         #
         nlp = getNLP(text)
-        content.text = "<![CDATA[" + getTagged(nlp) + ">]]"
-        break
+        tagged = getTagged(nlp)
+
+        #
+        charset.text = CHARSET
+        content.text = CDATA(tagged)
+        content_type.text  = "text/xml"
+        transfer_encoding = None
+        break # test line.
+    
     return eaxs
 
 

@@ -6,20 +6,17 @@ This module has a class to parse an EAXS file's message content with lxml."
 TODO:
     - The XPath you have for BodyContent needs to only find BodyContent where ContentType = "text/html" or "text/plain".
         - IOW, by using etree.find() you're relying on the textual content to be in first position.
-    - Once a decision is made re: Comments, this would need to udpate ContentTypeComments,
-    TransferEncodingComments, Description and/or DescriptionComments to say that this version
-    of the EAXS has modifications VS the original.
 """
 
 # import modules.
 from lxml import etree
 
 
-class EAXSParser():
+class EAXSToEtree():
     """ A class for parsing an EAXS file's message content with lxml. 
     
     Example:
-    >>> eaxs = EAXSParser("sampleEAXS.xml")
+    >>> eaxs = EAXSToEtree("sampleEAXS.xml")
     >>> message_dict = eaxs.messages() # get message elements.
     >>> for key, value in message_dict.items():
     >>>   print(key) # dictionary key for element.
@@ -77,12 +74,16 @@ class EAXSParser():
         ncdcr_ns = self.ncdcr_ns
 
         # given elements to retrieve via XPath.
-        content = message.find("ncdcr:MultiBody/ncdcr:SingleBody/ncdcr:BodyContent/ncdcr:Content", ncdcr_ns)
-        content_type = message.find("ncdcr:MultiBody/ncdcr:SingleBody/ncdcr:ContentType", ncdcr_ns)
-        transfer_encoding = message.find("ncdcr:MultiBody/ncdcr:SingleBody/ncdcr:BodyContent/ncdcr:TransferEncoding", ncdcr_ns)
+        _path = "ncdcr:MultiBody/ncdcr:SingleBody/"
+        charset = message.find(_path + "ncdcr:Charset", ncdcr_ns)
+        content = message.find(_path + "ncdcr:BodyContent/ncdcr:Content", ncdcr_ns)
+        content_type = message.find(_path + "ncdcr:ContentType", ncdcr_ns)
+        transfer_encoding = message.find(_path + "ncdcr:MultiBody/ncdcr:SingleBody/ncdcr:BodyContent/ncdcr:TransferEncoding", ncdcr_ns)
         
         # set and return dictionary.
-        message_dict = {"content":content, "content_type":content_type,
+        message_dict = {"charset":charset,
+                        "content":content,
+                        "content_type":content_type,
                         "transfer_encoding":transfer_encoding}
         return message_dict
 
@@ -130,7 +131,7 @@ def main():
     except:
         exit("Please pass an EAXS file via the command line.")
     
-    eaxs = EAXSParser(f)
+    eaxs = EAXSToEtree(f)
     mdata = eaxs.messages()[0]
     for k,v in mdata.items():
         print(k, ": ", v)
