@@ -2,8 +2,8 @@
 # keywords mostly from: http://www.thesaurus.com/browse/confidential
 
 ### REGEX
-(?x)						# set free spacing mode to make REGEX readable.
-(?i)between\sus|			# case-insensitive keywords and phrases ...
+(?x)                      # set free spacing mode to make REGEX readable.
+(?i)between\sus|          # case-insensitive keywords and phrases ...
 (?i)classified|
 (?i)confidential|
 (?i)discrete|
