@@ -28,8 +28,8 @@ class Test_HTMLToText(unittest.TestCase):
          html = ModifyHTML(html, "html5lib")
          html.remove_images()
          html = html.raw()
-         html2 = self.HTML.format("Hello World!")
-         self.assertEqual(html, html2)
+         expected = self.HTML.format("Hello World!")
+         self.assertEqual(html, expected)
 
     def test__text(self):
         
@@ -40,6 +40,4 @@ class Test_HTMLToText(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    
     unittest.main()
-
