@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-""" This module has classes for manipulating HTML and converting HTML to plain text.
+"""
+This module has classes for manipulating HTML and converting HTML to plain text.
 
 TODO:
     - Is there any way to use io.StringIO instead of a temp file?
