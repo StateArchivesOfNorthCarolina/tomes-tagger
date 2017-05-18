@@ -18,7 +18,7 @@ class Test_HTMLToText(unittest.TestCase):
         html = ModifyHTML(html, "html5lib")
         html.shift_links()
         html = html.raw()
-        expected = html.format("Hello World! [http://h.w]")
+        expected = self.HTML.format("Hello World! [http://h.w]")
         self.assertEqual(html, expected)
 
     def test__remove_images(self):
