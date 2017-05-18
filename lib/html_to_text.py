@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-""" This module has classes for converting HTML strings and files to plain text versions.
+""" This module has classes for manipulating HTML and converting HTML to plain text.
 
 TODO:
-    -   Is there any way to use io.StringIO instead of a temp file?
-            - this might help avoid the permision error.
+    - Is there any way to use io.StringIO instead of a temp file?
+        - this might help avoid the permision error.
 """
 
 # import modules.
@@ -27,20 +27,27 @@ class ModifyHTML(BeautifulSoup):
 
 
     def shift_links(self):
-        """ Appends A.href value to A tag's text for A tags in BeautifulSoup instance.
-            i.e. <a href="bar">foo</a> to <a href="bar">foo [bar]</a>
+        """ Appends each A tag's @href value to the tag's text value if the @href value starts
+        with "http" or "https", i.e. "<a href='bar'>foo</a>" to "<a href='bar'>foo [bar]</a>".
+
+        Returns:
+            <class 'bs4.BeautifulSoup'>
         """
 
+        # get all A tags.
         a_tags = self.find_all("a")
+        
+        # append @href values to text values.
         for a_tag in a_tags:
             
-            if a_tag.string == None:
+            if a_tag.string is None:
                 continue
             if "href" not in a_tag.attrs:
                 continue
             
+            # get @href; ignore non-http|https values. 
             href = a_tag["href"]
-            if href[0:4] == "http":
+            if href[0:4].lower() == "http": # case insensitive.
                 text = a_tag.string + " [" + href + "]"  
                 a_tag.string.replace_with(text)
 
@@ -48,8 +55,13 @@ class ModifyHTML(BeautifulSoup):
 
 
     def remove_images(self):
-        """ Removes image tags from BeautifulSoup instance. """
+        """ Removes image tags from DOM.
+        
+        Returns:
+            <class 'bs4.BeautifulSoup'>
+        """
 
+        # get all image tags; remove them.
         img_tags = self.find_all("img")
         for img_tag in img_tags:
             img_tag.extract()
@@ -58,7 +70,11 @@ class ModifyHTML(BeautifulSoup):
 
 
     def raw(self):
-        """ Returns string version of BeautifulSoup instance. """
+        """ Returns string version of this BeautifulSoup instance.
+        
+        Returns:
+            <class 'str'>
+        """
 
         return str(self)
 
@@ -67,12 +83,12 @@ class HTMLToText():
 
     """ A class to convert HTML files OR strings to plain text via the Lynx browser.
     
-        Examples:
-        >>> h2t = HTMLToText()
-        >>> ht2.text("sample.html")
-        # returns plain text version of "sample.html".
-        >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
-        '\nHello World!\n\n'
+    Examples:
+    >>> h2t = HTMLToText()
+    >>> h2t.text("sample.html")
+    # returns plain text version of "sample.html"
+    >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
+    '\nHello World!\n\n'
     """
     
     def __init__(self, custom_options=None, temp_file="_tmp.html"):
@@ -100,6 +116,7 @@ class HTMLToText():
     def __del__(self):
 
         """ Trys to remove temporary file if it exists. Passes on permission error. """
+
         if os.path.isfile(self.temp_file):
             try:
                 os.remove(self.temp_file)
@@ -115,6 +132,10 @@ class HTMLToText():
             - html (str): The HTML file OR the raw HTML string to convert to text.
             - is_raw (bool): If True, @html is saved to self.temp_file prior to conversion.
             - charset (str): The encoding for the converted text.
+
+        Returns:
+            <class 'str'>: If Lynx return code is 0.
+            <class 'NoneType'>: If Lynx return code is not 0.
         """
     
         # create beginning Lynx command line snippet.
@@ -143,3 +164,22 @@ class HTMLToText():
         return stdout
 
 
+# TEST.
+def main(html_file):
+
+    # modify HTML.
+    html = open(html_file).read()
+    html = ModifyHTML(html, "html5lib")
+    html.shift_links()
+    html.remove_images()
+    html = html.raw()
+
+    # convert to plain text.
+    h2t = HTMLToText()
+    plain = h2t.text(html, is_raw=True)
+    print(plain)
+    
+if __name__ == "__main__":
+        
+        import plac
+        plac.call(main)

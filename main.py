@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 """
+This module ??? ... 
+
 TODO:
     - Move into class structure; instantiate other classes in __init__.
         - Example: HTMLToText() only needs to be instantiated once.
@@ -9,9 +11,6 @@ TODO:
         - For now, setting timeout when starting the server (http://stackoverflow.com/a/36437157).
     - Likely better to write output XML incrementally rather than all at once.
         - This will be easier in a class structure.
-	- You should still create a standalone text-to-NLP module to abstract the process.
-		- Do the same for tagging EAXS - i.e. a module that returns tagged EAXS.
-		- This script should just be a "playlist".
     - In the outputted EAXS: I'm seeing line breaks in other elements that were not there before.
     - Once a decision is made re: Comments, this would need to udpate ContentTypeComments,
     TransferEncodingComments, Description and/or DescriptionComments to say that this version
@@ -20,20 +19,25 @@ TODO:
 
 # import modules.
 import base64
+import codecs
 import json
 from lxml.etree import CDATA
 from pycorenlp import StanfordCoreNLP
 from lib.eaxs_to_etree import *
 from lib.html_to_text import *
 from lib.nlp_to_xml import *
+from lib.nlp_to_stats import *
+from lib.account_to_aip import *
 
 
 # set globals.
 CHARSET = "utf-8"
+h2t = HTMLToText()
+n2x = NLPToXML()
 
 
 def getText(html):
-    """ Returns text version of @html (string). """
+    """ Returns string version of @html (str). """
 
     # alter DOM.
     html = ModifyHTML(html, "html5lib")
@@ -42,14 +46,12 @@ def getText(html):
     html = html.raw()
     
     # convert HTML to text.
-    h2t = HTMLToText()
     text = h2t.text(html, is_raw=True)
-
     return text
 
 
 def getNLP(text):
-    """ Returns CoreNLP JSON string for @text (string). """
+    """ Returns NLP/NER (JSON) for @text (str). """
 
     # set server and options.
     nlp = StanfordCoreNLP("http://localhost:9000")
@@ -67,27 +69,21 @@ def getNLP(text):
     
 
 def getTagged(jdict):
-    """ Returns tagged version of CoreNLP JSON string: @jdict (dictionary). """
+    """ Returns XML version of CoreNLP JSON: @jdict (dict). """
 
     # convert JSON To tagged XML.
-    n2x = NLPToXML()
     tagged = n2x.xml(jdict, return_string=True)
-
     return tagged
 
 
 def tagEAXS(eaxs_file):
-    """ Returns tagged EAXS element for EAXS file: @eaxs_file (string). """
+    """ Returns tagged version of @eaxs_file (str). """
 
     # get EAXS messages.
     eaxs = EAXSToEtree(eaxs_file)
     messages = eaxs.messages()
 
-    # run NLP on message text.
-    # if needed first:
-    #   - decode Base64 strings.
-    #   - convert HTML to text.
-    # update EAXS values.
+    # tag each message.
     for message in messages:
 
         print(message["message_id"].text) # test line.
@@ -118,32 +114,26 @@ def tagEAXS(eaxs_file):
         message["transfer_encoding"].text = None
         break # test line.
     
-    # return EAXS root.
-    eaxs = eaxs.root
+    # return EAXS as etree element.
+    eaxs = eaxs.to_etree()
     return eaxs
 
 
 # TEST.
-def main():
+def main(eaxs_file):
 
-    import codecs
-    import sys
-    
-    try:
-        f = sys.argv[1]
-    except:
-        exit("Please pass an EAXS file via the command line.")
-    
     # make tagged version of EAXS.
-    tagged = tagEAXS(f)
+    tagged = tagEAXS(eaxs_file)
     tagged = etree.tostring(tagged, pretty_print=True)
     tagged = tagged.decode("utf-8")
     
     # write tagged version to file.
-    f_tagged = f.replace(".xml", ".tagged.xml")
-    with codecs.open(f_tagged, "w", encoding="utf-8") as x:
-        x.write(tagged)
+    output = eaxs_file.replace(".xml", ".tagged.xml")
+    with codecs.open(output, "w", encoding="utf-8") as f:
+        f.write(tagged)
 
 if __name__ == "__main__":
-	main()
+        
+        import plac
+        plac.call(main)
 

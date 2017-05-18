@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This module has a class to parse an EAXS file's message content with lxml."
+This module has a class to parse an EAXS file's message content with lxml.
 
 TODO:
     - The XPath you have for BodyContent needs to only find BodyContent where ContentType = "text/html" or "text/plain".
@@ -13,15 +13,18 @@ from lxml import etree
 
 
 class EAXSToEtree():
-    """ A class for parsing an EAXS file's message content with lxml. 
+    """ A class for manipulating an EAXS file's message content. 
     
     Example:
     >>> eaxs = EAXSToEtree("sampleEAXS.xml")
     >>> message_dict = eaxs.messages() # get message elements.
     >>> for key, value in message_dict.items():
-    >>>   print(key) # dictionary key for element.
-    >>>   print(value) # lxml.etree element or None.
-    >>> etree.tostring(eaxs.root) # string version of EAXS.
+    >>>   print(key) # dictionary key for element
+    >>>   print(value) # lxml.etree._Element or None
+    >>>   if value is not None: 
+    >>>     value.text = "Once upon a midnight dreary ..."  
+    >>> eaxs = eaxs.to_etree() # EAXS as lxml.etree
+    >>> etree.tostring(eaxs) # string version of EAXS
     """
 
 
@@ -29,8 +32,8 @@ class EAXSToEtree():
         """ Sets instance attributes.
         
         Args:
-            - eaxs_file (string): Path to EAXS file.
-            - charset (string): Optional encoding with which to open @eaxs_file.
+            - eaxs_file (str): Path to EAXS file.
+            - charset (str): Optional encoding with which to open @eaxs_file.
         """
 
         # set args.
@@ -39,59 +42,8 @@ class EAXSToEtree():
         
         # set namespace for EAXS.
         self.ncdcr_ns = {"ncdcr": "http://www.archives.ncdcr.gov/mail-account"}
-        
-        # get/set root element for @self.eaxs_file.
-        self.root = self._get_root()
 
 
-    def _get_root(self):
-        """ Gets root element for EAXS file.
-        
-        Returns:
-            <class 'lxml.etree._Element'>
-        """
-
-        # EAXS file to parse.
-        eaxs_file = self.eaxs_file
-        
-        # parse file; leaving CData intact.
-        parser = etree.XMLParser(strip_cdata=False)
-        with open(eaxs_file, "rb") as eaxs:
-            tree = etree.parse(eaxs, parser=parser)
-        
-        # get and return root.
-        root = tree.getroot()
-        return root
-
-
-    def _get_message_elements(self, message):
-        """ Gets important message elements.
-        
-        Returns:
-            <class 'dict'>
-        """
-
-        # namespace to use.
-        ncdcr_ns = self.ncdcr_ns
-
-        # given elements to retrieve via XPath. 
-        _singleBodyPath = "ncdcr:MultiBody/ncdcr:SingleBody/"
-
-        message_id = message.find("ncdcr:MessageId", ncdcr_ns)
-        charset = message.find(_singleBodyPath + "ncdcr:Charset", ncdcr_ns)
-        content = message.find(_singleBodyPath + "ncdcr:BodyContent/ncdcr:Content", ncdcr_ns)
-        content_type = message.find(_singleBodyPath + "ncdcr:ContentType", ncdcr_ns)
-        transfer_encoding = message.find(_singleBodyPath + "ncdcr:TransferEncoding", ncdcr_ns)
-        
-        # set and return dictionary.
-        message_dict = {"message_id":message_id,
-                        "charset":charset,
-                        "content":content,
-                        "content_type":content_type,
-                        "transfer_encoding":transfer_encoding}
-        return message_dict
-
-    
     def _get_messages(self):
         """ Gets all messages in EAXS document. 
         
@@ -100,12 +52,44 @@ class EAXSToEtree():
         """
         
         # set root, namespace to use.
-        root = self.root
+        root = self.to_etree()
         ncdcr_ns = self.ncdcr_ns
         
         # get and return message elements.
         messages = root.findall("ncdcr:Folder/ncdcr:Message", ncdcr_ns)
         return messages
+
+
+    def _get_message_elements(self, message):
+        """ Gets important message elements.
+        
+        Args:
+            - message (lxml.etree._Element): The EAXS message element from which to find given
+            subelements.
+
+        Returns:
+            <class 'dict'>
+        """
+
+        # namespace to use.
+        ncdcr_ns = self.ncdcr_ns
+
+        # given elements to retrieve via XPath. 
+        _singleBody = "ncdcr:MultiBody/ncdcr:SingleBody/"
+
+        message_id = message.find("ncdcr:MessageId", ncdcr_ns)
+        charset = message.find(_singleBody + "ncdcr:Charset", ncdcr_ns)
+        content = message.find(_singleBody + "ncdcr:BodyContent/ncdcr:Content", ncdcr_ns)
+        content_type = message.find(_singleBody + "ncdcr:ContentType", ncdcr_ns)
+        transfer_encoding = message.find(_singleBody + "ncdcr:TransferEncoding", ncdcr_ns)
+        
+        # set and return dictionary.
+        message_dict = {"message_id":message_id,
+                        "charset":charset,
+                        "content":content,
+                        "content_type":content_type,
+                        "transfer_encoding":transfer_encoding}
+        return message_dict
 
 
     def messages(self):
@@ -125,22 +109,36 @@ class EAXSToEtree():
         return messages
 
 
-# TEST.
-def main():
+    def to_etree(self):
+        """ Gets root element for EAXS file.
+        
+        Returns:
+            <class 'lxml.etree._Element'>
+        """
 
-    import sys
-    
-    try:
-        f = sys.argv[1]
-    except:
-        exit("Please pass an EAXS file via the command line.")
-    
-    eaxs = EAXSToEtree(f)
-    mdata = eaxs.messages()[0]
-    for k,v in mdata.items():
-        print(k, ": ", v)
-        print(type(v))
+        # EAXS file to parse.
+        eaxs_file = self.eaxs_file
+        
+        # parse file; leaving CData intact.
+        parser = etree.XMLParser(strip_cdata=False)
+        with open(eaxs_file, "rb") as eaxs:
+            tree = etree.parse(eaxs, parser=parser)
+        
+        # return root.
+        root = tree.getroot()
+        return root
+
+
+# TEST.
+def main(eaxs_file):
+
+    eaxs = EAXSToEtree(eaxs_file)
+    message = eaxs.messages()[0]
+    for key, value in message.items():
+        print(key, ": ", value)
     
 if __name__ == "__main__":
-	main()
+        
+        import plac
+        plac.call(main)
 
