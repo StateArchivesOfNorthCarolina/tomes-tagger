@@ -22,7 +22,7 @@ class EAXSToEtree():
     >>>   print(key) # dictionary key for element
     >>>   print(value) # lxml.etree._Element or None
     >>>   if value is not None: 
-    >>>     value.text = "Once upon a midnight dreary ..."  
+    >>>     value.text = "Hello world!OB"  
     >>> eaxs = eaxs.to_etree() # EAXS as lxml.etree
     >>> etree.tostring(eaxs) # string version of EAXS
     """
