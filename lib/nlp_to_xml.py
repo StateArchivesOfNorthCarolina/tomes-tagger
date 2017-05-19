@@ -67,14 +67,15 @@ class NLPToXML():
             <class 'lxml.etree.DocumentInvalid'>: If @xdoc is invalid.
             <class 'NoneType'>: If @xdoc is valid.
         """
-
+  
         # if @is_raw, make XML file-like.
         if is_raw:
             xdoc = io.StringIO(xdoc)
         
         # parse @xdoc and XSD.
         xdoc = etree.parse(xdoc)
-        xsd = etree.parse("nlp_to_xml.xsd")
+        xsd = __file__.replace(".py", ".xsd")
+        xsd = etree.parse(xsd)
 
         # validate @xdoc.
         xsd = etree.XMLSchema(xsd)
@@ -163,8 +164,8 @@ class NLPToXML():
 
         # convert output to string if needed.
         if return_string:
-            tagged_content = etree.tostring(tagged_content, xml_declaration=header, encoding=charset,
-                                     pretty_print=beautify)
+            tagged_content = etree.tostring(tagged_content, xml_declaration=header,
+                            encoding=charset, pretty_print=beautify)
             tagged_content = tagged_content.decode(charset)
 
         return tagged_content

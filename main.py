@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 
 """
-This module ??? ... 
+This module reads an EAXS file and outputs a "tagged" version of the EAXS in which message
+content has been run through an NLP application. The message and NER entities are encoded
+in a defined schema.
+
 
 TODO:
     - Move into class structure; instantiate other classes in __init__.
         - Example: HTMLToText() only needs to be instantiated once.
         - BTW: Is that composition?
     - Add timeout length to NLP if text is long.
-        - For now, setting timeout when starting the server (http://stackoverflow.com/a/36437157).
+        - For now, setting timeout when starting the server.
+        Info: http://stackoverflow.com/a/36437157
     - Likely better to write output XML incrementally rather than all at once.
         - This will be easier in a class structure.
-    - In the outputted EAXS: I'm seeing line breaks in other elements that were not there before.
+    - In the outputted EAXS: I'm seeing line breaks in other elements that were not there
+    before.
     - Once a decision is made re: Comments, this would need to udpate ContentTypeComments,
     TransferEncodingComments, Description and/or DescriptionComments to say that this version
     of the EAXS has modifications VS the original.

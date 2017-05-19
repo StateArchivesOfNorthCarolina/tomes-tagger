@@ -5,12 +5,15 @@ import sys; sys.path.append("..")
 import unittest
 from lib.html_to_text import *
 
+
 class Test_HTMLToText(unittest.TestCase):
 
+    
     def setUp(self):
 
         self.H2T = HTMLToText()
         self.HTML = "<html><head></head><body><a href=\"http://h.w\">{}</a></body></html>"
+    
     
     def test__shift_link(self):
 
@@ -21,6 +24,7 @@ class Test_HTMLToText(unittest.TestCase):
         expected = self.HTML.format("Hello World! [http://h.w]")
         self.assertEqual(html, expected)
 
+    
     def test__remove_images(self):
 
          img = "Hello World!<img src='hw.jpg' alt='Hello World!'>"
@@ -31,6 +35,7 @@ class Test_HTMLToText(unittest.TestCase):
          expected = self.HTML.format("Hello World!")
          self.assertEqual(html, expected)
 
+    
     def test__text(self):
         
         html = self.HTML.format("Hello World!")
