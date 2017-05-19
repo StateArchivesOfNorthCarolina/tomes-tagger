@@ -15,4 +15,4 @@ The information package contents will contain not only the EAXS file(s), but als
 
 ...
 
-TOMES tool is under active development by the [State Archives of North Carolina](http://archives.ncdcr.gov/) in conjunction with the [TOMES project team](https://www.ncdcr.gov/resources/records-management/tomes/team).
+The **tomes_tool** is under active development by the [State Archives of North Carolina](http://archives.ncdcr.gov/) in conjunction with the [TOMES project team](https://www.ncdcr.gov/resources/records-management/tomes/team).
