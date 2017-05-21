@@ -9,6 +9,10 @@ TODO:
         - Just set a validation option in xml() and validate BEFORE adding the header, etc.
     - If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just make not to pass empty text to CoreNLP?
+    - The XSD filename and object are static, so they should be in the __init__.
+    - Need to be more classlike. The interface should be:
+        # xdoc = NLPtoXML("sample.json")
+        # xdoc.valid() # returns True/False, etc.
 """
 
 # import modules.
