@@ -13,6 +13,8 @@ TODO:
     - Need to be more classlike. The interface should be:
         # xdoc = NLPtoXML("sample.json")
         # xdoc.valid() # returns True/False, etc.
+	- add a separate to-string method to get an XML string. I think it's
+	important not to return different data types depending on params. :-]
 """
 
 # import modules.

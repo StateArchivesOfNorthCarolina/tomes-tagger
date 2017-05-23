@@ -1,13 +1,12 @@
 """
-attachments = fileSec.fileGrp(directory="./myDir", id_prefix="attachments_")
-attachments.xml("attachments")
+attachments = fileSec.fileGrp("./myDir", "attachments")
 """
 
 #
 import hashlib
 import os
 from datetime import datetime
-
+from lxml import etree
 
 #
 def get_mime(f):
@@ -15,48 +14,52 @@ def get_mime(f):
     ext = os.path.splitext(f)[1]
     mime = mimes.get(ext)
     return mime
-
-
+    
 #
-def fileGrp(directory, id_prefix):
+def fileGrp(directory, suffix):
+
+    ns_url = "http://www.loc.gov/METS/" # get this from an external source eventually OR when inhereted.
+    ns_prefix = "{" + ns_url + "}"
+    ns_map = {"METS" : ns_url}
     
     i = 0
-    fileGrp = {}
-    for root, dirs, files in os.walk(directory + "/attachments"):
+    #fileGrp = []
+    fileGrp_el = etree.Element(ns_prefix + "fileGrp", nsmap=ns_map)
+    fileGrp_el.set("ID", suffix)
+    for root, dirs, files in os.walk(directory + "/" + suffix):
         
         for myfile in files:
 
-            flocat = os.path.join(root, myfile)
-            with open(flocat, "rb") as f:
+            myfile = os.path.join(root, myfile)
+
+            file_el = etree.SubElement(fileGrp_el, ns_prefix + "file", nsmap=ns_map)
+
+            file_el.set("ID", suffix + "_" + str(i).zfill(5))
+            file_el.set("CHECKSUMTYPE", "SHA-256")
+            file_el.set("MIMETYPE", get_mime(myfile))
+            file_el.set("SIZE", str(os.path.getsize(myfile)))
+            with open(myfile, "rb") as f:
                 checksum = hashlib.sha256()
                 checksum.update(f.read())
-                file_checksum = checksum.hexdigest()
+                file_el.set("CHECKSUM", checksum.hexdigest())
 
             # "The number of seconds can include decimal digits to arbitrary precision." per: https://www.w3.org/TR/xmlschema-2/
-            file_created = os.path.getctime(flocat)
-            file_created = datetime.utcfromtimestamp(file_created).isoformat() 
-            
-            flocat_loctype = flocat.replace(directory, "")
-            flocat_loctype = flocat_loctype.replace("\\", "/")
-            fileGrp[flocat] = {"file":
-                                    {"@ID": id_prefix + str(i).zfill(5),
-                                    "@CHECKSUM": file_checksum,
-                                    "@CHECKSUMTYPE": "SHA-256",
-                                    "@CREATED": file_created,
-                                    "@MIMETYPE": get_mime(flocat),
-                                    "@SIZE": os.path.getsize(flocat),
-                                    "FLocat": 
-                                        ({"@LOCTYPE": "OTHER"},
-                                        flocat_loctype)
-                                    }
-                                }
-            i += 1
-            #break
+            file_created = os.path.getctime(myfile)
+            file_created = datetime.utcfromtimestamp(file_created).isoformat()
+            file_el.set("CREATED", file_created)
 
-        return fileGrp
+            flocat_el = etree.SubElement(file_el, ns_prefix + "FLocat", nsmap=ns_map)
+            flocat_el.set("LOCTYPE", "OTHER")
+            flocat_el.text = myfile.replace(directory, "")
+            flocat_el.text = flocat_el.text.replace("\\", "/")
+
+            i += 1
+            if i == 5:
+                break
+
+        return fileGrp_el
    
 testDir = open(".testDir").read()
-results = fileGrp(testDir, "attachments_")
-import json
-results = json.dumps(results, indent=2)
-print(results)
+results = fileGrp(testDir, "attachments")
+xml = etree.tostring(results, pretty_print=True)
+print(xml.decode("utf-8"))
