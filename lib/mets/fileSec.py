@@ -26,16 +26,21 @@ ns_url = "http://www.loc.gov/METS/"
 ns_dir_id = "{" + ns_url + "}"
 ns_map = {None : ns_url}
 
+# to save <file> ID attributes.
+file_ids = []
 
 def make_fileSec(filepath):
     """ Returns METS <fileSec> for all files in @filepath.
     Return type is <class 'lxml.etree._Element'>. """
 
+    
+    i = 0
+
     # create root <fileSec> element.
     fileSec_el = etree.Element(ns_dir_id + "fileSec", nsmap=ns_map)
 
     # loop through subdirectories and files.
-    for dirpath, dirnames, filenames in os.walk(filepath):
+    for dirpath, dirnames, filenames in os.walk(filepath): 
         
         # get current relative path; replace Windows backslashes.
         dir_id = os.path.relpath(dirpath, filepath)
@@ -55,6 +60,11 @@ def make_fileSec(filepath):
             file_el.set("CHECKSUMTYPE", "SHA-256")
             file_el.set("SIZE", str(os.path.getsize(fullname)))
 
+            # set ID attrbute.
+            filename_id = "file_" + str(i).zfill(7)
+            file_el.set("ID", filename_id)
+            file_ids.append(filename_id)
+            
             # set MIMETYPE attribute.
             mime = mimetypes.guess_type(fullname)[0]
             if mime is not None:
@@ -76,6 +86,8 @@ def make_fileSec(filepath):
             flocat_el.set("LOCTYPE", "OTHER")
             flocat_el.text = filename
 
+            i += 1
+
     return fileSec_el
 
 
@@ -85,4 +97,4 @@ fileSec = make_fileSec(testDir)
 fileSec = etree.tostring(fileSec, pretty_print=True)
 fileSec = fileSec.decode("utf-8")
 print(fileSec)
-
+print(file_ids)
