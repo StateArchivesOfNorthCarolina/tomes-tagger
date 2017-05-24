@@ -1,6 +1,12 @@
 """
-usage:
+This module creates a METS <fileSec> tree for a given user-inputted path.
+The output can be integrated into a complete METS file.
+
+Usage:
     >>> make_fileSec("./myDir")
+
+TODO:
+    - Get namespace stuff from an external source eventually.
 """
 
 # import modules.
@@ -11,7 +17,7 @@ from datetime import datetime
 from lxml import etree
 
 # set namespace prefixes.
-ns_url = "http://www.loc.gov/METS/" # get this from an external source eventually OR when inhereted.
+ns_url = "http://www.loc.gov/METS/"
 ns_dir_id = "{" + ns_url + "}"
 ns_map = {None : ns_url}
 
