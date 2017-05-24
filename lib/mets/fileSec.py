@@ -7,6 +7,11 @@ Usage:
 
 TODO:
     - Get namespace stuff from an external source eventually.
+    - You'll need to add the file@ID attribute back so you can reference it in the
+    structMap section. It might be best to just use a zero-padded int for all
+    files. That way the structMap sequence is intuitive.
+    - Need a separate fileGrp for preservation EAXS vs. tagged. This can wait
+    until our AIP structure is solid.
 """
 
 # import modules.
