@@ -25,7 +25,7 @@ from lxml import etree
 fileGrp_ids = []
 
 
-def fileGrp(filenames, basepath, identifier):
+def fileGrp(filenames, basepath, identifier, use=None):
     """ Creates METS <fileGrp> for all files in @filenames.
 
     Args:
@@ -40,6 +40,8 @@ def fileGrp(filenames, basepath, identifier):
     # create <fileGrp> element for current directory.
     fileGrp_el = etree.Element(mets_ns.ns_id + "fileGrp", nsmap=mets_ns.ns_map)
     fileGrp_el.set("ID", identifier)
+    if use is not None:
+        fileGrp_el.set("USE", use)
 
     i = 0
     for filename in filenames:  
@@ -89,7 +91,7 @@ def main(path):
     # create <fileGrp> based on @path.
     from glob import glob
     files = glob(path + "/**/*.*", recursive=True)
-    group = fileGrp(files, path, "test")
+    group = fileGrp(files, path, "test", "testing")
 
     # print XML.
     groupx = etree.tostring(group, pretty_print=True)
