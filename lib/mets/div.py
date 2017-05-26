@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """
-This module creates a METS <div> tree for a given list of files. The output can be
-integrated into a complete METS file's <structMap> element.
+This module creates a METS <div> tree for a given list of files. The output can be integrated
+into a complete METS file's <structMap> element.
 
 TODO:
     - ???
@@ -14,7 +14,7 @@ from lxml import etree
 
 
 def div(file_ids, attributes=None):
-    """ Creates a METS <div> etre element for each item in @file_ids.
+    """ Creates a METS <div> etree element for each item in @file_ids.
 
     Args:
         - file_ids (list): The identifiers to use for each <fptr> element within the <div>.
