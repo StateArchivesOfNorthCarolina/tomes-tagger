@@ -94,9 +94,10 @@ def main():
     # create <fileGrp> based on @path.
     path = "."
     files = glob(path + "/**/*.*", recursive=True)
-    attribs = {"USE": "testing"}
-    groupx = fileGrp(files, path, "test", attribs)
+    attribs = {"USE": "Testing"}
+    groupx = fileGrp(files, path, "ID_fileGrp", attribs)
     return(groupx)
+
 
 if __name__ == "__main__":
     

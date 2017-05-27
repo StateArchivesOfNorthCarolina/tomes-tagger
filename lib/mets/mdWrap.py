@@ -49,8 +49,9 @@ def main():
     md = simpledc.dump_etree(md)
 
     # wrap Dublin Core.
-    mdwrapx = mdWrap(md, "DC", {"ID":"Test Metadata"})
+    mdwrapx = mdWrap(md, "DC", {"ID":"Test_Metadata"})
     return mdwrapx
+
 
 if __name__ == "__main__":
     

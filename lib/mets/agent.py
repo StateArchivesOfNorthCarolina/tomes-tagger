@@ -52,7 +52,7 @@ def main():
   args = ("TOMES Tool",
           "CREATOR", 
           "TOMES Tool is Python code.",
-         {"TYPE":"OTHER", "OTHERTYPE": "software agent"})
+         {"TYPE":"OTHER", "OTHERTYPE": "Software Agent"})
   agentx = agent(*args)
   return agentx
 

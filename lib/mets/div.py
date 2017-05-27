@@ -43,11 +43,12 @@ def div(file_ids, attributes=None):
 def main():
 
     # create list of test ids.
-    file_ids = [str(i) for i in range(0,10)]
+    file_ids = ["test_" + str(i) for i in range(0,10)]
     
     # create <div> with some attributes.
-    dividerx = div(file_ids, {"ID": "test", "LABEL": "testing"})
+    dividerx = div(file_ids, {"ID": "ID_div", "LABEL": "Testing"})
     return dividerx
+
 
 if __name__ == "__main__":
     
