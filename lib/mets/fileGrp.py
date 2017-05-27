@@ -87,26 +87,22 @@ def fileGrp(filenames, basepath, identifier, attributes=None):
 
 
 # TEST.
-def main(path):
+def main():
+
+    from glob import glob
 
     # create <fileGrp> based on @path.
-    from glob import glob
+    path = "."
     files = glob(path + "/**/*.*", recursive=True)
     attribs = {"USE": "testing"}
-    group = fileGrp(files, path, "test", attribs)
-
-    # print XML.
-    groupx = etree.tostring(group, pretty_print=True)
-    groupx = groupx.decode("utf-8")
-    print(groupx)
-
-    # print list of <file> @ID attributes.
-    ids = fileGrp_ids
-    ids = "<!--" + str(ids) + "-->"
-    print(ids)
+    groupx = fileGrp(files, path, "test", attribs)
+    return(groupx)
 
 if __name__ == "__main__":
     
-    import plac
-    plac.call(main)
+    groupx = main()
 
+    # print XML.
+    groupx = etree.tostring(groupx, pretty_print=True)
+    groupx = groupx.decode("utf-8")
+    print(groupx)

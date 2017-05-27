@@ -49,13 +49,15 @@ def main():
     md = simpledc.dump_etree(md)
 
     # wrap Dublin Core.
-    mdwrap = mdWrap(md, "DC", {"ID":"Test Metadata"})
-
-    # print XML.
-    mdwrapx = etree.tostring(mdwrap, pretty_print=True)
-    mdwrapx = mdwrapx.decode("utf-8")
-    print(mdwrapx)
+    mdwrapx = mdWrap(md, "DC", {"ID":"Test Metadata"})
+    return mdwrapx
 
 if __name__ == "__main__":
-    main()
+    
+    mdwrapx = main()
+
+    # print XML.
+    mdwrapx = etree.tostring(mdwrapx, pretty_print=True)
+    mdwrapx = mdwrapx.decode("utf-8")
+    print(mdwrapx)
 

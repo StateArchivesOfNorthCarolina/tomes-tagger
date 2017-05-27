@@ -46,13 +46,14 @@ def main():
     file_ids = [str(i) for i in range(0,10)]
     
     # create <div> with some attributes.
-    divider = div(file_ids, {"ID": "test", "LABEL": "testing"})
-
-    # print XML.
-    dividerx = etree.tostring(divider, pretty_print=True)
-    dividerx = dividerx.decode("utf-8")
-    print(dividerx)
+    dividerx = div(file_ids, {"ID": "test", "LABEL": "testing"})
+    return dividerx
 
 if __name__ == "__main__":
-    main()
-
+    
+    dividerx = main()
+    
+    # print XML.
+    dividerx = etree.tostring(dividerx, pretty_print=True)
+    dividerx = dividerx.decode("utf-8")
+    print(dividerx)

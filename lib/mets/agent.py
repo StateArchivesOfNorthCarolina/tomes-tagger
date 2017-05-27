@@ -53,12 +53,16 @@ def main():
           "CREATOR", 
           "TOMES Tool is Python code.",
          {"TYPE":"OTHER", "OTHERTYPE": "software agent"})
+  agentx = agent(*args)
+  return agentx
 
-  # print XML.
-  agentx = etree.tostring(agent(*args), pretty_print=True)
-  agentx = agentx.decode("utf-8")
-  print(agentx)
 
 if __name__ == "__main__":
-    main()
+    
+    agentx = main()
+    
+    # print XML.
+    agentx = etree.tostring(agentx, pretty_print=True)
+    agentx = agentx.decode("utf-8")
+    print(agentx)
 
