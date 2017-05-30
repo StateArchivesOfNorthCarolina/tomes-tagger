@@ -25,7 +25,7 @@ def div(file_ids, attributes=None):
     """
     
     # create <div> element for ...; set ID and optional attributes.
-    div_el = etree.Element(mets_ns.ns_id + "div", nsmap=mets_ns.ns_map)
+    div_el = etree.Element(mets_ns.ns_id("mets") + "div", nsmap=mets_ns.ns_map)
     if attributes is not None:
         for k, v in attributes.items():
             div_el.set(k, v)
@@ -33,7 +33,7 @@ def div(file_ids, attributes=None):
     for file_id in file_ids:  
 
         # create <fptr> element for current file; set FILEID attribute.
-        fptr_el = etree.SubElement(div_el, mets_ns.ns_id + "fptr", nsmap=mets_ns.ns_map)
+        fptr_el = etree.SubElement(div_el, mets_ns.ns_id("mets") + "fptr", nsmap=mets_ns.ns_map)
         fptr_el.set("FILEID", file_id)
 
     return div_el

@@ -26,14 +26,14 @@ def mdWrap(metadata, mdtype, attributes=None):
     """
     
     # create <mdWrap> element; set optional attributes and MDTYPE attribute.
-    mdWrap_el = etree.Element(mets_ns.ns_id + "mdWrap", nsmap=mets_ns.ns_map)
+    mdWrap_el = etree.Element(mets_ns.ns_id("mets") + "mdWrap", nsmap=mets_ns.ns_map)
     if attributes is not None:
         for k, v in attributes.items():
             mdWrap_el.set(k, v)
     mdWrap_el.set("MDTYPE", mdtype)
 
     # create <xmlData> subelement; append @metadata tree.
-    xmlData_el = etree.SubElement(mdWrap_el, mets_ns.ns_id + "xmlData", nsmap=mets_ns.ns_map)
+    xmlData_el = etree.SubElement(mdWrap_el, mets_ns.ns_id("mets") + "xmlData", nsmap=mets_ns.ns_map)
     xmlData_el.append(metadata)
 
     return mdWrap_el

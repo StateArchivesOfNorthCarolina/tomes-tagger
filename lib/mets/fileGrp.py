@@ -37,7 +37,7 @@ def fileGrp(filenames, basepath, identifier, attributes=None):
     """
     
     # create <fileGrp> element for current directory; set ID and optional attributes.
-    fileGrp_el = etree.Element(mets_ns.ns_id + "fileGrp", nsmap=mets_ns.ns_map)
+    fileGrp_el = etree.Element(mets_ns.ns_id("mets") +  "fileGrp", nsmap=mets_ns.ns_map)
     if attributes is not None:
         for k, v in attributes.items():
             fileGrp_el.set(k, v)
@@ -47,7 +47,7 @@ def fileGrp(filenames, basepath, identifier, attributes=None):
     for filename in filenames:  
 
         # create <file> element for current file; set easy attributes.
-        file_el = etree.SubElement(fileGrp_el, mets_ns.ns_id + "file", nsmap=mets_ns.ns_map)
+        file_el = etree.SubElement(fileGrp_el, mets_ns.ns_id("mets") +  "file", nsmap=mets_ns.ns_map)
         file_el.set("CHECKSUMTYPE", "SHA-256")
         file_el.set("SIZE", str(os.path.getsize(filename)))
 
@@ -74,13 +74,13 @@ def fileGrp(filenames, basepath, identifier, attributes=None):
         file_el.set("CREATED", file_created)
 
         # create <FLocat> element; set attributes.
-        flocat_el = etree.SubElement(file_el, mets_ns.ns_id + "FLocat", nsmap=mets_ns.ns_map)
-        flocat_el.set("LOCTYPE", "OTHER")
-        flocat_el.set("OTHERLOCTYPE", "relpath")
         filename = os.path.relpath(filename, basepath)
         filename = filename.replace("\\", "/")
-        flocat_el.text = etree.CDATA(filename)
-
+        flocat_el = etree.SubElement(file_el, mets_ns.ns_id("mets") +  "FLocat", nsmap=mets_ns.ns_map)
+        flocat_el.set(mets_ns.ns_id("xlink") + "href", filename)
+        flocat_el.set("LOCTYPE", "OTHER")
+        flocat_el.set("OTHERLOCTYPE", "relpath")
+    
         i += 1
 
     return fileGrp_el

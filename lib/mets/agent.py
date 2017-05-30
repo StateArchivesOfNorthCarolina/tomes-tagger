@@ -27,19 +27,19 @@ def agent(name, role, note=None, attributes=None):
     """
     
     # create <agent> element; set optional attributes and ROLE attribute.
-    agent_el = etree.Element(mets_ns.ns_id + "agent", nsmap=mets_ns.ns_map)
+    agent_el = etree.Element(mets_ns.ns_id("mets") + "agent", nsmap=mets_ns.ns_map)
     if attributes is not None:
         for k, v in attributes.items():
             agent_el.set(k, v)
     agent_el.set("ROLE", role)
 
     # create <name> subelement.
-    name_el = etree.SubElement(agent_el, mets_ns.ns_id + "name", nsmap=mets_ns.ns_map)
+    name_el = etree.SubElement(agent_el, mets_ns.ns_id("mets") + "name", nsmap=mets_ns.ns_map)
     name_el.text = name
     
     # create optional <note> element.
     if note is not None:
-        note_el = etree.SubElement(agent_el, mets_ns.ns_id + "note", nsmap=mets_ns.ns_map)
+        note_el = etree.SubElement(agent_el, mets_ns.ns_id("mets") + "note", nsmap=mets_ns.ns_map)
         note_el.text = note
 
     return agent_el
