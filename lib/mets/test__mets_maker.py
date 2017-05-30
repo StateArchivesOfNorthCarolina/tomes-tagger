@@ -10,7 +10,7 @@ import mdWrap
 import mets_ns
 from lxml import etree
 
-# pre-built sections.
+# pre-built test sections.
 agentx = agent.main()
 mdwrapx = mdWrap.main()
 filegrpx = fileGrp.main()
@@ -40,38 +40,4 @@ structmap_el.append(divx)
 metsx = etree.tostring(mets_el, pretty_print=True)
 metsx = metsx.decode("utf-8")
 print(metsx)
-
-"""
-Notepad++ validation against schema isn't liking the CDATA in <FLocat>.
-Need to see if this is really a problem.
-If so, filenames with ampersands, etc. will get escaped in the element value if not wrapped in CDATA.
-
-... but OTHERWISE ... it's working! :-] 
-
-
-	Validation of current file using XML schema:
-
-
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-	ERROR: Element '{http://www.loc.gov/METS/}FLocat': Character content is not allowed, because the content type is empty.
-"""
-
-
-
 
