@@ -6,6 +6,7 @@ This module has classes for manipulating HTML and converting HTML to plain text.
 TODO:
     - Is there any way to use io.StringIO instead of a temp file?
         - this might help avoid the permision error.
+    - Do you REALLY need to inheret BeautifulSoup? Can you just use composition?
     - I think __del__ needs to be __exit__?
         - But maybe just have the user call tempfile instead of making your own?
         - Also, did you try using tempfile instead of just using open()?

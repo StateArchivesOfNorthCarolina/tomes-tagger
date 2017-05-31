@@ -15,6 +15,7 @@ class Agent():
     
     
     def __init__(self, prefix, ns_map):
+        
         self.prefix = prefix
         self.ns_map = ns_map
 
@@ -44,15 +45,15 @@ class Agent():
 
         # create <name> subelement.
         name_el = etree.SubElement(agent_el,
-                                "{" + self.ns_map[self.prefix] + "}name",
-                                nsmap=self.ns_map)
+                                  "{" + self.ns_map[self.prefix] + "}name",
+                                  nsmap=self.ns_map)
         name_el.text = name
         
         # create optional <note> element.
         if note is not None:
             note_el = etree.SubElement(agent_el,
-                        "{" + self.ns_map[self.prefix] + "}note",
-                        nsmap=self.ns_map)
+                                      "{" + self.ns_map[self.prefix] + "}note",
+                                      nsmap=self.ns_map)
             note_el.text = note
 
         return agent_el
