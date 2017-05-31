@@ -79,7 +79,7 @@ def fileGrp(filenames, basepath, identifier, attributes=None):
         flocat_el = etree.SubElement(file_el, mets_ns.ns_id("mets") +  "FLocat", nsmap=mets_ns.ns_map)
         flocat_el.set(mets_ns.ns_id("xlink") + "href", filename)
         flocat_el.set("LOCTYPE", "OTHER")
-        flocat_el.set("OTHERLOCTYPE", "relpath")
+        flocat_el.set("OTHERLOCTYPE", "SYSTEM")
     
         i += 1
 
