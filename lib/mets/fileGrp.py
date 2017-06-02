@@ -24,6 +24,7 @@ class FileGrp():
         self.prefix = prefix
         self.ns_map = ns_map
 
+
     def fileGrp(self, filenames, basepath, identifier, attributes=None):
         """ Creates a METS <fileGrp> etree element for all files in @filenames.
 
@@ -36,7 +37,7 @@ class FileGrp():
         Returns:
             <class 'lxml.etree._Element'>
         """
-        
+
         # create <fileGrp> element.
         fileGrp_el = etree.Element("{" + self.ns_map[self.prefix] + "}fileGrp",
                 nsmap=self.ns_map)

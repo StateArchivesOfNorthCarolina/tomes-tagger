@@ -5,8 +5,11 @@ from lxml import etree
 
 
 class MdSecType():
-    """ A class to create a METS ... """
+    """ A class to create a METS "mdSecType" elements that require an ID attribute:
+    "dmdSec", "digiprovMD", "rightsMD", "sourceMD", and "techMD".  This class can also be
+    used to create a generic METS element within the root METS namespace. """
     
+
     def __init__(self, prefix, ns_map):
         """ Set instance attributes. 
         
@@ -19,13 +22,14 @@ class MdSecType():
         self.ns_map = ns_map 
 
 
-    def mdSecType(self, name, identifier, attributes=None):
-        """ Creates a ...
+    def mdSecType(self, name, identifier=None, attributes=None):
+        """ Creates an element using the METS namespace. Note that "mdSecType"
+        elements require an ID attribute. This can be omitted by using the default value of
+        None for @identifier.
 
         Args:
             - name (str): The name of the element to create.
-            - identifier (str): The ID attribute value to set for the @name element.
-                                Secret: Use "None" to bypass creating this attribute.
+            - identifier (str): The option ID attribute value to set for the @name element.
             - attributes (dict): The optional attributes to set for the <div>.
         
         Returns:
