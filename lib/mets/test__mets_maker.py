@@ -8,6 +8,7 @@ import div
 import fileGrp
 import mdWrap
 import mets_ns
+from mdSecType import MdSecType
 from lxml import etree
 
 # pre-built test sections.
@@ -15,6 +16,9 @@ agentx = agent.main()
 mdwrapx = mdWrap.main()
 filegrpx = fileGrp.main()
 divx = div.main()
+
+# mdSecType builder.
+mdSecTyper = MdSecType("mets", mets_ns.ns_map)
 
 # <mets>
 mets_el = etree.Element("{" + mets_ns.ns_map["mets"] + "}mets", nsmap=mets_ns.ns_map)
@@ -25,10 +29,12 @@ metshdr_el= etree.SubElement(mets_el, "{" + mets_ns.ns_map["mets"] + "}metsHdr",
 metshdr_el.append(agentx)
 
 # <dmdSec>
-dmdsec_el= etree.SubElement(mets_el, "{" + mets_ns.ns_map["mets"] + "}dmdSec",
-        nsmap=mets_ns.ns_map)
-dmdsec_el.set("ID", "ID_dmdSec")
+#dmdsec_el= etree.SubElement(mets_el, "{" + mets_ns.ns_map["mets"] + "}dmdSec",
+        #nsmap=mets_ns.ns_map)
+#dmdsec_el.set("ID", "ID_dmdSec")
+dmdsec_el = mdSecTyper.mdSecType("dmdSec", "dmd1")
 dmdsec_el.append(mdwrapx)
+mets_el.append(dmdsec_el)
 
 # <fileSec>
 filesec_el= etree.SubElement(mets_el, "{" + mets_ns.ns_map["mets"] + "}fileSec",

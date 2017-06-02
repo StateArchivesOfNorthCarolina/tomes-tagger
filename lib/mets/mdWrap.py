@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 # import modules.
-import mets_ns
 from lxml import etree
 
 
