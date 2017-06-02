@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
 
-"""
-This module creates a METS <agent> tree for given input. The output can be integrated into a
-complete METS file's <metsHdr> element.
-
-TODO:
-    - ???
-"""
-
 # import modules.
 from lxml import etree
 
+
 class Agent():
+    """ A class to create a METS <agent> tree for given input. The output can be integrated
+    into a complete METS file's <metsHdr> element. """
     
     
     def __init__(self, prefix, ns_map):
+        """ Set instance attributes. 
+        
+        Args:
+            - prefix (str): The METS namespace prefix. 
+            - ns_map (dict): Namespace prefixes are keys; namespace URIs are values.
+        """
         
         self.prefix = prefix
-        self.ns_map = ns_map
+        self.ns_map = ns_map 
 
     
     def agent(self, name, role, note=None, attributes=None):
@@ -33,27 +34,27 @@ class Agent():
             <class 'lxml.etree._Element'>
         """
         
-        # create <agent> element; set optional attributes and ROLE attribute.
+        # create <agent> element.
         agent_el = etree.Element("{" + self.ns_map[self.prefix] + "}agent",
-                                nsmap=self.ns_map)
+                nsmap=self.ns_map)
         
+        # set optional attributes and ROLE attribute.
         if attributes is not None:
             for k, v in attributes.items():
                 agent_el.set(k, v)
-        
         agent_el.set("ROLE", role)
 
         # create <name> subelement.
         name_el = etree.SubElement(agent_el,
-                                  "{" + self.ns_map[self.prefix] + "}name",
-                                  nsmap=self.ns_map)
+                "{" + self.ns_map[self.prefix] + "}name",
+                nsmap=self.ns_map)
         name_el.text = name
         
         # create optional <note> element.
         if note is not None:
             note_el = etree.SubElement(agent_el,
-                                      "{" + self.ns_map[self.prefix] + "}note",
-                                      nsmap=self.ns_map)
+                    "{" + self.ns_map[self.prefix] + "}note",
+                    nsmap=self.ns_map)
             note_el.text = note
 
         return agent_el
@@ -69,9 +70,9 @@ def main():
           "CREATOR", 
           "TOMES Tool is Python code.",
          {"TYPE":"OTHER", "OTHERTYPE": "Software Agent"})
-  a = Agent("mets", ns_map)
-  agentx = a.agent(*args)
-  return agentx
+  agent_el = Agent("mets", ns_map)
+  agent_el = agent_el.agent(*args)
+  return agent_el
 
 
 if __name__ == "__main__":
