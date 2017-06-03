@@ -4,8 +4,14 @@
 This module has a class to parse an EAXS file's message content with lxml.
 
 TODO:
-    - The XPath you have for BodyContent needs to only find BodyContent where ContentType = "text/html" or "text/plain".
-        - IOW, by using etree.find() you're relying on the textual content to be in first position.
+    - The XPath you have for BodyContent needs to only find BodyContent where
+    ContentType = "text/html" or "text/plain".
+        - IOW, by using etree.find() you're relying on the textual content to be in first
+        position.
+    - The to_etree() method should be private and called "_get_root(). If you must, just have
+    a "root" attribute that is the return value of _get_root.
+    - Need to add update_message() method that can simplify the work in main.py.
+        - Also, need to do base64 handling here and not in main.py.
 """
 
 # import modules.
