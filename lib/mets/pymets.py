@@ -2,83 +2,67 @@
 
 """
 TODO:
-    - Add docstrings.
     - Note that struct-links and behavior elements aren't supported.
     - Say this is for METS version 1.11.
-    - Put all instantiated mets.* objects in __init__ or a private function.
-        - Just need to instantiate once, right?
 """
 
 # import modules.
 from lxml import etree
+from lxml.etree import CDATA
 from lib.anyType import AnyType
 from lib.div import Div
 from lib.fileGrp import FileGrp
-
-# DEPRECATE!
-from lib.agent import Agent
-from lib.mdSecType import MdSecType
-from lib.mdWrap import MdWrap
+from lib.namespace import ns_map as default_ns_map
 
 
 class PyMETS():
-    """ A class with which to create a METS file. """
+    """ A class with covenience methods for creating METS files. """
 
     
-    def __init__(self, prefix="mets", ns={}):
+    def __init__(self, ns_prefix="mets", ns_map=default_ns_map):
         """ Set instance attributes.
 
         Args:
-            - prefix (str): The METS namespace prefix. 
+            - ns_prefix (str): The METS namespace prefix. 
             - ns_map (dict): Namespace prefixes are keys; namespace URIs are values.
         """
-        
-        # set METS namespace prefix. 
-        self.prefix = prefix
 
-        # set namespace map using defaults plus user values in @ns.
-        self.ns_map = {"mets" : "http://www.loc.gov/METS/",
-                      "xlink" : "http://www.w3.org/1999/xlink",
-                      **ns}
-    
+        self.ns_prefix = ns_prefix
+        self.ns_map = ns_map
+
+        # compose instances.
+        self.AnyType = AnyType(self.ns_prefix, self.ns_map)
+        self.Div = Div(self.ns_prefix, self.ns_map)
+        self.FileGrp = FileGrp(self.ns_prefix, self.ns_map)
+
+
+    def stringify(self, element, beautify=True, charset="utf-8"):
+        """ Returns an XML string for a given etree @element. """
+
+        xstring = etree.tostring(element, pretty_print=beautify)
+        xstring = xstring.decode(charset)
+        return xstring
+
+
     def make(self, *args, **kwargs):
-        """ """
+        """ Returns an etree element using the self.AnyType instance. """
 
-        name_el = AnyType(self.prefix, self.ns_map)
-        name_el = name_el.anyType(*args, **kwargs)
+        name_el = self.AnyType.anyType(*args, **kwargs)
         return name_el
 
 
-    #def agent(self, *args, **kwargs):
-    #    """ """
-
-    #    agent_el = self.make("agent", attributes=attributes)
-    #    agent_el = 
-    #    return agent_el
-
-
     def div(self, *args, **kwargs):
-        """ """
+        """ Returns a METS <div> etree element using the self.Div instance. """
 
-        div_el = Div(self.prefix, self.ns_map)
-        div_el = div_el.div(*args, **kwargs)
+        div_el = self.Div.div(*args, **kwargs)
         return div_el
 
 
     def fileGrp(self, *args, **kwargs):
-        """ """
+        """ Returns a METS <fileGrp> etree element using the self.FileGrp instance. """
 
-        filegrp_el = FileGrp(self.prefix, self.ns_map)
-        filegrp_el = filegrp_el.fileGrp(*args, **kwargs)
+        filegrp_el = self.FileGrp.fileGrp(*args, **kwargs)
         return filegrp_el
-    
-
-    #def mdWrap(self, *args, **kwargs):
-    #    """ """
-
-    #    mdwrap_el = MdWrap(self.prefix, self.ns_map)
-    #    mdwrap_el = mdwrap_el.mdWrap(*args, **kwargs)
-    #    return mdwrap_el
 
 
 # TEST.
@@ -86,30 +70,30 @@ def main():
     
     pymets = PyMETS()
     
-    # set METS root; append <metsHdr>.
+    # create METS root; set <metsHdr>; append header to root.
     root = pymets.make("mets")
     header = pymets.make("metsHdr")
     root.append(header)
     
-    # append <agent> to header.
+    # create <agent>; append to header.
     attributes = {"ROLE":"CREATOR", "TYPE":"OTHER",  "OTHERTYPE":"Software Agent"}
     agent = pymets.make("agent", attributes=attributes)
     name = pymets.make("name", text="TOMES Tool")
-    note = pymets.make("note", text="TOMES Tool is written in Python.")
+    note = pymets.make("note", text=CDATA("TOMES Tool is written in Python."))
     agent.extend([name, note])
     header.append(agent)
     
-    # create <dmdSec>; append to root.
-    dmdSec = pymets.make("dmdSec", {"ID":"no_metadata"})
+    # create <dmdSec>.
+    dmdSec = pymets.make("dmdSec", attributes={"ID":"no_metadata"})
     root.append(dmdSec)
     
-    # create <fileSec>; append to root.
+    # create <fileSec>.
     fileSec = pymets.make("fileSec")
-    fileGrp = pymets.fileGrp(filenames=[__file__], basepath=".", identifier="code")
+    fileGrp = pymets.fileGrp(filenames=[__file__], basepath=".", identifier="source_code")
     fileSec.append(fileGrp)
     root.append(fileSec)
 
-    # get fileSec1 ids; create <structMap>; append to root.
+    # create <div>; create <structMap>.
     file_ids = [fid.get("ID") for fid in fileGrp.findall("{*}file")]
     structMap = pymets.make("structMap")
     div = pymets.div(file_ids)
@@ -117,8 +101,7 @@ def main():
     root.append(structMap)
 
     # print METS.
-    rootx = etree.tostring(root, pretty_print=True)
-    rootx = rootx.decode("utf-8")
+    rootx = pymets.stringify(root)
     print(rootx)
 
 

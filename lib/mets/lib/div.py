@@ -8,15 +8,15 @@ class Div():
     """ A class to create a METS <div> tree for a given list of files. The output can be
     integrated into a complete METS file's <structMap> element. """
     
-    def __init__(self, prefix, ns_map):
+    def __init__(self, ns_prefix, ns_map):
         """ Set instance attributes. 
         
         Args:
-            - prefix (str): The METS namespace prefix. 
+            - ns_prefix (str): The METS namespace prefix. 
             - ns_map (dict): Namespace prefixes are keys; namespace URIs are values.
         """
         
-        self.prefix = prefix
+        self.ns_prefix = ns_prefix
         self.ns_map = ns_map 
 
 
@@ -32,7 +32,7 @@ class Div():
         """
         
         # create <div> element.
-        div_el = etree.Element("{" + self.ns_map[self.prefix] + "}div",
+        div_el = etree.Element("{" + self.ns_map[self.ns_prefix] + "}div",
                 nsmap=self.ns_map)
         
         # set optional attributes.
@@ -43,7 +43,7 @@ class Div():
         for file_id in file_ids:  
 
             # create <fptr> element for current file; set FILEID attribute.
-            fptr_el = etree.SubElement(div_el, "{" + self.ns_map[self.prefix] + "}fptr",
+            fptr_el = etree.SubElement(div_el, "{" + self.ns_map[self.ns_prefix] + "}fptr",
                     nsmap=self.ns_map)
             fptr_el.set("FILEID", file_id)
 
@@ -53,7 +53,7 @@ class Div():
 # TEST.
 def main():
 
-    from mets_ns import ns_map
+    from namespace import ns_map
 
     # create list of test ids.
     file_ids = ["test_" + str(i) for i in range(0,10)]

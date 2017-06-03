@@ -5,23 +5,23 @@ from lxml import etree
 
 
 class AnyType():
-    """ A class to create a any METS element ... """
+    """ A class to create a any METS element with optional text and attributes. """
     
 
-    def __init__(self, prefix, ns_map):
+    def __init__(self, ns_prefix, ns_map):
         """ Set instance attributes. 
         
         Args:
-            - prefix (str): The METS namespace prefix. 
+            - ns_prefix (str): The METS namespace prefix. 
             - ns_map (dict): Namespace prefixes are keys; namespace URIs are values.
         """
         
-        self.prefix = prefix
+        self.ns_prefix = ns_prefix
         self.ns_map = ns_map 
 
 
     def anyType(self, name, attributes=None, text=None):
-        """ Creates an element using the METS namespace ...
+        """ Creates an element with optional text and attributes.
 
         Args:
             - name (str): The name of the element to create.
@@ -34,7 +34,7 @@ class AnyType():
         """
         
         # create @name element.
-        name_el = etree.Element("{" + self.ns_map[self.prefix] + "}" + name,
+        name_el = etree.Element("{" + self.ns_map[self.ns_prefix] + "}" + name,
                 nsmap=self.ns_map)
         
         # set optional attributes.
@@ -52,7 +52,7 @@ class AnyType():
 # TEST.
 def main():
 
-    from mets_ns import ns_map
+    from namespace import ns_map
     
     # create faek METS element with some attributes and sub-elements.
     attribs = {"baz" : "1", "qux" : "2"}

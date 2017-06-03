@@ -13,15 +13,15 @@ class FileGrp():
     integrated into a complete METS file's <fileSec> element. """
 
 
-    def __init__(self, prefix, ns_map):
+    def __init__(self, ns_prefix, ns_map):
         """ Set instance attributes. 
         
         Args:
-            - prefix (str): The METS namespace prefix. 
+            - ns_prefix (str): The METS namespace prefix. 
             - ns_map (dict): Namespace prefixes are keys; namespace URIs are values.
         """
         
-        self.prefix = prefix
+        self.ns_prefix = ns_prefix
         self.ns_map = ns_map
 
 
@@ -39,7 +39,7 @@ class FileGrp():
         """
 
         # create <fileGrp> element.
-        fileGrp_el = etree.Element("{" + self.ns_map[self.prefix] + "}fileGrp",
+        fileGrp_el = etree.Element("{" + self.ns_map[self.ns_prefix] + "}fileGrp",
                 nsmap=self.ns_map)
        
         # set optional attributes and ID attribute.
@@ -52,8 +52,8 @@ class FileGrp():
         for filename in filenames:  
 
             # create <file> element.
-            file_el = etree.SubElement(fileGrp_el, "{" + self.ns_map[self.prefix] + "}file",
-                    nsmap=self.ns_map)
+            file_el = etree.SubElement(fileGrp_el, "{" + self.ns_map[self.ns_prefix] +
+                    "}file", nsmap=self.ns_map)
             
             # set simple attributes.
             file_el.set("CHECKSUMTYPE", "SHA-256")
@@ -82,8 +82,8 @@ class FileGrp():
             # create <FLocat> element; set attributes.
             filename = os.path.relpath(filename, basepath)
             filename = filename.replace("\\", "/")
-            flocat_el = etree.SubElement(file_el, "{" + self.ns_map[self.prefix] + "}FLocat",
-                    nsmap=self.ns_map)
+            flocat_el = etree.SubElement(file_el, "{" + self.ns_map[self.ns_prefix] +
+                    "}FLocat", nsmap=self.ns_map)
             flocat_el.set("{" + self.ns_map["xlink"] + "}href", filename)
             flocat_el.set("LOCTYPE", "OTHER")
             flocat_el.set("OTHERLOCTYPE", "SYSTEM")
@@ -96,7 +96,7 @@ class FileGrp():
 # TEST.
 def main():
 
-    from mets_ns import ns_map
+    from namespace import ns_map
     from glob import glob
 
     # create <fileGrp> based on @path.
