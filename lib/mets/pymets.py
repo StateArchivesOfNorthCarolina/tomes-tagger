@@ -11,14 +11,17 @@ TODO:
 
 # import modules.
 from lxml import etree
-from mets.agent import Agent
-from mets.div import Div
-from mets.fileGrp import FileGrp
-from mets.mdSecType import MdSecType
-from mets.mdWrap import MdWrap
+from lib.anyType import AnyType
+from lib.div import Div
+from lib.fileGrp import FileGrp
+
+# DEPRECATE!
+from lib.agent import Agent
+from lib.mdSecType import MdSecType
+from lib.mdWrap import MdWrap
 
 
-class FolderToMETS():
+class PyMETS():
     """ A class with which to create a METS file. """
 
     
@@ -37,28 +40,21 @@ class FolderToMETS():
         self.ns_map = {"mets" : "http://www.loc.gov/METS/",
                       "xlink" : "http://www.w3.org/1999/xlink",
                       **ns}
-
-        # create METS root element.
-        self.root = self.make("mets")
-        
-        # create METS header sub-element.
-        self.metsHdr = self.make("metsHdr")
-    
     
     def make(self, *args, **kwargs):
         """ """
 
-        name_el = MdSecType(self.prefix, self.ns_map)
-        name_el = name_el.mdSecType(*args, **kwargs)
+        name_el = AnyType(self.prefix, self.ns_map)
+        name_el = name_el.anyType(*args, **kwargs)
         return name_el
 
 
-    def agent(self, *args, **kwargs):
-        """ """
+    #def agent(self, *args, **kwargs):
+    #    """ """
 
-        agent_el = Agent(self.prefix, self.ns_map)
-        agent_el = agent_el.agent(*args, **kwargs)
-        return agent_el
+    #    agent_el = self.make("agent", attributes=attributes)
+    #    agent_el = 
+    #    return agent_el
 
 
     def div(self, *args, **kwargs):
@@ -77,49 +73,53 @@ class FolderToMETS():
         return filegrp_el
     
 
-    def mdWrap(self, *args, **kwargs):
-        """ """
+    #def mdWrap(self, *args, **kwargs):
+    #    """ """
 
-        mdwrap_el = MdWrap(self.prefix, self.ns_map)
-        mdwrap_el = mdwrap_el.mdWrap(*args, **kwargs)
-        return mdwrap_el
+    #    mdwrap_el = MdWrap(self.prefix, self.ns_map)
+    #    mdwrap_el = mdwrap_el.mdWrap(*args, **kwargs)
+    #    return mdwrap_el
 
 
 # TEST.
 def main():
     
-    f2m = FolderToMETS()
+    pymets = PyMETS()
     
     # set METS root; append <metsHdr>.
-    root = f2m.root
-    header = f2m.metsHdr
+    root = pymets.make("mets")
+    header = pymets.make("metsHdr")
     root.append(header)
     
     # append <agent> to header.
-    agent1 = f2m.agent("name1", "role1", note="note1")
-    agent2 = f2m.agent("name2", "role2")
-    header.extend([agent1, agent2])
+    attributes = {"ROLE":"CREATOR", "TYPE":"OTHER",  "OTHERTYPE":"Software Agent"}
+    agent = pymets.make("agent", attributes=attributes)
+    name = pymets.make("name", text="TOMES Tool")
+    note = pymets.make("note", text="TOMES Tool is written in Python.")
+    agent.extend([name, note])
+    header.append(agent)
     
     # create <dmdSec>; append to root.
-    dmdSec1 = f2m.make("dmdSec", identifier="dmdSec_1")
-    root.append(dmdSec1)
+    dmdSec = pymets.make("dmdSec", {"ID":"no_metadata"})
+    root.append(dmdSec)
     
     # create <fileSec>; append to root.
-    fileSec1 = f2m.make("fileSec")
-    fileGrp1 = f2m.fileGrp(["mets/sampleMETS.xml"], ".", "fileGrp_1")
-    fileSec1.append(fileGrp1)
-    root.append(fileSec1)
+    fileSec = pymets.make("fileSec")
+    fileGrp = pymets.fileGrp(filenames=[__file__], basepath=".", identifier="code")
+    fileSec.append(fileGrp)
+    root.append(fileSec)
 
     # get fileSec1 ids; create <structMap>; append to root.
-    file_ids = [i.get("ID") for i in fileGrp1.findall("{*}file")]
-    structMap1 = f2m.make("structMap")
-    div1 = f2m.div(file_ids)
-    structMap1.append(div1)
-    root.append(structMap1)
+    file_ids = [fid.get("ID") for fid in fileGrp.findall("{*}file")]
+    structMap = pymets.make("structMap")
+    div = pymets.div(file_ids)
+    structMap.append(div)
+    root.append(structMap)
 
     # print METS.
-    x = etree.tostring(f2m.root, pretty_print=True)
-    print(x.decode("utf-8"))
+    rootx = etree.tostring(root, pretty_print=True)
+    rootx = rootx.decode("utf-8")
+    print(rootx)
 
 
 if __name__ == "__main__":
