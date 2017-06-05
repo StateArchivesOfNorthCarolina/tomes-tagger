@@ -4,8 +4,7 @@
 TODO:
     - Note that struct-links and behavior elements aren't supported.
     - Say this is for METS version 1.11.
-    - Get rid of "text" arg in AnyType and here. Just use etree's text attribute.
-    - Add a load() method to load XML strings.
+        - Doesn't the default for @xsd already tell me that?
 """
 
 # import modules.
@@ -22,16 +21,19 @@ class PyMETS():
     """ A class with covenience methods for creating METS files. """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns):
+    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns,
+            xsd="mets_version_1-11.xsd"):
         """ Set instance attributes.
 
         Args:
             - ns_prefix (str): The METS namespace prefix. 
             - ns_map (dict): Namespace prefixes are keys; namespace URIs are values.
+            - xsd (str): The filepath for the METS XSD.
         """
 
         self.ns_prefix = ns_prefix
         self.ns_map = ns_map
+        self.xsd = xsd
 
         # compose instances.
         self.AnyType = AnyType(self.ns_prefix, self.ns_map)
@@ -39,12 +41,31 @@ class PyMETS():
         self.FileGrp = FileGrp(self.ns_prefix, self.ns_map)
 
 
+    def load(self, xml, is_string=False):
+        """ Returns etree element for an XML file or XML string (@is_string==True). """
+        
+        if is_string:
+            x_el = etree.fromstring(xml)
+        else:
+            x_el = etree.parse(xml).getroot()
+        return x_el
+
+
     def stringify(self, element, beautify=True, charset="utf-8"):
-        """ Returns an XML string for a given etree @element. """
+        """ Returns XML as string for a given etree @element. """
 
         xstring = etree.tostring(element, pretty_print=beautify)
         xstring = xstring.decode(charset)
         return xstring
+
+
+    def valid(self, xdoc):
+        """ Returns boolean for "Is @xdoc valid against self.xsd?". """
+        
+        xsd = self.load(self.xsd)
+        xsd = etree.XMLSchema(xsd)
+        valid = xsd.validate(xdoc)
+        return valid
 
 
     def make(self, *args, **kwargs):
@@ -86,7 +107,6 @@ def main():
     note = pymets.make("note")
     note.text = CDATA("TOMES Tool is written in Python.")
     agent.extend([name, note])
-    agent.append(Comment("This is a comment!"))
     header.append(agent)
     
     # create <dmdSec>.
@@ -106,9 +126,15 @@ def main():
     structMap.append(div)
     root.append(structMap)
 
+    # append valid() response to root as a comment.
+    valid = pymets.valid(root)
+    valid = "It is " + str(valid) + " that this METS document is valid."
+    root.append(Comment(valid))
+
     # print METS.
     rootx = pymets.stringify(root)
     print(rootx)
+
 
 
 if __name__ == "__main__":

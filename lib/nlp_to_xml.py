@@ -5,8 +5,11 @@ This module converts Stanford CoreNLP JSON output to XML per the ./tagged_conten
 
 TODO:
     - You need an external, canonical data source for the custom NER tags, perhaps a SKOS file.
+        - Or at least make it optional in __init__.
     - XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
         - Just set a validation option in xml() and validate BEFORE adding the header, etc.
+    - Change validate() to valid() and return a boolean. If it's not valid, user can use
+    external validator to troubleshoot.
     - If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just make not to pass empty text to CoreNLP?
     - The XSD filename and object are static, so they should be in the __init__.
