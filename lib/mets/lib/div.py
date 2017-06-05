@@ -53,13 +53,13 @@ class Div():
 # TEST.
 def main():
 
-    from namespace import ns_map
+    from namespaces import mets_ns
 
     # create list of test ids.
     file_ids = ["test_" + str(i) for i in range(0,10)]
     
     # create <div> with some attributes.
-    div_el = Div("mets", ns_map)
+    div_el = Div("mets", mets_ns)
     div_el = div_el.div(file_ids, {"ID": "ID_div", "LABEL": "Testing"})
     return div_el
 

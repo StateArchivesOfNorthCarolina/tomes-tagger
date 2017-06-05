@@ -4,22 +4,25 @@
 TODO:
     - Note that struct-links and behavior elements aren't supported.
     - Say this is for METS version 1.11.
+    - Get rid of "text" arg in AnyType and here. Just use etree's text attribute.
+    - Add a load() method to load XML strings.
 """
 
 # import modules.
 from lxml import etree
 from lxml.etree import CDATA
+from lxml.etree import Comment
 from lib.anyType import AnyType
 from lib.div import Div
 from lib.fileGrp import FileGrp
-from lib.namespace import ns_map as default_ns_map
+import lib.namespaces as namespaces
 
 
 class PyMETS():
     """ A class with covenience methods for creating METS files. """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=default_ns_map):
+    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns):
         """ Set instance attributes.
 
         Args:
@@ -78,9 +81,12 @@ def main():
     # create <agent>; append to header.
     attributes = {"ROLE":"CREATOR", "TYPE":"OTHER",  "OTHERTYPE":"Software Agent"}
     agent = pymets.make("agent", attributes=attributes)
-    name = pymets.make("name", text="TOMES Tool")
-    note = pymets.make("note", text=CDATA("TOMES Tool is written in Python."))
+    name = pymets.make("name")
+    name.text = "TOMES Tool"
+    note = pymets.make("note")
+    note.text = CDATA("TOMES Tool is written in Python.")
     agent.extend([name, note])
+    agent.append(Comment("This is a comment!"))
     header.append(agent)
     
     # create <dmdSec>.

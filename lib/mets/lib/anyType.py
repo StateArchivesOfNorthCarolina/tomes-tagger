@@ -5,7 +5,7 @@ from lxml import etree
 
 
 class AnyType():
-    """ A class to create a any METS element with optional text and attributes. """
+    """ A class to create a any METS etree element with optional attributes. """
     
 
     def __init__(self, ns_prefix, ns_map):
@@ -20,14 +20,16 @@ class AnyType():
         self.ns_map = ns_map 
 
 
-    def anyType(self, name, attributes=None, text=None):
+    def anyType(self, name, attributes=None):
         """ Creates an element with optional text and attributes.
 
         Args:
             - name (str): The name of the element to create.
-            - attributes (dict): The optional attributes to set. Each key is the attribute
-                                 name; each key's value is the attribute value.
-            - text (str): The optional element text to set.
+            - attributes (dict): The optional attributes to set.
+            
+            Each key is the attribute name; each key's value is the attribute value. Inline
+            namespace prefixes (ex: "mets:ID") are supported if the prefix is a key in the
+            instance's @ns_map. 
         
         Returns:
             <class 'lxml.etree._Element'>
@@ -40,11 +42,10 @@ class AnyType():
         # set optional attributes.
         if attributes is not None:
             for attribute, value in attributes.items():
+                if ":" in attribute:
+                    pref, attr = attribute.split(":") 
+                    attribute = "{" + self.ns_map[pref] + "}" + attr
                 name_el.set(attribute, value)
-
-        # set optional sub-elements.
-        if text is not None:
-            name_el.text = text
 
         return name_el
 
@@ -52,13 +53,14 @@ class AnyType():
 # TEST.
 def main():
 
-    from namespace import ns_map
+    from namespaces import mets_ns
     
-    # create faek METS element with some attributes and sub-elements.
-    attribs = {"baz" : "1", "qux" : "2"}
-    anytype = AnyType("mets", ns_map)
+    # create fake METS element with some attributes and sub-elements.
+    attribs = {"baz" : "1", "mets:qux" : "2"}
+    anytype = AnyType("mets", mets_ns)
     foo = anytype.anyType("foo", attribs)
-    bar = anytype.anyType("bar", attribs, "Lorem ipsum.")
+    bar = anytype.anyType("bar", attribs)
+    bar.text = "Lorem ipsum."
     foo.append(bar)
     return foo
 
