@@ -111,6 +111,19 @@ def main():
     
     # create <dmdSec>.
     dmdSec = pymets.make("dmdSec", attributes={"ID":"no_metadata"})
+    oai = PyMETS("oai_dc", namespaces.dc_ns)
+    oai_root = oai.make("dc")
+    dc = PyMETS("dc", namespaces.dc_ns)
+    title = dc.make("title")
+    title.text = "pymets.py"
+    description = dc.make("description")
+    description.text = "A Python script to help write METS files."
+    oai_root.extend([title, description])
+    xdata = pymets.make("xmlData")
+    xdata.append(oai_root)
+    mdwrap = pymets.make("mdWrap", {"MDTYPE":"DC"})
+    mdwrap.append(xdata)
+    dmdSec.append(mdwrap)
     root.append(dmdSec)
     
     # create <fileSec>.
@@ -134,7 +147,6 @@ def main():
     # print METS.
     rootx = pymets.stringify(root)
     print(rootx)
-
 
 
 if __name__ == "__main__":
