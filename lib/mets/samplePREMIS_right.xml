@@ -1,0 +1,44 @@
+<rights xmlns="http://www.loc.gov/premis/v3">
+	<rightsStatement>
+
+		<rightsStatementIdentifier>
+			<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
+			<rightsStatementIdentifierValue>??? Ask Archivists ???</rightsStatementIdentifierValue>
+		</rightsStatementIdentifier>
+
+		<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
+
+		<statuteInformation>
+			<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
+			<statuteCitation>The public records and public information compiled by the agencies of North Carolina government or its subdivisions are the property of the people.</statuteCitation>
+			<statuteDocumentationIdentifier>
+				<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
+				<statuteDocumentationIdentifierValue>http://www.ncga.state.nc.us/EnactedLegislation/Statutes/HTML/ByChapter/Chapter_132.html</statuteDocumentationIdentifierValue>
+				<statuteDocumentationRole>law</statuteDocumentationRole>
+			</statuteDocumentationIdentifier>
+		</statuteInformation>
+
+		<rightsGranted>
+			<!--They might want more <rightsGranted></rightsGranted> sections to cover <act> = modify|migrate|etc.
+			I think this is known and dissemination might be the once to focus on.-->
+			<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
+			<restriction>??? Ask Archvivists ???</restriction>
+
+			<!--They might not even want this element.-->
+			<termOfGrant>
+				<startDate>{Current time of script execution}</startDate>
+				<endDate>OPEN</endDate>
+			</termOfGrant>
+
+			<!--They might not even want this element.-->
+			<termOfRestriction>
+				<startDate>??? Ask Archvivists ???</startDate>
+				<endDate>OPEN</endDate>
+			</termOfRestriction>
+
+			<rightsGrantedNote>Courtesy of the North Carolina Department of Natural and Cultural Resources.</rightsGrantedNote>
+		</rightsGranted>
+	
+	</rightsStatement>
+</rights>
+
