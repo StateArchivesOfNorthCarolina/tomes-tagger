@@ -21,8 +21,7 @@ class PyMETS():
     """ A class with covenience methods for creating METS files. """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns,
-            xsd="mets_version_1-11.xsd"):
+    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd="mets_1-11.xsd"):
         """ Set instance attributes.
 
         Args:

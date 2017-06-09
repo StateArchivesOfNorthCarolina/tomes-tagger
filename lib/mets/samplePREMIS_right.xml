@@ -19,8 +19,8 @@
 		</statuteInformation>
 
 		<rightsGranted>
-			<!--They might want more <rightsGranted></rightsGranted> sections to cover <act> = modify|migrate|etc.
-			I think this is known and dissemination might be the once to focus on.-->
+			<!--They might want more <rightsGranted> sections to cover <act> = modify|migrate|etc.
+			I think this is known/assumed and dissemination might be the once to focus on.-->
 			<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
 			<restriction>??? Ask Archvivists ???</restriction>
 
