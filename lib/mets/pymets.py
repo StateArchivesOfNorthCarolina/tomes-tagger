@@ -94,54 +94,37 @@ def main():
     
     pymets = PyMETS()
     
-    # create METS root; set <metsHdr>; append header to root.
+    # create METS root.
     root = pymets.make("mets")
+    
+    # create <metsHdr>; append to root.
     header = pymets.make("metsHdr")
     root.append(header)
     
-    # create <agent>; append to header.
+    # create header <agent>.
     attributes = {"ROLE":"CREATOR", "TYPE":"OTHER",  "OTHERTYPE":"Software Agent"}
     agent = pymets.make("agent", attributes=attributes)
+    header.append(agent)
     name = pymets.make("name")
     name.text = "TOMES Tool"
-    note = pymets.make("note")
-    note.text = CDATA("TOMES Tool is written in Python.")
-    agent.extend([name, note])
-    header.append(agent)
-    
-    # create <dmdSec>.
-    dmdSec = pymets.make("dmdSec", attributes={"ID":"no_metadata"})
-    oai = PyMETS("oai_dc", namespaces.dc_ns)
-    oai_root = oai.make("dc")
-    dc = PyMETS("dc", namespaces.dc_ns)
-    title = dc.make("title")
-    title.text = "pymets.py"
-    description = dc.make("description")
-    description.text = "A Python script to help write METS files."
-    oai_root.extend([title, description])
-    xdata = pymets.make("xmlData")
-    xdata.append(oai_root)
-    mdwrap = pymets.make("mdWrap", {"MDTYPE":"DC"})
-    mdwrap.append(xdata)
-    dmdSec.append(mdwrap)
-    root.append(dmdSec)
-    
+    agent.append(name)
+
     # create <fileSec>.
     fileSec = pymets.make("fileSec")
     fileGrp = pymets.fileGrp(filenames=[__file__], basepath=".", identifier="source_code")
     fileSec.append(fileGrp)
     root.append(fileSec)
 
-    # create <div>; create <structMap>.
-    file_ids = [fid.get("ID") for fid in fileGrp.findall("{*}file")]
+    # create <structMap> and <div>.
     structMap = pymets.make("structMap")
+    file_ids = [fid.get("ID") for fid in fileGrp.findall("{*}file")]
     div = pymets.div(file_ids)
     structMap.append(div)
     root.append(structMap)
 
-    # append valid() response to root as a comment.
+    # append valid() response to root as comment.
     valid = pymets.valid(root)
-    valid = "It is " + str(valid) + " that this METS document is valid."
+    valid = "It is {} that this METS document is valid.".format(valid)
     root.append(Comment(valid))
 
     # print METS.
