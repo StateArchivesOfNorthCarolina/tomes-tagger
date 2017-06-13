@@ -1,13 +1,12 @@
-<premis xmlns="http://www.loc.gov/premis/v3">
+<premis
+xmlns="http://www.loc.gov/premis/v3" version="3.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<!-- Need and OBJECT element.
-	How do we assign an ID value without a database to track them? -->
-	<object>
+	<object xsi:type="representation"> <!-- I think we'll use "file" for the techMD sec for this one. This is a conceptual reference to an access copy. -->
 		<objectIdentifier>
-			<objectIdentifierType>???</objectIdentifierType>
-			<objectIdentifierValue>???</objectIdentifierValue>
+			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
+			<objectIdentifierValue>{root/tagged EAXS file}</objectIdentifierValue>
 		</objectIdentifier>
-		<objectCategory>representation</objectCategory>
 	</object>
 	
 	<rights>
@@ -15,16 +14,14 @@
 
 			<rightsStatementIdentifier>
 				<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
-				<rightsStatementIdentifierValue>??? Ask Archivists ???</rightsStatementIdentifierValue>
+				<rightsStatementIdentifierValue>??? Ask Archivists. ???</rightsStatementIdentifierValue><!-- Maybe something like "access"??? -->
 			</rightsStatementIdentifier>
 
 			<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
 
-			<!--This need to actually be more about the rights of the Archives to act on this data, not so much public access rights.
-		So this statute needs to speak more to the archives rights OR at least ALSO speak to those.-->
 			<statuteInformation>
 				<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
-				<statuteCitation>The public records and public information compiled by the agencies of North Carolina government or its subdivisions are the property of the people.</statuteCitation>
+				<statuteCitation>G.S. 132</statuteCitation>
 				<statuteDocumentationIdentifier>
 					<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
 					<statuteDocumentationIdentifierValue>http://www.ncga.state.nc.us/EnactedLegislation/Statutes/HTML/ByChapter/Chapter_132.html</statuteDocumentationIdentifierValue>
@@ -32,12 +29,11 @@
 				</statuteDocumentationIdentifier>
 			</statuteInformation>
 
-			<rightsGranted>
+			<rightsGranted><!-- This is optional. -->
 				<!--They might want more <rightsGranted> sections to cover <act> = modify|migrate|etc.
-			I think this is known/assumed and dissemination might be the once to focus on.
-			Yes, it's assumed but then again that's the point of  to document what rights the Archives have to act on the data.-->
+			I think this is known/assumed and dissemination might be the once to focus on.-->
 				<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
-				<restriction>??? Ask Archvivists ???</restriction>
+				<restriction>??? Ask Archvivists ???</restriction><!-- This is optional. -->
 
 				<!--They might not even want this element.-->
 				<termOfGrant>
@@ -51,7 +47,7 @@
 					<endDate>OPEN</endDate>
 				</termOfRestriction>
 
-				<rightsGrantedNote>Attribution is requested by use of the following statement: "Courtesy of the North Carolina Department of Natural and Cultural Resources."</rightsGrantedNote>
+				<rightsGrantedNote>Attribution statement: "Courtesy of the North Carolina Department of Natural and Cultural Resources."</rightsGrantedNote>
 			</rightsGranted>
 
 		</rightsStatement>
