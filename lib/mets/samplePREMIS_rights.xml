@@ -1,4 +1,15 @@
 <premis xmlns="http://www.loc.gov/premis/v3">
+
+	<!-- Need and OBJECT element.
+	How do we assign an ID value without a database to track them? -->
+	<object>
+		<objectIdentifier>
+			<objectIdentifierType>???</objectIdentifierType>
+			<objectIdentifierValue>???</objectIdentifierValue>
+		</objectIdentifier>
+		<objectCategory>representation</objectCategory>
+	</object>
+	
 	<rights>
 		<rightsStatement>
 
@@ -24,7 +35,7 @@
 			<rightsGranted>
 				<!--They might want more <rightsGranted> sections to cover <act> = modify|migrate|etc.
 			I think this is known/assumed and dissemination might be the once to focus on.
-			Yes, it's assumed but then again that's the point of PREMIS: to document what rights the Archives have to act on the data.-->
+			Yes, it's assumed but then again that's the point of  to document what rights the Archives have to act on the data.-->
 				<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
 				<restriction>??? Ask Archvivists ???</restriction>
 
