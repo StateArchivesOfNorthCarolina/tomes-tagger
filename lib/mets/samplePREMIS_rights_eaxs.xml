@@ -9,6 +9,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 		</objectIdentifier>
 	</object>
 	
+	<object xsi:type="representation">
+		<objectIdentifier>
+			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
+			<objectIdentifierValue>{root/EAXS file}/attachments</objectIdentifierValue>
+		</objectIdentifier>
+	</object>
+	
 	<rights>
 		<rightsStatement>
 
