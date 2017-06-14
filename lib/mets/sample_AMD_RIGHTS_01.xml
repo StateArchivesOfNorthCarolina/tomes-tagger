@@ -16,7 +16,7 @@
 		</statuteInformation>
 		<linkingObjectIdentifier>
 			<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
-			<linkingObjectIdentifierValue>{root/EAXS_file}</linkingObjectIdentifierValue>
+			<linkingObjectIdentifierValue>{EAXS}</linkingObjectIdentifierValue>
 		</linkingObjectIdentifier>
 	</rightsStatement>
 </rights>

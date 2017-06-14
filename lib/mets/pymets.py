@@ -40,14 +40,24 @@ class PyMETS():
         self.FileGrp = FileGrp(self.ns_prefix, self.ns_map)
 
 
-    def load(self, xml, is_string=False):
-        """ Returns etree element for an XML file or XML string (@is_string==True). """
+    def load(self, xml, is_raw=True):
+        """ Returns etree element for an XML file or XML string (@is_raw==True). """
         
-        if is_string:
+        if is_raw:
             x_el = etree.fromstring(xml)
         else:
             x_el = etree.parse(xml).getroot()
         return x_el
+
+
+    def load_template(self, xml, *args, **kwargs):
+        """ Returns etree element for an XML string after formatting the string using the
+        string.Formatter.format() method for @args and @kwargs. """
+
+        with open(xml) as xfile:
+            xstring = xfile.read().format(*args, **kwargs)
+        xload = self.load(xstring)
+        return xload
 
 
     def stringify(self, element, beautify=True, charset="utf-8"):
@@ -61,7 +71,7 @@ class PyMETS():
     def valid(self, xdoc):
         """ Returns boolean for "Is @xdoc valid against self.xsd?". """
         
-        xsd = self.load(self.xsd)
+        xsd = self.load(self.xsd, False)
         xsd = etree.XMLSchema(xsd)
         valid = xsd.validate(xdoc)
         return valid
@@ -88,6 +98,24 @@ class PyMETS():
         return filegrp_el
 
 
+    def wrap(self, xtree, mdtype, attributes={}, xmlData=True):
+        """ Returns <mdWrap> etree element with "MDTYPE" attribute of @mdtype and
+        optional @attributes. The @xtree etree element will have a parent element of
+        <xmlData> (@xmlData==True) or <binData>. """
+
+        attributes["MDTYPE"] = mdtype
+        wrap_el = self.make("mdWrap", attributes)
+
+        if xmlData:
+            xobdata_el = self.make("xmlData")
+        else:
+            xobdata_el = self.make("binData")
+        
+        xobdata_el.append(xtree)
+        wrap_el.append(xobdata_el)
+        return wrap_el
+        
+        
 # TEST.
 def main():
     
