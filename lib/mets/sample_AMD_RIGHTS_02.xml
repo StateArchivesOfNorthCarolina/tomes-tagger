@@ -1,52 +1,27 @@
-<premis
-xmlns="http://www.loc.gov/premis/v3" version="3.0"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<rights xmlns="http://www.loc.gov/premis/v3" version="3.0">
+	<rightsStatement>
+		<rightsStatementIdentifier>
+			<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
+			<rightsStatementIdentifierValue>access-master</rightsStatementIdentifierValue>
+		</rightsStatementIdentifier>
+		<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
+		<statuteInformation>
+			<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
+			<statuteCitation>G.S. 132</statuteCitation>
+			<statuteDocumentationIdentifier>
+				<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
+				<statuteDocumentationIdentifierValue>http://www.ncleg.net/gascripts/statutes/statutelookup.pl?statute=132</statuteDocumentationIdentifierValue>
+				<statuteDocumentationRole>law</statuteDocumentationRole>
+			</statuteDocumentationIdentifier>
+		</statuteInformation>
+		<rightsGranted>
+			<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
+			<rightsGrantedNote>Attribution statement: "Courtesy of the North Carolina Department of Natural and Cultural Resources."</rightsGrantedNote>
+		</rightsGranted>
+		<linkingObjectIdentifier>
+			<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
+			<linkingObjectIdentifierValue>{root/EAXS_file}_tagged</linkingObjectIdentifierValue>
+		</linkingObjectIdentifier>
+	</rightsStatement>
+</rights>
 
-	<object xsi:type="representation"> <!-- I think we'll use "file" for the techMD sec for this one. This is a conceptual reference to an access copy. -->
-		<objectIdentifier>
-			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
-			<objectIdentifierValue>{root/tagged EAXS file}</objectIdentifierValue>
-		</objectIdentifier>
-	</object>
-	
-	<rights>
-		<rightsStatement>
-
-			<rightsStatementIdentifier>
-				<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
-				<rightsStatementIdentifierValue>??? Ask Archivists. ???</rightsStatementIdentifierValue><!-- Maybe something like "access"??? -->
-			</rightsStatementIdentifier>
-
-			<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
-
-			<statuteInformation>
-				<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
-				<statuteCitation>G.S. 132</statuteCitation>
-				<statuteDocumentationIdentifier>
-					<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
-					<statuteDocumentationIdentifierValue>http://www.ncga.state.nc.us/EnactedLegislation/Statutes/HTML/ByChapter/Chapter_132.html</statuteDocumentationIdentifierValue>
-					<statuteDocumentationRole>law</statuteDocumentationRole>
-				</statuteDocumentationIdentifier>
-			</statuteInformation>
-
-			<rightsGranted>
-				
-				<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
-				<!-- <restriction>??? Ask Archvivists ???</restriction>
-
-				<termOfGrant>
-					<startDate>{Current time of script execution}</startDate>
-					<endDate>OPEN</endDate>
-				</termOfGrant>
-
-				<termOfRestriction>
-					<startDate>??? Ask Archvivists ???</startDate>
-					<endDate>OPEN</endDate>
-				</termOfRestriction> -->
-
-				<rightsGrantedNote>Attribution statement: "Courtesy of the North Carolina Department of Natural and Cultural Resources."</rightsGrantedNote>
-			</rightsGranted>
-
-		</rightsStatement>
-	</rights>
-</premis>

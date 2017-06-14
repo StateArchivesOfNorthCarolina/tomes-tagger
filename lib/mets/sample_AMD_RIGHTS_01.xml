@@ -1,42 +1,22 @@
-<premis
-xmlns="http://www.loc.gov/premis/v3" version="3.0"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-	<object xsi:type="representation">
-		<objectIdentifier>
-			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
-			<objectIdentifierValue>{root/EAXS file}</objectIdentifierValue>
-		</objectIdentifier>
-	</object>
-	
-	<object xsi:type="representation">
-		<objectIdentifier>
-			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
-			<objectIdentifierValue>{root/EAXS file}/attachments</objectIdentifierValue>
-		</objectIdentifier>
-	</object>
-	
-	<rights>
-		<rightsStatement>
-
-			<rightsStatementIdentifier>
-				<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
-				<rightsStatementIdentifierValue>??? Ask Archivists. ???</rightsStatementIdentifierValue>
-				<!-- Maybe something like "preservation"??? -->
-			</rightsStatementIdentifier>
-
-			<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
-
-			<statuteInformation>
-				<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
-				<statuteCitation>G.S. 121-5</statuteCitation>
-				<statuteDocumentationIdentifier>
-					<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
-					<statuteDocumentationIdentifierValue>http://www.ncga.state.nc.us/EnactedLegislation/Statutes/HTML/ByChapter/Chapter_121.html</statuteDocumentationIdentifierValue>
-					<statuteDocumentationRole>law</statuteDocumentationRole>
-				</statuteDocumentationIdentifier>
-			</statuteInformation>
-
-		</rightsStatement>
-	</rights>
-</premis>
+<rights xmlns="http://www.loc.gov/premis/v3" version="3.0">
+	<rightsStatement>
+		<rightsStatementIdentifier>
+			<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
+			<rightsStatementIdentifierValue>preservation-master</rightsStatementIdentifierValue>
+		</rightsStatementIdentifier>
+		<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
+		<statuteInformation>
+			<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
+			<statuteCitation>G.S. 121-5</statuteCitation>
+			<statuteDocumentationIdentifier>
+				<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
+				<statuteDocumentationIdentifierValue>http://www.ncleg.net/gascripts/statutes/statutelookup.pl?statute=121</statuteDocumentationIdentifierValue>
+				<statuteDocumentationRole>law</statuteDocumentationRole>
+			</statuteDocumentationIdentifier>
+		</statuteInformation>
+		<linkingObjectIdentifier>
+			<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
+			<linkingObjectIdentifierValue>{root/EAXS_file}</linkingObjectIdentifierValue>
+		</linkingObjectIdentifier>
+	</rightsStatement>
+</rights>
