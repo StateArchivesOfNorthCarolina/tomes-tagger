@@ -5,7 +5,7 @@
 			<objectIdentifierValue>{root/EAXS_file}</objectIdentifierValue>
 		</objectIdentifier>
 		<significantProperties>
-			<significantPropertiesValue>This file(s) group constitutes the preservation-master for the email account's messages and attachments.</significantPropertiesValue>
+			<significantPropertiesValue>This file group constitutes the preservation-master for the email account's messages and attachments.</significantPropertiesValue>
 		</significantProperties>
 	</object>
 </premis>
