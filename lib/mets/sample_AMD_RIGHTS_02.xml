@@ -29,23 +29,20 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 				</statuteDocumentationIdentifier>
 			</statuteInformation>
 
-			<rightsGranted><!-- This is optional. -->
-				<!--They might want more <rightsGranted> sections to cover <act> = modify|migrate|etc.
-			I think this is known/assumed and dissemination might be the once to focus on.-->
+			<rightsGranted>
+				
 				<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
-				<restriction>??? Ask Archvivists ???</restriction><!-- This is optional. -->
+				<!-- <restriction>??? Ask Archvivists ???</restriction>
 
-				<!--They might not even want this element.-->
 				<termOfGrant>
 					<startDate>{Current time of script execution}</startDate>
 					<endDate>OPEN</endDate>
 				</termOfGrant>
 
-				<!--They might not even want this element.-->
 				<termOfRestriction>
 					<startDate>??? Ask Archvivists ???</startDate>
 					<endDate>OPEN</endDate>
-				</termOfRestriction>
+				</termOfRestriction> -->
 
 				<rightsGrantedNote>Attribution statement: "Courtesy of the North Carolina Department of Natural and Cultural Resources."</rightsGrantedNote>
 			</rightsGranted>

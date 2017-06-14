@@ -1,0 +1,15 @@
+<premis xmlns="http://www.loc.gov/premis/v3">
+
+	<object>
+		<objectIdentifier>
+			<objectIdentifierType>???</objectIdentifierType>
+			<objectIdentifierValue>???</objectIdentifierValue>
+		</objectIdentifier>
+		<objectCategory>representation</objectCategory>
+	</object>
+	<preservationLevel>
+	<preservationLevelType></preservationLevelType>
+	<preservationLevelValue></preservationLevelValue>
+	<preservationLevelRole></preservationLevelRole>
+	</preservationLevel>
+</premis>

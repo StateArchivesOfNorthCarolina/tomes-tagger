@@ -1,0 +1,20 @@
+<premis
+xmlns="http://www.loc.gov/premis/v3" version="3.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<object xsi:type="representation">
+		<!-- I think we'll use "file" for the techMD sec for this one. This is a conceptual reference to an access copy. -->
+		<objectIdentifier>
+			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
+			<objectIdentifierValue>{root/tagged EAXS file}</objectIdentifierValue>
+		</objectIdentifier>
+		<preservationLevel>
+			<preservationLevelValue/>
+		</preservationLevel>
+		<significantProperties>
+			<significantPropertiesType/>
+			<significantPropertiesValue/>
+		</significantProperties>
+	</object>
+
+</premis>

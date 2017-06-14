@@ -1,0 +1,33 @@
+<premis
+xmlns="http://www.loc.gov/premis/v3" version="3.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<object xsi:type="representation">
+		<objectIdentifier>
+			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
+			<objectIdentifierValue>{root/EAXS file}</objectIdentifierValue>
+		</objectIdentifier>
+		<preservationLevel>
+			<preservationLevelValue/>
+		</preservationLevel>
+		<significantProperties>
+			<significantPropertiesType/>
+			<significantPropertiesValue/>
+		</significantProperties>
+	</object>
+
+	<object xsi:type="representation">
+		<objectIdentifier>
+			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
+			<objectIdentifierValue>{root/EAXS file}/attachments</objectIdentifierValue>
+		</objectIdentifier>
+		<preservationLevel>
+			<preservationLevelValue/>
+		</preservationLevel>
+		<significantProperties>
+			<significantPropertiesType/>
+			<significantPropertiesValue/>
+		</significantProperties>
+	</object>
+
+</premis>
