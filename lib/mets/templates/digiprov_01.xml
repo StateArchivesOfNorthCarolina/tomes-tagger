@@ -1,7 +1,7 @@
 <event xmlns="http://www.loc.gov/premis/v3" version="3.0">
 	<eventIdentifier>
 		<eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
-		<eventIdentifierValue>DARCMAIL_##</eventIdentifierValue>
+		<eventIdentifierValue>create_eaxs</eventIdentifierValue>
 	</eventIdentifier>
 	<eventType valueURI="http://id.loc.gov/vocabulary/preservation/eventType/cre.html">cre</eventType>
 	<eventDateTime>{eaxs_cdate}</eventDateTime>
