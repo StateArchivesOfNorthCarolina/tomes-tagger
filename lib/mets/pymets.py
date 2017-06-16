@@ -8,6 +8,7 @@ TODO:
 """
 
 # import modules.
+import os
 from lxml import etree
 from lxml.etree import CDATA
 from lxml.etree import Comment
@@ -21,7 +22,7 @@ class PyMETS():
     """ A class with covenience methods for creating METS files. """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd="mets_1-11.xsd"):
+    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd=None):
         """ Set instance attributes.
 
         Args:
@@ -32,6 +33,8 @@ class PyMETS():
 
         self.ns_prefix = ns_prefix
         self.ns_map = ns_map
+        if xsd is None:
+            xsd = os.path.split(os.path.abspath(__file__))[0] + "/mets_1-11.xsd"
         self.xsd = xsd
 
         # compose instances.
