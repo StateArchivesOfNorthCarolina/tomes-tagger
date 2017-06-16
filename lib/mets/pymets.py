@@ -8,6 +8,7 @@ TODO:
 """
 
 # import modules.
+import codecs
 import os
 from lxml import etree
 from lxml.etree import CDATA
@@ -36,6 +37,8 @@ class PyMETS():
         if xsd is None:
             xsd = os.path.split(os.path.abspath(__file__))[0] + "/mets_1-11.xsd"
         self.xsd = xsd
+        self.CDATA = CDATA
+        self.Comment = Comment
 
         # compose instances.
         self.AnyType = AnyType(self.ns_prefix, self.ns_map)
@@ -53,11 +56,11 @@ class PyMETS():
         return x_el
 
 
-    def load_template(self, xml, *args, **kwargs):
+    def load_template(self, xml, charset="utf-8", *args, **kwargs):
         """ Returns etree element for an XML string after formatting the string using the
         string.Formatter.format() method for @args and @kwargs. """
 
-        with open(xml) as xfile:
+        with codecs.open(xml, encoding=charset) as xfile:
             xstring = xfile.read().format(*args, **kwargs)
         xload = self.load(xstring)
         return xload
@@ -155,7 +158,7 @@ def main():
     # append valid() response to root as comment.
     valid = pymets.valid(root)
     valid = "It is {} that this METS document is valid.".format(valid)
-    root.append(Comment(valid))
+    root.append(pymets.Comment(valid))
 
     # print METS.
     rootx = pymets.stringify(root)
