@@ -1,0 +1,20 @@
+<event xmlns="http://www.loc.gov/premis/v3" version="3.0">
+	<eventIdentifier>
+		<eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
+		<eventIdentifierValue>tagging_##</eventIdentifierValue>
+	</eventIdentifier>
+	<eventType valueURI="http://id.loc.gov/vocabulary/preservation/eventType/cre.html">cre</eventType>
+	<eventDateTime>{tagged_eaxs_cdate}</eventDateTime>
+	<eventDetailInformation>
+		<eventDetail>Tagged version of EAXS file created.</eventDetail>
+	</eventDetailInformation>
+	<linkingAgentIdentifier>
+		<linkingAgentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri.html">uri</linkingAgentIdentifierType>
+		<linkingAgentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/tomes_tool</linkingAgentIdentifierValue>
+		<linkingAgentRole valueURI="http://id.loc.gov/vocabulary/preservation/eventRelatedAgentRole/exe.html">exe</linkingAgentRole>
+	</linkingAgentIdentifier>
+	<linkingObjectIdentifier>
+		<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
+		<linkingObjectIdentifierValue>{eaxs_id}__tagged</linkingObjectIdentifierValue>
+	</linkingObjectIdentifier>
+</event>
