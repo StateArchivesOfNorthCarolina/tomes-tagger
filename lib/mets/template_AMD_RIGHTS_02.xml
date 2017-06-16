@@ -20,7 +20,7 @@
 		</rightsGranted>
 		<linkingObjectIdentifier>
 			<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
-			<linkingObjectIdentifierValue>{EAXS}__tagged</linkingObjectIdentifierValue>
+			<linkingObjectIdentifierValue>{eaxs_id}__tagged</linkingObjectIdentifierValue>
 		</linkingObjectIdentifier>
 	</rightsStatement>
 </rights>

@@ -2,7 +2,7 @@
 	<object xsi:type="representation">
 		<objectIdentifier>
 			<objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
-			<objectIdentifierValue>{EAXS}</objectIdentifierValue>
+			<objectIdentifierValue>{eaxs_id}</objectIdentifierValue>
 		</objectIdentifier>
 		<significantProperties>
 			<significantPropertiesValue>This file group constitutes the preservation-master for the email account's messages and attachments.</significantPropertiesValue>
