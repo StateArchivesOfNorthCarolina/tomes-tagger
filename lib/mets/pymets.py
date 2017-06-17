@@ -23,7 +23,7 @@ class PyMETS():
     """ A class with covenience methods for creating METS files. """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd=None):
+    def __init__(self, ns_prefix=None, ns_map=namespaces.mets_ns, xsd=None):
         """ Set instance attributes.
 
         Args:
@@ -61,7 +61,7 @@ class PyMETS():
         string.Formatter.format() method for @args and @kwargs. """
 
         with codecs.open(xml, encoding=charset) as xfile:
-            xstring = xfile.read().format(*args, **kwargs)
+            xstring = xfile.read()#.format(*args, **kwargs)
         xload = self.load(xstring)
         return xload
 

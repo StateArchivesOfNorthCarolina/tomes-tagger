@@ -3,7 +3,8 @@
 """ This file contains constant METS namespace values for import. """
 
 # METS.
-mets_ns = {"mets" : "http://www.loc.gov/METS/",
+mets_ns = {None : "http://www.loc.gov/METS/",
+        "mets" : "http://www.loc.gov/METS/",
         "xlink" : "http://www.w3.org/1999/xlink"}
 
 
