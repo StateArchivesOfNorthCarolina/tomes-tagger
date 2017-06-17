@@ -1,4 +1,4 @@
-<amdSec xmlns:mets="http://www.loc.gov/METS/" ID="amdSec_digiprovMD">
+<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec_digiprovMD">
 
   <digiprovMD ID="digiprovMD_01">
     <mdWrap MDTYPE="PREMIS">

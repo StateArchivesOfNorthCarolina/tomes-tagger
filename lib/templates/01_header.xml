@@ -1,4 +1,4 @@
-<metsHdr xmlns:mets="http://www.loc.gov/METS/">
+<metsHdr xmlns="http://www.loc.gov/METS/">
   <agent ROLE="CREATOR" TYPE="OTHER" OTHERTYPE="Software Agent">
     <name>TOMES Tool</name>
   </agent>

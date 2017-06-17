@@ -1,11 +1,11 @@
-<amdSec xmlns:mets="http://www.loc.gov/METS/" ID="amdSec_techMD">
+<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec_techMD">
 
   <techMD ID="techMD_01">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
 
         <premis xmlns="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <object xsi:type="representation">
+          <object>
             <objectIdentifier>
               <objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
               <objectIdentifierValue>{eaxs_id}</objectIdentifierValue>
@@ -25,7 +25,7 @@
       <xmlData>
 
         <premis xmlns="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <object xsi:type="representation">
+          <object>
             <objectIdentifier>
               <objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
               <objectIdentifierValue>{eaxs_id}__tagged</objectIdentifierValue>
