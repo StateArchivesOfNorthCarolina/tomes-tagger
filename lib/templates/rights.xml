@@ -1,69 +1,69 @@
 <amdSec xmlns:mets="http://www.loc.gov/METS/" ID="amdSec_rightsMD">
 
-	<rightsMD ID="rightsMD_01">
-		<mdWrap MDTYPE="PREMIS">
-			<xmlData>
+  <rightsMD ID="rightsMD_01">
+    <mdWrap MDTYPE="PREMIS">
+      <xmlData>
 
-				<rights xmlns="http://www.loc.gov/premis/v3" version="3.0">
-					<rightsStatement>
-						<rightsStatementIdentifier>
-							<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
-							<rightsStatementIdentifierValue>preservation-master</rightsStatementIdentifierValue>
-						</rightsStatementIdentifier>
-						<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
-						<statuteInformation>
-							<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
-							<statuteCitation>G.S. 121-5</statuteCitation>
-							<statuteDocumentationIdentifier>
-								<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
-								<statuteDocumentationIdentifierValue>http://www.ncleg.net/gascripts/statutes/statutelookup.pl?statute=121</statuteDocumentationIdentifierValue>
-								<statuteDocumentationRole>law</statuteDocumentationRole>
-							</statuteDocumentationIdentifier>
-						</statuteInformation>
-						<linkingObjectIdentifier>
-							<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
-							<linkingObjectIdentifierValue>{eaxs_id}</linkingObjectIdentifierValue>
-						</linkingObjectIdentifier>
-					</rightsStatement>
-				</rights>
+        <rights xmlns="http://www.loc.gov/premis/v3" version="3.0">
+          <rightsStatement>
+            <rightsStatementIdentifier>
+              <rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
+              <rightsStatementIdentifierValue>preservation-master</rightsStatementIdentifierValue>
+            </rightsStatementIdentifier>
+            <rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
+            <statuteInformation>
+              <statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
+              <statuteCitation>G.S. 121-5</statuteCitation>
+              <statuteDocumentationIdentifier>
+                <statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
+                <statuteDocumentationIdentifierValue>http://www.ncleg.net/gascripts/statutes/statutelookup.pl?statute=121</statuteDocumentationIdentifierValue>
+                <statuteDocumentationRole>law</statuteDocumentationRole>
+              </statuteDocumentationIdentifier>
+            </statuteInformation>
+            <linkingObjectIdentifier>
+              <linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
+              <linkingObjectIdentifierValue>{eaxs_id}</linkingObjectIdentifierValue>
+            </linkingObjectIdentifier>
+          </rightsStatement>
+        </rights>
 
-			</xmlData>
-		</mdWrap>
-	</rightsMD>
+      </xmlData>
+    </mdWrap>
+  </rightsMD>
 
-	<rightsMD ID="rightsMD_02">
-		<mdWrap MDTYPE="PREMIS">
-			<xmlData>
+  <rightsMD ID="rightsMD_02">
+    <mdWrap MDTYPE="PREMIS">
+      <xmlData>
 
-				<rights xmlns="http://www.loc.gov/premis/v3" version="3.0">
-					<rightsStatement>
-						<rightsStatementIdentifier>
-							<rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
-							<rightsStatementIdentifierValue>access-master</rightsStatementIdentifierValue>
-						</rightsStatementIdentifier>
-						<rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
-						<statuteInformation>
-							<statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
-							<statuteCitation>G.S. 132</statuteCitation>
-							<statuteDocumentationIdentifier>
-								<statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
-								<statuteDocumentationIdentifierValue>http://www.ncleg.net/gascripts/statutes/statutelookup.pl?statute=132</statuteDocumentationIdentifierValue>
-								<statuteDocumentationRole>law</statuteDocumentationRole>
-							</statuteDocumentationIdentifier>
-						</statuteInformation>
-						<rightsGranted>
-							<act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
-							<rightsGrantedNote>Attribution statement: "Courtesy of the North Carolina Department of Natural and Cultural Resources."</rightsGrantedNote>
-						</rightsGranted>
-						<linkingObjectIdentifier>
-							<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
-							<linkingObjectIdentifierValue>{eaxs_id}__tagged</linkingObjectIdentifierValue>
-						</linkingObjectIdentifier>
-					</rightsStatement>
-				</rights>
+        <rights xmlns="http://www.loc.gov/premis/v3" version="3.0">
+          <rightsStatement>
+            <rightsStatementIdentifier>
+              <rightsStatementIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</rightsStatementIdentifierType>
+              <rightsStatementIdentifierValue>access-master</rightsStatementIdentifierValue>
+            </rightsStatementIdentifier>
+            <rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</rightsBasis>
+            <statuteInformation>
+              <statuteJurisdiction authority="ISO 3166-2:US">US-NC</statuteJurisdiction>
+              <statuteCitation>G.S. 132</statuteCitation>
+              <statuteDocumentationIdentifier>
+                <statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</statuteDocumentationIdentifierType>
+                <statuteDocumentationIdentifierValue>http://www.ncleg.net/gascripts/statutes/statutelookup.pl?statute=132</statuteDocumentationIdentifierValue>
+                <statuteDocumentationRole>law</statuteDocumentationRole>
+              </statuteDocumentationIdentifier>
+            </statuteInformation>
+            <rightsGranted>
+              <act valueURI="http://id.loc.gov/vocabulary/preservation/actionsGranted/dis">disseminate</act>
+              <rightsGrantedNote>Attribution statement: "Courtesy of the North Carolina Department of Natural and Cultural Resources."</rightsGrantedNote>
+            </rightsGranted>
+            <linkingObjectIdentifier>
+              <linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
+              <linkingObjectIdentifierValue>{eaxs_id}__tagged</linkingObjectIdentifierValue>
+            </linkingObjectIdentifier>
+          </rightsStatement>
+        </rights>
 
-			</xmlData>
-		</mdWrap>
-	</rightsMD>
-	
+      </xmlData>
+    </mdWrap>
+  </rightsMD>
+  
 </amdSec>

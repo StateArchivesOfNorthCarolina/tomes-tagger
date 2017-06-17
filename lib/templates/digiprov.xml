@@ -1,61 +1,61 @@
 <amdSec xmlns:mets="http://www.loc.gov/METS/" ID="amdSec_digiprovMD">
 
-	<digiprovMD ID="digiprovMD_01">
-		<mdWrap MDTYPE="PREMIS">
-			<xmlData>
+  <digiprovMD ID="digiprovMD_01">
+    <mdWrap MDTYPE="PREMIS">
+      <xmlData>
 
-				<event xmlns="http://www.loc.gov/premis/v3" version="3.0">
-					<eventIdentifier>
-						<eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
-						<eventIdentifierValue>create_eaxs</eventIdentifierValue>
-					</eventIdentifier>
-					<eventType valueURI="http://id.loc.gov/vocabulary/preservation/eventType/cre.html">cre</eventType>
-					<eventDateTime>{eaxs_cdate}</eventDateTime>
-					<eventDetailInformation>
-						<eventDetail>EAXS created via DarcMailCLI.</eventDetail>
-					</eventDetailInformation>
-					<linkingAgentIdentifier>
-						<linkingAgentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri.html">uri</linkingAgentIdentifierType>
-						<linkingAgentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI</linkingAgentIdentifierValue>
-						<linkingAgentRole valueURI="http://id.loc.gov/vocabulary/preservation/eventRelatedAgentRole/exe.html">exe</linkingAgentRole>
-					</linkingAgentIdentifier>
-					<linkingObjectIdentifier>
-						<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
-						<linkingObjectIdentifierValue>{eaxs_id}</linkingObjectIdentifierValue>
-					</linkingObjectIdentifier>
-				</event>
+        <event xmlns="http://www.loc.gov/premis/v3" version="3.0">
+          <eventIdentifier>
+            <eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
+            <eventIdentifierValue>create_eaxs</eventIdentifierValue>
+          </eventIdentifier>
+          <eventType valueURI="http://id.loc.gov/vocabulary/preservation/eventType/cre.html">cre</eventType>
+          <eventDateTime>{eaxs_cdate}</eventDateTime>
+          <eventDetailInformation>
+            <eventDetail>EAXS created via DarcMailCLI.</eventDetail>
+          </eventDetailInformation>
+          <linkingAgentIdentifier>
+            <linkingAgentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri.html">uri</linkingAgentIdentifierType>
+            <linkingAgentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI</linkingAgentIdentifierValue>
+            <linkingAgentRole valueURI="http://id.loc.gov/vocabulary/preservation/eventRelatedAgentRole/exe.html">exe</linkingAgentRole>
+          </linkingAgentIdentifier>
+          <linkingObjectIdentifier>
+            <linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
+            <linkingObjectIdentifierValue>{eaxs_id}</linkingObjectIdentifierValue>
+          </linkingObjectIdentifier>
+        </event>
 
-			</xmlData>
-		</mdWrap>
-	</digiprovMD>
+      </xmlData>
+    </mdWrap>
+  </digiprovMD>
 
-	<digiprovMD ID="digiprovMD_02">
-		<mdWrap MDTYPE="PREMIS">
-			<xmlData>
+  <digiprovMD ID="digiprovMD_02">
+    <mdWrap MDTYPE="PREMIS">
+      <xmlData>
 
-				<event xmlns="http://www.loc.gov/premis/v3" version="3.0">
-					<eventIdentifier>
-						<eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
-						<eventIdentifierValue>create_tagged_eaxs</eventIdentifierValue>
-					</eventIdentifier>
-					<eventType valueURI="http://id.loc.gov/vocabulary/preservation/eventType/cre.html">cre</eventType>
-					<eventDateTime>{tagged_eaxs_cdate}</eventDateTime>
-					<eventDetailInformation>
-						<eventDetail>Tagged version of EAXS file created.</eventDetail>
-					</eventDetailInformation>
-					<linkingAgentIdentifier>
-						<linkingAgentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri.html">uri</linkingAgentIdentifierType>
-						<linkingAgentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/tomes_tool</linkingAgentIdentifierValue>
-						<linkingAgentRole valueURI="http://id.loc.gov/vocabulary/preservation/eventRelatedAgentRole/exe.html">exe</linkingAgentRole>
-					</linkingAgentIdentifier>
-					<linkingObjectIdentifier>
-						<linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
-						<linkingObjectIdentifierValue>{eaxs_id}__tagged</linkingObjectIdentifierValue>
-					</linkingObjectIdentifier>
-				</event>
+        <event xmlns="http://www.loc.gov/premis/v3" version="3.0">
+          <eventIdentifier>
+            <eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
+            <eventIdentifierValue>create_tagged_eaxs</eventIdentifierValue>
+          </eventIdentifier>
+          <eventType valueURI="http://id.loc.gov/vocabulary/preservation/eventType/cre.html">cre</eventType>
+          <eventDateTime>{tagged_eaxs_cdate}</eventDateTime>
+          <eventDetailInformation>
+            <eventDetail>Tagged version of EAXS file created.</eventDetail>
+          </eventDetailInformation>
+          <linkingAgentIdentifier>
+            <linkingAgentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri.html">uri</linkingAgentIdentifierType>
+            <linkingAgentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/tomes_tool</linkingAgentIdentifierValue>
+            <linkingAgentRole valueURI="http://id.loc.gov/vocabulary/preservation/eventRelatedAgentRole/exe.html">exe</linkingAgentRole>
+          </linkingAgentIdentifier>
+          <linkingObjectIdentifier>
+            <linkingObjectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</linkingObjectIdentifierType>
+            <linkingObjectIdentifierValue>{eaxs_id}__tagged</linkingObjectIdentifierValue>
+          </linkingObjectIdentifier>
+        </event>
 
-			</xmlData>
-		</mdWrap>
-	</digiprovMD>
+      </xmlData>
+    </mdWrap>
+  </digiprovMD>
 
 </amdSec>
