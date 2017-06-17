@@ -40,27 +40,12 @@ class FolderToMETS():
        path = self.path
        root = self.root
 
-       # create <metsHdr>.
-       header = pymets.make("metsHdr")
-       root.append(header)
+       # load templates.
+       templates = glob("templates/*.xml")
+       for template in templates:
+           t_el = pymets.load_template(template)
+           root.append(t_el)
        
-       # create <agent>.
-       attributes = {"ROLE":"CREATOR", "TYPE":"OTHER",  "OTHERTYPE":"Software Agent"}
-       agent = pymets.make("agent", attributes=attributes)
-       name = pymets.make("name")
-       name.text = "TOMES Tool"
-       agent.append(name)
-       header.append(agent)
-       
-       # create <amdSec>.
-       amdSec = pymets.make("amdSec")
-       root.append(amdSec)
-       techMD = pymets.make("techMD", {"ID":"tmd1"})
-       amdSec.append(techMD)
-       techmd_01 = pymets.load_template("templates/techmd_01.xml", eaxs_id="test")
-       techmd_01 = pymets.wrap(techmd_01, mdtype="PREMIS")
-       techMD.append(techmd_01)
-
        # create <fileSec>.
        fileSec = pymets.make("fileSec")
        root.append(fileSec)
@@ -79,16 +64,14 @@ class FolderToMETS():
        # create <structMap>.
        structMap = pymets.make("structMap")
        root.append(structMap)
-       file_ids = [fid.get("ID") for fid in fileSec.findall("*{*}file")]
+       file_ids = pymets.get_fileIDs(fileSec)
        div = pymets.div(file_ids)
        structMap.append(div)
 
        # append valid() response to root as comment.
        valid = pymets.valid(root)
        valid = "It is {} that this METS document is valid.".format(valid)
-       root.append(pymets.Comment(valid))
-
- 
+       root.append(pymets.comment(valid))
 
 
 # TEST.
