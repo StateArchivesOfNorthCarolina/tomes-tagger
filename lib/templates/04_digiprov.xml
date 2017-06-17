@@ -1,9 +1,7 @@
 <amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec_digiprovMD">
-
   <digiprovMD ID="digiprovMD_01">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
-
         <event xmlns="http://www.loc.gov/premis/v3" version="3.0">
           <eventIdentifier>
             <eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
@@ -24,15 +22,12 @@
             <linkingObjectIdentifierValue>{eaxs_id}</linkingObjectIdentifierValue>
           </linkingObjectIdentifier>
         </event>
-
       </xmlData>
     </mdWrap>
   </digiprovMD>
-
   <digiprovMD ID="digiprovMD_02">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
-
         <event xmlns="http://www.loc.gov/premis/v3" version="3.0">
           <eventIdentifier>
             <eventIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</eventIdentifierType>
@@ -53,9 +48,7 @@
             <linkingObjectIdentifierValue>{eaxs_id}__tagged</linkingObjectIdentifierValue>
           </linkingObjectIdentifier>
         </event>
-
       </xmlData>
     </mdWrap>
   </digiprovMD>
-
 </amdSec>
