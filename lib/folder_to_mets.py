@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 
-
 """
+This module contains a class to construct a METS file for a given email account folder with an
+EAXS file, an optional attachments folder, an optional tagged EAXS file, and other optional files and folders.
+
 TODO:
-    - You need to fill in the template placeholder variables.
-        - Is there a way to generate a list of their names after loading the string?
+    - Need to known naming conventions so this can implicitly figure out the name of the
+    tagged EAXS file.
+    - Need REAL values for formatting the templates! :-]
+    - Make separate fileGrp for attachments? Maybe no: unless you want to break out PREMIS
+    more so attachments are a separate object.
+    - Make separate fileGrp for tagged EAXS.
+    - Make separate fileGrp for all non-required folders (depends on final xIP structure).
 """
 
 # import modules.
@@ -14,48 +21,54 @@ from mets.pymets import PyMETS
 
 
 class FolderToMETS():
-    """ """
+    """ A class to construct a METS file for a given email account folder with an EAXS file,
+    an optional attachments folder, an optional tagged EAXS file, and other optional files
+    and folders. """
+
 
     def __init__(self, path):
-        """ """
+        """ Sets instance attributes.
         
+        Args:
+            - path (str): The path to the account folder containing the EAXS file, etc.
+        """
+        
+        # set attributes.
         self.path = path
+
+        # compose instance of PyMETS; build METS.
         self.pymets = PyMETS()
         self.root = self.pymets.make("mets")
         self.build()
 
-    
-    def stringify(self):
-        """ """
 
-        pymets = self.pymets
-        root = self.root
+    def stringify(self):
+        """ Returns a string representation of the root METS etree element. """
+
+        pymets, root = self.pymets, self.root
         rootx = pymets.stringify(root)
         return rootx
 
 
     def build(self):
-       """ """
+       """ Builds METS sections, appends sections to root. """
        
-       pymets = self.pymets
-       path = self.path
-       root = self.root
+       pymets, path, root = self.pymets, self.path, self.root
 
-       # load templates.
+       # load and format METS templates; append to root.
+       subs = {"eaxs_id": None, "eaxs_cdate": 1, "tagged_eaxs_cdate" : 2}
        templates = glob("templates/*.xml")
        for template in templates:
-           t_el = pymets.load_template(template)
+           t_el = pymets.load_template(template, **subs)
            root.append(t_el)
        
        # create <fileSec>.
        fileSec = pymets.make("fileSec")
        root.append(fileSec)
 
-       #
+       # make <fileGrp> for each folder.
        folders = glob("*/", recursive=True)
        for folder in folders:
-           
-           #
            fs = glob(folder + "/*.*", recursive=True)
            folder_id = "".join(
                    [c.lower() for c in folder if c.isalnum()]) # alpha-numeric only.
