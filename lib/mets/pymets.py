@@ -37,8 +37,8 @@ class PyMETS():
         if xsd is None:
             xsd = os.path.split(os.path.abspath(__file__))[0] + "/mets_1-11.xsd"
         self.xsd = xsd
-        self.CDATA = CDATA
-        self.Comment = Comment
+        self.cdata = CDATA
+        self.comment = Comment
 
         # compose instances.
         self.AnyType = AnyType(self.ns_prefix, self.ns_map)
@@ -104,6 +104,19 @@ class PyMETS():
         return filegrp_el
 
 
+    def get_fileIDs(self, file_el):
+        """ Returns a list of <fileGrp/file[@ID]> values for a given @file_el which can be an
+        individual <fileGrp> etree element or and entire <fileSec> etree element."""
+
+        path = "{" + self.ns_map[self.ns_prefix] + "}file"
+        
+        if file_el.tag[-7:] == "fileSec":
+            path = "*" + path
+        
+        fids = [fid.get("ID") for fid in file_el.findall(path)]
+        return fids
+
+
     def wrap(self, xtree, mdtype, attributes={}, xmlData=True):
         """ Returns <mdWrap> etree element with "MDTYPE" attribute of @mdtype and
         optional @attributes. The @xtree etree element will have a parent element of
@@ -150,7 +163,7 @@ def main():
 
     # create <structMap> and <div>.
     structMap = pymets.make("structMap")
-    file_ids = [fid.get("ID") for fid in fileGrp.findall("{*}file")]
+    file_ids = pymets.get_fileIDs(fileSec)
     div = pymets.div(file_ids)
     structMap.append(div)
     root.append(structMap)
@@ -158,7 +171,7 @@ def main():
     # append valid() response to root as comment.
     valid = pymets.valid(root)
     valid = "It is {} that this METS document is valid.".format(valid)
-    root.append(pymets.Comment(valid))
+    root.append(pymets.comment(valid))
 
     # print METS.
     rootx = pymets.stringify(root)
