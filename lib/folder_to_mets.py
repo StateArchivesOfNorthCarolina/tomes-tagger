@@ -12,6 +12,7 @@ TODO:
     more so attachments are a separate object.
     - Make separate fileGrp for tagged EAXS.
     - Make separate fileGrp for all non-required folders (depends on final xIP structure).
+    - The template files should be optional (ideally).
 """
 
 # import modules.
