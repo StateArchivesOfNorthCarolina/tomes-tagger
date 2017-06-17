@@ -3,7 +3,8 @@
 
 """
 TODO:
-    - ???
+    - You need to fill in the template placeholder variables.
+        - Is there a way to generate a list of their names after loading the string?
 """
 
 # import modules.

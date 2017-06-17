@@ -5,6 +5,8 @@ TODO:
     - Note that struct-links and behavior elements aren't supported.
     - Say this is for METS version 1.11.
         - Doesn't the default for @xsd already tell me that?
+    - get_fileIDs() seems to be slowing things down. It seemed faster when I used the "*"
+    instead of the specific METS namespace URI.
 """
 
 # import modules.
@@ -61,7 +63,7 @@ class PyMETS():
         string.Formatter.format() method for @args and @kwargs. """
 
         with codecs.open(xml, encoding=charset) as xfile:
-            xstring = xfile.read()#.format(*args, **kwargs)
+            xstring = xfile.read().format(*args, **kwargs)
         xload = self.load(xstring)
         return xload
 
