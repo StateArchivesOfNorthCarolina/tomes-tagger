@@ -4,35 +4,35 @@
       <xmlData>
         <!-- <premis xmlns="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <object xsi:type="representation"> Valid against Premis 3.0 XSD. -->
-          <premis xmlns="http://www.loc.gov/premis/v3" version="3.0">
-            <object>
-              <objectIdentifier>
-                <objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
-                <objectIdentifierValue>{eaxs_id}</objectIdentifierValue>
-              </objectIdentifier>
-              <objectCategory>representation</objectCategory> <!-- Listed in PREMIS 3.0 Data Dictionary, but not in XSD. -->
-              <significantProperties>
-                <significantPropertiesValue>This file group constitutes the preservation-master for the email account's messages and attachments.</significantPropertiesValue>
-              </significantProperties>
-            </object>
-          </premis>
+          <premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
+            <premis:object>
+              <premis:objectIdentifier>
+                <premis:objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</premis:objectIdentifierType>
+                <premis:objectIdentifierValue>{eaxs_id}</premis:objectIdentifierValue>
+              </premis:objectIdentifier>
+              <premis:objectCategory>representation</premis:objectCategory> <!-- Listed in PREMIS 3.0 Data Dictionary, but not in XSD. -->
+              <premis:significantProperties>
+                <premis:significantPropertiesValue>This file group constitutes the preservation-master for the email account's messages and attachments.</premis:significantPropertiesValue>
+              </premis:significantProperties>
+            </premis:object>
+          </premis:premis>
         </xmlData>
       </mdWrap>
     </techMD>
     <techMD ID="techMD_02">
       <mdWrap MDTYPE="PREMIS">
         <xmlData>
-          <premis xmlns="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <object>
-              <objectIdentifier>
-                <objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</objectIdentifierType>
-                <objectIdentifierValue>{eaxs_id}__tagged</objectIdentifierValue>
-              </objectIdentifier>
-              <significantProperties>
-                <significantPropertiesValue>This file group constitutes the access-master for the email account's messages. This group differs from the preservation-master EAXS file/s in that message content was subjected to machine and optional human efforts in order to mark up entities and personally identifiable information.</significantPropertiesValue>
-              </significantProperties>
-            </object>
-          </premis>
+          <premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <premis:object>
+              <premis:objectIdentifier>
+                <premis:objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</premis:objectIdentifierType>
+                <premis:objectIdentifierValue>{eaxs_id}__tagged</premis:objectIdentifierValue>
+              </premis:objectIdentifier>
+              <premis:significantProperties>
+                <premis:significantPropertiesValue>This file group constitutes the access-master for the email account's messages. This group differs from the preservation-master EAXS file/s in that message content was subjected to machine and optional human efforts in order to mark up entities and personally identifiable information.</premis:significantPropertiesValue>
+              </premis:significantProperties>
+            </premis:object>
+          </premis:premis>
         </xmlData>
       </mdWrap>
     </techMD>
