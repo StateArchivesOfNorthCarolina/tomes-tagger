@@ -57,7 +57,9 @@ class FolderToMETS():
        pymets, path, root = self.pymets, self.path, self.root
 
        # load and format METS templates; append to root.
-       subs = {"eaxs_id": None, "eaxs_cdate": 1, "tagged_eaxs_cdate" : 2}
+       subs = {"eaxs_id": "{eaxs_id}", 
+               "eaxs_cdate": "{eaxs_cdate}",
+               "tagged_eaxs_cdate" : "{tagged_eaxs_cdate}"}
        templates = glob("templates/*.xml")
        for template in templates:
            t_el = pymets.load_template(template, **subs)
