@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 """
-This module contains a class to construct a METS file for a given email account folder with an
-EAXS file, an optional attachments folder, an optional tagged EAXS file, and other optional files and folders.
+This module contains a class to construct a METS file for a given email account folder with
+an EAXS file, an optional attachments folder, an optional tagged EAXS file, and other
+optional files and folders.
 
 TODO:
     - Need to known naming conventions so this can implicitly figure out the name of the
@@ -12,7 +13,6 @@ TODO:
     more so attachments are a separate object.
     - Make separate fileGrp for tagged EAXS.
     - Make separate fileGrp for all non-required folders (depends on final xIP structure).
-    - The template files should be optional (ideally).
 """
 
 # import modules.
@@ -44,7 +44,11 @@ class FolderToMETS():
 
 
     def stringify(self):
-        """ Returns a string representation of the root METS etree element. """
+        """ Returns a string representation of the root METS etree element.
+        
+        Returns:
+            <class 'str'>
+        """
 
         pymets, root = self.pymets, self.root
         rootx = pymets.stringify(root)
@@ -52,7 +56,11 @@ class FolderToMETS():
 
 
     def build(self):
-       """ Builds METS sections, appends sections to root. """
+       """ Builds METS sections, appends sections to root.
+       
+       Returns:
+            <class 'NoneType'>
+        """
        
        pymets, path, root = self.pymets, self.path, self.root
 
@@ -90,12 +98,14 @@ class FolderToMETS():
        valid = "It is {} that this METS document is valid.".format(valid)
        root.append(pymets.comment(valid))
 
+       return
+
 
 # TEST.
 def main():
     f2m = FolderToMETS(".")
-    x = f2m.stringify()
-    print(x)
+    metsx = f2m.stringify()
+    print(metsx)
 
 
 if __name__ == "__main__":
