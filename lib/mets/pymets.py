@@ -51,10 +51,11 @@ class PyMETS():
     def load(self, xml, is_raw=True):
         """ Returns etree element for an XML file or XML string (@is_raw==True). """
         
+        parser = etree.XMLParser(remove_blank_text=True)
         if is_raw:
-            x_el = etree.fromstring(xml)
+            x_el = etree.fromstring(xml, parser)
         else:
-            x_el = etree.parse(xml).getroot()
+            x_el = etree.parse(xml, parser).getroot()
         return x_el
 
 
