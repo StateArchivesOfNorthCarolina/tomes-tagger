@@ -6,7 +6,7 @@
           <dc:creator>State of North Carolina</dc:creator>
           <dc:date>{ctime}</dc:date>
           <dc:description>{description}</dc:description>
-          <dc:identifier>{eaxs_id}</dc:identifier>
+		  <dc:identifier>{eaxs_id}</dc:identifier>
 		  <dc:language>en-US</dc:language>
           <dc:publisher>State Archives of North Carolina</dc:publisher>
           <dc:subject>{subject}</dc:subject> <!-- Multiple subjects? One for the person, others for generic terms like "email", etc.? -->
