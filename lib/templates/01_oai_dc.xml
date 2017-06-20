@@ -9,7 +9,7 @@
           <dc:identifier>{eaxs_id}</dc:identifier>
 		  <dc:language>en-US</dc:language>
           <dc:publisher>State Archives of North Carolina</dc:publisher>
-          <dc:subject>{subject}</dc:subject> <!-- Mutliple subjects? One for the person, others for generic terms like "email", etc.? -->
+          <dc:subject>{subject}</dc:subject> <!-- Multiple subjects? One for the person, others for generic terms like "email", etc.? -->
       </oai_dc:dc>
     </xmlData>
   </mdWrap>

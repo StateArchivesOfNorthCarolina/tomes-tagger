@@ -10,7 +10,8 @@
                 <premis:objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</premis:objectIdentifierType>
                 <premis:objectIdentifierValue>{eaxs_id}</premis:objectIdentifierValue>
               </premis:objectIdentifier>
-              <premis:objectCategory>representation</premis:objectCategory> <!-- Listed in PREMIS 3.0 Data Dictionary, but not in XSD. -->
+              <premis:objectCategory>representation</premis:objectCategory>
+			  <!-- "objectCategory" is listed in PREMIS 3.0 Data Dictionary, but not in XSD. -->
               <premis:significantProperties>
                 <premis:significantPropertiesValue>This file group constitutes the preservation-master for the email account's messages and attachments.</premis:significantPropertiesValue>
               </premis:significantProperties>
