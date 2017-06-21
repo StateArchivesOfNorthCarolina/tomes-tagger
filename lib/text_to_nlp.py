@@ -43,7 +43,7 @@ class TextToNLP():
             nlp = annotator.annotate(text, properties=options)
             return nlp
         except Exception as e:
-            return e
+            exit(e)
 
 
 # TEST.
