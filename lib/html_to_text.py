@@ -143,8 +143,7 @@ class HTMLToText():
             - charset (str): The encoding for the converted text.
 
         Returns:
-            <class 'str'>: If Lynx return code is 0.
-            <class 'NoneType'>: If Lynx return code is not 0.
+            <class 'str'>
         """
     
         # create beginning Lynx command line snippet.
@@ -162,13 +161,10 @@ class HTMLToText():
             args += " " + html
 
         # run Lynx.
-        cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
 
         # return stdout.
-        if cmd.returncode == 0:
-            stdout = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
-        else:
-            stdout = None
+        stdout = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
 
         return stdout
 
