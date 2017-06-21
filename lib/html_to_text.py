@@ -19,7 +19,7 @@ import subprocess
 from bs4 import BeautifulSoup
 
 
-class ModifyHTML(BeautifulSoup):
+class ModifyHTML():
     """ A class with tools to modify the HTML DOM via BeautifulSoup.
     
     Example:
@@ -29,6 +29,11 @@ class ModifyHTML(BeautifulSoup):
         >>> html.remove_images() # alters DOM
         >>> html.raw() # back to string ...
     """
+
+    def __init__(self, html, parser="html5lib"):
+        """ Sets instance attributes."""
+
+        self.root = BeautifulSoup(html, parser)
 
 
     def shift_links(self):
@@ -40,7 +45,7 @@ class ModifyHTML(BeautifulSoup):
         """
 
         # get all A tags.
-        a_tags = self.find_all("a")
+        a_tags = self.root.find_all("a")
         
         # append @href values to text values.
         for a_tag in a_tags:
@@ -56,7 +61,7 @@ class ModifyHTML(BeautifulSoup):
                 text = a_tag.string + " [" + href + "]"  
                 a_tag.string.replace_with(text)
 
-        return self
+        return self.root
 
 
     def remove_images(self):
@@ -67,11 +72,11 @@ class ModifyHTML(BeautifulSoup):
         """
 
         # get all image tags; remove them.
-        img_tags = self.find_all("img")
+        img_tags = self.root.find_all("img")
         for img_tag in img_tags:
             img_tag.extract()
 
-        return self
+        return self.root
 
 
     def raw(self):
@@ -81,7 +86,7 @@ class ModifyHTML(BeautifulSoup):
             <class 'str'>
         """
 
-        return str(self)
+        return str(self.root)
 
 
 class HTMLToText():

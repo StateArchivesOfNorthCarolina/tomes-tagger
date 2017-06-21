@@ -18,7 +18,7 @@ class Test_HTMLToText(unittest.TestCase):
     def test__shift_link(self):
 
         html = self.HTML.format("Hello World!")
-        html = ModifyHTML(html, "html5lib")
+        html = ModifyHTML(html)
         html.shift_links()
         html = html.raw()
         expected = self.HTML.format("Hello World! [http://h.w]")
