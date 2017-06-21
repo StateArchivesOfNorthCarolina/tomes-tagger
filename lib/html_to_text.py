@@ -80,7 +80,7 @@ class ModifyHTML():
 
 
     def raw(self):
-        """ Returns string version of this BeautifulSoup instance.
+        """ Returns string version of DOM.
         
         Returns:
             <class 'str'>
