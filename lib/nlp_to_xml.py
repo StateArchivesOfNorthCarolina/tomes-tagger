@@ -4,7 +4,8 @@
 This module converts Stanford CoreNLP JSON output to XML per the ./tagged_content.xsd schema.
 
 TODO:
-    - You need an external, canonical data source for the custom NER tags, perhaps a SKOS file.
+    - You need an external, canonical data source for the custom NER tags, perhaps a SKOS
+    file.
         - Or at least make it optional in __init__.
     - XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
         - Just set a validation option in xml() and validate BEFORE adding the header, etc.
@@ -28,7 +29,8 @@ from lxml import etree
 
 
 class NLPToXML():
-    """ A class for converting CoreNLP JSON output to XML per the ./tagged_content.xsd schema. """
+    """ A class for converting CoreNLP JSON output to XML per the ./tagged_content.xsd
+    schema. """
 
     def __init__(self):
         """ Sets attributes. """
@@ -66,15 +68,15 @@ class NLPToXML():
 
 
     def validate(self, xdoc, is_raw=True):
-        """ Validates XML document per the ./tagged_content.xsd schema.
+        """ Determines if XML document @xdoc is valid or not per the ./tagged_content.xsd
+        schema.
 
         Args:
             - xdoc (str): The XML file OR the raw XML string to validate.
             - is_raw (bool): Use True for XML as string. Use False for an XML file.
 
         Returns:
-            <class 'lxml.etree.DocumentInvalid'>: If @xdoc is invalid.
-            <class 'NoneType'>: If @xdoc is valid.
+            <class 'bool'>
         """
   
         # if @is_raw, make XML file-like.
@@ -88,9 +90,9 @@ class NLPToXML():
 
         # validate @xdoc.
         xsd = etree.XMLSchema(xsd)
-        validation = xsd.assertValid(xdoc)
+        valid = xsd.valid(xdoc)
 
-        return validation
+        return valid
 
 
     def xml(self, jdoc, charset="utf-8", return_string=True, header=False, beautify=True):

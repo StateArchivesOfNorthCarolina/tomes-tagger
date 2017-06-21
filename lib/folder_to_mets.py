@@ -56,15 +56,11 @@ class FolderToMETS():
 
 
     def build(self):
-       """ Builds METS sections, appends sections to root.
-       
-       Returns:
-            <class 'NoneType'>
-        """
+       """ Builds METS sections, appends sections to root. """
        
        pymets, path, root = self.pymets, self.path, self.root
 
-       # load and format METS templates; append to root.
+       # set template substitution strings.
        subs = {"eaxs_id": "{eaxs_id}", 
                "eaxs_cdate": "{eaxs_cdate}",
                "tagged_eaxs_cdate" : "{tagged_eaxs_cdate}",
@@ -72,6 +68,8 @@ class FolderToMETS():
                "ctime": "{ctime}",
                "description": "{description}",
                "subject": "{subject}"}
+
+       # load and format METS templates; append to root.
        templates = glob("templates/*.xml")
        for template in templates:
            t_el = pymets.load_template(template, **subs)
