@@ -13,8 +13,6 @@ TODO:
 import codecs
 import os
 from lxml import etree
-from lxml.etree import CDATA
-from lxml.etree import Comment
 from lib.anyType import AnyType
 from lib.div import Div
 from lib.fileGrp import FileGrp
@@ -39,8 +37,8 @@ class PyMETS():
         if xsd is None:
             xsd = os.path.split(os.path.abspath(__file__))[0] + "/mets_1-11.xsd"
         self.xsd = xsd
-        self.cdata = CDATA
-        self.comment = Comment
+        self.cdata = etree.CDATA
+        self.comment = etree.Comment
 
         # compose instances.
         self.AnyType = AnyType(self.ns_prefix, self.ns_map)
