@@ -10,12 +10,17 @@ TODO:
         - IOW, you're relying on the textual content to be in first position.
     - Does the updated value for "Charset" need to be uppercase?
     - Is "TransferEncoding" a required element?
+    - Parse and alter the elements in the order they appear in the schema. It's just logical.
+    - Need to check if Charset is None, because per the XSD that means "text/plain" is
+    assumed.
+    - Should you pass the "Charset" to the NLP tagged even though Stanford doesn't seem to
+    care? Ideally yes, so you can easily pass a different NLP tagger to this class.
 """
 
 # import modules.
 import base64
 from lxml import etree
-
+    
 
 class EAXSToTagged():
     """ A class for ... 
@@ -132,8 +137,7 @@ class EAXSToTagged():
 
         # decode Base64 if needed.
         if len(transfer_encoding_el) != 0:
-            transfer_encoding_el = transfer_encoding_el[0]
-            if transfer_encoding_el.text == "base64":
+            if transfer_encoding_el[0].text == "base64":
                 text = base64.b64decode(content_el.text)
                 content_el.text = text.decode(encoding=charset, errors="backslashreplace")
         
@@ -149,7 +153,7 @@ class EAXSToTagged():
 
 
     def tag_eaxs(self):
-        """ """
+        """ Writes file ... """
 
         pass
 
