@@ -5,6 +5,8 @@ This module has a class for ...
 
 TODO:
     - Docstrings.
+    - Add to_file() method? Or just have tag_eaxs() write to file? Maybe an option (to string
+    OR to file)?
     - The XPath you have for BodyContent needs to only find BodyContent where
     ContentType = "text/html" or "text/plain".
         - IOW, you're relying on the textual content to be in first position.
@@ -17,6 +19,9 @@ TODO:
     care? Ideally yes, so you can easily pass a different NLP tagger to this class.
     -  >>> content_text = content_text.decode(charset, errors="backslashreplace")
     #"ignore" works too. Which is better?
+    - It's odd: just editing the EAXS in place gets me a nicer output re: pretty printing.
+    Using iterparse, iterchildren gets me odd looking output. Until we need to deal with
+    massive EAXS files, I'll leave it as is for now.
 """
 
 # import modules.
@@ -51,11 +56,8 @@ class EAXSToTagged():
         
         # set namespace attributes.
         self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
-        self.ns_map  = {"ncdcr":self.ncdcr_uri,
+        self.ns_map  = {None:self.ncdcr_uri,
                 "xsi":"http://www.w3.org/2001/XMLSchema-instance"}
-
-        # re-usable path prefix. 
-        self.singleBody = "ncdcr:MultiBody/ncdcr:SingleBody[1]/"
 
     
     def _get_messages(self, folder_el):
@@ -77,17 +79,20 @@ class EAXSToTagged():
         return messages
 
 
-    def _get_element(self, message_el, el_name, default_value=None):
+    def _get_element(self, message_el, tag, value=None):
         """ """
 
-        ns_map, singleBody = self.ns_map, self.singleBody
+        ncdcr_uri = "{" + self.ncdcr_uri + "}"
+    
+        bodyContent = "{ncdcr_uri}MultiBody/{ncdcr_uri}SingleBody[1]/"
+        bodyContent += "{ncdcr_uri}BodyContent/{ncdcr_uri}{tag}[1]"
         
-        el_path = "ncdcr:BodyContent/ncdcr:{}[1]".format(el_name)
-        elems = message_el.xpath(singleBody + el_path, namespaces=ns_map)
+        el_path = bodyContent.format(ncdcr_uri=ncdcr_uri, tag=tag)
+        elems = message_el.find(el_path)
         
-        el, el_text = None, default_value
-        if len(elems) > 0:
-            el, el_text = elems[0], elems[0].text
+        el, el_text = None, value
+        if elems is not None:
+            el, el_text = elems, elems.text
         
         return (el, el_text)
 
@@ -106,13 +111,12 @@ class EAXSToTagged():
         charset = self.charset
 
         # elements to alter.
-        print(message_el.xpath("ncdcr:MessageId/text()", namespaces=self.ns_map)) # test line.
-
         content_el, content_text = self._get_element(message_el, "Content") 
         charset_el, charset_text = self._get_element(message_el, "Content", "us-ascii")
         content_type_el, content_type_text = self._get_element(message_el, "ContentType",
                 "text/plain")
-        transfer_encoding_el, transfer_encoding_text = self._get_element(message_el, "Content")
+        transfer_encoding_el, transfer_encoding_text = self._get_element(message_el,
+                "Content")
 
         # stop if no content.
         if content_el is None or content_text is None:
@@ -122,14 +126,14 @@ class EAXSToTagged():
         if transfer_encoding_text == "base64":
             content_text = base64.b64decode(content_text)
             content_text = content_text.decode(charset, errors="backslashreplace")
-            content_text = etree.CDATA(content_text)
 
         # alter element values.
         if charset_el is not None:
             charset_el.text = charset        
         if content_type_text == "text/html":
             content_text = strip_html(content_text)
-        content_el.text = nlp_tagger(content_text)
+        content_text = nlp_tagger(content_text)
+        content_el.text = etree.CDATA(content_text)
         transfer_encoding_el = None
         
         return message_el
@@ -140,24 +144,25 @@ class EAXSToTagged():
 
         eaxs_file = self.eaxs_file
         ncdcr_uri = self.ncdcr_uri
+        ns_map = self.ns_map
 
         #
         account = "{" + ncdcr_uri + "}Account"
-        account_el = etree.Element(account)
+        account_el = etree.Element(account, nsmap=ns_map)
+
+        # 
+        parser = etree.XMLParser(strip_cdata=False, collect_ids=False)
+        root = etree.parse(eaxs_file, parser).getroot()
 
         #
-        root = etree.iterparse(eaxs_file, tag=account, strip_cdata=False)
-        root = next(root)[1]
-        
-        children = root.iterchildren()
+        children = root.getchildren()#iterchildren()
         for child_el in children:
             if child_el.tag == "{" + ncdcr_uri + "}Folder":
                 messages = self._get_messages(child_el)
                 for message_el in messages:
                     message_el = self._update_message(message_el)
-            account_el.append(child_el)
-
-        return account_el
+            
+        return root
 
 
 # TEST.
@@ -165,10 +170,10 @@ def main(eaxs_file, tagged_eaxs_file):
 
     e2t = EAXSToTagged(eaxs_file, tagged_eaxs_file,  lambda x: x, lambda x: "FOOBAR")
     tagged = e2t.tag_eaxs()
-    print(tagged)
-    with open("foo.xml", "w") as f:
-        f.write(etree.tostring(tagged, pretty_print=True).decode())
 
+    with etree.xmlfile("foo.xml", encoding="UTF-8") as f:
+        f.write_declaration()
+        f.write(tagged, pretty_print=True)
 
 if __name__ == "__main__":
         
