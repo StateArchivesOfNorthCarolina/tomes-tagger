@@ -15,6 +15,8 @@ TODO:
     assumed.
     - Should you pass the "Charset" to the NLP tagged even though Stanford doesn't seem to
     care? Ideally yes, so you can easily pass a different NLP tagger to this class.
+    -  >>> content_text = content_text.decode(charset, errors="backslashreplace")
+    #"ignore" works too. Which is better?
 """
 
 # import modules.
@@ -52,6 +54,9 @@ class EAXSToTagged():
         self.ns_map  = {"ncdcr":self.ncdcr_uri,
                 "xsi":"http://www.w3.org/2001/XMLSchema-instance"}
 
+        # re-usable path prefix. 
+        self.singleBody = "ncdcr:MultiBody/ncdcr:SingleBody[1]/"
+
     
     def _get_messages(self, folder_el):
         """ Gets all <Message> elements from an EAXS <Folder> element. 
@@ -72,6 +77,21 @@ class EAXSToTagged():
         return messages
 
 
+    def _get_element(self, message_el, el_name, default_value=None):
+        """ """
+
+        ns_map, singleBody = self.ns_map, self.singleBody
+        
+        el_path = "ncdcr:BodyContent/ncdcr:{}[1]".format(el_name)
+        elems = message_el.xpath(singleBody + el_path, namespaces=ns_map)
+        
+        el, el_text = None, default_value
+        if len(elems) > 0:
+            el, el_text = elems[0], elems[0].text
+        
+        return (el, el_text)
+
+
     def _update_message(self, message_el):
         """
         
@@ -85,40 +105,31 @@ class EAXSToTagged():
         nlp_tagger = self.nlp_tagger
         charset = self.charset
 
-        # re-usable path prefix. 
-        _singleBody = "ncdcr:MultiBody/ncdcr:SingleBody[1]/"
-
         # elements to alter.
-        message_id = message_el.xpath("ncdcr:MessageId/text()", namespaces=ns_map)
-        print(message_id)
+        print(message_el.xpath("ncdcr:MessageId/text()", namespaces=self.ns_map)) # test line.
 
-        charset_el = message_el.xpath(_singleBody + "ncdcr:Charset[1]", namespaces=ns_map)[0]
-        content_el = message_el.xpath(_singleBody + "ncdcr:BodyContent/ncdcr:Content[1]",
-                namespaces=ns_map)[0]
-        content_type_el = message_el.xpath(_singleBody + "ncdcr:ContentType[1]",
-                namespaces=ns_map)[0]
-        transfer_encoding_el = message_el.xpath(_singleBody + "ncdcr:TransferEncoding[1]",
-                namespaces=ns_map)
+        content_el, content_text = self._get_element(message_el, "Content") 
+        charset_el, charset_text = self._get_element(message_el, "Content", "us-ascii")
+        content_type_el, content_type_text = self._get_element(message_el, "ContentType",
+                "text/plain")
+        transfer_encoding_el, transfer_encoding_text = self._get_element(message_el, "Content")
 
         # stop if no content.
-        if content_el != None:
-            if content_el.text == None:
-                return message_el
+        if content_el is None or content_text is None:
+            return message_el
 
         # decode Base64 if needed.
-        if len(transfer_encoding_el) != 0:
-            if transfer_encoding_el[0].text == "base64":
-                text = base64.b64decode(content_el.text)
-                text = text.decode(encoding=charset, errors="backslashreplace")
-                content.text = etree.CDATA(text)
-            # getting ValueError here, apparently not XML compatible for message: ['<7C7C3D5653AD7743872A90E300B6519C18CA96852A@NCWITMXMBEV44.ad.ncmail>']
+        if transfer_encoding_text == "base64":
+            content_text = base64.b64decode(content_text)
+            content_text = content_text.decode(charset, errors="backslashreplace")
+            content_text = etree.CDATA(content_text)
 
         # alter element values.
-        charset_el.text = charset
-        if content_type_el.text == "text/html":
-            content_el.text = strip_html(content_el.text)
-        content_el.text = nlp_tagger(content_el.text)
-        content_type_el.text = "text/xml"
+        if charset_el is not None:
+            charset_el.text = charset        
+        if content_type_text == "text/html":
+            content_text = strip_html(content_text)
+        content_el.text = nlp_tagger(content_text)
         transfer_encoding_el = None
         
         return message_el
@@ -155,6 +166,8 @@ def main(eaxs_file, tagged_eaxs_file):
     e2t = EAXSToTagged(eaxs_file, tagged_eaxs_file,  lambda x: x, lambda x: "FOOBAR")
     tagged = e2t.tag_eaxs()
     print(tagged)
+    with open("foo.xml", "w") as f:
+        f.write(etree.tostring(tagged, pretty_print=True).decode())
 
 
 if __name__ == "__main__":
