@@ -7,7 +7,8 @@ lxml.etree_Element or an XML file.
 TODO:
     - Docstrings.
     - The XPath you have for BodyContent needs to only find BodyContent where
-    ContentType = "text/html" or "text/plain".
+    ContentType = "text/html" or "text/plain" or whatever is required to skip attachments.
+        - see <MessageId><![CDATA[<7D5283D6710CD94BB9271326E415C3720FB0B2@email.nccrimecontrol.org>]]></MessageId>
         - IOW, you're relying on the textual content to be in first position.
     - Does the updated value for "Charset" need to be uppercase?
     - Is "TransferEncoding" a required element?
@@ -31,7 +32,7 @@ class EAXSToTagged():
     
     Example:
         >>> fake_html2text = lambda x: "" # convert HTML to plain text.
-        >>> fake_text2nlp = lambda x: ""  # convert plain text to preferred NLP output.
+        >>> fake_text2nlp = lambda x: ""  # convert plain text to NLP output.
         >>> e2t = EAXSToTagged(fake_html2text, fake_text2nlp) # EAXS to tagged EAXS instance.
         >>> #tagged = e2t.get_tagged(eaxs_file) # tagged EAXS as lxml.etree._Element.
         >>> tagged = e2t.write_tagged(eaxs_file, "output.xml") # tagged EAXS to file.
@@ -91,8 +92,8 @@ class EAXSToTagged():
             
             - message_el (lxml.etree._Element): An EAXS <Message> element.
             
-            - name (str): The element name prefaced by a <Message> element's
-            "/MultiBody/SingleBody/BodyContent/" sub-element path.
+            - name (str): The <Message> element's sub-element to retrieve. It will already be
+            prefaced with the "MultiBody/SingleBody[1]/" path.
 
             - value (str): An optional default text value for @name.
 
@@ -102,9 +103,9 @@ class EAXSToTagged():
 
         ncdcr_uri = "{" + self.ncdcr_uri + "}"
     
-        # set XPath to @name. 
-        path = "{ncdcr_uri}MultiBody/{ncdcr_uri}SingleBody[1]/"
-        path += "{ncdcr_uri}BodyContent/{ncdcr_uri}{name}[1]"
+        # set XPath to @name.
+        name = name.replace("/", "/{ncdcr_uri}").format(ncdcr_uri=ncdcr_uri)
+        path = "{ncdcr_uri}MultiBody/{ncdcr_uri}SingleBody[1]/{ncdcr_uri}{name}[1]"
         path = path.format(ncdcr_uri=ncdcr_uri, name=name)
 
         # get element.
@@ -114,7 +115,7 @@ class EAXSToTagged():
         el, el_text = None, value
         if name_el is not None:
             el, el_text = name_el, name_el.text
-        
+
         return (el, el_text)
 
 
@@ -136,13 +137,13 @@ class EAXSToTagged():
         get_element = self._get_element
 
         # get elements.
-        content_el, content_text = get_element(message_el, "Content") 
+        content_el, content_text = get_element(message_el, "BodyContent/Content") 
         charset_el, charset_text = get_element(message_el, "Charset", "us-ascii")
         content_type_el, content_type_text = get_element(message_el, "ContentType",
                 "text/plain")
         transfer_encoding_el, transfer_encoding_text = get_element(message_el,
                 "TransferEncoding")
-
+        
         # stop if no <Content> element exists.
         if content_el is None or content_text is None:
             return message_el
@@ -152,7 +153,7 @@ class EAXSToTagged():
             content_text = base64.b64decode(content_text)
             content_text = content_text.decode(charset, errors="backslashreplace")
 
-        # alter each element.     
+        # alter each element.
         if content_type_text == "text/html":
             content_text = html_converter(content_text)
         content_text = nlp_tagger(content_text)
@@ -228,9 +229,12 @@ class EAXSToTagged():
 # TEST.
 def main(eaxs_file):
 
-    fake_html2text = lambda x: ""
-    fake_text2nlp = lambda x: ""
-    e2t = EAXSToTagged(fake_html2text, fake_text2nlp)
+    def mark(s):
+        if s[:5] == "n2t()":
+            return "h2t(); n2t()" # HTML conversion was run.
+        else:
+            return "n2t()" # HTML conversion was not run.
+    e2t = EAXSToTagged(mark, mark)
     tagged = e2t.write_tagged(eaxs_file, "testTagged.xml")
 
 
