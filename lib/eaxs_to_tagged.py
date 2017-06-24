@@ -104,13 +104,14 @@ class EAXSToTagged():
         strip_html = self.strip_html
         nlp_tagger = self.nlp_tagger
         charset = self.charset
+        get_element = self._get_element
 
         # elements to alter.
-        content_el, content_text = self._get_element(message_el, "Content") 
-        charset_el, charset_text = self._get_element(message_el, "Charset", "us-ascii")
-        content_type_el, content_type_text = self._get_element(message_el, "ContentType",
+        content_el, content_text = get_element(message_el, "Content") 
+        charset_el, charset_text = get_element(message_el, "Charset", "us-ascii")
+        content_type_el, content_type_text = get_element(message_el, "ContentType",
                 "text/plain")
-        transfer_encoding_el, transfer_encoding_text = self._get_element(message_el,
+        transfer_encoding_el, transfer_encoding_text = get_element(message_el,
                 "TransferEncoding")
 
         # stop if no content.
@@ -138,6 +139,8 @@ class EAXSToTagged():
         """ Writes file ... return filepath ... """
 
         ncdcr_uri = self.ncdcr_uri
+        get_messages = self._get_messages
+        update_message = self._update_message
 
         # 
         parser = etree.XMLParser(strip_cdata=False)
@@ -147,9 +150,9 @@ class EAXSToTagged():
         children = root.iterchildren()
         for child_el in children:
             if child_el.tag == "{" + ncdcr_uri + "}Folder":
-                messages = self._get_messages(child_el)
+                messages = get_messages(child_el)
                 for message_el in messages:
-                    message_el = self._update_message(message_el)
+                    message_el = update_message(message_el)
 
         return root
 
@@ -157,12 +160,13 @@ class EAXSToTagged():
     def write_tagged(self, eaxs_file, tagged_eaxs_file=None):
         """ """
         
-        charset = self.charset        
+        charset = self.charset
+        get_tagged = self.get_tagged
         
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
         
-        tagged_root = self.get_tagged(eaxs_file)
+        tagged_root = get_tagged(eaxs_file)
         with etree.xmlfile(tagged_eaxs_file, encoding=charset) as xf:
             xf.write_declaration()
             xf.write(tagged_root, pretty_print=True)
