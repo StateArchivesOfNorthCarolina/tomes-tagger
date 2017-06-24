@@ -19,6 +19,8 @@ TODO:
         - So add *args/**kwargs to text_to_nlp?
     -  >>> content_text = content_text.decode(charset, errors="backslashreplace")
     #"ignore" works too. Which is better?
+    - If charset_el or content_type_el are None, you need to create the element and add it so
+    that you can update the .text value.
 """
 
 # import modules.
@@ -86,14 +88,14 @@ class EAXSToTagged():
 
 
     def _get_element(self, message_el, name, value=None):
-        """ Gets @tag element and its text value for a given <Message> element.
+        """ Gets @tag sub-element and its text value for a given
+        <Message/MultiBody/SingleBody[1]> element.
         
         Args:
             
             - message_el (lxml.etree._Element): An EAXS <Message> element.
             
-            - name (str): The <Message> element's sub-element to retrieve. It will already be
-            prefaced with the "MultiBody/SingleBody[1]/" path.
+            - name (str): The sub-element to retrieve.
 
             - value (str): An optional default text value for @name.
 
@@ -120,12 +122,12 @@ class EAXSToTagged():
 
 
     def _update_message(self, message_el):
-        """ Replaces <Content>, <Charset>, <ContentType>, and <TransferEncoding> elements for
-        a given <Message> element.
+        """ Replaces <BodyContent/Content>, <Charset>, <ContentType>, and
+        <TransferEncoding> elements for a given <Message/MultiBody/SingleBody[1]> element.
         
         Args:
             - message_el (lxml.etree._Element): The <Message> element for which to alter the
-            elments mentioned above.
+            sub-elements mentioned above.
 
         Returns:
             <class 'lxml.etree._Element'>
@@ -158,10 +160,13 @@ class EAXSToTagged():
             content_text = html_converter(content_text)
         content_text = nlp_tagger(content_text)
         content_el.text = etree.CDATA(content_text)
+        
         if charset_el is not None:
             charset_el.text = charset
+        
         if content_type_el is not None:
             content_type_el.text = "text/xml"
+        
         transfer_encoding_el = None
         
         return message_el
