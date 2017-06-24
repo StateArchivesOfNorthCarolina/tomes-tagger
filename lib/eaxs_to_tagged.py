@@ -20,8 +20,9 @@ TODO:
     -  >>> content_text = content_text.decode(charset, errors="backslashreplace")
     #"ignore" works too. Which is better?
     - It's odd: just editing the EAXS in place gets me a nicer output re: pretty printing.
-    Using iterparse, iterchildren gets me odd looking output. Until we need to deal with
-    massive EAXS files, I'll leave it as is for now.
+    Using iterparse to get the root and appending the children to a new "Account" root
+    element gets me odd looking output. Until we need to deal with massive EAXS files, I'll
+    leave it as is for now.
 """
 
 # import modules.
