@@ -229,6 +229,8 @@ class EAXSToTagged():
         with etree.xmlfile(tagged_eaxs_file, encoding=charset) as xf:
             xf.write_declaration()
             xf.write(tagged_root, pretty_print=True)
+
+        return
         
 
 # TEST.
