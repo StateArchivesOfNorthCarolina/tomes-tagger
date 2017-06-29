@@ -75,7 +75,8 @@ class EAXSToTagged():
 
 
     def _get_element(self, message_el, name, value=None):
-        """ Gets <Message/MultiBody/SingleBody[1]/@name> element and its text value.
+        """ Gets <Message/MultiBody/SingleBody/@name> element and its text value. Note
+        that <SingleBody> elements for attachments are skipped.
         
         Args:
             - message_el (lxml.etree._Element): An EAXS <Message> element.
@@ -110,8 +111,8 @@ class EAXSToTagged():
 
 
     def _update_message(self, message_el):
-        """ Replaces the <BodyContent/Content> for a given <Message/MultiBody/SingleBody[1]>
-        element.
+        """ Replaces the <BodyContent/Content> for a given <Message/MultiBody/SingleBody>
+        element. Note that <SingleBody> elements for attachments are skipped.
         
         Args:
             - message_el (lxml.etree._Element): The <Message> element to be updated.
