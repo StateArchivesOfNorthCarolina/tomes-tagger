@@ -43,8 +43,10 @@ class ModifyHTML():
             <class 'bs4.BeautifulSoup'>
         """
 
+        root = self.root
+
         # get all A tags.
-        a_tags = self.root.find_all("a")
+        a_tags = root.find_all("a")
         
         # append @href values to text values.
         for a_tag in a_tags:
@@ -60,7 +62,7 @@ class ModifyHTML():
                 text = a_tag.string + " [" + href + "]"  
                 a_tag.string.replace_with(text)
 
-        return self.root
+        return root
 
 
     def remove_images(self):
@@ -70,12 +72,14 @@ class ModifyHTML():
             <class 'bs4.BeautifulSoup'>
         """
 
+        root = self.root
+
         # get all image tags; remove them.
-        img_tags = self.root.find_all("img")
+        img_tags = root.find_all("img")
         for img_tag in img_tags:
             img_tag.extract()
 
-        return self.root
+        return root
 
 
     def raw(self):
@@ -84,8 +88,9 @@ class ModifyHTML():
         Returns:
             <class 'str'>
         """
-
-        return str(self.root)
+        
+        root = self.root
+        return str(root)
 
 
 class HTMLToText():
