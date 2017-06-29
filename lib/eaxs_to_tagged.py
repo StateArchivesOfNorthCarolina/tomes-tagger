@@ -5,10 +5,7 @@ This module has a class for converting an EAXS file to a tagged EAXS document as
 lxml.etree_Element or an XML file.
 
 TODO:
-    - The XPath you have for BodyContent needs to only find BodyContent where
-    ContentType = "text/html" or "text/plain" or whatever is required to skip attachments.
-        - see <MessageId><![CDATA[<7D5283D6710CD94BB9271326E415C3720FB0B2@email.nccrimecontrol.org>]]></MessageId>
-        - IOW, you're relying on the textual content to be in first position.
+    - Do you need to support <ExtBodyContent> messages?
 """
 
 # import modules.
@@ -22,8 +19,8 @@ class EAXSToTagged():
     lxml.etree_Element or an XML file.
 
     Example:
-        >>> fake_html2text = lambda x: "" # convert HTML to plain text.
-        >>> fake_text2nlp = lambda x: ""  # convert plain text to NLP output.
+        >>> fake_html2text = def html2text(html) ... # convert HTML to plain text.
+        >>> fake_text2nlp = def text2nlp(text) ... # convert plain text to NLP-tagged output.
         >>> e2t = EAXSToTagged(fake_html2text, fake_text2nlp) # EAXS to tagged EAXS instance.
         >>> #tagged = e2t.get_tagged(eaxs_file) # tagged EAXS as lxml.etree._Element.
         >>> tagged = e2t.write_tagged(eaxs_file, "output.xml") # tagged EAXS to file.
@@ -53,7 +50,7 @@ class EAXSToTagged():
         
         # set namespace attributes.
         self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
-        self.ns_map  = {None:self.ncdcr_uri,
+        self.ns_map  = {"ncdcr":self.ncdcr_uri,
                 "xsi":"http://www.w3.org/2001/XMLSchema-instance"}
 
     
@@ -91,19 +88,22 @@ class EAXSToTagged():
             The second item is a str, i.e. @name's value.
         """
 
-        ncdcr_uri = "{" + self.ncdcr_uri + "}"
+        ns_map = self.ns_map
     
-        # set XPath to @name.
-        name = name.replace("/", "/{ncdcr_uri}").format(ncdcr_uri=ncdcr_uri)
-        path = "{ncdcr_uri}MultiBody/{ncdcr_uri}SingleBody[1]/{ncdcr_uri}{name}[1]"
-        path = path.format(ncdcr_uri=ncdcr_uri, name=name)
+        # set XPath to @name, omitting attachments.
+        name = name.replace("/", "/ncdcr:")
+        path = "ncdcr:MultiBody"
+        path += "/ncdcr:SingleBody[(not(contains(ncdcr:Disposition, 'attachment')))][1]"
+        path += "/ncdcr:{name}"
+        path = path.format(name=name)
 
         # get element.
-        name_el = message_el.find(path)
+        name_el = message_el.xpath(path, namespaces=ns_map)
         
         # assume defaults; replace with actual values if element exists.
         el, el_text = None, value
-        if name_el is not None:
+        if len(name_el) > 0:
+            name_el = name_el[0]
             el, el_text = name_el, name_el.text
 
         return (el, el_text)
@@ -207,9 +207,9 @@ class EAXSToTagged():
         
         # write tagged EAXS document to file.
         tagged_root = get_tagged(eaxs_file)
-        with etree.xmlfile(tagged_eaxs_file, encoding=charset) as xf:
-            xf.write_declaration()
-            xf.write(tagged_root, pretty_print=True)
+        with etree.xmlfile(tagged_eaxs_file, encoding=charset) as xml:
+            xml.write_declaration()
+            xml.write(tagged_root, pretty_print=True)
 
         return
         
@@ -218,10 +218,11 @@ class EAXSToTagged():
 def main(eaxs_file):
 
     def mark(s):
-        if s[:5] == "Text > NLP":
-            return "HTML > NLP" # HTML conversion was run.
+        html, nlp = "HTML > NLP", "Text > NLP"
+        if s[:len(nlp)] == "Text > NLP":
+            return html # HTML conversion was run.
         else:
-            return "Text > NLP" # HTML conversion was not run.
+            return nlp # HTML conversion was not run.
     e2t = EAXSToTagged(mark, mark)
     tagged = e2t.write_tagged(eaxs_file, "testTagged.xml")
 
