@@ -5,33 +5,22 @@ This module has a class for converting an EAXS file to a tagged EAXS document as
 lxml.etree_Element or an XML file.
 
 TODO:
-    - Docstrings.
     - The XPath you have for BodyContent needs to only find BodyContent where
     ContentType = "text/html" or "text/plain" or whatever is required to skip attachments.
         - see <MessageId><![CDATA[<7D5283D6710CD94BB9271326E415C3720FB0B2@email.nccrimecontrol.org>]]></MessageId>
         - IOW, you're relying on the textual content to be in first position.
-    - Does the updated value for "Charset" need to be uppercase?
-    - Is "TransferEncoding" a required element?
-    - Parse and alter the elements in the order they appear in the schema. It's just logical.
-        - Also change order in docstring for update_message().
-    - Should you pass the "Charset" to the NLP tagged even though Stanford doesn't seem to
-    care? Ideally yes, so you can easily pass a different NLP tagger to this class.
-        - So add *args/**kwargs to text_to_nlp?
-    -  >>> content_text = content_text.decode(charset, errors="backslashreplace")
-    #"ignore" works too. Which is better?
-    - If charset_el or content_type_el are None, you need to create the element and add it so
-    that you can update the .text value.
 """
 
 # import modules.
 import base64
+import os
 from lxml import etree
     
 
 class EAXSToTagged():
     """ A class for converting an EAXS file to a tagged EAXS document as either an
     lxml.etree_Element or an XML file.
-    
+
     Example:
         >>> fake_html2text = lambda x: "" # convert HTML to plain text.
         >>> fake_text2nlp = lambda x: ""  # convert plain text to NLP output.
@@ -41,16 +30,16 @@ class EAXSToTagged():
     """
 
 
-    def __init__(self, html_converter, nlp_tagger, charset="utf-8"):
+    def __init__(self, html_converter, nlp_tagger, charset="UTF-8"):
         """ Sets instance attributes.
         
         Args:
             
             - html_converter (function): Any function that accepts HTML text (str) as its
-            only required argument and returns plain text (str).
+            only required argument and returns a plain text version (str).
             
             - nlp_tagger (function): Any function that accepts plain text (str) as its only
-            required argument and returns a string.
+            required argument and returns an NLP tagged version (str).
             
             - charset (str): Optional encoding with which to update EAXS message content.
             This is also the encoding used to write a tagged EAXS file with the
@@ -75,7 +64,8 @@ class EAXSToTagged():
             - folder_el (lxml.etree._Element): An EAXS <Folder> element.
 
         Returns:
-            <class 'lxml.etree.ElementChildIterator'>
+            lxml.etree.ElementChildIterator: The return value.
+            Each item within the iterator is an lxml.etree._Element.
         """
         
         ncdcr_uri = self.ncdcr_uri
@@ -88,19 +78,17 @@ class EAXSToTagged():
 
 
     def _get_element(self, message_el, name, value=None):
-        """ Gets @tag sub-element and its text value for a given
-        <Message/MultiBody/SingleBody[1]> element.
+        """ Gets <Message/MultiBody/SingleBody[1]/@name> element and its text value.
         
         Args:
-            
             - message_el (lxml.etree._Element): An EAXS <Message> element.
-            
-            - name (str): The sub-element to retrieve.
-
+            - name (str): The element to retrieve.
             - value (str): An optional default text value for @name.
 
         Returns:
-            <class 'tuple'>: (lxml.etree.Element, str)
+            tuple: The return value.
+            The first item is an lxml.etree.Element, i.e. the element @name.
+            The second item is a str, i.e. @name's value.
         """
 
         ncdcr_uri = "{" + self.ncdcr_uri + "}"
@@ -122,15 +110,15 @@ class EAXSToTagged():
 
 
     def _update_message(self, message_el):
-        """ Replaces <BodyContent/Content>, <Charset>, <ContentType>, and
-        <TransferEncoding> elements for a given <Message/MultiBody/SingleBody[1]> element.
+        """ Replaces the <BodyContent/Content> for a given <Message/MultiBody/SingleBody[1]>
+        element.
         
         Args:
-            - message_el (lxml.etree._Element): The <Message> element for which to alter the
-            sub-elements mentioned above.
+            - message_el (lxml.etree._Element): The <Message> element to be updated.
 
         Returns:
-            <class 'lxml.etree._Element'>
+            lxml.etree._Element: The return value.
+            The updated <Message> element.
         """
 
         html_converter = self.html_converter
@@ -138,49 +126,40 @@ class EAXSToTagged():
         charset = self.charset
         get_element = self._get_element
 
-        # get elements.
-        content_el, content_text = get_element(message_el, "BodyContent/Content") 
-        charset_el, charset_text = get_element(message_el, "Charset", "us-ascii")
-        content_type_el, content_type_text = get_element(message_el, "ContentType",
-                "text/plain")
+        # get needed element.
+        content_el, content_text = get_element(message_el, "BodyContent/Content")
         transfer_encoding_el, transfer_encoding_text = get_element(message_el,
                 "TransferEncoding")
-        
+        content_type_el, content_type_text = get_element(message_el, "ContentType",
+                "text/plain")
+         
         # stop if no <Content> element exists.
         if content_el is None or content_text is None:
             return message_el
 
-        # decode Base64 if needed.
+        # decode Base64 <Content> if needed.
         if transfer_encoding_text == "base64":
             content_text = base64.b64decode(content_text)
             content_text = content_text.decode(charset, errors="backslashreplace")
 
-        # alter each element.
-        if content_type_text == "text/html":
+        # alter <Content>; wrap in CDATA block.
+        if content_type_text in ["text/html", "application/xml+html"]:
             content_text = html_converter(content_text)
         content_text = nlp_tagger(content_text)
         content_el.text = etree.CDATA(content_text)
-        
-        if charset_el is not None:
-            charset_el.text = charset
-        
-        if content_type_el is not None:
-            content_type_el.text = "text/xml"
-        
-        transfer_encoding_el = None
         
         return message_el
 
 
     def get_tagged(self, eaxs_file):
-        """ Converts an EAXS file to a tagged EAXS document.
+        """ Converts an @eaxs_file to a tagged EAXS document.
         
         Args:
-            - eaxs_file (str): The filepath for the EAXS file to convert to a tagged EAXS
-            document.
+            - eaxs_file (str): The filepath for the EAXS file to convert.
 
         Returns:
-            <class 'lxml.etree._Element'>
+            lxml.etree._Element: The return value.
+            The tagged EAXS document.
         """
 
         ncdcr_uri = self.ncdcr_uri
@@ -202,29 +181,31 @@ class EAXSToTagged():
         return root
 
 
-    def write_tagged(self, eaxs_file, tagged_eaxs_file=None):
-        """ Converts an EAXS file to a tagged EAXS document and writes it to a file.
+    def write_tagged(self, eaxs_file, tagged_eaxs_file):
+        """ Converts an EAXS file to a tagged EAXS document and writes it to
+        @tagged_eaxs_file.
         
-        Args:
-            
-            - eaxs_file (str): The filepath for the EAXS file to convert to a tagged EAXS
-            document.
-
+        Args:    
+            - eaxs_file (str): The filepath for the EAXS file to convert.
             - tagged_eaxs_file (str): The filepath that the tagged EAXS document will be
             written to.
 
         Returns:
-            <class 'NoneType'>
+            None
+
+        Raises:
+            - FileExistsError: If @tagged_eaxs_file already exists.
         """
 
         charset = self.charset
         get_tagged = self.get_tagged
+
+        # raise error if output file already exists.
+        if os.path.isfile(tagged_eaxs_file):
+            err = "{} already exists.".format(tagged_eaxs_file)
+            raise FileExistsError(err)
         
-        # create output filename if needed.
-        if tagged_eaxs_file is None:
-            tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
-        
-        # get tagged EAXS document; write to file.
+        # write tagged EAXS document to file.
         tagged_root = get_tagged(eaxs_file)
         with etree.xmlfile(tagged_eaxs_file, encoding=charset) as xf:
             xf.write_declaration()
@@ -237,10 +218,10 @@ class EAXSToTagged():
 def main(eaxs_file):
 
     def mark(s):
-        if s[:5] == "n2t()":
-            return "h2t(); n2t()" # HTML conversion was run.
+        if s[:5] == "Text > NLP":
+            return "HTML > NLP" # HTML conversion was run.
         else:
-            return "n2t()" # HTML conversion was not run.
+            return "Text > NLP" # HTML conversion was not run.
     e2t = EAXSToTagged(mark, mark)
     tagged = e2t.write_tagged(eaxs_file, "testTagged.xml")
 
