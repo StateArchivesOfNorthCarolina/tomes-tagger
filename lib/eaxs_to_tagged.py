@@ -220,7 +220,7 @@ def main(eaxs_file):
 
     def mark(s):
         html, nlp = "HTML > NLP", "Text > NLP"
-        if s[:len(nlp)] == "Text > NLP":
+        if s[:len(nlp)] == nlp:
             return html # HTML conversion was run.
         else:
             return nlp # HTML conversion was not run.
