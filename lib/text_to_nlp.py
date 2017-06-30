@@ -18,11 +18,13 @@ class TextToNLP():
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
 
-    def __init__(self):
+    def __init__(self, port=9000):
         """ Sets attributes. """
 
         # set annotation server and options.
-        self.annotator = StanfordCoreNLP("http://localhost:9000")
+        self.port = str(port)
+        self.localhost = "http://localhost:{}".format(self.port) 
+        self.annotator = StanfordCoreNLP(self.localhost)
         self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
                 "outputFormat": "json",
                 "regexner.mapping": "regexner_TOMES/mappings.txt"}
