@@ -90,16 +90,16 @@ class NLPToXML():
 
         # validate @xdoc.
         xsd = etree.XMLSchema(xsd)
-        valid = xsd.valid(xdoc)
+        valid = xsd.validate(xdoc)
 
         return valid
 
 
-    def xml(self, jdoc, charset="utf-8", return_string=True, header=False, beautify=True):
+    def xml(self, jdict, charset="utf-8", return_string=True, header=False, beautify=True):
         """ Converts CoreNLP JSON to XML per the ./tagged_content.xsd schema.
         
         Args:
-            - jdoc (str): CoreNLP JSON output to convert to XML.
+            - jdict (dict): CoreNLP output to convert to XML.
             - charset (str): The encoding for the converted text.
             - return_string (bool): Use True to return an XML string. Use False to return an
             lxml.etree._Element.
@@ -112,9 +112,6 @@ class NLPToXML():
             <class 'str'>: If @return_string is True.
             <class 'lxml.etree._Element'>: If @return_string is False.
         """
-
-        # convert JSON to dict.
-        jdict = json.loads(jdoc)
 
         # create XML namespace map.
         ns_url = "http://archives.ncdcr.gov/mail-account/tagged-content/"
