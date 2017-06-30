@@ -184,10 +184,11 @@ def main(json_file):
 
     # load JSON.
     jdoc = open(json_file).read()
+    jdict = json.loads(jdoc)
 
     # convert JSON to XML and validate XML.
     n2x = NLPToXML()
-    xdoc = n2x.xml(jdoc, return_string=True)
+    xdoc = n2x.xml(jdict, return_string=True)
     valid = n2x.validate(xdoc, is_raw=True)
     print(xdoc)
     print(valid)
