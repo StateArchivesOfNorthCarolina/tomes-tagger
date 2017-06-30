@@ -28,20 +28,22 @@ class TOMESToolTagger():
     in a defined schema. """
     
 
-    def __init__(self, eaxs_file, charset="UTF-8"): 
+    def __init__(self, charset="UTF-8"): 
         """ Sets instance attributes. """
 
         # set attributes.
         self.charset = charset
         
         # compose instances.
-        h2t = HTMLToText()
-        t2n = TextToNLP()
-        n2x = NLPToXML()
+        self.h2t = HTMLToText()
+        self.t2n = TextToNLP()
+        self.n2x = NLPToXML()
 
 
     def _html_to_text(self, html):
         """ Returns string version of @html (str). """
+
+        h2t = self.h2t
 
         # alter DOM.
         html = ModifyHTML(html)
@@ -57,12 +59,16 @@ class TOMESToolTagger():
     def _text_to_nlpx(self, text):
         """ Returns XML version of NLP-tagged JSON @text (str). """
 
+        t2n = self.t2n
+        n2x = self.n2x
+
+        # get NLP; convert to XML.
         nlp = t2n.get_NLP(text)
-        nlpx = n2x.xml(text, return_string=True)
+        nlpx = n2x.xml(nlp, return_string=True)
         return nlpx
 
 
-    def eaxs_to_tagged(eaxs_file, tagged_eaxs_file=None):
+    def eaxs_to_tagged(self, eaxs_file, tagged_eaxs_file=None):
         """ Returns tagged version of @eaxs_file (str). """
 
         charset = self.charset
@@ -84,7 +90,8 @@ class TOMESToolTagger():
 def main(eaxs_file, tagged_eaxs_file=None):
 
     # make tagged version of EAXS.
-    tagger = TOMESToolTagger(eaxs_file)
+    tagger = TOMESToolTagger()
+    tagger.eaxs_to_tagged(eaxs_file)
 
 
 if __name__ == "__main__":
