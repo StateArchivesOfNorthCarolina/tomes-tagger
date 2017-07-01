@@ -31,13 +31,10 @@ class EAXSToTagged():
         """ Sets instance attributes.
         
         Args:
-            
             - html_converter (function): Any function that accepts HTML text (str) as its
             only required argument and returns a plain text version (str).
-            
             - nlp_tagger (function): Any function that accepts plain text (str) as its only
             required argument and returns an NLP tagged version (str).
-            
             - charset (str): Optional encoding with which to update EAXS message content.
             This is also the encoding used to write a tagged EAXS file with the
             write_tagged() method.

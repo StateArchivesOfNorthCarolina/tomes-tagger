@@ -7,7 +7,6 @@ defined schema.
 
 
 TODO:
-    - Docstrings.
     - Need *args/**kwargs anywhere?
     - What to do if NLP timeouts? This is a lib.text_to_nlp issue.
 """
@@ -41,7 +40,14 @@ class TOMESToolTagger():
 
 
     def _html_to_text(self, html):
-        """ Returns string version of @html (str). """
+        """ Converts HTML string (@html) to a plain text string.
+        
+        Args:
+            - html (str): The HTML to convert.
+
+        Returns:
+            str: The return value.
+        """
 
         h2t = self.h2t
 
@@ -57,7 +63,16 @@ class TOMESToolTagger():
 
 
     def _text_to_nlpx(self, text):
-        """ Returns XML version of NLP-tagged JSON @text (str). """
+        """ Converts plain text (@text) to a TOMES-specific XML version with NLP-tagged
+        entities.
+        
+        Args:
+            - text (str): The text to convert to NLP-tagged XML.
+
+        Returns:
+            str: The return value.
+            The string is an XML document.
+        """
 
         t2n = self.t2n
         n2x = self.n2x
@@ -69,7 +84,17 @@ class TOMESToolTagger():
 
 
     def eaxs_to_tagged(self, eaxs_file, tagged_eaxs_file=None):
-        """ Returns tagged version of @eaxs_file (str). """
+        """ Returns tagged version of @eaxs_file (str).
+        
+        Args:
+            - eaxs_file (str): The EAXS file to convert.
+            - tagged_eaxs_file (str): The tagged EAXS document will be written to this file.
+            If None, this value will be @eaxs_file with the ".xml" extension replaced with
+            "__tagged.xml".
+
+        Returns:
+            None
+        """
 
         charset = self.charset
         html_to_text = self._html_to_text
