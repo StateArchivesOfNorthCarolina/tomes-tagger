@@ -72,11 +72,11 @@ class TOMESToolTagger():
         """ Returns tagged version of @eaxs_file (str). """
 
         charset = self.charset
-        h2t = self._html_to_text
-        t2x = self._text_to_nlpx
+        html_to_text = self._html_to_text
+        text_to_nlpx = self._text_to_nlpx
 
         # construct tagger instance.
-        e2t = EAXSToTagged(h2t, t2x, charset)
+        e2t = EAXSToTagged(html_to_text, text_to_nlpx, charset)
         
         # create tagged EAXS.
         if tagged_eaxs_file is None:
@@ -91,7 +91,7 @@ def main(eaxs_file, tagged_eaxs_file=None):
 
     # make tagged version of EAXS.
     tagger = TOMESToolTagger()
-    tagger.eaxs_to_tagged(eaxs_file)
+    tagger.eaxs_to_tagged(eaxs_file, tagged_eaxs_file)
 
 
 if __name__ == "__main__":
