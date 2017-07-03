@@ -9,6 +9,9 @@ defined schema.
 TODO:
     - Need *args/**kwargs anywhere?
     - What to do if NLP timeouts? This is a lib.text_to_nlp issue.
+    - Somebody needs to start the Stanford server: should it be this or text_to_nlp?
+        - Probably the latter.
+        - Well, if I do it here, then I can shut it down here, too via __exit__?
 """
 
 # import modules.
@@ -37,9 +40,10 @@ class TOMESToolTagger():
         self.h2t = HTMLToText()
         self.t2n = TextToNLP()
         self.n2x = NLPToXML()
+        self.e2t = EAXSToTagged(self.html_to_text, self.text_to_nlpx, self.charset)
 
 
-    def _html_to_text(self, html):
+    def html_to_text(self, html):
         """ Converts HTML string (@html) to a plain text string.
         
         Args:
@@ -62,7 +66,7 @@ class TOMESToolTagger():
         return text
 
 
-    def _text_to_nlpx(self, text):
+    def text_to_nlpx(self, text):
         """ Converts plain text (@text) to a TOMES-specific XML version with NLP-tagged
         entities.
         
@@ -96,12 +100,7 @@ class TOMESToolTagger():
             None
         """
 
-        charset = self.charset
-        html_to_text = self._html_to_text
-        text_to_nlpx = self._text_to_nlpx
-
-        # construct tagger instance.
-        e2t = EAXSToTagged(html_to_text, text_to_nlpx, charset)
+        e2t = self.e2t
         
         # create tagged EAXS.
         if tagged_eaxs_file is None:
