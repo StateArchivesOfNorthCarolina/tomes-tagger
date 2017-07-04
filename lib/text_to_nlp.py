@@ -18,16 +18,24 @@ class TextToNLP():
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
 
-    def __init__(self, port=9000):
-        """ Sets attributes. """
+    def __init__(self, port=9000, mapping_file="regexner_TOMES/mappings.txt",
+            *args, **kwargs):
+        """ Sets attributes. 
+        
+        Args:
+            - port (int): ???
+            - mapping_file (str): ???
+            - *args/**kwargs: ???
+        """
 
         # set annotation server and options.
         self.port = str(port)
+        self.mapping_file = mapping_file
         self.localhost = "http://localhost:{}".format(self.port) 
-        self.annotator = StanfordCoreNLP(self.localhost)
+        self.annotator = StanfordCoreNLP(self.localhost, *args, **kwargs)
         self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
                 "outputFormat": "json",
-                "regexner.mapping": "regexner_TOMES/mappings.txt"}
+                "regexner.mapping": self.mapping_file}
 
 
     def get_NLP(self, text):
@@ -40,7 +48,8 @@ class TextToNLP():
             <class 'dict'>
         """
         
-        annotator, options = self.annotator, self.options
+        annotator = self.annotator
+        options = self.options
         
         # run NLP.
         try:

@@ -7,18 +7,14 @@ TODO:
     - You need an external, canonical data source for the custom NER tags, perhaps a SKOS
     file.
         - Or at least make it optional in __init__.
+        - Yes: the constructor should set the tag authories.
+    - The XSD filename and object are static, so they should be in the __init__.
     - XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
         - Just set a validation option in xml() and validate BEFORE adding the header, etc.
-    - Change validate() to valid() and return a boolean. If it's not valid, user can use
-    external validator to troubleshoot.
+        - If you do this, you need to return a tuple (xml doc, True|False|None
+        (None = not validated)). Then, also make validate() a private method.
     - If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just make not to pass empty text to CoreNLP?
-    - The XSD filename and object are static, so they should be in the __init__.
-    - Need to be more classlike. The interface should be:
-        # xdoc = NLPtoXML("sample.json")
-        # xdoc.valid() # returns True/False, etc.
-	- add a separate to-string method to get an XML string. I think it's
-	important not to return different data types depending on params. :-]
 """
 
 # import modules.
@@ -141,7 +137,8 @@ class NLPToXML():
                 after = token["after"]
                 ner_tag = token["ner"]
 
-                # if no NER tag, add to root element and continue.
+                # if no NER tag, add to root element and continue;
+                # otherwise, add a "tag" sub-element.
                 if ner_tag == "O":
                     current_tag = ner_tag
                     try:
@@ -152,8 +149,8 @@ class NLPToXML():
                         tagged_content.text += originalText + after
                     continue
 
-                # otherwise, add a "tag" subelement ...
-
+                # add a "tag" sub-element.
+                
                 # if new tag value, increase "id" attribute value.
                 if ner_tag != current_tag:
                     current_tag = ner_tag

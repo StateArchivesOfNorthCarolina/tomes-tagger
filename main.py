@@ -7,7 +7,6 @@ defined schema.
 
 
 TODO:
-    - Need *args/**kwargs anywhere?
     - What to do if NLP timeouts? This is a lib.text_to_nlp issue.
     - Somebody needs to start the Stanford server: should it be this or text_to_nlp?
         - Probably the latter.
