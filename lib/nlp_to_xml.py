@@ -15,6 +15,7 @@ TODO:
         (None = not validated)). Then, also make validate() a private method.
     - If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just make not to pass empty text to CoreNLP?
+    - 
 """
 
 # import modules.
@@ -91,22 +92,14 @@ class NLPToXML():
         return valid
 
 
-    def xml(self, jdict, charset="utf-8", return_string=True, header=False, beautify=True):
-        """ Converts CoreNLP JSON to XML per the ./tagged_content.xsd schema.
+    def xml(self, jdict):
+        """ Converts CoreNLP JSON to lxml.etree._Element per the self.xsd schema.
         
         Args:
             - jdict (dict): CoreNLP output to convert to XML.
-            - charset (str): The encoding for the converted text.
-            - return_string (bool): Use True to return an XML string. Use False to return an
-            lxml.etree._Element.
-            - header (bool): Use True to include an XML header in the output. Use False to
-            omit the header.
-            - beautify (bool): Use True to pretty print the return value if @return_string is
-            True.
 
         Returns:
-            <class 'str'>: If @return_string is True.
-            <class 'lxml.etree._Element'>: If @return_string is False.
+            <class 'lxml.etree._Element'>
         """
 
         # create XML namespace map.
@@ -167,11 +160,33 @@ class NLPToXML():
                 tagged.text = originalText
                 tagged.tail = after
 
-        # convert output to string if needed.
-        if return_string:
-            tagged_content = etree.tostring(tagged_content, xml_declaration=header,
-                            encoding=charset, pretty_print=beautify)
-            tagged_content = tagged_content.decode(charset)
+            return tagged_content
+
+
+    def xstring(self, jdict, charset="utf-8", header=False, beautify=True):
+        """ Converts CoreNLP JSON to an XML string per the self.xsd schema.
+
+        Args:
+            - jdict (dict): CoreNLP output to convert to XML.
+            - charset (str): The encoding for the converted text.
+            - header (bool): Use True to include an XML header in the output. Use False to
+            omit the header.
+            - beautify (bool): Use True to pretty print the return value if @return_string is
+            True.
+
+        Returns:
+            <class 'str'>
+        """
+
+        xml = self.xml
+
+        # get tagged etree._Element.
+        tagged_content = xml(jdict)
+
+        # convert to string.
+        tagged_content = etree.tostring(tagged_content, xml_declaration=header,
+                encoding=charset, pretty_print=beautify)
+        tagged_content = tagged_content.decode(charset)
 
         return tagged_content
 
@@ -185,10 +200,11 @@ def main(json_file):
 
     # convert JSON to XML and validate XML.
     n2x = NLPToXML()
-    xdoc = n2x.xml(jdict, return_string=True)
+    xdoc = n2x.xstring(jdict)
     valid = n2x.validate(xdoc, is_raw=True)
     print(xdoc)
     print(valid)
+
 
 if __name__ == "__main__":
     

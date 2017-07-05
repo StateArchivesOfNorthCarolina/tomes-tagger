@@ -82,7 +82,7 @@ class TOMESToolTagger():
 
         # get NLP; convert to XML.
         nlp = t2n.get_NLP(text)
-        nlpx = n2x.xml(nlp, return_string=True)
+        nlpx = n2x.xstring(nlp)
         return nlpx
 
 
@@ -110,11 +110,11 @@ class TOMESToolTagger():
 
 
 # TEST.
-def main(eaxs_file, tagged_eaxs_file=None):
+def main(eaxs_file):
 
     # make tagged version of EAXS.
     tagger = TOMESToolTagger()
-    tagger.eaxs_to_tagged(eaxs_file, tagged_eaxs_file)
+    tagger.eaxs_to_tagged(eaxs_file)
 
 
 if __name__ == "__main__":
