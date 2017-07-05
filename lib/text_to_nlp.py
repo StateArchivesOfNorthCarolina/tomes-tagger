@@ -7,6 +7,7 @@ TODO:
     - Add timeout length to NLP if text is long.
         - For now, setting timeout when starting the server.
         Info: http://stackoverflow.com/a/36437157
+    - Add an option to start up the server. I'm tired of starting it manually. :-]
 """
 
 # import modules.

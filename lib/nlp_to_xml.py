@@ -7,7 +7,8 @@ TODO:
     - You need an external, canonical data source for the custom NER tags, perhaps a SKOS
     file.
         - Or at least make it optional in __init__.
-        - Yes: the constructor should set the tag authories.
+        - Yes: the constructor should set the tag authories. This should be a list.
+          It's the job of the user to obtain the list and pass it.
     - The XSD filename and object are static, so they should be in the __init__.
     - XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
         - Just set a validation option in xml() and validate BEFORE adding the header, etc.
@@ -159,7 +160,7 @@ class NLPToXML():
                 tagged.text = originalText
                 tagged.tail = after
 
-            return tagged_content
+        return tagged_content
 
 
     def xstring(self, jdict, charset="utf-8", header=False, beautify=True):
