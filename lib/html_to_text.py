@@ -173,23 +173,4 @@ class HTMLToText():
 
         return stdout
 
-
-# TEST.
-def main(html_file):
-
-    # modify HTML.
-    html = open(html_file).read()
-    html = ModifyHTML(html, "html5lib")
-    html.shift_links()
-    html.remove_images()
-    html = html.raw()
-
-    # convert to plain text.
-    h2t = HTMLToText()
-    plain = h2t.text(html, is_raw=True)
-    print(plain)
-    
-if __name__ == "__main__":
-        
-        import plac
-        plac.call(main)
+# fin.
