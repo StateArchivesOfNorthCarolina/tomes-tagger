@@ -15,7 +15,6 @@ TODO:
         (None = not validated)). Then, also make validate() a private method.
     - If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just make not to pass empty text to CoreNLP?
-    - 
 """
 
 # import modules.
