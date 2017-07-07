@@ -67,7 +67,7 @@ class Test_HTMLToText(unittest.TestCase):
 
 
 # CLI TEST.
-def main(html: "HTML string or file."):
+def main(html: "HTML string or file"):
 
     import os
 
