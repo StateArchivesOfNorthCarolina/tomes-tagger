@@ -173,4 +173,8 @@ class HTMLToText():
 
         return stdout
 
-# fin.
+
+if __name__ == "__main__":
+    
+    pass
+

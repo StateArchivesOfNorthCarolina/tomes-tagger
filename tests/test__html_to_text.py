@@ -8,41 +8,87 @@ from lib.html_to_text import *
 
 class Test_HTMLToText(unittest.TestCase):
 
-    
+
     def setUp(self):
 
-        self.H2T = HTMLToText()
-        self.HTML = "<html><head></head><body><a href=\"http://h.w\">{}</a></body></html>"
+        self.h2t = HTMLToText()
+        self.sample = "<html><head></head><body><a href=\"http://h.w\">{}</a></body></html>"
     
     
-    def test__shift_link(self):
+    def test__shift_links(self):
 
-        html = self.HTML.format("Hello World!")
+        sample = self.sample
+        
+        # format sample text.
+        html = self.sample.format("Hello World!")
+        
+        # remove links.
         html = ModifyHTML(html)
         html.shift_links()
         html = html.raw()
-        expected = self.HTML.format("Hello World! [http://h.w]")
+
+        # check if result is expected.
+        expected = sample.format("Hello World! [http://h.w]")
         self.assertEqual(html, expected)
 
     
     def test__remove_images(self):
-
-         img = "Hello World!<img src='hw.jpg' alt='Hello World!'>"
-         html = self.HTML.format(img)
-         html = ModifyHTML(html, "html5lib")
-         html.remove_images()
-         html = html.raw()
-         expected = self.HTML.format("Hello World!")
-         self.assertEqual(html, expected)
+        
+        sample = self.sample
+        
+        # add image tag to sample text.
+        img = "Hello World!<img src='hw.jpg' alt='Hello World!'>"
+        html = sample.format(img)
+        
+        # remove images.
+        html = ModifyHTML(html)
+        html.remove_images()
+        html = html.raw()
+        
+        # check if result is expected. 
+        expected = sample.format("Hello World!")
+        self.assertEqual(html, expected)
 
     
-    def test__text(self):
+    def test__html_to_text(self):
         
-        html = self.HTML.format("Hello World!")
-        plain = self.H2T.text(html, is_raw=True)
+        h2t = self.h2t
+        sample = self.sample
+
+        # format sample text.
+        html = sample.format("Hello World!")
+        
+        # convert to plain text.
+        plain = h2t.text(html, is_raw=True)
+        
+        # check if result is expected.
         expected = "\nHello World!\n\n"
         self.assertEqual(plain, expected)
 
 
+# CLI TEST.
+def main(html: "HTML string or file."):
+
+    import os
+
+    # read HTML file.
+    if os.path.isfile(html):
+        html = open(html).read()
+    
+    # modify HTML.
+    html = ModifyHTML(html)
+    html.shift_links()
+    html.remove_images()
+    html = html.raw()
+
+    # convert to plain text.
+    h2t = HTMLToText()
+    plain = h2t.text(html, is_raw=True)
+    print(plain)
+
+
 if __name__ == "__main__":
-    unittest.main()
+    
+    import plac
+    plac.call(main)
+
