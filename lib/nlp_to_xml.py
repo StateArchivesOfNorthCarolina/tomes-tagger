@@ -191,23 +191,7 @@ class NLPToXML():
         return tagged_content
 
 
-# TEST.
-def main(json_file):
-
-    # load JSON.
-    jdoc = open(json_file).read()
-    jdict = json.loads(jdoc)
-
-    # convert JSON to XML and validate XML.
-    n2x = NLPToXML()
-    xdoc = n2x.xstring(jdict)
-    valid = n2x.validate(xdoc, is_raw=True)
-    print(xdoc)
-    print(valid)
-
-
 if __name__ == "__main__":
-    
-    import plac
-    plac.call(main)
+
+    pass
 
