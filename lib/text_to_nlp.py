@@ -56,17 +56,5 @@ class TextToNLP():
             exit(e)
 
 
-# TEST.
-def main():
-
-    import json
-
-    t2n = TextToNLP()
-    results = t2n.get_NLP("TOMES")
-    results = json.dumps(results, indent=2)
-    print(results)
-
-
 if __name__ == "__main__":
-    main()
-
+    pass
