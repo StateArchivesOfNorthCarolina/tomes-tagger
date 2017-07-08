@@ -2,15 +2,12 @@
 
 """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper around
 pycorenlp (https://github.com/smilli/py-corenlp).
-
-TODO:
-    - Add timeout length to NLP if text is long.
-        - For now, setting timeout when starting the server.
-        Info: http://stackoverflow.com/a/36437157
-    - Add an option to start up the server. I'm tired of starting it manually. :-]
 """
 
 # import modules.
+import os
+import subprocess
+import urllib
 from pycorenlp import StanfordCoreNLP
 
 
@@ -19,12 +16,13 @@ class TextToNLP():
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
 
-    def __init__(self, port=9000, mapping_file="regexner_TOMES/mappings.txt",
+    def __init__(self, host="http://localhost", port=9000, mapping_file="regexner_TOMES/mappings.txt",
             *args, **kwargs):
         """ Sets attributes. 
         
         Args:
             - port (int): ???
+            - timeout (int): ???
             - mapping_file (str): ???
             - *args/**kwargs: ???
         """
@@ -32,8 +30,8 @@ class TextToNLP():
         # set annotation server and options.
         self.port = str(port)
         self.mapping_file = mapping_file
-        self.localhost = "http://localhost:{}".format(self.port) 
-        self.annotator = StanfordCoreNLP(self.localhost, *args, **kwargs)
+        self.host = ":".join([host, self.port])
+        self.annotator = StanfordCoreNLP(self.host, *args, **kwargs)
         self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
                 "outputFormat": "json",
                 "regexner.mapping": self.mapping_file}
