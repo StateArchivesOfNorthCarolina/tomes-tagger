@@ -28,7 +28,7 @@ class Test_NLPToXML(unittest.TestCase):
         self.assertEqual([ncdcr, stanford], ["ncdcr.gov", "stanford.edu"])
 
     
-    def test__xml(self):
+    def test__xstring(self):
         
         n2x = self.n2x
         json_file = self.json_file

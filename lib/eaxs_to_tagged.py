@@ -6,6 +6,7 @@ lxml.etree_Element or an XML file.
 
 TODO:
     - Do you need to support <ExtBodyContent> messages?
+    - Add valid() method. Should be able to check etree._Element OR XML file.
 """
 
 # import modules.
@@ -212,21 +213,6 @@ class EAXSToTagged():
         return
         
 
-# TEST.
-def main(eaxs_file):
-
-    def mark(s):
-        html, nlp = "HTML > NLP", "Text > NLP"
-        if s[:len(nlp)] == nlp:
-            return html # HTML conversion was run.
-        else:
-            return nlp # HTML conversion was not run.
-    e2t = EAXSToTagged(mark, mark)
-    tagged = e2t.write_tagged(eaxs_file, "testTagged.xml")
-
-
 if __name__ == "__main__":
-        
-        import plac
-        plac.call(main)
+    pass
 
