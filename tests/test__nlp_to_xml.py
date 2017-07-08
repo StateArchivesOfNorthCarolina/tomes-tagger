@@ -58,7 +58,6 @@ def main(json_file: "Core NLP JSON file"):
     # convert JSON to XML and validate XML.
     n2x = NLPToXML()
     xdoc = n2x.xstring(jdict)
-    valid = n2x.validate(xdoc, is_raw=True)
     print(xdoc)
 
 
