@@ -102,12 +102,6 @@ class FolderToMETS():
        return
 
 
-# TEST.
-def main():
-    f2m = FolderToMETS(".")
-    metsx = f2m.stringify()
-    print(metsx)
-
-
 if __name__ == "__main__":
-    main()
+    pass
+

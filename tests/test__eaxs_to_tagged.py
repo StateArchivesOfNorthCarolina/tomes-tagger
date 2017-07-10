@@ -2,9 +2,6 @@
 
 # import modules.
 import sys; sys.path.append("..")
-import hashlib
-import os
-import tempfile
 import unittest
 from lxml import etree
 from lib.eaxs_to_tagged import *
