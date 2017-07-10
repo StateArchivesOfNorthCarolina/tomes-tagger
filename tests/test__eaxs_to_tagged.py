@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 
-"""
-TODO:
-    - The tes should be using the valid() method which I haven't written yet.
-        - That's it. Nothing else to test.
-"""
-
 # import modules.
 import sys; sys.path.append("..")
 import hashlib
 import os
 import tempfile
 import unittest
+from lxml import etree
 from lib.eaxs_to_tagged import *
 
 
@@ -21,34 +16,38 @@ class Test_EAXSToTagged(unittest.TestCase):
     def setUp(self):
 
         self.sample = "sample_files/sampleEAXS.xml"
+        self.xsd = etree.parse("mail-account.xsd")
+      
+    
+    def _validate(self, eaxs):
+        """ """
+
+        xsd = self.xsd
+
+        validator = etree.XMLSchema(xsd)
+        valid = validator.validate(eaxs)
+
+        return valid
     
     
-    def test__tagging_workflow(self):
+    def test__validation(self):
+        """ Is it True that ... """
 
         sample = self.sample
-        with tempfile.TemporaryFile() as temp:
-            tagged_sample = temp.name
-        sample_files = [sample, tagged_sample]
-
+        validate = self._validate
+        
         #
         copy = lambda x: x
         
         #
         e2t = EAXSToTagged(copy, copy)
-        tagged = e2t.write_tagged(*sample_files)
+        tagged = e2t.get_tagged(sample)
 
         #
-        hashes = []
-        for f in sample_files:
-            print(f)
-            with open(f, "rb") as f:
-                fr = f.read()
-                checksum = hashlib.sha256(fr).hexdigest()
-                hashes.append(checksum)
-        #os.remove(tagged_sample)
+        valid = validate(tagged)
 
         # check if result is expected.
-        self.assertEqual(*hashes)
+        self.assertEqual(True, valid)
         
 
 

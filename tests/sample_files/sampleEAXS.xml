@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <Account xmlns="http://www.archives.ncdcr.gov/mail-account"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd">
+>
 	<GlobalId>foo</GlobalId>
 	<Folder>
 		<Name>bar</Name>
 		<Message>
 			<RelPath>.</RelPath>
-			<LocalId>lid_1</LocalId>
+			<LocalId>1000</LocalId>
 			<MessageId>
-				<![CDATA[<mid_1>]]>
+				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D7>]]>
 			</MessageId>
 			<MimeVersion>1.0</MimeVersion>
 			<OrigDate>2010-02-12T11:46:40-05:00</OrigDate>
@@ -20,7 +20,10 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 				<![CDATA["Jane Doe" <jane_doe@fake.nc.gov>]]>
 			</To>
 			<Subject>Hi</Subject>
-			<Header />
+			<Header>
+				<Name>Date</Name>
+				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
+			</Header>
 			<MultiBody>
 				<ContentType>multipart/mixed</ContentType>
 				<BoundaryString>--boundary-LibPST-iamunique-32332_-_-</BoundaryString>
@@ -53,27 +56,27 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 					<DispositionFileName>hi.pdf</DispositionFileName>
 					<ExtBodyContent>
 						<RelPath>./attachments/hi.xml</RelPath>
-						<LocalId>lid_1a</LocalId>
+						<LocalId>10001</LocalId>
 						<XMLWrapped>true</XMLWrapped>
 						<Hash>
-							<Value/>
-							<Function/>
+							<Value>49618c929dde66c8bb488073e7312ad9c18c70f1</Value>
+							<Function>SHA1</Function>
 						</Hash>
 					</ExtBodyContent>
 				</SingleBody>
 			</MultiBody>
 			<Eol>LF</Eol>
 			<Hash>
-				<Value/>
-				<Function/>
+				<Value>49618c929dde66c8bb488073e7312ad9c18c70f2</Value>
+				<Function>SHA1</Function>
 			</Hash>
 		</Message>
 		<Message>
 
 			<RelPath>.</RelPath>
-			<LocalId>lid_2</LocalId>
+			<LocalId>1002</LocalId>
 			<MessageId>
-				<![CDATA[<mid_2>]]>
+				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D8>]]>
 			</MessageId>
 			<MimeVersion>1.0</MimeVersion>
 			<OrigDate>2010-02-12T11:46:40-05:00</OrigDate>
@@ -84,7 +87,10 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 				<![CDATA["John Doe" <john_doe@fake.nc.gov>]]>
 			</To>
 			<Subject>Bye</Subject>
-			<Header />
+			<Header>
+				<Name>Date</Name>
+				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
+			</Header>
 			<MultiBody>
 				<ContentType>multipart/mixed</ContentType>
 				<BoundaryString>--boundary-LibPST-iamunique-32332_-_-</BoundaryString>
@@ -103,8 +109,8 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 			</MultiBody>
 			<Eol>LF</Eol>
 			<Hash>
-				<Value/>
-				<Function/>
+				<Value>49618c929dde66c8bb488073e7312ad9c18c70f3</Value>
+				<Function>SHA1</Function>
 			</Hash>
 		</Message>
 		<Mbox>
