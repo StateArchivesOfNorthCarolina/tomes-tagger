@@ -50,26 +50,6 @@ class AnyType():
         return name_el
 
 
-# TEST.
-def main():
-
-    from namespaces import mets_ns
-    
-    # create fake METS element with some attributes and sub-elements.
-    attribs = {"baz" : "1", "mets:qux" : "2"}
-    anytype = AnyType("mets", mets_ns)
-    foo = anytype.anyType("foo", attribs)
-    bar = anytype.anyType("bar", attribs)
-    bar.text = "Lorem ipsum."
-    foo.append(bar)
-    return foo
-
-
 if __name__ == "__main__":
-    
-    anyx = main()
-    
-    # print XML.
-    anyx = etree.tostring(anyx, pretty_print=True)
-    anyx = anyx.decode("utf-8")
-    print(anyx)
+    pass
+

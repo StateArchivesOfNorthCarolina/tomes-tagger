@@ -93,26 +93,6 @@ class FileGrp():
         return fileGrp_el
 
 
-# TEST.
-def main():
-
-    from glob import glob
-    from namespaces import mets_ns
-
-    # create <fileGrp> based on @path.
-    path = "."
-    files = glob(path + "/**/*.*", recursive=True)
-    attribs = {"USE": "Testing"}
-    filegrp_el = FileGrp("mets", mets_ns)
-    filegrp_el = filegrp_el.fileGrp(files, path, "ID_fileGrp", attribs)
-    return filegrp_el
-
-
 if __name__ == "__main__":
-    
-    groupx = main()
+    pass
 
-    # print XML.
-    groupx = etree.tostring(groupx, pretty_print=True)
-    groupx = groupx.decode("utf-8")
-    print(groupx)

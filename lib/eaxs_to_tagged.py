@@ -63,10 +63,8 @@ class EAXSToTagged():
             Each item within the iterator is an lxml.etree._Element.
         """
         
-        ncdcr_uri = self.ncdcr_uri
-        
         # get element generator.
-        message_el = "{" + ncdcr_uri + "}Message"
+        message_el = "{" + self.ncdcr_uri + "}Message"
         messages =  folder_el.iterchildren(tag=message_el)
  
         return messages
@@ -87,8 +85,6 @@ class EAXSToTagged():
             The second item is a str, i.e. @name's value.
         """
 
-        ns_map = self.ns_map
-    
         # set XPath to @name, omitting attachments.
         name = name.replace("/", "/ncdcr:")
         path = "ncdcr:MultiBody"
@@ -97,7 +93,7 @@ class EAXSToTagged():
         path = path.format(name=name)
 
         # get element.
-        name_el = message_el.xpath(path, namespaces=ns_map)
+        name_el = message_el.xpath(path, namespaces=self.ns_map)
         
         # assume defaults; replace with actual values if element exists.
         el, el_text = None, value
@@ -120,16 +116,11 @@ class EAXSToTagged():
             The updated <Message> element.
         """
 
-        html_converter = self.html_converter
-        nlp_tagger = self.nlp_tagger
-        charset = self.charset
-        get_element = self._get_element
-
         # get needed element.
-        content_el, content_text = get_element(message_el, "BodyContent/Content")
-        transfer_encoding_el, transfer_encoding_text = get_element(message_el,
+        content_el, content_text = self._get_element(message_el, "BodyContent/Content")
+        transfer_encoding_el, transfer_encoding_text = self._get_element(message_el,
                 "TransferEncoding")
-        content_type_el, content_type_text = get_element(message_el, "ContentType",
+        content_type_el, content_type_text = self._get_element(message_el, "ContentType",
                 "text/plain")
          
         # stop if no <Content> element exists.
@@ -139,12 +130,12 @@ class EAXSToTagged():
         # decode Base64 <Content> if needed.
         if transfer_encoding_text == "base64":
             content_text = base64.b64decode(content_text)
-            content_text = content_text.decode(charset, errors="backslashreplace")
+            content_text = content_text.decode(self.charset, errors="backslashreplace")
 
         # alter <Content>; wrap in CDATA block.
         if content_type_text in ["text/html", "application/xml+html"]:
-            content_text = html_converter(content_text)
-        content_text = nlp_tagger(content_text)
+            content_text = self.html_converter(content_text)
+        content_text = self.nlp_tagger(content_text)
         content_el.text = etree.CDATA(content_text)
         
         return message_el
@@ -161,10 +152,6 @@ class EAXSToTagged():
             The tagged EAXS document.
         """
 
-        ncdcr_uri = self.ncdcr_uri
-        get_messages = self._get_messages
-        update_message = self._update_message
-
         # parse @eaxs_file; set root.
         parser = etree.XMLParser(strip_cdata=False)
         root = etree.parse(eaxs_file, parser).getroot()
@@ -172,10 +159,10 @@ class EAXSToTagged():
         # iterate through elements; update <Message> elements. 
         children = root.iterchildren()
         for child_el in children:
-            if child_el.tag == "{" + ncdcr_uri + "}Folder":
-                messages = get_messages(child_el)
+            if child_el.tag == "{" + self.ncdcr_uri + "}Folder":
+                messages = self._get_messages(child_el)
                 for message_el in messages:
-                    message_el = update_message(message_el)
+                    message_el = self._update_message(message_el)
 
         return root
 
@@ -196,17 +183,14 @@ class EAXSToTagged():
             - FileExistsError: If @tagged_eaxs_file already exists.
         """
 
-        charset = self.charset
-        get_tagged = self.get_tagged
-
         # raise error if output file already exists.
         if os.path.isfile(tagged_eaxs_file):
             err = "{} already exists.".format(tagged_eaxs_file)
             raise FileExistsError(err)
         
         # write tagged EAXS document to file.
-        tagged_root = get_tagged(eaxs_file)
-        with etree.xmlfile(tagged_eaxs_file, encoding=charset) as xml:
+        tagged_root = self.get_tagged(eaxs_file)
+        with etree.xmlfile(tagged_eaxs_file, encoding=self.charset) as xml:
             xml.write_declaration()
             xml.write(tagged_root, pretty_print=True)
 

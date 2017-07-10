@@ -50,16 +50,14 @@ class FolderToMETS():
             <class 'str'>
         """
 
-        pymets, root = self.pymets, self.root
-        rootx = pymets.stringify(root)
+        #
+        rootx = self.pymets.stringify(self.root)
         return rootx
 
 
     def build(self):
        """ Builds METS sections, appends sections to root. """
        
-       pymets, path, root = self.pymets, self.path, self.root
-
        # set template substitution strings.
        subs = {"eaxs_id": "{eaxs_id}", 
                "eaxs_cdate": "{eaxs_cdate}",
@@ -72,12 +70,12 @@ class FolderToMETS():
        # load and format METS templates; append to root.
        templates = glob("templates/*.xml")
        for template in templates:
-           t_el = pymets.load_template(template, **subs)
-           root.append(t_el)
+           t_el = self.pymets.load_template(template, **subs)
+           self.root.append(t_el)
        
        # create <fileSec>.
-       fileSec = pymets.make("fileSec")
-       root.append(fileSec)
+       fileSec = self.pymets.make("fileSec")
+       self.root.append(fileSec)
 
        # make <fileGrp> for each folder.
        folders = glob("*/", recursive=True)
@@ -85,20 +83,21 @@ class FolderToMETS():
            fs = glob(folder + "/*.*", recursive=True)
            folder_id = "".join(
                    [c.lower() for c in folder if c.isalnum()]) # alpha-numeric only.
-           fileGrp = pymets.fileGrp(filenames=fs, basepath=path, identifier=folder_id)
+           fileGrp = self.pymets.fileGrp(filenames=fs, basepath=self.path,
+                   identifier=folder_id)
            fileSec.append(fileGrp)
        
        # create <structMap>.
-       structMap = pymets.make("structMap")
-       root.append(structMap)
-       file_ids = pymets.get_fileIDs(fileSec)
-       div = pymets.div(file_ids)
+       structMap = self.pymets.make("structMap")
+       self.root.append(structMap)
+       file_ids = self.pymets.get_fileIDs(fileSec)
+       div = self.pymets.div(file_ids)
        structMap.append(div)
 
        # append valid() response to root as comment.
-       valid = pymets.valid(root)
+       valid = self.pymets.valid(self.root)
        valid = "It is {} that this METS document is valid.".format(valid)
-       root.append(pymets.comment(valid))
+       self.root.append(self.pymets.comment(valid))
 
        return
 

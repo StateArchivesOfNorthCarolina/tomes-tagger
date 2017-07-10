@@ -4,6 +4,7 @@
 This module converts Stanford CoreNLP JSON output to XML per the ./tagged_content.xsd schema.
 
 TODO:
+    - You need to declare the namespace stuff in __init__, not xml().
     - You need an external, canonical data source for the custom NER tags, perhaps a SKOS
     file.
         - Or at least make it optional in __init__.
@@ -32,6 +33,9 @@ class NLPToXML():
     def __init__(self):
         """ Sets attributes. """
 
+        # get XSD filepath.
+        self.xsd_file = __file__.replace(".py", ".xsd")
+        
         # custom NER tags.
         self.custom_ner = ["GOV.state_agency",
                           "PII.bank_account_number",
@@ -82,12 +86,11 @@ class NLPToXML():
         
         # parse @xdoc and XSD.
         xdoc = etree.parse(xdoc)
-        xsd = __file__.replace(".py", ".xsd")
-        xsd = etree.parse(xsd)
+        xsd = etree.parse(self.xsd_file)
 
         # validate @xdoc.
-        xsd = etree.XMLSchema(xsd)
-        valid = xsd.validate(xdoc)
+        validator = etree.XMLSchema(xsd)
+        valid = validator.validate(xdoc)
 
         return valid
 
@@ -192,6 +195,5 @@ class NLPToXML():
 
 
 if __name__ == "__main__":
-
     pass
 

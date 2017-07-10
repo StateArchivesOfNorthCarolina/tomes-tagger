@@ -22,9 +22,7 @@ class Test_EAXSToTagged(unittest.TestCase):
     def _validate(self, eaxs):
         """ """
 
-        xsd = self.xsd
-
-        validator = etree.XMLSchema(xsd)
+        validator = etree.XMLSchema(self.xsd)
         valid = validator.validate(eaxs)
 
         return valid
@@ -33,18 +31,15 @@ class Test_EAXSToTagged(unittest.TestCase):
     def test__validation(self):
         """ Is it True that ... """
 
-        sample = self.sample
-        validate = self._validate
-        
         #
         copy = lambda x: x
         
         #
         e2t = EAXSToTagged(copy, copy)
-        tagged = e2t.get_tagged(sample)
+        tagged = e2t.get_tagged(self.sample)
 
         #
-        valid = validate(tagged)
+        valid = self._validate(tagged)
 
         # check if result is expected.
         self.assertEqual(True, valid)

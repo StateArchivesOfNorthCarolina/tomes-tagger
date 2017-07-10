@@ -17,8 +17,6 @@ class Test_HTMLToText(unittest.TestCase):
     
     def test__shift_links(self):
 
-        sample = self.sample
-        
         # format sample text.
         html = self.sample.format("Hello World!")
         
@@ -28,17 +26,15 @@ class Test_HTMLToText(unittest.TestCase):
         html = html.raw()
 
         # check if result is expected.
-        expected = sample.format("Hello World! [http://h.w]")
+        expected = self.sample.format("Hello World! [http://h.w]")
         self.assertEqual(html, expected)
 
     
     def test__remove_images(self):
         
-        sample = self.sample
-        
         # add image tag to sample text.
         img = "Hello World!<img src='hw.jpg' alt='Hello World!'>"
-        html = sample.format(img)
+        html = self.sample.format(img)
         
         # remove images.
         html = ModifyHTML(html)
@@ -46,20 +42,17 @@ class Test_HTMLToText(unittest.TestCase):
         html = html.raw()
         
         # check if result is expected. 
-        expected = sample.format("Hello World!")
+        expected = self.sample.format("Hello World!")
         self.assertEqual(html, expected)
 
     
     def test__html_to_text(self):
         
-        h2t = self.h2t
-        sample = self.sample
-
         # format sample text.
-        html = sample.format("Hello World!")
+        html = self.sample.format("Hello World!")
         
         # convert to plain text.
-        plain = h2t.text(html, is_raw=True)
+        plain = self.h2t.text(html, is_raw=True)
         
         # check if result is expected.
         expected = "\nHello World!\n\n"

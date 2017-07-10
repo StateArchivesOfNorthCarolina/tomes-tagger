@@ -45,12 +45,9 @@ class TextToNLP():
             <class 'dict'>
         """
         
-        annotator = self.annotator
-        options = self.options
-        
         # run NLP.
         try:
-            nlp = annotator.annotate(text, properties=options)
+            nlp = self.annotator.annotate(text, properties=self.options)
             return nlp
         except Exception as e:
             exit(e)

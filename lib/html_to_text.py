@@ -9,6 +9,7 @@ TODO:
     - I think __del__ needs to be __exit__?
         - But maybe just have the user call tempfile instead of making your own?
         - Also, did you try using tempfile instead of just using open()?
+        - IWO: "with TemporaryFile ... (run command)" - then the file will auto-delete.
 """
 
 # import modules.
@@ -43,10 +44,8 @@ class ModifyHTML():
             <class 'bs4.BeautifulSoup'>
         """
 
-        root = self.root
-
         # get all A tags.
-        a_tags = root.find_all("a")
+        a_tags = self.root.find_all("a")
         
         # append @href values to text values.
         for a_tag in a_tags:
@@ -62,7 +61,7 @@ class ModifyHTML():
                 text = a_tag.string + " [" + href + "]"  
                 a_tag.string.replace_with(text)
 
-        return root
+        return self.root
 
 
     def remove_images(self):
@@ -72,14 +71,12 @@ class ModifyHTML():
             <class 'bs4.BeautifulSoup'>
         """
 
-        root = self.root
-
         # get all image tags; remove them.
-        img_tags = root.find_all("img")
+        img_tags = self.root.find_all("img")
         for img_tag in img_tags:
             img_tag.extract()
 
-        return root
+        return self.root
 
 
     def raw(self):
@@ -88,9 +85,8 @@ class ModifyHTML():
         Returns:
             <class 'str'>
         """
-        
-        root = self.root
-        return str(root)
+
+        return str(self.root)
 
 
 class HTMLToText():

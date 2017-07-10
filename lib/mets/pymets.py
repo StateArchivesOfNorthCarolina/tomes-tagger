@@ -23,20 +23,20 @@ class PyMETS():
     """ A class with covenience methods for creating METS files. """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd=None):
+    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd_file=None):
         """ Set instance attributes.
 
         Args:
             - ns_prefix (str): The METS namespace prefix. 
             - ns_map (dict): Namespace prefixes are keys; namespace URIs are values.
-            - xsd (str): The filepath for the METS XSD.
+            - xsd_file (str): The filepath for the METS XSD.
         """
 
         self.ns_prefix = ns_prefix
         self.ns_map = ns_map
-        if xsd is None:
-            xsd = os.path.split(os.path.abspath(__file__))[0] + "/mets_1-11.xsd"
-        self.xsd = xsd
+        if xsd_file is None:
+            xsd_file = os.path.split(os.path.abspath(__file__))[0] + "/mets_1-11.xsd"
+        self.xsd_file = xsd_file
         self.cdata = etree.CDATA
         self.comment = etree.Comment
 
@@ -78,9 +78,9 @@ class PyMETS():
     def valid(self, xdoc):
         """ Returns boolean for "Is @xdoc valid against self.xsd?". """
         
-        xsd = self.load(self.xsd, False)
-        xsd = etree.XMLSchema(xsd)
-        valid = xsd.validate(xdoc)
+        xsd = self.load(self.xsd_file, False)
+        validator = etree.XMLSchema(xsd)
+        valid = validator.validate(xdoc)
         return valid
 
 

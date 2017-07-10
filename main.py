@@ -52,8 +52,6 @@ class TOMESToolTagger():
             str: The return value.
         """
 
-        h2t = self.h2t
-
         # alter DOM.
         html = ModifyHTML(html)
         html.shift_links()
@@ -61,7 +59,7 @@ class TOMESToolTagger():
         html = html.raw()
         
         # convert HTML to text.
-        text = h2t.text(html, is_raw=True)
+        text = self.h2t.text(html, is_raw=True)
         return text
 
 
@@ -77,12 +75,9 @@ class TOMESToolTagger():
             The string is an XML document.
         """
 
-        t2n = self.t2n
-        n2x = self.n2x
-
         # get NLP; convert to XML.
-        nlp = t2n.get_NLP(text)
-        nlpx = n2x.xstring(nlp)
+        nlp = self.t2n.get_NLP(text)
+        nlpx = self.n2x.xstring(nlp)
         return nlpx
 
 
@@ -99,12 +94,10 @@ class TOMESToolTagger():
             None
         """
 
-        e2t = self.e2t
-        
         # create tagged EAXS.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
-        tagged = e2t.write_tagged(eaxs_file, tagged_eaxs_file)
+        tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         
         return
 
