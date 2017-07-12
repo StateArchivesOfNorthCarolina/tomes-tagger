@@ -94,10 +94,10 @@ class FolderToMETS():
        div = self.pymets.div(file_ids)
        structMap.append(div)
 
-       # append valid() response to root as comment.
-       valid = self.pymets.valid(self.root)
-       valid = "It is {} that this METS document is valid.".format(valid)
-       self.root.append(self.pymets.comment(valid))
+       # append validation response to root as comment.
+       is_valid = self.pymets.validate(self.root)
+       is_valid = "It is {} that this METS document is valid.".format(is_valid)
+       self.root.append(self.pymets.comment(is_valid))
 
        return
 

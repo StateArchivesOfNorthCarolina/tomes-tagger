@@ -83,7 +83,7 @@ class PyMETS():
         return xstring
 
 
-    def valid(self, xdoc):
+    def validate(self, xdoc):
         """ Returns boolean for "Is @xdoc valid against self.xsd?". """
         
         #

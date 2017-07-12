@@ -43,7 +43,7 @@ class Test_PyMETS(unittest.TestCase):
         root.append(structMap)
 
         # test if METS is valid
-        is_valid = pymets.valid(root)
+        is_valid = pymets.validate(root)
 
         # check if result is expected.
         self.assertEqual(True, is_valid)  

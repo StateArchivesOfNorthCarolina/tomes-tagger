@@ -17,12 +17,12 @@ class Test_NLPToXML(unittest.TestCase):
         self.json_file = "sample_files/sampleCoreNLP.json"
 
     
-    def test__get_authority(self):
+    def test___get_authority(self):
 
         # test if authority assignment is as expected.
         tag = random.choice(self.n2x.custom_ner)
-        ncdcr = self.n2x.get_authority(tag)
-        stanford = self.n2x.get_authority("")
+        ncdcr = self.n2x._get_authority(tag)
+        stanford = self.n2x._get_authority("")
         self.assertEqual([ncdcr, stanford], ["ncdcr.gov", "stanford.edu"])
 
     
