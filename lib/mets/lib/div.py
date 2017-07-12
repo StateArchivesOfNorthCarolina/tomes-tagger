@@ -8,6 +8,7 @@ class Div():
     """ A class to create a METS <div> tree for a given list of files. The output can be
     integrated into a complete METS file's <structMap> element. """
     
+
     def __init__(self, ns_prefix, ns_map):
         """ Set instance attributes. 
         

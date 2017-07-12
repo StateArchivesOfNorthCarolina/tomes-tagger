@@ -30,8 +30,9 @@ class ModifyHTML():
         >>> html.raw() # back to string ...
     """
 
+
     def __init__(self, html, parser="html5lib"):
-        """ Sets instance attributes."""
+        """ Sets instance attributes. """
 
         self.root = BeautifulSoup(html, parser)
 
@@ -41,7 +42,7 @@ class ModifyHTML():
         with "http" or "https", i.e. "<a href='bar'>foo</a>" to "<a href='bar'>foo [bar]</a>".
 
         Returns:
-            <class 'bs4.BeautifulSoup'>
+            None
         """
 
         # get all A tags.
@@ -61,14 +62,14 @@ class ModifyHTML():
                 text = a_tag.string + " [" + href + "]"  
                 a_tag.string.replace_with(text)
 
-        return self.root
+        return
 
 
     def remove_images(self):
         """ Removes image tags from DOM.
         
         Returns:
-            <class 'bs4.BeautifulSoup'>
+            None
         """
 
         # get all image tags; remove them.
@@ -76,7 +77,7 @@ class ModifyHTML():
         for img_tag in img_tags:
             img_tag.extract()
 
-        return self.root
+        return
 
 
     def raw(self):
@@ -86,7 +87,8 @@ class ModifyHTML():
             <class 'str'>
         """
 
-        return str(self.root)
+        strroot = str(self.root)
+        return strroot
 
 
 class HTMLToText():
@@ -165,10 +167,11 @@ class HTMLToText():
         cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
 
         # return stdout.
-        stdout = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
+        text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
 
-        return stdout
+        return text
 
 
 if __name__ == "__main__":    
     pass
+

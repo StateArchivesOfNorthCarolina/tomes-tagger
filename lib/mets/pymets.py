@@ -49,39 +49,50 @@ class PyMETS():
     def load(self, xml, is_raw=True):
         """ Returns etree element for an XML file or XML string (@is_raw==True). """
         
+        #
         parser = etree.XMLParser(remove_blank_text=True)
+        
+        #
         if is_raw:
-            x_el = etree.fromstring(xml, parser)
+            loaded_el = etree.fromstring(xml, parser)
         else:
-            x_el = etree.parse(xml, parser).getroot()
-        return x_el
+            loaded_el = etree.parse(xml, parser).getroot()
+        
+        return loaded_el
 
 
     def load_template(self, xml, charset="utf-8", *args, **kwargs):
         """ Returns etree element for an XML string after formatting the string using the
         string.Formatter.format() method for @args and @kwargs. """
 
+        #
         with codecs.open(xml, encoding=charset) as xfile:
             xstring = xfile.read().format(*args, **kwargs)
-        xload = self.load(xstring)
-        return xload
+        
+        template_el = self.load(xstring)
+        return template_el
 
 
     def stringify(self, element, beautify=True, charset="utf-8"):
         """ Returns XML as string for a given etree @element. """
 
+        #
         xstring = etree.tostring(element, pretty_print=beautify)
         xstring = xstring.decode(charset)
+        
         return xstring
 
 
     def valid(self, xdoc):
         """ Returns boolean for "Is @xdoc valid against self.xsd?". """
         
+        #
         xsd = self.load(self.xsd_file, False)
         validator = etree.XMLSchema(xsd)
-        valid = validator.validate(xdoc)
-        return valid
+        
+        #
+        is_valid = validator.validate(xdoc)
+        return is_valid
 
 
     def make(self, *args, **kwargs):
@@ -109,8 +120,10 @@ class PyMETS():
         """ Returns a list of <fileGrp/file[@ID]> values for a given @file_el which can be an
         individual <fileGrp> etree element or and entire <fileSec> etree element."""
 
+        #
         path = "{" + self.ns_map[self.ns_prefix] + "}file"
-        
+
+        #
         if file_el.tag[-7:] == "fileSec":
             path = "*" + path
         
@@ -122,62 +135,24 @@ class PyMETS():
         """ Returns <mdWrap> etree element with "MDTYPE" attribute of @mdtype and
         optional @attributes. The @xtree etree element will have a parent element of
         <xmlData> (@xmlData==True) or <binData>. """
-
+        
+        #
         attributes["MDTYPE"] = mdtype
         wrap_el = self.make("mdWrap", attributes)
 
+        #
         if xmlData:
             xobdata_el = self.make("xmlData")
         else:
             xobdata_el = self.make("binData")
         
+        #
         xobdata_el.append(xtree)
         wrap_el.append(xobdata_el)
+        
         return wrap_el
         
-        
-# TEST.
-def main():
-    
-    pymets = PyMETS()
-    
-    # create METS root.
-    root = pymets.make("mets")
-    
-    # create <metsHdr>; append to root.
-    header = pymets.make("metsHdr")
-    root.append(header)
-    
-    # create header <agent>.
-    attributes = {"ROLE":"CREATOR", "TYPE":"OTHER",  "OTHERTYPE":"Software Agent"}
-    agent = pymets.make("agent", attributes=attributes)
-    header.append(agent)
-    name = pymets.make("name")
-    name.text = "TOMES Tool"
-    agent.append(name)
-
-    # create <fileSec>.
-    fileSec = pymets.make("fileSec")
-    fileGrp = pymets.fileGrp(filenames=[__file__], basepath=".", identifier="source_code")
-    fileSec.append(fileGrp)
-    root.append(fileSec)
-
-    # create <structMap> and <div>.
-    structMap = pymets.make("structMap")
-    file_ids = pymets.get_fileIDs(fileSec)
-    div = pymets.div(file_ids)
-    structMap.append(div)
-    root.append(structMap)
-
-    # append valid() response to root as comment.
-    valid = pymets.valid(root)
-    valid = "It is {} that this METS document is valid.".format(valid)
-    root.append(pymets.comment(valid))
-
-    # print METS.
-    rootx = pymets.stringify(root)
-    print(rootx)
-
 
 if __name__ == "__main__":
-    main()
+    pass
+

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 """
-This module converts Stanford CoreNLP JSON output to XML per the ./tagged_content.xsd schema.
+This module converts Stanford CoreNLP JSON output to XML per the Tagged EAXS schema.
 
 TODO:
-    - You need to declare the namespace stuff in __init__, not xml().
     - You need an external, canonical data source for the custom NER tags, perhaps a SKOS
     file.
         - Or at least make it optional in __init__.
@@ -27,8 +26,8 @@ from lxml import etree
 
 
 class NLPToXML():
-    """ A class for converting CoreNLP JSON output to XML per the ./tagged_content.xsd
-    schema. """
+    """ A class for converting CoreNLP JSON output to XML per the Tagged EAXS schema. """
+
 
     def __init__(self):
         """ Sets attributes. """
@@ -36,6 +35,10 @@ class NLPToXML():
         # get XSD filepath.
         self.xsd_file = __file__.replace(".py", ".xsd")
         
+        # set namespace attributes.
+        self.ns_uri = "http://archives.ncdcr.gov/mail-account/tagged-content/"
+        self.ns_map  = {None: self.ns_uri}
+
         # custom NER tags.
         self.custom_ner = ["GOV.state_agency",
                           "PII.bank_account_number",
@@ -61,15 +64,15 @@ class NLPToXML():
         """
 
         if ner_tag in self.custom_ner:
-            tag_authority = "ncdcr.gov"
+            authority = "ncdcr.gov"
         else:
-            tag_authority = "stanford.edu"
+            authority = "stanford.edu"
         
-        return tag_authority
+        return authority
 
 
     def validate(self, xdoc, is_raw=True):
-        """ Determines if XML document @xdoc is valid or not per the ./tagged_content.xsd
+        """ Determines if XML document @xdoc is valid or not per the Tagged EAXS
         schema.
 
         Args:
@@ -90,13 +93,13 @@ class NLPToXML():
 
         # validate @xdoc.
         validator = etree.XMLSchema(xsd)
-        valid = validator.validate(xdoc)
+        is_valid = validator.validate(xdoc)
 
-        return valid
+        return is_valid
 
 
     def xml(self, jdict):
-        """ Converts CoreNLP JSON to lxml.etree._Element per the self.xsd schema.
+        """ Converts CoreNLP JSON to lxml.etree._Element per the Tagged EAXS schema.
         
         Args:
             - jdict (dict): CoreNLP output to convert to XML.
@@ -105,13 +108,9 @@ class NLPToXML():
             <class 'lxml.etree._Element'>
         """
 
-        # create XML namespace map.
-        ns_url = "http://archives.ncdcr.gov/mail-account/tagged-content/"
-        ns_prefix = "{" + ns_url + "}"
-        ns_map = {None : ns_url}
-
         # create root element.
-        tagged_content = etree.Element(ns_prefix + "tagged_content", nsmap=ns_map)
+        tagged_content = etree.Element("{" + self.ns_uri + "}tagged_content",
+                nsmap=self.ns_map)
         tagged_content.text = ""
         
         # start tracking "tag" subelements.
@@ -156,7 +155,8 @@ class NLPToXML():
                 tag_authority = self.get_authority(ner_tag)
             
                 # add "tag" subelement and attributes to root.
-                tagged = etree.SubElement(tagged_content, ns_prefix + "tagged", nsmap=ns_map)
+                tagged = etree.SubElement(tagged_content, "{" + self.ns_uri + "}tagged",
+                        nsmap=self.ns_map)
                 tagged.set("entity", ner_tag)
                 tagged.set("authority", tag_authority)
                 tagged.set("id", str(tag_id)   )
@@ -167,7 +167,7 @@ class NLPToXML():
 
 
     def xstring(self, jdict, charset="utf-8", header=False, beautify=True):
-        """ Converts CoreNLP JSON to an XML string per the self.xsd schema.
+        """ Converts CoreNLP JSON to an XML string per the Tagged EAXS schema.
 
         Args:
             - jdict (dict): CoreNLP output to convert to XML.
@@ -181,10 +181,8 @@ class NLPToXML():
             <class 'str'>
         """
 
-        xml = self.xml
-
         # get tagged etree._Element.
-        tagged_content = xml(jdict)
+        tagged_content = self.xml(jdict)
 
         # convert to string.
         tagged_content = etree.tostring(tagged_content, xml_declaration=header,

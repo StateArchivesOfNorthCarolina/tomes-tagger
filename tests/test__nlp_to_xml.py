@@ -42,15 +42,16 @@ class Test_NLPToXML(unittest.TestCase):
 # CLI TEST.
 def main(json_file: "Core NLP JSON file"):
 
-    # load JSON; convert to dict.
+    # load JSON.
     with open(json_file) as f:
         jdoc = f.read()
         jdict = json.loads(jdoc)
     
+    # convert JSON to dict.
     jdoc = open(json_file).read()
     jdict = json.loads(jdoc)
 
-    # convert JSON to XML and validate XML.
+    # convert dict to XML.
     n2x = NLPToXML()
     xdoc = n2x.xstring(jdict)
     print(xdoc)

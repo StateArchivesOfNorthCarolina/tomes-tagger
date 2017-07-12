@@ -14,16 +14,7 @@ class Test_EAXSToTagged(unittest.TestCase):
 
         self.sample = "sample_files/sampleEAXS.xml"
         self.xsd = etree.parse("mail-account.xsd")
-      
-    
-    def _validate(self, eaxs):
-        """ """
 
-        validator = etree.XMLSchema(self.xsd)
-        valid = validator.validate(eaxs)
-
-        return valid
-    
     
     def test__validation(self):
         """ Is it True that ... """
@@ -36,27 +27,31 @@ class Test_EAXSToTagged(unittest.TestCase):
         tagged = e2t.get_tagged(self.sample)
 
         #
-        valid = self._validate(tagged)
+        validator = etree.XMLSchema(self.xsd)
+        is_valid = validator.validate(tagged)
 
         # check if result is expected.
-        self.assertEqual(True, valid)
-        
+        self.assertEqual(True, is_valid)  
 
 
 # CLI TEST.
 def main(eaxs_file: "EAXS file"):
 
+    #
     def mark(s):
         html, nlp = "HTML > NLP", "Text > NLP"
         if s[:len(nlp)] == nlp:
             return html # HTML conversion was run.
         else:
             return nlp # HTML conversion was not run.
+
+    #
     e2t = EAXSToTagged(mark, mark)
     tagged = e2t.write_tagged(eaxs_file, "testTagged.xml")
 
 
 if __name__ == "__main__":
+
     import plac
     plac.call(main)
 

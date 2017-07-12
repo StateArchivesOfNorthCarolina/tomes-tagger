@@ -2,6 +2,9 @@
 
 """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper around
 pycorenlp (https://github.com/smilli/py-corenlp).
+
+TODO:
+    - I don't think this should exit() on error. I think it should raise the error.
 """
 
 # import modules.
@@ -55,3 +58,4 @@ class TextToNLP():
 
 if __name__ == "__main__":
     pass
+

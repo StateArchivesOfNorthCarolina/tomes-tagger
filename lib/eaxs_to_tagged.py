@@ -152,19 +152,19 @@ class EAXSToTagged():
             The tagged EAXS document.
         """
 
-        # parse @eaxs_file; set root.
+        # parse @eaxs_file; set root for tagged output.
         parser = etree.XMLParser(strip_cdata=False)
-        root = etree.parse(eaxs_file, parser).getroot()
+        tagged = etree.parse(eaxs_file, parser).getroot()
 
         # iterate through elements; update <Message> elements. 
-        children = root.iterchildren()
+        children = tagged.iterchildren()
         for child_el in children:
             if child_el.tag == "{" + self.ncdcr_uri + "}Folder":
                 messages = self._get_messages(child_el)
                 for message_el in messages:
                     message_el = self._update_message(message_el)
 
-        return root
+        return tagged
 
 
     def write_tagged(self, eaxs_file, tagged_eaxs_file):
@@ -193,7 +193,7 @@ class EAXSToTagged():
         with etree.xmlfile(tagged_eaxs_file, encoding=self.charset) as xml:
             xml.write_declaration()
             xml.write(tagged_root, pretty_print=True)
-
+            
         return
         
 

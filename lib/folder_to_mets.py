@@ -51,8 +51,8 @@ class FolderToMETS():
         """
 
         #
-        rootx = self.pymets.stringify(self.root)
-        return rootx
+        strroot = self.pymets.stringify(self.root)
+        return strroot
 
 
     def build(self):
