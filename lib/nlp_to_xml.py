@@ -53,7 +53,7 @@ class NLPToXML():
                           "PII.social_security_number"]
 
 
-    def get_authority(self, ner_tag):
+    def _get_authority(self, ner_tag):
         """ Returns the authority's domain for an NER tag.
 
         Args:
@@ -152,7 +152,7 @@ class NLPToXML():
                     tag_id += 1
                 
                 # get "authority" attribute value.
-                tag_authority = self.get_authority(ner_tag)
+                tag_authority = self._get_authority(ner_tag)
             
                 # add "tag" subelement and attributes to root.
                 tagged = etree.SubElement(tagged_content, "{" + self.ns_uri + "}tagged",
