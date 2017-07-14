@@ -17,37 +17,37 @@ class Test_EAXSToTagged(unittest.TestCase):
 
     
     def test__validation(self):
-        """ Is it True that ... """
+        """ Is it sample EAXS document valid? """
 
-        #
+        # function to return arg unaltered.
         copy = lambda x: x
         
-        #
+        # make tagged EAXS.
         e2t = EAXSToTagged(copy, copy)
         tagged = e2t.get_tagged(self.sample)
 
-        #
+        # validate tagged EAXS.
         validator = etree.XMLSchema(self.xsd)
         is_valid = validator.validate(tagged)
 
-        # check if result is expected.
-        self.assertEqual(True, is_valid)  
+        # check if result is as expected.
+        self.assertTrue(is_valid) 
 
 
 # CLI TEST.
-def main(eaxs_file: "EAXS file"):
+def main(eaxs_file: "input EAXS file", tagged_file: "tagged EAXS destination"):
 
-    #
+    # function to mark processing for HTML emails VS. plain text.
     def mark(s):
         html, nlp = "HTML > NLP", "Text > NLP"
         if s[:len(nlp)] == nlp:
-            return html # HTML conversion was run.
+            return html # theoretical HTML conversion was run.
         else:
-            return nlp # HTML conversion was not run.
+            return nlp # theoretical HTML conversion was NOT run.
 
-    #
+    # write tagged EAXS to file.
     e2t = EAXSToTagged(mark, mark)
-    tagged = e2t.write_tagged(eaxs_file, "testTagged.xml")
+    tagged = e2t.write_tagged(eaxs_file, tagged_file)
 
 
 if __name__ == "__main__":

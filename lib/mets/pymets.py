@@ -22,7 +22,26 @@ import lib.namespaces as namespaces
 
 
 class PyMETS():
-    """ A class with covenience methods for creating METS files. """
+    """ A class with covenience methods for creating METS files.
+    
+    Example:
+    >>> pymets = PyMETS()
+    >>> root = pymets.make("mets") # create METS root.
+    >>> header = pymets.make("metsHdr")
+    >>> root.append(header)
+    >>> attributes = {"ROLE":"CREATOR", "TYPE":"OTHER",  "OTHERTYPE":"Software Agent"}
+    >>> agent = pymets.make("agent", attributes=attributes)
+    >>> header.append(agent)
+    >>> name = pymets.make("name")
+    >>> name.text = "PyMETS"
+    >>> agent.append(name)
+    >>> pymets.stringify(root) # string version of METS.
+    '<mets:mets xmlns:mets="http://www.loc.gov/METS/"
+    ...
+    </mets:mets>\n'
+    >>> pymets.validate(root) # Not valid due to missing <StructMap>, etc.
+    False
+    """
 
     
     def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd_file=None):

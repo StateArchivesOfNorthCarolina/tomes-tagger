@@ -18,29 +18,35 @@ class Test_NLPToXML(unittest.TestCase):
 
     
     def test___get_authority(self):
+        """ Are the authorities assigned correctly for NER tags? """
 
-        # test if authority assignment is as expected.
+        # get authorities.
         tag = random.choice(self.n2x.custom_ner)
         ncdcr = self.n2x._get_authority(tag)
         stanford = self.n2x._get_authority("")
+
+        # check if result is as expected.
         self.assertEqual([ncdcr, stanford], ["ncdcr.gov", "stanford.edu"])
 
     
-    def test__xstring(self):
+    def test__validation(self):
+        """ Is the sample tagged XML snippet valid? """
         
         # load JSON; convert to dict.
         with open(self.json_file) as f:
             jdoc = f.read()
             jdict = json.loads(jdoc)
         
-        # test if XML is valid.
-        xml = self.n2x.xstring(jdict)
+        # validate XML.
+        xml = self.n2x.xstring(jdict, header=False)
         is_valid = self.n2x.validate(xml, is_raw=True)
-        self.assertTrue(is_valid == True)
+        
+        # check if result is as expected.
+        self.assertTrue(is_valid)
 
 
 # CLI TEST.
-def main(json_file: "Core NLP JSON file"):
+def main(json_file: "CoreNLP JSON file"):
 
     # load JSON.
     with open(json_file) as f:

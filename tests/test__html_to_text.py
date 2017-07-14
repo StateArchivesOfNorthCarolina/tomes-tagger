@@ -16,6 +16,7 @@ class Test_HTMLToText(unittest.TestCase):
     
     
     def test__shift_links(self):
+        """ Does extracting href values into body text work? """
 
         # format sample text.
         html = self.sample.format("Hello World!")
@@ -25,12 +26,13 @@ class Test_HTMLToText(unittest.TestCase):
         html.shift_links()
         html = html.raw()
 
-        # check if result is expected.
+        # check if result is as expected.
         expected = self.sample.format("Hello World! [http://h.w]")
         self.assertEqual(html, expected)
 
     
     def test__remove_images(self):
+        """ Does removing image tags work? """
         
         # add image tag to sample text.
         img = "Hello World!<img src='hw.jpg' alt='Hello World!'>"
@@ -41,12 +43,13 @@ class Test_HTMLToText(unittest.TestCase):
         html.remove_images()
         html = html.raw()
         
-        # check if result is expected. 
+        # check if result is as expected. 
         expected = self.sample.format("Hello World!")
         self.assertEqual(html, expected)
 
     
     def test__html_to_text(self):
+        """ Does HTML to text conversion work? """
         
         # format sample text.
         html = self.sample.format("Hello World!")
@@ -54,7 +57,7 @@ class Test_HTMLToText(unittest.TestCase):
         # convert to plain text.
         plain = self.h2t.text(html, is_raw=True)
         
-        # check if result is expected.
+        # check if result is as expected.
         expected = "\nHello World!\n\n"
         self.assertEqual(plain, expected)
 
