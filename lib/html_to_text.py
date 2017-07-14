@@ -3,13 +3,8 @@
 """
 This module has classes for manipulating HTML and converting HTML to plain text.
 
-TODO:
-    - Is there any way to use io.StringIO instead of a temp file?
-        - this might help avoid the permision error.
-    - I think __del__ needs to be __exit__?
-        - But maybe just have the user call tempfile instead of making your own?
-        - Also, did you try using tempfile instead of just using open()?
-        - IWO: "with TemporaryFile ... (run command)" - then the file will auto-delete.
+Todo:
+    * Use tempfile instead of creating @temp_file in __init__; remove __del__.
 """
 
 # import modules.
@@ -23,11 +18,11 @@ class ModifyHTML():
     """ A class with tools to modify the HTML DOM via BeautifulSoup.
     
     Example:
-        >>> html = open("sample.html").read() # string
-        >>> html = ModifyHTML(html, "html5lib") #BeautifulSoup object
-        >>> html.shift_links() # alters DOM
-        >>> html.remove_images() # alters DOM
-        >>> html.raw() # back to string ...
+        >>> html = open("sample.html").read() # string.
+        >>> html = ModifyHTML(html, "html5lib") #BeautifulSoup object.
+        >>> html.shift_links()
+        >>> html.remove_images()
+        >>> html.raw() # string version of the HTML with shifted links and no images.
     """
 
 
@@ -81,10 +76,10 @@ class ModifyHTML():
 
 
     def raw(self):
-        """ Returns string version of DOM.
+        """ Returns string version of current DOM.
         
         Returns:
-            <class 'str'>
+            str: The return value.
         """
 
         strroot = str(self.root)
@@ -97,8 +92,7 @@ class HTMLToText():
     
     Examples:
     >>> h2t = HTMLToText()
-    >>> h2t.text("sample.html")
-    # returns plain text version of "sample.html"
+    >>> h2t.text("sample.html") # returns plain text version of "sample.html"
     >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
     '\nHello World!\n\n'
     """
@@ -138,7 +132,7 @@ class HTMLToText():
 
     def text(self, html, is_raw=False, charset="utf-8"):
 
-        """ Converts HTML files OR strings to plain text via the Lynx browser.
+        """ Converts HTML files OR strings to plain text string via the Lynx browser.
 
         Args:
             - html (str): The HTML file OR the raw HTML string to convert to text.
@@ -146,7 +140,7 @@ class HTMLToText():
             - charset (str): The encoding for the converted text.
 
         Returns:
-            <class 'str'>
+            str: The return value.
         """
     
         # create beginning Lynx command line snippet.

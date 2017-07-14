@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 
 """
-This module converts Stanford CoreNLP JSON output to XML per the Tagged EAXS schema.
+This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema.
 
-TODO:
-    - You need an external, canonical data source for the custom NER tags, perhaps a SKOS
+Todo:
+    * You need an external, canonical data source for the custom NER tags, perhaps a SKOS
     file.
         - Or at least make it optional in __init__.
         - Yes: the constructor should set the tag authories. This should be a list.
           It's the job of the user to obtain the list and pass it.
-    - The XSD filename and object are static, so they should be in the __init__.
-    - XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
-        - Just set a validation option in xml() and validate BEFORE adding the header, etc.
-        - If you do this, you need to return a tuple (xml doc, True|False|None
-        (None = not validated)). Then, also make validate() a private method.
-    - If jdict["sentences"] raises a TypeError, you need to handle it.
-        - Or should you just make not to pass empty text to CoreNLP?
+    * The XSD filename and object are static, so they should be in the __init__.
+    * XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
+    * validate() should ONLY work for etree._Element and not strings. 
+        - So, get rid of is_raw.
+    * If jdict["sentences"] raises a TypeError, you need to handle it.
+        - Or should you just raise and error before passing empty text to CoreNLP? That would
+        certainly be more efficient.
 """
 
 # import modules.
@@ -26,11 +26,11 @@ from lxml import etree
 
 
 class NLPToXML():
-    """ A class for converting CoreNLP JSON output to XML per the Tagged EAXS schema. """
+    """ A class for converting CoreNLP JSON output to XML per the tagged EAXS schema. """
 
 
     def __init__(self):
-        """ Sets attributes. """
+        """ Sets instance attributes. """
 
         # get XSD filepath.
         self.xsd_file = __file__.replace(".py", ".xsd")
@@ -39,7 +39,7 @@ class NLPToXML():
         self.ns_uri = "http://archives.ncdcr.gov/mail-account/tagged-content/"
         self.ns_map  = {None: self.ns_uri}
 
-        # custom NER tags.
+        # set custom NER tags.
         self.custom_ner = ["GOV.state_agency",
                           "PII.bank_account_number",
                           "PII.beacon_id",
@@ -54,13 +54,13 @@ class NLPToXML():
 
 
     def _get_authority(self, ner_tag):
-        """ Returns the authority's domain for an NER tag.
+        """ Returns the authority domain for an @ner_tag.
 
         Args:
             - ner_tag (str): The NER tag for which to get the authority.
 
         Returns:
-            <class 'str'>
+            str: The return value.
         """
 
         if ner_tag in self.custom_ner:
@@ -72,7 +72,7 @@ class NLPToXML():
 
 
     def validate(self, xdoc, is_raw=True):
-        """ Determines if XML document @xdoc is valid or not per the Tagged EAXS
+        """ Determines if XML document @xdoc is valid or not per the tagged EAXS
         schema.
 
         Args:
@@ -80,7 +80,7 @@ class NLPToXML():
             - is_raw (bool): Use True for XML as string. Use False for an XML file.
 
         Returns:
-            <class 'bool'>
+            bool: The return value. True for valid, otherwise False.
         """
   
         # if @is_raw, make XML file-like.
@@ -99,13 +99,13 @@ class NLPToXML():
 
 
     def xml(self, jdict):
-        """ Converts CoreNLP JSON to lxml.etree._Element per the Tagged EAXS schema.
+        """ Converts CoreNLP JSON to lxml.etree._Element per the tagged EAXS schema.
         
         Args:
             - jdict (dict): CoreNLP output to convert to XML.
 
         Returns:
-            <class 'lxml.etree._Element'>
+            lxml.etree._Element: The return value.
         """
 
         # create root element.
@@ -113,18 +113,18 @@ class NLPToXML():
                 nsmap=self.ns_map)
         tagged_content.text = ""
         
-        # start tracking "tag" subelements.
+        # start tracking "tag" sub-elements.
         tag_id = 0
         current_tag = ""
 
-        # add text or "tag" subelements to root as needed.
+        # add text or "tag" sub-element to root XML as needed.
         sentences = jdict["sentences"] 
         for sentence in sentences:
             
             tokens = sentence["tokens"]
             for token in tokens:
                 
-                # get important key values.
+                # get required values.
                 try:
                     originalText = token["originalText"]
                 except KeyError:
@@ -132,8 +132,9 @@ class NLPToXML():
                 after = token["after"]
                 ner_tag = token["ner"]
 
-                # if no NER tag, add to root element and continue;
+                # if no NER tag found, append to root element and continue.
                 # otherwise, add a "tag" sub-element.
+
                 if ner_tag == "O":
                     current_tag = ner_tag
                     try:
@@ -144,8 +145,6 @@ class NLPToXML():
                         tagged_content.text += originalText + after
                     continue
 
-                # add a "tag" sub-element.
-                
                 # if new tag value, increase "id" attribute value.
                 if ner_tag != current_tag:
                     current_tag = ner_tag
@@ -154,31 +153,29 @@ class NLPToXML():
                 # get "authority" attribute value.
                 tag_authority = self._get_authority(ner_tag)
             
-                # add "tag" subelement and attributes to root.
+                # add "tag" sub-element and attributes to root.
                 tagged = etree.SubElement(tagged_content, "{" + self.ns_uri + "}tagged",
                         nsmap=self.ns_map)
                 tagged.set("entity", ner_tag)
                 tagged.set("authority", tag_authority)
-                tagged.set("id", str(tag_id)   )
+                tagged.set("id", str(tag_id))
                 tagged.text = originalText
                 tagged.tail = after
 
         return tagged_content
 
 
-    def xstring(self, jdict, charset="utf-8", header=False, beautify=True):
+    def xstring(self, jdict, charset="utf-8", header=True, beautify=True):
         """ Converts CoreNLP JSON to an XML string per the Tagged EAXS schema.
 
         Args:
             - jdict (dict): CoreNLP output to convert to XML.
             - charset (str): The encoding for the converted text.
-            - header (bool): Use True to include an XML header in the output. Use False to
-            omit the header.
-            - beautify (bool): Use True to pretty print the return value if @return_string is
-            True.
+            - header (bool): Use True to include an XML header in the output.
+            - beautify (bool): Use True to pretty print.
 
         Returns:
-            <class 'str'>
+            str: The return value.
         """
 
         # get tagged etree._Element.

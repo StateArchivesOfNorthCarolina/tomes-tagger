@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 """
-This module has a class for converting an EAXS file to a tagged EAXS document as either an
-lxml.etree_Element or an XML file.
+This module contains a class for converting an EAXS file to a tagged EAXS document as either
+an lxml.etree_Element or an XML file.
 
-TODO:
-    - Do you need to support <ExtBodyContent> messages?
-    - Add valid() method. Should be able to check etree._Element OR XML file.
+Todo:
+    * Do you need to support <ExtBodyContent> messages?
+    * Add valid() method. Should be able to check etree._Element OR XML file.
 """
 
 # import modules.
@@ -16,15 +16,14 @@ from lxml import etree
     
 
 class EAXSToTagged():
-    """ A class for converting an EAXS file to a tagged EAXS document as either an
-    lxml.etree_Element or an XML file.
+    """ A class for converting an EAXS file to a tagged EAXS document.
 
     Example:
-        >>> fake_html2text = def html2text(html) ... # convert HTML to plain text.
-        >>> fake_text2nlp = def text2nlp(text) ... # convert plain text to NLP-tagged output.
-        >>> e2t = EAXSToTagged(fake_html2text, fake_text2nlp) # EAXS to tagged EAXS instance.
+        >>> html2text = def html2text(html) ... # convert HTML to plain text.
+        >>> text2nlp = def text2nlp(text) ... # convert plain text to NLP-tagged output.
+        >>> e2t = EAXSToTagged(html2text, text2nlp)
         >>> #tagged = e2t.get_tagged(eaxs_file) # tagged EAXS as lxml.etree._Element.
-        >>> tagged = e2t.write_tagged(eaxs_file, "output.xml") # tagged EAXS to file.
+        >>> tagged = e2t.write_tagged(eaxs_file, "tagged.xml") # tagged EAXS to "tagged.xml".
     """
 
 
@@ -35,7 +34,7 @@ class EAXSToTagged():
             - html_converter (function): Any function that accepts HTML text (str) as its
             only required argument and returns a plain text version (str).
             - nlp_tagger (function): Any function that accepts plain text (str) as its only
-            required argument and returns an NLP tagged version (str).
+            required argument and returns an NLP-tagged version (str).
             - charset (str): Optional encoding with which to update EAXS message content.
             This is also the encoding used to write a tagged EAXS file with the
             write_tagged() method.
@@ -71,8 +70,8 @@ class EAXSToTagged():
 
 
     def _get_element(self, message_el, name, value=None):
-        """ Gets <Message/MultiBody/SingleBody/@name> element and its text value. Note
-        that <SingleBody> elements for attachments are skipped.
+        """ Gets <Message/MultiBody/SingleBody/@name> element and its text value. Note that
+        <SingleBody> elements for attachments are skipped.
         
         Args:
             - message_el (lxml.etree._Element): An EAXS <Message> element.
@@ -81,7 +80,7 @@ class EAXSToTagged():
 
         Returns:
             tuple: The return value.
-            The first item is an lxml.etree.Element, i.e. the element @name.
+            The first item is an lxml.etree.Element, i.e. @name.
             The second item is a str, i.e. @name's value.
         """
 
@@ -123,7 +122,7 @@ class EAXSToTagged():
         content_type_el, content_type_text = self._get_element(message_el, "ContentType",
                 "text/plain")
          
-        # stop if no <Content> element exists.
+        # return <Message> if no <Content> sub-element exists.
         if content_el is None or content_text is None:
             return message_el
 
@@ -132,9 +131,11 @@ class EAXSToTagged():
             content_text = base64.b64decode(content_text)
             content_text = content_text.decode(self.charset, errors="backslashreplace")
 
-        # alter <Content>; wrap in CDATA block.
+        # convert HTML to text if needed.
         if content_type_text in ["text/html", "application/xml+html"]:
             content_text = self.html_converter(content_text)
+        
+        # tag <Content>; wrap in CDATA block.
         content_text = self.nlp_tagger(content_text)
         content_el.text = etree.CDATA(content_text)
         

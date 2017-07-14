@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 
 """
-This module contains a class to construct a METS file for a given email account folder with
-an EAXS file, an optional attachments folder, an optional tagged EAXS file, and other
-optional files and folders.
+This module contains a class to construct a METS file for a given email account folder.
 
-TODO:
-    - Need to known naming conventions so this can implicitly figure out the name of the
+Todo:
+    * Work with Archivists re: profile!!!
+    * Need to known naming conventions so this can implicitly figure out the name of the
     tagged EAXS file.
-    - Need REAL values for formatting the templates! :-]
-    - Make separate fileGrp for attachments? Maybe no: unless you want to break out PREMIS
-    more so attachments are a separate object.
-    - Make separate fileGrp for tagged EAXS.
-    - Make separate fileGrp for all non-required folders (depends on final xIP structure).
+    * Need REAL values for formatting the templates! :-]
+    You probably want __init__ to accept args/kwargs then so these can be pass to __init__?
+    * This is the only module with side effects. I don't like that. So don't
+    declare a self.root in __init__. Have the constructor accept the templates
+    as a list of optional files and a "charset". Then explicitly call build()
+    to get an etree._Element; stringify() will now take an _Element arg; and
+    create a new method to write directly to file. Also, make build() public
+    now. You'll need to update the example, too.
 """
 
 # import modules.
@@ -22,16 +24,20 @@ from mets.pymets import PyMETS
 
 
 class FolderToMETS():
-    """ A class to construct a METS file for a given email account folder with an EAXS file,
-    an optional attachments folder, an optional tagged EAXS file, and other optional files
-    and folders. """
+    """ A class to construct a METS file for a given email account folder. 
+    
+    Example:
+        >>> f2m = FolderToMETS("my/EAXS/path/") # specify EAXS folder.
+        >>> f2m.root # lxml.etree._Element version of METS.
+        >>> f2m.string() # string version of METS.
+    """
 
 
     def __init__(self, path):
         """ Sets instance attributes.
         
         Args:
-            - path (str): The path to the account folder containing the EAXS file, etc.
+            - path (str): The EAXS path.
         """
         
         # set attributes.
@@ -40,14 +46,14 @@ class FolderToMETS():
         # compose instance of PyMETS; build METS.
         self.pymets = PyMETS()
         self.root = self.pymets.make("mets")
-        self.build()
+        self._build()
 
 
-    def stringify(self):
+    def string(self):
         """ Returns a string representation of the root METS etree element.
         
         Returns:
-            <class 'str'>
+            str: The return value.
         """
 
         #
@@ -55,8 +61,12 @@ class FolderToMETS():
         return strroot
 
 
-    def build(self):
-       """ Builds METS sections, appends sections to root. """
+    def _build(self):
+        """ Builds METS document.
+        
+        Returns:
+            None
+        """
        
        # set template substitution strings.
        subs = {"eaxs_id": "{eaxs_id}", 
