@@ -58,6 +58,9 @@ def make_sample():
     structMap.append(div)
     root.append(structMap)
     
+    # add comment.
+    root.append(pymets.Comment("This is a comment."))
+    
     return root
 
 
