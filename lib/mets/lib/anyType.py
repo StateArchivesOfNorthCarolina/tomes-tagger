@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
+""" The module contain a class to create any METS element with optional attributes. """
+
 # import modules.
 from lxml import etree
 
 
 class AnyType():
-    """ A class to create a any METS etree element with optional attributes. """
+    """ A class to create any METS element with optional attributes. """
     
 
     def __init__(self, ns_prefix, ns_map):
@@ -17,22 +19,19 @@ class AnyType():
         """
         
         self.ns_prefix = ns_prefix
-        self.ns_map = ns_map 
+        self.ns_map = ns_map
 
 
     def anyType(self, name, attributes=None):
-        """ Creates an element with optional text and attributes.
+        """ Creates an element @name with optional attributes.
 
         Args:
             - name (str): The name of the element to create.
-            - attributes (dict): The optional attributes to set.
-            
-            Each key is the attribute name; each key's value is the attribute value. Inline
-            namespace prefixes (ex: "mets:ID") are supported if the prefix is a key in the
-            instance's @ns_map. 
+            - attributes (dict): The optional attributes to set. Attribute namespace prefixes
+            are supported if the prefix is a key in the instance's @ns_map.
         
         Returns:
-            <class 'lxml.etree._Element'>
+            lxml.etree._Element: The return value.
         """
         
         # create @name element.
@@ -41,10 +40,14 @@ class AnyType():
         
         # set optional attributes.
         if attributes is not None:
+            
             for attribute, value in attributes.items():
+                
+                # supported namespace prefixes for attributes (e.g. "mets:ID").
                 if ":" in attribute:
                     pref, attr = attribute.split(":") 
                     attribute = "{" + self.ns_map[pref] + "}" + attr
+                    
                 name_el.set(attribute, value)
 
         return name_el

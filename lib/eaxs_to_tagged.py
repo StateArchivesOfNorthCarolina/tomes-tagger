@@ -35,7 +35,7 @@ class EAXSToTagged():
             only required argument and returns a plain text version (str).
             - nlp_tagger (function): Any function that accepts plain text (str) as its only
             required argument and returns an NLP-tagged version (str).
-            - charset (str): Optional encoding with which to update EAXS message content.
+            - charset (str): Encoding with which to update EAXS message content.
             This is also the encoding used to write a tagged EAXS file with the
             write_tagged() method.
         """
@@ -76,11 +76,11 @@ class EAXSToTagged():
         Args:
             - message_el (lxml.etree._Element): An EAXS <Message> element.
             - name (str): The element to retrieve.
-            - value (str): An optional default text value for @name.
+            - value (str): The default text value for @name.
 
         Returns:
             tuple: The return value.
-            The first item is an lxml.etree.Element, i.e. @name.
+            The first item is an lxml.etree._Element, i.e. @name.
             The second item is a str, i.e. @name's value.
         """
 

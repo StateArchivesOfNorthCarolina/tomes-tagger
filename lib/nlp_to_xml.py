@@ -54,7 +54,7 @@ class NLPToXML():
 
 
     def _get_authority(self, ner_tag):
-        """ Returns the authority domain for an @ner_tag.
+        """ Gets the authority domain for an @ner_tag.
 
         Args:
             - ner_tag (str): The NER tag for which to get the authority.

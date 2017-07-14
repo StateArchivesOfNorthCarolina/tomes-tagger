@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+""" This module contains a class to create a METS <fileGrp> tree for a given list of files.
+The output can be integrated into a complete METS file's <fileSec> element."""
+
 # import modules.
 import hashlib
 import mimetypes
@@ -26,16 +29,16 @@ class FileGrp():
 
 
     def fileGrp(self, filenames, basepath, identifier, attributes=None):
-        """ Creates a METS <fileGrp> etree element for all files in @filenames.
+        """ Creates a METS <fileGrp> element for all files in @filenames.
 
         Args:
-            - filenames (list): All file paths from which to create a <fileGrp> element.
+            - filenames (list): The file paths from which to create a <fileGrp> element.
             - basepath (str): Each <file> element's <FLocat> value is relative to this path.
-            - identifier (str): The ID attribute value to set for the <fileGrp>.
-            - attributes (dict): The optional attributes to set for the <fileGrp>.
+            - identifier (str): The ID attribute value to set.
+            - attributes (dict): The optional attributes to set.
         
         Returns:
-            <class 'lxml.etree._Element'>
+            lxml.etree._Element: The return value.
         """
 
         # create <fileGrp> element.
@@ -48,6 +51,7 @@ class FileGrp():
                 fileGrp_el.set(k, v)
         fileGrp_el.set("ID", identifier)
 
+        # add a sub-element for each file.
         i = 0
         for filename in filenames:  
 
