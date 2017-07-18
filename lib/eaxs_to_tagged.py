@@ -11,6 +11,7 @@ Todo:
 
 # import modules.
 import base64
+import logging
 import os
 from lxml import etree
     
@@ -40,6 +41,9 @@ class EAXSToTagged():
             write_tagged() method.
         """
 
+        # suppress logging by default. 
+        logging.getLogger(__name__).addHandler(logging.NullHandler())
+        
         # set attributes.
         self.html_converter = html_converter
         self.nlp_tagger = nlp_tagger
@@ -67,6 +71,26 @@ class EAXSToTagged():
         messages =  folder_el.iterchildren(tag=message_el)
  
         return messages
+
+    
+    def _get_message_id(self, message_el):
+        """ Gets the message's <MessageId> value. 
+        
+        Args:
+            message_el (lxml.etree._Element): The <Message> element from which to get the
+            <MessageId>.
+        
+        Returns:
+            str: The return value.
+            The message identifier.
+        """
+
+        # get identifier value; strip whitespace.
+        path = "ncdcr:MessageId"
+        message_id = message_el.xpath(path, namespaces=self.ns_map)[0].text
+        message_id = message_id.strip()
+ 
+        return message_id
 
 
     def _get_element(self, message_el, name, value=None):
@@ -163,6 +187,8 @@ class EAXSToTagged():
             if child_el.tag == "{" + self.ncdcr_uri + "}Folder":
                 messages = self._get_messages(child_el)
                 for message_el in messages:
+                    message_id = self._get_message_id(message_el)
+                    logging.info("Updating message: " + message_id)
                     message_el = self._update_message(message_el)
 
         return tagged

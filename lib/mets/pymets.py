@@ -9,6 +9,7 @@ Todo:
         - Doesn't the default for @xsd already tell me that?
     * get_fileIDs() seems to be slowing things down. It seemed faster when I used the "*"
     instead of the specific METS namespace URI.
+    * Do you want to add a base64 convenience method to help wrap a <binData> value?
 """
 
 # import modules.
@@ -219,7 +220,7 @@ class PyMETS():
             - mdtype (str): The required "MDTYPE" attribute for the <mdWrap> element.
             - attributes (dict): The optional attributes to set.
             - xmlData (bool): Use True to wrap @xtree within a parent <xmlData> element.
-            Use false to a parent <binData> element.
+            Use false to wrap a parent <binData> element.
             
         Returns:
             lxml.etree._Element: The return value.

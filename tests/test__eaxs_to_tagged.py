@@ -3,6 +3,7 @@
 # import modules.
 import sys; sys.path.append("..")
 import unittest
+import logging
 from lxml import etree
 from lib.eaxs_to_tagged import *
 
@@ -12,6 +13,10 @@ class Test_EAXSToTagged(unittest.TestCase):
 
     def setUp(self):
 
+        # enable logging.
+        logging.basicConfig(level=logging.INFO)
+        
+        # set attributes.
         self.sample = "sample_files/sampleEAXS.xml"
         self.xsd = etree.parse("mail-account.xsd")
 
