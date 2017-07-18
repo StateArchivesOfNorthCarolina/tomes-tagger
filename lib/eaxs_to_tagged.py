@@ -74,11 +74,10 @@ class EAXSToTagged():
 
     
     def _get_message_id(self, message_el):
-        """ Gets the message's <MessageId> value. 
+        """ Gets the <Message/MessageId> value. 
         
         Args:
-            message_el (lxml.etree._Element): The <Message> element from which to get the
-            <MessageId>.
+            message_el (lxml.etree._Element): An EAXS <Message> element.
         
         Returns:
             str: The return value.
@@ -188,7 +187,7 @@ class EAXSToTagged():
                 messages = self._get_messages(child_el)
                 for message_el in messages:
                     message_id = self._get_message_id(message_el)
-                    logging.info("Updating message: " + message_id)
+                    logging.info(__name__ + "\tUpdating message: " + message_id)
                     message_el = self._update_message(message_el)
 
         return tagged
