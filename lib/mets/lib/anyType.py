@@ -34,9 +34,15 @@ class AnyType():
             lxml.etree._Element: The return value.
         """
         
+        # supported namespace prefixes for elements (e.g. "mets:fileSec").
+        if ":" in name:
+            pref, name = name.split(":") 
+            name_el = "{" + self.ns_map[pref] + "}" + name 
+        else:
+            pref, name = self.ns_prefix, name
+            
         # create @name element.
-        name_el = etree.Element("{" + self.ns_map[self.ns_prefix] + "}" + name,
-                nsmap=self.ns_map)
+        name_el = etree.Element("{" + self.ns_map[pref] + "}" + name, nsmap=self.ns_map)
         
         # set optional attributes.
         if attributes is not None:
