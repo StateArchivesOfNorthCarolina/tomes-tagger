@@ -14,7 +14,7 @@ class Test_EAXSToTagged(unittest.TestCase):
     def setUp(self):
 
         # enable logging.
-        logging.basicConfig(level=logging.WARNING)
+        logging.basicConfig(level=logging.DEBUG)
         
         # set attributes.
         self.sample = "sample_files/sampleEAXS.xml"

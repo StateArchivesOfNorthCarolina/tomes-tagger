@@ -41,8 +41,9 @@ class EAXSToTagged():
             write_tagged() method.
         """
 
-        # suppress logging by default. 
-        logging.getLogger(__name__).addHandler(logging.NullHandler())
+        # set logger; suppress logging by default. 
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.NullHandler())
         
         # set attributes.
         self.html_converter = html_converter
@@ -74,7 +75,7 @@ class EAXSToTagged():
 
     
     def _get_message_id(self, message_el):
-        """ Gets the <Message/MessageId> value. 
+        """ Gets <Message/MessageId> value. 
         
         Args:
             message_el (lxml.etree._Element): An EAXS <Message> element.
@@ -151,14 +152,17 @@ class EAXSToTagged():
 
         # decode Base64 <Content> if needed.
         if transfer_encoding_text == "base64":
+            self.logger.debug("Decoding Base64 message content.")
             content_text = base64.b64decode(content_text)
             content_text = content_text.decode(self.charset, errors="backslashreplace")
 
         # convert HTML to text if needed.
         if content_type_text in ["text/html", "application/xml+html"]:
+            self.logger.debug("Converting HTML message to plain text.")
             content_text = self.html_converter(content_text)
         
         # tag <Content>; wrap in CDATA block.
+        self.logger.debug("Applying NLP tags to message.")
         content_text = self.nlp_tagger(content_text)
         content_el.text = etree.CDATA(content_text)
         
@@ -187,7 +191,7 @@ class EAXSToTagged():
                 messages = self._get_messages(child_el)
                 for message_el in messages:
                     message_id = self._get_message_id(message_el)
-                    logging.info(__name__ + "\tUpdating message: " + message_id)
+                    self.logger.info("Updating message: " + message_id)
                     message_el = self._update_message(message_el)
 
         return tagged

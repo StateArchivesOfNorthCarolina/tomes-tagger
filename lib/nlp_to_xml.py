@@ -32,6 +32,10 @@ class NLPToXML():
     def __init__(self):
         """ Sets instance attributes. """
 
+        # set logger; suppress logging by default. 
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.NullHandler())
+        
         # get XSD filepath.
         self.xsd_file = __file__.replace(".py", ".xsd")
         

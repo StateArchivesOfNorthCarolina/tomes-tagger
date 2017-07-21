@@ -5,10 +5,12 @@ This module has classes for manipulating HTML and converting HTML to plain text.
 
 Todo:
     * Use tempfile instead of creating @temp_file in __init__; remove __del__.
+    * You need to pass the absolute path of the temp file to logging statements.
 """
 
 # import modules.
 import codecs
+import logging
 import os
 import subprocess
 from bs4 import BeautifulSoup
@@ -29,6 +31,7 @@ class ModifyHTML():
     def __init__(self, html, parser="html5lib"):
         """ Sets instance attributes. """
 
+        # compose BeautifulSoup object.
         self.root = BeautifulSoup(html, parser)
 
 
@@ -66,7 +69,7 @@ class ModifyHTML():
         Returns:
             None
         """
-
+        
         # get all image tags; remove them.
         img_tags = self.root.find_all("img")
         for img_tag in img_tags:
@@ -106,11 +109,15 @@ class HTMLToText():
             - temp_file (str): File in which to store raw HTML strings.
         """
 
+        # set logger; suppress logging by default. 
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.NullHandler())
+
         # set default options for Lynx.
         options = {"nolist":True, "nomargins":True, "dump":True}
 
         # add in custom options.
-        if isinstance(custom_options, dict): 
+        if isinstance(custom_options, dict):
             for key, val in custom_options.items():
                 options[key] = val
         self.options = options
@@ -125,8 +132,10 @@ class HTMLToText():
 
         if os.path.isfile(self.temp_file):
             try:
+                self.logger.debug("Removing temporary HTML file: " + self.temp_file)
                 os.remove(self.temp_file)
             except PermissionError:
+                self.logger.warning("PermissionError - Unable to remove temporary file: " + self.temp_file)
                 pass
 
 
@@ -151,6 +160,7 @@ class HTMLToText():
         # if @is_raw == True, write @html to temporary file.
         # complete command line snippet.
         if is_raw:
+            self.logger.debug("Creating temporary HTML file: " + self.temp_file)
             with codecs.open(self.temp_file, "w", encoding=charset) as tmp:
                 tmp.write(html)
             args += " " + self.temp_file
