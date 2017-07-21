@@ -4,7 +4,9 @@
 This module has classes for manipulating HTML and converting HTML to plain text.
 
 Todo:
-    * Use tempfile instead of creating @temp_file in __init__; remove __del__.
+    * Use tempfile instead of creating @temp_file in __init__; remove __del__?
+        - No, not working in Windows due to permissions issues.
+        - Maybe some encoding issues too.
     * You need to pass the absolute path of the temp file to logging statements.
 """
 
