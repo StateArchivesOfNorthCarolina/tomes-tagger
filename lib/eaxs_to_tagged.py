@@ -191,7 +191,7 @@ class EAXSToTagged():
                 messages = self._get_messages(child_el)
                 for message_el in messages:
                     message_id = self._get_message_id(message_el)
-                    self.logger.info("Updating message: " + message_id)
+                    self.logger.info("Updating message: {}".format(message_id))
                     message_el = self._update_message(message_el)
 
         return tagged

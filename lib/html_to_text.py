@@ -132,10 +132,11 @@ class HTMLToText():
 
         if os.path.isfile(self.temp_file):
             try:
-                self.logger.debug("Removing temporary HTML file: " + self.temp_file)
+                self.logger.debug("Removing temporary HTML file: {}".format(self.temp_file))
                 os.remove(self.temp_file)
             except PermissionError:
-                self.logger.warning("PermissionError - Unable to remove temporary file: " + self.temp_file)
+                self.logger.warning("Unable to remove temporary file: {}".format(
+                    self.temp_file))
                 pass
 
 
@@ -160,7 +161,7 @@ class HTMLToText():
         # if @is_raw == True, write @html to temporary file.
         # complete command line snippet.
         if is_raw:
-            self.logger.debug("Creating temporary HTML file: " + self.temp_file)
+            self.logger.debug("Creating temporary HTML file: {}".format(self.temp_file))
             with codecs.open(self.temp_file, "w", encoding=charset) as tmp:
                 tmp.write(html)
             args += " " + self.temp_file
@@ -168,6 +169,7 @@ class HTMLToText():
             args += " " + html
 
         # run Lynx.
+        self.logger.debug("Running: '{}'".format(args))
         cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
 
         # return stdout.

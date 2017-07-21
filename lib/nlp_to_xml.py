@@ -16,12 +16,14 @@ Todo:
     * If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just raise and error before passing empty text to CoreNLP? That would
         certainly be more efficient.
+        - You also need to log a warning.
 """
 
 # import modules.
 import codecs
 import io
 import json
+import logging
 from lxml import etree
 
 
@@ -98,6 +100,7 @@ class NLPToXML():
         # validate @xdoc.
         validator = etree.XMLSchema(xsd)
         is_valid = validator.validate(xdoc)
+        self.logger.debug("Tagged message XML validation yields: {}".format(is_valid))  
 
         return is_valid
 
@@ -122,7 +125,7 @@ class NLPToXML():
         current_tag = ""
 
         # add text or "tag" sub-element to root XML as needed.
-        sentences = jdict["sentences"] 
+        sentences = jdict["sentences"]
         for sentence in sentences:
             
             tokens = sentence["tokens"]

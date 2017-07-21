@@ -39,6 +39,9 @@ class TOMESToolTagger():
         Args:
             - charset (str): Optional encoding for tagged EAXS.
         """
+    
+        # set logging.
+        logging.basicConfig(level=logging.DEBUG)
 
         # set attributes.
         self.charset = charset

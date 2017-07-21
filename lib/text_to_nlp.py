@@ -8,6 +8,7 @@ Todo:
 """
 
 # import modules.
+import logging
 import os
 import subprocess
 import urllib
@@ -31,6 +32,10 @@ class TextToNLP():
             - *args/**kwargs: Any additional, optional arguments to pass to pycorenlp.
         """
 
+        # set logger; suppress logging by default. 
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.NullHandler())
+
         # set CoreNLP server and options.
         self.host = "{}:{}".format(host, port)
         self.mapping_file = mapping_file
@@ -51,10 +56,12 @@ class TextToNLP():
         """
         
         try:
+            self.logger.debug("Getting NLP tags for text.")
             nlp = self.annotator.annotate(text, properties=self.options)
             return nlp
         except Exception as e:
-            exit(e)
+            self.logger.warning("Unable to get NLP tags for text.")
+            #exit(e)
 
 
 if __name__ == "__main__":

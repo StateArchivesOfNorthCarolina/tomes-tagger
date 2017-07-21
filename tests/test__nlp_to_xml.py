@@ -3,6 +3,7 @@
 # import modules.
 import sys; sys.path.append("..")
 import json
+import logging
 import unittest
 import random
 from lib.nlp_to_xml import *
@@ -13,6 +14,9 @@ class Test_NLPToXML(unittest.TestCase):
     
     def setUp(self):
 
+        # enable logging.
+        logging.basicConfig(level=logging.DEBUG)
+        
         self.n2x = NLPToXML()
         self.json_file = "sample_files/sampleCoreNLP.json"
 
