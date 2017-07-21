@@ -169,7 +169,7 @@ class HTMLToText():
             args += " " + html
 
         # run Lynx.
-        self.logger.debug("Running: '{}'".format(args))
+        self.logger.debug("Converting HTML to text: '{}'".format(args))
         cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
 
         # return stdout.

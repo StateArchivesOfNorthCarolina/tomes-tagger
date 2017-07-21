@@ -42,6 +42,7 @@ class TOMESToolTagger():
     
         # set logging.
         logging.basicConfig(level=logging.DEBUG)
+        self.logger = logging.getLogger(__name__)        
 
         # set attributes.
         self.charset = charset
@@ -100,15 +101,19 @@ class TOMESToolTagger():
             "__tagged.xml".
 
         Returns:
-            None
+            str: The return value.
+            The filepath of the tagged EAXS file.
         """
+
+        self.logger.info("Tagging EAXS file: {}".format(eaxs_file))
 
         # create tagged EAXS.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
+        self.logger.info("Writing results to: {}".format(tagged_eaxs_file))
         tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         
-        return
+        return tagged_eaxs_file
 
 
 # CLI.

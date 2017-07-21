@@ -158,11 +158,11 @@ class EAXSToTagged():
 
         # convert HTML to text if needed.
         if content_type_text in ["text/html", "application/xml+html"]:
-            self.logger.debug("Converting HTML message to plain text.")
+            self.logger.debug("Requesting HTML to plain text.")
             content_text = self.html_converter(content_text)
         
         # tag <Content>; wrap in CDATA block.
-        self.logger.debug("Applying NLP tags to message.")
+        self.logger.debug("Requesting NLP tags.")
         content_text = self.nlp_tagger(content_text)
         content_el.text = etree.CDATA(content_text)
         
