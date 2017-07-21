@@ -216,6 +216,7 @@ class EAXSToTagged():
         # raise error if output file already exists.
         if os.path.isfile(tagged_eaxs_file):
             err = "{} already exists.".format(tagged_eaxs_file)
+            self.logger.error(err)
             raise FileExistsError(err)
         
         # write tagged EAXS document to file.
