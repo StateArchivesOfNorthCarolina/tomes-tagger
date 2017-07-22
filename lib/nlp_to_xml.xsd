@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema
-targetNamespace="http://archives.ncdcr.gov/mail-account/tagged-content/"
-xmlns="http://archives.ncdcr.gov/mail-account/tagged-content/"
+targetNamespace="http://archives.ncdcr.gov/mail-account/tagged-message/"
+xmlns="http://archives.ncdcr.gov/mail-account/tagged-message/"
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 elementFormDefault="qualified">
 
 <xs:annotation>
 	<xs:documentation xml:lang="en">
-	This "tagged content" schema defines an XML structure to be inserted into the
+	This "tagged message" schema defines an XML structure to be inserted into the
 	State Archives of North Carolina XML Schema for a Single E-Mail Account
 	located at:
 		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
@@ -18,7 +18,7 @@ elementFormDefault="qualified">
 	This element is define within the email account XSD located at:
 		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd
 
-	The tagged content XML structure serves to annotate a plain-text
+	The tagged message XML structure serves to annotate a plain-text
 	representation of an email message.
 
 	Tokens recognized as named entities via Natural Language Processing (NLP)
