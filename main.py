@@ -11,6 +11,7 @@ Todo:
     Probably the latter.
     * Is METS creation out of scope for main.py? Nah: it'll just be a quick call to
     FolderToMETS.
+    * Add logging level as an optional CLI arg. Also add log to file/screen/both option.
 """
 
 # import modules.
