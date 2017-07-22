@@ -158,7 +158,7 @@ class EAXSToTagged():
 
         # convert HTML to text if needed.
         if content_type_text in ["text/html", "application/xml+html"]:
-            self.logger.debug("Requesting HTML to plain text.")
+            self.logger.debug("Requesting HTML to plain text conversion.")
             content_text = self.html_converter(content_text)
         
         # tag <Content>; wrap in CDATA block.
