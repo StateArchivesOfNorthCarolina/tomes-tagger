@@ -35,11 +35,14 @@ TOMES Tool requires the following applications:
 
 ## Quick Tests
 
-- Run the following unit tests from the [../tests](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/tests/) directory:
-	- `py -3 -m unittest test__html_to_text.py`
-		- This tests that Lynx can be called by TOMES Tool.
-	- `py -3 -m unittest test__eaxs_to_tagged.py`
-		- This tests the EAXS to tagged EAXS workflow without actually calling CoreNLP or Lynx.
+You can run all the unit tests in the [../tests](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/tests/) directory: `py -3 -m unittest`
+
+Specific unit tests of interest:
+
+- `py -3 -m unittest test__html_to_text.py`
+	- This tests that Lynx can be called by TOMES Tool.
+- `py -3 -m unittest test__eaxs_to_tagged.py`
+	- This tests the EAXS to tagged EAXS workflow without actually calling CoreNLP or Lynx.
 
 You can also test CoreNLP by starting it and going to the correct local URL, i.e. "localhost:9000". To save time, it is recommended to only enter *very* short text (e.g. "George Washington").
 

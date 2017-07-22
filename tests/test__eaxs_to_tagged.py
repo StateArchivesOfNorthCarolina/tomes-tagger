@@ -47,7 +47,7 @@ def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
 
     # function to mark processing for HTML emails VS. plain text.
     def mark(s):
-        html, nlp = "HTML > NLP", "Text > NLP"
+        html, nlp = "HTML > Text > NLP", "Text > NLP"
         if s[:len(nlp)] == nlp:
             return html # theoretical HTML conversion was run.
                         # i.e. messages was HTML.
