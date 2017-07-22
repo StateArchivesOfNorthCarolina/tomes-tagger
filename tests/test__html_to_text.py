@@ -67,13 +67,11 @@ class Test_HTMLToText(unittest.TestCase):
 
 
 # CLI TEST.
-def main(html: "HTML string or file"):
-
-    import os
+def main(html: "HTML file"):
+    "Prints plain text version of an HTML document"
 
     # read HTML file.
-    if os.path.isfile(html):
-        html = open(html).read()
+    html = open(html).read()
     
     # modify HTML.
     html = ModifyHTML(html)

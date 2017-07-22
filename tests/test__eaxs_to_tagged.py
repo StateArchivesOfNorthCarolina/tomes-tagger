@@ -40,15 +40,18 @@ class Test_EAXSToTagged(unittest.TestCase):
 
 
 # CLI TEST.
-def main(eaxs_file: "input EAXS file", tagged_file: "tagged EAXS destination"):
+def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
+    "Converts EAXS document to tagged EAXS (dry run only - no actual NLP tags)"
 
     # function to mark processing for HTML emails VS. plain text.
     def mark(s):
         html, nlp = "HTML > NLP", "Text > NLP"
         if s[:len(nlp)] == nlp:
             return html # theoretical HTML conversion was run.
+                        # i.e. messages was HTML.
         else:
             return nlp # theoretical HTML conversion was NOT run.
+                       # i.e. message was plain text. 
 
     # write tagged EAXS to file.
     e2t = EAXSToTagged(mark, mark)

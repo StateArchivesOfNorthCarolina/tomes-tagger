@@ -120,6 +120,7 @@ class TOMESToolTagger():
 # CLI.
 def main(eaxs: "source EAXS file",
         output: ("tagged EAXS destination", "option", "o")):
+    "Converts EAXS document to tagged EAXS "
 
     # make tagged version of EAXS.
     tagger = TOMESToolTagger()

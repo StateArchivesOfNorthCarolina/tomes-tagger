@@ -51,6 +51,7 @@ class Test_NLPToXML(unittest.TestCase):
 
 # CLI TEST.
 def main(json_file: "CoreNLP JSON file"):
+    "Prints tagged message version of CoreNLP JSON output"
 
     # load JSON.
     with open(json_file) as f:
