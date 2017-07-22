@@ -41,14 +41,14 @@ TOMES Tool requires the following applications:
 	- `py -3 -m unittest test__eaxs_to_tagged.py`
 		- This tests the EAXS to tagged EAXS workflow without actually calling CoreNLP or Lynx.
 
-You can also test CoreNLP by starting it and going to the correct local URL, i.e. "localhost:9000". It is recommended to only enter *very* short text (e.g. "George Washington") so as to save time.
+You can also test CoreNLP by starting it and going to the correct local URL, i.e. "localhost:9000". To save time, it is recommended to only enter *very* short text (e.g. "George Washington").
 
 
 ## Sample Files 
 
-Some simple sample files are located in the "tests/sample_files" directory for quick testing.
+Sample files are located in the "tests/sample_files" directory.
 
-The Python unit test scripts in the "tests" directory also have command line options.
+The sample files can be used with the Python unit test scripts in the "tests" directory.
 
 To test these scripts on sample files, simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
 
