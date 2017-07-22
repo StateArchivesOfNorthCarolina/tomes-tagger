@@ -30,7 +30,7 @@ TOMES Tool requires the following applications:
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
 	- *We're currently using this for HTML email to plain text conversion.*
 	- The "lynx" command must be executable from any directory on your system.
-	- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
+		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 
 
 ## Quick Tests
