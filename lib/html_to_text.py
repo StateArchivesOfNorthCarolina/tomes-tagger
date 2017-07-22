@@ -33,6 +33,10 @@ class ModifyHTML():
     def __init__(self, html, parser="html5lib"):
         """ Sets instance attributes. """
 
+        # set logger; suppress logging by default. 
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.NullHandler())
+
         # compose BeautifulSoup object.
         self.root = BeautifulSoup(html, parser)
 
@@ -44,6 +48,8 @@ class ModifyHTML():
         Returns:
             None
         """
+
+        self.logger.debug("Shifting link tag values.")
 
         # get all A tags.
         a_tags = self.root.find_all("a")
@@ -72,6 +78,8 @@ class ModifyHTML():
             None
         """
         
+        self.logger.debug("Removing image tags.")
+        
         # get all image tags; remove them.
         img_tags = self.root.find_all("img")
         for img_tag in img_tags:
@@ -87,6 +95,7 @@ class ModifyHTML():
             str: The return value.
         """
 
+        self.logger.debug("Converting BeautifulSoup object to HTML string.")
         strroot = str(self.root)
         return strroot
 
@@ -163,7 +172,8 @@ class HTMLToText():
         # if @is_raw == True, write @html to temporary file.
         # complete command line snippet.
         if is_raw:
-            self.logger.debug("Creating temporary HTML file: {}".format(self.temp_file))
+            self.logger.debug(
+                    "Writing HTML to temporary HTML file: {}".format(self.temp_file))
             with codecs.open(self.temp_file, "w", encoding=charset) as tmp:
                 tmp.write(html)
             args += " " + self.temp_file
@@ -171,7 +181,7 @@ class HTMLToText():
             args += " " + html
 
         # run Lynx.
-        self.logger.debug("Converting HTML to text: '{}'".format(args))
+        self.logger.debug("Converting HTML to text via: '{}'".format(args))
         cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
 
         # return stdout.

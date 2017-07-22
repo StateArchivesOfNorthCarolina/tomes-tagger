@@ -56,12 +56,12 @@ class TextToNLP():
         """
         
         try:
-            self.logger.debug("Getting NLP tags for text.")
+            self.logger.debug("Getting NLP tags.")
             nlp = self.annotator.annotate(text, properties=self.options)
             return nlp
         except Exception as e:
-            self.logger.warning("Unable to get NLP tags for text.")
-            #exit(e)
+            self.logger.error("Unable to get NLP tags.")
+            exit(e)
 
 
 if __name__ == "__main__":
