@@ -43,12 +43,12 @@ elementFormDefault="qualified">
 		3. 	@id - the identifier for each token; this value is shared by adjacent
 			tokens with the same @entity value.
 
-	An example tagged_content document is below.
+	An example tagged_message document is below.
 
 	<!--
 
 	<![CDATA[
-	<tagged_content>
+	<tagged_message>
 		Good morning <tagged entity="PERSON" authority="stanford.edu" id="1">John</tagged>!
 		
 		Love,
@@ -57,14 +57,14 @@ elementFormDefault="qualified">
 		<raw_text>Marsha B.
 		Los Angeles, CA
 		555-555-5555</raw_text>
-	</tagged_content>
+	</tagged_message>
 	]]>
 		
 	-->
 	</xs:documentation>
 </xs:annotation>
 
-<xs:element name="tagged_content">
+<xs:element name="tagged_message">
 	<xs:complexType mixed="true">
 		<xs:sequence>
 			<xs:element ref="tagged" minOccurs="0" maxOccurs="unbounded"/>
