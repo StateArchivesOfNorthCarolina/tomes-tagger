@@ -9,7 +9,7 @@ Its purpose is to:
 1. Create a deliverable version of an [EAXS](http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_docs.html) file(s) - an XML schema for storing email account information.
 2. Package the original EAXS file(s) and the deliverable EAXS file(s) into an Archival Information Package.
 
-The deliverable version of the EAXS file is meant to contain email messages that have tagged by Name Entity Recognition (NER) tools to facilitate archival processing and eventually discovery.
+The deliverable version of the EAXS file is meant to contain email messages that have tagged by Name Entity Recognition (NER) tools to facilitate archival processing.
 
 The information package contents will contain not only the EAXS file(s), but also a [METS](http://www.loc.gov/standards/mets/mets-home.html) file, message attachments, statistical information, and other relevant data.
 
@@ -19,7 +19,7 @@ The information package contents will contain not only the EAXS file(s), but als
 
 ## Dependencies
 
-TOMES Tool requires the following applications.
+TOMES Tool requires the following applications:
 
 - [Python 3+](https://www.python.org/download/releases/3.0/) (using: 3.6)
 	- See the ../requirements.txt file for additional module dependencies.
@@ -29,7 +29,7 @@ TOMES Tool requires the following applications.
 	- The "lynx" command must be executable from any folder on your system.
 	- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 
-## Usage:
+## Usage
 
 - First, create an EAXS file via [DarcMailCLI](https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI).
 - Start the CoreNLP server.
@@ -39,7 +39,7 @@ TOMES Tool requires the following applications.
 
     	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 50000`
 - Then do: `py -3 main.py -h` from the root TOMES Tool folder.
-- Pass in your EAXS file per the instructions.
+- Pass in your EAXS filepath per the instructions.
 - Let us know what happens.
 
 	
