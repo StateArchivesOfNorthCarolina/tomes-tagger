@@ -23,7 +23,7 @@ The information package contents will contain not only the EAXS file(s), but als
 TOMES Tool requires the following applications:
 
 - [Python 3+](https://www.python.org/download/releases/3.0/) (using: 3.6)
-	- See the ../requirements.txt file for additional module dependencies.
+	- See the [../requirements.txt](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/requirements.txt) file for additional module dependencies.
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using: 3.7.0)
 	- *We're currently using this for NER tagging.*
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
@@ -35,7 +35,7 @@ TOMES Tool requires the following applications:
 
 ## Quick Tests
 
-- Run the following unit tests from the "tests" directory:
+- Run the following unit tests from the [../tests](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/tests/) directory:
 	- `py -3 -m unittest test__html_to_text.py`
 		- This tests that Lynx can be called by TOMES Tool.
 	- `py -3 -m unittest test__eaxs_to_tagged.py`
@@ -46,9 +46,9 @@ You can also test CoreNLP by starting it and going to the correct local URL, i.e
 
 ## Sample Files 
 
-Sample files are located in the "tests/sample_files" directory.
+Sample files are located in the [../tests/sample_files](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/tests/sample_files/) directory.
 
-The sample files can be used with the Python unit test scripts in the "tests" directory.
+The sample files can be used with the Python unit test scripts.
 
 To test these scripts on sample files, simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
 
@@ -62,6 +62,6 @@ To test these scripts on sample files, simply call the scripts with the `-h` opt
 		`cd stanford-corenlp-full-2016-10-31`
 
      	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 50000`
-3. From the root TOMES Tool directory do: `py -3 main.py -h` 
+3. From the [root TOMES Tool directory](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/) do: `py -3 main.py -h` 
 4. Pass in your EAXS filepath (including the filename) per the instructions.
 5. Let us know what happens.
