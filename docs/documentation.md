@@ -41,7 +41,7 @@ TOMES Tool requires the following applications:
 You can also test CoreNLP by starting it and going to the correct local URL, i.e. "localhost:9000". It's recommended to only enter *very* short text (e.g. "George Washington") so as to save time.
 
 ## Sample Files
-Some simple sample files are located in the "tests/sample_files/" directory for quick testing.
+Some simple sample files are located in the "tests/sample_files" directory for quick testing.
 
 The Python unit test scripts in the "tests" directory also have command line options. To test these scripts on sample files, simply call the scripts without the `-m unittest` option. 
 
