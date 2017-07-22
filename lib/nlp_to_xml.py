@@ -42,7 +42,7 @@ class NLPToXML():
         self.xsd_file = __file__.replace(".py", ".xsd")
         
         # set namespace attributes.
-        self.ns_uri = "http://archives.ncdcr.gov/mail-account/tagged-content/"
+        self.ns_uri = "http://archives.ncdcr.gov/mail-account/tagged-message/"
         self.ns_map  = {None: self.ns_uri}
 
         # set custom NER tags.
@@ -116,9 +116,9 @@ class NLPToXML():
         """
 
         # create root element.
-        tagged_content = etree.Element("{" + self.ns_uri + "}tagged_content",
+        tagged_message = etree.Element("{" + self.ns_uri + "}tagged_message",
                 nsmap=self.ns_map)
-        tagged_content.text = ""
+        tagged_message.text = ""
         
         # start tracking "tag" sub-elements.
         tag_id = 0
@@ -145,11 +145,11 @@ class NLPToXML():
                 if ner_tag == "O":
                     current_tag = ner_tag
                     try:
-                        tagged_content[-1].tail += originalText + after
+                        tagged_message[-1].tail += originalText + after
                     except TypeError: # no previous tail.
-                        tagged_content[-1].tail = originalText + after
+                        tagged_message[-1].tail = originalText + after
                     except IndexError: # no child elements.
-                        tagged_content.text += originalText + after
+                        tagged_message.text += originalText + after
                     continue
 
                 # if new tag value, increase "id" attribute value.
@@ -161,7 +161,7 @@ class NLPToXML():
                 tag_authority = self._get_authority(ner_tag)
             
                 # add "tag" sub-element and attributes to root.
-                tagged = etree.SubElement(tagged_content, "{" + self.ns_uri + "}tagged",
+                tagged = etree.SubElement(tagged_message, "{" + self.ns_uri + "}tagged",
                         nsmap=self.ns_map)
                 tagged.set("entity", ner_tag)
                 tagged.set("authority", tag_authority)
@@ -169,7 +169,7 @@ class NLPToXML():
                 tagged.text = originalText
                 tagged.tail = after
 
-        return tagged_content
+        return tagged_message
 
 
     def xstring(self, jdict, charset="utf-8", header=True, beautify=True):
@@ -186,14 +186,14 @@ class NLPToXML():
         """
 
         # get tagged etree._Element.
-        tagged_content = self.xml(jdict)
+        tagged_message = self.xml(jdict)
 
         # convert to string.
-        tagged_content = etree.tostring(tagged_content, xml_declaration=header,
+        tagged_message = etree.tostring(tagged_message, xml_declaration=header,
                 encoding=charset, pretty_print=beautify)
-        tagged_content = tagged_content.decode(charset)
+        tagged_message = tagged_message.decode(charset)
 
-        return tagged_content
+        return tagged_message
 
 
 if __name__ == "__main__":
