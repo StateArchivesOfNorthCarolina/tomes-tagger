@@ -15,16 +15,16 @@ The information package contents will contain not only the EAXS file(s), but als
 
 ...
 
-**TOMES Tool**  is under active development by the [State Archives of North Carolina](http://archives.ncdcr.gov/) in conjunction with the [TOMES project team](https://www.ncdcr.gov/resources/records-management/tomes/team). As such, it it not currently intended for use other than testing by the project team.
+**TOMES Tool**  is under active development by the [State Archives of North Carolina](http://archives.ncdcr.gov/) in conjunction with the [TOMES Project Team](https://www.ncdcr.gov/resources/records-management/tomes/team). Currently, it is not intended for use other than testing by the project team.
 
 
 ## Dependencies
 
 TOMES Tool requires the following applications:
 
-- [Python 3+](https://www.python.org/download/releases/3.0/) (using: 3.6)
+- [Python 3+](https://www.python.org/download/releases/3.0/) (using 3.6)
 	- See the [../requirements.txt](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/requirements.txt) file for additional module dependencies.
-- [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using: 3.7.0)
+- [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
 	- *We're currently using this for NER tagging.*
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
