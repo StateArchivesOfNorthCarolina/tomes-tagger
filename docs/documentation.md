@@ -19,7 +19,7 @@ The information package contents will contain not only the EAXS file(s), but als
 
 ## Dependencies
 
-TOMES Tools requires the following applications.
+TOMES Tool requires the following applications.
 
 - [Python 3+](https://www.python.org/download/releases/3.0/) (using: 3.6)
 	- See the ../requirements.txt file for additional module dependencies.
