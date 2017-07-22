@@ -27,7 +27,7 @@ TOMES Tools requires the following applications.
 	- Please see the CoreNLP documentation for Java requirements, etc.
 - [Lynx](http://lynx.browser.org/) 2.8+ (using 2.8.8)
 	- The "lynx" command must be executable from any folder on your system.
-	- For Windows, this will likely require editing you Environmental Variables "PATH" to include the path to the lynx.exe file.
+	- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 
 ## Usage:
 
