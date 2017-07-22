@@ -119,7 +119,7 @@ class TOMESToolTagger():
 
 # CLI.
 def main(eaxs: "source EAXS file",
-        output: ("output filepath", "option", "o")):
+        output: ("tagged EAXS output filepath", "option", "o")):
 
     # make tagged version of EAXS.
     tagger = TOMESToolTagger()
