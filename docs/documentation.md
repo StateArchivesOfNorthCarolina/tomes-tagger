@@ -33,9 +33,10 @@ TOMES Tools requires the following applications.
 
 - First, create an EAXS file via [DarcMailCLI](https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI).
 - Start the CoreNLP server.
-	- Until further notice, it is assumed you will run the CoreNLP server on port 9000 with a lengthy timeout a la:
+	- Until further notice, it is assumed you will run the server on port 9000 with a lengthy timeout a la:
 
     	`cd stanford-corenlp-full-2016-10-31`
+
     	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 50000`
 - Then do: `py -3 main.py -h` from the root TOMES Tool folder.
 - Pass in your EAXS file per the instructions.
