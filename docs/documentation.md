@@ -38,25 +38,27 @@ TOMES Tool requires the following applications:
 	- `py -3 -m unittest test__eaxs_to_tagged.py`
 		- This tests the EAXS to "tagged" EAXS workflow without calling CoreNLP or Lynx.
 
-You can also test CoreNLP by starting it and going to the correct local URL, i.e. "localhost:9000". It's recommended to only enter *very* short text (e.g. "George Washington") so as to save time.
+You can also test CoreNLP by starting it and going to the correct local URL, i.e. "localhost:9000". It is recommended to only enter *very* short text (e.g. "George Washington") so as to save time.
 
 ## Sample Files
 Some simple sample files are located in the "tests/sample_files" directory for quick testing.
 
-The Python unit test scripts in the "tests" directory also have command line options. To test these scripts on sample files, simply call the scripts without the `-m unittest` option. 
+The Python unit test scripts in the "tests" directory also have command line options.
+
+To test these scripts on sample files, simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
 
 
 ## Usage
 
 1. Create an EAXS file via [DarcMailCLI](https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI).
 2. Start the CoreNLP server.
-	- Until further notice, it is assumed you will run the server on port 9000 with a lengthy timeout a la:
+	- Until further notice, it is assumed you will run the server on port 9000 with a lengthy timeout:
 	
 		`cd stanford-corenlp-full-2016-10-31`
 
      	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 50000`
-3. Do: `py -3 main.py -h` from the root TOMES Tool directory.
-4. Pass in your EAXS filepath per the instructions.
+3. From the root TOMES Tool directory do: `py -3 main.py -h` 
+4. Pass in your EAXS filepath (including the filename) per the instructions.
 5. Let us know what happens.
 
 	

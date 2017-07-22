@@ -68,7 +68,9 @@ class Test_HTMLToText(unittest.TestCase):
 
 # CLI TEST.
 def main(html: "HTML file"):
-    "Prints plain text version of an HTML document"
+    
+    "Prints plain text version of an HTML document.\
+    \nexample: `py -3 test__html_to_text sample_files\sampleHTML.html` "
 
     # read HTML file.
     html = open(html).read()

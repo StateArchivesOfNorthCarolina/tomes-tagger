@@ -66,7 +66,8 @@ def make_sample():
 
 # CLI TEST.
 def main():
-    "Prints METS file based on current directory"
+    
+    "Prints METS file based on current directory."
 
     stringify = PyMETS.stringify # lxml.etree._Element to string.
     
@@ -79,5 +80,5 @@ def main():
 if __name__ == "__main__":
 
     import plac
-    plac.call(main  )
+    plac.call(main)
 

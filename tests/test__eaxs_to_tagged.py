@@ -41,7 +41,9 @@ class Test_EAXSToTagged(unittest.TestCase):
 
 # CLI TEST.
 def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
-    "Converts EAXS document to tagged EAXS (dry run only - no actual NLP tags)"
+    
+    "Converts EAXS document to tagged EAXS (dry run only - no actual NLP tags).\
+    \nexample: `py -3 test__eaxs_to_tagged.py sample_files\sampleEAXS.xml output.xml`"
 
     # function to mark processing for HTML emails VS. plain text.
     def mark(s):
