@@ -37,15 +37,15 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 					<BodyContent>
 						<Content>
 							<![CDATA[<!DOCTYPE html>
-						<html>
-						<head>
-						<title>Bye</title>
-						<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-						</head>
-						<body>
-						<p>Hi Jane!</p>
-						</body>
-						</html>]]>
+							<html>
+							<head>
+							<title>Bye</title>
+							<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+							</head>
+							<body>
+							<p>Hi Jane!</p>
+							</body>
+							</html>]]>
 						</Content>
 					</BodyContent>
 				</SingleBody>
