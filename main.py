@@ -143,7 +143,7 @@ def main(eaxs: "source EAXS file",
 
 
 if __name__ == "__main__":
-        
-        import plac
-        plac.call(main)
+    
+    import plac
+    plac.call(main)
 
