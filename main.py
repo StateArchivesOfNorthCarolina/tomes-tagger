@@ -15,10 +15,10 @@ Todo:
 """
 
 # import modules.
-import yaml
 import logging
 import logging.config
 import os
+import yaml
 from lib.html_to_text import *
 from lib.text_to_nlp import *
 from lib.nlp_to_xml import *
