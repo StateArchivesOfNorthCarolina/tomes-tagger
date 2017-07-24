@@ -15,6 +15,10 @@ Todo:
 """
 
 # import modules.
+import yaml
+import logging
+import logging.config
+import os
 from lib.html_to_text import *
 from lib.text_to_nlp import *
 from lib.nlp_to_xml import *
@@ -42,7 +46,6 @@ class TOMESToolTagger():
         """
     
         # set logging.
-        logging.basicConfig(level=logging.DEBUG)
         self.logger = logging.getLogger(__name__)        
 
         # set attributes.
@@ -111,10 +114,10 @@ class TOMESToolTagger():
         # create tagged EAXS.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
-        self.logger.info("Writing results to: {}".format(tagged_eaxs_file))
         tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         
-        return tagged_eaxs_file
+        self.logger.info("Writing results to: {}".format(tagged_eaxs_file))
+        return
 
 
 # CLI.
@@ -124,6 +127,16 @@ def main(eaxs: "source EAXS file",
     "Converts EAXS document to tagged EAXS.\
     \nexample: `py -3 main.py tests\sample_files\sampleEAXS.xml`"
 
+    # make sure logging directory exists.
+    logdir = "log"
+    if not os.path.isdir(logdir):
+        os.mkdir(logdir)
+
+    # load logging config.
+    with open("logger.yaml") as f:
+        config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+    
     # make tagged version of EAXS.
     tagger = TOMESToolTagger()
     tagger.eaxs_to_tagged(eaxs, output)

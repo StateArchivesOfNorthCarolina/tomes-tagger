@@ -36,6 +36,9 @@ class TextToNLP():
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.NullHandler())
 
+        # suppress "requests" module's logging if below a warning.
+        logging.getLogger("requests").setLevel(logging.WARNING) # per: https://stackoverflow.com/a/11029841
+
         # set CoreNLP server and options.
         self.host = "{}:{}".format(host, port)
         self.mapping_file = mapping_file
@@ -59,9 +62,9 @@ class TextToNLP():
             self.logger.debug("Getting NLP tags.")
             nlp = self.annotator.annotate(text, properties=self.options)
             return nlp
-        except Exception as e:
-            self.logger.error("Unable to get NLP tags.")
-            exit(e)
+        except Exception as err:
+            self.logger.error("Cannot get NLP tags. Is the CoreNLP server working?")
+            raise err
 
 
 if __name__ == "__main__":
