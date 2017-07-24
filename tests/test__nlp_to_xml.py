@@ -50,19 +50,10 @@ class Test_NLPToXML(unittest.TestCase):
 
 
 # CLI TEST.
-def main(json_file: "CoreNLP JSON file", log_level: ("log level","option", "l")="DEBUG"):
+def main(json_file: "CoreNLP JSON file"):
     
     "Prints tagged message version of CoreNLP JSON output.\
     \nexample: `py -3 test__nlp_to_xml.py sample_files\sampleCoreNLP.json`"
-
-    # set logging level.
-    try:
-        log_level = logging._nameToLevel[log_level]
-        logging.basicConfig(level=log_level)
-    except KeyError:
-        logging.basicConfig(level=logging.DEBUG)
-        levels = [l for l in logging._nameToLevel.keys()]
-        logging.warning("ERROR: 'log level' must be one of: {}. Using DEBUG.".format(levels))
 
     # load JSON.
     with open(json_file) as f:

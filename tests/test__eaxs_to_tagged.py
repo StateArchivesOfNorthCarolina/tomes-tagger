@@ -14,7 +14,7 @@ class Test_EAXSToTagged(unittest.TestCase):
     def setUp(self):
 
         # enable logging.
-        logging.basicConfig(level=logging.DEBUG)
+        logging.basicConfig(level=logging.WARNING)
 
         # set attributes.
         self.sample = "sample_files/sampleEAXS.xml"
@@ -40,20 +40,10 @@ class Test_EAXSToTagged(unittest.TestCase):
 
 
 # CLI TEST.
-def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination",
-        log_level: ("log level","option", "l")="DEBUG"):
+def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
     
     "Converts EAXS document to tagged EAXS (dry run only).\
     \nexample: `py -3 test__eaxs_to_tagged.py sample_files\sampleEAXS.xml output.xml`"
-
-    # set logging level.
-    try:
-        log_level = logging._nameToLevel[log_level]
-        logging.basicConfig(level=log_level)
-    except KeyError:
-        logging.basicConfig(level=logging.DEBUG)
-        levels = [l for l in logging._nameToLevel.keys()]
-        logging.warning("ERROR: 'log level' must be one of: {}. Using DEBUG.".format(levels))
 
     # function to mark processing for HTML emails VS. plain text.
     def mark(s):
