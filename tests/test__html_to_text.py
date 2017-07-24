@@ -67,10 +67,19 @@ class Test_HTMLToText(unittest.TestCase):
 
 
 # CLI TEST.
-def main(html: "HTML file"):
+def main(html: "HTML file", log_level: ("log level","option", "l")="DEBUG"):
     
     "Prints plain text version of an HTML document.\
-    \nexample: `py -3 test__html_to_text sample_files\sampleHTML.html` "
+    \nexample: `py -3 test__html_to_text sample_files\sampleHTML.html`"
+
+    # set logging level.
+    try:
+        log_level = logging._nameToLevel[log_level]
+        logging.basicConfig(level=log_level)
+    except KeyError:
+        logging.basicConfig(level=logging.DEBUG)
+        levels = [l for l in logging._nameToLevel.keys()]
+        logging.warning("ERROR: 'log level' must be one of: {}. Using DEBUG.".format(levels))
 
     # read HTML file.
     html = open(html).read()
