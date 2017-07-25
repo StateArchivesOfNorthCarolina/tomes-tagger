@@ -27,6 +27,7 @@ TOMES Tool requires the following applications:
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
 	- *We're currently using this for NER tagging.*
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
+	- You **must** place the [regexner_TOMES](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/tree/master/lib/stanford.edu/stanford-corenlp-full-2016-10-31) directory and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
 	- *We're currently using this for HTML email to plain text conversion.*
 	- The "lynx" command must be executable from any directory on your system.
