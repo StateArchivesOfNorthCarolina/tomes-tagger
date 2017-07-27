@@ -19,6 +19,7 @@ Todo:
 
 # import modules.
 import os
+from datetime import datetime
 from glob import glob
 from mets.pymets import PyMETS
 
@@ -68,50 +69,49 @@ class FolderToMETS():
             None
         """
        
-       # set template substitution strings.
-       subs = {"eaxs_id": "{eaxs_id}", 
+        # set template substitution strings.
+        subs = {"eaxs_id": "{eaxs_id}", 
                "eaxs_cdate": "{eaxs_cdate}",
                "tagged_eaxs_cdate" : "{tagged_eaxs_cdate}",
-               "title": "{title}",
-               "ctime": "{ctime}",
-               "description": "{description}",
-               "subject": "{subject}"}
+               "mets_ctime": datetime.now().isoformat()}
 
-       # load and format METS templates; append to root.
-       templates = glob("templates/*.xml")
-       for template in templates:
-           t_el = self.pymets.load_template(template, **subs)
-           self.root.append(t_el)
+        # load and format METS templates; append to root.
+        templates = glob("mets_templates/*.xml")
+        for template in templates:
+            t_el = self.pymets.load_template(template, **subs)
+            self.root.append(t_el)
        
-       # create <fileSec>.
-       fileSec = self.pymets.make("fileSec")
-       self.root.append(fileSec)
+        # create <fileSec>.
+        fileSec = self.pymets.make("fileSec")
+        self.root.append(fileSec)
 
-       # make <fileGrp> for each folder.
-       folders = glob("*/", recursive=True)
-       for folder in folders:
-           fs = glob(folder + "/*.*", recursive=True)
-           folder_id = "".join(
-                   [c.lower() for c in folder if c.isalnum()]) # alpha-numeric only.
-           fileGrp = self.pymets.fileGrp(filenames=fs, basepath=self.path,
+        # make <fileGrp> for each folder.
+        folders = glob("*/", recursive=True)
+        for folder in folders:
+            fs = glob(folder + "/*.*", recursive=True)
+            folder_id = "".join(
+                    [c.lower() for c in folder if c.isalnum()]) # alpha-numeric only.
+            fileGrp = self.pymets.fileGrp(filenames=fs, basepath=self.path,
                    identifier=folder_id)
-           fileSec.append(fileGrp)
+            fileSec.append(fileGrp)
        
-       # create <structMap>.
-       structMap = self.pymets.make("structMap")
-       self.root.append(structMap)
-       file_ids = self.pymets.get_fileIDs(fileSec)
-       div = self.pymets.div(file_ids)
-       structMap.append(div)
+        # create <structMap>.
+        structMap = self.pymets.make("structMap")
+        self.root.append(structMap)
+        file_ids = self.pymets.get_fileIDs(fileSec)
+        div = self.pymets.div(file_ids)
+        structMap.append(div)
 
-       # append validation response to root as comment.
-       is_valid = self.pymets.validate(self.root)
-       is_valid = "It is {} that this METS document is valid.".format(is_valid)
-       self.root.append(self.pymets.comment(is_valid))
+        # append validation response to root as comment.
+        is_valid = self.pymets.validate(self.root)
+        is_valid = "It is {} that this METS document is valid.".format(is_valid)
+        self.root.append(self.pymets.Comment(is_valid))
 
-       return
+        return
 
 
 if __name__ == "__main__":
-    pass
+    
+    f2m = FolderToMETS(".")
+    print(f2m.string())
 

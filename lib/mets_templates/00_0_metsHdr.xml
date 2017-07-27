@@ -1,0 +1,12 @@
+<metsHdr xmlns="http://www.loc.gov/METS/" CREATEDATE="{mets_ctime}">
+	<agent ROLE="CREATOR" TYPE="OTHER" OTHERTYPE="Software Agent">
+		<name>TOMES Tool</name>
+		<note>Email archiving software developed through the Transforming Online Mail with Embedded Semantics (TOMES) project, a multi-state partnership that includes Kansas, Utah and North Carolina.</note>
+	</agent>
+	<agent ROLE="CREATOR" TYPE="ORGANIZATION">
+		<name>State Archives of North Carolina</name>
+	</agent>
+	<agent ROLE="CUSTODIAN" TYPE="ORGANIZATION">
+		<name>State Archives of North Carolina</name>
+	</agent>
+</metsHdr>

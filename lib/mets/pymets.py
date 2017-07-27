@@ -16,10 +16,10 @@ Todo:
 import codecs
 import os
 from lxml import etree
-from lib.anyType import AnyType
-from lib.div import Div
-from lib.fileGrp import FileGrp
-import lib.namespaces as namespaces
+from .lib.anyType import *
+from .lib.div import *
+from .lib.fileGrp import *
+from .lib.namespaces import *
 
 
 class PyMETS():
@@ -45,7 +45,7 @@ class PyMETS():
     """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd_file=None):
+    def __init__(self, ns_prefix="mets", ns_map=mets_ns, xsd_file=None):
         """ Sets instance attributes.
 
         Args:
