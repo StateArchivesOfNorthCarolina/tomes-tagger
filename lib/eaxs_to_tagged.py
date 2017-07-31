@@ -108,7 +108,7 @@ class EAXSToTagged():
             The second item is a str, i.e. @name's value.
         """
 
-        # set XPath to @name, omitting attachments.
+        # set XPath for @name, omitting attachments.
         name = name.replace("/", "/ncdcr:")
         path = "ncdcr:MultiBody"
         path += "/ncdcr:SingleBody[(not(contains(ncdcr:Disposition, 'attachment')))][1]"
