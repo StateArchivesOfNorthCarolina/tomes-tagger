@@ -7,6 +7,9 @@ Todo:
     * Use tempfile instead of creating @temp_file in __init__; remove __del__?
         - No, not working in Windows due to permissions issues.
         - Maybe some encoding issues too.
+    * ModifyHTML should be private. The constructor for HTMLToText() should take
+    "shift_links=True" and "remove_images=True" and run ModifyHTML itself.
+        - This will simplify what the user (main.py) has to do.
     * You need to pass the absolute path of the temp file to logging statements.
 """
 
