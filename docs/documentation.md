@@ -41,7 +41,7 @@ You can run all the unit tests in the [../tests](https://github.com/StateArchive
 Specific unit tests of interest:
 
 - `py -3 -m unittest test__html_to_text.py`
-	- This tests that Lynx can be called by TOMES Tool.
+	- This primarily tests that Lynx can be called by TOMES Tool.
 - `py -3 -m unittest test__eaxs_to_tagged.py`
 	- This tests the EAXS to tagged EAXS workflow without actually calling CoreNLP or Lynx.
 
