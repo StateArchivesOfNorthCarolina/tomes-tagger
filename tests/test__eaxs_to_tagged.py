@@ -22,7 +22,7 @@ class Test_EAXSToTagged(unittest.TestCase):
 
     
     def test__validation(self):
-        """ Is it sample EAXS document valid? """
+        """ Can I create a valid tagged EAXS from the sample EAXS? """
 
         # function to return arg unaltered.
         copy = lambda x: x

@@ -15,12 +15,13 @@ class Test_HTMLToText(unittest.TestCase):
         # enable logging.
         logging.basicConfig(level=logging.WARNING)
         
+	# set attributes.
         self.h2t = HTMLToText()
         self.sample = "<html><head></head><body><a href=\"http://h.w\">{}</a></body></html>"
     
     
     def test__shift_links(self):
-        """ Does extracting href values into body text work? """
+        """ Does extracting a.@href values into body text work? """
 
         # format sample text.
         html = self.sample.format("Hello World!")

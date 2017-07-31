@@ -16,7 +16,8 @@ class Test_NLPToXML(unittest.TestCase):
 
         # enable logging.
         logging.basicConfig(level=logging.WARNING)
-        
+		
+        # set attributes.
         self.n2x = NLPToXML()
         self.json_file = "sample_files/sampleCoreNLP.json"
 
