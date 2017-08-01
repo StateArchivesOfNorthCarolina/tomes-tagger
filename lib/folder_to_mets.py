@@ -73,7 +73,9 @@ class FolderToMETS():
         subs = {"eaxs_id": "{eaxs_id}", 
                "eaxs_cdate": "{eaxs_cdate}",
                "tagged_eaxs_cdate" : "{tagged_eaxs_cdate}",
-               "mets_ctime": datetime.now().isoformat()}
+               "mets_ctime": datetime.now().isoformat(),
+               "darcmail_version":"darcmail_version",
+               "tomes_tool_version":"tomes_tool_version"}
 
         # load and format METS templates; append to root.
         templates = glob("mets_templates/*.xml")
