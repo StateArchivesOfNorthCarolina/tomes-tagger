@@ -1,5 +1,5 @@
-<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec_techMD">
-  <techMD ID="techMD_01">
+<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec__object">
+  <techMD ID="tecnhMD__preservation_master">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
         <!-- <premis xmlns="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -20,7 +20,7 @@
       </xmlData>
     </mdWrap>
   </techMD>
-  <techMD ID="techMD_02">
+  <techMD ID="techMD__processing_version">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
         <premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

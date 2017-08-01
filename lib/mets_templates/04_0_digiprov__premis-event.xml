@@ -1,5 +1,5 @@
-<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec_digiprovMD">
-  <digiprovMD ID="digiprovMD_01">
+<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec__event">
+  <digiprovMD ID="digiprovMD_DarcMailCLI">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
         <premis:event xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
@@ -25,7 +25,7 @@
       </xmlData>
     </mdWrap>
   </digiprovMD>
-  <digiprovMD ID="digiprovMD_02">
+  <digiprovMD ID="digiprovMD_TOMESTool">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
         <premis:event xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">

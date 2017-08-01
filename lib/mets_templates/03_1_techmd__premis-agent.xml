@@ -1,40 +1,36 @@
-<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec_techMD">
-  <techMD ID="techMD_01">
-    <mdWrap MDTYPE="PREMIS">
-      <xmlData>
-        <!-- <premis xmlns="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <object xsi:type="representation"> Valid against Premis 3.0 XSD. -->
-        <premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
-          <premis:object>
-            <premis:objectIdentifier>
-              <premis:objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</premis:objectIdentifierType>
-              <premis:objectIdentifierValue>{eaxs_id}</premis:objectIdentifierValue>
-            </premis:objectIdentifier>
-            <premis:objectCategory>representation</premis:objectCategory>
-            <!-- "objectCategory" is listed in PREMIS 3.0 Data Dictionary, but not in XSD. -->
-            <premis:significantProperties>
-              <premis:significantPropertiesValue>This file group constitutes the preservation-master for the email account's messages and attachments.</premis:significantPropertiesValue>
-            </premis:significantProperties>
-          </premis:object>
-        </premis:premis>
-      </xmlData>
-    </mdWrap>
-  </techMD>
-  <techMD ID="techMD_02">
-    <mdWrap MDTYPE="PREMIS">
-      <xmlData>
-        <premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <premis:object>
-            <premis:objectIdentifier>
-              <premis:objectIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/local">local</premis:objectIdentifierType>
-              <premis:objectIdentifierValue>{eaxs_id}__tagged</premis:objectIdentifierValue>
-            </premis:objectIdentifier>
-            <premis:significantProperties>
-              <premis:significantPropertiesValue>This file group constitutes the access-master for the email account's messages. This group differs from the preservation-master EAXS file/s in that message content was subjected to machine and optional human efforts in order to mark up entities and personally identifiable information.</premis:significantPropertiesValue>
-            </premis:significantProperties>
-          </premis:object>
-        </premis:premis>
-      </xmlData>
-    </mdWrap>
-  </techMD>
+<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec__agent">
+	<techMD ID="techMD__DarcMailCLI">
+		<mdWrap MDTYPE="PREMIS">
+			<xmlData>
+				<premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
+					<premis:agent>
+						<premis:agentIdentifier>
+							<premis:agentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">uri</premis:agentIdentifierType>
+							<premis:agentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI</premis:agentIdentifierValue>
+						</premis:agentIdentifier>
+						<premis:agentName>DarcMailCLI</premis:agentName>
+						<premis:agentType>software</premis:agentType>
+						<premis:agentVersion>{darcmail_version}</premis:agentVersion>
+					</premis:agent>
+				</premis:premis>
+			</xmlData>
+		</mdWrap>
+	</techMD>
+	<techMD ID="techMD__TOMESTool">
+		<mdWrap MDTYPE="PREMIS">
+			<xmlData>
+				<premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
+					<premis:agent>
+						<premis:agentIdentifier>
+							<premis:agentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">uri</premis:agentIdentifierType>
+							<premis:agentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/tomes_tool</premis:agentIdentifierValue>
+						</premis:agentIdentifier>
+						<premis:agentName>TOMES Tool</premis:agentName>
+						<premis:agentType>software</premis:agentType>
+						<premis:agentVersion>{tomes_tool_version}</premis:agentVersion>
+					</premis:agent>
+				</premis:premis>
+			</xmlData>
+		</mdWrap>
+	</techMD>
 </amdSec>

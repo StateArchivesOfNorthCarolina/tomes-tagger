@@ -1,5 +1,5 @@
-<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec_rightsMD">
-  <rightsMD ID="rightsMD_01">
+<amdSec xmlns="http://www.loc.gov/METS/" ID="amdSec__rights">
+  <rightsMD ID="rightsMD__GS_121_5">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
         <premis:rights xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
@@ -27,7 +27,7 @@
       </xmlData>
     </mdWrap>
   </rightsMD>
-  <rightsMD ID="rightsMD_02">
+  <rightsMD ID="rightsMD__GS_132_1">
     <mdWrap MDTYPE="PREMIS">
       <xmlData>
         <premis:rights xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
@@ -39,7 +39,7 @@
             <premis:rightsBasis valueURI="http://id.loc.gov/vocabulary/preservation/rightsBasis/sta">statute</premis:rightsBasis>
             <premis:statuteInformation>
               <premis:statuteJurisdiction authority="ISO 3166-2:US">US-NC</premis:statuteJurisdiction>
-              <premis:statuteCitation>G.S. 132</premis:statuteCitation>
+              <premis:statuteCitation>G.S. 132-1</premis:statuteCitation>
               <premis:statuteDocumentationIdentifier>
                 <premis:statuteDocumentationIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">Uniform Resource Identifier</premis:statuteDocumentationIdentifierType>
                 <premis:statuteDocumentationIdentifierValue>http://www.ncleg.net/gascripts/statutes/statutelookup.pl?statute=132</premis:statuteDocumentationIdentifierValue>
