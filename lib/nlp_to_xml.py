@@ -7,8 +7,10 @@ Todo:
     * You need an external, canonical data source for the custom NER tags, perhaps a SKOS
     file.
         - Or at least make it optional in __init__.
-        - Yes: the constructor should set the tag authories. This should be a list.
-          It's the job of the user to obtain the list and pass it.
+        - Yes: the constructor should set the tag authories. This should be a list. It's the
+        job of the user to obtain the list and pass it.
+        - You also need them to pass in the default authority, otherwise it will be
+        "ncdcr.gov".
     * The XSD filename and object are static, so they should be in the __init__.
     * XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
     * validate() should ONLY work for etree._Element and not strings. 
