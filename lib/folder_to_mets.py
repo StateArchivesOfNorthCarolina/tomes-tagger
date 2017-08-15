@@ -57,7 +57,6 @@ class FolderToMETS():
             str: The return value.
         """
 
-        #
         strroot = self.pymets.stringify(self.root)
         return strroot
 
