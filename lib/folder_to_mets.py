@@ -4,11 +4,9 @@
 This module contains a class to construct a METS file for a given email account folder.
 
 Todo:
-    * Work with Archivists re: profile!!!
-    * Need to known naming conventions so this can implicitly figure out the name of the
-    tagged EAXS file.
-    * Need REAL values for formatting the templates! :-]
-    You probably want __init__ to accept args/kwargs then so these can be pass to __init__?
+    * The templates folder AND the substitution dict need to be passed to the methods rather
+    than be assumed.
+    * You probably want __init__ to accept args/kwargs then so these can be pass to __init__?
     * This is the only module with side effects. I don't like that. So don't
     declare a self.root in __init__. Have the constructor accept the templates
     as a list of optional files and a "charset". Then explicitly call build()
