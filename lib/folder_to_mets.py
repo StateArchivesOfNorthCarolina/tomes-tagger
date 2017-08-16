@@ -75,7 +75,7 @@ class FolderToMETS():
                "tomes_tool_version":"tomes_tool_version"}
 
         # load and format METS templates; append to root.
-        templates = glob("mets_templates/*.xml")
+        templates = glob("mets_templates/[!=~]*.[xml|xlsx]")
         for template in templates:
             t_el = self.pymets.load_template(template, **subs)
             self.root.append(t_el)
