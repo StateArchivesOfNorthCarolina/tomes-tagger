@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 """
-This module contains a function for creating RDF/Dublin Core metadata from a Microsoft Excel 2010
-file (.xlsx).
+This module contains a function for creating RDF/Dublin Core metadata from a Microsoft Excel
+2010 file (.xlsx).
 
 Todo:
     * Add logging.
     * Need to actually output entire mets:mdWrap. So maybe this shouldn't be an "extension"?
-    * Bug: Formulas are showing up instead of their values.
+        - Well, pymets will actually do the wrapping IF you pass a dict not a list so that
+        the sheet name is available to pymets.
 """
 
 # import modules.
@@ -42,7 +43,7 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
 
     # ???
     logging.info("Opening workbook '{}'.".format(xlsx_path))
-    workbook = load_workbook(xlsx_path, read_only=False)
+    workbook = load_workbook(xlsx_path, read_only=False, data_only=True)
     worksheets = workbook.get_sheet_names()
 
     # create instance of generic element builder.
@@ -62,7 +63,8 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
                 element_header))
             continue
         elif value_header not in header_map.keys():
-            logging.info("Skipping sheet. Missing required header '{}.'".format(value_header))
+            logging.info("Skipping sheet. Missing required header '{}.'".format(
+                value_header))
             continue
         else: 
             logging.info("Success. Found required headers.".format(element_header,
@@ -75,11 +77,11 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
             column = [cell.value for cell in worksheet_object[header_column][1:]]
             metadata.append(column)
 
-        # ???
+        # ??? paranoid check.
         elements, values = metadata[0], metadata[1]
         if not len(elements) == len(values):
-            logging.warning("Length of cells in '{}' and '{}' do not match. \
-                     Skipping sheet.".format(element_header, value_header))
+            logging.warning("Skipping sheet. Length of '{}' and '{}' do not match.".format(
+                element_header, value_header))
             continue
 
 
@@ -97,7 +99,7 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
             element, value = elements[i], values[i]
             if element is not None and value is not None:
                 element = make("dc:" + element)
-                element.text = value
+                element.text = str(value)
                 rdf_description.append(element)
             rdf_root.append(rdf_description)
         logging.info("RDF tree built.")
