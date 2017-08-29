@@ -16,10 +16,10 @@ Todo:
 import codecs
 import os
 from lxml import etree
-from .lib.anyType import *
-from .lib.div import *
-from .lib.fileGrp import *
-from .lib.namespaces import *
+from lib import anyType
+from lib import div
+from lib import fileGrp
+from lib import namespaces
 
 
 class PyMETS():
@@ -45,7 +45,7 @@ class PyMETS():
     """
 
     
-    def __init__(self, ns_prefix="mets", ns_map=mets_ns, xsd_file=None):
+    def __init__(self, ns_prefix="mets", ns_map=namespaces.mets_ns, xsd_file=None):
         """ Sets instance attributes.
 
         Args:
@@ -69,9 +69,9 @@ class PyMETS():
         self.Comment = etree.Comment
 
         # compose instances of helper classes.
-        self.AnyType = AnyType(self.ns_prefix, self.ns_map)
-        self.Div = Div(self.ns_prefix, self.ns_map)
-        self.FileGrp = FileGrp(self.ns_prefix, self.ns_map)
+        self.AnyType = anyType.AnyType(self.ns_prefix, self.ns_map)
+        self.Div = div.Div(self.ns_prefix, self.ns_map)
+        self.FileGrp = fileGrp.FileGrp(self.ns_prefix, self.ns_map)
 
 
     def load(self, xml, is_raw=False):

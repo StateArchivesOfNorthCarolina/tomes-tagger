@@ -43,6 +43,7 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
 
     # ???
     logging.info("Opening workbook '{}'.".format(xlsx_path))
+    # do try/except here and log if you can't open the file.
     workbook = load_workbook(xlsx_path, read_only=False, data_only=True)
     worksheets = workbook.get_sheet_names()
 
@@ -108,12 +109,13 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
 
     return RDF
 
-r = excel_to_rdf("test.xlsx")
-print()
-print("Here are any RDF trees that were created ...")
-
-for i in r:
+if __name__ == "__main__":
+    r = excel_to_rdf("test.xlsx")
     print()
-    s = (etree.tostring(i, pretty_print=True))
-    s = s.decode("utf-8")
-    print(s)
+    print("Here are any RDF trees that were created ...")
+
+    for i in r:
+        print()
+        s = (etree.tostring(i, pretty_print=True))
+        s = s.decode("utf-8")
+        print(s)
