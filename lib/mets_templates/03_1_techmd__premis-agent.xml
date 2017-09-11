@@ -5,7 +5,7 @@
         <premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
           <premis:agent>
             <premis:agentIdentifier>
-              <premis:agentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">uri</premis:agentIdentifierType>
+              <premis:agentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri.html">uri</premis:agentIdentifierType>
               <premis:agentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI</premis:agentIdentifierValue>
             </premis:agentIdentifier>
             <premis:agentName>DarcMailCLI</premis:agentName>
@@ -22,7 +22,7 @@
         <premis:premis xmlns:premis="http://www.loc.gov/premis/v3" version="3.0">
           <premis:agent>
             <premis:agentIdentifier>
-              <premis:agentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri">uri</premis:agentIdentifierType>
+              <premis:agentIdentifierType valueURI="http://id.loc.gov/vocabulary/identifiers/uri.html">uri</premis:agentIdentifierType>
               <premis:agentIdentifierValue>https://github.com/StateArchivesOfNorthCarolina/tomes_tool</premis:agentIdentifierValue>
             </premis:agentIdentifier>
             <premis:agentName>TOMES Tool</premis:agentName>
