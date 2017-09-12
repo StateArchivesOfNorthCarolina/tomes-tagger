@@ -35,10 +35,16 @@ def getNER(phrase, PII_type):
 
     # set RegexNER mapping file.
     mapping = "regexner_TOMES/" + PII_type + "__regexnerMappings.txt"
+
+    #set RegexNER default tags to always replace on match.
+    background_symbol = ["DATE", "DURATION", "LOCATION", "MISC", "MONEY", "NUMBER", "O",
+             "ORDINAL", "ORGANIZATION", "PERCENT", "PERSON", "SET", "TIME"]
+    background_symbol = ",".join(background_symbol)
     
     # run CoreNLP on @phrase with @mapping file.
     properties = {"annotators":"tokenize, ssplit, pos, ner, regexner",
                  "outputFormat":"json",
+                 "regexner.backgroundSymbol": background_symbol,
                  "regexner.mapping":mapping}
     output = NLP.annotate(phrase, properties=properties)
     #print(output)
