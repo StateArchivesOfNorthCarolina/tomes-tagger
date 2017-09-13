@@ -8,31 +8,30 @@ elementFormDefault="qualified">
 
 <xs:annotation>
 	<xs:documentation xml:lang="en">
-	This "tagged content" schema defines an XML structure to be inserted into the
+	This "tagged content" schema proposes an XML structure to be added to the
 	State Archives of North Carolina XML Schema for a Single E-Mail Account
 	located at:
 		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
 
-	Specifically, it can be inserted within the
-	MultiBody/SingleBody/BodyContent/Content element within a CDATA block.
-	This element is define within the email account XSD located at:
-		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd
+	Specifically, it is meant to be optionally inserted within the
+	"Message/MultiBody/SingleBody" element.
 
-	The tagged message XML structure serves to annotate a plain-text
-	representation of an email message.
+	The proposed XML structure serves to annotate a plain-text representation of an
+	email message.
 
 	Tokens recognized as named entities via Natural Language Processing (NLP)
-	techniques are to be enclosed within the "tagged" sub-element. Non-recognized
+	techniques are to be enclosed within the "Token" sub-element. Non-recognized
 	tokens and leading/trailing whitespace are not encased within this
-	sub-element.
+	sub-element. Note that whitespace between opening and closing "Token"
+	elements IS significant.
 
-	All content not subjected to NLP are to be enclosed in the "raw_text"
+	All content not subjected to NLP are to be enclosed in the "TextBlock"
 	element. This is primarily intended to contain signature blocks.
 
-	The value of a "tagged" element is a token (colloquially equivalent to a
+	The value of a "Token" element is a token (colloquially equivalent to a
 	"word") that has been "tagged" with a named entity via NLP.
 
-	The "tagged" element has three attributes:
+	The element has three optional attributes:
 
 		1.	@entity - the name of the entity the token is recognized as
 			(PERSON, PLACE, etc.)
@@ -40,24 +39,29 @@ elementFormDefault="qualified">
 		2.	@authority - the Internet domain of the organization reponsible for
 			the controlled vocabulary from which the @entity value derives.
 				
-		3. 	@id - the identifier for each token; this value is shared by adjacent
+		3. 	@group - the identifier for each token; this value is shared by adjacent
 			tokens with the same @entity value.
+			
+	Note that if any attribute exists, then the other two attributes must exist. In
+	other words, the three attributes must collectively exist or must collectively
+	not exist.
 
-	An example tagged_message document is below.
+	An example document is below:
 
 	<!--
 
 	<![CDATA[
-	<tagged_message>
-		Good morning <tagged entity="PERSON" authority="stanford.edu" id="1">John</tagged>!
+	<?xml version='1.0' encoding='utf-8'?>
+	<TaggedContent xmlns="http://www.archives.ncdcr.gov/mail-account">
+		<Token>Good</Token> <Token>morning</Token> <Token entity="person.male" authority="foo.bar" group="1">John</Token><Token>!</Token>
+
+		<Token>Love</Token><Token>,</Token>
+		<Token entity="PERSON" authority="stanford.edu" group="2">Marsha</Token>
 		
-		Love,
-		<tagged entity="PERSON" authority="stanford.edu" id="2">Marsha</tagged>
-		
-		<raw_text>Marsha B.
+		<TextBlock>Marsha B.
 		Los Angeles, CA
-		555-555-5555</raw_text>
-	</tagged_message>
+		555-555-5555</TextBlock>
+	</TaggedContent>
 	]]>
 		
 	-->
@@ -67,7 +71,7 @@ elementFormDefault="qualified">
 <xs:element name="TaggedContent">
 	<xs:complexType mixed="true">
 		<xs:sequence>
-			<xs:element ref="Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Token" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element ref="TextBlock" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
