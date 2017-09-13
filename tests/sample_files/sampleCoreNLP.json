@@ -35,7 +35,7 @@
           "characterOffsetBegin": 13,
           "characterOffsetEnd": 17,
           "pos": "NNP",
-          "ner": "PERSON",
+          "ner": "foo.bar/person.male",
           "before": " ",
           "after": ""
         },

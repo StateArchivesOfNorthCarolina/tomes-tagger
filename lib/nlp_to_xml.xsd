@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema
-targetNamespace="http://archives.ncdcr.gov/mail-account/tagged-message/"
-xmlns="http://archives.ncdcr.gov/mail-account/tagged-message/"
+targetNamespace="http://www.archives.ncdcr.gov/mail-account"
+xmlns="http://www.archives.ncdcr.gov/mail-account"
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 elementFormDefault="qualified">
 
 <xs:annotation>
 	<xs:documentation xml:lang="en">
-	This "tagged message" schema defines an XML structure to be inserted into the
+	This "tagged content" schema defines an XML structure to be inserted into the
 	State Archives of North Carolina XML Schema for a Single E-Mail Account
 	located at:
 		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
@@ -64,33 +64,24 @@ elementFormDefault="qualified">
 	</xs:documentation>
 </xs:annotation>
 
-<xs:element name="tagged_message">
+<xs:element name="TaggedContent">
 	<xs:complexType mixed="true">
 		<xs:sequence>
-			<xs:element ref="tagged" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element ref="raw_text" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="TextBlock" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:element>
 
-<xs:element name="tagged">
+<xs:element name="Token">
 	<xs:complexType>
 
 		<xs:simpleContent>
 			<xs:extension base="xs:token">
 
-				<xs:attribute name="entity" type="xs:token" use="required"/>
-
-				<xs:attribute name="authority" use="required">
-					<xs:simpleType>
-						<xs:restriction base="xs:token">
-							<xs:enumeration value="stanford.edu"/>
-							<xs:enumeration value="ncdcr.gov"/>
-						</xs:restriction>
-					</xs:simpleType>
-				</xs:attribute>
-				
-				<xs:attribute name="id" type="xs:integer" use="required"/>
+				<xs:attribute name="entity" type="xs:token" />
+				<xs:attribute name="authority" type="xs:token" />
+				<xs:attribute name="group" type="xs:integer" />
 
 			</xs:extension>
 		</xs:simpleContent>
@@ -98,7 +89,7 @@ elementFormDefault="qualified">
 	</xs:complexType>
 </xs:element>
 
-<xs:element name="raw_text">
+<xs:element name="TextBlock">
 	<xs:simpleType>
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>

@@ -4,17 +4,11 @@
 This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema.
 
 Todo:
-    * You need an external, canonical data source for the custom NER tags, perhaps a SKOS
-    file.
-        - Or at least make it optional in __init__.
-        - Yes: the constructor should set the tag authories. This should be a list. It's the
-        job of the user to obtain the list and pass it.
-        - You also need them to pass in the default authority, otherwise it will be
-        "ncdcr.gov".
     * The XSD filename and object are static, so they should be in the __init__.
     * XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
     * validate() should ONLY work for etree._Element and not strings. 
         - So, get rid of is_raw.
+        - Remember: you can't validate without an Internet connection.
     * If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just raise and error before passing empty text to CoreNLP? That would
         certainly be more efficient.
@@ -44,39 +38,35 @@ class NLPToXML():
         self.xsd_file = __file__.replace(".py", ".xsd")
         
         # set namespace attributes.
-        self.ns_uri = "http://archives.ncdcr.gov/mail-account/tagged-message/"
+        self.ns_uri = "http://www.archives.ncdcr.gov/mail-account"
         self.ns_map  = {None: self.ns_uri}
 
-        # set custom NER tags.
-        self.custom_ner = ["GOV.state_agency",
-                          "PII.bank_account_number",
-                          "PII.beacon_id",
-                          "PII.credit_card_number",
-                          "PII.email_address",
-                          "PII.employee_identification_number",
-                          "PII.nc_drivers_license_number",
-                          "PII.passport_number",
-                          "PII.personal_health_information",
-                          "PII.sensitive_document",
-                          "PII.social_security_number"]
 
-
-    def _get_authority(self, ner_tag):
-        """ Gets the authority domain for an @ner_tag.
+    def _split_authority(self, auth_tag):
+        """ Splits @auth_tag into the authority domain and NER tag.
 
         Args:
-            - ner_tag (str): The NER tag for which to get the authority.
+            - auth_tag (str): The forward-slash concatenated authority domain and NER tag.
 
         Returns:
-            str: The return value.
+            tuple: The return value.
+            The first item is a string, i.e the authority domain.
+            The second item is a string, i.e. the NER tag.
         """
-
-        if ner_tag in self.custom_ner:
-            authority = "ncdcr.gov"
-        else:
-            authority = "stanford.edu"
         
-        return authority
+        slash = auth_tag.find("/")
+
+        # determine authority.
+        if slash == -1:
+            authority, ner_tag = "stanford.edu", auth_tag
+        else:
+            authority, ner_tag = auth_tag[0:slash], auth_tag[slash+1:]
+
+        # if forward slashes are in @ner_tag, log a warning.
+        if "/" in ner_tag:
+            self.logger.warning("Forward slashes found in NER tag: {}".format(ner_tag))
+        
+        return (authority, ner_tag)
 
 
     def validate(self, xdoc, is_raw=True):
@@ -118,15 +108,15 @@ class NLPToXML():
         """
 
         # create root element.
-        tagged_message = etree.Element("{" + self.ns_uri + "}tagged_message",
+        tagged_message = etree.Element("{" + self.ns_uri + "}TaggedContent",
                 nsmap=self.ns_map)
         tagged_message.text = ""
         
-        # start tracking "tag" sub-elements.
-        tag_id = 0
-        current_tag = ""
+        # start tracking NER tag groups with default authority/NER tag combination.
+        tag_group = 0
+        current_ner = ""
 
-        # add text or "tag" sub-element to root XML as needed.
+        # iterate through tokens; append sub-elements to root.
         sentences = jdict["sentences"]
         for sentence in sentences:
             
@@ -139,42 +129,32 @@ class NLPToXML():
                 except KeyError:
                     originalText = token["word"]
                 after = token["after"]
-                ner_tag = token["ner"]
+                ner = token["ner"]
 
-                # if no NER tag found, append to root element and continue.
-                # otherwise, add a "tag" sub-element.
-
-                if ner_tag == "O":
-                    current_tag = ner_tag
-                    try:
-                        tagged_message[-1].tail += originalText + after
-                    except TypeError: # no previous tail.
-                        tagged_message[-1].tail = originalText + after
-                    except IndexError: # no child elements.
-                        tagged_message.text += originalText + after
-                    continue
-
-                # if new tag value, increase "id" attribute value.
-                if ner_tag != current_tag:
-                    current_tag = ner_tag
-                    tag_id += 1
-                
-                # get "authority" attribute value.
-                tag_authority = self._get_authority(ner_tag)
+                # if new tag, increase group value.
+                if ner != current_ner and ner != "O":
+                    current_ner = ner
+                    tag_group += 1
             
-                # add "tag" sub-element and attributes to root.
-                tagged = etree.SubElement(tagged_message, "{" + self.ns_uri + "}tagged",
+                # create sub-element.
+                tagged = etree.SubElement(tagged_message, "{" + self.ns_uri + "}Token",
                         nsmap=self.ns_map)
-                tagged.set("entity", ner_tag)
-                tagged.set("authority", tag_authority)
-                tagged.set("id", str(tag_id))
+                
+                # if NER tag exists, add attributes.
+                if ner != "O":
+                    tag_authority, tag_value = self._split_authority(ner)
+                    tagged.set("entity", tag_value)
+                    tagged.set("authority", tag_authority)
+                    tagged.set("group", str(tag_group))
+                
+                # set text and append whitespace.
                 tagged.text = originalText
                 tagged.tail = after
 
         return tagged_message
 
 
-    def xstring(self, jdict, charset="utf-8", header=True, beautify=True):
+    def xstring(self, jdict, charset="utf-8", header=True, beautify=False):
         """ Converts CoreNLP JSON to an XML string per the Tagged EAXS schema.
 
         Args:
