@@ -25,7 +25,7 @@ elementFormDefault="qualified">
 	sub-element. Note that whitespace between opening and closing "Token"
 	elements IS significant.
 
-	All content not subjected to NLP are to be enclosed in the "TextBlock"
+	All content not subjected to NLP are to be enclosed in the "BlockText"
 	element. This is primarily intended to contain signature blocks.
 
 	The value of a "Token" element is a token (colloquially equivalent to a
@@ -58,9 +58,9 @@ elementFormDefault="qualified">
 		<Token>Love</Token><Token>,</Token>
 		<Token entity="PERSON" authority="stanford.edu" group="2">Marsha</Token>
 		
-		<TextBlock>Marsha B.
+		<BlockText>Marsha B.
 		Los Angeles, CA
-		555-555-5555</TextBlock>
+		555-555-5555</BlockText>
 	</TaggedContent>
 	]]>
 		
@@ -72,7 +72,7 @@ elementFormDefault="qualified">
 	<xs:complexType mixed="true">
 		<xs:sequence>
 			<xs:element ref="Token" minOccurs="0" maxOccurs="unbounded" />
-			<xs:element ref="TextBlock" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="BlockText" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:element>
@@ -93,7 +93,7 @@ elementFormDefault="qualified">
 	</xs:complexType>
 </xs:element>
 
-<xs:element name="TextBlock">
+<xs:element name="BlockText">
 	<xs:simpleType>
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
