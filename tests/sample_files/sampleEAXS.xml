@@ -72,7 +72,6 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 			</Hash>
 		</Message>
 		<Message>
-
 			<RelPath>.</RelPath>
 			<LocalId>1002</LocalId>
 			<MessageId>
@@ -117,5 +116,49 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 			<RelPath>.</RelPath>
 			<Eol>CRLF</Eol>
 		</Mbox>
+	</Folder>
+	<Folder>
+		<Name>baz</Name>
+		<Message>
+			<RelPath>.</RelPath>
+			<LocalId>1003</LocalId>
+			<MessageId>
+				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D9>]]>
+			</MessageId>
+			<MimeVersion>1.0</MimeVersion>
+			<OrigDate>2010-02-12T11:50:40-05:00</OrigDate>
+			<From>
+				<![CDATA["Jane Doe" <jane_doe@fake.nc.gov>]]>
+			</From>
+			<To>
+				<![CDATA["John Doe" <john_doe@fake.nc.gov>]]>
+			</To>
+			<Subject>Bye</Subject>
+			<Header>
+				<Name>Date</Name>
+				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
+			</Header>
+			<MultiBody>
+				<ContentType>multipart/mixed</ContentType>
+				<BoundaryString>--boundary-LibPST-iamunique-32332_-_-</BoundaryString>
+				<OtherMimeHeader>
+					<Name>Content-Language</Name>
+					<Value>en-US</Value>
+				</OtherMimeHeader>
+				<SingleBody>
+					<Charset>us-ascii</Charset>
+					<BodyContent>
+						<Content>
+							<![CDATA[I meant it .... goodbye John!!!]]>
+						</Content>
+					</BodyContent>
+				</SingleBody>
+			</MultiBody>
+			<Eol>LF</Eol>
+			<Hash>
+				<Value>49618c929dde66c8bb488073e7312ad9c18c70f4</Value>
+				<Function>SHA1</Function>
+			</Hash>
+		</Message>
 	</Folder>
 </Account>
