@@ -5,8 +5,7 @@ This module ... ???
 
 Todo:
     * Do you need to handle/skip blank rows?
-    * Can you assume the data is small enough to use a row list?
-
+    * Have the regexmap be a default param in __init__.
 """
 
 # import modules.
