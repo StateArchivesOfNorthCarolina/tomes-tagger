@@ -85,7 +85,6 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
                 element_header, value_header))
             continue
 
-
         # ???
         rdf_id = "{}".format(metadata) + datetime.utcnow().isoformat()
         rdf_id = rdf_id.encode("utf-8")
@@ -105,7 +104,6 @@ def excel_to_rdf(xlsx_path, element_header="dc_element", value_header="dc_value"
             rdf_root.append(rdf_description)
         logging.info("RDF tree built.")
         RDF.append(rdf_root)
-
 
     return RDF
 
