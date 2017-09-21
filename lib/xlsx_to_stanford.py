@@ -37,14 +37,25 @@ class XLSXToStanford():
         """ ??? """
 
         # ???
-        if not is_case_sensitive:
-            pattern = "(?i)" + " (?i)".join(pattern.split())
+        while "  " in pattern:
+            pattern = pattern.replace("  ", " ")
+ 
+        # ???
+        prefix = "(?i)"
+        if is_case_sensitive:
+            prefix = ""
+        
+        # ???
+        regx_map = {"{abc}":".*[a-zA-Z]", "{123}":".*[0-9]", "{abc123}":".*[a-zA-Z0-9]"}
+        retoken = lambda t: prefix + t if t not in regx_map.keys() else regx_map[t]
+        pattern = [retoken(t) for t in pattern.split()]
+        pattern = " ".join(pattern)
 
         # ???
-        replacements = {"{abc}":".*[a-zA-Z]", "{123}":".*[0-9]", "{abc123}":".*[a-zA-Z0-9]"}
-        for match, replacement in replacements.items():
-            pattern = pattern.replace("(?i)" + match, match)
-            pattern = pattern.replace(match, replacement)
+        #if not is_case_sensitive:
+        #    for regx_key in regx_map.keys():
+        #        if prefix + regx_key in pattern:
+        #            self.logger.warning("Illegal wildcard. Wilcards must be standalone tokens.")
 
         return pattern
 
@@ -71,33 +82,49 @@ class XLSXToStanford():
         return False
 
 
-    def stanfordize_file(self, xlsx_file, tsv_file=None):
+    def _get_tsv_file(self, xlsx_file, tsv_file):
         """ ??? """
         
-        # load workbook; verify that required worksheet exists.
-        self.logger.info("Loading workbook: {}".format(xlsx_file))
-        workbook = load_workbook(xlsx_file, read_only=False, data_only=True)
-        try:
-            rows = workbook[self.entity_worksheet]
-        except KeyError:
-            self.logger.error("Missing required worksheet '{}' in workbook: {}".format(
-                    self.entity_worksheet, xlsx_file))
-            raise
-        
         # ???
-        if tsv_file is not None:
+        if tsv_file is None:
             tsv_file = xlsx_file.replace(".xlsx", "__mapping.txt")
         if os.path.isfile(tsv_file):
             self.logger.warning("File '{}' already exists and will be overwritten.".format(
                 tsv_file))
+
+        return tsv_file
+
+        
+    def _get_entity_rows(self, xlsx_file):
+        """ ??? """
+
+        # load workbook; verify that required worksheet exists.
+        workbook = load_workbook(xlsx_file, read_only=False, data_only=True)
+        try:
+            entity_rows = workbook[self.entity_worksheet]
+        except KeyError:
+            self.logger.error("Missing required worksheet '{}' in workbook: {}".format(
+                    self.entity_worksheet, xlsx_file))
+            raise
+
+        return entity_rows
+
+
+    def stanfordize_file(self, xlsx_file, tsv_file=None):
+        """ ??? """
             
+        # ???
+        self.logger.info("Loading workbook: {}".format(xlsx_file))
+        entity_rows = self._get_entity_rows(xlsx_file)
+        tsv_file = self._get_tsv_file(xlsx_file, tsv_file)
+
         # ???
         tsv = open(tsv_file, "w")
         tsv_writer = csv.writer(tsv, delimiter="\t", lineterminator="")
         
         #
         i = 1
-        for row in rows.values:
+        for row in entity_rows.values:
 
             # validate headers.
             if i == 1:
@@ -122,7 +149,7 @@ class XLSXToStanford():
                     tsv_writer.writerow([pattern,label])
 
             # avoid final linebreak, otherwise CoreNLP will crash.
-            if i != 1 and i != rows.max_row:
+            if i != 1 and i != entity_rows.max_row:
                 tsv.write("\n")
             i += 1
 
@@ -140,7 +167,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
 
     xl_in = "../tests/sample_files/entity_dictionaries/foo.xlsx"
-    xl_out = xl_in.replace(".xlsx", "_stanford.txt")
+    xl_out = None#xl_in.replace(".xlsx", "_stanford.txt")
 
     x2s = XLSXToStanford()
     x2s.stanfordize_file(xl_in, xl_out)
