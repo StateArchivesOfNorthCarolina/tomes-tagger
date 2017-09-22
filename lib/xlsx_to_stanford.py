@@ -4,13 +4,16 @@
 This module ... ???
 
 Todo:
-    * ???
+    * Should you validate the data type for each row, i.e. "_validate_row()"?
+        - It won't add to the length of stanfordize_file().
 """
 
 # import modules.
 import csv
+import glob
 import logging
 import os
+import shutil
 from openpyxl import load_workbook
 
 
@@ -32,30 +35,39 @@ class XLSXToStanford():
         self.required_headers = ("pattern", "description", "case_sensitive", "label", 
                 "authority")
 
+        # ???
+        self.regx_map = {"{abc}":".*[a-zA-Z]", "{123}":".*[0-9]", "{abc123}":".*[a-zA-Z0-9]"}
 
-    def _interpret_pattern(self, pattern, is_case_sensitive):
+
+    def _get_pattern(self, pattern, is_case_sensitive):
         """ ??? """
 
-        # ???
-        while "  " in pattern:
-            pattern = pattern.replace("  ", " ")
- 
-        # ???
-        prefix = "(?i)"
-        if is_case_sensitive:
-            prefix = ""
-        
-        # ???
-        regx_map = {"{abc}":".*[a-zA-Z]", "{123}":".*[0-9]", "{abc123}":".*[a-zA-Z0-9]"}
-        retoken = lambda t: prefix + t if t not in regx_map.keys() else regx_map[t]
-        pattern = [retoken(t) for t in pattern.split()]
-        pattern = " ".join(pattern)
+        # ensure that @pattern does not only contain wildcard patterns.
+        only_wildcards = [t for t in pattern.split() if t not in self.regx_map.keys()]
+        only_wildcards = True if len(only_wildcards) ==0 else False
+        if only_wildcards:
+            self.logger.warning("Pattern contains only wildcards.")
+            return None
+
+        # ensure that @pattern does not contain non-standalone wildcard patterns.
+        mixed_wildcards = [t for t in pattern.split() if t not in
+                self.regx_map.keys() and "{" in t]
+        mixed_wildcards = True if len(mixed_wildcards) !=0 else False
+        if mixed_wildcards:
+            self.logger.warning("Pattern contains non-standalone wildcards.")
+            return None
 
         # ???
-        #if not is_case_sensitive:
-        #    for regx_key in regx_map.keys():
-        #        if prefix + regx_key in pattern:
-        #            self.logger.warning("Illegal wildcard. Wilcards must be standalone tokens.")
+        if "  " in pattern:
+            self.logger.warning("Removing adjacent whitespace in: {}".format(pattern))
+            while "  " in pattern:
+                pattern = pattern.replace("  ", " ")
+
+        # ???
+        prefix = "" if is_case_sensitive else "(?i)"
+        retoken = lambda t: prefix + t if t not in self.regx_map.keys() else self.regx_map[t]
+        pattern = [retoken(t) for t in pattern.split()]
+        pattern = " ".join(pattern)
 
         return pattern
 
@@ -64,12 +76,11 @@ class XLSXToStanford():
         """ ??? """
         
         # ???
-        self.logger.info("Validating header row.")
-        self.logger.debug("Found header row: {}".format(header_row))
+        self.logger.debug("Validating header row: {}".format(header_row))
         
         # ???
         if header_row == self.required_headers:
-            self.logger.info("Header row is valid.")
+            self.logger.debug("Header row is valid.")
             return True
         
         # ???
@@ -82,14 +93,14 @@ class XLSXToStanford():
         return False
 
 
-    def _get_tsv_file(self, xlsx_file, tsv_file):
+    def _get_tsv_file(self, xlsx_file, tsv_file=None):
         """ ??? """
         
         # ???
         if tsv_file is None:
-            tsv_file = xlsx_file.replace(".xlsx", "__mapping.txt")
+            tsv_file = xlsx_file.replace("__mapping.xlsx", "__mapping.txt")
         if os.path.isfile(tsv_file):
-            self.logger.warning("File '{}' already exists and will be overwritten.".format(
+            self.logger.warning("File '{}' already exists.".format(
                 tsv_file))
 
         return tsv_file
@@ -123,10 +134,12 @@ class XLSXToStanford():
         tsv_writer = csv.writer(tsv, delimiter="\t", lineterminator="")
         
         #
-        i = 1
+        i = 0
         for row in entity_rows.values:
 
-            # validate headers.
+            i += 1
+
+            # validate header row.
             if i == 1:
                 if not self._validate_header_row(row):
                     self.logger.info("Removing file: {}".format(tsv_file))
@@ -137,28 +150,60 @@ class XLSXToStanford():
                 else:
                     self.logger.info("Writing to mapping file: {}".format(tsv_file))
             
-            # write data to file.        
-            else:
-                if None in row:
-                    self.logger.warning("Found empty cell in row {}. Skipping row.".format(i))
-                    self.logger.debug("Row {}: {}".format(i, row))
-                else:
-                    pattern, description, case_sensitive, label, authority = row
-                    pattern = self._interpret_pattern(pattern, case_sensitive)
-                    label = authority + "/" + label
-                    tsv_writer.writerow([pattern,label])
+            # check and modify row data.               
+            if None in row:
+                self.logger.warning("Empty cell in row #{}. Skipping row.".format(i))
+                continue
 
-            # avoid final linebreak, otherwise CoreNLP will crash.
-            if i != 1 and i != entity_rows.max_row:
-                tsv.write("\n")
-            i += 1
+            # ???
+            pattern, description, case_sensitive, label, authority = row
+            pattern = self._get_pattern(pattern, case_sensitive)
+            label = authority + "/" + label
+
+            if pattern is None:
+                self.logger.warning("Illegal pattern in row #{}. Skipping row.".format(i))
+                continue
+
+            # write row to file and avoid final linebreak (otherwise CoreNLP will crash).
+            if i != 1:
+                tsv_writer.writerow([pattern,label])
+                if i != entity_rows.max_row:
+                    tsv.write("\n")
 
         return
 
 
     def stanfordize_folder(self, input_dir, output_dir):
         """ ??? """
-        pass
+        
+        # ???
+        input_dir = os.path.abspath(input_dir)
+        output_dir = os.path.abspath(output_dir)
+
+        # ???
+        for _dir in [input_dir, output_dir]:
+            if not os.path.isdir(_dir):
+                self.logger.warning("Non-existant directory: {}".format(_dir))
+                return
+
+        # ???
+        xlsx_files = glob.glob(input_dir + "/[!~]*__mapping.xlsx")
+        txt_files = glob.glob(input_dir + "/*__mapping.txt")
+
+        # ???
+        for txt_file in txt_files:
+            out_file = txt_file.replace(input_dir, output_dir)
+            self.logger.info("Copying '{}' to {}.".format(txt_file, out_file))
+            shutil.copy(txt_file, out_file)
+
+        # ???
+        for xlsx_file in xlsx_files:
+            out_file = self._get_tsv_file(xlsx_file)
+            out_file = out_file.replace(input_dir, output_dir)
+            self.logger.info("Mapping '{}' to {}.".format(xlsx_file, out_file))
+            self.stanfordize_file(xlsx_file, out_file)
+
+        return
 
 
 # TEST.
@@ -166,9 +211,9 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
 
-    xl_in = "../tests/sample_files/entity_dictionaries/foo.xlsx"
-    xl_out = None#xl_in.replace(".xlsx", "_stanford.txt")
+    xlsx_path = "../tests/sample_files/entity_dictionaries"
+    xlsx_file = xlsx_path + "/foo__mapping.xlsx"
 
     x2s = XLSXToStanford()
-    x2s.stanfordize_file(xl_in, xl_out)
-
+    #x2s.stanfordize_file(xlsx_file)
+    x2s.stanfordize_folder(xlsx_path, xlsx_path)
