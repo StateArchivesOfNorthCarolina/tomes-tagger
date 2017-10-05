@@ -6,6 +6,9 @@ This module ... ???
 Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - It won't add to the length of stanfordize_file().
+        - No: Just trust that data is OK unless we start to see data entry errors. :-]
+    * You need to catch SameFileError when copying text to text OR ... should you only
+    support Excel files (yes?!).
 """
 
 # import modules.
@@ -35,40 +38,24 @@ class XLSXToStanford():
         self.required_headers = ("pattern", "description", "case_sensitive", "label", 
                 "authority")
 
-        # ???
-        self.regx_map = {"{abc}":".*[a-zA-Z]", "{123}":".*[0-9]", "{abc123}":".*[a-zA-Z0-9]"}
-
 
     def _get_pattern(self, pattern, is_case_sensitive):
         """ ??? """
 
-        # ensure that @pattern does not only contain wildcard patterns.
-        only_wildcards = [t for t in pattern.split() if t not in self.regx_map.keys()]
-        only_wildcards = True if len(only_wildcards) ==0 else False
-        if only_wildcards:
-            self.logger.warning("Pattern contains only wildcards.")
-            return None
-
-        # ensure that @pattern does not contain non-standalone wildcard patterns.
-        mixed_wildcards = [t for t in pattern.split() if t not in
-                self.regx_map.keys() and "{" in t]
-        mixed_wildcards = True if len(mixed_wildcards) !=0 else False
-        if mixed_wildcards:
-            self.logger.warning("Pattern contains non-standalone wildcards.")
-            return None
-
         # ???
-        if "  " in pattern:
-            self.logger.warning("Removing adjacent whitespace in: {}".format(pattern))
-            while "  " in pattern:
-                pattern = pattern.replace("  ", " ")
+        self.logger.debug("Inspecting pattern: {}".format(pattern))
 
-        # ???
-        prefix = "" if is_case_sensitive else "(?i)"
-        retoken = lambda t: prefix + t if t not in self.regx_map.keys() else self.regx_map[t]
-        pattern = [retoken(t) for t in pattern.split()]
-        pattern = " ".join(pattern)
-
+        # remove excess whitespace from @pattern.
+        _pattern = " ".join(pattern.strip().split())
+        if pattern != _pattern:
+            self.logger.warning("Removing excess whitespace in: {}".format(pattern))
+            pattern = _pattern
+        
+        # alter @pattern to be case-insensitive if @is_case_sensitive is True.
+        if is_case_sensitive:
+            self.logger.debug("Rewriting case-insensitive pattern to: {}".format(pattern))
+            pattern = "(?i)" + pattern.replace(" ", " (?i)")
+        
         return pattern
 
 
@@ -150,7 +137,7 @@ class XLSXToStanford():
                 else:
                     self.logger.info("Writing to mapping file: {}".format(tsv_file))
             
-            # check and modify row data.               
+            # check for incomplete rows.               
             if None in row:
                 self.logger.warning("Empty cell in row #{}. Skipping row.".format(i))
                 continue
@@ -160,7 +147,7 @@ class XLSXToStanford():
             pattern = self._get_pattern(pattern, case_sensitive)
             label = authority + "/" + label
 
-            if pattern is None:
+            if pattern == "":
                 self.logger.warning("Illegal pattern in row #{}. Skipping row.".format(i))
                 continue
 
@@ -186,7 +173,7 @@ class XLSXToStanford():
                 self.logger.warning("Non-existant directory: {}".format(_dir))
                 return
 
-        # ???
+        # glob mapping files; avoid temporary Excel files.
         xlsx_files = glob.glob(input_dir + "/[!~]*__mapping.xlsx")
         txt_files = glob.glob(input_dir + "/*__mapping.txt")
 
