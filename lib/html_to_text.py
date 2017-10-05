@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This module has classes for manipulating HTML and converting HTML to plain text.
+This module contains classes for manipulating HTML and converting HTML to plain text.
 
 Todo:
     * Use tempfile instead of creating @temp_file in __init__; remove __del__?
