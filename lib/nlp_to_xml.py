@@ -6,9 +6,9 @@ This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS sch
 Todo:
     * The XSD filename and object are static, so they should be in the __init__.
     * XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
-    * validate() should ONLY work for etree._Element and not strings. 
-        - So, get rid of is_raw.
-        - Remember: you can't validate without an Internet connection.
+        - validate() should ONLY work for etree._Element and not strings. 
+            - So, get rid of is_raw, etc.
+            - Remember: you can't validate without an Internet connection, so handle that.
     * If jdict["sentences"] raises a TypeError, you need to handle it.
         - Or should you just raise and error before passing empty text to CoreNLP? That would
         certainly be more efficient.
@@ -98,7 +98,8 @@ class NLPToXML():
 
 
     def xml(self, jdict):
-        """ Converts CoreNLP JSON to lxml.etree._Element per the tagged EAXS schema.
+        """ Converts CoreNLP JSON to lxml.etree._Element per the tagged EAXS schema for body
+        content.
         
         Args:
             - jdict (dict): CoreNLP output to convert to XML.

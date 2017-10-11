@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 
 """
-This module contains a class for converting an EAXS file to a tagged EAXS document as either
-an lxml.etree_Element or an XML file.
+This module contains a class for converting an EAXS file to a tagged EAXS document.
 
 Todo:
     * Do you need to support <ExtBodyContent> messages?
         - I think "yes" and you'll need to append attributes/elements accordingly.
         - I think _update_message MIGHT be doing this already?
+            - Only one way to find out. :P
     * Do you really need huge_tree when iterparsing?
-    * Dependning on fate of <Message/@Restricted, you might change "tagged_tree" to
-    "tagged_content" to signify it's not an etree._Element but rather a string. Basically,
-    I need a tree for detecting PII and otherwise just want a string.
 """
 
 # import modules.
@@ -39,12 +36,9 @@ class EAXSToTagged():
             - html_converter (function): Any function that accepts HTML text (str) as its
             only required argument and returns a plain text version (str).
             - nlp_tagger (function): Any function that accepts plain text (str) as its only
-            required argument and returns a tuple where the first item is an NLP-tagged
-            XML message (str) and the second item (bool) is True if the text is believed to
-            contain sensitive material.
-            - charset (str): Encoding with which to update EAXS message content.
-            This is also the encoding used to write a tagged EAXS file with the
-            write_tagged() method.
+            required argument and returns an NLP-tagged XML message (lxml.etree_Element).
+            - charset (str): Encoding with which to update EAXS message content. This is also
+            the encoding used to write a tagged EAXS file with the write_tagged() method.
         """
 
         # set logger; suppress logging by default.
@@ -87,7 +81,7 @@ class EAXSToTagged():
         Args:
             - message_el (lxml.etree._Element): An EAXS <Message> element.
             - name (str): The element to retrieve.
-            - value (str): The default text value for @name.
+            - value (str): The text value to return for @name if no text value found.
 
         Returns:
             tuple: The return value.
@@ -115,11 +109,12 @@ class EAXSToTagged():
 
 
     def _tag_message(self, message_el, content_text):
-        """ ??? ... ???
+        """ Tags a given <Message> element with a given text value.
 
         Args:
             - message_el (lxml.etree._Element): The <Message> element to be updated.
-            - content_text (str): ???
+            - content_text (str): The text from which to extract NLP tags via 
+            self.nlp_tagger.
 
         Returns:
             tuple: The return value.
@@ -128,13 +123,13 @@ class EAXSToTagged():
             Base64-decoded. If the messages was unaltered, this value is None.
         """
 
-        # ???
+        # get transfer encoding and MIME type.
         transfer_encoding_el, transfer_encoding_text = self._get_single_body_element(
                 message_el, "TransferEncoding")
         content_type_el, content_type_text = self._get_single_body_element(message_el,
                 "ContentType")
 
-        # ???
+        # assume that content will be unaltered.
         is_stripped = False
 
         # decode Base64 <Content> if needed.
@@ -154,7 +149,7 @@ class EAXSToTagged():
         self.logger.info("Requesting NLP tags.")
         tagged_tree = self.nlp_tagger(content_text)
 
-        # ???
+        # set value of stripped content.
         stripped_content = None
         if is_stripped:
             stripped_content = content_text
@@ -163,63 +158,67 @@ class EAXSToTagged():
 
 
     def _update_message(self, message_el, folder_name):
-        """ ???
+        """ Updates a <Message> element's value with NLP-tagged content. Affixes the parent 
+        @folder_name as an attribute to updated elment.
 
         Args:
             - message_el (lxml.etree._Element): The <Message> element to be updated.
-            - folder_name (str): The name of the EAXS <Folder> element containing <Message>
-            element.
+            - folder_name (str): The name of the EAXS <Folder> element containing the 
+            <Message> element.
 
         Returns:
             lxml.etree._Element: The return value.
             The updated <Message> element.
         """
         
-        # ???
+        # set new attributes.
         message_el.set("ParentFolder", folder_name)
         message_el.set("Processed", "false")
         message_el.set("Record", "true")
-        ##message_el.set("Restricted", "false")
-        message_el.append(etree.Element("Restriction", nsmap=self.ns_map))
+        message_el.set("Restricted", "true")
+        #message_el.append(etree.Element("{" + self.ncdcr_uri + "}Restriction", 
+        #    nsmap=self.ns_map))
 
-        # get <Content>.
-        content_el, content_text = self._get_single_body_element(message_el,
-                        "BodyContent/Content")
+        # get <Content> element value.
+        content_el, content_text = self._get_single_body_element(message_el, 
+                "BodyContent/Content")
 
         # if no <Content> sub-element exists, return <Message>.
         if content_el is None or content_text is None:
                 return message_el
 
-        # otherwise ...
+        # otherwise tag the message with NLP.
         tagged_tree, stripped_content = self._tag_message(message_el, content_text)
-        #tagged_tree = etree.tostring(tagged_tree, encoding=self.charset)
 
-        # ???
-        single_body_el = etree.Element("SingleBody", nsmap=self.ns_map)
-        tagged_content_el = etree.Element("TaggedContent", nsmap=self.ns_map)
+        # create new <SingleBody> element with NLP-tagged content tree.
+        single_body_el = etree.Element("{" + self.ncdcr_uri + "}SingleBody", 
+                nsmap=self.ns_map)
+        tagged_content_el = etree.Element("{" + self.ncdcr_uri + "}TaggedContent", 
+                nsmap=self.ns_map)
         tagged_content_el.text = etree.CDATA(tagged_tree)
         single_body_el.append(tagged_content_el)
 
-        # ???
+        # if needed, append plain text version of content to new <SingleBody> element.
         if stripped_content is not None:
-                stripped_content_el = etree.Element("StrippedContent", nsmap=self.ns_map)
+                stripped_content_el = etree.Element("{" + self.ncdcr_uri + 
+                        "}StrippedContent", nsmap=self.ns_map)
                 stripped_content_el.text = etree.CDATA(stripped_content)
                 single_body_el.append(stripped_content_el)
 
-        # ???
+        # append new <SingleBody> element to @message_el. 
         message_el.xpath("ncdcr:MultiBody", namespaces=self.ns_map)[0].append(single_body_el)
-        ##message_el.set("Restricted", str(is_restricted).lower())
 
         return message_el
 
 
     def _get_global_id(self, eaxs_file):
-        """ ??? """
+        """ Gets <GlobalId> value for a given @eaxs_file. """
 
-        global_id = None
+        # set full <GlobalId> name to include namespace URI.
         global_id_el = "{" + self.ncdcr_uri + "}GlobalId"
 
-        # ???
+        # iterate through @eaxs_file until value is found.
+        global_id = None
         for event, element in etree.iterparse(eaxs_file, tag=global_id_el):
             global_id_el = element
             global_id = global_id_el.text
@@ -229,7 +228,7 @@ class EAXSToTagged():
 
 
     def write_tagged(self, eaxs_file, tagged_eaxs_file):
-        """ Converts an EAXS file to a tagged EAXS document and writes it to
+        """ Converts an EAXS file to a tagged EAXS document and writes it to 
         @tagged_eaxs_file.
 
         Args:
@@ -254,29 +253,26 @@ class EAXSToTagged():
         message_open = False
         current_folder = None
 
-        # prepare attributes for <Account> root.
-        global_id = self._get_global_id(eaxs_file)
-        source_eaxs = os.path.basename(eaxs_file)
-
-        # write relevant data to "tagged" EAXS file.
+        # write tagged EAXS file.
         with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True) as xfile:
 
             # write XML header; permanently register namespace prefix and URI.
             xfile.write_declaration()
             etree.register_namespace("ncdcr", self.ncdcr_uri)
 
-            with xfile.element("ncdcr:Account", GlobalId=global_id, SourceEAXS=source_eaxs,
-                    nsmap=self.ns_map):
+            # create <Account> element with attributes.
+            with xfile.element("ncdcr:Account", GlobalId=self._get_global_id(eaxs_file), 
+                    SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
 
                 for event, element in etree.iterparse(eaxs_file, events=("start", "end",),
                         strip_cdata=False, huge_tree=True):
 
-                    # establish when a <Message> element is open.
+                    # if applicable, establish that a <Message> element is open.
                     if event == "start" and element.tag == "{" + self.ncdcr_uri + "}Message":
                         message_open = True
                         continue
 
-                    # tag <Message> elements.
+                    # if a <Message> element is open, tag it.
                     if message_open:
 
                         if (event == "end" and
@@ -288,7 +284,7 @@ class EAXSToTagged():
                             element.clear()
                             message_open = False
 
-                    # else, set current <Folder/Name> value.
+                    # otherwise, find the <Folder/Name> value for the next set of messages.
                     elif not message_open:
 
                         if (event == "start" and
