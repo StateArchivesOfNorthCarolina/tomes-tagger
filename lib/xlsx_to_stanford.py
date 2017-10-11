@@ -7,11 +7,11 @@ file containing NER mapping rules for Stanford CoreNLP.
 Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
+    * Remove the main() test code when you're done with it.
 """
 
 # import modules.
 import codecs
-import csv
 import glob
 import logging
 import os
@@ -70,7 +70,7 @@ class XLSXToStanford():
             pattern = _pattern
         
         # if specified, alter @pattern to be case-insensitive.
-        if case_sensitive:
+        if not case_sensitive:
             pattern = "(?i)" + pattern.replace(" ", " (?i)")
         
         return pattern
@@ -174,8 +174,7 @@ class XLSXToStanford():
 
         # open @tsv_file for writing.
         tsv = codecs.open(tsv_file, "w", encoding=self.charset)
-        tsv_writer = csv.writer(tsv, delimiter="\t", lineterminator="")
-        
+
         # iterate through rows; write data to @tsv_file.
         i = 0
         for row in entity_rows.values:
@@ -197,7 +196,7 @@ class XLSXToStanford():
 
             # write row to file and avoid final linebreak (otherwise CoreNLP will crash).
             if i != 0:
-                tsv_writer.writerow([pattern,label])
+                tsv.write("\t".join([pattern,label]))
                 if i != entity_rows.max_row - 1:
                     tsv.write("\n")
 
