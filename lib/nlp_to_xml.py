@@ -109,9 +109,9 @@ class NLPToXML():
         """
 
         # create root element.
-        tagged_message = etree.Element("{" + self.ns_uri + "}TaggedContent",
+        tagged_el = etree.Element("{" + self.ns_uri + "}Tokens",
                 nsmap=self.ns_map)
-        tagged_message.text = ""
+        tagged_el.text = ""
         
         # start tracking NER tag groups with default authority/NER tag combination.
         tag_group = 0
@@ -138,45 +138,21 @@ class NLPToXML():
                     tag_group += 1
             
                 # create sub-element.
-                tagged = etree.SubElement(tagged_message, "{" + self.ns_uri + "}Token",
+                token_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}Token",
                         nsmap=self.ns_map)
                 
                 # if NER tag exists, add attributes.
                 if ner != "O":
                     tag_authority, tag_value = self._split_authority(ner)
-                    tagged.set("entity", tag_value)
-                    tagged.set("authority", tag_authority)
-                    tagged.set("group", str(tag_group))
+                    token_el.set("entity", tag_value)
+                    token_el.set("authority", tag_authority)
+                    token_el.set("group", str(tag_group))
                 
                 # set text and append whitespace.
-                tagged.text = originalText
-                tagged.tail = after
+                token_el.text = originalText
+                token_el.tail = after
 
-        return tagged_message
-
-
-    def xstring(self, jdict, charset="utf-8", header=True, beautify=False):
-        """ Converts CoreNLP JSON to an XML string per the Tagged EAXS schema.
-
-        Args:
-            - jdict (dict): CoreNLP output to convert to XML.
-            - charset (str): The encoding for the converted text.
-            - header (bool): Use True to include an XML header in the output.
-            - beautify (bool): Use True to pretty print.
-
-        Returns:
-            str: The return value.
-        """
-
-        # get tagged etree._Element.
-        tagged_message = self.xml(jdict)
-
-        # convert to string.
-        tagged_message = etree.tostring(tagged_message, xml_declaration=header,
-                encoding=charset, pretty_print=beautify)
-        tagged_message = tagged_message.decode(charset)
-
-        return tagged_message
+        return tagged_el
 
 
 if __name__ == "__main__":
