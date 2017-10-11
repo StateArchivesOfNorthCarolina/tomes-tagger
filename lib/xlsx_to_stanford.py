@@ -7,7 +7,6 @@ file containing NER mapping rules for Stanford CoreNLP.
 Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
-    * Remove the main() test code when you're done with it.
 """
 
 # import modules.
@@ -247,14 +246,6 @@ class XLSXToStanford():
         return
 
 
-# TEST.
 if __name__ == "__main__":
+    pass
 
-    logging.basicConfig(level=logging.DEBUG)
-
-    xlsx_path = "../tests/sample_files/entity_dictionaries"
-    xlsx_file = xlsx_path + "/foo__mapping.xlsx"
-
-    x2s = XLSXToStanford()
-    x2s.convert_file(xlsx_file, xlsx_path + "/output/foo.txt")
-    x2s.convert_folder(xlsx_path, xlsx_path + "/output")
