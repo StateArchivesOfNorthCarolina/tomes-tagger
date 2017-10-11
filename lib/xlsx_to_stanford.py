@@ -201,7 +201,7 @@ class XLSXToStanford():
 
             i += 1
 
-        return None
+        return
 
 
     def convert_folder(self, input_dir, output_dir):
