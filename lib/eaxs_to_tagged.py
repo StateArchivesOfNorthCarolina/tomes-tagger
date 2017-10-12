@@ -118,7 +118,7 @@ class EAXSToTagged():
 
         Returns:
             tuple: The return value.
-            The first item is a string: the tagged XML tree.
+            The first item is an lxml.etree._Element: the tagged XML tree.
             The second item is a string: the original message stripped of HTML tags and/or
             Base64-decoded. If the messages was unaltered, this value is None.
         """
@@ -147,15 +147,14 @@ class EAXSToTagged():
 
         # get NLP tags.
         self.logger.info("Requesting NLP tags.")
-        tagged_content = self.nlp_tagger(content_text)
-        tagged_content = etree.tostring(tagged_content, encoding=self.charset)
+        tagged_el = self.nlp_tagger(content_text)
 
         # set value of stripped content.
         stripped_content = None
         if is_stripped:
             stripped_content = content_text
 
-        return (tagged_content, stripped_content)
+        return (tagged_el, stripped_content)
 
 
     def _update_message(self, message_el, folder_name):
@@ -177,8 +176,8 @@ class EAXSToTagged():
         message_el.set("Processed", "false")
         message_el.set("Record", "true")
         message_el.set("Restricted", "true")
-        #message_el.append(etree.Element("{" + self.ncdcr_uri + "}Restriction", 
-        #    nsmap=self.ns_map))
+        message_el.append(etree.Element("{" + self.ncdcr_uri + "}Restriction", 
+            nsmap=self.ns_map))
 
         # get <Content> element value.
         content_el, content_text = self._get_single_body_element(message_el, 
@@ -190,6 +189,7 @@ class EAXSToTagged():
 
         # otherwise tag the message with NLP.
         tagged_content, stripped_content = self._tag_message(message_el, content_text)
+        tagged_content = etree.tostring(tagged_content, encoding=self.charset)
 
         # create new <SingleBody> element with NLP-tagged content tree.
         single_body_el = etree.Element("{" + self.ncdcr_uri + "}SingleBody", 
