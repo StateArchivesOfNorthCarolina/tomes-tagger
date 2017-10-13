@@ -252,7 +252,7 @@ class EAXSToTagged():
 
         # assume values.
         message_open = False
-        current_folder = None
+        current_folders = []
 
         # write tagged EAXS file.
         with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True) as xfile:
@@ -280,7 +280,8 @@ class EAXSToTagged():
                                 element.tag == "{" + self.ncdcr_uri + "}Message"):
                             message_id = self._get_message_id(element)
                             self.logger.info("Working on message: {}".format(message_id))
-                            tagged_message = self._update_message(element, current_folder)
+                            tagged_message = self._update_message(element, 
+                                    "/".join(current_folders))
                             xfile.write(tagged_message)
                             element.clear()
                             message_open = False
@@ -290,10 +291,10 @@ class EAXSToTagged():
 
                         if (event == "start" and
                                 element.tag == "{" + self.ncdcr_uri + "}Name"):
-                            current_folder = element.text
+                            current_folders.append(element.text)
                         elif (event == "end" and
                                 element.tag == "{" + self.ncdcr_uri + "}Folder"):
-                            current_folder = None
+                            current_folders.pop()
 
                         element.clear()
 
