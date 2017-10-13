@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Account xmlns="http://www.archives.ncdcr.gov/mail-account"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd">
+	<GlobalId>foo</GlobalId>
+	<Folder>
+		<Name>bar</Name>
+		<Message>
+			<RelPath>.</RelPath>
+			<LocalId>1000</LocalId>
+			<MessageId>
+				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D7>]]>
+			</MessageId>
+			<MimeVersion>1.0</MimeVersion>
+			<OrigDate>2010-02-12T11:46:40-05:00</OrigDate>
+			<From>
+				<![CDATA["John Doe" <john_doe@fake.nc.gov>]]>
+			</From>
+			<To>
+				<![CDATA["Jane Doe" <jane_doe@fake.nc.gov>]]>
+			</To>
+			<Subject>Hi</Subject>
+			<Header>
+				<Name>Date</Name>
+				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
+			</Header>
+			<MultiBody>
+				<ContentType>multipart/mixed</ContentType>
+				<BoundaryString>--boundary-LibPST-iamunique-32332_-_-</BoundaryString>
+				<OtherMimeHeader>
+					<Name>Content-Language</Name>
+					<Value>en-US</Value>
+				</OtherMimeHeader>
+				<SingleBody>
+					<ContentType>text/html</ContentType>
+					<Charset>us-ascii</Charset>
+					<BodyContent>
+						<Content>
+							<![CDATA[<!DOCTYPE html>
+							<html>
+							<head>
+							<title>Bye</title>
+							<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+							</head>
+							<body>
+							<p>Hi Jane!</p>
+							</body>
+							</html>]]>
+						</Content>
+					</BodyContent>
+				</SingleBody>
+				<SingleBody>
+					<ContentType>application/pdf</ContentType>
+					<TransferEncoding>base64</TransferEncoding>
+					<Disposition>attachment</Disposition>
+					<DispositionFileName>hi.pdf</DispositionFileName>
+					<ExtBodyContent>
+						<RelPath>./attachments/hi.xml</RelPath>
+						<LocalId>10001</LocalId>
+						<XMLWrapped>true</XMLWrapped>
+						<Hash>
+							<Value>49618c929dde66c8bb488073e7312ad9c18c70f1</Value>
+							<Function>SHA1</Function>
+						</Hash>
+					</ExtBodyContent>
+				</SingleBody>
+			</MultiBody>
+			<Eol>LF</Eol>
+			<Hash>
+				<Value>49618c929dde66c8bb488073e7312ad9c18c70f2</Value>
+				<Function>SHA1</Function>
+			</Hash>
+		</Message>
+		<Message>
+			<RelPath>.</RelPath>
+			<LocalId>1002</LocalId>
+			<MessageId>
+				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D8>]]>
+			</MessageId>
+			<MimeVersion>1.0</MimeVersion>
+			<OrigDate>2010-02-12T11:46:40-05:00</OrigDate>
+			<From>
+				<![CDATA["Jane Doe" <jane_doe@fake.nc.gov>]]>
+			</From>
+			<To>
+				<![CDATA["John Doe" <john_doe@fake.nc.gov>]]>
+			</To>
+			<Subject>Bye</Subject>
+			<Header>
+				<Name>Date</Name>
+				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
+			</Header>
+			<MultiBody>
+				<ContentType>multipart/mixed</ContentType>
+				<BoundaryString>--boundary-LibPST-iamunique-32332_-_-</BoundaryString>
+				<OtherMimeHeader>
+					<Name>Content-Language</Name>
+					<Value>en-US</Value>
+				</OtherMimeHeader>
+				<SingleBody>
+					<Charset>us-ascii</Charset>
+					<BodyContent>
+						<Content>
+							<![CDATA[Goodbye John!]]>
+						</Content>
+					</BodyContent>
+				</SingleBody>
+			</MultiBody>
+			<Eol>LF</Eol>
+			<Hash>
+				<Value>49618c929dde66c8bb488073e7312ad9c18c70f3</Value>
+				<Function>SHA1</Function>
+			</Hash>
+		</Message>
+	<Folder>
+		<Name>bar_child</Name>
+		<Message>
+			<RelPath>.</RelPath>
+			<LocalId>1003</LocalId>
+			<MessageId>
+				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D9>]]>
+			</MessageId>
+			<MimeVersion>1.0</MimeVersion>
+			<OrigDate>2010-02-12T11:50:40-05:00</OrigDate>
+			<From>
+				<![CDATA["Jane Doe" <jane_doe@fake.nc.gov>]]>
+			</From>
+			<To>
+				<![CDATA["John Doe" <john_doe@fake.nc.gov>]]>
+			</To>
+			<Subject>Bye</Subject>
+			<Header>
+				<Name>Date</Name>
+				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
+			</Header>
+			<MultiBody>
+				<ContentType>multipart/mixed</ContentType>
+				<BoundaryString>--boundary-LibPST-iamunique-32332_-_-</BoundaryString>
+				<OtherMimeHeader>
+					<Name>Content-Language</Name>
+					<Value>en-US</Value>
+				</OtherMimeHeader>
+				<SingleBody>
+					<Charset>us-ascii</Charset>
+					<BodyContent>
+						<Content>
+							<![CDATA[I meant it .... goodbye John!!!]]>
+						</Content>
+					</BodyContent>
+				</SingleBody>
+			</MultiBody>
+			<Eol>LF</Eol>
+			<Hash>
+				<Value>49618c929dde66c8bb488073e7312ad9c18c70f4</Value>
+				<Function>SHA1</Function>
+			</Hash>
+		</Message>
+	</Folder>
+		<Mbox>
+			<RelPath>.</RelPath>
+			<Eol>CRLF</Eol>
+		</Mbox>
+	</Folder>
+</Account>
