@@ -6,12 +6,10 @@ message content has been run through an NLP application. The message and NER ent
 encoded in a defined schema.
 
 Todo:
-    * What to do if NLP timeouts? This is a lib.text_to_nlp issue.
-    * Somebody needs to start the Stanford server: should it be this or text_to_nlp?
-    Probably the latter.
-    * Is METS creation out of scope for main.py? Nah: it'll just be a quick call to
-    FolderToMETS.
-    * Add logging level as an optional CLI arg. Also add log to file/screen/both option.
+    * What to do if NLP timeouts? You really need to write to file the message IDs of any 
+    skipped messages due to timeouts or other errors.
+    * Somebody needs to start the Stanford server. No: that's a documentation thing but I
+    think you need an optional port argument in case Stanford's on a different server.
 """
 
 # import modules.
@@ -23,9 +21,6 @@ from lib.html_to_text import *
 from lib.text_to_nlp import *
 from lib.nlp_to_xml import *
 from lib.eaxs_to_tagged import *
-#from lib.nlp_to_stats import *
-#from lib.account_to_aip import *
-#from lib.folder_to_mets import *
 
 
 class TOMESToolTagger():
