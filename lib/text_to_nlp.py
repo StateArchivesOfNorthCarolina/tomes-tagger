@@ -21,7 +21,8 @@ class TextToNLP():
 
 
     def __init__(self, host="http://localhost", port=9000,
-            mapping_file="regexner_TOMES/mappings.txt", *args, **kwargs):
+            mapping_file="regexner_TOMES/mappings.txt", override_defaults=True, *args, 
+            **kwargs):
         """ Sets instance attributes. 
         
         Args:
@@ -29,6 +30,9 @@ class TextToNLP():
             - port (int): The host's port on which to run the CoreNLP server.
             - mapping_file (str): The relative path for the regexNER mapping file. This must
             be located within the CoreNLP server's file directory.
+            - override_defaults (bool): If True, custom NER tags will override built-in tags
+            when a string matches both tag patterns. If False, built-in tags will override
+            custom tags.
             - *args/**kwargs: Any additional, optional arguments to pass to pycorenlp.
         """
 
@@ -37,16 +41,24 @@ class TextToNLP():
         self.logger.addHandler(logging.NullHandler())
 
         # suppress "requests" module's logging if below a warning.
-        logging.getLogger("requests").setLevel(logging.WARNING) # per: https://stackoverflow.com/a/11029841
-
+        # per: https://stackoverflow.com/a/11029841
+        logging.getLogger("requests").setLevel(logging.WARNING) 
+        
         # set CoreNLP server and options.
         self.host = "{}:{}".format(host, port)
         self.mapping_file = mapping_file
         self.annotator = StanfordCoreNLP(self.host, *args, **kwargs)
         self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
-                "outputFormat": "json", "regexner.mapping": self.mapping_file}
+                "outputFormat": "json",
+                "regexner.mapping": self.mapping_file}
 
-    
+        # if specified, add option to override default tags.
+        if override_defaults:
+            default_tags = ["DATE", "DURATION", "LOCATION", "MISC", "MONEY", "NUMBER", "O",
+             "ORDINAL", "ORGANIZATION", "PERCENT", "PERSON", "SET", "TIME"]
+            self.options["regexner.backgroundSymbol"] =  ",".join(default_tags)
+
+
     def get_NLP(self, text):
         """ Runs CoreNLP on @text.
         
