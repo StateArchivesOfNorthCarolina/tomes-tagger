@@ -5,14 +5,6 @@ This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS sch
 
 Todo:
     * The XSD filename and object are static, so they should be in the __init__.
-    * XSD won't validate if @xdoc has an XML declaration. Is there a way to fix that?
-        - validate() should ONLY work for etree._Element and not strings. 
-            - So, get rid of is_raw, etc.
-            - Remember: you can't validate without an Internet connection, so handle that.
-    * If jdict["sentences"] raises a TypeError, you need to handle it.
-        - Or should you just raise and error before passing empty text to CoreNLP? That would
-        certainly be more efficient.
-        - You also need to log a warning.
 """
 
 # import modules.
@@ -69,24 +61,17 @@ class NLPToXML():
         return (authority, ner_tag)
 
 
-    def _validate(self, xdoc, is_raw=True):
-        """ Determines if XML document @xdoc is valid or not per the tagged EAXS
-        schema.
+    def validate(self, xdoc):
+        """ Determines if @xdoc is valid or not per the tagged EAXS schema.
 
         Args:
-            - xdoc (str): The XML file OR the raw XML string to validate.
-            - is_raw (bool): Use True for XML as string. Use False for an XML file.
+            - xdoc (str): The lxml.etree._Element to validate.
 
         Returns:
             bool: The return value. True for valid, otherwise False.
         """
-  
-        # if @is_raw, make XML file-like.
-        if is_raw:
-            xdoc = io.StringIO(xdoc)
         
-        # parse @xdoc and XSD.
-        xdoc = etree.parse(xdoc)
+        # parse XSD.
         xsd = etree.parse(self.xsd_file)
 
         # validate @xdoc.
@@ -96,12 +81,14 @@ class NLPToXML():
         return is_valid
 
 
-    def xml(self, jdict):
+    def xml(self, jdict, validate=False):
         """ Converts CoreNLP JSON to lxml.etree._Element per the tagged EAXS schema for body
         content.
         
         Args:
             - jdict (dict): CoreNLP output to convert to XML.
+            - validate (bool): If True, the resultant lxml.etree._Element will be validated 
+            against @self.xsd_file. If False, no validation is attempted.
 
         Returns:
             lxml.etree._Element: The return value.
@@ -118,8 +105,14 @@ class NLPToXML():
         tag_group = 0
         current_ner = ""
 
+        # ensure CoreNLP JSON has required field.
+        try:
+            sentences = jdict["sentences"]
+        except KeyError:
+            self.logger.error("Required JSON field 'sentences' not found.")
+            self.logger.debug("CoreNLP JSON: {}".format(jdict))
+
         # iterate through tokens; append sub-elements to root.
-        sentences = jdict["sentences"]
         for sentence in sentences:
             
             tokens = sentence["tokens"]
@@ -152,6 +145,12 @@ class NLPToXML():
                 # set text and append whitespace.
                 token_el.text = originalText
                 token_el.tail = after
+
+        # validate root element if needed.
+        if validate:
+            is_valid = self.validate(tagged_el) 
+            if not is_valid:
+                self.logger.warning("Tagged etree._Element not valid.")
 
         return tagged_el
 

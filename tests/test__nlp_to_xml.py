@@ -30,8 +30,8 @@ class Test_NLPToXML(unittest.TestCase):
             jdict = json.loads(jdoc)
         
         # validate XML.
-        xml = self.n2x.xstring(jdict, header=False)
-        is_valid = self.n2x.validate(xml, is_raw=True)
+        xml = self.n2x.xml(jdict)
+        is_valid = self.n2x.validate(xml)
         
         # check if result is as expected.
         self.assertTrue(is_valid)
