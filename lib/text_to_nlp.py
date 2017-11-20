@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
 """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper around
-pycorenlp (https://github.com/smilli/py-corenlp).
-
-Todo:
-    * I don't think this should exit() on error. I think it should raise the error.
-"""
+pycorenlp (https://github.com/smilli/py-corenlp). """
 
 # import modules.
 import logging
@@ -44,7 +40,7 @@ class TextToNLP():
         # per: https://stackoverflow.com/a/11029841
         logging.getLogger("requests").setLevel(logging.WARNING) 
         
-        # set CoreNLP server and options.
+        # set CoreNLP server with options to get NER tags.
         self.host = "{}:{}".format(host, port)
         self.mapping_file = mapping_file
         self.annotator = StanfordCoreNLP(self.host, *args, **kwargs)
@@ -59,23 +55,24 @@ class TextToNLP():
             self.options["regexner.backgroundSymbol"] =  ",".join(default_tags)
 
 
-    def get_NLP(self, text):
-        """ Runs CoreNLP on @text.
+    def get_NER(self, text):
+        """ Runs CoreNLP's NER tagger on @text.
         
         Args:
-            - text (str): The text to send to CoreNLP.
+            - text (str): The text to send to CoreNLP's NER tagger.
             
         Returns:
             dict: The return value.
-            The CoreNLP results.
+            The CoreNLP NER tagger results.
         """
         
+        self.logger.info("Getting NER tags.")
         try:
-            self.logger.debug("Getting NLP tags.")
             nlp = self.annotator.annotate(text, properties=self.options)
+            self.logger.debug("Got following NER tag results: {}".format(nlp))
             return nlp
         except Exception as err:
-            self.logger.error("Cannot get NLP tags. Is the CoreNLP server working?")
+            self.logger.error("Cannot get NER tags. Is the CoreNLP server working?")
             raise err
 
 

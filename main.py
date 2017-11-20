@@ -50,7 +50,7 @@ class TOMESToolTagger():
         self.h2t = HTMLToText()
         self.t2n = TextToNLP()
         self.n2x = NLPToXML()
-        self.e2t = EAXSToTagged(self.html_to_text, self.text_to_nlpx, self.charset)
+        self.e2t = EAXSToTagged(self.html_to_text, self.text_to_nlp, self.charset)
 
 
     def html_to_text(self, html):
@@ -74,7 +74,7 @@ class TOMESToolTagger():
         return text
 
 
-    def text_to_nlpx(self, text):
+    def text_to_nlp(self, text):
         """ Converts plain @text to NLP-tagged, TOMES-specific XML.
         
         Args:
@@ -86,8 +86,8 @@ class TOMESToolTagger():
 
         # get NLP; convert to XML.
         nlp = self.t2n.get_NLP(text)
-        nlpx = self.n2x.xml(nlp)
-        return nlpx
+        nlp = self.n2x.xml(nlp)
+        return nlp
 
 
     def eaxs_to_tagged(self, eaxs_file, tagged_eaxs_file=None):
@@ -109,7 +109,7 @@ class TOMESToolTagger():
         # create tagged EAXS.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
-        tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
+        tagged = self.e2t.convert(eaxs_file, tagged_eaxs_file)
         
         self.logger.info("Writing results to: {}".format(tagged_eaxs_file))
         return

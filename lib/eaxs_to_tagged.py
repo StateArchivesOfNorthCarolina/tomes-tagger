@@ -6,7 +6,7 @@ This module contains a class for converting an EAXS file to a tagged EAXS docume
 Todo:
     * Do you need to support <ExtBodyContent> messages?
         - I think "yes" and you'll need to append attributes/elements accordingly.
-        - I think _update_message MIGHT be doing this already?
+        - I think update_message MIGHT be doing this already?
             - Only one way to find out. :P
     * Do you really need huge_tree when iterparsing?
 """
@@ -54,6 +54,21 @@ class EAXSToTagged():
         self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
         self.ns_map  = {"ncdcr":self.ncdcr_uri}
 
+
+    def _get_global_id(self, eaxs_file):
+        """ Gets <GlobalId> value for a given @eaxs_file. """
+
+        # set full <GlobalId> name to include namespace URI.
+        global_id_el = "{" + self.ncdcr_uri + "}GlobalId"
+
+        # iterate through @eaxs_file until value is found.
+        global_id = None
+        for event, element in etree.iterparse(eaxs_file, tag=global_id_el):
+            global_id_el = element
+            global_id = global_id_el.text
+            element.clear()
+
+        return global_id
 
     def _get_message_id(self, message_el):
         """ Gets <Message/MessageId> value.
@@ -108,7 +123,7 @@ class EAXSToTagged():
         return (el, el_text)
 
 
-    def _tag_message(self, message_el, content_text):
+    def tag_message(self, message_el, content_text):
         """ Tags a given <Message> element with a given text value.
 
         Args:
@@ -122,6 +137,8 @@ class EAXSToTagged():
             The second item is a string: the original message stripped of HTML tags and/or
             Base64-decoded. If the messages was unaltered, this value is None.
         """
+
+        self.logger.info("Tagging <Message> element content.")
 
         # get transfer encoding and MIME type.
         transfer_encoding_el, transfer_encoding_text = self._get_single_body_element(
@@ -146,7 +163,7 @@ class EAXSToTagged():
             is_stripped = True
 
         # get NLP tags.
-        self.logger.info("Requesting NLP tags.")
+        self.logger.info("Requesting NER tags.")
         tagged_el = self.nlp_tagger(content_text)
 
         # set value of stripped content.
@@ -157,7 +174,7 @@ class EAXSToTagged():
         return (tagged_el, stripped_content)
 
 
-    def _update_message(self, message_el, folder_name):
+    def update_message(self, message_el, folder_name):
         """ Updates a <Message> element's value with NLP-tagged content. Affixes the parent 
         @folder_name as an attribute to updated elment.
 
@@ -171,6 +188,8 @@ class EAXSToTagged():
             The updated <Message> element.
         """
         
+        self.logger.info("Updating <Message> element tree.")
+
         # set new attributes.
         message_el.set("ParentFolder", folder_name)
         message_el.set("Processed", "false")
@@ -188,7 +207,7 @@ class EAXSToTagged():
                 return message_el
 
         # otherwise tag the message with NLP.
-        tagged_content, stripped_content = self._tag_message(message_el, content_text)
+        tagged_content, stripped_content = self.tag_message(message_el, content_text)
         tagged_content = etree.tostring(tagged_content, encoding=self.charset)
 
         # create new <SingleBody> element with NLP-tagged content tree.
@@ -212,23 +231,7 @@ class EAXSToTagged():
         return message_el
 
 
-    def _get_global_id(self, eaxs_file):
-        """ Gets <GlobalId> value for a given @eaxs_file. """
-
-        # set full <GlobalId> name to include namespace URI.
-        global_id_el = "{" + self.ncdcr_uri + "}GlobalId"
-
-        # iterate through @eaxs_file until value is found.
-        global_id = None
-        for event, element in etree.iterparse(eaxs_file, tag=global_id_el):
-            global_id_el = element
-            global_id = global_id_el.text
-            element.clear()
-
-        return global_id
-
-
-    def write_tagged(self, eaxs_file, tagged_eaxs_file):
+    def convert(self, eaxs_file, tagged_eaxs_file):
         """ Converts an EAXS file to a tagged EAXS document and writes it to 
         @tagged_eaxs_file.
 
@@ -244,9 +247,12 @@ class EAXSToTagged():
             - FileExistsError: If @tagged_eaxs_file already exists.
         """
 
+        self.logger.info("Converting '{}' EAXS file to tagged EAXS file: {}".format(
+            eaxs_file, tagged_eaxs_file))
+
         # raise error if output file already exists.
         if os.path.isfile(tagged_eaxs_file):
-            err = "{} already exists.".format(tagged_eaxs_file)
+            err = "Destination file '{}' already exists.".format(tagged_eaxs_file)
             self.logger.error(err)
             raise FileExistsError(err)
 
@@ -280,7 +286,7 @@ class EAXSToTagged():
                                 element.tag == "{" + self.ncdcr_uri + "}Message"):
                             message_id = self._get_message_id(element)
                             self.logger.info("Working on message: {}".format(message_id))
-                            tagged_message = self._update_message(element, 
+                            tagged_message = self.update_message(element, 
                                     "/".join(current_folders))
                             xfile.write(tagged_message)
                             element.clear()

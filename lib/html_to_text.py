@@ -7,10 +7,8 @@ Todo:
     * Use tempfile instead of creating @temp_file in __init__; remove __del__?
         - No, not working in Windows due to permissions issues.
         - Maybe some encoding issues too.
-    * ModifyHTML should be private. The constructor for HTMLToText() should take
-    "shift_links=True" and "remove_images=True" and run ModifyHTML itself.
-        - This will simplify what the user (main.py) has to do.
     * You need to pass the absolute path of the temp file to logging statements.
+    * remove_images() needs the options to preserve @alt values.
 """
 
 # import modules.
@@ -52,7 +50,7 @@ class ModifyHTML():
             None
         """
 
-        self.logger.debug("Shifting link tag values.")
+        self.logger.info("Shifting @href values to parent <a> tags.")
 
         # get all A tags.
         a_tags = self.root.find_all("a")
@@ -81,7 +79,7 @@ class ModifyHTML():
             None
         """
         
-        self.logger.debug("Removing image tags.")
+        self.logger.info("Removing image tags.")
         
         # get all image tags; remove them.
         img_tags = self.root.find_all("img")
@@ -104,7 +102,6 @@ class ModifyHTML():
 
 
 class HTMLToText():
-
     """ A class to convert HTML files OR strings to plain text via the Lynx browser.
     
     Examples:
@@ -115,7 +112,6 @@ class HTMLToText():
     """
     
     def __init__(self, custom_options=None, temp_file="_tmp.html"):
-
         """ Sets instance attributes.
         
         Args:
@@ -141,7 +137,6 @@ class HTMLToText():
 
 
     def __del__(self):
-
         """ Trys to remove temporary file if it exists. Passes on permission error. """
 
         if os.path.isfile(self.temp_file):
@@ -155,7 +150,6 @@ class HTMLToText():
 
 
     def text(self, html, is_raw=False, charset="utf-8"):
-
         """ Converts HTML files OR strings to plain text string via the Lynx browser.
 
         Args:
@@ -167,6 +161,8 @@ class HTMLToText():
             str: The return value.
         """
     
+        self.logger.info("Converting HTML to plain text.")
+
         # create beginning Lynx command line snippet.
         arg_options = [key for key, val in self.options.items() if val]
         args = "lynx -"

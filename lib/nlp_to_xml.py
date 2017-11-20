@@ -69,7 +69,7 @@ class NLPToXML():
         return (authority, ner_tag)
 
 
-    def validate(self, xdoc, is_raw=True):
+    def _validate(self, xdoc, is_raw=True):
         """ Determines if XML document @xdoc is valid or not per the tagged EAXS
         schema.
 
@@ -92,7 +92,6 @@ class NLPToXML():
         # validate @xdoc.
         validator = etree.XMLSchema(xsd)
         is_valid = validator.validate(xdoc)
-        self.logger.debug("Tagged message XML validation yields: {}".format(is_valid))  
 
         return is_valid
 
@@ -107,6 +106,8 @@ class NLPToXML():
         Returns:
             lxml.etree._Element: The return value.
         """
+
+        self.logger.info("Converting CoreNLP JSON to tagged EAXS schema.")
 
         # create root element.
         tagged_el = etree.Element("{" + self.ns_uri + "}Tokens",

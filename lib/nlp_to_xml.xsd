@@ -11,6 +11,7 @@ elementFormDefault="qualified">
 	This "tagged content" schema proposes an XML structure to be added to the
 	State Archives of North Carolina XML Schema for a Single E-Mail Account
 	located at:
+	
 		http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
 
 	Specifically, it is meant to be optionally inserted within the
@@ -23,7 +24,7 @@ elementFormDefault="qualified">
 	techniques are to be enclosed within the "Token" sub-element. Non-recognized
 	tokens and leading/trailing whitespace are not encased within this
 	sub-element. Note that whitespace between opening and closing "Token"
-	elements IS significant.
+	elements *is* significant.
 
 	All content not subjected to NLP are to be enclosed in the "BlockText"
 	element. This is primarily intended to contain signature blocks.
