@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 
-"""
-This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema.
-
-Todo:
-    * The XSD filename and object are static, so they should be in the __init__.
-"""
+""" This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema. """
 
 # import modules.
 import codecs
@@ -26,8 +21,9 @@ class NLPToXML():
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.NullHandler())
         
-        # get XSD filepath.
+        # get XSD filepath and parse XSD.
         self.xsd_file = __file__.replace(".py", ".xsd")
+        self.xsd = etree.parse(self.xsd_file)
         
         # set namespace attributes.
         self.ns_uri = "http://www.archives.ncdcr.gov/mail-account"
@@ -62,7 +58,8 @@ class NLPToXML():
 
 
     def validate(self, xdoc):
-        """ Determines if @xdoc is valid or not per the tagged EAXS schema.
+        """ Determines if @xdoc is valid or not per the tagged EAXS schema file 
+        @self.xsd_file.
 
         Args:
             - xdoc (str): The lxml.etree._Element to validate.
@@ -70,12 +67,9 @@ class NLPToXML():
         Returns:
             bool: The return value. True for valid, otherwise False.
         """
-        
-        # parse XSD.
-        xsd = etree.parse(self.xsd_file)
 
         # validate @xdoc.
-        validator = etree.XMLSchema(xsd)
+        validator = etree.XMLSchema(self.xsd)
         is_valid = validator.validate(xdoc)
 
         return is_valid
@@ -146,11 +140,12 @@ class NLPToXML():
                 token_el.text = originalText
                 token_el.tail = after
 
-        # validate root element if needed.
+        # if requested, validate tagged message.
         if validate:
             is_valid = self.validate(tagged_el) 
             if not is_valid:
-                self.logger.warning("Tagged etree._Element not valid.")
+                self.logger.warning("Tagged message XML is not valid per '{}'.".format(
+                    self.xsd.file))
 
         return tagged_el
 

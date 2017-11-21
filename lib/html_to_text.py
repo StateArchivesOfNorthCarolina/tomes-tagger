@@ -1,15 +1,6 @@
 #!/usr/bin/env python3
 
-"""
-This module contains classes for manipulating HTML and converting HTML to plain text.
-
-Todo:
-    * Use tempfile instead of creating @temp_file in __init__; remove __del__?
-        - No, not working in Windows due to permissions issues.
-        - Maybe some encoding issues too.
-    * You need to pass the absolute path of the temp file to logging statements.
-    * remove_images() needs the options to preserve @alt values.
-"""
+""" This module contains classes for manipulating HTML and converting HTML to plain text. """
 
 # import modules.
 import codecs
@@ -72,8 +63,13 @@ class ModifyHTML():
         return
 
 
-    def remove_images(self):
+    def remove_images(self, preserve_alt=False):
         """ Removes image tags from DOM.
+
+        Args:
+            - preserve_alt (bool): If True, the "alt" attribute in the <img> tag will be 
+            extracted and placed in a new and adjacent <span> tag to preserve the attribute 
+            value.
         
         Returns:
             None
@@ -84,6 +80,11 @@ class ModifyHTML():
         # get all image tags; remove them.
         img_tags = self.root.find_all("img")
         for img_tag in img_tags:
+            if preserve_alt:
+                if "alt" in img_tag.attrs and img_tag["alt"] != "":
+                    span = BeautifulSoup.new_tag(self.root, "span")
+                    span.string = "[IMAGE: " + img_tag["alt"] + "]"
+                    img_tag.insert_after(span)
             img_tag.extract()
 
         return
@@ -133,7 +134,7 @@ class HTMLToText():
         self.options = options
 
         # set persistent temporary file name.
-        self.temp_file = temp_file
+        self.temp_file = os.path.abspath(temp_file)
 
 
     def __del__(self):
