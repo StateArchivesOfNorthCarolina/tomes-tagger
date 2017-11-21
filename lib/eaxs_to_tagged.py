@@ -231,7 +231,7 @@ class EAXSToTagged():
         return message_el
 
 
-    def convert(self, eaxs_file, tagged_eaxs_file):
+    def write_tagged(self, eaxs_file, tagged_eaxs_file):
         """ Converts an EAXS file to a tagged EAXS document and writes it to 
         @tagged_eaxs_file.
 
