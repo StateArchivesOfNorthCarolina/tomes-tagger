@@ -86,7 +86,7 @@ class TOMESToolTagger():
         """
 
         # get NLP; convert to XML.
-        nlp = self.t2n.get_NLP(text)
+        nlp = self.t2n.get_NER(text)
         nlp = self.n2x.xml(nlp)
         return nlp
 
