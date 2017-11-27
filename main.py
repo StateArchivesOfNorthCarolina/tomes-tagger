@@ -90,7 +90,6 @@ class TOMESToolTagger():
         nlp = self.n2x.xml(nlp)
         return nlp
 
-
     def eaxs_to_tagged(self, eaxs_file, tagged_eaxs_file=None):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
         

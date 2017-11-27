@@ -6,3 +6,4 @@ pycorenlp>=0.3.0
 PyYAML>=3.12
 Twisted==17.9.0
 autobahn==0.9.1
+html5lib>=0.9

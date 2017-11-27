@@ -105,6 +105,8 @@ class NLPToXML():
         except KeyError:
             self.logger.error("Required JSON field 'sentences' not found.")
             self.logger.debug("CoreNLP JSON: {}".format(jdict))
+        except TypeError as te:
+            self.logger.error(te)
 
         # iterate through tokens; append sub-elements to root.
         for sentence in sentences:
