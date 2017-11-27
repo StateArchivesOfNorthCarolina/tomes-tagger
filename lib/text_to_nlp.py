@@ -16,7 +16,7 @@ class TextToNLP():
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
 
-    def __init__(self, host="http://localhost", port=9000,
+    def __init__(self, host="http://localhost", port=9003,
             mapping_file="regexner_TOMES/mappings.txt", override_defaults=True, *args, 
             **kwargs):
         """ Sets instance attributes. 
