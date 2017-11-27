@@ -12,7 +12,6 @@ from pycorenlp import StanfordCoreNLP
 import socket
 
 CORENLP = socket.gethostbyname('corenlp-server')
-print(CORENLP)
 
 class TextToNLP():
     """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper
