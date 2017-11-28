@@ -11,14 +11,14 @@ import urllib
 from pycorenlp import StanfordCoreNLP
 import socket
 
-#CORENLP = socket.gethostbyname('corenlp-server')
+CORENLP = socket.gethostbyname('corenlp-server')
 
 
 class TextToNLP():
     """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
-    def __init__(self, host="http://{}".format("192.168.99.100"), port=9003,
+    def __init__(self, host="http://{}".format(CORENLP), port=9003,
             mapping_file="regexner_TOMES/mappings.txt", override_defaults=True, *args, 
             **kwargs):
         """ Sets instance attributes. 
