@@ -28,7 +28,7 @@ class TextToNLP():
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
 
-    def __init__(self, host="http://localhost", port=9000,
+    def __init__(self, host="http://localhost", port=9000, chunk_size=50000,
             mapping_file="regexner_TOMES/mappings.txt", override_defaults=True, *args, 
             **kwargs):
         """ Sets instance attributes. 
@@ -36,6 +36,7 @@ class TextToNLP():
         Args:
             - host (str): The base host URL for the CoreNLP server.
             - port (int): The host's port on which to run the CoreNLP server.
+            - chunk_size (int): The maximum string length to send to CoreNLP at a time.
             - mapping_file (str): The relative path for the regexNER mapping file. This must
             be located within the CoreNLP server's file directory.
             - override_defaults (bool): If True, custom NER tags will override built-in tags
@@ -54,6 +55,7 @@ class TextToNLP():
         
         # set CoreNLP server with options to get NER tags.
         self.host = "{}:{}".format(host, port)
+        self.chunk_size = chunk_size
         self.mapping_file = mapping_file
         self.annotator = StanfordCoreNLP(self.host, *args, **kwargs)
         self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
@@ -67,13 +69,11 @@ class TextToNLP():
             self.options["regexner.backgroundSymbol"] =  ",".join(default_tags)
 
 
-    def get_NER(self, text, chunk_size=50000):
+    def get_NER(self, text):
         """ Runs CoreNLP's NER tagger on @text.
         
         Args:
             - text (str): The text to send to CoreNLP's NER tagger.
-            - chunk_size (int): The maximum string length to send to CoreNLP at a time. If
-            @text exceeds this value, then @text will be sent to CoreNLP in smaller chunks.
             
         Returns:
             dict: The return value.
@@ -84,8 +84,8 @@ class TextToNLP():
         ner = {"sentences": []}
 
         # if needed, break @text into smaller chunks.
-        if len(text) >= chunk_size:
-            wrapper = TextWrapper(width=chunk_size, break_long_words=False, 
+        if len(text) > self.chunk_size:
+            wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
                     break_on_hyphens=False) 
             text = wrapper.wrap(text)
         else:
