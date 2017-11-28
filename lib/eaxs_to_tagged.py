@@ -75,6 +75,7 @@ class EAXSToTagged():
 
         return global_id
 
+
     def _get_message_id(self, message_el):
         """ Gets <Message/MessageId> value.
 
@@ -214,7 +215,7 @@ class EAXSToTagged():
         # otherwise tag the message with NLP.
         tagged_content, stripped_content = self.tag_message(message_el, content_text)
         tagged_content = etree.tostring(tagged_content, encoding=self.charset)
-        tagged_content = tagged_content.decode(self.charset, "backslashreplace")
+        tagged_content = tagged_content.decode(self.charset, errors="backslashreplace")
 
         # create new <SingleBody> element with NLP-tagged content tree.
         single_body_el = etree.Element("{" + self.ncdcr_uri + "}SingleBody", 
