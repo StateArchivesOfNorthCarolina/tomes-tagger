@@ -9,6 +9,10 @@ Todo:
         - I think update_message MIGHT be doing this already?
             - Only one way to find out. :P
     * Do you really need huge_tree when iterparsing?
+    * When you write the tagged block, I think you need to use 
+    "decode(self.charset, errors="backslashreplace"" or JG's function to prevent XML writing
+    errors. This is because the tagged XML is converted to a string in order to place it in
+    a CDATA block. Otherwise, it seems OK. So nlp_to_xml is probably OK.
 """
 
 # import modules.

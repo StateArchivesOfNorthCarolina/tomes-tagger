@@ -85,7 +85,7 @@ class TOMESToolTagger():
         """
 
         # get NLP; convert to XML.
-        nlp = self.t2n.get_NLP(text)
+        nlp = self.t2n.get_NER(text)
         nlp = self.n2x.xml(nlp)
         return nlp
 
@@ -109,7 +109,7 @@ class TOMESToolTagger():
         # create tagged EAXS.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
-        tagged = self.e2t.convert(eaxs_file, tagged_eaxs_file)
+        tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         
         self.logger.info("Writing results to: {}".format(tagged_eaxs_file))
         return
