@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 
 """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper around
-pycorenlp (https://github.com/smilli/py-corenlp). """
+pycorenlp (https://github.com/smilli/py-corenlp).
+
+Todo:
+    * Document text wrapper stuff.    
+"""
 
 # import modules.
 import logging
@@ -9,6 +13,7 @@ import os
 import subprocess
 import urllib
 from pycorenlp import StanfordCoreNLP
+from textwrap import TextWrapper
 
 
 class TextToNLP():
@@ -55,7 +60,7 @@ class TextToNLP():
             self.options["regexner.backgroundSymbol"] =  ",".join(default_tags)
 
 
-    def get_NER(self, text):
+    def get_NER(self, text, chunk_size=100):
         """ Runs CoreNLP's NER tagger on @text.
         
         Args:
@@ -66,15 +71,25 @@ class TextToNLP():
             The CoreNLP NER tagger results.
         """
         
+        # ???
+        nlp = {"sentences": []}
+
+        # ???
+        wrapper = TextWrapper(width=chunk_size, break_long_words=False) 
+        text_chunks = wrapper.wrap(text)
+        
+        # ???
         self.logger.info("Getting NER tags.")
         try:
-            nlp = self.annotator.annotate(text, properties=self.options)
-            self.logger.debug("Got following NER tag results: {}".format(nlp))
-            return nlp
+            for text_chunk in text_chunks:
+                results = self.annotator.annotate(text_chunk, properties=self.options)
+                nlp["sentences"] += results["sentences"]
+                #break # test line.
         except Exception as err:
             self.logger.error("Cannot get NER tags. Is the CoreNLP server working?")
             raise err
 
+        return nlp
 
 if __name__ == "__main__":
     pass
