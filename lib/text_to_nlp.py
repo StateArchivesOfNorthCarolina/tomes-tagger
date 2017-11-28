@@ -4,7 +4,11 @@
 pycorenlp (https://github.com/smilli/py-corenlp).
 
 Todo:
-    * Document text wrapper stuff.    
+    * Is 50k a good number for @chunk_size? If not, what should it be?
+    * Currently, the "try/except" attempts to tag all chunks. Should the "for" loop be outside
+    the "try/except"? IOW, should you "try" on each chunk instead of the entire @text?
+        - CoreNLP will fail (I think) on blank text, so I still think you need to make sure
+        the returned dict has a "sentences" key.
 """
 
 # import modules.
@@ -60,36 +64,41 @@ class TextToNLP():
             self.options["regexner.backgroundSymbol"] =  ",".join(default_tags)
 
 
-    def get_NER(self, text, chunk_size=100):
+    def get_NER(self, text, chunk_size=50000):
         """ Runs CoreNLP's NER tagger on @text.
         
         Args:
             - text (str): The text to send to CoreNLP's NER tagger.
+            - chunk_size (int): The maximum string length to send to CoreNLP at a time. If
+            @text exceeds this value, then @text will be sent to CoreNLP in smaller chunks.
             
         Returns:
             dict: The return value.
             The CoreNLP NER tagger results.
         """
         
-        # ???
-        nlp = {"sentences": []}
+        # set placeholder dictionary for NER results.
+        ner = {"sentences": []}
 
-        # ???
-        wrapper = TextWrapper(width=chunk_size, break_long_words=False) 
-        text_chunks = wrapper.wrap(text)
+        # if needed, break @text into smaller chunks.
+        if len(text) >= chunk_size:
+            wrapper = TextWrapper(width=chunk_size, break_long_words=False, 
+                    break_on_hyphens=False) 
+            text = wrapper.wrap(text)
+        else:
+            text = [text]
         
-        # ???
         self.logger.info("Getting NER tags.")
-        try:
-            for text_chunk in text_chunks:
+        try:            
+            for text_chunk in text:
                 results = self.annotator.annotate(text_chunk, properties=self.options)
-                nlp["sentences"] += results["sentences"]
-                #break # test line.
+                ner["sentences"] += results["sentences"]
         except Exception as err:
             self.logger.error("Cannot get NER tags. Is the CoreNLP server working?")
             raise err
 
-        return nlp
+        return ner
+
 
 if __name__ == "__main__":
     pass
