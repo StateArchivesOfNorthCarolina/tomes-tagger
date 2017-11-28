@@ -4,6 +4,9 @@
 pycorenlp (https://github.com/smilli/py-corenlp).
 
 Todo:
+    * You need to document somewhere that chunking via textwrap will destroy line breaks. So,
+    the tagged message can no longer be a whitespace-intact representation of the original
+    message when chunking occurs.
     * Is 50k a good number for @chunk_size? If not, what should it be?
     * Currently, the "try/except" attempts to tag all chunks. Should the "for" loop be outside
     the "try/except"? IOW, should you "try" on each chunk instead of the entire @text?
