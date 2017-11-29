@@ -95,7 +95,7 @@ class NLPToXML():
                 nsmap=self.ns_map)
         tagged_el.text = ""
         
-        # start tracking NER tag groups with default authority/NER tag combination.
+        # start tracking NER tag groups.
         tag_group = 0
         current_ner = ""
 
@@ -122,10 +122,11 @@ class NLPToXML():
                 after = token["after"]
                 ner = token["ner"]
 
-                # if new tag, increase group value.
-                if ner != current_ner and ner != "O":
+                # if new tag, set new current tag and increase group value.
+                if ner != current_ner:
                     current_ner = ner
-                    tag_group += 1
+                    if ner != "O":
+                        tag_group += 1
             
                 # create sub-element.
                 token_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}Token",

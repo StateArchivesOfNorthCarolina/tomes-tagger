@@ -43,7 +43,7 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 							<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 							</head>
 							<body>
-							<p>Hi Jane!</p>
+							<p>Hi Jane Doe!</p>
 							</body>
 							</html>]]>
 						</Content>
@@ -101,7 +101,9 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 					<Charset>us-ascii</Charset>
 					<BodyContent>
 						<Content>
-							<![CDATA[Goodbye John!]]>
+							<![CDATA[Goodbye John D. Doe!
+							Peace,
+							Jane.]]>
 						</Content>
 					</BodyContent>
 				</SingleBody>
@@ -149,7 +151,7 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 					<Charset>us-ascii</Charset>
 					<BodyContent>
 						<Content>
-							<![CDATA[I meant it .... goodbye John!!!]]>
+							<![CDATA[I meant it .... goodbye John!!! We'll always have Raleigh, North Carolina.]]>
 						</Content>
 					</BodyContent>
 				</SingleBody>

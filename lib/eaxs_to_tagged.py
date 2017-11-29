@@ -9,6 +9,11 @@ Todo:
         - I think update_message MIGHT be doing this already?
             - Only one way to find out. :P
     * Do you really need huge_tree when iterparsing?
+    * When you write the tagged block, I think you need to use 
+    "decode(self.charset, errors="backslashreplace"" or JG's function to prevent XML writing
+    errors. This is because the tagged XML is converted to a string in order to place it in
+    a CDATA block. Otherwise, it seems OK. So nlp_to_xml is probably OK.
+        - Update: For now, using "decode()" on the infamous "choke message" is working.
 """
 
 # import modules.
@@ -68,6 +73,7 @@ class EAXSToTagged():
             element.clear()
 
         return global_id
+
 
     def _get_message_id(self, message_el):
         """ Gets <Message/MessageId> value.
@@ -205,6 +211,7 @@ class EAXSToTagged():
         # otherwise tag the message with NLP.
         tagged_content, stripped_content = self.tag_message(message_el, content_text)
         tagged_content = etree.tostring(tagged_content, encoding=self.charset)
+        tagged_content = tagged_content.decode(self.charset, errors="backslashreplace")
 
         # create new <SingleBody> element with NLP-tagged content tree.
         single_body_el = etree.Element("{" + self.ncdcr_uri + "}SingleBody", 
