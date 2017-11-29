@@ -22,6 +22,7 @@ from lib.text_to_nlp import *
 from lib.nlp_to_xml import *
 from lib.eaxs_to_tagged import *
 
+ex_dir = os.path.join(os.getcwd(), "tomes_tool")
 
 class TOMESToolTagger():
     """ A class to convert an EAXS file to a tagged EAXS document.
@@ -89,7 +90,6 @@ class TOMESToolTagger():
         nlp = self.n2x.xml(nlp)
         return nlp
 
-
     def eaxs_to_tagged(self, eaxs_file, tagged_eaxs_file=None):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
         
@@ -128,7 +128,7 @@ def main(eaxs: "source EAXS file",
         os.mkdir(logdir)
 
     # load logging config.
-    with open("logger.yaml") as f:
+    with open(os.path.join(ex_dir, "logger.yaml")) as f:
         config = yaml.safe_load(f.read())
     logging.config.dictConfig(config)
     

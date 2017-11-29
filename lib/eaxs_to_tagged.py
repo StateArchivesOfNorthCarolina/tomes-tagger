@@ -21,6 +21,7 @@ import base64
 import logging
 import os
 from lxml import etree
+import unicodedata
 
 
 class EAXSToTagged():
@@ -32,7 +33,6 @@ class EAXSToTagged():
         >>> e2t = EAXSToTagged(html2text, text2nlp)
         >>> tagged = e2t.write_tagged(eaxs_file, "output.xml") # tagged EAXS to "output.xml".
     """
-
 
     def __init__(self, html_converter, nlp_tagger, charset="UTF-8"):
         """ Sets instance attributes.
@@ -58,7 +58,6 @@ class EAXSToTagged():
         # set namespace attributes.
         self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
         self.ns_map  = {"ncdcr":self.ncdcr_uri}
-
 
     def _get_global_id(self, eaxs_file):
         """ Gets <GlobalId> value for a given @eaxs_file. """
@@ -94,7 +93,6 @@ class EAXSToTagged():
 
         return message_id
 
-
     def _get_single_body_element(self, message_el, name, value=""):
         """ Gets <Message/MultiBody/SingleBody/@name> element and its text value. Note that
         <SingleBody> elements for attachments are skipped.
@@ -127,7 +125,6 @@ class EAXSToTagged():
             el, el_text = name_el, name_el.text
 
         return (el, el_text)
-
 
     def tag_message(self, message_el, content_text):
         """ Tags a given <Message> element with a given text value.
@@ -179,7 +176,6 @@ class EAXSToTagged():
 
         return (tagged_el, stripped_content)
 
-
     def update_message(self, message_el, folder_name):
         """ Updates a <Message> element's value with NLP-tagged content. Affixes the parent 
         @folder_name as an attribute to updated elment.
@@ -222,7 +218,12 @@ class EAXSToTagged():
                 nsmap=self.ns_map)
         tagged_content_el = etree.Element("{" + self.ncdcr_uri + "}TaggedContent", 
                 nsmap=self.ns_map)
-        tagged_content_el.text = etree.CDATA(tagged_content)
+        try:
+            tagged_content_el.text = etree.CDATA(tagged_content)
+        except ValueError as e:
+            self.logger.error(e)
+            self.logger.error("Attempting to clean the message.")
+            tagged_content_el.text = etree.CDATA(self.remove_bad_characters(tagged_content))
         single_body_el.append(tagged_content_el)
 
         # if needed, append plain text version of content to new <SingleBody> element.
@@ -236,7 +237,6 @@ class EAXSToTagged():
         message_el.xpath("ncdcr:MultiBody", namespaces=self.ns_map)[0].append(single_body_el)
 
         return message_el
-
 
     def write_tagged(self, eaxs_file, tagged_eaxs_file):
         """ Converts an EAXS file to a tagged EAXS document and writes it to 
@@ -312,6 +312,12 @@ class EAXSToTagged():
                         element.clear()
 
         return
+
+    @staticmethod
+    def remove_bad_characters(s: bytes):
+        s = s.decode("utf-8")
+        return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
+
 
 if __name__ == "__main__":
     pass
