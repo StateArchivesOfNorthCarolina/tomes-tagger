@@ -100,6 +100,8 @@ class NLPToXML():
         current_ner = ""
 
         # ensure CoreNLP JSON has required field.
+        # TODO: There is a lot that can go wrong here with little reporting. We are assuming clean input at this point.
+        sentences = []  # Fixes reference before assignment, but we need to check this out.
         try:
             sentences = jdict["sentences"]
         except KeyError:
@@ -109,6 +111,10 @@ class NLPToXML():
             self.logger.error(te)
 
         # iterate through tokens; append sub-elements to root.
+        if len(sentences) == 0:
+            # TODO: What do we do if sentences not populated
+            pass
+
         for sentence in sentences:
             
             tokens = sentence["tokens"]

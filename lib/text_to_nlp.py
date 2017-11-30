@@ -22,15 +22,17 @@ import urllib
 from pycorenlp import StanfordCoreNLP
 import socket
 from textwrap import TextWrapper
+import json
+import unicodedata
 
-CORENLP = socket.gethostbyname('corenlp-server')
+#CORENLP = socket.gethostbyname('corenlp-server')
 
 
 class TextToNLP():
     """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
-    def __init__(self, host="http://{}".format(CORENLP), port=9003, chunk_size=50000,
+    def __init__(self, host="http://{}".format('192.168.99.100'), port=9003, chunk_size=50000,
             mapping_file="regexner_TOMES/mappings.txt", override_defaults=True, *args, 
             **kwargs):
         """ Sets instance attributes. 
@@ -68,7 +70,7 @@ class TextToNLP():
         if override_defaults:
             default_tags = ["DATE", "DURATION", "LOCATION", "MISC", "MONEY", "NUMBER", "O",
              "ORDINAL", "ORGANIZATION", "PERCENT", "PERSON", "SET", "TIME"]
-            self.options["regexner.backgroundSymbol"] =  ",".join(default_tags)
+            self.options["regexner.backgroundSymbol"] = ",".join(default_tags)
 
 
     def get_NER(self, text):
@@ -97,13 +99,21 @@ class TextToNLP():
         try:            
             for text_chunk in text:
                 results = self.annotator.annotate(text_chunk, properties=self.options)
+                # TODO: if results is not a dict handle the message.
+                if not isinstance(results, dict):
+                    #TODO: What is a sane return that won't break the workflow or can we fix?
+                    results = json.loads(self.remove_bad_characters(results))
                 ner["sentences"] += results["sentences"]
+        # TODO: Catching a general exception here is making things very hard to debug.
         except Exception as err:
             self.logger.error("Cannot get NER tags. Is the CoreNLP server working?")
             raise err
 
         return ner
 
+    @staticmethod
+    def remove_bad_characters(s):
+        return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
 
 if __name__ == "__main__":
     pass

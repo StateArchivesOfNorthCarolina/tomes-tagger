@@ -263,10 +263,6 @@ class EAXSToTagged():
             self.logger.error(err)
             raise FileExistsError(err)
 
-        # assume values.
-        message_open = False
-        current_folders = []
-
         # write tagged EAXS file.
         with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True) as xfile:
 
@@ -274,43 +270,39 @@ class EAXSToTagged():
             xfile.write_declaration()
             etree.register_namespace("ncdcr", self.ncdcr_uri)
 
+            messages_to_process = 0
+            self.logger.info("Finding number of Messages.")
+            for ev, el in etree.iterparse(eaxs_file, events=("end",),
+                                          strip_cdata=False,
+                                          tag="{http://www.archives.ncdcr.gov/mail-account}Message",
+                                          huge_tree=True):
+                messages_to_process += 1
+                ev = None
+                el = None
+
+
             # create <Account> element with attributes.
             with xfile.element("ncdcr:Account", GlobalId=self._get_global_id(eaxs_file), 
                     SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
+                # Loop through Messages and tag them.
 
-                for event, element in etree.iterparse(eaxs_file, events=("start", "end",),
-                        strip_cdata=False, huge_tree=True):
-
+                for event, element in etree.iterparse(eaxs_file, events=("end",),
+                        strip_cdata=False, tag="{http://www.archives.ncdcr.gov/mail-account}Message", huge_tree=True):
+                    # TODO: Remove this for production
+                    # if messages_to_process > 3817:
+                    #     messages_to_process -= 1
+                    #     continue
+                    fldr = element.getparent()
+                    fldr_name = fldr.getchildren()[0].text
+                    fldr = None
                     # if applicable, establish that a <Message> element is open.
-                    if event == "start" and element.tag == "{" + self.ncdcr_uri + "}Message":
-                        message_open = True
-                        continue
-
-                    # if a <Message> element is open, tag it.
-                    if message_open:
-
-                        if (event == "end" and
-                                element.tag == "{" + self.ncdcr_uri + "}Message"):
-                            message_id = self._get_message_id(element)
-                            self.logger.info("Working on message: {}".format(message_id))
-                            tagged_message = self.update_message(element, 
-                                    "/".join(current_folders))
-                            xfile.write(tagged_message)
-                            element.clear()
-                            message_open = False
-
-                    # otherwise, find the <Folder/Name> value for the next set of messages.
-                    elif not message_open:
-
-                        if (event == "start" and
-                                element.tag == "{" + self.ncdcr_uri + "}Name"):
-                            current_folders.append(element.text)
-                        elif (event == "end" and
-                                element.tag == "{" + self.ncdcr_uri + "}Folder"):
-                            current_folders.pop()
-
-                        element.clear()
-
+                    message_id = self._get_message_id(element)
+                    self.logger.info("Working on message: {}".format(message_id))
+                    self.logger.info("{} Messages left to process.".format(messages_to_process))
+                    messages_to_process -= 1
+                    tagged_message = self.update_message(element, fldr_name)
+                    xfile.write(tagged_message)
+                    element.clear()
         return
 
     @staticmethod
