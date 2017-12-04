@@ -133,8 +133,8 @@ def main(eaxs: "source EAXS file",
     config_file = os.path.join(config_path, "logger.yaml")
     
     # load logging config file.
-    with open(config_file) as f:
-        config = yaml.safe_load(f.read())
+    with open(config_file) as cf:
+        config = yaml.safe_load(cf.read())
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
