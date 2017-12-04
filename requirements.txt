@@ -1,9 +1,9 @@
+autobahn==0.9.1
 beautifulsoup4>=4.5.3
+html5lib>=0.9
 lxml>=3.7.2
 openpyxl>=2.4.8
 plac>=0.9.6
 pycorenlp>=0.3.0
 PyYAML>=3.12
 Twisted==17.9.0
-autobahn==0.9.1
-html5lib>=0.9
