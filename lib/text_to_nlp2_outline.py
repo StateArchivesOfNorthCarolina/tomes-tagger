@@ -13,7 +13,7 @@ class CoreNLP():
         try:
             r = self.nlp.annotate(text, properties=self.props)
         except Exception as e:
-            print(e)
+            print("Can't talk to CoreNLP. Is it running?)
             raise self.CoreNLP_Error
         return r
 
