@@ -12,6 +12,17 @@ Todo:
     the "try/except"? IOW, should you "try" on each chunk instead of the entire @text?
         - CoreNLP will fail (I think) on blank text, so I still think you need to make sure
         the returned dict has a "sentences" key.
+    * Replace static function with .decode/errors=backslashreplace.
+        - Remove import of unicodedata.
+    * Catch specific exceptions for call to CoreNLP.
+    * Make possible to pass in server info via main rather than anything specific for 
+    UI/Docker.
+        - Remove import of socket - should be able to pass in what's needed via main.py.
+        - Update init accordingly.
+    * Jeremy asks "What is a sane return that won't break the workflow or can we fix?
+        - I think is specific if a dict isn't returned, but also points to some server
+        timeout, etc. This might be where we need to maintain a running list of problem
+        message ids.
 """
 
 # import modules.
@@ -99,12 +110,12 @@ class TextToNLP():
         try:            
             for text_chunk in text:
                 results = self.annotator.annotate(text_chunk, properties=self.options)
-                # TODO: if results is not a dict handle the message.
+
                 if not isinstance(results, dict):
-                    #TODO: What is a sane return that won't break the workflow or can we fix?
                     results = json.loads(self.remove_bad_characters(results))
+                
                 ner["sentences"] += results["sentences"]
-        # TODO: Catching a general exception here is making things very hard to debug.
+
         except Exception as err:
             self.logger.error("Cannot get NER tags. Is the CoreNLP server working?")
             raise err
