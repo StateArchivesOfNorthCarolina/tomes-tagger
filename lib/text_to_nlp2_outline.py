@@ -40,8 +40,8 @@ class CoreNLP():
         try:
             results = self.nlp.annotate(text, properties=self.props)
         except Exception:
-            # log error here.
-            raise self.CoreNLP_Error("Can't talk to CoreNLP. Is it running?")
+            msg = "Unable to connect to CoreNLP at: {}".format(self.url)
+            raise self.CoreNLP_Error(msg)
         
         return results
 
@@ -64,31 +64,52 @@ class TextToNLP():
     def get_ner(self, text):
         """ ??? """
         
-        results = []
+        ner = []
         try:
             results = self.corenlp.annotate(text)
-        except self.corenlp.CoreNLP_Error:
-            print("Doh: CoreNLP server issue.")
+        except self.corenlp.CoreNLP_Error as e:
+            # log error here.
+            print(e)
             return
 
-        for result in results:
-            try:
-                print(results)
-                #a #force NamError
-                #result["bad_key"] #for TypeError
-            except NameError as e:
-                print("Doh: NameError")
-                print(e)
-            except TypeError as e:
-                print("Doh: TypeError.")
-                print(e)
+        # ???
+        if not isinstance(results, dict):
+            # log error; do something to handle error.
+            pass
+        if "sentences" not in results.keys():
+            # log error; do something to handle error.
+            ner.append(None)
+
+        sentences = results["sentences"]
+        for sentence in sentences:
+
+            tokens = sentence["tokens"]
+            for token in tokens:
+            
+                # get required values.
+                try:
+                    text = token["originalText"]
+                except KeyError:
+                    text = token["word"]
+                tag = token["ner"]
+                if tag == "O":
+                    tag = None
+                trailing_space = token["after"]
+                token_group = text, tag, trailing_space
+                ner.append(token_group)
+
+        return ner
+                    
 
 corenlp_cls = CoreNLP(port=9002)
 t2n = TextToNLP(corenlp_cls)
-t2n.get_ner("Jane Doe") # CoreNLP_Error
+t2n.get_ner("") # CoreNLP_Error
 
 print()
 
 corenlp_cls = CoreNLP(port=9003)
 t2n = TextToNLP(corenlp_cls)
-t2n.get_ner("1/12/2005") # TypeError
+r = t2n.get_ner("1/12/2005 is a date that CoreNLP should not recognize now. Thanks Jane Doe.")
+for i in r:
+    print(i)
+
