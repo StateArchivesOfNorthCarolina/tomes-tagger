@@ -8,9 +8,8 @@ encoded in a defined schema.
 Todo:
     * What to do if NLP timeouts? You really need to write to file the message IDs of any 
     skipped messages due to timeouts or other errors.
-        - This isn't a main() issue, but it's a high level concept nonetheless.
-    * Need to be able to pass in CoreNLP server info from here.
-        - Requires change to text_to_nlp.py.
+    * Somebody needs to start the Stanford server. No: that's a documentation thing but I
+    think you need an optional port argument in case Stanford's on a different server.
 """
 
 # import modules.
@@ -90,7 +89,7 @@ class TOMESToolTagger():
         nlp = self.n2x.xml(nlp)
         return nlp
 
-    
+
     def eaxs_to_tagged(self, eaxs_file, tagged_eaxs_file=None):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
         
@@ -128,13 +127,9 @@ def main(eaxs: "source EAXS file",
     if not os.path.isdir(logdir):
         os.mkdir(logdir)
 
-    # get absolute path to logging config file.
-    config_dir = os.path.dirname(os.path.abspath(__file__))
-    config_file = os.path.join(config_dir, "logger.yaml")
-    
-    # load logging config file.
-    with open(config_file) as cf:
-        config = yaml.safe_load(cf.read())
+    # load logging config.
+    with open("logger.yaml") as f:
+        config = yaml.safe_load(f.read())
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
