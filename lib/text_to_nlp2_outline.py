@@ -18,7 +18,7 @@ class CoreNLP():
     """ ??? """
 
     def __init__(self, host="localhost", port=9003, 
-            mapping_file="regexner_TOMES/mappings.txt", override_default_tags=True, omit_tags=[],
+            mapping_file="regexner_TOMES/mappings.txt", override_default_tags=True,
             *args, **kwargs):
         """ ??? 
         
@@ -26,20 +26,24 @@ class CoreNLP():
             
         """
 
-        self.host="http://localhost:{}".format(port)
+        self.url="http://{}:{}".format(host, port)
         self.props = {"annotators": "tokenize, ssplit, pos, ner, regexner",
-         "outputFormat": "json"
-         }
-        self.nlp = pycorenlp.StanfordCoreNLP(self.host)
+        "ner.useSUTime": "false", "ner.applyNumericClassifiers": "false",
+        "outputFormat": "json"}
+        self.nlp = pycorenlp.StanfordCoreNLP(self.url)
 
    
     def annotate(self, text):
+        """ ??? """
+
+        # ???
         try:
-            r = self.nlp.annotate(text, properties=self.props)
-        except Exception as e:
-            print("Can't talk to CoreNLP. Is it running?)
-            raise self.CoreNLP_Error
-        return r
+            results = self.nlp.annotate(text, properties=self.props)
+        except Exception:
+            # log error here.
+            raise self.CoreNLP_Error("Can't talk to CoreNLP. Is it running?")
+        
+        return results
 
     class CoreNLP_Error(Exception):
         """ Segments the modules exceptions."""
@@ -47,11 +51,19 @@ class CoreNLP():
 
 
 class TextToNLP():
+    """ ??? """
+
+
     def __init__(self, corenlp):
+        """ ??? """
+        
         self.corenlp = corenlp
         # other stuff to specifically chunck and collect output ...
 
+   
     def get_ner(self, text):
+        """ ??? """
+        
         results = []
         try:
             results = self.corenlp.annotate(text)
@@ -61,8 +73,9 @@ class TextToNLP():
 
         for result in results:
             try:
+                print(results)
                 #a #force NamError
-                result["bad_key"] #for TypeError
+                #result["bad_key"] #for TypeError
             except NameError as e:
                 print("Doh: NameError")
                 print(e)
@@ -70,12 +83,12 @@ class TextToNLP():
                 print("Doh: TypeError.")
                 print(e)
 
-corenlp_cls = CoreNLP("9002")
+corenlp_cls = CoreNLP(port=9002)
 t2n = TextToNLP(corenlp_cls)
 t2n.get_ner("Jane Doe") # CoreNLP_Error
 
 print()
 
-corenlp_cls = CoreNLP("9003")
+corenlp_cls = CoreNLP(port=9003)
 t2n = TextToNLP(corenlp_cls)
-t2n.get_ner("Jane Doe") # TypeError
+t2n.get_ner("1/12/2005") # TypeError
