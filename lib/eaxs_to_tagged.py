@@ -21,6 +21,7 @@ import base64
 import logging
 import os
 from lxml import etree
+import unicodedata
 
 
 class EAXSToTagged():
@@ -32,7 +33,6 @@ class EAXSToTagged():
         >>> e2t = EAXSToTagged(html2text, text2nlp)
         >>> tagged = e2t.write_tagged(eaxs_file, "output.xml") # tagged EAXS to "output.xml".
     """
-
 
     def __init__(self, html_converter, nlp_tagger, charset="UTF-8"):
         """ Sets instance attributes.
@@ -58,7 +58,6 @@ class EAXSToTagged():
         # set namespace attributes.
         self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
         self.ns_map  = {"ncdcr":self.ncdcr_uri}
-
 
     def _get_global_id(self, eaxs_file):
         """ Gets <GlobalId> value for a given @eaxs_file. """
@@ -94,7 +93,6 @@ class EAXSToTagged():
 
         return message_id
 
-
     def _get_single_body_element(self, message_el, name, value=""):
         """ Gets <Message/MultiBody/SingleBody/@name> element and its text value. Note that
         <SingleBody> elements for attachments are skipped.
@@ -127,7 +125,6 @@ class EAXSToTagged():
             el, el_text = name_el, name_el.text
 
         return (el, el_text)
-
 
     def tag_message(self, message_el, content_text):
         """ Tags a given <Message> element with a given text value.
@@ -179,7 +176,6 @@ class EAXSToTagged():
 
         return (tagged_el, stripped_content)
 
-
     def update_message(self, message_el, folder_name):
         """ Updates a <Message> element's value with NLP-tagged content. Affixes the parent 
         @folder_name as an attribute to updated elment.
@@ -222,7 +218,12 @@ class EAXSToTagged():
                 nsmap=self.ns_map)
         tagged_content_el = etree.Element("{" + self.ncdcr_uri + "}TaggedContent", 
                 nsmap=self.ns_map)
-        tagged_content_el.text = etree.CDATA(tagged_content)
+        try:
+            tagged_content_el.text = etree.CDATA(tagged_content)
+        except ValueError as e:
+            self.logger.error(e)
+            self.logger.error("Attempting to clean the message.")
+            tagged_content_el.text = etree.CDATA(self.remove_bad_characters(tagged_content))
         single_body_el.append(tagged_content_el)
 
         # if needed, append plain text version of content to new <SingleBody> element.
@@ -236,7 +237,6 @@ class EAXSToTagged():
         message_el.xpath("ncdcr:MultiBody", namespaces=self.ns_map)[0].append(single_body_el)
 
         return message_el
-
 
     def write_tagged(self, eaxs_file, tagged_eaxs_file):
         """ Converts an EAXS file to a tagged EAXS document and writes it to 
@@ -263,10 +263,6 @@ class EAXSToTagged():
             self.logger.error(err)
             raise FileExistsError(err)
 
-        # assume values.
-        message_open = False
-        current_folders = []
-
         # write tagged EAXS file.
         with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True) as xfile:
 
@@ -274,44 +270,46 @@ class EAXSToTagged():
             xfile.write_declaration()
             etree.register_namespace("ncdcr", self.ncdcr_uri)
 
+            messages_to_process = 0
+            self.logger.info("Finding number of Messages.")
+            for ev, el in etree.iterparse(eaxs_file, events=("end",),
+                                          strip_cdata=False,
+                                          tag="{http://www.archives.ncdcr.gov/mail-account}Message",
+                                          huge_tree=True):
+                messages_to_process += 1
+                ev = None
+                el = None
+
+
             # create <Account> element with attributes.
             with xfile.element("ncdcr:Account", GlobalId=self._get_global_id(eaxs_file), 
                     SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
+                # Loop through Messages and tag them.
 
-                for event, element in etree.iterparse(eaxs_file, events=("start", "end",),
-                        strip_cdata=False, huge_tree=True):
-
+                for event, element in etree.iterparse(eaxs_file, events=("end",),
+                        strip_cdata=False, tag="{http://www.archives.ncdcr.gov/mail-account}Message", huge_tree=True):
+                    # TODO: Remove this for production
+                    # if messages_to_process > 3817:
+                    #     messages_to_process -= 1
+                    #     continue
+                    fldr = element.getparent()
+                    fldr_name = fldr.getchildren()[0].text
+                    fldr = None
                     # if applicable, establish that a <Message> element is open.
-                    if event == "start" and element.tag == "{" + self.ncdcr_uri + "}Message":
-                        message_open = True
-                        continue
-
-                    # if a <Message> element is open, tag it.
-                    if message_open:
-
-                        if (event == "end" and
-                                element.tag == "{" + self.ncdcr_uri + "}Message"):
-                            message_id = self._get_message_id(element)
-                            self.logger.info("Working on message: {}".format(message_id))
-                            tagged_message = self.update_message(element, 
-                                    "/".join(current_folders))
-                            xfile.write(tagged_message)
-                            element.clear()
-                            message_open = False
-
-                    # otherwise, find the <Folder/Name> value for the next set of messages.
-                    elif not message_open:
-
-                        if (event == "start" and
-                                element.tag == "{" + self.ncdcr_uri + "}Name"):
-                            current_folders.append(element.text)
-                        elif (event == "end" and
-                                element.tag == "{" + self.ncdcr_uri + "}Folder"):
-                            current_folders.pop()
-
-                        element.clear()
-
+                    message_id = self._get_message_id(element)
+                    self.logger.info("Working on message: {}".format(message_id))
+                    self.logger.info("{} Messages left to process.".format(messages_to_process))
+                    messages_to_process -= 1
+                    tagged_message = self.update_message(element, fldr_name)
+                    xfile.write(tagged_message)
+                    element.clear()
         return
+
+    @staticmethod
+    def remove_bad_characters(s: bytes):
+        s = s.decode("utf-8")
+        return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
+
 
 if __name__ == "__main__":
     pass

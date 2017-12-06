@@ -8,6 +8,13 @@ import logging
 import os
 import subprocess
 from bs4 import BeautifulSoup
+import platform
+
+if platform.system() == "Windows":
+    lynx_exec = "C:\Program Files (x86)\lynx\lynx.exe"
+
+if platform.system() == "Linux":
+    lynx_exec = "lynx"
 
 
 class ModifyHTML():
@@ -112,7 +119,7 @@ class HTMLToText():
     '\nHello World!\n\n'
     """
     
-    def __init__(self, custom_options=None, temp_file="_tmp.html"):
+    def __init__(self, custom_options=None, temp_file=os.path.join(os.getcwd(), "_tmp.html")):
         """ Sets instance attributes.
         
         Args:
@@ -149,7 +156,6 @@ class HTMLToText():
                     self.temp_file))
                 pass
 
-
     def text(self, html, is_raw=False, charset="utf-8"):
         """ Converts HTML files OR strings to plain text string via the Lynx browser.
 
@@ -166,8 +172,11 @@ class HTMLToText():
 
         # create beginning Lynx command line snippet.
         arg_options = [key for key, val in self.options.items() if val]
-        args = "lynx -"
-        args += " -".join(arg_options)
+        args = []
+        args.append(lynx_exec)
+        for opt in arg_options:
+            args.append("-{}".format(opt))
+
 
         # if @is_raw == True, write @html to temporary file.
         # complete command line snippet.
@@ -176,16 +185,24 @@ class HTMLToText():
                     "Writing HTML to temporary HTML file: {}".format(self.temp_file))
             with codecs.open(self.temp_file, "w", encoding=charset) as tmp:
                 tmp.write(html)
-            args += " " + self.temp_file
+            #args += " " + self.temp_file
+            args.append(self.temp_file)
         else:
-            args += " " + html
+            #args += " " + html
+            args.append(html)
 
         # run Lynx.
         self.logger.debug("Converting HTML to text via: '{}'".format(args))
-        cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        text = html
+        try:
+            cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+            text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
+        except FileNotFoundError as e:
+            print(e)
+            self.logger.error(e)
+            self.logger.error(html)
 
         # return stdout.
-        text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
 
         return text
 
