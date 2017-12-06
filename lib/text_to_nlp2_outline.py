@@ -1,14 +1,38 @@
+#!/usr/bin/env python3
+
+""" This module converts ... 
+
+Todo:
+
+    
+"""
+
+# import modules.
+import json
+import logging
 import pycorenlp
+from textwrap import TextWrapper
 
 
 class CoreNLP():
-    def __init__(self, port):
+    """ ??? """
+
+    def __init__(self, host="localhost", port=9003, 
+            mapping_file="regexner_TOMES/mappings.txt", override_default_tags=True, omit_tags=[],
+            *args, **kwargs):
+        """ ??? 
+        
+        Args:
+            
+        """
+
         self.host="http://localhost:{}".format(port)
         self.props = {"annotators": "tokenize, ssplit, pos, ner, regexner",
          "outputFormat": "json"
          }
         self.nlp = pycorenlp.StanfordCoreNLP(self.host)
 
+   
     def annotate(self, text):
         try:
             r = self.nlp.annotate(text, properties=self.props)
