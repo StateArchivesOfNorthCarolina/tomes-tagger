@@ -1,0 +1,13 @@
+(?i)deductible	PII.personal_health_information
+(?i)diagnosis	PII.personal_health_information
+(?i)FMLA	PII.personal_health_information
+(?i)health (?i)condition	PII.personal_health_information
+(?i)health (?i)insurance	PII.personal_health_information
+(?i)health (?i)issues	PII.personal_health_information
+(?i)health (?i)problems	PII.personal_health_information
+(?i)HIPPA	PII.personal_health_information
+(?i)medical (?i)leave	PII.personal_health_information
+(?i)medical (?i)records	PII.personal_health_information
+(?i)patient	PII.personal_health_information
+(?i)PHI	PII.personal_health_information
+(?i)policy (?i)number	PII.personal_health_information

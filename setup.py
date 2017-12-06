@@ -1,16 +1,16 @@
 from distutils.core import setup
 
 setup(
-    name='docker_tmstl',
-    version='0.0.1',
-    package_dir={'docker_tomes': 'lib'},
-    packages=['lib', 'lib.stanford_edu', '_other', '_other.mets', '_other.mets_templates', '_other.old',
-              '_other.signatures'],
-    url='',
-    license='LICENSE.txt',
-    author='Nitin Arora',
-    author_email='nitin.arora@ncdcr.gov',
-    description='The eaxs to tagged portion of the TOMES process',
+    name="docker_tmstl",
+    version="0.0.1",
+    package_dir={"docker_tomes": "lib"},
+    packages=["lib", "lib.stanford_edu", "_other", "_other.mets", "_other.mets_templates",
+        "_other.old", "_other.signatures"],
+    url="https://github.com/StateArchivesOfNorthCarolina/tomes_tool",
+    license="LICENSE.txt",
+    author="Nitin Arora",
+    author_email="nitin.a.arora@ncdcr.gov",
+    description="Part of the TOMES project: creates a 'tagged' version of an EAXS file(s).",
     install_requires=[
         "beautifulsoup4">="4.5.3",
         "lxml" >= "3.7.2",

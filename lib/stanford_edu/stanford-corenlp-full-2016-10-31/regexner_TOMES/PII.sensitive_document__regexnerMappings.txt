@@ -1,0 +1,29 @@
+(?i)between (?i)us	PII.sensitive_document
+(?i)classified	PII.sensitive_document
+(?i)confidential	PII.sensitive_document
+(?i)discrete	PII.sensitive_document
+(?i)eyes (?i)only	PII.sensitive_document
+(?i)eyes-only	PII.sensitive_document
+(?i)hushed	PII.sensitive_document
+(?i)hush (?i)hush	PII.sensitive_document
+(?i)hush-hush	PII.sensitive_document
+(?i)in (?i)confidence	PII.sensitive_document
+(?i)intelligence	PII.sensitive_document
+(?i)legal (?i)disclaimer	PII.sensitive_document
+NDA	PII.sensitive_document	ORGANIZATION
+(?i)non (?i)disclosure	PII.sensitive_document
+(?i)non-disclosure	PII.sensitive_document
+(?i)not (?i)for (?i)publication	PII.sensitive_document
+(?i)not (?i)public	PII.sensitive_document
+(?i)not (?i)to (?i)be (?i)quoted	PII.sensitive_document
+(?i)off (?i)the (?i)record	PII.sensitive_document
+(?i)off-the-record	PII.sensitive_document
+(?i)private	PII.sensitive_document
+(?i)restricted	PII.sensitive_document
+(?i)secret	PII.sensitive_document
+(?i)sensitive	PII.sensitive_document
+(?i)strictly (?i)prohibited	PII.sensitive_document
+(?i)top (?i)secret	PII.sensitive_document
+(?i)under-the-table	PII.sensitive_document
+(?i)under (?i)the (?i)table	PII.sensitive_document
+(?i)under (?i)wraps	PII.sensitive_document
