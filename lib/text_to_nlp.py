@@ -12,6 +12,17 @@ Todo:
     the "try/except"? IOW, should you "try" on each chunk instead of the entire @text?
         - CoreNLP will fail (I think) on blank text, so I still think you need to make sure
         the returned dict has a "sentences" key.
+    * Replace static function with .decode/errors=backslashreplace.
+        - Remove import of unicodedata.
+    * Catch specific exceptions for call to CoreNLP.
+    * Make possible to pass in server info via main rather than anything specific for 
+    UI/Docker.
+        - Remove import of socket - should be able to pass in what's needed via main.py.
+        - Update init accordingly.
+    * Jeremy asks "What is a sane return that won't break the workflow or can we fix?
+        - I think is specific if a dict isn't returned, but also points to some server
+        timeout, etc. This might be where we need to maintain a running list of problem
+        message ids.
 """
 
 # import modules.
@@ -20,15 +31,19 @@ import os
 import subprocess
 import urllib
 from pycorenlp import StanfordCoreNLP
+import socket
 from textwrap import TextWrapper
+import json
+import unicodedata
+
+#CORENLP = socket.gethostbyname('corenlp-server')
 
 
 class TextToNLP():
     """ This module converts plain text to Stanford CoreNLP's JSON output. It is a wrapper
     around pycorenlp (https://github.com/smilli/py-corenlp). """
 
-
-    def __init__(self, host="http://localhost", port=9000, chunk_size=50000,
+    def __init__(self, host="http://{}".format('192.168.99.100'), port=9003, chunk_size=50000,
             mapping_file="regexner_TOMES/mappings.txt", override_defaults=True, *args, 
             **kwargs):
         """ Sets instance attributes. 
@@ -66,7 +81,7 @@ class TextToNLP():
         if override_defaults:
             default_tags = ["DATE", "DURATION", "LOCATION", "MISC", "MONEY", "NUMBER", "O",
              "ORDINAL", "ORGANIZATION", "PERCENT", "PERSON", "SET", "TIME"]
-            self.options["regexner.backgroundSymbol"] =  ",".join(default_tags)
+            self.options["regexner.backgroundSymbol"] = ",".join(default_tags)
 
 
     def get_NER(self, text):
@@ -95,13 +110,21 @@ class TextToNLP():
         try:            
             for text_chunk in text:
                 results = self.annotator.annotate(text_chunk, properties=self.options)
+
+                if not isinstance(results, dict):
+                    results = json.loads(self.remove_bad_characters(results))
+                
                 ner["sentences"] += results["sentences"]
+
         except Exception as err:
             self.logger.error("Cannot get NER tags. Is the CoreNLP server working?")
             raise err
 
         return ner
 
+    @staticmethod
+    def remove_bad_characters(s):
+        return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
 
 if __name__ == "__main__":
     pass
