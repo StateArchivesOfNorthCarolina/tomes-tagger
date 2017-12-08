@@ -5,7 +5,8 @@ given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp
 (https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly.
 
 Todo:
-    * ???
+    * Add chunker.
+    * Add JG's notes.
 """
 
 # import modules.
@@ -100,8 +101,8 @@ class TextToNLP():
             - host (str): The base host URL for the CoreNLP server.
             - port (int): The host's port on which to run the CoreNLP server.
             - chunk_size (int): The maximum string length to send to  at a time.
-            - mapping_file (str): See help(CoreNLP) for more info.
-            - tags_to_override (list): See help(CoreNLP) for more info.
+            - mapping_file (str): See "help(CoreNLP)" for more info.
+            - tags_to_override (list): See "help(CoreNLP)" for more info.
             """
         
         # set logger; suppress logging by default. 
@@ -114,7 +115,7 @@ class TextToNLP():
         self.url="{}:{}".format(host, port)
 
         # compose instance of CoreNLP wrapper class.
-        self.nlp = CoreNLP(self.url, mapping_file, tags_to_override)
+        self.corenlp = CoreNLP(self.url, mapping_file, tags_to_override)
 
    
     def get_ner(self, text):
@@ -141,7 +142,7 @@ class TextToNLP():
         # get NER tags.
         try:
             results = self.corenlp.annotate(text)
-        except (TypeError, self.nlp.Connection_Error) as e:
+        except (TypeError, self.corenlp.Connection_Error) as e:
             self.logger.error(e)
             return failed_ner
 
