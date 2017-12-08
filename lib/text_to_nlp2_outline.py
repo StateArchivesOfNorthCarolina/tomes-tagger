@@ -30,10 +30,6 @@ class _CoreNLP():
             -*args/**kwargs: Any additional, optional arguments to pass to pycorenlp.
         """
 
-        # set logger; suppress logging by default. 
-        self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(logging.NullHandler())
-
         # set CoreNLP server location and options.
         self.url = url
         self.mapping_file = mapping_file
@@ -50,9 +46,7 @@ class _CoreNLP():
         if len(self.tags_to_override) > 0:
             self.options["regexner.backgroundSymbol"] = ",".join(self.tags_to_override)
 
-        # compose instance of pycorenlp class.
-        self.logger.info("Connecting to CoreNLP server at '{}' with options: {}".format(
-            self.url, self.options))
+        # compose instance of main pycorenlp class.
         self.nlp = pycorenlp.StanfordCoreNLP(self.url, *args, **kwargs)
 
    
@@ -67,22 +61,22 @@ class _CoreNLP():
             The CoreNLP NER tagger results.
 
         Raises:
-            self.CoreNLP_Error: If pycorenlp fails.
+            - TypeError: If @text is not a string.
+            - self.Connection_Error: If pycorenlp cannot connect to the CoreNLP server.
         """
 
-        # check that @text is a string.
+        # verify that @text is a string.
         if not isinstance(text, str):
-            self.logger.warning("Argument @text must be a string, got '{}' instead.".format(
-                type(text).__name__))
-            text = ""
+            msg = "Argument @text must be a string, got '{}' instead.".format(
+                    type(text).__name__)
+            raise TypeError(msg)
 
         # get NER tag results.
         try:
             results = self.nlp.annotate(text, properties=self.options)
             return results
-        except Exception:
+        except Exception as e:
             msg = "Unable to connect to CoreNLP at: {}".format(self.url)
-            self.logger.error(msg)
             raise self.Connection_Error(msg)
 
 
@@ -100,56 +94,63 @@ class TextToNLP():
                 "ORGANIZATION", "PERSON"]):
         """ ??? """
         
-        # ???
+        # set logger; suppress logging by default. 
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.NullHandler())
+
+        # set server location attributes.
         self.host = host
         self.port = port
-        self.url="http://{}:{}".format(host, port)
+        self.url="{}:{}".format(host, port)
 
-        self._corenlp = _CoreNLP(self.url)
+        # compose instance of CoreNLP wrapper class.
+        self.corenlp = _CoreNLP(self.url)
 
    
     def get_ner(self, text):
         """ ??? """
         
-        # ???
+        # prepare output containers.
         ner = []
+        failed_ner = [None]
         
-        # ???
+        # get NER tags.
         try:
-            results = self._corenlp.annotate(text)
-        except self.corenlp.CoreNLP_Error as e:
-            # log error here; don't print.
-            print(e)
-            return [None]
+            results = self.corenlp.annotate(text)
+        except (TypeError, self.corenlp.Connection_Error) as e:
+            self.logger.error(e)
+            return failed_ner
 
-        # ???
+        # ensure @results is correct data type.
         if not isinstance(results, dict):
-            # log error; do something to handle error.
-             return [None]
+            self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary.".format(
+                type(results).__name__))
+            return failed_ner
+        
+        # ensure @results contains required key.
         if "sentences" not in results:
-            # log error; do something to handle error.
-            return [None]
+            self.logger.warning("CoreNLP response is missing required field 'sentences'.")
+            return failed_ner
 
-        # ???
+        # loop through data; append necessary values to @ner.
         sentences = results["sentences"]
         for sentence in sentences:
 
-            if "tokens" not in sentence:
-                # log error; do something to handle error.
-                continue
-            
             tokens = sentence["tokens"]
             for token in tokens:
-            
-                # get required values.
+
                 try:
                     text = token["originalText"]
                 except KeyError:
                     text = token["word"]
+                
                 tag = token["ner"]
-                if tag == "O":
+                if tag == "O": # because CoreNLP uses "O" for a null NER tag.
                     tag = None
+                
                 trailing_space = token["after"]
+                
+                # append values as tuple.
                 token_group = text, tag, trailing_space
                 ner.append(token_group)
 
@@ -159,10 +160,7 @@ class TextToNLP():
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.WARNING)
-    corenlp = _CoreNLP("http://localhost:9003")
-    try:
-        r = corenlp.annotate("1234 Jane")
-        print(r)
-    except corenlp.Connection_Error as e:
-        print(e)
-
+    t2n = TextToNLP()
+    res = t2n.get_ner("1234 is a number. Jane Doe is married to John Doe.")
+    for w, t, s in res:
+        print("{} [{}]".format(w, t))
