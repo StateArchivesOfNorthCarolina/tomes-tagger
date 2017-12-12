@@ -5,6 +5,7 @@ given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp
 (https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly.
 
 Todo:
+    * Add logging to CoreNLP().
     * Add JG's notes.
 """
 
@@ -31,6 +32,14 @@ class CoreNLP():
             -*args/**kwargs: Any additional, optional arguments to pass to pycorenlp.
         """
 
+        # set logger; suppress logging by default. 
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.NullHandler())
+
+        # suppress "requests" module's logging if below a warning.
+        # per: https://stackoverflow.com/a/11029841
+        logging.getLogger("requests").setLevel(logging.WARNING)
+        
         # set CoreNLP server location and options.
         self.url = url
         self.mapping_file = mapping_file
@@ -91,7 +100,7 @@ class TextToNLP():
     Stanford's CoreNLP. """
 
 
-    def __init__(self, host="http://localhost", port=9003, chunk_size=50000,
+    def __init__(self, host="http://localhost", port=9003, chunk_size=1,
             mapping_file="regexner_TOMES/mappings.txt", tags_to_override=["LOCATION", 
                 "ORGANIZATION", "PERSON"]):
         """ Sets instance attributes.
@@ -138,13 +147,15 @@ class TextToNLP():
             # if needed, break @text into smaller chunks.
             if len(text) > self.chunk_size:
                 wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
-                        break_on_hyphens=False, drop_whitespace=False) 
+                        break_on_hyphens=False, drop_whitespace=False, 
+                        replace_whitespace=False) 
                 text_list = wrapper.wrap(text)
             else:
                 text_list = [text]
 
             # get NER tags for each item and add results to @ner.
             for text_chunk in text_list:
+                print("\nchunk: ", repr(text_chunk)) # TEST
                 tokenized_tagged = def__get_ner(self, text_chunk)
                 ner_results += tokenized_tagged
 
@@ -178,6 +189,7 @@ class TextToNLP():
         results = {}
         try:
             results = self.corenlp.annotate(text)
+            print("results: ", results) # TEST
         except (TypeError, self.corenlp.Connection_Error) as e:
             self.logger.error(e)
             return failed_output
@@ -195,7 +207,14 @@ class TextToNLP():
 
         # loop through data; append necessary values to @ner.
         sentences = results["sentences"]
+
+        if sentences == []:
+            output.append((text, "", ""))
+            return output
+
         for sentence in sentences:
+
+            print("sentence: ", type(sentence)) # TEST
 
             # verify @sentence contains required key.
             if "tokens" not in sentence:
@@ -218,7 +237,7 @@ class TextToNLP():
                 except KeyError as e:
                     self.logger.error(e)
                     self.logger.warning("Token data not found; nothing to append to output.")
-                    continue
+                    #continue
                 
                 # overwrite CoreNLP's use of "O" for a null NER tag.
                 if tag == "O":
@@ -235,6 +254,10 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=logging.WARNING)
     t2n = TextToNLP(port=9003, chunk_size=1)
-    res = t2n.get_ner("123 Jane")
-    print(repr(res))
+    s = "Jane\n\t\r"
+    print(repr(s))
+    print()
+    res = t2n.get_ner(s)
+    for r in res:
+        print(r)
 
