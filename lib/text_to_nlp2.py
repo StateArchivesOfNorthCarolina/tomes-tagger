@@ -5,8 +5,16 @@ given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp
 (https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly.
 
 Todo:
-    * Add logging to CoreNLP().
-    * Add JG's notes.
+    * Add logging to CoreNLP()???
+    * You still need a try/except around each chunk attempt in the decorator.
+    * If we have to log a response, should we limit the length of what we return (to reduce
+    excessive logging)?
+        - It's probably better to have a private function you can pass the repsonse to. I 
+        don't like how I'm encoding/decoding under two separate conditions.
+    * Jeremy asks "What is a sane return that won't break the workflow or can we fix?
+        - I think is specific if a dict isn't returned, but also points to some server
+        timeout, etc. This might be where we need to maintain a running list of problem
+        message ids.
 """
 
 # import modules.
@@ -39,6 +47,7 @@ class CoreNLP():
         # suppress "requests" module's logging if below a warning.
         # per: https://stackoverflow.com/a/11029841
         logging.getLogger("requests").setLevel(logging.WARNING)
+        logging.getLogger("urllib3").setLevel(logging.WARNING)
         
         # set CoreNLP server location and options.
         self.url = url
@@ -100,15 +109,17 @@ class TextToNLP():
     Stanford's CoreNLP. """
 
 
-    def __init__(self, host="http://localhost", port=9003, chunk_size=1,
-            mapping_file="regexner_TOMES/mappings.txt", tags_to_override=["LOCATION", 
-                "ORGANIZATION", "PERSON"]):
+    def __init__(self, host="http://localhost", port=9003, chunk_size=50000,
+            logger_charset="ascii", mapping_file="regexner_TOMES/mappings.txt", 
+            tags_to_override=["LOCATION", "ORGANIZATION", "PERSON"]):
         """ Sets instance attributes.
 
         Args:
             - host (str): The base host URL for the CoreNLP server.
             - port (int): The host's port on which to run the CoreNLP server.
             - chunk_size (int): The maximum string length to send to  at a time.
+            - logger_charset (str): Encoding used if an erroneous CoreNLP response needs to be
+            logged.
             - mapping_file (str): See "help(CoreNLP)" for more info.
             - tags_to_override (list): See "help(CoreNLP)" for more info.
             """
@@ -120,8 +131,9 @@ class TextToNLP():
         # set attributes.
         self.host = host
         self.port = port
-        self.url="{}:{}".format(host, port)
+        self.url = "{}:{}".format(host, port)
         self.chunk_size = chunk_size
+        self.logger_charset = logger_charset
         self.mapping_file = mapping_file
         self.tags_to_override = tags_to_override
 
@@ -129,7 +141,7 @@ class TextToNLP():
         self.corenlp = CoreNLP(self.url, self.mapping_file, self.tags_to_override)
 
 
-    def __chunk(def__get_ner):
+    def __get_ner_decorator(def__get_ner):
         """ A decorator for self.get_ner() that splits text into chunks if the string passed
         to self.get_ner() exceeds self.chunk_size in length. 
         
@@ -138,14 +150,24 @@ class TextToNLP():
 
         Returns:
             function: The return value.
+
+        Raises:
+            - TypeError: If @text passed to get_ner() is not a string.
         """
 
-        def chunk(self, text):
+        def wrapper(self, text):
 
             ner_results = []
             
+            # verify that @text is a string.
+            if not isinstance(text, str):
+                msg = "Argument @text must be a string, got '{}' instead.".format(
+                        type(text).__name__)
+                raise TypeError(msg)
+
             # if needed, break @text into smaller chunks.
             if len(text) > self.chunk_size:
+                self.logger.debug("@text exceeds chunk size of: {}.".format(self.chunk_size))
                 wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
                         break_on_hyphens=False, drop_whitespace=False, 
                         replace_whitespace=False) 
@@ -154,17 +176,21 @@ class TextToNLP():
                 text_list = [text]
 
             # get NER tags for each item and add results to @ner.
+            i = 1
+            total_chunks = len(text_list)
             for text_chunk in text_list:
-                print("\nchunk: ", repr(text_chunk)) # TEST
+                self.logger.debug("Getting NER tags for chunk {} of {}.".format(i, 
+                    total_chunks))
                 tokenized_tagged = def__get_ner(self, text_chunk)
                 ner_results += tokenized_tagged
+                i += 1
 
             return ner_results
 
-        return chunk
+        return wrapper
 
 
-    @__chunk
+    @__get_ner_decorator
     def get_ner(self, text):
         """ Performs tokenization and NER tagging on @text.
         
@@ -178,7 +204,7 @@ class TextToNLP():
             tag value and the trailing whitespace chracter, respectively. All items are 
             strings.
         """
-        
+  
         # prepare output containers.
         output = []
 
@@ -189,32 +215,33 @@ class TextToNLP():
         results = {}
         try:
             results = self.corenlp.annotate(text)
-            print("results: ", results) # TEST
         except (TypeError, self.corenlp.Connection_Error) as e:
             self.logger.error(e)
             return failed_output
 
-        # ensure @results is correct data type.
+        # ensure @results is correct data type, otherwise return.
         if not isinstance(results, dict):
+            results_err = results.encode(self.logger_charset, errors="ignore").decode()
             self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary.".format(
                 type(results).__name__))
+            self.logger.debug("CoreNLP response: {}".format(results_err))
             return failed_output
-        
-        # verify @results contains required key.
+
+        # verify @results contains required key, otherwise return.
         if "sentences" not in results:
+            results_err = str(results).encode(self.logger_charset, errors="ignore").decode()
             self.logger.warning("CoreNLP response is missing required field 'sentences'.")
+            self.logger.debug("CoreNLP response: {}".format(results_err))
             return failed_output
 
         # loop through data; append necessary values to @ner.
         sentences = results["sentences"]
 
         if sentences == []:
-            output.append((text, "", ""))
+            output.append(("", "", text))
             return output
 
         for sentence in sentences:
-
-            print("sentence: ", type(sentence)) # TEST
 
             # verify @sentence contains required key.
             if "tokens" not in sentence:
@@ -237,7 +264,7 @@ class TextToNLP():
                 except KeyError as e:
                     self.logger.error(e)
                     self.logger.warning("Token data not found; nothing to append to output.")
-                    #continue
+                    continue
                 
                 # overwrite CoreNLP's use of "O" for a null NER tag.
                 if tag == "O":
@@ -252,12 +279,11 @@ class TextToNLP():
 
 if __name__ == "__main__":
 
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.DEBUG)
     t2n = TextToNLP(port=9003, chunk_size=1)
-    s = "Jane\n\t\r"
+    s = "Jack Jill\n\t\rpail"
+    #s = None
     print(repr(s))
-    print()
     res = t2n.get_ner(s)
-    for r in res:
-        print(r)
+    print(res)
 
