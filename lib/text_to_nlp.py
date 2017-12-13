@@ -10,8 +10,6 @@ Todo:
         is returned regardless of what happens. So we could lose data, but it shouldn't break
         the workflow.
     * Remove __main__ test snippet when ready.
-    * Proofread docstrings.
-        - classmethod for _encode*()?
 """
 
 # import modules.
@@ -41,7 +39,7 @@ class CoreNLP():
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.NullHandler())
 
-        # suppress third party logging that is not at least a warning.
+        # suppress third party logging that is not a warning or higher.
         # per: https://stackoverflow.com/a/11029841
         logging.getLogger("requests").setLevel(logging.WARNING)
         logging.getLogger("urllib3").setLevel(logging.WARNING)
@@ -78,7 +76,7 @@ class CoreNLP():
 
         Raises:
             - TypeError: If @text is not a string.
-            - self.Connection_Error: If pycorenlp cannot connect to the CoreNLP server.
+            - self.Connection_Error: If pycorenlp can't connect to the CoreNLP server.
         """
 
         # verify that @text is a string.
@@ -92,7 +90,7 @@ class CoreNLP():
             results = self.nlp.annotate(text, properties=self.options)
             return results
         except Exception as err:
-            msg = "Unable to connect to CoreNLP at: {}".format(self.url)
+            msg = "Can't connect to CoreNLP at: {}".format(self.url)
             raise self.Connection_Error(msg)
 
 
@@ -112,9 +110,9 @@ class TextToNLP():
         """ Sets instance attributes.
 
         Args:
-            - host (str): The base host URL for the CoreNLP server.
-            - port (int): The host's port on which to run the CoreNLP server.
-            - chunk_size (int): The maximum string length to send to  at a time.
+            - host (str): The base URL for the CoreNLP server.
+            - port (int): The port on which to run the CoreNLP server.
+            - chunk_size (int): The maximum string length to send to CoreNLP at once.
             - mapping_file (str): See "help(CoreNLP)" for more info.
             - tags_to_override (list): See "help(CoreNLP)" for more info.
         """
@@ -135,15 +133,15 @@ class TextToNLP():
         self.corenlp = CoreNLP(self.url, self.mapping_file, self.tags_to_override)
 
 
-    def _encode_bad_response(self, response, charset="ascii", max_length=1):
+    def _encode_bad_response(self, response, charset="ascii", max_length=500):
         """ In the event CoreNLP returns an erroneous or unexpected @response; this function
-        can convert the @response to a string for logging purposes. The string will be encode
+        can convert that response to a string for logging purposes. The string will be encoded
         using @charset as the encoding. The returned value will be truncated if its length
         exceeds @max_length.
 
         Args:
-            response (str): The response value from CoreNLP.
-            charset (str): The character encoding to encode @response with.
+            response (str): The response from CoreNLP.
+            charset (str): The character encoding with which to encode @response.
             max_length (int): The maximum string length for the return value.
 
         Returns:
@@ -206,6 +204,7 @@ class TextToNLP():
             # get NER tags for each item and add results to @ner_output.
             i = 1
             total_chunks = len(text_list)
+            
             for text_chunk in text_list:
                 self.logger.debug("Getting NER tags for chunk {} of {}.".format(i, 
                     total_chunks))
@@ -235,8 +234,7 @@ class TextToNLP():
             list: The return value.
             The NER tagger results as a list of tuples.
             The first item in the tuple is a token. The second and third items are the NER 
-            tag value and the trailing whitespace chracter, respectively. All items are 
-            strings.
+            tag value and the trailing whitespace, respectively. All items are strings.
         """
   
         # prepare output container.
@@ -250,7 +248,7 @@ class TextToNLP():
             self.logger.error(err)
             return []
 
-        # ensure @results is correct data type, otherwise return.
+        # ensure @results is correct data type.
         if not isinstance(results, dict):
             self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary; \
                     falling back to empty output.".format(type(results).__name__))
@@ -258,7 +256,7 @@ class TextToNLP():
             self.logger.debug("CoreNLP response: {}".format(results_err))
             return []
         
-        # verify @results contains required key, otherwise return.
+        # verify @results contains required key.
         if "sentences" not in results:
             self.logger.warning("CoreNLP response is missing required field 'sentences'; \
                      falling back to empty output.")
@@ -269,7 +267,7 @@ class TextToNLP():
         # get values to loop through.
         sentences = results["sentences"]
 
-        # if @sentences is null; return tuple with @text value as last item.
+        # if @sentences is null, return tuple with @text value as last item.
         # Why? It appears CoreNLP will return a null when asked to tag only whitespace.
         if sentences == []:
             ner_output.append(("", "", text))
@@ -293,7 +291,7 @@ class TextToNLP():
                 if text_key not in token:
                     text_key = "word"
 
-                # get values.
+                # get tuple values.
                 try:
                     text, tag, tspace = token[text_key], token["ner"], token["after"]
                 except KeyError as err:
