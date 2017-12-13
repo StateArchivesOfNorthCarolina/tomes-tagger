@@ -9,6 +9,9 @@ Todo:
         - Nitin update: this new version of text_to_nlp is really trying to guarantee a list
         is returned regardless of what happens. So we could lose data, but it shouldn't break
         the workflow.
+    * Remove __main__ test snippet when ready.
+    * Proofread docstrings.
+        - classmethod for _encode*()?
 """
 
 # import modules.
@@ -88,7 +91,7 @@ class CoreNLP():
         try:
             results = self.nlp.annotate(text, properties=self.options)
             return results
-        except Exception as e:
+        except Exception as err:
             msg = "Unable to connect to CoreNLP at: {}".format(self.url)
             raise self.Connection_Error(msg)
 
@@ -114,7 +117,7 @@ class TextToNLP():
             - chunk_size (int): The maximum string length to send to  at a time.
             - mapping_file (str): See "help(CoreNLP)" for more info.
             - tags_to_override (list): See "help(CoreNLP)" for more info.
-            """
+        """
         
         # set logger; suppress logging by default. 
         self.logger = logging.getLogger(__name__)
@@ -132,13 +135,14 @@ class TextToNLP():
         self.corenlp = CoreNLP(self.url, self.mapping_file, self.tags_to_override)
 
 
-    def _encode_bad_response(self, response, charset="ascii", max_length=500):
-        """ In the event CoreNLP resturns an erroroneous @response; this function will convert
-        the @response to a string using @charset as the encoding. The returned value wil be
-        truncated if its length exceeds @max_length.
+    def _encode_bad_response(self, response, charset="ascii", max_length=1):
+        """ In the event CoreNLP returns an erroneous or unexpected @response; this function
+        can convert the @response to a string for logging purposes. The string will be encode
+        using @charset as the encoding. The returned value will be truncated if its length
+        exceeds @max_length.
 
         Args:
-            response (str): The erroneous response from CoreNLP.
+            response (str): The response value from CoreNLP.
             charset (str): The character encoding to encode @response with.
             max_length (int): The maximum string length for the return value.
 
@@ -194,8 +198,8 @@ class TextToNLP():
                         break_on_hyphens=False, drop_whitespace=False, 
                         replace_whitespace=False) 
                     text_list = wrapper.wrap(text)
-                except Exception as e:
-                    self.logger.error(e)
+                except Exception as err:
+                    self.logger.error(err)
                     self.logger.error("Failed to chunk text; falling back to empty output.")
                     return []
 
@@ -207,8 +211,8 @@ class TextToNLP():
                     total_chunks))
                 try:
                     tokenized_tagged = def__get_ner(self, text_chunk)
-                except Exception as e:
-                    self.logger.error(e)
+                except Exception as err:
+                    self.logger.error(err)
                     self.logger.error("Failed to get NER tags for chunk; fallign back to \
                             empty output for chunk.")
                     tokenized_tagged = []
@@ -242,8 +246,8 @@ class TextToNLP():
         results = {}
         try:
             results = self.corenlp.annotate(text)
-        except (TypeError, self.corenlp.Connection_Error) as e:
-            self.logger.error(e)
+        except (TypeError, self.corenlp.Connection_Error) as err:
+            self.logger.error(err)
             return []
 
         # ensure @results is correct data type, otherwise return.
@@ -253,7 +257,7 @@ class TextToNLP():
             results_err = self._encode_bad_response(results)
             self.logger.debug("CoreNLP response: {}".format(results_err))
             return []
-
+        
         # verify @results contains required key, otherwise return.
         if "sentences" not in results:
             self.logger.warning("CoreNLP response is missing required field 'sentences'; \
@@ -292,8 +296,8 @@ class TextToNLP():
                 # get values.
                 try:
                     text, tag, tspace = token[text_key], token["ner"], token["after"]
-                except KeyError as e:
-                    self.logger.error(e)
+                except KeyError as err:
+                    self.logger.error(err)
                     self.logger.warning("Token data not found; nothing to append to output.")
                     continue
                 
@@ -311,10 +315,11 @@ class TextToNLP():
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
-    t2n = TextToNLP(port=9003, chunk_size=25)
+    t2n = TextToNLP(port=9003, chunk_size=5)
     s = "Jack Jill\n\t\rpail"
     #s = None
     print(repr(s))
     res = t2n.get_ner(s)
-    print(res)
+    for r in res:
+        print(r)
 

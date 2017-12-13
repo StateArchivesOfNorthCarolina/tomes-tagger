@@ -197,9 +197,8 @@ class HTMLToText():
         try:
             cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
             text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
-        except FileNotFoundError as e:
-            print(e)
-            self.logger.error(e)
+        except FileNotFoundError as err:
+            self.logger.error(err)
             self.logger.error(html)
 
         # return stdout.

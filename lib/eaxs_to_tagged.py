@@ -220,8 +220,8 @@ class EAXSToTagged():
                 nsmap=self.ns_map)
         try:
             tagged_content_el.text = etree.CDATA(tagged_content)
-        except ValueError as e:
-            self.logger.error(e)
+        except ValueError as err:
+            self.logger.error(err)
             self.logger.error("Attempting to clean the message.")
             tagged_content_el.text = etree.CDATA(self.remove_bad_characters(tagged_content))
         single_body_el.append(tagged_content_el)
