@@ -5,16 +5,10 @@ given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp
 (https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly.
 
 Todo:
-    * Add logging to CoreNLP()???
-    * You still need a try/except around each chunk attempt in the decorator.
-    * If we have to log a response, should we limit the length of what we return (to reduce
-    excessive logging)?
-        - It's probably better to have a private function you can pass the repsonse to. I 
-        don't like how I'm encoding/decoding under two separate conditions.
     * Jeremy asks "What is a sane return that won't break the workflow or can we fix?
-        - I think is specific if a dict isn't returned, but also points to some server
-        timeout, etc. This might be where we need to maintain a running list of problem
-        message ids.
+        - Nitin update: this new version of text_to_nlp is really trying to guarantee a list
+        is returned regardless of what happens. So we could lose data, but it shouldn't break
+        the workflow.
 """
 
 # import modules.
@@ -44,7 +38,7 @@ class CoreNLP():
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.NullHandler())
 
-        # suppress "requests" module's logging if below a warning.
+        # suppress third party logging that is not at least a warning.
         # per: https://stackoverflow.com/a/11029841
         logging.getLogger("requests").setLevel(logging.WARNING)
         logging.getLogger("urllib3").setLevel(logging.WARNING)
@@ -109,17 +103,15 @@ class TextToNLP():
     Stanford's CoreNLP. """
 
 
-    def __init__(self, host="http://localhost", port=9003, chunk_size=50000,
-            logger_charset="ascii", mapping_file="regexner_TOMES/mappings.txt", 
-            tags_to_override=["LOCATION", "ORGANIZATION", "PERSON"]):
+    def __init__(self, host="http://localhost", port=9003, chunk_size=50000, 
+            mapping_file="regexner_TOMES/mappings.txt", tags_to_override=["LOCATION", 
+                "ORGANIZATION", "PERSON"]):
         """ Sets instance attributes.
 
         Args:
             - host (str): The base host URL for the CoreNLP server.
             - port (int): The host's port on which to run the CoreNLP server.
             - chunk_size (int): The maximum string length to send to  at a time.
-            - logger_charset (str): Encoding used if an erroneous CoreNLP response needs to be
-            logged.
             - mapping_file (str): See "help(CoreNLP)" for more info.
             - tags_to_override (list): See "help(CoreNLP)" for more info.
             """
@@ -133,7 +125,6 @@ class TextToNLP():
         self.port = port
         self.url = "{}:{}".format(host, port)
         self.chunk_size = chunk_size
-        self.logger_charset = logger_charset
         self.mapping_file = mapping_file
         self.tags_to_override = tags_to_override
 
@@ -141,7 +132,35 @@ class TextToNLP():
         self.corenlp = CoreNLP(self.url, self.mapping_file, self.tags_to_override)
 
 
-    def __get_ner_decorator(def__get_ner):
+    def _encode_bad_response(self, response, charset="ascii", max_length=500):
+        """ In the event CoreNLP resturns an erroroneous @response; this function will convert
+        the @response to a string using @charset as the encoding. The returned value wil be
+        truncated if its length exceeds @max_length.
+
+        Args:
+            response (str): The erroneous response from CoreNLP.
+            charset (str): The character encoding to encode @response with.
+            max_length (int): The maximum string length for the return value.
+
+        Returns:
+            str: The return value.
+        """
+
+        # verify @response is a string; decode @response.
+        if not isinstance(response, str):
+            response = str(response)
+        response = response.encode(charset, errors="ignore").decode()
+        
+        # if needed, truncate @response.
+        if len(response) > max_length:
+            self.logger.debug("Response exceeds @max_length of '{}'; truncating.".format(
+                max_length))
+            response = response[:max_length] + " ..."
+
+        return response
+
+
+    def __chunk_ner_requests(def__get_ner):
         """ A decorator for self.get_ner() that splits text into chunks if the string passed
         to self.get_ner() exceeds self.chunk_size in length. 
         
@@ -155,9 +174,9 @@ class TextToNLP():
             - TypeError: If @text passed to get_ner() is not a string.
         """
 
-        def wrapper(self, text):
+        def chunker(self, text):
 
-            ner_results = []
+            ner_output = []
             
             # verify that @text is a string.
             if not isinstance(text, str):
@@ -166,31 +185,42 @@ class TextToNLP():
                 raise TypeError(msg)
 
             # if needed, break @text into smaller chunks.
-            if len(text) > self.chunk_size:
-                self.logger.debug("@text exceeds chunk size of: {}.".format(self.chunk_size))
-                wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
+            if len(text) <= self.chunk_size:
+                text_list = [text]
+            else:
+                self.logger.debug("@text exceeds chunk size of: {}".format(self.chunk_size))
+                try:
+                    wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
                         break_on_hyphens=False, drop_whitespace=False, 
                         replace_whitespace=False) 
-                text_list = wrapper.wrap(text)
-            else:
-                text_list = [text]
+                    text_list = wrapper.wrap(text)
+                except Exception as e:
+                    self.logger.error(e)
+                    self.logger.error("Failed to chunk text; falling back to empty output.")
+                    return []
 
-            # get NER tags for each item and add results to @ner.
+            # get NER tags for each item and add results to @ner_output.
             i = 1
             total_chunks = len(text_list)
             for text_chunk in text_list:
                 self.logger.debug("Getting NER tags for chunk {} of {}.".format(i, 
                     total_chunks))
-                tokenized_tagged = def__get_ner(self, text_chunk)
-                ner_results += tokenized_tagged
+                try:
+                    tokenized_tagged = def__get_ner(self, text_chunk)
+                except Exception as e:
+                    self.logger.error(e)
+                    self.logger.error("Failed to get NER tags for chunk; fallign back to \
+                            empty output for chunk.")
+                    tokenized_tagged = []
+                ner_output += tokenized_tagged
                 i += 1
 
-            return ner_results
+            return ner_output
 
-        return wrapper
+        return chunker
 
 
-    @__get_ner_decorator
+    @__chunk_ner_requests
     def get_ner(self, text):
         """ Performs tokenization and NER tagging on @text.
         
@@ -205,42 +235,43 @@ class TextToNLP():
             strings.
         """
   
-        # prepare output containers.
-        output = []
+        # prepare output container.
+        ner_output = []
 
-        # pre-prepare data to use during failures.
-        failed_output = []
-        
         # get NER tags.
         results = {}
         try:
             results = self.corenlp.annotate(text)
         except (TypeError, self.corenlp.Connection_Error) as e:
             self.logger.error(e)
-            return failed_output
+            return []
 
         # ensure @results is correct data type, otherwise return.
         if not isinstance(results, dict):
-            results_err = results.encode(self.logger_charset, errors="ignore").decode()
-            self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary.".format(
-                type(results).__name__))
+            self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary; \
+                    falling back to empty output.".format(type(results).__name__))
+            results_err = self._encode_bad_response(results)
             self.logger.debug("CoreNLP response: {}".format(results_err))
-            return failed_output
+            return []
 
         # verify @results contains required key, otherwise return.
         if "sentences" not in results:
-            results_err = str(results).encode(self.logger_charset, errors="ignore").decode()
-            self.logger.warning("CoreNLP response is missing required field 'sentences'.")
+            self.logger.warning("CoreNLP response is missing required field 'sentences'; \
+                     falling back to empty output.")
+            results_err = self._encode_bad_response(results)
             self.logger.debug("CoreNLP response: {}".format(results_err))
-            return failed_output
+            return []
 
-        # loop through data; append necessary values to @ner.
+        # get values to loop through.
         sentences = results["sentences"]
 
+        # if @sentences is null; return tuple with @text value as last item.
+        # Why? It appears CoreNLP will return a null when asked to tag only whitespace.
         if sentences == []:
-            output.append(("", "", text))
-            return output
+            ner_output.append(("", "", text))
+            return ner_output
 
+        # loop through data; append necessary values to @ner_output.
         for sentence in sentences:
 
             # verify @sentence contains required key.
@@ -270,17 +301,17 @@ class TextToNLP():
                 if tag == "O":
                     tag = ""
 
-                # append final values to @ner.
+                # append final values to @ner_output.
                 token_group = text, tag, tspace
-                output.append(token_group)
+                ner_output.append(token_group)
 
-        return output
+        return ner_output
 
 
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
-    t2n = TextToNLP(port=9003, chunk_size=1)
+    t2n = TextToNLP(port=9003, chunk_size=25)
     s = "Jack Jill\n\t\rpail"
     #s = None
     print(repr(s))
