@@ -162,7 +162,7 @@ class TextToNLP():
         return response
 
 
-    def __chunk_ner_requests(def__get_ner):
+    def __preprocess_ner_requests(def__get_ner):
         """ A decorator for self.get_ner() that splits text into chunks if the string passed
         to self.get_ner() exceeds self.chunk_size in length. 
         
@@ -176,21 +176,22 @@ class TextToNLP():
             - TypeError: If @text passed to get_ner() is not a string.
         """
 
-        def chunker(self, text):
+        def preprocessor(self, text):
 
+            # prepare output container.
             ner_output = []
             
             # verify that @text is a string.
             if not isinstance(text, str):
-                msg = "Argument @text must be a string, got '{}' instead.".format(
-                        type(text).__name__)
+                kind = type(text).__name__
+                msg = "Argument @text must be a string, got '{}' instead.".format(kind)
                 raise TypeError(msg)
 
             # if needed, break @text into smaller chunks.
             if len(text) <= self.chunk_size:
                 text_list = [text]
             else:
-                self.logger.debug("@text exceeds chunk size of: {}".format(self.chunk_size))
+                self.logger.info("Text exceeds chunk size of: {}".format(self.chunk_size))
                 try:
                     wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
                         break_on_hyphens=False, drop_whitespace=False, 
@@ -206,7 +207,7 @@ class TextToNLP():
             total_chunks = len(text_list)
             
             for text_chunk in text_list:
-                self.logger.debug("Getting NER tags for chunk {} of {}.".format(i, 
+                self.logger.info("Getting NER tags for chunk {} of {}.".format(i, 
                     total_chunks))
                 try:
                     tokenized_tagged = def__get_ner(self, text_chunk)
@@ -220,10 +221,10 @@ class TextToNLP():
 
             return ner_output
 
-        return chunker
+        return preprocessor
 
 
-    @__chunk_ner_requests
+    @__preprocess_ner_requests
     def get_ner(self, text):
         """ Performs tokenization and NER tagging on @text.
         
@@ -244,8 +245,10 @@ class TextToNLP():
         results = {}
         try:
             results = self.corenlp.annotate(text)
-        except (TypeError, self.corenlp.Connection_Error) as err:
+        except self.corenlp.Connection_Error as err:
             self.logger.error(err)
+            self.logger.warning("CoreNLP did not return a response; falling back to empty \
+                    output.")
             return []
 
         # ensure @results is correct data type.
@@ -318,6 +321,5 @@ if __name__ == "__main__":
     #s = None
     print(repr(s))
     res = t2n.get_ner(s)
-    for r in res:
-        print(r)
+    print(res)
 
