@@ -183,9 +183,10 @@ class TextToNLP():
             
             # verify that @text is a string.
             if not isinstance(text, str):
-                kind = type(text).__name__
-                msg = "Argument @text must be a string, got '{}' instead.".format(kind)
-                raise TypeError(msg)
+                self.logger.error("Argument @text must be a string, got: {}".format(
+                    type(text).__name__))
+                self.logger.warning("Falling  back to empty output.")
+                return []
 
             # if needed, break @text into smaller chunks.
             if len(text) <= self.chunk_size:
@@ -194,12 +195,13 @@ class TextToNLP():
                 self.logger.info("Text exceeds chunk size of: {}".format(self.chunk_size))
                 try:
                     wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
-                        break_on_hyphens=False, drop_whitespace=False, 
+                        break_on_hyphens=False, drop_whitespace=False, expand_tabs=False, 
                         replace_whitespace=False) 
                     text_list = wrapper.wrap(text)
                 except Exception as err:
                     self.logger.error(err)
-                    self.logger.error("Failed to chunk text; falling back to empty output.")
+                    self.logger.error("Failed to chunk text.")
+                    self.logger.warning("Falling back to empty output.")
                     return []
 
             # get NER tags for each item and add results to @ner_output.
@@ -213,8 +215,8 @@ class TextToNLP():
                     tokenized_tagged = def__get_ner(self, text_chunk)
                 except Exception as err:
                     self.logger.error(err)
-                    self.logger.error("Failed to get NER tags for chunk; fallign back to \
-                            empty output for chunk.")
+                    self.logger.error("Failed to get NER tags for chunk.")
+                    self.logger.warning("Fallign back to empty output for chunk.")
                     tokenized_tagged = []
                 ner_output += tokenized_tagged
                 i += 1
@@ -247,22 +249,22 @@ class TextToNLP():
             results = self.corenlp.annotate(text)
         except self.corenlp.Connection_Error as err:
             self.logger.error(err)
-            self.logger.warning("CoreNLP did not return a response; falling back to empty \
-                    output.")
+            self.logger.warning("Falling back to empty output.")
             return []
 
         # ensure @results is correct data type.
         if not isinstance(results, dict):
-            self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary; \
-                    falling back to empty output.".format(type(results).__name__))
+            self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary.".format(
+                type(results).__name__))
+            self.logger.warning("Falling back to empty output.")
             results_err = self._encode_bad_response(results)
             self.logger.debug("CoreNLP response: {}".format(results_err))
             return []
-        
+
         # verify @results contains required key.
         if "sentences" not in results:
-            self.logger.warning("CoreNLP response is missing required field 'sentences'; \
-                     falling back to empty output.")
+            self.logger.warning("CoreNLP response is missing required field 'sentences'.")
+            self.logger.warning("Falling back to empty output.")
             results_err = self._encode_bad_response(results)
             self.logger.debug("CoreNLP response: {}".format(results_err))
             return []

@@ -57,7 +57,7 @@ class NLPToXML():
         return (authority, ner_tag)
 
 
-    def validate(self, xdoc):
+    def validate_xml(self, xdoc):
         """ Determines if @xdoc is valid or not per the tagged EAXS schema file 
         @self.xsd_file.
 
@@ -75,12 +75,14 @@ class NLPToXML():
         return is_valid
 
 
-    def xml(self, jdict, validate=False):
+    def get_xml(self, ner_data, validate=False):
         """ Converts CoreNLP JSON to lxml.etree._Element per the tagged EAXS schema for body
         content.
         
         Args:
-            - jdict (dict): CoreNLP output to convert to XML.
+            - ner_data (list): The NER data to convert to XML. Each item in the list is 
+            expected to be a tuple with three string values: a text token, its NER tag, and 
+            its trailing space.
             - validate (bool): If True, the resultant lxml.etree._Element will be validated 
             against @self.xsd_file. If False, no validation is attempted.
 
@@ -88,7 +90,7 @@ class NLPToXML():
             lxml.etree._Element: The return value.
         """
 
-        self.logger.info("Converting CoreNLP JSON to tagged EAXS schema.")
+        self.logger.info("Converting NER list to an XML 'tagged' message.")
 
         # create root element.
         tagged_el = etree.Element("{" + self.ns_uri + "}Tokens",
@@ -97,61 +99,42 @@ class NLPToXML():
         
         # start tracking NER tag groups.
         tag_group = 0
-        current_ner = ""
+        current_tag = None
 
-        # ensure CoreNLP JSON has required field.
-        # TODO: There is a lot that can go wrong here with little reporting. We are assuming clean input at this point.
-        sentences = []  # Fixes reference before assignment, but we need to check this out.
-        try:
-            sentences = jdict["sentences"]
-        except KeyError:
-            self.logger.error("Required JSON field 'sentences' not found.")
-            self.logger.debug("CoreNLP JSON: {}".format(jdict))
-        except TypeError as te:
-            self.logger.error(te)
+        # iterate through @ner_data; append sub-elements to root.
+        if len(ner_data) == 0:
+            # TODO: What do we do if sentences not populated?
+            #self.logger.error("???")
+            print("list is empty.") # TEMP!!!
 
-        # iterate through tokens; append sub-elements to root.
-        if len(sentences) == 0:
-            # TODO: What do we do if sentences not populated
-            pass
-
-        for sentence in sentences:
+        for token_group in ner_data:
             
-            tokens = sentence["tokens"]
-            for token in tokens:
-                
-                # get required values.
-                try:
-                    originalText = token["originalText"]
-                except KeyError:
-                    originalText = token["word"]
-                after = token["after"]
-                ner = token["ner"]
+            text, tag, tspace = token_group
 
-                # if new tag, set new current tag and increase group value.
-                if ner != current_ner:
-                    current_ner = ner
-                    if ner != "O":
-                        tag_group += 1
+            # if new tag, set new current tag and increase group value.
+            if tag != current_tag:
+                current_tag = tag
+                if tag != "":
+                    tag_group += 1
+        
+            # create sub-element.
+            token_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}Token",
+                    nsmap=self.ns_map)
             
-                # create sub-element.
-                token_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}Token",
-                        nsmap=self.ns_map)
-                
-                # if NER tag exists, add attributes.
-                if ner != "O":
-                    tag_authority, tag_value = self._split_authority(ner)
-                    token_el.set("entity", tag_value)
-                    token_el.set("authority", tag_authority)
-                    token_el.set("group", str(tag_group))
-                
-                # set text and append whitespace.
-                token_el.text = originalText
-                token_el.tail = after
+            # if NER tag exists, add attributes.
+            if tag != "":
+                tag_authority, tag_value = self._split_authority(tag)
+                token_el.set("entity", tag_value)
+                token_el.set("authority", tag_authority)
+                token_el.set("group", str(tag_group))
+            
+            # set text and append whitespace.
+            token_el.text = text
+            token_el.tail = tspace
 
         # if requested, validate tagged message.
         if validate:
-            is_valid = self.validate(tagged_el) 
+            is_valid = self.validate_xml(tagged_el) 
             if not is_valid:
                 self.logger.warning("Tagged message XML is not valid per '{}'.".format(
                     self.xsd.file))
@@ -160,5 +143,17 @@ class NLPToXML():
 
 
 if __name__ == "__main__":
-    pass
+
+    from text_to_nlp import *
+    logging.basicConfig(level=logging.ERROR)
+    
+    t2n = TextToNLP(port=9003, chunk_size=10)
+    n2x = NLPToXML()
+
+    res = t2n.get_ner("Jack and Jill Singh went up a hill in:\t\nNorth Carolina.")
+    for i in res: print(i)
+    xml = n2x.get_xml(res)
+    xml = etree.tostring(xml).decode()
+    print(xml)
+
 
