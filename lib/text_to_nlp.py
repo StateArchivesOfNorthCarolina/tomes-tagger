@@ -9,6 +9,7 @@ Todo:
         - Nitin update: this new version of text_to_nlp is really trying to guarantee a list
         is returned regardless of what happens. So we could lose data, but it shouldn't break
         the workflow.
+    * Update docstring for __process_ner_requests() because it now calls _get_outer_space().
     * Remove __main__ test snippet when ready.
 """
 
@@ -133,6 +134,35 @@ class TextToNLP():
         self.corenlp = CoreNLP(self.url, self.mapping_file, self.tags_to_override)
 
 
+    @staticmethod
+    def _get_outer_space(text):
+        """ Returns the leading and trailing whitespace for a given @text. 
+        
+        Args:
+            text (str): The string from which to extract leading and trailing whitespace.
+            
+        Returns:
+            tuple: The return value.
+            The first item is @text's leading whitespace.
+            The second item is @text's trailing whitespace.
+        """
+
+        # assume values.
+        leading_space, trailing_space = "", ""
+
+        # get length of leading and trailing whitespace.
+        leading_distance = len(text) - len(text.lstrip())
+        trailing_distance = len(text) - len(text.rstrip())
+
+        # if leading or trailing space exists, update return values.
+        if leading_distance > 0:
+            leading_space = text[:leading_distance]
+        if trailing_distance > 0:
+            trailing_space = text[-trailing_distance:]
+
+        return (leading_space, trailing_space)
+
+
     def _encode_bad_response(self, response, charset="ascii", max_length=500):
         """ In the event CoreNLP returns an erroneous or unexpected @response; this function
         can convert that response to a string for logging purposes. The string will be encoded
@@ -162,7 +192,7 @@ class TextToNLP():
         return response
 
 
-    def __preprocess_ner_requests(def__get_ner):
+    def __process_ner_requests(def__get_ner):
         """ A decorator for self.get_ner() that splits text into chunks if the string passed
         to self.get_ner() exceeds self.chunk_size in length. 
         
@@ -176,7 +206,7 @@ class TextToNLP():
             - TypeError: If @text passed to get_ner() is not a string.
         """
 
-        def preprocessor(self, text):
+        def processor(self, text):
 
             # prepare output container.
             ner_output = []
@@ -195,7 +225,7 @@ class TextToNLP():
                 self.logger.info("Text exceeds chunk size of: {}".format(self.chunk_size))
                 try:
                     wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
-                        break_on_hyphens=False, drop_whitespace=False, expand_tabs=False, 
+                        break_on_hyphens=False, drop_whitespace=False, 
                         replace_whitespace=False) 
                     text_list = wrapper.wrap(text)
                 except Exception as err:
@@ -218,15 +248,23 @@ class TextToNLP():
                     self.logger.error("Failed to get NER tags for chunk.")
                     self.logger.warning("Fallign back to empty output for chunk.")
                     tokenized_tagged = []
+                
+                # ???
+                leading_space, trailing_space = self._get_outer_space(text_chunk)
+                if leading_space != "":
+                    ner_output += [("", "", leading_space)]
                 ner_output += tokenized_tagged
+                if trailing_space != "":
+                    ner_output += [("", "", trailing_space)]
+                
                 i += 1
 
             return ner_output
 
-        return preprocessor
+        return processor
 
 
-    @__preprocess_ner_requests
+    @__process_ner_requests
     def get_ner(self, text):
         """ Performs tokenization and NER tagging on @text.
         

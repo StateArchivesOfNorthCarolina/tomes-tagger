@@ -111,6 +111,11 @@ class NLPToXML():
             
             text, tag, tspace = token_group
 
+            if text == "":
+                # not a token but rather whitespace.
+                # TODO: add space to the tree but don't create a <Token> element.
+                pass
+
             # if new tag, set new current tag and increase group value.
             if tag != current_tag:
                 current_tag = tag
@@ -150,7 +155,7 @@ if __name__ == "__main__":
     t2n = TextToNLP(port=9003, chunk_size=10)
     n2x = NLPToXML()
 
-    res = t2n.get_ner("Jack and Jill Singh went up a hill in:\t\nNorth Carolina.")
+    res = t2n.get_ner("Jack and Jill Singh went up a hill in:   North Carolina.")
     for i in res: print(i)
     xml = n2x.get_xml(res)
     xml = etree.tostring(xml).decode()
