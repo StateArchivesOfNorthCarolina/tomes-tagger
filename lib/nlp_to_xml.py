@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-""" This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema. """
+""" This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema. 
+
+Todo:
+    * Add report on if all tokens were just whitespace, so we'll know it's not useful.
+"""
 
 # import modules.
 import codecs
@@ -101,39 +105,38 @@ class NLPToXML():
         tag_group = 0
         current_tag = None
 
-        # iterate through @ner_data; append sub-elements to root.
+        # verify that @ner_data is not empty.
         if len(ner_data) == 0:
-            # TODO: What do we do if sentences not populated?
-            #self.logger.error("???")
-            print("list is empty.") # TEMP!!!
+            self.logger.warning("NER tag data is empty; XML output will be empty as well.")
 
+        # iterate through @ner_data; append sub-elements to root.
         for token_group in ner_data:
             
             text, tag, tspace = token_group
 
+            # if @token_group is a placeholder for whitespace, add comment to XML output.
             if text == "":
-                # not a token but rather whitespace.
-                # TODO: add space to the tree but don't create a <Token> element.
-                pass
+                cmt = "Following empty 'Token' element serves to preserve whitespace."
+                tagged_el.append(etree.Comment(cmt))
 
-            # if new tag, set new current tag and increase group value.
+            # if @tag is new, set new @current_tag value and increase group value.
             if tag != current_tag:
                 current_tag = tag
                 if tag != "":
                     tag_group += 1
         
-            # create sub-element.
+            # create sub-element for token.
             token_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}Token",
                     nsmap=self.ns_map)
             
-            # if NER tag exists, add attributes.
+            # if NER tag exists, add attributes to token sub-element.
             if tag != "":
                 tag_authority, tag_value = self._split_authority(tag)
                 token_el.set("entity", tag_value)
                 token_el.set("authority", tag_authority)
                 token_el.set("group", str(tag_group))
             
-            # set text and append whitespace.
+            # set token sub-element's text value and append whitespace.
             token_el.text = text
             token_el.tail = tspace
 
@@ -150,12 +153,16 @@ class NLPToXML():
 if __name__ == "__main__":
 
     from text_to_nlp import *
-    logging.basicConfig(level=logging.ERROR)
+    logging.basicConfig(level=logging.DEBUG)
     
-    t2n = TextToNLP(port=9003, chunk_size=10)
+    t2n = TextToNLP(port=9003, chunk_size=5)
     n2x = NLPToXML()
 
-    res = t2n.get_ner("Jack and Jill Singh went up a hill in:   North Carolina.")
+    
+    s = "Jack Jill\n\t\rpail"
+    #s = "Jack and Jill Singh went up a hill in:   North Carolina."
+    s = " \n\n\t\t\r\r"
+    res = t2n.get_ner(s)
     for i in res: print(i)
     xml = n2x.get_xml(res)
     xml = etree.tostring(xml).decode()
