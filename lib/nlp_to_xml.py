@@ -110,7 +110,7 @@ class NLPToXML():
             
             text, tag, tspace = token_group
 
-            # add pure whitespace tuples to tree and continue.
+            # add pure whitespace to tree and continue.
             if text == "":
             
                 # append space to previous child; otherwise fall back to new element.
