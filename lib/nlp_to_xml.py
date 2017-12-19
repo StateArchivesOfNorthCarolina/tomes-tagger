@@ -110,9 +110,10 @@ class NLPToXML():
             
             text, tag, tspace = token_group
 
-            # if @token_group is a placeholder for whitespace, append space to last child 
-            # element in current tree, otherwise place it within a new <BlockText> element.
+            # add pure whitespace tuples to tree and continue.
             if text == "":
+            
+                # append space to previous child; otherwise fall back to new element.
                 children = tagged_el.getchildren()
                 if len(children) != 0:
                     children[-1].tail += tspace
@@ -162,7 +163,7 @@ if __name__ == "__main__":
     n2x = NLPToXML()
 
     s = "Jack Jill\n\t\rpail"
-    s = "\nJack and Jill Singh went up a hill in:   North Carolina.\r"
+    s = "\nJack and Jill \t\t\t\t\t\tSingh went up a hill in:   North Carolina.\r"
     #s = " \n\n\t\t\r\r" + s
     res = t2n.get_ner(s)
     for i in res: 
