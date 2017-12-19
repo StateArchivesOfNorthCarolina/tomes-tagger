@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-""" This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema. 
-
-Todo:
-    * Add report on if all tokens were just whitespace, so we'll know it's not useful.
-"""
+""" This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema. """
 
 # import modules.
 import codecs
@@ -114,10 +110,17 @@ class NLPToXML():
             
             text, tag, tspace = token_group
 
-            # if @token_group is a placeholder for whitespace, add comment to XML output.
+            # if @token_group is a placeholder for whitespace, append space to last child 
+            # element in current tree, otherwise place it within a new <BlockText> element.
             if text == "":
-                cmt = "Following empty 'Token' element serves to preserve whitespace."
-                tagged_el.append(etree.Comment(cmt))
+                children = tagged_el.getchildren()
+                if len(children) != 0:
+                    children[-1].tail += tspace
+                else:
+                    block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
+                            nsmap=self.ns_map)
+                    block_el.text = tspace
+                continue
 
             # if @tag is new, set new @current_tag value and increase group value.
             if tag != current_tag:
@@ -158,12 +161,13 @@ if __name__ == "__main__":
     t2n = TextToNLP(port=9003, chunk_size=5)
     n2x = NLPToXML()
 
-    
     s = "Jack Jill\n\t\rpail"
-    #s = "Jack and Jill Singh went up a hill in:   North Carolina."
-    s = " \n\n\t\t\r\r"
+    s = "\nJack and Jill Singh went up a hill in:   North Carolina.\r"
+    #s = " \n\n\t\t\r\r" + s
     res = t2n.get_ner(s)
-    for i in res: print(i)
+    for i in res: 
+        print(i)
+    print()
     xml = n2x.get_xml(res)
     xml = etree.tostring(xml).decode()
     print(xml)
