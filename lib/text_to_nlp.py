@@ -9,7 +9,6 @@ Todo:
         - Nitin update: this new version of text_to_nlp is really trying to guarantee a list
         is returned regardless of what happens. So we could lose data, but it shouldn't break
         the workflow.
-    * Update docstring for __process_ner_requests() because it now calls _get_outer_space().
     * Remove __main__ test snippet when ready.
 """
 
@@ -143,8 +142,8 @@ class TextToNLP():
             
         Returns:
             tuple: The return value.
-            The first item is @text's leading whitespace.
-            The second item is @text's trailing whitespace.
+            The first item (str) is @text's leading whitespace.
+            The second item (str) is @text's trailing whitespace.
         """
 
         # assume values.
@@ -155,9 +154,9 @@ class TextToNLP():
         trailing_distance = len(text) - len(text.rstrip())
 
         # if leading or trailing space exists, update return values.
-        if leading_distance > 0:
+        if leading_distance > 0 and leading_distance < len(text):
             leading_space = text[:leading_distance]
-        if trailing_distance > 0:
+        if trailing_distance > 0 and trailing_distance < len(text):
             trailing_space = text[-trailing_distance:]
 
         return (leading_space, trailing_space)
@@ -194,7 +193,7 @@ class TextToNLP():
 
     def __process_ner_requests(def__get_ner):
         """ A decorator for self.get_ner() that splits text into chunks if the string passed
-        to self.get_ner() exceeds self.chunk_size in length. 
+        to self.get_ner() exceeds self.chunk_size in length.
         
         Args:
             - def__get_ner (function): An alias intended for self.get_ner().
@@ -203,7 +202,7 @@ class TextToNLP():
             function: The return value.
 
         Raises:
-            - TypeError: If @text passed to get_ner() is not a string.
+            - TypeError: If @text passed to self.get_ner() is not a string.
         """
 
         def processor(self, text):
@@ -226,7 +225,7 @@ class TextToNLP():
                 try:
                     wrapper = TextWrapper(width=self.chunk_size, break_long_words=False, 
                         break_on_hyphens=False, drop_whitespace=False, 
-                        replace_whitespace=False) 
+                        replace_whitespace=False)
                     text_list = wrapper.wrap(text)
                 except Exception as err:
                     self.logger.error(err)
@@ -234,7 +233,7 @@ class TextToNLP():
                     self.logger.warning("Falling back to empty output.")
                     return []
 
-            # get NER tags for each item and add results to @ner_output.
+            # get NER tags for each item in @text_list.
             i = 1
             total_chunks = len(text_list)
             
@@ -246,17 +245,23 @@ class TextToNLP():
                 except Exception as err:
                     self.logger.error(err)
                     self.logger.error("Failed to get NER tags for chunk.")
-                    self.logger.warning("Fallign back to empty output for chunk.")
+                    self.logger.warning("Falling back to empty output for chunk.")
                     tokenized_tagged = []
                 
-                # ???
-                leading_space, trailing_space = self._get_outer_space(text_chunk)
-                if leading_space != "":
-                    ner_output += [("", "", leading_space)]
-                ner_output += tokenized_tagged
-                if trailing_space != "":
-                    ner_output += [("", "", trailing_space)]
-                
+                # if @tokenized_tagged is not empty, append it to @ner_output.
+                # if needed, also append orphaned whitespace before/after.
+                if len(tokenized_tagged) != 0:
+
+                    leading_space, trailing_space = self._get_outer_space(text_chunk)
+                    
+                    if leading_space != "":
+                        ner_output += [("", "", leading_space)]
+                    
+                    ner_output += tokenized_tagged
+                    
+                    if trailing_space != "":
+                        ner_output += [("", "", trailing_space)]
+                    
                 i += 1
 
             return ner_output
@@ -356,10 +361,10 @@ class TextToNLP():
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
-    t2n = TextToNLP(port=9003, chunk_size=5)
+    t2n = TextToNLP(port=9003, chunk_size=15)
     s = "Jack Jill\n\t\rpail"
     #s = None
+    #s= "\t\t\t\t\t\t\t"
     print(repr(s))
     res = t2n.get_ner(s)
     print(res)
-
