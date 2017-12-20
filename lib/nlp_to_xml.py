@@ -159,16 +159,17 @@ if __name__ == "__main__":
     from text_to_nlp import *
     logging.basicConfig(level=logging.DEBUG)
     
-    t2n = TextToNLP(port=9003, chunk_size=5)
+    t2n = TextToNLP(port=9003)
     n2x = NLPToXML()
 
-    s = "Jack Jill\n\t\rpail"
-    s = "\nJack and Jill \t\t\t\t\t\tSingh went up a hill in:   North Carolina.\r"
+    #s = "Jack Jill\n\t\rpail"
+    #s = "\nJack and Jill \t\t\t\t\t\tSingh went up a hill in:   North Carolina.\r"
     #s = " \n\n\t\t\r\r" + s
+    #s = "Free Sony DVD"
+    with open("MikeWard__choke_message.txt") as f:
+        s = f.read()
     res = t2n.get_ner(s)
-    for i in res: 
-        print(i)
-    print()
+    #for i in res: print(i)
     xml = n2x.get_xml(res)
     xml = etree.tostring(xml).decode()
     print(xml)

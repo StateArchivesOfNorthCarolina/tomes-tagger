@@ -9,6 +9,8 @@ Todo:
         - Nitin update: this new version of text_to_nlp is really trying to guarantee a list
         is returned regardless of what happens. So we could lose data, but it shouldn't break
         the workflow.
+    * Delete sutime/numeric classifier options. It doesn't help.
+    * Document tags_to_remove.
     * Remove __main__ test snippet when ready.
 """
 
@@ -49,7 +51,7 @@ class CoreNLP():
         self.mapping_file = mapping_file
         self.tags_to_override = tags_to_override
         self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
-        "ner.useSUTime": "false", "ner.applyNumericClassifiers": "false",
+        #"ner.useSUTime": "false", "ner.applyNumericClassifiers": "true",
         "outputFormat": "json"}
 
         # if specified, add option to use mapping file.
@@ -105,16 +107,20 @@ class TextToNLP():
 
 
     def __init__(self, host="http://localhost", port=9003, chunk_size=50000, 
-            mapping_file="regexner_TOMES/mappings.txt", tags_to_override=["LOCATION", 
-                "ORGANIZATION", "PERSON"]):
+            mapping_file="regexner_TOMES/mappings.txt", tags_to_override=["DATE", "DURATION",
+                "LOCATION", "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "ORGANIZATION", 
+                "PERCENT", "PERSON", "SET", "TIME"], tags_to_remove=["DATE", "DURATION",
+                    "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "PERCENT", "SET", "TIME"]):
         """ Sets instance attributes.
 
         Args:
             - host (str): The base URL for the CoreNLP server.
             - port (int): The port on which to run the CoreNLP server.
-            - chunk_size (int): The maximum string length to send to CoreNLP at once.
+            - chunk_size (int): The maximum string length to send to CoreNLP at once. Increase
+            it at your own risk.
             - mapping_file (str): See "help(CoreNLP)" for more info.
             - tags_to_override (list): See "help(CoreNLP)" for more info.
+            - tags_to_remove (list): ???
         """
         
         # set logger; suppress logging by default. 
@@ -128,9 +134,11 @@ class TextToNLP():
         self.chunk_size = chunk_size
         self.mapping_file = mapping_file
         self.tags_to_override = tags_to_override
+        self.tags_to_remove = tags_to_remove
 
         # compose instance of CoreNLP wrapper class.
-        self.corenlp = CoreNLP(self.url, self.mapping_file, self.tags_to_override)
+        self.corenlp = CoreNLP(self.url, mapping_file=self.mapping_file, 
+                tags_to_override=self.tags_to_override)
 
 
     @staticmethod
@@ -348,7 +356,7 @@ class TextToNLP():
                     continue
                 
                 # overwrite CoreNLP's use of "O" for a null NER tag.
-                if tag == "O":
+                if tag in self.tags_to_remove:
                     tag = ""
 
                 # append final values to @ner_output.
@@ -361,10 +369,13 @@ class TextToNLP():
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
-    t2n = TextToNLP(port=9003, chunk_size=15)
-    s = "Jack Jill\n\t\rpail"
+    t2n = TextToNLP(port=9003, chunk_size=1500)# 
+            #mapping_file="regexner_TOMES/PII.bank_account_number__regexnerMappings.txt")
+    #s = "Jack Jill\n\t\rpail"
     #s = None
     #s= "\t\t\t\t\t\t\t"
+    s= "Mon Jan 6"
+    s = "Mon Jan 000012345678"
     print(repr(s))
     res = t2n.get_ner(s)
     print(res)
