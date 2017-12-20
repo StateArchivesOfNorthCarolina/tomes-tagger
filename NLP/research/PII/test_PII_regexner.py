@@ -9,10 +9,10 @@ from pycorenlp import StanfordCoreNLP
 # set CoreNLP port.
 # note: CoreNLP server must be running a la: 
 # "$ java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000".
-NLP = StanfordCoreNLP("http://localhost:9000")
+NLP = StanfordCoreNLP("http://localhost:9003")
 
 
-def getNER(phrase, PII_type):
+def testNER(phrase, PII_type):
     """ Gets NER tags for given @phrase and report if it matches @PII_type.
     
     Args:
@@ -29,7 +29,7 @@ def getNER(phrase, PII_type):
               number of tokens analyzed.
 
     Examples:
-        >>> getNER("foo@bar.com", "PII.email_address")
+        >>> testNER("foo@bar.com", "PII.email_address")
         ('foo@bar.com', 'foo@bar.com', ['PII.email_address'], True, 1.0)
     """
 
@@ -84,7 +84,7 @@ def testPII():
     # glob all PII folders.
     piis = glob("PII.*/")
 
-    # for each PII type; run getNER() on all test data.
+    # for each PII type; run testNER() on all test data.
     for pii in piis:
         
         # navigate to PII folder.
@@ -104,7 +104,7 @@ def testPII():
 
             # run test; determine if test passed.
             try:
-                phrase, rephrase, ner_tags, ner_test, ratio = getNER(line, pii)
+                phrase, rephrase, ner_tags, ner_test, ratio = testNER(line, pii)
             except Exception as e:
                 exit(e)
             match = rephrase in match_data
