@@ -107,7 +107,7 @@ class TextToNLP():
 
 
     def __init__(self, host="http://localhost", port=9003, chunk_size=50000, 
-            mapping_file="regexner_TOMES/mappings.txt", tags_to_override=["DATE", "DURATION",
+            mapping_file="regexner_TOMES/mappings.txt", stanford_tags=["DATE", "DURATION",
                 "LOCATION", "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "ORGANIZATION", 
                 "PERCENT", "PERSON", "SET", "TIME"], tags_to_remove=["DATE", "DURATION",
                     "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "PERCENT", "SET", "TIME"]):
@@ -133,12 +133,12 @@ class TextToNLP():
         self.url = "{}:{}".format(host, port)
         self.chunk_size = chunk_size
         self.mapping_file = mapping_file
-        self.tags_to_override = tags_to_override
+        self.stanford_tags = stanford_tags
         self.tags_to_remove = tags_to_remove
 
         # compose instance of CoreNLP wrapper class.
         self.corenlp = CoreNLP(self.url, mapping_file=self.mapping_file, 
-                tags_to_override=self.tags_to_override)
+                tags_to_override=self.stanford_tags)
 
 
     @staticmethod
@@ -358,6 +358,10 @@ class TextToNLP():
                 # overwrite CoreNLP's use of "O" for a null NER tag.
                 if tag in self.tags_to_remove:
                     tag = ""
+
+                # add authority domain if @tag is from Stanford.
+                if tag in self.stanford_tags:
+                    tag = "stanford.edu/" + tag
 
                 # append final values to @ner_output.
                 token_group = text, tag, tspace

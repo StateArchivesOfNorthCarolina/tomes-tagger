@@ -41,12 +41,12 @@ class NLPToXML():
             The first item is a string, i.e the authority domain.
             The second item is a string, i.e. the NER tag.
         """
-        
-        slash = auth_tag.find("/")
 
         # determine authority.
+        slash = auth_tag.find("/")
+        
         if slash == -1:
-            authority, ner_tag = "stanford.edu", auth_tag
+            authority, ner_tag = "UNSPECIFIED", auth_tag
         else:
             authority, ner_tag = auth_tag[0:slash], auth_tag[slash+1:]
 
