@@ -4,6 +4,10 @@
 This module contains a class for converting an EAXS file to a tagged EAXS document.
 
 Todo:
+    * <Folder> and <RelPath> are not equivalent, so we still need to work on this.
+        - .getparent().getchildren() will assume that the <Folder> tag is not nested. In cases
+        where it is nested, we will lose the full path to the folder. So we probably need a
+        recursive function to stop only when no more parent <Folder> tags exist?
     * Do you need to support <ExtBodyContent> messages?
         - I think "yes" and you'll need to append attributes/elements accordingly.
         - I think update_message MIGHT be doing this already?
@@ -14,6 +18,12 @@ Todo:
     errors. This is because the tagged XML is converted to a string in order to place it in
     a CDATA block. Otherwise, it seems OK. So nlp_to_xml is probably OK.
         - Update: For now, using "decode()" on the infamous "choke message" is working.
+        - So remove import of unicodedata. DONE.
+    * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
+    work on that. That's somewhat redundant within the context of search, but I guess we need
+    to think of the tagged EAXS as document that's independent of search.
+    * Create a self.ncdcr_prefix attribute and stop manually using "ncdcr:" in XPaths.
+    * Revisit comments before loops: some of the them can be more clearly written.
 """
 
 # import modules.
@@ -21,7 +31,6 @@ import base64
 import logging
 import os
 from lxml import etree
-import unicodedata
 
 
 class EAXSToTagged():
@@ -59,6 +68,7 @@ class EAXSToTagged():
         self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
         self.ns_map  = {"ncdcr":self.ncdcr_uri}
 
+
     def _get_global_id(self, eaxs_file):
         """ Gets <GlobalId> value for a given @eaxs_file. """
 
@@ -73,6 +83,21 @@ class EAXSToTagged():
             element.clear()
 
         return global_id
+
+
+    def _get_messages(self, eaxs_file):
+        """ ??? 
+        
+        Returns:
+            generator: ??? has event/element ... ???
+        """
+
+        # ???
+        message_el = "{" + self.ncdcr_uri + "}Message"
+        messages = etree.iterparse(eaxs_file, events=("end",), strip_cdata=False, 
+                tag=message_el, huge_tree=True)
+
+        return messages
 
 
     def _get_message_id(self, message_el):
@@ -92,6 +117,7 @@ class EAXSToTagged():
         message_id = message_id.strip()
 
         return message_id
+
 
     def _get_single_body_element(self, message_el, name, value=""):
         """ Gets <Message/MultiBody/SingleBody/@name> element and its text value. Note that
@@ -125,6 +151,7 @@ class EAXSToTagged():
             el, el_text = name_el, name_el.text
 
         return (el, el_text)
+
 
     def tag_message(self, message_el, content_text):
         """ Tags a given <Message> element with a given text value.
@@ -176,6 +203,7 @@ class EAXSToTagged():
 
         return (tagged_el, stripped_content)
 
+
     def update_message(self, message_el, folder_name):
         """ Updates a <Message> element's value with NLP-tagged content. Affixes the parent 
         @folder_name as an attribute to updated elment.
@@ -208,22 +236,19 @@ class EAXSToTagged():
         if content_el is None or content_text is None:
                 return message_el
 
-        # otherwise tag the message with NLP.
+        # otherwise get message body's NER tags and a plain text version of the body.
         tagged_content, stripped_content = self.tag_message(message_el, content_text)
-        tagged_content = etree.tostring(tagged_content, encoding=self.charset)
-        tagged_content = tagged_content.decode(self.charset, errors="backslashreplace")
 
-        # create new <SingleBody> element with NLP-tagged content tree.
+        # create a new <SingleBody> element.
         single_body_el = etree.Element("{" + self.ncdcr_uri + "}SingleBody", 
                 nsmap=self.ns_map)
+
+        # append <TaggedContent> element to new <SingleBody> element.
         tagged_content_el = etree.Element("{" + self.ncdcr_uri + "}TaggedContent", 
                 nsmap=self.ns_map)
-        try:
-            tagged_content_el.text = etree.CDATA(tagged_content)
-        except ValueError as err:
-            self.logger.error(err)
-            self.logger.error("Attempting to clean the message.")
-            tagged_content_el.text = etree.CDATA(self.remove_bad_characters(tagged_content))
+        tagged_content = etree.tostring(tagged_content, encoding=self.charset)
+        tagged_content = tagged_content.decode(self.charset, errors="backslashreplace")
+        tagged_content_el.text = etree.CDATA(tagged_content)
         single_body_el.append(tagged_content_el)
 
         # if needed, append plain text version of content to new <SingleBody> element.
@@ -237,6 +262,7 @@ class EAXSToTagged():
         message_el.xpath("ncdcr:MultiBody", namespaces=self.ns_map)[0].append(single_body_el)
 
         return message_el
+
 
     def write_tagged(self, eaxs_file, tagged_eaxs_file):
         """ Converts an EAXS file to a tagged EAXS document and writes it to 
@@ -270,46 +296,33 @@ class EAXSToTagged():
             xfile.write_declaration()
             etree.register_namespace("ncdcr", self.ncdcr_uri)
 
-            messages_to_process = 0
-            self.logger.info("Finding number of Messages.")
-            for ev, el in etree.iterparse(eaxs_file, events=("end",),
-                                          strip_cdata=False,
-                                          tag="{http://www.archives.ncdcr.gov/mail-account}Message",
-                                          huge_tree=True):
+            # ???
+            total_messages = 0
+            self.logger.info("Finding number of messages in source EAXS file.")
+            for event, element in self._get_messages():
                 messages_to_process += 1
-                ev = None
-                el = None
-
+                element.clear()
+            self.logger.info("Found '{}' messages.".format(total_messages))
 
             # create <Account> element with attributes.
+            remaining_messages = total_messages
             with xfile.element("ncdcr:Account", GlobalId=self._get_global_id(eaxs_file), 
                     SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
-                # Loop through Messages and tag them.
-
-                for event, element in etree.iterparse(eaxs_file, events=("end",),
-                        strip_cdata=False, tag="{http://www.archives.ncdcr.gov/mail-account}Message", huge_tree=True):
-                    # TODO: Remove this for production
-                    # if messages_to_process > 3817:
-                    #     messages_to_process -= 1
-                    #     continue
-                    fldr = element.getparent()
-                    fldr_name = fldr.getchildren()[0].text
-                    fldr = None
-                    # if applicable, establish that a <Message> element is open.
+                
+                # ??? Loop through Messages and tag them.
+                for event, element in self._get_messages()
+                    self.logger.info("Processing message with id: {}".format(message_id))
+                    folder_el = element.getparent().getchildren()[0]
                     message_id = self._get_message_id(element)
-                    self.logger.info("Working on message: {}".format(message_id))
-                    self.logger.info("{} Messages left to process.".format(messages_to_process))
-                    messages_to_process -= 1
-                    tagged_message = self.update_message(element, fldr_name)
+                    tagged_message = self.update_message(element, folder_el.text)
                     xfile.write(tagged_message)
                     element.clear()
+                    remaining_messages -= 1
+                    self.logger.info("Messages left to process: {}".format(
+                        remaining_messages))
+
         return
-
-    @staticmethod
-    def remove_bad_characters(s: bytes):
-        s = s.decode("utf-8")
-        return "".join(ch for ch in s if unicodedata.category(ch)[0] != "C")
-
+  
 
 if __name__ == "__main__":
     pass
