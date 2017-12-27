@@ -2,17 +2,7 @@
 
 """ This module contains a class to extract tokens and their corresponding NER tags from a 
 given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp 
-(https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly.
-
-Todo:
-    * Jeremy asks "What is a sane return that won't break the workflow or can we fix?
-        - Nitin update: this new version of text_to_nlp is really trying to guarantee a list
-        is returned regardless of what happens. So we could lose data, but it shouldn't break
-        the workflow.
-    * Delete sutime/numeric classifier options. It doesn't help.
-    * Document tags_to_remove.
-    * Remove __main__ test snippet when ready.
-"""
+(https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly. """
 
 # import modules.
 import json
@@ -50,9 +40,8 @@ class CoreNLP():
         self.url = url
         self.mapping_file = mapping_file
         self.tags_to_override = tags_to_override
-        self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
-        #"ner.useSUTime": "false", "ner.applyNumericClassifiers": "true",
-        "outputFormat": "json"}
+        self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner", 
+                "outputFormat": "json"}
 
         # if specified, add option to use mapping file.
         if self.mapping_file != "":
@@ -107,9 +96,7 @@ class TextToNLP():
 
 
     def __init__(self, host="http://localhost", port=9003, chunk_size=50000, 
-            mapping_file="regexner_TOMES/mappings.txt", stanford_tags=["DATE", "DURATION",
-                "LOCATION", "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "ORGANIZATION", 
-                "PERCENT", "PERSON", "SET", "TIME"], tags_to_remove=["DATE", "DURATION",
+            mapping_file="regexner_TOMES/mappings.txt", tags_to_remove=["DATE", "DURATION",
                     "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "PERCENT", "SET", "TIME"]):
         """ Sets instance attributes.
 
@@ -119,8 +106,8 @@ class TextToNLP():
             - chunk_size (int): The maximum string length to send to CoreNLP at once. Increase
             it at your own risk.
             - mapping_file (str): See "help(CoreNLP)" for more info.
-            - tags_to_override (list): See "help(CoreNLP)" for more info.
-            - tags_to_remove (list): ???
+            - tags_to_remove (list): If CoreNLP returns one on these NER tags, the tag will be
+            replaced with an empty string.
         """
         
         # set logger; suppress logging by default. 
@@ -133,9 +120,10 @@ class TextToNLP():
         self.url = "{}:{}".format(host, port)
         self.chunk_size = chunk_size
         self.mapping_file = mapping_file
-        self.stanford_tags = stanford_tags
         self.tags_to_remove = tags_to_remove
-
+        self.stanford_tags = ["DATE", "DURATION", "LOCATION", "MISC", "MONEY", "NUMBER", "O",
+                "ORDINAL", "ORGANIZATION", "PERCENT", "PERSON", "SET", "TIME"]
+        
         # compose instance of CoreNLP wrapper class.
         self.corenlp = CoreNLP(self.url, mapping_file=self.mapping_file, 
                 tags_to_override=self.stanford_tags)
@@ -371,15 +359,5 @@ class TextToNLP():
 
 
 if __name__ == "__main__":
+    pass
 
-    logging.basicConfig(level=logging.DEBUG)
-    t2n = TextToNLP(port=9003, chunk_size=1500)# 
-            #mapping_file="regexner_TOMES/PII.bank_account_number__regexnerMappings.txt")
-    #s = "Jack Jill\n\t\rpail"
-    #s = None
-    #s= "\t\t\t\t\t\t\t"
-    s= "Mon Jan 6"
-    s = "Mon Jan 000012345678"
-    print(repr(s))
-    res = t2n.get_ner(s)
-    print(res)
