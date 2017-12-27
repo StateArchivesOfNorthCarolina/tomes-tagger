@@ -42,11 +42,18 @@ class NLPToXML():
             The second item is a string, i.e. the NER tag.
         """
 
+        # verify @auth_tag is a string.
+        if not isinstance(auth_tag, str):
+            self.logger.error("Authority should be a string, got '{}' instead.".format(
+                type(auth_tag).__name__))
+            self.logger.warning("Falling back to empty authority and NER tag values.")
+            return ("", "")
+
         # determine authority.
         slash = auth_tag.find("/")
         
         if slash == -1:
-            authority, ner_tag = "UNSPECIFIED", auth_tag
+            authority, ner_tag = "", auth_tag
         else:
             authority, ner_tag = auth_tag[0:slash], auth_tag[slash+1:]
 
@@ -107,10 +114,30 @@ class NLPToXML():
 
         # iterate through @ner_data; append sub-elements to root.
         for token_group in ner_data:
-            
-            text, tag, tspace = token_group
 
-            # add pure whitespace to tree and continue.
+            # verify that @token_group is a tuple.
+            if not isinstance(token_group, tuple):
+                self.logger.error("Token group is not a tuple; got {} instead.".format(
+                    type(token_group).__name__))
+                self.logger.warning("Skipping token group.")
+                continue
+            
+            # verify that tuple's length is correct.
+            if len(token_group) != 3:
+                self.logger.error("Token group contains {} items, not 3.".format(
+                    len(token_group)))
+                self.logger.warning("Skipping token group.")
+                continue
+
+            # unpack tuple, and write to @tagged_el.
+            try:
+                text, tag, tspace = token_group
+            except ValueError as err:
+                self.logger.error(err)
+                self.logger.warning("Skipping token group.")
+                continue
+
+            # add whitespace-only items to tree and continue.
             if text == "":
             
                 # append space to previous child; otherwise fall back to new element.
@@ -135,10 +162,15 @@ class NLPToXML():
             
             # if NER tag exists, add attributes to token sub-element.
             if tag != "":
+
                 tag_authority, tag_value = self._split_authority(tag)
+                
                 token_el.set("entity", tag_value)
-                token_el.set("authority", tag_authority)
                 token_el.set("group", str(tag_group))
+
+                # write attribute if it exists.
+                if tag_authority != "": 
+                    token_el.set("authority", tag_authority)
             
             # set token sub-element's text value and append whitespace.
             token_el.text = text
@@ -155,23 +187,5 @@ class NLPToXML():
 
 
 if __name__ == "__main__":
-
-    from text_to_nlp import *
-    logging.basicConfig(level=logging.DEBUG)
-    
-    t2n = TextToNLP(port=9003)
-    n2x = NLPToXML()
-
-    #s = "Jack Jill\n\t\rpail"
-    #s = "\nJack and Jill \t\t\t\t\t\tSingh went up a hill in:   North Carolina.\r"
-    #s = " \n\n\t\t\r\r" + s
-    #s = "Free Sony DVD"
-    with open("MikeWard__choke_message.txt") as f:
-        s = f.read()
-    res = t2n.get_ner(s)
-    #for i in res: print(i)
-    xml = n2x.get_xml(res)
-    xml = etree.tostring(xml).decode()
-    print(xml)
-
+    pass
 

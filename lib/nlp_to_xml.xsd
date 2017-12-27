@@ -66,6 +66,32 @@ elementFormDefault="qualified">
 	]]>
 		
 	-->
+	
+	For HTML-based display of this schema, the following mapping is recommended to
+	preservce whitespace:
+	
+		- Tokens -> pre.class="Tokens"
+		- Token -> span.class="Token"
+			- @entity -> @data-entity
+			- @authority -> @data-authority
+			- @group -> @data-group
+		- BlockText -> span.class="BlockText"
+		
+	An example of this mapping, using the previous example document:
+	<!--
+	
+	<pre class="Tokens" style="text-align: left; white-space: pre-line;">
+	<span class="Token">Good</span> <span class="Token">morning</span> <span data-entity="person.male" data-authority="foo.bar" data-group="1">John</span><span class="Token">!</span>
+
+	<span class="Token">Love</span><span class="Token">,</span>
+	<span data-entity="PERSON" data-authority="stanford.edu" data-group="2">Marsha</span>
+	
+	<span class="BlockText">Marsha B.
+	Los Angeles, CA
+	555-555-5555</span>
+	</pre>
+
+	-->
 	</xs:documentation>
 </xs:annotation>
 
