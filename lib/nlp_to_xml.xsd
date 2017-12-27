@@ -21,7 +21,9 @@ elementFormDefault="qualified">
 	email message.
 
 	Tokens recognized as named entities via Natural Language Processing (NLP)
-	techniques are to be enclosed within the "Token" sub-element. Non-tokens and leading/trailing whitespace are not encased within this sub-element. Note that whitespace between opening and closing "Token" elements *is*, therefore,
+	techniques are to be enclosed within the "Token" sub-element. Non-tokens and 
+	leading/trailing whitespace are not encased within this sub-element. Note that 
+	whitespace between opening and closing "Token" elements *is*, therefore,
 	significant.
 
 	All content not subjected to NLP are to be enclosed in the "BlockText"
