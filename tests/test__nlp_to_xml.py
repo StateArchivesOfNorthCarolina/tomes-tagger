@@ -9,10 +9,11 @@ import random
 from lib.nlp_to_xml import *
 
 # enable logging.
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.DEBUG)
+
 
 class Test_NLPToXML(unittest.TestCase):
-
+    """ ??? """
     
     def setUp(self):
 		

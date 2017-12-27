@@ -13,14 +13,14 @@ import logging
 from lxml import etree
 from lib.eaxs_to_tagged import *
 
+# enable logging.
+logging.basicConfig(level=logging.DEBUG)
+
 
 class Test_EAXSToTagged(unittest.TestCase):
-
+    """ ??? """
 
     def setUp(self):
-
-        # enable logging.
-        logging.basicConfig(level=logging.WARNING)
 
         # set attributes.
         self.sample = "sample_files/sampleEAXS.xml"

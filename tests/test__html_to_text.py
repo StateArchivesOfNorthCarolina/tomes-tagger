@@ -6,15 +6,15 @@ import logging
 import unittest
 from lib.html_to_text import *
 
+# enable logging.
+logging.basicConfig(level=logging.DEBUG)
+        
 
 class Test_HTMLToText(unittest.TestCase):
-
+    """ ??? """
 
     def setUp(self):
 
-        # enable logging.
-        logging.basicConfig(level=logging.WARNING)
-        
 	# set attributes.
         self.h2t = HTMLToText()
         self.sample = "<html><head></head><body><a href=\"http://h.w\">{}</a></body></html>"
