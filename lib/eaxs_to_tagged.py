@@ -85,6 +85,7 @@ class EAXSToTagged():
     
         # convert list to path-like string.
         folder_name = "/".join(folder_names)
+        folder_name = folder_name.encode(self.charset, errors="ignore").decode(self.charset)
         
         return folder_name
 
@@ -99,14 +100,8 @@ class EAXSToTagged():
             str: The return value.
         """
 
-        # set full <GlobalId> name to include namespace URI.
+        # find <GlobalId> element value and break immediately (to avoid memory spikes!).
         global_id_tag = "{" + self.ncdcr_uri + "}GlobalId"
-
-        # iterate through @eaxs_file until value is found.
-        # Note: it's critical to "break" as soon as the data is found, otherwise memory usage
-        # will suffer because etree.iterparse doesn't know there's only only <GlobalId> and
-        # will keep searching for more.
-        global_id = None
         for event, element in etree.iterparse(eaxs_file, events=("end",), strip_cdata=False,
                 tag=global_id_tag, huge_tree=True):
             global_id_el = element
