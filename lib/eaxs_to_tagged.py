@@ -11,7 +11,7 @@ Todo:
     * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
     work on that. That's somewhat redundant within the context of search, but I guess we need
     to think of the tagged EAXS as document that's independent of search.
-    * Investigate JG's Slack comment re: quoted printable:
+    * Investigate JG's Slack comment from 12/22/2017:
         "Another note.  All body-content that is tagged as quoted-printable is now meets that
         specification exactly. If you need to decode for chunking and sending python has a
         tool.
@@ -352,7 +352,7 @@ class EAXSToTagged():
                     message_id = self._get_message_id(element)
                     folder_name = self._get_folder_name(element)
                     
-                    # tag <Message> and write updated element to @xfile.
+                    # tag <Message> element and write updated element to @xfile.
                     self.logger.info("Processing message with id: {}".format(message_id))
                     tagged_message = self.update_message(element, folder_name)
                     xfile.write(tagged_message)
