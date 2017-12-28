@@ -11,6 +11,11 @@ Todo:
     * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
     work on that. That's somewhat redundant within the context of search, but I guess we need
     to think of the tagged EAXS as document that's independent of search.
+    * Investigate JG's Slack comment re: quoted printable:
+        "Another note.  All body-content that is tagged as quoted-printable is now meets that
+        specification exactly. If you need to decode for chunking and sending python has a
+        tool.
+        https://docs.python.org/3/library/quopri.html"
 """
 
 # import modules.
