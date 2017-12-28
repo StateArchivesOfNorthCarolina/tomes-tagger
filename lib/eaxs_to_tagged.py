@@ -16,6 +16,7 @@ Todo:
         specification exactly. If you need to decode for chunking and sending python has a
         tool.
         https://docs.python.org/3/library/quopri.html"
+    * Do you really need the decode/encode bit in _get_folder_name()?
 """
 
 # import modules.
