@@ -4,21 +4,12 @@
 This module contains a class for converting an EAXS file to a tagged EAXS document.
 
 Todo:
-    * <Folder> and <RelPath> are not equivalent, so we still need to work on this.
-        - .getparent().getchildren() will assume that the <Folder> tag is not nested. In cases
-        where it is nested, we will lose the full path to the folder. So we probably need a
-        recursive function to stop only when no more parent <Folder> tags exist?
     * Do you need to support <ExtBodyContent> messages?
         - I think "yes" and you'll need to append attributes/elements accordingly.
         - I think update_message MIGHT be doing this already?
             - Only one way to find out. :P
     * Do you really need huge_tree when iterparsing?
-    * When you write the tagged block, I think you need to use 
-    "decode(self.charset, errors="backslashreplace"" or JG's function to prevent XML writing
-    errors. This is because the tagged XML is converted to a string in order to place it in
-    a CDATA block. Otherwise, it seems OK. So nlp_to_xml is probably OK.
-        - Update: For now, using "decode()" on the infamous "choke message" is working.
-        - So remove import of unicodedata. DONE.
+        - Umm ... YES!!! :-] _get_global_id() was breaking on large files w/out it.
     * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
     work on that. That's somewhat redundant within the context of search, but I guess we need
     to think of the tagged EAXS as document that's independent of search.
@@ -69,6 +60,25 @@ class EAXSToTagged():
         self.ns_map  = {"ncdcr":self.ncdcr_uri}
 
 
+    def _get_folder_name(self, message_el):
+        """ ??? """
+
+        # ???
+        folder_names = []
+
+        # ???
+        for ancestor in message_el.iterancestors():
+            if ancestor.tag == "{" + self.ncdcr_uri + "}Folder":
+                name_el = ancestor.getchildren()[0]
+                folder_names.insert(0, name_el.text)
+            elif ancestor.tag == "{" + self.ncdcr_uri + "}Account":
+                break
+    
+        # ???
+        folder_name = "/".join(folder_names)
+        return folder_name
+
+
     def _get_global_id(self, eaxs_file):
         """ Gets <GlobalId> value for a given @eaxs_file. """
 
@@ -77,7 +87,7 @@ class EAXSToTagged():
 
         # iterate through @eaxs_file until value is found.
         global_id = None
-        for event, element in etree.iterparse(eaxs_file, tag=global_id_el):
+        for event, element in etree.iterparse(eaxs_file, tag=global_id_el, huge_tree=True):
             global_id_el = element
             global_id = global_id_el.text
             element.clear()
@@ -94,8 +104,8 @@ class EAXSToTagged():
 
         # ???
         message_el = "{" + self.ncdcr_uri + "}Message"
-        messages = etree.iterparse(eaxs_file, events=("end",), strip_cdata=False, 
-                tag=message_el, huge_tree=True)
+        messages = etree.iterparse(eaxs_file, strip_cdata=False, tag=message_el,
+                huge_tree=True)
 
         return messages
 
@@ -113,8 +123,8 @@ class EAXSToTagged():
 
         # get identifier value; strip whitespace.
         path = "ncdcr:MessageId"
-        message_id = message_el.xpath(path, namespaces=self.ns_map)[0].text
-        message_id = message_id.strip()
+        message_id = message_el.xpath(path, namespaces=self.ns_map)
+        message_id = message_id[0].text.strip()
 
         return message_id
 
@@ -299,8 +309,8 @@ class EAXSToTagged():
             # ???
             total_messages = 0
             self.logger.info("Finding number of messages in source EAXS file.")
-            for event, element in self._get_messages():
-                messages_to_process += 1
+            for event, element in self._get_messages(eaxs_file):
+                total_messages += 1
                 element.clear()
             self.logger.info("Found '{}' messages.".format(total_messages))
 
@@ -310,14 +320,17 @@ class EAXSToTagged():
                     SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
                 
                 # ??? Loop through Messages and tag them.
-                for event, element in self._get_messages()
-                    self.logger.info("Processing message with id: {}".format(message_id))
-                    folder_el = element.getparent().getchildren()[0]
+                for event, element in self._get_messages(eaxs_file):
                     message_id = self._get_message_id(element)
-                    tagged_message = self.update_message(element, folder_el.text)
+                    #folder_el = element.getparent().getchildren()[0]
+                    folder_name = self._get_folder_name(element)
+                    self.logger.info("Processing message with id: {}".format(message_id))
+                    tagged_message = self.update_message(element, folder_name)
                     xfile.write(tagged_message)
                     element.clear()
                     remaining_messages -= 1
+                    self.logger.info("Processing complete for {} of {} messages.".format(
+                        remaining_messages, total_messages))
                     self.logger.info("Messages left to process: {}".format(
                         remaining_messages))
 
