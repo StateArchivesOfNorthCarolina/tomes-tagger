@@ -98,11 +98,16 @@ class EAXSToTagged():
         global_id_tag = "{" + self.ncdcr_uri + "}GlobalId"
 
         # iterate through @eaxs_file until value is found.
+        # Note: it's critical to "break" as soon as the data is found, otherwise memory usage
+        # will suffer because etree.iterparse doesn't know there's only only <GlobalId> and
+        # will keep searching for more.
         global_id = None
-        for event, element in etree.iterparse(eaxs_file, tag=global_id_tag, huge_tree=True):
+        for event, element in etree.iterparse(eaxs_file, events=("end",), strip_cdata=False,
+                tag=global_id_tag, huge_tree=True):
             global_id_el = element
             global_id = global_id_el.text
             element.clear()
+            break
 
         return global_id
 
@@ -119,8 +124,8 @@ class EAXSToTagged():
 
         # get generator for all <Message> elements.
         message_tag = "{" + self.ncdcr_uri + "}Message"
-        messages = etree.iterparse(eaxs_file, strip_cdata=False, tag=message_tag,
-                huge_tree=True)
+        messages = etree.iterparse(eaxs_file, events=("end",), strip_cdata=False, 
+                tag=message_tag, huge_tree=True)
 
         return messages
 
