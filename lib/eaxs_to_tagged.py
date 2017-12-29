@@ -23,6 +23,9 @@ Todo:
     * Do you need to test if there are text AND HTML versions of the email first and default
     to the plain text?
     * _legalize_cdata_text() is stripping a lot of whitespace and mashing words together.
+        - I think this is fixed.
+    * I think you want to use .strip() for tagged and stripped content to avoid large swaths
+    of leading/trailing whitespace.
     * Comment all "???" occurences and uncomment all "!!!" occurences you find.
 """
 
@@ -30,6 +33,7 @@ Todo:
 import base64
 import logging
 import os
+import string
 import quopri
 import unicodedata
 from lxml import etree
@@ -80,7 +84,8 @@ class EAXSToTagged():
         if isinstance(cdtext, str):
             cdtext = cdtext.encode(charset, errors=error_handler)
         cdtext = cdtext.decode(charset, errors=error_handler)
-        cdtext = "".join(ch for ch in cdtext if unicodedata.category(ch)[0] != "C")
+        cdtext = "".join([ch for ch in cdtext if unicodedata.category(ch)[0] != "C" or
+            ch in string.whitespace[:4]])
         return cdtext
     
 
@@ -325,7 +330,7 @@ class EAXSToTagged():
                     self.logger.warning("Cleaning stripped content in order to write CDATA.")
                     stripped_content = self._legalize_cdata_text(stripped_content, 
                             self.charset)
-                    tagged_content_el.text = etree.CDATA(stripped_content)
+                    stripped_content_el.text = etree.CDATA(stripped_content)
                 single_body_el.append(stripped_content_el)
 
         # append the new <SingleBody> element to @message_el.
