@@ -11,18 +11,27 @@ Todo:
     * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
     work on that. That's somewhat redundant within the context of search, but I guess we need
     to think of the tagged EAXS as document that's independent of search.
+    * Do you really need the decode/encode bit in _get_folder_name()?
     * Investigate JG's Slack comment from 12/22/2017:
         "Another note.  All body-content that is tagged as quoted-printable is now meets that
         specification exactly. If you need to decode for chunking and sending python has a
         tool.
         https://docs.python.org/3/library/quopri.html"
-    * Do you really need the decode/encode bit in _get_folder_name()?
+        - I think this is working now but I'll leave this TODO item until I'm more sure.
+        - I'm also wondering if I need to check for transfer-encoding and MIME type at the
+        multibody level if I don't find it in the <Message> element itself.
+    * Do you need to test if there are text AND HTML versions of the email first and default
+    to the plain text?
+    * _legalize_cdata_text() is stripping a lot of whitespace and mashing words together.
+    * Comment all "???" occurences and uncomment all "!!!" occurences you find.
 """
 
 # import modules.
 import base64
 import logging
 import os
+import quopri
+import unicodedata
 from lxml import etree
 
 
@@ -63,6 +72,17 @@ class EAXSToTagged():
         self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
         self.ns_map  = {self.ncdcr_prefix : self.ncdcr_uri}
 
+
+    @staticmethod
+    def _legalize_cdata_text(cdtext, charset, error_handler="backslashreplace"):
+        """ ??? """
+
+        if isinstance(cdtext, str):
+            cdtext = cdtext.encode(charset, errors=error_handler)
+        cdtext = cdtext.decode(charset, errors=error_handler)
+        cdtext = "".join(ch for ch in cdtext if unicodedata.category(ch)[0] != "C")
+        return cdtext
+    
 
     def _get_folder_name(self, message_el):
         """ Gets the folder name for a given <Message> element. Subfolders are preceeded by
@@ -214,17 +234,24 @@ class EAXSToTagged():
         if transfer_encoding_text.lower() == "base64":
             self.logger.info("Decoding Base64 message content.")
             content_text = base64.b64decode(content_text)
-            content_text =  content_text.decode(self.charset, errors="backslashreplace")
+            content_text = content_text.decode(self.charset, errors="backslashreplace")
             is_stripped = True
 
+        # if needed, decode quoted-printable text.
+        if transfer_encoding_text.lower() == "quoted-printable":
+            self.logger.info("Decoding quoted-printable message content.")
+            content_text = quopri.decodestring(content_text)
+            content_text = content_text.decode(self.charset, errors="backslashreplace")
+            is_stripped = True
+        
         # if needed, convert HTML in @content_text to plain text.
         if content_type_text.lower() in ["text/html", "application/xml+html"]:
-            self.logger.info("Requesting HTML to plain text conversion.")
+            self.logger.info("Converting HTML message content to plain text.")
             content_text = self.html_converter(content_text)
             is_stripped = True
 
         # get NER tags.
-        self.logger.info("Requesting NER tags.")
+        self.logger.info("Tagging message content with NER.")
         tagged_el = self.nlp_tagger(content_text)
 
         # set value of stripped content.
@@ -278,15 +305,27 @@ class EAXSToTagged():
         tagged_content_el = etree.Element("{" + self.ncdcr_uri + "}TaggedContent", 
                 nsmap=self.ns_map)
         tagged_content = etree.tostring(tagged_content, encoding=self.charset)
-        tagged_content = tagged_content.decode(self.charset, errors="backslashreplace")
-        tagged_content_el.text = etree.CDATA(tagged_content)
+        try:
+            tagged_content_el.text = etree.CDATA(tagged_content)
+        except ValueError as err:
+            self.logger.error(err)
+            self.logger.warning("Cleaning tagged content in order to write CDATA.")
+            tagged_content = self._legalize_cdata_text(tagged_content, self.charset)
+            tagged_content_el.text = etree.CDATA(tagged_content)
         single_body_el.append(tagged_content_el)
 
         # if needed, append a plain text message body to the new <SingleBody> element.
         if stripped_content is not None:
                 stripped_content_el = etree.Element("{" + self.ncdcr_uri + 
                         "}StrippedContent", nsmap=self.ns_map)
-                stripped_content_el.text = etree.CDATA(stripped_content)
+                try:
+                    stripped_content_el.text = etree.CDATA(stripped_content)
+                except ValueError as err:
+                    self.logger.error(err)
+                    self.logger.warning("Cleaning stripped content in order to write CDATA.")
+                    stripped_content = self._legalize_cdata_text(stripped_content, 
+                            self.charset)
+                    tagged_content_el.text = etree.CDATA(stripped_content)
                 single_body_el.append(stripped_content_el)
 
         # append the new <SingleBody> element to @message_el.
@@ -318,7 +357,7 @@ class EAXSToTagged():
         if os.path.isfile(tagged_eaxs_file):
             err = "Destination file '{}' already exists.".format(tagged_eaxs_file)
             self.logger.error(err)
-            raise FileExistsError(err)
+            #raise FileExistsError(err) # !!! UNDO COMMENT.
 
         # get count of <Message> elements; prepare data for progress updates.
         total_messages = 0
@@ -346,6 +385,11 @@ class EAXSToTagged():
                     
                     # get needed values.
                     message_id = self._get_message_id(element)
+                    
+                    # DELETE block.
+                    if message_id!="<20041004154915.QTXN17040.lakecmmtar01.coxmail.com@Ron>":
+                        continue#DELETE !!!
+                    
                     folder_name = self._get_folder_name(element)
                     
                     # tag the message and write it to @xfile.
