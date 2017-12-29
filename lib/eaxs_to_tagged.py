@@ -329,26 +329,26 @@ class EAXSToTagged():
         self.logger.info("Found {} messages.".format(total_messages))
         remaining_messages = total_messages
 
-        # open new tagged EAXS XML file.
+        # open new @tagged_eaxs_file.
         with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True) as xfile:
 
             # write XML header to @xfile; register namespace information.
             xfile.write_declaration()
             etree.register_namespace(self.ncdcr_prefix, self.ncdcr_uri)
 
-            # write root <Account> element to @xfile.
+            # write root <Account> element; append tagged <Message> elements.
             account_tag = "{}:Account".format(self.ncdcr_prefix)
             with xfile.element(account_tag, GlobalId=self._get_global_id(eaxs_file), 
                     SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
                 
-                # process each <Message> element. 
+                # tag each <Message> element from source @eaxs_file.
                 for event, element in self._get_messages(eaxs_file):
                     
-                    # get needed values for <Message> element.
+                    # get needed values.
                     message_id = self._get_message_id(element)
                     folder_name = self._get_folder_name(element)
                     
-                    # tag <Message> element and write updated element to @xfile.
+                    # tag the message and write it to @xfile.
                     self.logger.info("Processing message with id: {}".format(message_id))
                     tagged_message = self.update_message(element, folder_name)
                     xfile.write(tagged_message)
@@ -361,10 +361,9 @@ class EAXSToTagged():
                     if remaining_messages > 0:
                         self.logger.info("Messages left to process: {}".format(
                             remaining_messages))
-                    else:
-                        self.logger.info("Finished writing tagged EAXS file: {}".format(
-                            tagged_eaxs_file))
-
+        
+        # report on completion.
+        self.logger.info("Finished writing tagged EAXS file: {}".format(tagged_eaxs_file))
         return
   
 
