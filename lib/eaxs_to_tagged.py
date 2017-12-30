@@ -80,12 +80,11 @@ class EAXSToTagged():
     def _legalize_cdata_text(cdtext, charset, error_handler="backslashreplace"):
         """ ??? """
 
-        if isinstance(cdtext, str):
-            cdtext = cdtext.encode(charset, errors=error_handler)
-        cdtext = cdtext.decode(charset, errors=error_handler)
+        # ???
         cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
         cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
             char in ("\r", "\t")])
+        
         return cdtext
     
 
