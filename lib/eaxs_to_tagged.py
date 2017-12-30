@@ -81,6 +81,7 @@ class EAXSToTagged():
         """ ??? """
 
         # ???
+        cdtext = cdtext.encode(charset).decode(charset, errors=error_handler)
         cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
         cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
             char in ("\r", "\t")])
