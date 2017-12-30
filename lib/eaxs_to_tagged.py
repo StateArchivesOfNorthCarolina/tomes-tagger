@@ -33,7 +33,6 @@ Todo:
 import base64
 import logging
 import os
-import string
 import quopri
 import unicodedata
 from lxml import etree
@@ -84,8 +83,9 @@ class EAXSToTagged():
         if isinstance(cdtext, str):
             cdtext = cdtext.encode(charset, errors=error_handler)
         cdtext = cdtext.decode(charset, errors=error_handler)
-        cdtext = "".join([ch for ch in cdtext if unicodedata.category(ch)[0] != "C" or
-            ch in string.whitespace[:4]])
+        cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
+        cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
+            char in ("\r", "\t")])
         return cdtext
     
 
