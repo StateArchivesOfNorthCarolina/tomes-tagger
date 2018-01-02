@@ -5,6 +5,7 @@
 todo:
     * The glob delete looks like overkill. Maybe just pass if cleanup() fails?
     * Is there a better way to get a temp file name?
+    * Review all code/documentation.
 """
 
 # import modules.
@@ -207,7 +208,8 @@ class HTMLToText():
             text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
         except FileNotFoundError as err:
             self.logger.error(err)
-            self.logger.warning("Couldn't convert HTML, falling back to empty string.")
+            self.logger.warning("Couldn't convert HTML. Is Lynx installed correctly?")
+            self.logger.warning("Falling back to empty string.")
             text = ""
 
         # delete temporay files.
