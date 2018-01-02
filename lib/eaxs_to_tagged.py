@@ -62,9 +62,9 @@ class EAXSToTagged():
 
     @staticmethod
     def _legalize_cdata_text(cdtext, charset, error_handler="backslashreplace"):
-        """ A static method to alter @cdtext by replacing vertical tabs and form feeds with
-        line breaks and removing control characters except for carriage returns and tabs so 
-        that @cdtext can be passed to lxml.etree.CDATA() without raising a ValueError.
+        """ A static method that alters @cdtext by replacing vertical tabs and form feeds with
+        line breaks and removing control characters except for carriage returns and tabs. This
+        is so that @cdtext can be passed to lxml.etree.CDATA() without raising a ValueError.
         
         Args:
             - cdtext (str): The text to alter.
