@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Account xmlns="http://www.archives.ncdcr.gov/mail-account"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd">
+	<GlobalId>foo</GlobalId>
+	<Folder>
+		<Name>bar</Name>
+		<Message>
+			<RelPath>.</RelPath>
+			<LocalId>1003</LocalId>
+			<MessageId>
+				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D9>]]>
+			</MessageId>
+			<MimeVersion>1.0</MimeVersion>
+			<OrigDate>2010-02-12T11:50:40-05:00</OrigDate>
+			<From>
+				<![CDATA["Jane Doe" <jane_doe@fake.nc.gov>]]>
+			</From>
+			<To>
+				<![CDATA["John Doe" <john_doe@fake.nc.gov>]]>
+			</To>
+			<Subject>Bye</Subject>
+			<Header>
+				<Name>Date</Name>
+				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
+			</Header>
+			<MultiBody>
+				<ContentType>multipart/mixed</ContentType>
+				<BoundaryString>--boundary-LibPST-iamunique-32332_-_-</BoundaryString>
+				<OtherMimeHeader>
+					<Name>Content-Language</Name>
+					<Value>en-US</Value>
+				</OtherMimeHeader>
+				<SingleBody>
+					<ContentType>text/html</ContentType>
+					<Charset>utf-8</Charset>
+					<TransferEncoding>quoted-printable</TransferEncoding>
+					<BodyContent>
+						<Content>
+							<![CDATA[]]>
+						</Content>
+					</BodyContent>
+				</SingleBody>
+				<SingleBody>
+					<ContentType>text/plain</ContentType>
+					<Charset>utf-8</Charset>
+					<TransferEncoding>quoted-printable</TransferEncoding>
+					<BodyContent>
+						<Content>
+							<![CDATA[
+text from: https://en.wikipedia.org/wiki/Quoted-printable
+conversion by: http://www.convertstring.com/EncodeDecode/QuotedPrintableEnc=
+ode
+...
+
+MIME defines mechanisms for sending other kinds of information in e-mail, i=
+ncluding text in languages other than English, using character encodings ot=
+her than ASCII. However, these encodings often use byte values outside the =
+ASCII range so they need to be encoded further before they are suitable for=
+ use in a non-8-bit-clean environment. Quoted-Printable encoding is one met=
+hod used for mapping arbitrary bytes into sequences of ASCII characters. So=
+, Quoted-Printable is not a character encoding scheme itself, but a data co=
+ding layer to be used under some byte-oriented character encoding. QP encod=
+ing is reversible, meaning the original bytes and hence the non-ASCII chara=
+cters they represent can be identically recovered.
+
+Quoted-Printable and Base64 are the two basic MIME content transfer encodin=
+gs, if a trivial "8bit" encoding is not counted. If the text to be encoded =
+does not contain many non-ASCII characters, then Quoted-Printable results i=
+n a fairly readable[2] and compact encoded result. On the other hand, if th=
+e input is not mostly ASCII, then Quoted-Printable becomes both unreadable =
+and extremely inefficient. Base64 is not human-readable, but has a uniform =
+overhead for all data and is the more sensible choice for binary formats or=
+ text in non-Latin based languages.]]>
+						</Content>
+						<TransferEncoding>quoted-printable</TransferEncoding>
+					</BodyContent>
+				</SingleBody>
+			</MultiBody>
+			<Eol>LF</Eol>
+			<Hash>
+				<Value>49618c929dde66c8bb488073e7312ad9c18c70f4</Value>
+				<Function>SHA1</Function>
+			</Hash>
+		</Message>
+	</Folder>
+</Account>
