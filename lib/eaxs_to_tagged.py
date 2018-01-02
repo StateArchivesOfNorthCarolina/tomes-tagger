@@ -11,11 +11,6 @@ Todo:
     * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
     work on that. That's somewhat redundant within the context of search, but I guess we need
     to think of the tagged EAXS as document that's independent of search.
-    * Do you need to test if there are text AND HTML versions of the email first and default
-    to the plain text?
-        - Yes. But you aren't. :P
-    * Comment all "???" occurences and uncomment all "!!!" occurences you find. This includes
-    and temporary test lines/blocks.
 """
 
 # import modules.
@@ -175,84 +170,99 @@ class EAXSToTagged():
 
         return message_id
 
-
-    def _get_single_body_element(self, message_el, name, fallback=""):
-        """ Gets the <MultiBody/SingleBody/@name> element and its text value for the given
-        parent <Message> element. Note that <SingleBody> elements for attachments are skipped.
-
+    
+    def _get_message_data(self, message_el):
+        """ Gets relevant element values from the given <Message> element, @message_el.
+        
         Args:
             - message_el (lxml.etree._Element): An EAXS <Message> element.
-            - name (str): The element to retrieve. DO NOT include the @self.ncdcr_prefix 
-            namespace prefix (e.g. "ncdcr") as it will be added automatically.
-            - fallback (str): The text value to return for @name if no text value is found.
-
+        
         Returns:
             tuple: The return value.
-            The first item is an lxml.etree._Element, i.e. @name.
-            The second item is a string, i.e. @name's value.
+            The first item is the message's <BodyContent/Content> element value.
+            The second item is the <BodyContent/TransferEncoding> element value.
+            The third item is the <ContentType> element value.
         """
 
-        # set XPath for @name element, omitting attachments.
-        path = "{}:MultiBody".format(self.ncdcr_prefix)
-        path += "/SingleBody[(not(contains({}:Disposition, 'attachment')))][1]".format(
-                self.ncdcr_prefix)
-        path += "/{}".format(name)
-        path = path.replace("/", "/{}:".format(self.ncdcr_prefix))
+        # set XPath for <SingleBody> elements, omitting attachments.
+        path = "{ns}:MultiBody/{ns}:SingleBody[not(descendant::{ns}:Disposition)]"
+        path = path.format(ns=self.ncdcr_prefix)
+        
+        # assume default values.
+        content_text, transfer_encoding_text, content_type_text = "", "7-bit", "text/plain"
 
-        # get element from @path.
-        name_el = message_el.xpath(path, namespaces=self.ns_map)
+        # get all <SingleBody> elements via XPath.
+        single_body_els = message_el.xpath(path, namespaces=self.ns_map)
+        for single_body_el in single_body_els:
+            
+            # set @content_text.
+            node = "{ns}:BodyContent/{ns}:Content".format(ns=self.ncdcr_prefix)
+            content_el = single_body_el.xpath(node, namespaces=self.ns_map)
+            if len(content_el) > 0:
+                content_text = content_el[0].text
 
-        # get element values.
-        el, el_text = None, fallback
-        if len(name_el) > 0:
-            name_el = name_el[0]
-            el, el_text = name_el, name_el.text
+            # set @transfer_encoding_text.
+            node = "{ns}:BodyContent/{ns}:TransferEncoding".format(ns=self.ncdcr_prefix)
+            transfer_el = single_body_el.xpath(node, namespaces=self.ns_map)
+            if len(transfer_el) > 0:
+                if transfer_el[0].text.lower() != "":
+                    transfer_encoding_text = transfer_el[0].text.lower()
 
-        return (el, el_text)
+            # set @content_type_text.
+            node = "{ns}:ContentType".format(ns=self.ncdcr_prefix)
+            content_type_el = single_body_el.xpath(node, namespaces=self.ns_map)
+            if len(content_type_el) > 0:
+                if content_type_el[0].text.lower() != "":
+                    content_type_text = content_type_el[0].text.lower()
+ 
+            # if the preferred plain/text message is found, break immediately.
+            if content_type_text == "text/plain":
+                break
+
+        # place data in tuple.
+        content_data = (content_text, transfer_encoding_text, content_type_text)
+        return content_data
 
 
-    def tag_message(self, message_el, content_text):
-        """ Tags a given <Message> element with a given text value (@content_text).
+    def tag_message(self, content_text, transfer_encoding_text, content_type_text):
+        """ Tags a given <Message> element with a given text value (@content_text) and given
+        @transfer_encoding_text and @content_type_text values.
 
         Args:
-            - message_el (lxml.etree._Element): An EAXS <Message> element.
             - content_text (str): The text from which to extract NER tags via 
             @self.nlp_tagger.
+            - transfer_encoding_text (str): The message's transfer encoding value.
+            - content_type_text (str): The message's content type value.
 
         Returns:
             tuple: The return value.
             The first item is an lxml.etree._Element: the tagged XML tree.
             The second item is a string: the original message stripped of HTML tags and/or
-            Base64-decoded. If the messages was unaltered, this value is None.
+            Base64-decoded and/or decoded quoted-printable. If the messages was unaltered,
+            this value is None.
         """
 
         self.logger.info("Tagging <Message> element content.")
-
-        # get <Message> element's transfer encoding and MIME type.
-        transfer_encoding_el, transfer_encoding_text = self._get_single_body_element(
-                message_el, "TransferEncoding")
-        content_type_el, content_type_text = self._get_single_body_element(message_el,
-                "ContentType")
 
         # assume that @content_text will not be altered.
         is_stripped = False
 
         # if needed, Base64 decode @content_text.
-        if transfer_encoding_text.lower() == "base64":
+        if transfer_encoding_text == "base64":
             self.logger.info("Decoding Base64 message content.")
             content_text = base64.b64decode(content_text)
             content_text = content_text.decode(self.charset, errors="backslashreplace")
             is_stripped = True
 
         # if needed, decode quoted-printable text.
-        if transfer_encoding_text.lower() == "quoted-printable":
+        if transfer_encoding_text == "quoted-printable":
             self.logger.info("Decoding quoted-printable message content.")
             content_text = quopri.decodestring(content_text)
             content_text = content_text.decode(self.charset, errors="backslashreplace")
             is_stripped = True
         
         # if needed, convert HTML in @content_text to plain text.
-        if content_type_text.lower() in ["text/html", "application/xml+html"]:
+        if content_type_text in ["text/html", "application/xml+html"]:
             self.logger.info("Converting HTML message content to plain text.")
             content_text = self.html_converter(content_text)
             is_stripped = True
@@ -293,16 +303,18 @@ class EAXSToTagged():
         message_el.append(etree.Element("{" + self.ncdcr_uri + "}Restriction", 
             nsmap=self.ns_map))
 
-        # get <Content> element value.
-        content_el, content_text = self._get_single_body_element(message_el, 
-                "BodyContent/Content")
+        # get relevant <Message> element data.
+        message_data = self._get_message_data(message_el)
+        content_text, transfer_encoding_text, content_type_text = message_data
 
-        # if no <Content> sub-element exists, return the <Message> element.
-        if content_el is None or content_text is None:
-                return message_el
+        # if no viable <Content> sub-element exists, return the <Message> element.
+        if content_text == "":
+            self.logger.info("Found empty message content; skipping message.")
+            return message_el
 
         # otherwise, get NER tags and a plain text version of the message body.
-        tagged_content, stripped_content = self.tag_message(message_el, content_text)
+        tagged_content, stripped_content = self.tag_message(content_text, 
+                transfer_encoding_text, content_type_text)
 
         # create a new <SingleBody> element.
         single_body_el = etree.Element("{" + self.ncdcr_uri + "}SingleBody", 
@@ -364,7 +376,7 @@ class EAXSToTagged():
         if os.path.isfile(tagged_eaxs_file):
             err = "Destination file '{}' already exists.".format(tagged_eaxs_file)
             self.logger.error(err)
-            #raise FileExistsError(err) # !!! UNDO COMMENT.
+            raise FileExistsError(err)
 
         # get count of <Message> elements; prepare data for progress updates.
         total_messages = 0
@@ -392,11 +404,6 @@ class EAXSToTagged():
                     
                     # get needed values.
                     message_id = self._get_message_id(element)
-                    
-                    # !!! DELETE this test block.
-                    if message_id!="<20041004154915.QTXN17040.lakecmmtar01.coxmail.com@Ron>":
-                        continue#DELETE !!!
-                    
                     folder_name = self._get_folder_name(element)
                     
                     # tag the message and write it to @xfile.
