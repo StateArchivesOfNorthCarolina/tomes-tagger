@@ -11,22 +11,11 @@ Todo:
     * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
     work on that. That's somewhat redundant within the context of search, but I guess we need
     to think of the tagged EAXS as document that's independent of search.
-    * Do you really need the decode/encode bit in _get_folder_name()?
-    * Investigate JG's Slack comment from 12/22/2017:
-        "Another note.  All body-content that is tagged as quoted-printable is now meets that
-        specification exactly. If you need to decode for chunking and sending python has a
-        tool.
-        https://docs.python.org/3/library/quopri.html"
-        - I think this is working now but I'll leave this TODO item until I'm more sure.
-        - I'm also wondering if I need to check for transfer-encoding and MIME type at the
-        multibody level if I don't find it in the <Message> element itself.
     * Do you need to test if there are text AND HTML versions of the email first and default
     to the plain text?
-    * _legalize_cdata_text() is stripping a lot of whitespace and mashing words together.
-        - I think this is fixed.
-    * I think you want to use .strip() for tagged and stripped content to avoid large swaths
-    of leading/trailing whitespace.
-    * Comment all "???" occurences and uncomment all "!!!" occurences you find.
+        - Yes. But you aren't. :P
+    * Comment all "???" occurences and uncomment all "!!!" occurences you find. This includes
+    and temporary test lines/blocks.
 """
 
 # import modules.
@@ -78,9 +67,22 @@ class EAXSToTagged():
 
     @staticmethod
     def _legalize_cdata_text(cdtext, charset, error_handler="backslashreplace"):
-        """ ??? """
+        """ A static method to alter @cdtext by replacing vertical tabs and form feeds with
+        line breaks and removing control characters except for carriage returns and tabs so 
+        that @cdtext can be passed to lxml.etree.CDATA() without raising a ValueError.
+        
+        Args:
+            - cdtext (str): The text to alter.
+            - charset (str): The encoding with which to encode @cdtext.
+            - error_handler (str): The "error" parameter value with which to encode/decode
+            @cdtext as it's converted to bytes and back to a string. See also:
+            https://docs.python.org/3/howto/unicode.html#converting-to-bytes.
 
-        # ???
+        Returns:
+            str: The return value.
+        """
+
+        # legalize @cdtext for use with lxml.etree.CDATA().
         cdtext = cdtext.encode(charset).decode(charset, errors=error_handler)
         cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
         cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
@@ -111,7 +113,7 @@ class EAXSToTagged():
     
         # convert list to path-like string.
         folder_name = "/".join(folder_names)
-        folder_name = folder_name.encode(self.charset, errors="ignore").decode(self.charset)
+        folder_name = folder_name.encode(self.charset).decode(self.charset, errors="ignore")
         
         return folder_name
 
@@ -311,12 +313,12 @@ class EAXSToTagged():
                 nsmap=self.ns_map)
         tagged_content = etree.tostring(tagged_content, encoding=self.charset)
         try:
-            tagged_content_el.text = etree.CDATA(tagged_content)
+            tagged_content_el.text = etree.CDATA(tagged_content.strip())
         except ValueError as err:
             self.logger.error(err)
             self.logger.warning("Cleaning tagged content in order to write CDATA.")
             tagged_content = self._legalize_cdata_text(tagged_content, self.charset)
-            tagged_content_el.text = etree.CDATA(tagged_content)
+            tagged_content_el.text = etree.CDATA(tagged_content.strip())
         single_body_el.append(tagged_content_el)
 
         # if needed, append a plain text message body to the new <SingleBody> element.
@@ -324,13 +326,13 @@ class EAXSToTagged():
                 stripped_content_el = etree.Element("{" + self.ncdcr_uri + 
                         "}StrippedContent", nsmap=self.ns_map)
                 try:
-                    stripped_content_el.text = etree.CDATA(stripped_content)
+                    stripped_content_el.text = etree.CDATA(stripped_content.strip())
                 except ValueError as err:
                     self.logger.error(err)
                     self.logger.warning("Cleaning stripped content in order to write CDATA.")
                     stripped_content = self._legalize_cdata_text(stripped_content, 
                             self.charset)
-                    stripped_content_el.text = etree.CDATA(stripped_content)
+                    stripped_content_el.text = etree.CDATA(stripped_content.strip())
                 single_body_el.append(stripped_content_el)
 
         # append the new <SingleBody> element to @message_el.
@@ -391,7 +393,7 @@ class EAXSToTagged():
                     # get needed values.
                     message_id = self._get_message_id(element)
                     
-                    # DELETE block.
+                    # !!! DELETE this test block.
                     if message_id!="<20041004154915.QTXN17040.lakecmmtar01.coxmail.com@Ron>":
                         continue#DELETE !!!
                     
