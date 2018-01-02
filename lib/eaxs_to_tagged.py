@@ -78,7 +78,8 @@ class EAXSToTagged():
         """
 
         # legalize @cdtext for use with lxml.etree.CDATA().
-        cdtext = cdtext.encode(charset).decode(charset, errors=error_handler)
+        cdtext = cdtext.encode(charset, errors=error_handler).decode(charset, 
+                errors=error_handler)
         cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
         cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
             char in ("\r", "\t")])

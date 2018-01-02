@@ -68,13 +68,13 @@ class Test_HTMLToText(unittest.TestCase):
 
 
 # CLI TEST.
-def main(html: "HTML file"):
+def main(html_file: "HTML file"):
     
     "Prints plain text version of an HTML document.\
     \nexample: `py -3 test__html_to_text sample_files\sampleHTML.html`"
 
     # read HTML file.
-    html = open(html).read()
+    html = open(html_file).read()
     
     # modify HTML.
     html = ModifyHTML(html)

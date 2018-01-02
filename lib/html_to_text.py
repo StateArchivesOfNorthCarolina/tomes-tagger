@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 
-""" This module contains classes for manipulating HTML and converting HTML to plain text. """
+""" This module contains classes for manipulating HTML and converting HTML to plain text.
+
+todo:
+    * The glob delete looks like overkill. Maybe just pass if cleanup() fails?
+    * Is there a better way to get a temp file name?
+"""
 
 # import modules.
 import codecs
 import logging
 import os
 import subprocess
+import tempfile
 from bs4 import BeautifulSoup
-import platform
-
-if platform.system() == "Windows":
-    lynx_exec = "C:\Program Files (x86)\lynx\lynx.exe"
-
-if platform.system() == "Linux":
-    lynx_exec = "lynx"
 
 
 class ModifyHTML():
@@ -119,12 +118,12 @@ class HTMLToText():
     '\nHello World!\n\n'
     """
     
-    def __init__(self, custom_options=None, temp_file=os.path.join(os.getcwd(), "_tmp.html")):
+    def __init__(self, custom_options=None):
         """ Sets instance attributes.
         
         Args:
             - custom_options (dict): Custom Lynx options per: http://lynx.browser.org/lynx2.8.8/breakout/lynx_help/Lynx_users_guide.html#InteractiveOptions (Retrieved: April 2017).
-            - temp_file (str): File in which to store raw HTML strings.
+            - temp_file (str): File in which to store raw HTML strings.???
         """
 
         # set logger; suppress logging by default. 
@@ -140,22 +139,34 @@ class HTMLToText():
                 options[key] = val
         self.options = options
 
-        # set persistent temporary file name.
-        self.temp_file = os.path.abspath(temp_file)
+        # set persistent temporary file name. ???
+        this_dir = os.path.dirname(os.path.abspath(__file__))
+        self.temp_dir = tempfile.TemporaryDirectory(dir=this_dir)
 
 
-    def __del__(self):
-        """ Trys to remove temporary file if it exists. Passes on permission error. """
+    def _delete_temporary_files(self):
+        """ Trys to remove temporary file if it exists. Passes on permission error.
+        
+        Returns:
+            None
+        """
 
-        if os.path.isfile(self.temp_file):
-            try:
-                self.logger.debug("Removing temporary HTML file: {}".format(self.temp_file))
-                os.remove(self.temp_file)
-            except PermissionError:
-                self.logger.warning("Unable to remove temporary file: {}".format(
-                    self.temp_file))
-                pass
+        # ???
+        try:
+            self.logger.debug("???")
+            self.temp_dir.cleanup()
+        except:
+            for tmp in glob.glob(self.temp_dir):
+                try:
+                    self.logger.debug("Removing temporary HTML file: {}".format(tmp))
+                    os.remove(tmp)
+                except PermissionError:
+                    self.logger.warning("Unable to remove temporary file: {}".format(temp))
+                    pass
 
+        return
+
+    
     def text(self, html, is_raw=False, charset="utf-8"):
         """ Converts HTML files OR strings to plain text string via the Lynx browser.
 
@@ -170,39 +181,41 @@ class HTMLToText():
     
         self.logger.info("Converting HTML to plain text.")
 
-        # create beginning Lynx command line snippet.
-        arg_options = [key for key, val in self.options.items() if val]
-        args = []
-        args.append(lynx_exec)
-        for opt in arg_options:
-            args.append("-{}".format(opt))
-
+        # create beginning Lynx command line snippet; add options. ???
+        args = ["lynx"]
+        options = [key for key, val in self.options.items() if val]        
+        for option in options:
+            args.append("-{}".format(option))
 
         # if @is_raw == True, write @html to temporary file.
         # complete command line snippet.
         if is_raw:
-            self.logger.debug(
-                    "Writing HTML to temporary HTML file: {}".format(self.temp_file))
-            with codecs.open(self.temp_file, "w", encoding=charset) as tmp:
-                tmp.write(html)
-            #args += " " + self.temp_file
-            args.append(self.temp_file)
+            with tempfile.NamedTemporaryFile(suffix=".html", dir=self.temp_dir.name) as tf:
+                temp_file = tf.name
+            self.logger.debug("Writing HTML to temporary HTML file: {}".format(temp_file))
+            with codecs.open(temp_file, "w", encoding=charset) as tf:
+                tf.write(html)
+            args.append(temp_file)
         else:
-            #args += " " + html
             args.append(html)
 
-        # run Lynx.
-        self.logger.debug("Converting HTML to text via: '{}'".format(args))
-        text = html
+        # run Lynx; capture its output.
+        self.logger.debug("Converting HTML to text via: '{}'".format(" ".join(args)))
         try:
-            cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+            cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, 
+                    check=True)
             text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
         except FileNotFoundError as err:
             self.logger.error(err)
-            self.logger.error(html)
+            self.logger.warning("Couldn't convert HTML, falling back to empty string.")
+            text = ""
 
-        # return stdout.
-
+        # delete temporay files.
+        self.logger.debug("Attempting to cleanup leftover temporary files in: {}".format(
+            self.temp_dir))
+        self._delete_temporary_files()
+        
+        # return HTML to text conversion.
         return text
 
 

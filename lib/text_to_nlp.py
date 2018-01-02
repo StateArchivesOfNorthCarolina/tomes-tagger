@@ -176,7 +176,7 @@ class TextToNLP():
         # verify @response is a string; decode @response.
         if not isinstance(response, str):
             response = str(response)
-        response = response.encode(charset, errors="ignore").decode()
+        response = response.encode(charset, errors="ignore").decode(charset, error="ignore")
         
         # if needed, truncate @response.
         if len(response) > max_length:
@@ -210,7 +210,13 @@ class TextToNLP():
             if not isinstance(text, str):
                 self.logger.error("Argument @text must be a string, got: {}".format(
                     type(text).__name__))
-                self.logger.warning("Falling  back to empty output.")
+                self.logger.warning("Falling back to empty output.")
+                return []
+
+            # verify @text is not empty.
+            if len(text) == 0:
+                self.logger.warning("Argument @text was empty.")
+                self.logger.warning("Falling back to empty output.")
                 return []
 
             # if needed, break @text into smaller chunks.
