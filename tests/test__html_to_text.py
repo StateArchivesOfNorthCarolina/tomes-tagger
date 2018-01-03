@@ -84,7 +84,7 @@ def main(html_file: "HTML file"):
 
     # convert to plain text.
     h2t = HTMLToText()
-    plain = h2t.text(html, is_raw=True)
+    plain = h2t.get_text(html, is_raw=True)
     print(plain)
 
 

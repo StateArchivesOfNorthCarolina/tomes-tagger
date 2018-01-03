@@ -1,20 +1,16 @@
 #!/usr/bin/env python3
 
-""" This module contains classes for manipulating HTML and converting HTML to plain text.
-
-todo:
-    * The glob delete looks like overkill. Maybe just pass if cleanup() fails?
-    * Is there a better way to get a temp file name?
-    * Review all code/documentation.
-"""
+""" This module contains classes for manipulating HTML and converting HTML to plain text. """
 
 # import modules.
 import codecs
 import logging
 import os
+import shutil
 import subprocess
 import tempfile
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 
 class ModifyHTML():
@@ -41,8 +37,9 @@ class ModifyHTML():
 
 
     def shift_links(self):
-        """ Appends each A tag's @href value to the tag's text value if the @href value starts
-        with "http" or "https", i.e. "<a href='bar'>foo</a>" to "<a href='bar'>foo [bar]</a>".
+        """ Appends each <a> tag's "href" attribute value to the tag's text value if the 
+        value starts with "http" or "https", i.e. "<a href='bar'>foo</a>" to 
+        "<a href='bar'>foo [bar]</a>".
 
         Returns:
             None
@@ -50,7 +47,7 @@ class ModifyHTML():
 
         self.logger.info("Shifting @href values to parent <a> tags.")
 
-        # get all A tags.
+        # get all <a> tags.
         a_tags = self.root.find_all("a")
         
         # append @href values to text values.
@@ -104,7 +101,7 @@ class ModifyHTML():
             str: The return value.
         """
 
-        self.logger.debug("Converting BeautifulSoup object to HTML string.")
+        self.logger.info("Converting BeautifulSoup object to HTML string.")
         strroot = str(self.root)
         return strroot
 
@@ -114,61 +111,81 @@ class HTMLToText():
     
     Examples:
     >>> h2t = HTMLToText()
-    >>> h2t.text("sample.html") # returns plain text version of "sample.html"
-    >>> ht2.text("<p class='hi'>Hello World!</p>", is_raw=True)
+    >>> h2t.get_text("sample.html") # returns plain text version of "sample.html"
+    >>> ht2.get_text("<p class='hi'>Hello World!</p>", is_raw=True)
     '\nHello World!\n\n'
     """
     
-    def __init__(self, custom_options=None):
+    def __init__(self, lynx_options=None):
         """ Sets instance attributes.
         
         Args:
-            - custom_options (dict): Custom Lynx options per: http://lynx.browser.org/lynx2.8.8/breakout/lynx_help/Lynx_users_guide.html#InteractiveOptions (Retrieved: April 2017).
-            - temp_file (str): File in which to store raw HTML strings.???
+            - lynx_options (dict): Any additional Lynx command line options for the
+            "dump" command. See: "http://goo.gl/e55eNp" (Retrieved January 3, 2018). 
         """
 
         # set logger; suppress logging by default. 
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.NullHandler())
 
-        # set default options for Lynx.
-        options = {"nolist":True, "nomargins":True, "dump":True}
+        # set default and custom options for Lynx.
+        self.lynx_options = {"nolist":True, "nomargins":True}
+        if isinstance(lynx_options, dict):
+            for key, val in lynx_options.items():
+                self.lynx_options[key] = val
+        self.lynx_options["dump"] = True
 
-        # add in custom options.
-        if isinstance(custom_options, dict):
-            for key, val in custom_options.items():
-                options[key] = val
-        self.options = options
-
-        # set persistent temporary file name. ???
-        this_dir = os.path.dirname(os.path.abspath(__file__))
-        self.temp_dir = tempfile.TemporaryDirectory(dir=this_dir)
+        # ???
+        self.temp_dir = self.__make_temp_dir()
 
 
-    def _delete_temporary_files(self):
-        """ Trys to remove temporary file if it exists. Passes on permission error.
+    def __make_temp_dir(self):
+        """ ??? 
         
         Returns:
-            None
+            tempfile.TemporaryDirectory ???
+        """
+
+        # ???
+        temp_dir = os.path.dirname(os.path.abspath(__file__))
+        temp_dir = os.path.join(temp_dir, "_temp")
+        
+        # ???
+        if not os.path.isdir(temp_dir):
+            try:
+                self.logger.info("???")
+                os.mkdir(temp_dir)
+            except Exception as err:
+                self.logger.error(err)
+                self.logger.warning("???")
+                # ???
+
+        temp_dir =tempfile.TemporaryDirectory(dir=temp_dir)
+        return temp_dir
+
+
+    def __del__(self):
+        """ Trys to remove temporary ???
         """
 
         # ???
         try:
-            self.logger.debug("???")
+            self.logger.info("Removing temporary folder: {}".format(self.temp_dir.name))
             self.temp_dir.cleanup()
-        except:
-            for tmp in glob.glob(self.temp_dir):
-                try:
-                    self.logger.debug("Removing temporary HTML file: {}".format(tmp))
-                    os.remove(tmp)
-                except PermissionError:
-                    self.logger.warning("Unable to remove temporary file: {}".format(temp))
-                    pass
-
-        return
-
+        except Exception as err:
+            self.logger.error(err)
+            self.logger.warning("Unable to completely remove temporary folder.")
+            self.logger.info("Attempting fallback method to clean up temporary folder.")
+            shutil.rmtree(self.temp_dir.name, ignore_errors=True)
+            
+            # ???
+            if os.path.isdir(self.temp_dir.name):
+                self.logger.info("Please manually delete: {}".format(self.temp_dir.name))
+            else:
+                self.logger.info("Success; temporary folder finally removed.")
+            
     
-    def text(self, html, is_raw=False, charset="utf-8"):
+    def get_text(self, html, is_raw=False, charset="utf-8"):
         """ Converts HTML files OR strings to plain text string via the Lynx browser.
 
         Args:
@@ -184,16 +201,16 @@ class HTMLToText():
 
         # create beginning Lynx command line snippet; add options. ???
         args = ["lynx"]
-        options = [key for key, val in self.options.items() if val]        
+        options = [key for key, val in self.lynx_options.items() if val]        
         for option in options:
             args.append("-{}".format(option))
 
         # if @is_raw == True, write @html to temporary file.
         # complete command line snippet.
         if is_raw:
-            with tempfile.NamedTemporaryFile(suffix=".html", dir=self.temp_dir.name) as tf:
-                temp_file = tf.name
-            self.logger.debug("Writing HTML to temporary HTML file: {}".format(temp_file))
+            temp_file = os.path.join(self.temp_dir.name, 
+                    datetime.utcnow().strftime("%Y%m%d_%H-%M-%S-%f") + ".html")
+            self.logger.info("Writing HTML to temporary HTML file: {}".format(temp_file))
             with codecs.open(temp_file, "w", encoding=charset) as tf:
                 tf.write(html)
             args.append(temp_file)
@@ -211,11 +228,6 @@ class HTMLToText():
             self.logger.warning("Couldn't convert HTML. Is Lynx installed correctly?")
             self.logger.warning("Falling back to empty string.")
             text = ""
-
-        # delete temporay files.
-        self.logger.debug("Attempting to cleanup leftover temporary files in: {}".format(
-            self.temp_dir))
-        self._delete_temporary_files()
         
         # return HTML to text conversion.
         return text
