@@ -220,9 +220,9 @@ class EAXSToTagged():
             if content_type_text == "text/plain":
                 break
 
-        # place data in tuple.
-        content_data = (content_text, transfer_encoding_text, content_type_text)
-        return content_data
+        # return data as tuple.
+        message_data = (content_text, transfer_encoding_text, content_type_text)
+        return message_data
 
 
     def tag_message(self, content_text, transfer_encoding_text, content_type_text):
