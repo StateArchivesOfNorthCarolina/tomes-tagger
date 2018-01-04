@@ -68,9 +68,9 @@ class Test_HTMLToText(unittest.TestCase):
 
 
     def test__bad_data_gets_empty(self):
-        """ Does passing the wring data type return an empty string? """
+        """ Does passing the wrong data type return an empty string? """
         
-        # try to convert an int.
+        # try to convert an int and a non-existant file.
         empty_01 = self.h2t.get_text(1, is_raw=True)
         empty_02 = self.h2t.get_text("file_not_exists.fake", is_raw=False)
         

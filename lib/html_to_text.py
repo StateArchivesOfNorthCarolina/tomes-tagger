@@ -105,21 +105,22 @@ class ModifyHTML():
 
 
 class HTMLToText():
-    """ A class to convert HTML files OR strings to plain text via the Lynx browser.
+    """ A class to convert HTML files OR strings to plain text via the Lynx browser 
+    (http://lynx.invisible-island.net/).
     
     Examples:
-    >>> h2t = HTMLToText()
-    >>> h2t.get_text("sample.html") # returns plain text version of "sample.html"
-    >>> ht2.get_text("<p class='hi'>Hello World!</p>", is_raw=True)
-    '\nHello World!\n\n'
+        >>> h2t = HTMLToText()
+        >>> h2t.get_text("sample.html") # returns plain text version of "sample.html".
+        >>> ht2.get_text("<p class='hi'>Hello World!</p>", is_raw=True)
+        # returns "Hello World!" with leading/trailing line breaks.
     """
     
     def __init__(self, lynx_options=None):
         """ Sets instance attributes.
         
         Args:
-            - lynx_options (dict): Any additional Lynx command line options for the
-            "dump" command. See: "http://goo.gl/e55eNp". 
+            - lynx_options (dict): Any additional command line options for the Lynx "dump"
+            command. See: "http://goo.gl/e55eNp". 
         """
 
         # set logger; suppress logging by default. 
@@ -134,7 +135,7 @@ class HTMLToText():
         self.lynx_options["dump"] = True
 
         # set temporary folder in which to write temporary files.
-        self.temp_dir = self.__make_temp_dir()
+        self.temp_dir = self._make_temp_dir()
 
 
     def __del__(self):
@@ -151,15 +152,15 @@ class HTMLToText():
                         self.temp_dir.name))
 
 
-    def __make_temp_dir(self):
-        """ Creates a temporary folder inside "_temp" in which to write temporary files for
+    def _make_temp_dir(self):
+        """ Creates a temporary folder inside "./_temp" in which to write temporary files for
         the duration of the class instance.
         
         Returns:
-            tempfile.TemporaryDirectory
+            tempfile.TemporaryDirectory: The return value.
 
         Raises:
-            - OSError: If the container "_temp" folder does not exist and can't be created. 
+            - OSError: If the container "./_temp" folder does not exist AND can't be created. 
         """
 
         # get absoluate path of container folder.
@@ -176,7 +177,7 @@ class HTMLToText():
                 self.logger.error(err)
                 self.logger.warning("Failed to create missing container folder: {} ".format(
                     container_dir))
-                raise OSError
+                raise OSError(err)
         
         # create temporary folder inside container folder.
         temp_dir = tempfile.TemporaryDirectory(dir=container_dir)
@@ -188,12 +189,15 @@ class HTMLToText():
 
         Args:
             - html (str): The HTML file OR the raw HTML string to convert to text.
-            - is_raw (bool): Use True is @html is an HTML string. Otherwise, use False if 
-            @html is an HTML file path.
+            - is_raw (bool): Use True is @html is an HTML string snippet. Otherwise, use False
+            if @html is an HTML file path.
             - charset (str): The encoding for the converted text.
 
         Returns:
             str: The return value.
+
+        Raises:
+            - FileNotFoundError: If the "lynx" command can't be called.
         """
     
         # verify @html is a string or a file.
@@ -202,6 +206,7 @@ class HTMLToText():
                 type(html).__name__))
             self.logger.warning("Falling back to empty string.""")
             return ""
+        
         if not is_raw and not os.path.isfile(html):
             self.logger.error("Non-existant file path: {}".format(html))
             self.logger.warning("Falling back to empty string.""")
@@ -213,7 +218,7 @@ class HTMLToText():
             if val:
                 cli_args.append("-{}".format(key))
 
-        # if @is_raw == True, write @html to temporary file; complete Lynx arguments.
+        # if needed, write @html to a temporary file.
         if is_raw:
             tf_handle, tf_path = tempfile.mkstemp(dir=self.temp_dir.name, suffix=".html")
             self.logger.info("Writing HTML to temporary file: {}".format(tf_path))
@@ -233,11 +238,10 @@ class HTMLToText():
         except FileNotFoundError as err:
             self.logger.error(err)
             self.logger.warning("Couldn't convert HTML. Is Lynx installed and working?")
-            self.logger.warning("Falling back to empty string.")
-            text = ""
+            raise FileNotFoundError(err)
         
-        # if a temporary file was made, delete it per: 
-        # https://www.logilab.org/blogentry/17873
+        # if a temporary file was made, delete it. 
+        # deletion method per: "https://www.logilab.org/blogentry/17873".
         if is_raw:
             try:
                 self.logger.info("Deleting temporary file: {}".format(tf_path))
