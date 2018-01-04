@@ -60,7 +60,7 @@ class Test_HTMLToText(unittest.TestCase):
         html = self.sample.format("Hello World!")
         
         # convert to plain text.
-        plain = self.h2t.text(html, is_raw=True)
+        plain = self.h2t.get_text(html, is_raw=True)
         
         # check if result is as expected.
         expected = "\nHello World!\n\n"
