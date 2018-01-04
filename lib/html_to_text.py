@@ -234,7 +234,8 @@ class HTMLToText():
             self.logger.warning("Falling back to empty string.")
             text = ""
         
-        # if a temporary file was made, delete it.
+        # if a temporary file was made, delete it per: 
+        # https://www.logilab.org/blogentry/17873
         if is_raw:
             try:
                 self.logger.info("Deleting temporary file: {}".format(tf_path))
