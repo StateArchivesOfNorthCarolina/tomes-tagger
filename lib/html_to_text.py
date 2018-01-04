@@ -6,11 +6,9 @@
 import codecs
 import logging
 import os
-import shutil
 import subprocess
 import tempfile
 from bs4 import BeautifulSoup
-from datetime import datetime
 
 
 class ModifyHTML():
@@ -121,7 +119,7 @@ class HTMLToText():
         
         Args:
             - lynx_options (dict): Any additional Lynx command line options for the
-            "dump" command. See: "http://goo.gl/e55eNp" (Retrieved January 3, 2018). 
+            "dump" command. See: "http://goo.gl/e55eNp". 
         """
 
         # set logger; suppress logging by default. 
@@ -135,101 +133,117 @@ class HTMLToText():
                 self.lynx_options[key] = val
         self.lynx_options["dump"] = True
 
-        # ???
+        # set temporary folder in which to write temporary files.
         self.temp_dir = self.__make_temp_dir()
 
 
-    def __make_temp_dir(self):
-        """ ??? 
-        
-        Returns:
-            tempfile.TemporaryDirectory ???
-        """
-
-        # ???
-        temp_dir = os.path.dirname(os.path.abspath(__file__))
-        temp_dir = os.path.join(temp_dir, "_temp")
-        
-        # ???
-        if not os.path.isdir(temp_dir):
-            try:
-                self.logger.info("???")
-                os.mkdir(temp_dir)
-            except Exception as err:
-                self.logger.error(err)
-                self.logger.warning("???")
-                # ???
-
-        temp_dir =tempfile.TemporaryDirectory(dir=temp_dir)
-        return temp_dir
-
-
     def __del__(self):
-        """ Trys to remove temporary ???
-        """
+        """ Attempts to delete @self.temp_dir."""
 
-        # ???
+        # attempt to remove folder; report on results.
         try:
             self.logger.info("Removing temporary folder: {}".format(self.temp_dir.name))
             self.temp_dir.cleanup()
         except Exception as err:
             self.logger.error(err)
-            self.logger.warning("Unable to completely remove temporary folder.")
-            self.logger.info("Attempting fallback method to clean up temporary folder.")
-            shutil.rmtree(self.temp_dir.name, ignore_errors=True)
-            
-            # ???
-            if os.path.isdir(self.temp_dir.name):
-                self.logger.info("Please manually delete: {}".format(self.temp_dir.name))
-            else:
-                self.logger.info("Success; temporary folder finally removed.")
-            
-    
-    def get_text(self, html, is_raw=False, charset="utf-8"):
-        """ Converts HTML files OR strings to plain text string via the Lynx browser.
+            self.logger.warning(
+                    "Can't remove temporary folder'{}'; please delete it manually.".format(
+                        self.temp_dir.name))
+
+
+    def __make_temp_dir(self):
+        """ Creates a temporary folder inside "_temp" in which to write temporary files for
+        the duration of the class instance.
+        
+        Returns:
+            tempfile.TemporaryDirectory
+
+        Raises:
+            - OSError: If the container "_temp" folder does not exist and can't be created. 
+        """
+
+        # get absoluate path of container folder.
+        container_dir = os.path.dirname(os.path.abspath(__file__))
+        container_dir = os.path.join(container_dir, "_temp")
+        
+        # verify container folder exists; if needed, create it.
+        if not os.path.isdir(container_dir):
+            try:
+                self.logger.info("Creating missing container folder: {} ".format(
+                    container_dir))
+                os.mkdir(temp_dir)
+            except OSError as err:
+                self.logger.error(err)
+                self.logger.warning("Failed to create missing container folder: {} ".format(
+                    container_dir))
+                raise OSError
+        
+        # create temporary folder inside container folder.
+        temp_dir = tempfile.TemporaryDirectory(dir=container_dir)
+        return temp_dir
+
+
+    def get_text(self, html, is_raw=True, charset="utf-8"):
+        """ Converts and HTML file OR and HTML string to plain text via the Lynx browser.
 
         Args:
             - html (str): The HTML file OR the raw HTML string to convert to text.
-            - is_raw (bool): If True, @html is saved to self.temp_file prior to conversion.
+            - is_raw (bool): Use True is @html is an HTML string. Otherwise, use False if 
+            @html is an HTML file path.
             - charset (str): The encoding for the converted text.
 
         Returns:
             str: The return value.
+
+        Raises:
+            - TypeError: If @html is neither a file or a string.
         """
     
-        self.logger.info("Converting HTML to plain text.")
+        # verify @html is a file or string.
+        if not os.path.isfile(html) and not isinstance(html, str):
+            self.logger.error("Expected HTML file or string, found '{}' instead.".format(
+                type(html).__name__))
+            raise TypeError
 
-        # create beginning Lynx command line snippet; add options. ???
-        args = ["lynx"]
-        options = [key for key, val in self.lynx_options.items() if val]        
-        for option in options:
-            args.append("-{}".format(option))
+        # create Lynx command line arguments.
+        cli_args = ["lynx"]
+        for key, val in self.lynx_options.items():
+            if val:
+                cli_args.append("-{}".format(key))
 
-        # if @is_raw == True, write @html to temporary file.
-        # complete command line snippet.
+        # if @is_raw == True, write @html to temporary file; complete Lynx arguments.
         if is_raw:
-            temp_file = os.path.join(self.temp_dir.name, 
-                    datetime.utcnow().strftime("%Y%m%d_%H-%M-%S-%f") + ".html")
-            self.logger.info("Writing HTML to temporary HTML file: {}".format(temp_file))
-            with codecs.open(temp_file, "w", encoding=charset) as tf:
+            tf_handle, tf_path = tempfile.mkstemp(dir=self.temp_dir.name, suffix=".html")
+            self.logger.info("Writing HTML to temporary file: {}".format(tf_path))
+            with codecs.open(tf_path, "w", encoding=charset) as tf:
                 tf.write(html)
-            args.append(temp_file)
+            cli_args.append(tf_path)
         else:
-            args.append(html)
+            cli_args.append(html)
 
-        # run Lynx; capture its output.
-        self.logger.debug("Converting HTML to text via: '{}'".format(" ".join(args)))
+        # run Lynx; return its output.
+        self.logger.debug("Using Lynx command line: {}".format(" ".join(cli_args)))
         try:
-            cmd = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, 
+            self.logger.info("Converting HTML to text via Lynx.")
+            cmd = subprocess.run(cli_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, 
                     check=True)
             text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
         except FileNotFoundError as err:
             self.logger.error(err)
-            self.logger.warning("Couldn't convert HTML. Is Lynx installed correctly?")
+            self.logger.warning("Couldn't convert HTML. Is Lynx installed and working?")
             self.logger.warning("Falling back to empty string.")
             text = ""
         
-        # return HTML to text conversion.
+        # if a temporary file was made, delete it.
+        if is_raw:
+            try:
+                self.logger.info("Deleting temporary file: {}".format(tf_path))
+                os.close(tf_handle)
+                os.remove(tf_path)
+            except Exception as err:
+                self.logger.error(err)
+                self.logger.warning("Unable to delete temporary file: {}".format(tf_path))
+
         return text
 
 

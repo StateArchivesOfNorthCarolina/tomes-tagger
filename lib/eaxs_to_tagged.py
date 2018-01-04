@@ -71,7 +71,7 @@ class EAXSToTagged():
             - charset (str): The encoding with which to encode @cdtext.
             - error_handler (str): The "error" parameter value with which to encode/decode
             @cdtext as it's converted to bytes and back to a string. See also:
-            https://docs.python.org/3/howto/unicode.html#converting-to-bytes.
+            "https://docs.python.org/3/howto/unicode.html#converting-to-bytes".
 
         Returns:
             str: The return value.
