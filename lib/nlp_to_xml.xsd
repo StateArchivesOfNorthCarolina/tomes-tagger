@@ -83,14 +83,14 @@ elementFormDefault="qualified">
 	<!--
 	
 	<pre class="Tokens" style="text-align: left; white-space: pre-line;">
-		<span class="Token">Good</span> <span class="Token">morning</span> <span class="Token" data-entity="person.male" data-authority="foo.bar" data-group="1">John</span><span class="Token">!</span>
+	<span class="Token">Good</span> <span class="Token">morning</span> <span class="Token" data-entity="person.male" data-authority="foo.bar" data-group="1">John</span><span class="Token">!</span>
 
-		<span class="Token">Love</span><span class="Token">,</span>
-		<span class="Token" data-entity="PERSON" data-authority="stanford.edu" data-group="2">Marsha</span>
-		
-		<span class="BlockText">Marsha B.
-		Los Angeles, CA
-		555-555-5555</span>
+	<span class="Token">Love</span><span class="Token">,</span>
+	<span class="Token" data-entity="PERSON" data-authority="stanford.edu" data-group="2">Marsha</span>
+	
+	<span class="BlockText">Marsha B.
+	Los Angeles, CA
+	555-555-5555</span>
 	</pre>
 
 	-->
