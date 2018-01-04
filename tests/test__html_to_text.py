@@ -67,10 +67,21 @@ class Test_HTMLToText(unittest.TestCase):
         self.assertEqual(plain, expected)
 
 
+    def test__bad_data_gets_empty(self):
+        """ Does passing the wring data type return an empty string? """
+        
+        # try to convert an int.
+        empty_01 = self.h2t.get_text(1, is_raw=True)
+        empty_02 = self.h2t.get_text("file_not_exists.fake", is_raw=False)
+        
+        # check if result is as expected.
+        self.assertEqual([empty_01, empty_02], ["", ""])
+
+
 # CLI TEST.
 def main(html_file: "HTML file"):
     
-    "Prints plain text version of an HTML document.\
+    "Prints plain text version of an HTML file.\
     \nexample: `py -3 test__html_to_text sample_files\sampleHTML.html`"
 
     # read HTML file.

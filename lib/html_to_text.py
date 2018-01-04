@@ -194,16 +194,18 @@ class HTMLToText():
 
         Returns:
             str: The return value.
-
-        Raises:
-            - TypeError: If @html is neither a file or a string.
         """
     
-        # verify @html is a file or string.
-        if not os.path.isfile(html) and not isinstance(html, str):
-            self.logger.error("Expected HTML file or string, found '{}' instead.".format(
+        # verify @html is a string or a file.
+        if not isinstance(html, str):
+            self.logger.error("Expected file path or string, found '{}' instead.".format(
                 type(html).__name__))
-            raise TypeError
+            self.logger.warning("Falling back to empty string.""")
+            return ""
+        if not is_raw and not os.path.isfile(html):
+            self.logger.error("Non-existant file path: {}".format(html))
+            self.logger.warning("Falling back to empty string.""")
+            return ""
 
         # create Lynx command line arguments.
         cli_args = ["lynx"]
