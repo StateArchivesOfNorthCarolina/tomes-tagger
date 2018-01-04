@@ -184,7 +184,7 @@ class HTMLToText():
 
 
     def get_text(self, html, is_raw=True, charset="utf-8"):
-        """ Converts and HTML file OR and HTML string to plain text via the Lynx browser.
+        """ Converts an HTML file OR an HTML string to plain text via the Lynx browser.
 
         Args:
             - html (str): The HTML file OR the raw HTML string to convert to text.
