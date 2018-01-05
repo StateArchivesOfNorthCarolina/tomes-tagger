@@ -43,7 +43,7 @@ class Test_TextToNLP(unittest.TestCase):
     def test__gets_empty_list(self):
         """ Since we can't connect to port -1, is an empty list returned? """
 
-        results = self.t2n.get_ner("")
+        results = self.t2n.get_NER("")
         self.assertTrue(results == [])
 
 
@@ -55,7 +55,7 @@ def main(text="North Carolina", host="http://localhost", port=9003):
 
     # get/print NER results.
     t2n = TextToNLP(host=host, port=port)
-    ner = t2n.get_ner(text)
+    ner = t2n.get_NER(text)
     print(ner)
 
 

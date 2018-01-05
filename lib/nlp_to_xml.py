@@ -82,7 +82,7 @@ class NLPToXML():
         return is_valid
 
 
-    def get_xml(self, ner_data, validate=False):
+    def get_XML(self, ner_data, validate=False):
         """ Converts CoreNLP JSON to lxml.etree._Element per the tagged EAXS schema for body
         content.
         
@@ -97,7 +97,7 @@ class NLPToXML():
             lxml.etree._Element: The return value.
         """
 
-        self.logger.info("Converting NER list to an XML 'tagged' message.")
+        self.logger.info("Converting NER list to a tagged XML message.")
 
         # create root element.
         tagged_el = etree.Element("{" + self.ns_uri + "}Tokens",

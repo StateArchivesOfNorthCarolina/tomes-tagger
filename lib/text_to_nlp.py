@@ -187,18 +187,18 @@ class TextToNLP():
         return response
 
 
-    def __process_ner_requests(def__get_ner):
-        """ A decorator for self.get_ner() that splits text into chunks if the string passed
-        to self.get_ner() exceeds self.chunk_size in length.
+    def __process_NER_requests(def__get_NER):
+        """ A decorator for self.get_NER() that splits text into chunks if the string passed
+        to self.get_NER() exceeds self.chunk_size in length.
         
         Args:
-            - def__get_ner (function): An alias intended for self.get_ner().
+            - def__get_NER (function): An alias intended for self.get_NER().
 
         Returns:
             function: The return value.
 
         Raises:
-            - TypeError: If @text passed to self.get_ner() is not a string.
+            - TypeError: If @text passed to self.get_NER() is not a string.
         """
 
         def processor(self, text):
@@ -243,7 +243,7 @@ class TextToNLP():
                 self.logger.info("Getting NER tags for chunk {} of {}.".format(i, 
                     total_chunks))
                 try:
-                    tokenized_tagged = def__get_ner(self, text_chunk)
+                    tokenized_tagged = def__get_NER(self, text_chunk)
                 except Exception as err:
                     self.logger.error(err)
                     self.logger.error("Failed to get NER tags for chunk.")
@@ -271,8 +271,8 @@ class TextToNLP():
         return processor
 
 
-    @__process_ner_requests
-    def get_ner(self, text):
+    @__process_NER_requests
+    def get_NER(self, text):
         """ Performs tokenization and NER tagging on @text.
         
         Args:

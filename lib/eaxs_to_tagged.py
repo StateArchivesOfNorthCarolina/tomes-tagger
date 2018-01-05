@@ -370,14 +370,14 @@ class EAXSToTagged():
             - FileExistsError: If @tagged_eaxs_file already exists.
         """
 
-        self.logger.info("Converting '{}' EAXS file to tagged EAXS file: {}".format(
-            eaxs_file, tagged_eaxs_file))
-
         # raise error if output file already exists.
         if os.path.isfile(tagged_eaxs_file):
             err = "Destination file '{}' already exists.".format(tagged_eaxs_file)
             self.logger.error(err)
             raise FileExistsError(err)
+
+        self.logger.info("Converting '{}' EAXS file to tagged EAXS file: {}".format(
+            eaxs_file, tagged_eaxs_file))
 
         # get count of <Message> elements; prepare data for progress updates.
         total_messages = 0

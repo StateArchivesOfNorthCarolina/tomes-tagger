@@ -36,7 +36,7 @@ class Test_NLPToXML(unittest.TestCase):
         
         # validate XML.
         ner = [("Jane", "stanford.edu/PERSON", " "), ("Doe", "stanford.edu/PERSON", "")]
-        xdoc = self.n2x.get_xml(ner)
+        xdoc = self.n2x.get_XML(ner)
         is_valid = self.n2x.validate_xml(xdoc)
         
         # check if result is as expected.
@@ -54,7 +54,7 @@ def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):
 
     # convert @ner_data to XML.
     n2x = NLPToXML()
-    xdoc = n2x.get_xml(ner_data)
+    xdoc = n2x.get_XML(ner_data)
     xdoc = etree.tostring(xdoc).decode()
     
     print(xdoc)

@@ -115,10 +115,11 @@ class HTMLToText():
         # returns "Hello World!" with leading/trailing line breaks.
     """
     
-    def __init__(self, lynx_options=None):
+    def __init__(self, lynx_command="lynx", lynx_options=None):
         """ Sets instance attributes.
         
         Args:
+            - lynx_command (str): The path to the "lynx" executable.
             - lynx_options (dict): Any additional command line options for the Lynx "dump"
             command. See: "http://goo.gl/e55eNp". 
         """
@@ -126,6 +127,9 @@ class HTMLToText():
         # set logger; suppress logging by default. 
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.NullHandler())
+
+        # set Lynx command path.
+        self.lynx_command = lynx_command
 
         # set default and custom options for Lynx.
         self.lynx_options = {"nolist":True, "nomargins":True}
@@ -141,15 +145,21 @@ class HTMLToText():
     def __del__(self):
         """ Attempts to delete @self.temp_dir. """
 
-        # remove folder; report on results.
+        # remove folder.
         try:
-            self.logger.info("Removing temporary folder: {}".format(self.temp_dir.name))
             self.temp_dir.cleanup()
         except Exception as err:
             self.logger.error(err)
-            self.logger.warning(
-                    "Can't remove temporary folder'{}'; please delete it manually.".format(
-                        self.temp_dir.name))
+
+        # verify folder is removed.
+        if not os.path.isdir(self.temp_dir.name):
+            self.logger.info("Removed temporary HTML folder: {}".format(self.temp_dir.name))
+        else:
+            self.logger.warning("Couldn't delete temporary HTML folder: {}".format(
+                self.temp_dir.name))
+            self.logger.info("Please manually delete the folder.")
+        
+        return
 
 
     def _make_temp_dir(self):
@@ -181,6 +191,8 @@ class HTMLToText():
         
         # create temporary folder inside container folder.
         temp_dir = tempfile.TemporaryDirectory(dir=container_dir)
+        self.logger.info("Created temporary HTML folder: {}".format(temp_dir.name))
+                
         return temp_dir
 
 
@@ -213,7 +225,7 @@ class HTMLToText():
             return ""
 
         # create Lynx command line arguments.
-        cli_args = ["lynx"]
+        cli_args = [self.lynx_command]
         for key, val in self.lynx_options.items():
             if val:
                 cli_args.append("-{}".format(key))
@@ -239,7 +251,7 @@ class HTMLToText():
             self.logger.error(err)
             self.logger.warning("Couldn't convert HTML. Is Lynx installed and working?")
             raise FileNotFoundError(err)
-        
+          
         # if a temporary file was made, delete it. 
         # deletion method per: "https://www.logilab.org/blogentry/17873".
         if is_raw:

@@ -71,7 +71,7 @@ class TOMESToolTagger():
         html = html.raw()
         
         # convert HTML to text.
-        text = self.h2t.text(html, is_raw=True)
+        text = self.h2t.get_text(html, is_raw=True)
         return text
 
 
@@ -87,7 +87,7 @@ class TOMESToolTagger():
 
         # get NLP; convert to XML.
         nlp = self.t2n.get_NER(text)
-        nlp = self.n2x.xml(nlp)
+        nlp = self.n2x.get_XML(nlp)
         return nlp
 
     
@@ -101,19 +101,25 @@ class TOMESToolTagger():
             "__tagged.xml".
 
         Returns:
-            str: The return value.
-            The filepath of the tagged EAXS file.
+            bool: The return value.
+            True if the process completed. Otherwise, False.
         """
 
-        self.logger.info("Tagging EAXS file: {}".format(eaxs_file))
+        self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
 
         # create tagged EAXS.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
-        tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
+        try:
+            tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
+        except Exception as err:
+            err_name = type(err).__name__
+            self.logger.error("{}: {}".format(err_name, err))
+            self.logger.warning("Can't tag EAXS file; aborting.")
+            return False
         
-        self.logger.info("Writing results to: {}".format(tagged_eaxs_file))
-        return
+        self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
+        return True
 
 
 # CLI.
