@@ -182,7 +182,7 @@ class HTMLToText():
             try:
                 self.logger.info("Creating missing container folder: {} ".format(
                     container_dir))
-                os.mkdir(temp_dir)
+                os.mkdir(container_dir)
             except OSError as err:
                 self.logger.error(err)
                 self.logger.warning("Failed to create missing container folder: {} ".format(
