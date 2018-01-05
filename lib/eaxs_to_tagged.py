@@ -180,6 +180,7 @@ class EAXSToTagged():
         
         Returns:
             tuple: The return value.
+            All items are strings.
             The first item is the message's <BodyContent/Content> element value.
             The second item is the <BodyContent/TransferEncoding> element value.
             The third item is the <ContentType> element value.
@@ -199,22 +200,26 @@ class EAXSToTagged():
             # set @content_text.
             node = "{ns}:BodyContent/{ns}:Content".format(ns=self.ncdcr_prefix)
             content_el = single_body_el.xpath(node, namespaces=self.ns_map)
-            if len(content_el) > 0:
+            if len(content_el) > 0 and content_el[0].text is not None:
                 content_text = content_el[0].text
+            else:
+                content_text = ""
 
             # set @transfer_encoding_text.
             node = "{ns}:BodyContent/{ns}:TransferEncoding".format(ns=self.ncdcr_prefix)
             transfer_el = single_body_el.xpath(node, namespaces=self.ns_map)
-            if len(transfer_el) > 0:
-                if transfer_el[0].text.lower() != "":
-                    transfer_encoding_text = transfer_el[0].text.lower()
+            if len(transfer_el) > 0 and transfer_el[0].text is not None:
+                transfer_encoding_text = transfer_el[0].text.lower()
+            else:
+                transfer_encoding_text = ""
 
             # set @content_type_text.
             node = "{ns}:ContentType".format(ns=self.ncdcr_prefix)
             content_type_el = single_body_el.xpath(node, namespaces=self.ns_map)
-            if len(content_type_el) > 0:
-                if content_type_el[0].text.lower() != "":
-                    content_type_text = content_type_el[0].text.lower()
+            if len(content_type_el) > 0 and content_type_el[0].text is not None:
+                content_type_text = content_type_el[0].text.lower()
+            else:
+                content_type_text = ""
  
             # if the preferred plain/text message is found, break immediately.
             if content_type_text == "text/plain":
