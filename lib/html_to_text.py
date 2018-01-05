@@ -139,9 +139,9 @@ class HTMLToText():
 
 
     def __del__(self):
-        """ Attempts to delete @self.temp_dir."""
+        """ Attempts to delete @self.temp_dir. """
 
-        # attempt to remove folder; report on results.
+        # remove folder; report on results.
         try:
             self.logger.info("Removing temporary folder: {}".format(self.temp_dir.name))
             self.temp_dir.cleanup()
