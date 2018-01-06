@@ -1,17 +1,8 @@
 #!/usr/bin/env python3
 
-"""
-This module contains a class to convert an EAXS file to a tagged EAXS documet in which
+""" This module contains a class to convert an EAXS file to a tagged EAXS documet in which
 message content has been run through an NLP application. The message and NER entities are
-encoded in a defined schema.
-
-Todo:
-    * What to do if NLP timeouts? You really need to write to file the message IDs of any 
-    skipped messages due to timeouts or other errors.
-        - This isn't a main() issue, but it's a high level concept nonetheless.
-    * Need to be able to pass in CoreNLP server info from here.
-        - Requires change to text_to_nlp.py.
-"""
+encoded in a defined schema. """
 
 # import modules.
 import logging
