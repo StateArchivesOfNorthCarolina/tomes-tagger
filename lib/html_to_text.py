@@ -110,7 +110,8 @@ class HTMLToText():
     
     Examples:
         >>> h2t = HTMLToText()
-        >>> h2t.get_text("sample.html") # returns plain text version of "sample.html".
+        >>> h2t.get_text("sample.html", is_raw=False)
+        # returns plain text version of "sample.html".
         >>> ht2.get_text("<p class='hi'>Hello World!</p>", is_raw=True)
         # returns "Hello World!" with leading/trailing line breaks.
     """
