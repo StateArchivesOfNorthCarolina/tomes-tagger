@@ -103,7 +103,9 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 						<Content>
 							<![CDATA[Goodbye John D. Doe!
 							Peace,
-							Jane.]]>
+							Jane.
+							
+							jane_doe@fake.nc.gov]]>
 						</Content>
 					</BodyContent>
 				</SingleBody>

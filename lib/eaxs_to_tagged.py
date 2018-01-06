@@ -8,9 +8,6 @@ Todo:
         - I think "yes" and you'll need to append attributes/elements accordingly.
         - I think update_message MIGHT be doing this already?
             - Only one way to find out. :P
-    * Do we really want to set @restricted to True if "PII*" is in the tags? If so, need to
-    work on that. That's somewhat redundant within the context of search, but I guess we need
-    to think of the tagged EAXS as document that's independent of search.
 """
 
 # import modules.
@@ -305,7 +302,7 @@ class EAXSToTagged():
         message_el.set("ParentFolder", folder_name)
         message_el.set("Processed", "false")
         message_el.set("Record", "true")
-        message_el.set("Restricted", "true")
+        message_el.set("Restricted", "false")
         message_el.append(etree.Element("{" + self.ncdcr_uri + "}Restriction", 
             nsmap=self.ns_map))
 
@@ -315,12 +312,22 @@ class EAXSToTagged():
 
         # if no viable <Content> sub-element exists, return the <Message> element.
         if content_text == "":
-            self.logger.info("Found empty message content; skipping message.")
+            self.logger.warning("Found empty message content; skipping message tagging.")
             return message_el
 
         # otherwise, get NER tags and a plain text version of the message body.
         tagged_content, stripped_content = self.tag_message(content_text, 
                 transfer_encoding_text, content_type_text)
+
+        # if PII appears to exist in the message; update the @Restricted attribute.
+        token_el = "{" + self.ncdcr_uri + "}Token"
+        for element in tagged_content.iterchildren(tag=token_el):
+            if "entity" not in element.attrib:
+                continue
+            if element.attrib["entity"][:4] == "PII.":
+                self.logger.info("Found PII; updating messages's @Restricted attribute.")
+                message_el.set("Restricted", "true")
+                break
 
         # create a new <SingleBody> element.
         single_body_el = etree.Element("{" + self.ncdcr_uri + "}SingleBody", 
