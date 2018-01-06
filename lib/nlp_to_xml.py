@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-""" This module converts Stanford CoreNLP JSON output to XML per the tagged EAXS schema. """
+""" This module converts a list of NER tuples (token, NER tag, trailing whitespace) to XML 
+per the tagged message schema, nlp_to_xml.xsd. """
 
 # import modules.
 import codecs
@@ -11,7 +12,8 @@ from lxml import etree
 
 
 class NLPToXML():
-    """ A class for converting CoreNLP JSON output to XML per the tagged EAXS schema. """
+    """ A class for converting a list of NER tuples (token, NER tag, trailing whitespace) to
+    XML per the tagged message schema, nlp_to_xml.xsd. """
 
 
     def __init__(self):
@@ -65,8 +67,7 @@ class NLPToXML():
 
 
     def validate_xml(self, xdoc):
-        """ Determines if @xdoc is valid or not per the tagged EAXS schema file 
-        @self.xsd_file.
+        """ Determines if @xdoc is valid or not per @self.xsd_file.
 
         Args:
             - xdoc (str): The lxml.etree._Element to validate.
@@ -83,8 +84,7 @@ class NLPToXML():
 
 
     def get_XML(self, ner_data, validate=False):
-        """ Converts CoreNLP JSON to lxml.etree._Element per the tagged EAXS schema for body
-        content.
+        """ Converts @ner_data to XML, i.e. a tagged XML message.
         
         Args:
             - ner_data (list): The NER data to convert to XML. Each item in the list is 
