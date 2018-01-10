@@ -6,26 +6,26 @@
 223456789-123456	PII.bank_account_number	TRUE
 223456789 12345678910131517	PII.bank_account_number	TRUE
 
-123456789123456	PII.bank_account_number	
-12345678 9-123456	PII.bank_account_number	
-12345678 9 123456	PII.bank_account_number	
-223456789 123456789101315171921	PII.bank_account_number	
-133456789-123456	PII.bank_account_number	
-1234_5678-9-123456	PII.bank_account_number	
+123456789123456	PII.bank_account_number	FALSE
+12345678 9-123456	PII.bank_account_number	FALSE
+12345678 9 123456	PII.bank_account_number	FALSE
+223456789 123456789101315171921	PII.bank_account_number	FALSE
+133456789-123456	PII.bank_account_number	FALSE
+1234_5678-9-123456	PII.bank_account_number	FALSE
 
 12345678	PII.beacon_id	TRUE
 
-12345678 123	PII.beacon_id	
-123456	PII.beacon_id	
-1 234567	PII.beacon_id	
-123456789	PII.beacon_id	
+12345678 123	PII.beacon_id	FALSE
+123456	PII.beacon_id	FALSE
+1 234567	PII.beacon_id	FALSE
+123456789	PII.beacon_id	FALSE
 
 1234-1234-1234-1234	PII.credit_card_number	TRUE
 1234 1234 1234 1234	PII.credit_card_number	TRUE
 4465-1234 5467-2341	PII.credit_card_number	TRUE
 
-1234123412341234	PII.credit_card_number	
-1234 1234 1234 12345	PII.credit_card_number	
+1234123412341234	PII.credit_card_number	FALSE
+1234 1234 1234 12345	PII.credit_card_number	FALSE
 
 single@foo.com	PII.email_address	TRUE
 dot.ted@foo.edu	PII.email_address	TRUE
@@ -48,25 +48,25 @@ foo@foo.com	PII.email_address	TRUE
 a@foo.co.es	PII.email_address	TRUE
 long@doma.iXXX	PII.email_address	TRUE
 
-"quoted"@quote.org	PII.email_address	
-Arora, Nitin <nitin.a.arora@ncdcr.gov>	PII.email_address	
-Arora, Nitin "nitin.a.arora@ncdcr.gov"	PII.email_address	
-Arora, Nitin 'nitin.a.arora@ncdcr.gov'	PII.email_address	
-Arora, Nitin (nitin.a.arora@ncdcr.gov)	PII.email_address	
-Arora, Nitin {nitin.a.arora@ncdcr.gov}	PII.email_address	
-Arora, Nitin [nitin.a.arora@ncdcr.gov]	PII.email_address	
-(comment)foo@foo.com	PII.email_address	
-mañaña@foo.co.es			PII.email_address	
-illegalDomain@fo.o	PII.email_address	
-dot.ted(comment)@foo.com	PII.email_address	
-long@doma.iXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXin	PII.email_address	
+"quoted"@quote.org	PII.email_address	FALSE
+Arora, Nitin <nitin.a.arora@ncdcr.gov>	PII.email_address	FALSE
+Arora, Nitin "nitin.a.arora@ncdcr.gov"	PII.email_address	FALSE
+Arora, Nitin 'nitin.a.arora@ncdcr.gov'	PII.email_address	FALSE
+Arora, Nitin (nitin.a.arora@ncdcr.gov)	PII.email_address	FALSE
+Arora, Nitin {nitin.a.arora@ncdcr.gov}	PII.email_address	FALSE
+Arora, Nitin [nitin.a.arora@ncdcr.gov]	PII.email_address	FALSE
+(comment)foo@foo.com	PII.email_address	FALSE
+mañaña@foo.co.es			PII.email_address	FALSE
+illegalDomain@fo.o	PII.email_address	FALSE
+dot.ted(comment)@foo.com	PII.email_address	FALSE
+long@doma.iXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXin	PII.email_address	FALSE
 
 12-1234567	PII.employee_identification_number	TRUE
 12-1234567A	PII.employee_identification_number	TRUE
 12-1234567001	PII.employee_identification_number	TRUE
 
-12-1234567 A	PII.employee_identification_number	
-12-1234567001A	PII.employee_identification_number	
+12-1234567 A	PII.employee_identification_number	FALSE
+12-1234567001A	PII.employee_identification_number	FALSE
 
 K00-00-0000	PII.ks_drivers_license_number	TRUE
 K12-34-5678	PII.ks_drivers_license_number	TRUE
@@ -75,11 +75,11 @@ K00000000	PII.ks_drivers_license_number	TRUE
 K12345678	PII.ks_drivers_license_number	TRUE
 K98765432	PII.ks_drivers_license_number	TRUE
 
-K00-0-000	PII.ks_drivers_license_number	
-K000000	PII.ks_drivers_license_number	
-K1234	PII.ks_drivers_license_number	
-M00-00-0000	PII.ks_drivers_license_number	
-M00000000	PII.ks_drivers_license_number	
+K00-0-000	PII.ks_drivers_license_number	FALSE
+K000000	PII.ks_drivers_license_number	FALSE
+K1234	PII.ks_drivers_license_number	FALSE
+M00-00-0000	PII.ks_drivers_license_number	FALSE
+M00000000	PII.ks_drivers_license_number	FALSE
 
 xxxx-xxxx-xxxx	PII.ks_Tax_Clearance_Certificate	TRUE
 X1X1-X1X1-X1X1	PII.ks_Tax_Clearance_Certificate	TRUE
@@ -88,18 +88,18 @@ AS12-DF34-GH56	PII.ks_Tax_Clearance_Certificate	TRUE
 POI1-UYT2-REW3	PII.ks_Tax_Clearance_Certificate	TRUE
 1234-5678-9012	PII.ks_Tax_Clearance_Certificate	TRUE
 
-Asdf1234jklh	PII.ks_Tax_Clearance_Certificate	
-Xxxxxxxxxxxx	PII.ks_Tax_Clearance_Certificate	
-123456789123	PII.ks_Tax_Clearance_Certificate	
+Asdf1234jklh	PII.ks_Tax_Clearance_Certificate	FALSE
+Xxxxxxxxxxxx	PII.ks_Tax_Clearance_Certificate	FALSE
+123456789123	PII.ks_Tax_Clearance_Certificate	FALSE
 
 000012345678	PII.nc_drivers_license_number	TRUE
 
-123456789112	PII.nc_drivers_license_number	
-012345678911 123456789112	PII.nc_drivers_license_number	
-12345678911 2	PII.nc_drivers_license_number	
-12345678911	PII.nc_drivers_license_number	
-a123456789112	PII.nc_drivers_license_number	
-123456789112a	PII.nc_drivers_license_number	
+123456789112	PII.nc_drivers_license_number	FALSE
+012345678911 123456789112	PII.nc_drivers_license_number	FALSE
+12345678911 2	PII.nc_drivers_license_number	FALSE
+12345678911	PII.nc_drivers_license_number	FALSE
+a123456789112	PII.nc_drivers_license_number	FALSE
+123456789112a	PII.nc_drivers_license_number	FALSE
 
 462329510	PII.passport_number	TRUE
 925919782	PII.passport_number	TRUE
@@ -107,8 +107,8 @@ a123456789112	PII.nc_drivers_license_number
 a1234567	PII.passport_number	TRUE
 A1234567	PII.passport_number	TRUE
 
-1234567	PII.passport_number	
-z12345678	PII.passport_number	
+1234567	PII.passport_number	FALSE
+z12345678	PII.passport_number	FALSE
 
 DEduCtible	PII.personal_health_information	TRUE
 DIAGNOSiS	PII.personal_health_information	TRUE
@@ -171,10 +171,10 @@ UndEr WRaPs	PII.sensitive_document	TRUE
 907 85 6893	PII.social_security_number	TRUE
 433-91-9072	PII.social_security_number	TRUE
 
-959714676	PII.social_security_number	
-535234337	PII.social_security_number	
-433924327	PII.social_security_number	
-162310293	PII.social_security_number	
-364645920	PII.social_security_number	
-915422666	PII.social_security_number	
+959714676	PII.social_security_number	FALSE
+535234337	PII.social_security_number	FALSE
+433924327	PII.social_security_number	FALSE
+162310293	PII.social_security_number	FALSE
+364645920	PII.social_security_number	FALSE
+915422666	PII.social_security_number	FALSE
 
