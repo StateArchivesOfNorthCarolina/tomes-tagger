@@ -162,7 +162,7 @@ class EAXSToTagged():
         """
 
         # get <MessageId> element value; strip leading/trailing space.
-        path = "{}:MessageId".format(self.ncdcr_prefix)
+        path = "{ns}:MessageId".format(ns=self.ncdcr_prefix)
         message_id = message_el.xpath(path, namespaces=self.ns_map)
         message_id = message_id[0].text.strip()
 
@@ -361,7 +361,7 @@ class EAXSToTagged():
                 single_body_el.append(stripped_content_el)
 
         # append the new <SingleBody> element to @message_el.
-        multi_body_tag = "{}:MultiBody".format(self.ncdcr_prefix)
+        multi_body_tag = "{ns}:MultiBody".format(ns=self.ncdcr_prefix)
         message_el.xpath(multi_body_tag, namespaces=self.ns_map)[0].append(single_body_el)
 
         return message_el
@@ -408,7 +408,7 @@ class EAXSToTagged():
             etree.register_namespace(self.ncdcr_prefix, self.ncdcr_uri)
 
             # write root <Account> element; append tagged <Message> elements.
-            account_tag = "{}:Account".format(self.ncdcr_prefix)
+            account_tag = "{ns}:Account".format(ns=self.ncdcr_prefix)
             with xfile.element(account_tag, GlobalId=self._get_global_id(eaxs_file), 
                     SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
                 
