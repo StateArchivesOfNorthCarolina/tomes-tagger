@@ -5,8 +5,8 @@
 \b          	# word boundary.     	
 [a-zA-Z0-9]{4}	# 4 occurrences of any digit or letter.
 [-]{1}		# hyphen.
-[a-zA-Z0-9]{4}
-[-]{1}
-[a-zA-Z0-9]{4}
+[a-zA-Z0-9]{4}	# 4 occurrences of any digit or letter.
+[-]{1}		# hyphen.
+[a-zA-Z0-9]{4} 	# 4 occurrences of any digit or letter.
 \b          	# word boundary.
 
