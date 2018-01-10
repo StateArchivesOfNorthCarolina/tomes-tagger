@@ -1,0 +1,12 @@
+### ks_Tax_Clearance_Certificate
+
+### REGEX
+(?x)        	# set free spacing mode to make REGEX readable.
+\b          	# word boundary.     	
+[a-zA-Z0-9]{4}	# 4 occurrences of any digit or letter.
+[-]{1}			# hyphen.
+[a-zA-Z0-9]{4}
+[-]{1}
+[a-zA-Z0-9]{4}
+\b          	# word boundary.
+
