@@ -7,6 +7,7 @@ file containing NER mapping rules for Stanford CoreNLP.
 Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
+    * After you re-write any code, check your examples and docstrings.
 """
 
 # import modules.
@@ -24,7 +25,7 @@ class XLSXToStanford():
     
     Example:
         >>> x2s = XLSXToStanford()
-        >>> x2s.convert_file("foo.xlsx") # outputs "foo__mapping.txt".
+        >>> x2s.convert_file("foo__mapping.xlsx", "foo__mapping.txt")
         >>> xs2.convert_folder("in", "out") # converts "in/*.xlsx" to "out/*.txt".
     """
 

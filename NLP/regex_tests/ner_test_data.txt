@@ -1,0 +1,180 @@
+123456789-123456	PII.bank_account_number	TRUE
+123456789 123456	PII.bank_account_number	TRUE
+1234-5678-9-123456	PII.bank_account_number	TRUE
+1234-5678-9 123456	PII.bank_account_number	TRUE
+223456789 123456	PII.bank_account_number	TRUE
+223456789-123456	PII.bank_account_number	TRUE
+223456789 12345678910131517	PII.bank_account_number	TRUE
+
+123456789123456	PII.bank_account_number	
+12345678 9-123456	PII.bank_account_number	
+12345678 9 123456	PII.bank_account_number	
+223456789 123456789101315171921	PII.bank_account_number	
+133456789-123456	PII.bank_account_number	
+1234_5678-9-123456	PII.bank_account_number	
+
+12345678	PII.beacon_id	TRUE
+
+12345678 123	PII.beacon_id	
+123456	PII.beacon_id	
+1 234567	PII.beacon_id	
+123456789	PII.beacon_id	
+
+1234-1234-1234-1234	PII.credit_card_number	TRUE
+1234 1234 1234 1234	PII.credit_card_number	TRUE
+4465-1234 5467-2341	PII.credit_card_number	TRUE
+
+1234123412341234	PII.credit_card_number	
+1234 1234 1234 12345	PII.credit_card_number	
+
+single@foo.com	PII.email_address	TRUE
+dot.ted@foo.edu	PII.email_address	TRUE
+dot.ted@dot.ted.gov	PII.email_address	TRUE
+d.ot.ted@ws.ws	PII.email_address	TRUE
+ip.address@[127.0.0.1]	PII.email_address	TRUE
+UPPER@CASE.FOO	PII.email_address	TRUE
+cAsE@inSeNsItIvE.cO.uK	PII.email_address	TRUE
+.startsWithDot@foo.com	PII.email_address	TRUE
+dot..@dot.com	PII.email_address	TRUE
+100_total_length___________________________________________________________________________@foo.com	PII.email_address	TRUE
+<nitin.a.arora@ncdcr.gov>	PII.email_address	TRUE
+"nitin.a.arora@ncdcr.gov"	PII.email_address	TRUE
+'nitin.a.arora@ncdcr.gov'	PII.email_address	TRUE
+nitin.a.arora@ncdcr.gov	PII.email_address	TRUE
+{nitin.a.arora@ncdcr.gov}	PII.email_address	TRUE
+[nitin.a.arora@ncdcr.gov]	PII.email_address	TRUE
+foo@test.1	PII.email_address	TRUE
+foo@foo.com	PII.email_address	TRUE
+a@foo.co.es	PII.email_address	TRUE
+long@doma.iXXX	PII.email_address	TRUE
+
+"quoted"@quote.org	PII.email_address	
+Arora, Nitin <nitin.a.arora@ncdcr.gov>	PII.email_address	
+Arora, Nitin "nitin.a.arora@ncdcr.gov"	PII.email_address	
+Arora, Nitin 'nitin.a.arora@ncdcr.gov'	PII.email_address	
+Arora, Nitin (nitin.a.arora@ncdcr.gov)	PII.email_address	
+Arora, Nitin {nitin.a.arora@ncdcr.gov}	PII.email_address	
+Arora, Nitin [nitin.a.arora@ncdcr.gov]	PII.email_address	
+(comment)foo@foo.com	PII.email_address	
+mañaña@foo.co.es			PII.email_address	
+illegalDomain@fo.o	PII.email_address	
+dot.ted(comment)@foo.com	PII.email_address	
+long@doma.iXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXin	PII.email_address	
+
+12-1234567	PII.employee_identification_number	TRUE
+12-1234567A	PII.employee_identification_number	TRUE
+12-1234567001	PII.employee_identification_number	TRUE
+
+12-1234567 A	PII.employee_identification_number	
+12-1234567001A	PII.employee_identification_number	
+
+K00-00-0000	PII.ks_drivers_license_number	TRUE
+K12-34-5678	PII.ks_drivers_license_number	TRUE
+K98-76-5432	PII.ks_drivers_license_number	TRUE
+K00000000	PII.ks_drivers_license_number	TRUE
+K12345678	PII.ks_drivers_license_number	TRUE
+K98765432	PII.ks_drivers_license_number	TRUE
+
+K00-0-000	PII.ks_drivers_license_number	
+K000000	PII.ks_drivers_license_number	
+K1234	PII.ks_drivers_license_number	
+M00-00-0000	PII.ks_drivers_license_number	
+M00000000	PII.ks_drivers_license_number	
+
+xxxx-xxxx-xxxx	PII.ks_Tax_Clearance_Certificate	TRUE
+X1X1-X1X1-X1X1	PII.ks_Tax_Clearance_Certificate	TRUE
+AS12-DF34-GH56	PII.ks_Tax_Clearance_Certificate	TRUE
+123L-456K-789J	PII.ks_Tax_Clearance_Certificate	TRUE
+POI1-UYT2-REW3	PII.ks_Tax_Clearance_Certificate	TRUE
+1234-5678-9012	PII.ks_Tax_Clearance_Certificate	TRUE
+
+Asdf1234jklh	PII.ks_Tax_Clearance_Certificate	
+Xxxxxxxxxxxx	PII.ks_Tax_Clearance_Certificate	
+123456789123	PII.ks_Tax_Clearance_Certificate	
+
+000012345678	PII.nc_drivers_license_number	TRUE
+
+123456789112	PII.nc_drivers_license_number	
+012345678911 123456789112	PII.nc_drivers_license_number	
+12345678911 2	PII.nc_drivers_license_number	
+12345678911	PII.nc_drivers_license_number	
+a123456789112	PII.nc_drivers_license_number	
+123456789112a	PII.nc_drivers_license_number	
+
+462329510	PII.passport_number	TRUE
+925919782	PII.passport_number	TRUE
+092357332	PII.passport_number	TRUE
+a1234567	PII.passport_number	TRUE
+A1234567	PII.passport_number	TRUE
+
+1234567	PII.passport_number	
+z12345678	PII.passport_number	
+
+DEduCtible	PII.personal_health_information	TRUE
+DIAGNOSiS	PII.personal_health_information	TRUE
+fMla	PII.personal_health_information	TRUE
+HeaLth COnDiTiON	PII.personal_health_information	TRUE
+HeALtH InSURaNce	PII.personal_health_information	TRUE
+HEALTH isSues	PII.personal_health_information	TRUE
+health PrObleMS	PII.personal_health_information	TRUE
+hIPpa	PII.personal_health_information	TRUE
+mediCal LeAVe	PII.personal_health_information	TRUE
+meDICAL recOrDs	PII.personal_health_information	TRUE
+PAtieNT	PII.personal_health_information	TRUE
+PHi	PII.personal_health_information	TRUE
+poLiCY NuMber	PII.personal_health_information	TRUE
+
+
+BEtwEen us	PII.sensitive_document	TRUE
+cLASSIFIeD	PII.sensitive_document	TRUE
+cOnfIdeNtiAL	PII.sensitive_document	TRUE
+dIsCrETE	PII.sensitive_document	TRUE
+eYEs ONlY	PII.sensitive_document	TRUE
+EYeS-onLY	PII.sensitive_document	TRUE
+HUSHed	PII.sensitive_document	TRUE
+Hush hush	PII.sensitive_document	TRUE
+huSh-Hush	PII.sensitive_document	TRUE
+IN cONfidencE	PII.sensitive_document	TRUE
+inTeLLigeNCE	PII.sensitive_document	TRUE
+LEgal DiScLAimeR	PII.sensitive_document	TRUE
+NDA	PII.sensitive_document	TRUE
+non DiSCLoSure	PII.sensitive_document	TRUE
+Non-dISCLOSURE	PII.sensitive_document	TRUE
+NOt For pubLicAtIoN	PII.sensitive_document	TRUE
+nOt PUBliC	PII.sensitive_document	TRUE
+not tO bE quOtED	PII.sensitive_document	TRUE
+off tHE rEcORD	PII.sensitive_document	TRUE
+oFF-tHe-REcORd	PII.sensitive_document	TRUE
+pRivaTE	PII.sensitive_document	TRUE
+rESTRICtEd	PII.sensitive_document	TRUE
+secret	PII.sensitive_document	TRUE
+SEnSItive	PII.sensitive_document	TRUE
+sTrIcTLy pRohiBited	PII.sensitive_document	TRUE
+TOP secRet	PII.sensitive_document	TRUE
+UNDEr tHE tabLE	PII.sensitive_document	TRUE
+UnDER-ThE-tAblE	PII.sensitive_document	TRUE
+UndEr WRaPs	PII.sensitive_document	TRUE
+
+
+700-99-0513	PII.social_security_number	TRUE
+714 89 6228	PII.social_security_number	TRUE
+376 87 1396	PII.social_security_number	TRUE
+489 71 7878	PII.social_security_number	TRUE
+730 04 7552	PII.social_security_number	TRUE
+738-75-2148	PII.social_security_number	TRUE
+853-06-5240	PII.social_security_number	TRUE
+097 80 9084	PII.social_security_number	TRUE
+155 21 7104	PII.social_security_number	TRUE
+319-51-6119	PII.social_security_number	TRUE
+996 36 8070	PII.social_security_number	TRUE
+944 39 5643	PII.social_security_number	TRUE
+907 85 6893	PII.social_security_number	TRUE
+433-91-9072	PII.social_security_number	TRUE
+
+959714676	PII.social_security_number	
+535234337	PII.social_security_number	
+433924327	PII.social_security_number	
+162310293	PII.social_security_number	
+364645920	PII.social_security_number	
+915422666	PII.social_security_number	
+
