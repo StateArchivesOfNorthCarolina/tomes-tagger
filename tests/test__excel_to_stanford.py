@@ -6,7 +6,7 @@ import json
 import logging
 import unittest
 import random
-from lib.excel_to_stanford import *
+from tomes_tool.lib.excel_to_stanford import *
 
 # enable logging.
 logging.basicConfig(level=logging.DEBUG)

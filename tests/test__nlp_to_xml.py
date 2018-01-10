@@ -6,7 +6,7 @@ import json
 import logging
 import unittest
 import random
-from lib.nlp_to_xml import *
+from tomes_tool.lib.nlp_to_xml import *
 
 # enable logging.
 logging.basicConfig(level=logging.DEBUG)

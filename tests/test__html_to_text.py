@@ -4,7 +4,7 @@
 import sys; sys.path.append("..")
 import logging
 import unittest
-from lib.html_to_text import *
+from tomes_tool.lib.html_to_text import *
 
 # enable logging.
 logging.basicConfig(level=logging.DEBUG)

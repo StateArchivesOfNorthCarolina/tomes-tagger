@@ -5,14 +5,15 @@ message content has been run through an NLP application. The message and NER ent
 encoded in a defined schema. """
 
 # import modules.
+import sys; sys.path.append("..")
 import logging
 import logging.config
 import os
 import yaml
-from lib.eaxs_to_tagged import EAXSToTagged
-from lib.html_to_text import HTMLToText, ModifyHTML
-from lib.nlp_to_xml import NLPToXML
-from lib.text_to_nlp import TextToNLP
+from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
+from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML
+from tomes_tool.lib.nlp_to_xml import NLPToXML
+from tomes_tool.lib.text_to_nlp import TextToNLP
 
 
 class TOMESToolTagger():

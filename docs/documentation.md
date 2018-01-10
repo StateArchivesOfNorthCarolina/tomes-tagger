@@ -66,6 +66,6 @@ To test these scripts on sample files, simply call the scripts with the `-h` opt
 		`cd stanford-corenlp-full-2016-10-31`
 
      	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9003 -timeout 50000`
-3. From the [root TOMES Tool directory](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/) do: `py -3 main.py -h` 
+3. From the [TOMES Tool module directory](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/tomes_tool) do: `py -3 tomes_tool/tagger.py -h` 
 4. Pass in your EAXS filepath (including the filename) per the instructions.
 5. Let us know what happens.

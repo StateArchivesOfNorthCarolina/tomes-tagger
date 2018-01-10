@@ -11,7 +11,7 @@ import sys; sys.path.append("..")
 import unittest
 import logging
 from lxml import etree
-from lib.eaxs_to_tagged import *
+from tomes_tool.lib.eaxs_to_tagged import *
 
 # enable logging.
 logging.basicConfig(level=logging.DEBUG)
