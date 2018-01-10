@@ -119,7 +119,7 @@ def main(eaxs: "source EAXS file",
         output: ("tagged EAXS destination", "option", "o")):
 
     "Converts EAXS document to tagged EAXS.\
-    \nexample: `py -3 main.py tests\sample_files\sampleEAXS.xml`"
+    \nexample: `py -3 tagger.py ../tests/sample_files/sampleEAXS.xml`"
 
     # make sure logging directory exists.
     logdir = "log"

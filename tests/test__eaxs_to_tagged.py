@@ -47,7 +47,7 @@ class Test_EAXSToTagged(unittest.TestCase):
 def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
     
     "Converts EAXS document to tagged EAXS (dry run only).\
-    \nexample: `py -3 test__eaxs_to_tagged.py sample_files\sampleEAXS.xml output.xml`"
+    \nexample: `py -3 test__eaxs_to_tagged.py ../tests/sample_files/sampleEAXS.xml out.xml`"
 
     # write tagged EAXS to file.
     def_html = lambda x: "HTML"

@@ -23,11 +23,11 @@ The information package contents will contain not only the EAXS file(s), but als
 TOMES Tool requires the following applications:
 
 - [Python 3+](https://www.python.org/download/releases/3.0/) (using 3.6)
-	- See the [../requirements.txt](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/requirements.txt) file for additional module dependencies.
+	- See the "./requirements.txt" file for additional module dependencies.
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
 	- *We're currently using this for NER tagging.*
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
-	- You **must** place the [regexner_TOMES](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/tree/master/lib/stanford.edu/stanford-corenlp-full-2016-10-31) directory and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
+	- You **must** place the "regexner\_TOMES" directory (found in in the "./NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
 	- *We're currently using this for HTML email to plain text conversion.*
 	- The "lynx" command must be executable from any directory on your system.
@@ -36,7 +36,7 @@ TOMES Tool requires the following applications:
 
 ## Quick Tests
 
-You can run all the unit tests in the [../tests](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/tests/) directory: `py -3 -m unittest`
+You can run all the unit tests in the "./tests" directory: `py -3 -m unittest`
 
 Specific unit tests of interest:
 
@@ -50,7 +50,7 @@ You can also test CoreNLP by starting it and going to the correct local URL, i.e
 
 ## Sample Files 
 
-Sample files are located in the [../tests/sample_files](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/blob/master/tests/sample_files/) directory.
+Sample files are located in the "./tests/sample_files" directory.
 
 The sample files can be used with the Python unit test scripts.
 
@@ -66,6 +66,6 @@ To test these scripts on sample files, simply call the scripts with the `-h` opt
 		`cd stanford-corenlp-full-2016-10-31`
 
      	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9003 -timeout 50000`
-3. From the [TOMES Tool module directory](https://github.com/StateArchivesOfNorthCarolina/tomes_tool/tomes_tool) do: `py -3 tomes_tool/tagger.py -h` 
+3. From the "./tomes_tool" directory do: `py -3 tagger.py -h` 
 4. Pass in your EAXS filepath (including the filename) per the instructions.
 5. Let us know what happens.
