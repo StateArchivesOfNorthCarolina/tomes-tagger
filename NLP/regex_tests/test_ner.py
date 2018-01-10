@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+"""
+todo:
+    * You really need to move this in "tests" and call the new CoreNLP wrapper.
+        - Otherwise, you'll have to redo all our default options.
+        - This shouldn't be a unit test though.
+    * You need to output to UTF-8 file only (no screen).
+    * You need to add ratios and the "expected" to the TSV.
+"""
+
 # import modules.
 import codecs
 import os
@@ -11,30 +20,25 @@ from pycorenlp import StanfordCoreNLP
 # "$ java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000".
 NLP = StanfordCoreNLP("http://localhost:9003")
 
-
-def testNER(phrase, PII_type):
-    """ Gets NER tags for given @phrase and report if it matches @PII_type.
+def testNER(phrase, label):
+    """ Gets NER tags for given @phrase and report if it matches the expected NER tag @label.
     
     Args:
-        phrase (str): The text to apply NLP to.
-        PII_type (str): The label for the type of PII ("PII.beacon_id", etc.).
+        phrase (str): The text from which to extract NER.
+        label (str): The label for the NER tag pattern ("PII.beacon_id", etc.).
     
     Returns:
         tuple: 
-            - phrase (str): the original @phrase.
-            - rephrase (str): the joined tokens analyzed by CoreNLP.
+            - rephrase (str): the re-joined tokenization of @phrase.
             - ner_tags (list): the list of NER tags found.
-            - ner_test (bool): if the only NER tag found equals @PII_type.
-            - ratio (decimal): the ratio of tokens tagged as @PII_type divided by the total
-              number of tokens analyzed.
 
     Examples:
         >>> testNER("foo@bar.com", "PII.email_address")
-        ('foo@bar.com', 'foo@bar.com', ['PII.email_address'], True, 1.0)
+        ('foo@bar.com', ['PII.email_address'])
     """
 
     # set RegexNER mapping file.
-    mapping = "regexner_TOMES/" + PII_type + "__regexnerMappings.txt"
+    mapping = "regexner_TOMES/mappings.txt"
 
     #set RegexNER default tags to always replace on match.
     background_symbol = ["DATE", "DURATION", "LOCATION", "MISC", "MONEY", "NUMBER", "O",
@@ -53,78 +57,72 @@ def testNER(phrase, PII_type):
     tokens = output["sentences"][0]["tokens"]
     
     # get words from @tokens; re-join into single string.
-    #word = [o["word"] for o in tokens]
-    word = [o["word"] for o in tokens if o["ner"] == PII_type]
+    word = [t["word"] for t in tokens]
     rephrase = " ".join(word)
     
-    # get non-empty NER tags; prepare report data.
-    ner = [o["ner"] for o in tokens]
+    # get non-empty NER tags.
+    ner = [t["ner"] for t in tokens]
     ner_tags = [n for n in ner if n != "O"]
     ner_tags = list(set(ner_tags))
-    ner_test = ner_tags == [PII_type] 
-    ratio = len(ner_tags)/len(tokens)
+
+    return (rephrase, ner_tags)
+
+
+def testDataFile(data_file="ner_test_data.txt"):
+    """ Tests NER patterns in @data_file; returns results as a list of tab-delimited data.
     
-    return (phrase, rephrase, ner_tags, ner_test, ratio)
-
-
-def testPII():
-    """ Tests CoreNLP RegexNER PII mappings against test and match data;
-        reports results as tab-delimied data.
+    Args:
+        - data_file (str): The filepath with test data in the required format.
+    
+    Returns:
+        list: The return value.
     """
     
     # create empty output list.
     tsv = []
 
     # append @tsv header.
-    header = ["PII_type", "Test_Data", "Matched_Test_Data", "NER_tags", "isCorrectNER",
-             "Token_Ratio", "isMatchData", "isTestPassed"]
+    header = ["phrase", "returned_phrase", "expected_tag", "tags_found", "is_passed"]
     header = "\t".join(header)
     tsv.append(header)
 
-    # glob all PII folders.
-    piis = glob("PII.*/")
+    # read test @data_file.
+    with open(data_file) as f:
+        test_data = f.read().split("\n")
 
-    # for each PII type; run testNER() on all test data.
-    for pii in piis:
-        
-        # navigate to PII folder.
-        pii = pii[:-1]
-        os.chdir(pii)
-        
-        # open/read test and match data files; remove blank lines.
-        with open(pii + "__testData.txt") as f:
-            test_data = f.read().split("\n")
-            test_data = [x for x in test_data if x != ""]
-        with open(pii + "__matchData.txt") as f:
-            match_data = f.read().split("\n")
-            match_data = [x for x in match_data if x != ""]
 
-        # runs tests; determine if each test passed or not; append results to @tsv.
-        for line in test_data:
+    # runs tests; determine if each test passed or not; append results to @tsv.
+    for line in test_data:
 
-            # run test; determine if test passed.
-            try:
-                phrase, rephrase, ner_tags, ner_test, ratio = testNER(line, pii)
-            except Exception as e:
-                exit(e)
-            match = rephrase in match_data
-            if ner_test and match:
-                passed = True
-            elif ner_test and not match:
-                passed = False
-            elif not ner_test and match:
-                passed = False
-            elif not ner_test and not match:
-                passed = True
-            
-            # append test data to @tsv.
-            test = [pii, phrase, rephrase, ner_tags, ner_test, ratio, match, passed]
-            test = [str(r) for r in test]
-            test = "\t".join(test)
-            tsv.append(test)
+        if line == "":
+            continue
+
+        phrase, label, expected = line.split("\t")
+        rephrase, ner_tags = testNER(phrase, label)
+
+        # ???
+        if expected == "TRUE":
+            expected = True
+        else:
+            expected = False
+
+        # ???
+        if len(ner_tags) == 0:
+            ner_tags = [""]
         
-        # go back up one directory.
-        os.chdir("..")
+        # determine if a match is successful (True) or not (False).
+        if expected and label == ner_tags[0]:
+            passed = True
+        elif not expected and label != ner_tags[0]:
+            passed = True
+        else:
+            passed = False
+        
+        # append test data to @tsv.
+        test = [phrase, rephrase, label, ner_tags, passed]
+        test = [str(r) for r in test]
+        test = "\t".join(test)
+        tsv.append(test)
         #break
 
     # convert list to tsv data.
@@ -133,14 +131,9 @@ def testPII():
         
 
 ### let's test ...
-SCREEN = False
 def main():
-    results = testPII()
-    if SCREEN == True:
-        print(results)
-    else:
-        with codecs.open("test_PII_regexner.tsv", "w", encoding="utf-8") as f:
-            f.write(results)
+    results = testDataFile()
+    print(results)
 
 if __name__ == "__main__":
     main()
