@@ -15,9 +15,6 @@ logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 logger.setLevel("INFO")
 
-# creat tagger instance.
-T2N = TextToNLP()
-
 
 def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_results.tsv"):
     """ Tests NER patterns in @data_file; returns results as a list of tab-delimited data.
@@ -45,9 +42,13 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
     logger.info("Testing data in: {}".format(data_path))    
     with open(data_path) as f:
         test_data = f.read().split("\n")
-        
+    
+    # creat tagger instance.
+    t2n = TextToNLP()
+
     # write header row.
-    header = ["phrase", "returned_phrase", "expected_tag", "tags_found", "score"]
+    header = ["phrase", "returned_phrase", "expected_tag", "tags_found", "is_match_expected",
+            "is_as_expected", "exactness_score"]
     header = "\t".join(header) + "\n"
     results_file.write(header)
 
@@ -67,33 +68,49 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
 
         # split line.
         logger.debug("Testing line number: {}".format(line_num))
-        phrase, expected_tag, expectation = line.split("\t")
+        try:
+            phrase, expected_tag, is_match_expected = line.split("\t")
+        except ValueError as err:
+            logger.error(err)
+            logger.warning("Line '{}' may not be delimited by actual tabs.".format(line_num))
+        
+        # determine if @expected_tag SHOULD be returned via tagging.
+        if is_match_expected == "TRUE":
+            is_match_expected = True
+        else:
+            is_match_expected = False
 
         # get NER tags; format results.
-        ner_tags = T2N.get_NER(phrase)
-        returned_phrase, tags_found = "", []
+        ner_tags = t2n.get_NER(phrase)
+        tokens_found, tags_found = [], []
         if len(ner_tags) != 0:
-            returned_phrase += "".join([n[0] + n[2] for n in ner_tags])
-            tags_found = set([n[1] for n in ner_tags if n[1] != ""])
-            tags_found = list(tags_found)
+            tokens_found = [n[0] for n in ner_tags]
+            tags_found = [n[1] for n in ner_tags]
+            #tags_found = set([n[1] for n in ner_tags])
+            #tags_found = list(tags_found)
 
-        # determine if the returned tags met the expected output from @data_file.
-        if expectation == "TRUE":
-            expectation = True
+        # determine if matching went as expected. 
+        if is_match_expected and expected_tag == tags_found[0]:
+            is_as_expected = True
+        elif not is_match_expected and expected_tag != tags_found[0]:
+            is_as_expected = True
         else:
-            expectation = False
-        
-        # determine how well the test worked; a "1" is perfect.
-        score = 0
-        if expected_tag in tags_found:
-            score = 1/len(tags_found) 
+            is_as_expected = False
 
+        # determine how exactly the tag results matched the @expected_tag.
+        # "1" means only the @expected_tag was found while anything else greater than "0"
+        # likely means that the @phrase was tokenized and the matching tag applies to only 
+        # part of the @phrase.
+        exactness_score = 0
+        if expected_tag in tags_found:
+            exactness_score = 1/len(tags_found)
+        
         # write test results row.
-        result = [phrase, returned_phrase, expected_tag, tags_found, score]
+        result = [phrase, tokens_found, expected_tag, tags_found, is_match_expected, 
+                is_as_expected, exactness_score]
         result = [str(r) for r in result]
         result = "\t".join(result) + "\n"
         results_file.write(result)
-        #break
 
     # close file.
     results_file.close()
