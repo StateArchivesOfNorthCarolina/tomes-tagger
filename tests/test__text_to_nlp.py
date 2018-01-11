@@ -2,10 +2,8 @@
 
 # import modules.
 import sys; sys.path.append("..")
-import json
 import logging
 import unittest
-import random
 from tomes_tool.lib.text_to_nlp import *
 
 # enable logging.
