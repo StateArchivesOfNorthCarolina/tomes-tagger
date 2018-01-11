@@ -54,6 +54,7 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
 
     # get NER tags for each line; write results row.
     line_num = 0
+    tested_lines = 0
     for line in test_data:
     
         line_num += 1
@@ -67,12 +68,13 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
             continue
 
         # split line.
-        logger.debug("Testing line number: {}".format(line_num))
+        logger.debug("Testing line {}.".format(line_num))
         try:
             phrase, expected_tag, is_match_expected = line.split("\t")
+            tested_lines += 1
         except ValueError as err:
             logger.error(err)
-            logger.warning("Line '{}' may not be delimited by actual tabs.".format(line_num))
+            logger.warning("Line {} may not be delimited by actual tabs.".format(line_num))
         
         # determine if @expected_tag SHOULD be returned via tagging.
         if is_match_expected == "TRUE":
@@ -86,8 +88,6 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
         if len(ner_tags) != 0:
             tokens_found = [n[0] for n in ner_tags]
             tags_found = [n[1] for n in ner_tags]
-            #tags_found = set([n[1] for n in ner_tags])
-            #tags_found = list(tags_found)
 
         # determine if matching went as expected. 
         if is_match_expected and expected_tag == tags_found[0]:
@@ -114,7 +114,7 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
 
     # close file.
     results_file.close()
-    logger.info("Done.")
+    logger.info("Tested {} lines out of {}.".format(tested_lines, line_num))
     return 
         
 
