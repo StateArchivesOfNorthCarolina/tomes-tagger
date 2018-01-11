@@ -17,14 +17,14 @@ logger.setLevel("INFO")
 
 
 def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_results.tsv"):
-    """ Tests NER patterns in @data_file; returns results as a list of tab-delimited data.
+    """ Tests NER patterns in @data_path and writes results to @results_path.
     
     Args:
         - data_path (str): The filepath with test data (in the required format).
         - results_path (str): The filepath in which to write the test results.
     
     Returns:
-        list: The return value.
+        None
     """
 
     # test if @results_path already exists.
@@ -52,7 +52,7 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
     header = "\t".join(header) + "\n"
     results_file.write(header)
 
-    # get NER tags for each line; write results row.
+    # get NER tags for each line in @data_path; write results row.
     line_num = 0
     tested_lines = 0
     for line in test_data:
