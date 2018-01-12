@@ -119,11 +119,17 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
         
 
 ### let's test ...
-def main():
+def main(test_data:"path to tab-delimited test data", 
+        report_file:"destination file for test results"):
+    
+    "Creates tab-delimited report file for NER tagging of test data.\
+    \nexample: `py -3 ner_tester.py test_data.tsv report_file.tsv`"
 
-    results_path = testDataFile()
+    results_path = testDataFile(test_data, report_file)
     logging.info("Created results file: {}".format(results_path))
 
 if __name__ == "__main__":
-    main()
+    
+    import plac
+    plac.call(main)
 
