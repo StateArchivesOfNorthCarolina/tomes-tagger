@@ -64,10 +64,10 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
 
         # ignore blank lines and comment lines.
         if line == "":
-            logger.info("Skipping blank line at line number: {}".format(line_num))
+            logger.debug("Skipping blank line at line number: {}".format(line_num))
             continue
         if "#" in line:
-            logger.info("Skipping comment line at line number: {}".format(line_num))
+            logger.debug("Skipping comment line at line number: {}".format(line_num))
             continue
 
         # split line.
