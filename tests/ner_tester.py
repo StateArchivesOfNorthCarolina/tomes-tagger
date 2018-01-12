@@ -25,6 +25,9 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
     
     Returns:
         None
+
+    Raises:
+        FileExistsError: If @results_path already exists.
     """
 
     # test if @results_path already exists.
@@ -61,20 +64,22 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
 
         # ignore blank lines and comment lines.
         if line == "":
-            logger.debug("Skipping blank line at line number: {}".format(line_num))
+            logger.info("Skipping blank line at line number: {}".format(line_num))
             continue
         if "#" in line:
-            logger.debug("Skipping comment line at line number: {}".format(line_num))
+            logger.info("Skipping comment line at line number: {}".format(line_num))
             continue
 
         # split line.
-        logger.debug("Testing line {}.".format(line_num))
+        logger.debug("Testing line: {}".format(line_num))
         try:
             phrase, expected_tag, is_match_expected = line.split("\t")
             tested_lines += 1
         except ValueError as err:
             logger.error(err)
-            logger.warning("Line {} may not be delimited by actual tabs.".format(line_num))
+            logger.error("Found {} tabs; expected 3.".format(line.count("\t")))
+            logger.warning("Skipping invalid line: {}".format(line_num))
+            continue
         
         # determine if @expected_tag SHOULD be returned via tagging.
         if is_match_expected == "TRUE":
