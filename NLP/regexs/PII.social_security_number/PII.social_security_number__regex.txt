@@ -1,5 +1,3 @@
-### social_security_number
-
 ### REGEX
 # note: allows for illegal SSNs such as 000-12-1234, etc. but how many times would emails contain invalid SSNs?
 (?x)        # set free spacing mode to make REGEX readable.

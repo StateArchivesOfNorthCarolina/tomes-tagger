@@ -1,5 +1,3 @@
-### ut_employee_id
-
 ### REGEX
 (?x)		# set free spacing mode to make REGEX readable.
 \b		# word boundary.     	

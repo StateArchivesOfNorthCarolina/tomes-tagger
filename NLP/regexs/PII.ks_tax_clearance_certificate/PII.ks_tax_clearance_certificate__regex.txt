@@ -1,5 +1,3 @@
-### ks_tax_clearance_certificate
-
 ### REGEX
 (?x)        	# set free spacing mode to make REGEX readable.
 \b          	# word boundary.     	

@@ -1,5 +1,3 @@
-### passport_number
-
 ### REGEX
 # currently not allowing 6 and 7 digit passport numbers.
 (?x)                                # set free spacing mode to make REGEX readable.

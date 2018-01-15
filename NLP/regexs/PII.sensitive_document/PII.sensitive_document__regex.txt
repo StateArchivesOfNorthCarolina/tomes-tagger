@@ -1,4 +1,3 @@
-### sensitive_document
 # keywords mostly from: http://www.thesaurus.com/browse/confidential
 
 ### REGEX
@@ -32,3 +31,4 @@
 (?i)under\sthe\stable|
 (?i)under-the-table|
 (?i)under\swraps
+
