@@ -2,10 +2,10 @@
 (?x)		# set free spacing mode to make REGEX readable.
 \b 		# word boundary.
 (
-Session\s{1}Law|
+(?i)Session\s{1}Law(?-i)|
 SL|
 S\.\s{0,1}L\.
-) 		# "Session Law" OR "SL" OR "S.L." (with optional whitespace after 1st period).
+) 		# "Session Law" (case-insensitive) OR "SL" OR "S.L." (with optional whitespace after 1st period).
 \s{1} 		# single whitespace.
 [1,2]{1} 	# single digit, starting with "1" or "2".
 [0-9]{3} 	# 3 digits.
