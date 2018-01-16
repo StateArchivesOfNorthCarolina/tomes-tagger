@@ -1,0 +1,5 @@
+### REGEX
+(?x)		# set free spacing mode to make REGEX readable.
+\b		# word boundary.     	
+[0-9]{6}	# 6 digits.
+\b		# word boundary.

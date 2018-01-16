@@ -1,0 +1,12 @@
+### REGEX
+(?x)        # set free spacing mode to make REGEX readable.
+\b          # word boundary.
+[0-9]{4}    # 4 digits.
+[\s|-]      # space or hyphen.
+[0-9]{4}    # 4 digits.
+[\s|-]      # space or hyphen.
+[0-9]{4}    # 4 digits.
+[\s|-]?     # optional hyphen.
+[0-9]{4}    # 4 digits.
+\b          # word boundary.
+

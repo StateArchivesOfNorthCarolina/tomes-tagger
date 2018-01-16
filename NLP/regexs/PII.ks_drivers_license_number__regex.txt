@@ -1,0 +1,8 @@
+### REGEX
+(?x)        			# set free spacing mode to make REGEX readable.
+\b          			# word boundary.     	
+[K]{1}				# uppercase letter "K".
+([0-9]{4}  | 
+[0-9]{2}[-]{1}[0-9]{2}[-]{1})	# 4 digits OR 2 sets of: 2 digits plus a hyphen.
+[0-9]{4}			# 4 digits.
+\b          			# word boundary.
