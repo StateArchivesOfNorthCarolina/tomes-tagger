@@ -6,8 +6,8 @@
 S|
 SB|
 S\.\s{0,1}B\.
-) 		# "Senate Bill" OR "S" OR "SB" OR "S.B." (with optional whitespace after 1st
-		# period).
+) 		# "Senate Bill" (case-insensitive) OR "S" OR "SB" OR "S.B." (with optional 
+		# whitespace after 1st period).
 \s{0,1} 	# optional, single whitespace.
 [0-9]{1,4}	# 1 to 4 digits.
 \b 		# word boundary.
