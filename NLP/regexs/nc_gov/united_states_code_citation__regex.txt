@@ -19,5 +19,5 @@ U\.S\.C
 [0-9]{0,2}	# optional number of 1 to 2 digits.
 (-[1-9]{1}
 [0-9]{0,3}
-){0,1}        	# optional number greater than zero of 1 to 4 digits (preceeded by a hyphen).
+){0,1}        	# optional number (> than zero) of 1 to 4 digits (preceeded by a hyphen).
 \b 		# word boundary.
