@@ -16,7 +16,7 @@ class ModifyHTML():
     
     Example:
         >>> html = open("sample.html").read() # string.
-        >>> html = ModifyHTML(html, "html5lib") #BeautifulSoup object.
+        >>> html = ModifyHTML(html, "html5lib") # BeautifulSoup object.
         >>> html.shift_links()
         >>> html.remove_images()
         >>> html.raw() # string version of the HTML with shifted links and no images.
@@ -24,13 +24,20 @@ class ModifyHTML():
 
 
     def __init__(self, html, parser="html5lib"):
-        """ Sets instance attributes. """
+        """ Sets instance attributes. 
+        
+        Args:
+            - html (str): The HTML source code to modify.
+            - parser (str): The library with which to parse @html. See: 
+            "https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser". 
+        """
 
         # set logger; suppress logging by default. 
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.NullHandler())
 
         # compose BeautifulSoup object.
+        self.logger.info("Creating BeautifulSoup object.")
         self.root = BeautifulSoup(html, parser)
 
 
