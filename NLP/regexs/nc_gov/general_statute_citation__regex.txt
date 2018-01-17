@@ -1,4 +1,5 @@
 # need to discuss trailing "-*" with Emily, i.e. need more contraints or we'll just omit it.
+# also: are lower case letters OK for the trailing letter?
 
 ### REGEX
 (?x)		# set free spacing mode to make REGEX readable.
