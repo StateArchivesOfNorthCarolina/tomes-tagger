@@ -1,0 +1,23 @@
+# references: http://guides.ll.georgetown.edu/c.php?g=261289&p=2383798
+
+### REGEX
+(?x)		# set free spacing mode to make REGEX readable.
+\b 		# word boundary.
+(
+[1-9]{1}|
+[1-5]{1}[0-9]{1}|
+) 		# 1 through 9 OR a two digital number between 10 and 59 (technically 54
+		# appears to be the actual maximum legal value per E.S at NC Archives.
+\s{1}		# single space.	
+(
+USC|
+U\.S\.C
+) 		# "USC" OR "U.S.C."
+(\s{1}§{1,2}){0,1}
+\s{1} 		# single space OR 1 to 2 section symbols (preceeded by a single space)
+[1-9]		# 1 through 9.
+[0-9]{0,2}	# optional number of 1 to 2 digits.
+(-[1-9]{1}
+[0-9]{0,3}
+){0,1}        	# optional number greater than zero of 1 to 4 digits (preceeded by a hyphen).
+\b 		# word boundary.
