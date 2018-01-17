@@ -1,14 +1,17 @@
+# need to discuss trailing "-*" with Emily, i.e. need more contraints or we'll just omit it.
+
 ### REGEX
 (?x)		# set free spacing mode to make REGEX readable.
 \b 		# word boundary.
 (
-(?i)House\s{1}Bill(?-i)\s{1}|
-H|
-HB\s{0,1}|
-H\.\s{0,1}B\.\s{1}
-) 		# "House Bill " (case-insensitive) OR "H" OR "HB" (with optional trailing 
-		# space)  OR "H.B. " (with optional whitespace after 1st period).
-[0-9]{1,4}	# 1 to 4 digits.
+(?i)General\s{1}Statute(?-i)\s{1}|
+GS\s{0,1}|
+G\.\s{0,1}S\.\s{1}
+) 		# "General Statute " (case-insensitive) OR "GS" (with optional trailing space)
+		#  OR "G.S. " (with optional whitespace after 1st period).
+(§\s{0,1}){0,1} # optional section symbol (with optional trailing space)
+[1-9]{1} 	# 1 to 9.
+[0-9]{0,2} 	# optional number, 1 to 2 digits.
+[a-zA-Z]{0,1} 	# optional letter.
 \b 		# word boundary.
-
 
