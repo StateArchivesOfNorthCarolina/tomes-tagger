@@ -1,0 +1,23 @@
+### REGEX
+(?x)
+
+# word boundary.
+\b    	
+
+# uppercase letter "U".
+[U]
+
+# 8 digits.	
+[0-9]{8}
+
+# word boundary.
+\b
+
+
+### MATCH
+U12345678
+
+
+### NON-MATCH
+U123456789
+u12345678

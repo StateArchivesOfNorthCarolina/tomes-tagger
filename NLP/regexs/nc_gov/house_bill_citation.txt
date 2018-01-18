@@ -6,10 +6,10 @@
 
 # variations on "House Bill."
 (
-(?i)House\s{1}Bill(?-i)\s{1}|
+(?i)House\sBill(?-i)\s|
 H|
 HB\s{0,1}|
-H\.\s{0,1}B\.\s{1}
+H\.\s{0,1}B\.\s
 )
 
 # 1 to 4 digits. 

@@ -1,0 +1,20 @@
+### REGEX
+(?x)
+
+# word boundary.
+\b
+
+# 6 digits.
+[0-9]{6}
+
+# word boundary.
+\b
+
+
+### MATCH
+123456
+
+
+### NON-MATCH
+U123456
+U12345
