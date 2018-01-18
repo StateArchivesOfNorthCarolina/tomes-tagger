@@ -1,0 +1,35 @@
+### REGEX
+(?x)
+
+# word boundary.
+\b
+
+# variations on "House Bill."
+(
+(?i)House\s{1}Bill(?-i)\s{1}|
+H|
+HB\s{0,1}|
+H\.\s{0,1}B\.\s{1}
+)
+
+# 1 to 4 digits. 
+[0-9]{1,4}
+
+# word boundary.
+\b
+
+
+### MATCH
+H123
+H1234
+House BiLl 123
+H.B. 123
+H. B. 1
+
+
+### NON-MATCH
+house bill12
+h1234
+H12345
+House Bill X123
+

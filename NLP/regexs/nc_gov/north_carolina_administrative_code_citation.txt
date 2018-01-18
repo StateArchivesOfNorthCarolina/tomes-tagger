@@ -1,3 +1,7 @@
+### REFERENCES
+https://www.law.cornell.edu/citation/3-400#3-410_North_Carolina
+
+
 ### REGEX
 (?x)
 
@@ -26,7 +30,7 @@ NCAC
 # space.
 \s
 
-# number > 0.
+# 1 to 9.
 [1-9]
 
 # optional number.

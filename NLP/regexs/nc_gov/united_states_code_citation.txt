@@ -1,0 +1,56 @@
+### REGEX
+(?x)
+
+# word boundary.
+\b
+
+# 1 to 59 (54 appears to be the actual maximum legal value per E.S at NC Archives.)
+(
+[1-9]|
+[1-5][0-9]
+)
+
+# space.
+\s
+
+# "USC" OR "U.S.C.".
+(USC|U\.S\.C)
+
+# optional: 1 to 2 section symbols (preceeded by a single space).
+(\s§{1,2}){0,1}
+
+# space.
+\s
+
+# 1 to 9.
+[1-9]
+
+# optional number of 1 to 2 digits.
+[0-9]{0,2}
+
+# optional number greater than zero of 1 to 4 digits (preceeded by a hyphen).
+(-[1-9][0-9]{0,3}){0,1}
+
+# word boundary.
+\b
+
+
+### MATCH
+1 USC 1
+1 USC 123
+1 USC 123-1234
+1 U.S.C 1
+1 U.S.C 123
+1 U.S.C 123.1234
+1 USC § 1
+1 USC § 123
+59 USC §§ 123-1234
+1 USC 123-0234
+
+
+### NON-MATCH
+62 USC 12
+0 U.S.C 12
+62 USC § 123
+1 USC 0
+

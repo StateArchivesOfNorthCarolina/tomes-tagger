@@ -1,0 +1,22 @@
+### REGEX
+(?x)
+
+# word boundary.
+\b
+
+# 8 digits.
+[0-9]{8}
+
+# word boundary.
+\b
+
+
+### MATCH
+12345678
+
+
+### NON-MATCH
+123456
+1 2345678
+123456A7
+123456789
