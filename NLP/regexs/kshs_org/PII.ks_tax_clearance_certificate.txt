@@ -3,7 +3,7 @@
 
 # word boundary.
 \b
-    	
+
 # 4 occurrences of any digit or letter.
 [a-zA-Z0-9]{4}
 

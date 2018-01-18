@@ -9,16 +9,16 @@
 
 # hyphen.
 -
-         
-# 7 digits.		 
-[0-9]{7}       
+ 
+# 7 digits. 
+[0-9]{7} 
 
 # optional: letter OR 3 digits.
 (
 [a-zA-Z]|
 [0-9]{3}
 ){0,1}
-    
+
 # word boundary.
 \b
 

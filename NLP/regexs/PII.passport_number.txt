@@ -1,0 +1,32 @@
+### REGEX
+# currently not allowing 6 and 7 digit passport numbers.
+(?x)
+
+# word boundary.
+\b
+
+# 8 to 9 digits (visa, passport) OR letter followed by 7 digits (visa).
+(
+[0-9]{8,9}|
+[a-zA-Z][0-9]{7}
+) 
+
+# word boundary.
+\b
+
+
+### MATCH
+462329510
+925919782
+092357332
+12345678
+a1234567
+A1234567
+
+
+### NON-MATCH
+1234567
+z12345678
+z12345678
+12345678911
+123456

@@ -1,0 +1,41 @@
+### REGEX
+(?x)
+
+# word boundary.
+\b
+
+(?i)deductible|
+(?i)diagnosis|
+(?i)FMLA|
+(?i)health\scondition|
+(?i)health\sinsurance|
+(?i)health\sissues|
+(?i)health\sproblems|
+(?i)HIPPA|
+(?i)medical\sleave|
+(?i)medical\srecords|
+(?i)patient|
+(?i)PHI|
+(?i)policy\snumber
+
+# word boundary.
+\b
+
+
+### MATCH
+DEduCtible
+DIAGNOSiS
+fMla
+HeaLth COnDiTiON
+HeALtH InSURaNce
+HEALTH isSues
+health PrObleMS
+hIPpa
+mediCal LeAVe
+meDICAL recOrDs
+PAtieNT
+PHi
+poLiCY NuMber
+
+
+### NON-MATCH

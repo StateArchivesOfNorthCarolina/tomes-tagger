@@ -2,12 +2,12 @@
 (?x)
 
 # word boundary.
-\b    	
+\b
 
 # uppercase letter "U".
 [U]
 
-# 8 digits.	
+# 8 digits.
 [0-9]{8}
 
 # word boundary.

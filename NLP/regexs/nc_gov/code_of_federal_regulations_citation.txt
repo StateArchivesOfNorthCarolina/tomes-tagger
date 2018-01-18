@@ -16,7 +16,7 @@ https://www.gpo.gov/help/about_code_of_federal_regulations.htm
 (
 [1-9]|
 [1-5][0-9]
-) 		
+) 
 
 # space.
 \s

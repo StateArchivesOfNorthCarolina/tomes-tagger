@@ -9,13 +9,13 @@ K
 
 # 4 digits OR 2 sets of: 2 digits plus a hyphen.
 ([0-9]{4}| 
-[0-9]{2}-[0-9]{2}-)	
+[0-9]{2}-[0-9]{2}-)
 
 # 4 digits.
 [0-9]{4}
 
 # word boundary.
-\b  
+\b
 
 
 ### MATCH

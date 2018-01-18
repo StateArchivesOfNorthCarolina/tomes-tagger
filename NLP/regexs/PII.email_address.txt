@@ -1,0 +1,63 @@
+### REFERENCES
+http://regexlib.com/RETester.aspx?regexp_id=26
+
+
+### REGEX
+(?x)
+
+# word boundary.
+\b
+
+# optional open enclosing character.
+["'\[{<]{0,1}
+ 
+# any character from this class; repeatable to 100 times. 
+[a-zA-Z0-9_\-\.]{1,100}
+
+# "at" symbol.
+@
+
+# support either IP-address form OR domain form.
+((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+)) 
+
+# domain extension of 2-4 letters OR 1-3 digits.
+([a-zA-Z]{2,4}|[0-9]{1,3}) 
+
+# optional closing bracket for emails with IP address form. 
+(\]?)
+
+# optional close enclosing character. 
+["'\]}>]{0,1}
+
+# word boundary.
+\b
+
+
+### MATCH
+single@foo.com
+dot.ted@foo.edu
+dot.ted@dot.ted.gov
+d.ot.ted@ws.ws
+ip.address@[127.0.0.1]
+UPPER@CASE.FOO
+cAsE@inSeNsItIvE.cO.uK
+.startsWithDot@foo.com
+dot..@dot.com
+100_total_length___________________________________________________________________________@foo.com
+Arora, Nitin <nitin.a.arora@ncdcr.gov>
+Arora, Nitin "nitin.a.arora@ncdcr.gov"
+Arora, Nitin 'nitin.a.arora@ncdcr.gov'
+Arora, Nitin (nitin.a.arora@ncdcr.gov)
+Arora, Nitin {nitin.a.arora@ncdcr.gov}
+Arora, Nitin [nitin.a.arora@ncdcr.gov]
+foo@test.1
+(comment)foo@foo.com
+
+
+### NON-MATCH
+mañaña@foo.co.es
+long@doma.iXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXin
+"quoted"@quote.org
+illegalDomain@fo.o
+
+dot.ted(comment)@foo.com

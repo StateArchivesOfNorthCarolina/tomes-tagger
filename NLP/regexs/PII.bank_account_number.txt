@@ -1,0 +1,60 @@
+### REFERENCES
+http://regexlib.com/RETester.aspx?regexp_id=2057
+
+### REGEX
+# note: accepts forms "nnnnnnnnn" OR "nnnn-nnnn-n" OR "nnnn-nnnnn" OR "nnnnnnnn-n" for ROUTING_NUMBER (i.e. doesn't enforce 2 hyphens OR none).
+(?x)
+
+# word boundary.
+\b
+
+# first two digital of ROUTING_NUMBER per ABA rules.
+((0[0-9]) | (1[0-2]) | (2[1-9]) | (3[0-2]) | (6[1-9]) | (7[0-2]) | 80)
+
+# next two numbers.
+[0-9]{2}
+
+# optional hyphen.
+-{0,1}
+
+# next 4 digits.
+[0-9]{4}
+
+# optional hyphen.
+-{0,1}
+
+# last digit.
+[0-9]
+
+# whitespace OR hyphen.
+(\s|-)
+
+# 6 to 17 digits for ACCOUNT_NUMBER.
+[0-9]{6,17} 
+
+# word boundary.
+\b
+
+
+### MATCH
+123456789-123456
+123456789 123456
+223456789 12345678910131517
+1234-5678-9-123456
+1234-5678-9 123456
+223456789 123456
+223456789-123456
+223456789 12345678910131517
+123456789-123456
+223456789 123456
+223456789-123456
+
+
+### NON-MATCH
+223456789 123456789101315171921
+133456789-123456
+1234_5678-9-123456
+123456789123456
+12345678 9-123456
+12345678 9 123456
+223456789 123456789101315171921
