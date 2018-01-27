@@ -7,6 +7,9 @@ file containing NER mapping rules for Stanford CoreNLP.
 Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
+        - I'm changing my answer to "YES" now!
+    * I think we want to prepend the XLSX checksum to the "identifier" automatically so we can
+    add this as an attribute in the message XML: @entity_ref="AB123#0001" for the 1st entity.
     * After you re-write any code, check your examples and docstrings.
 """
 
