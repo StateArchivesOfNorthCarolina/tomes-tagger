@@ -11,6 +11,11 @@ Todo:
     * I think we want to prepend the XLSX checksum to the "identifier" automatically so we can
     add this as an attribute in the message XML: @entity_ref="AB123#0001" for the 1st entity.
         - Note: you will need to udpate the XSD.
+    * Get rid of the unlink method. Just raise a FileExistsError.
+    * Get rid of the folder method.
+    * Look at your foo.py example to get a better way of doing things.
+        - Have a method that returns a tuple: header values and iterable data rows.
+        - Then loop over that method to return a dict (for indexing) or a text file.
     * After you re-write any code, check your examples and docstrings.
 """
 
