@@ -10,6 +10,7 @@ Todo:
         - I'm changing my answer to "YES" now!
     * I think we want to prepend the XLSX checksum to the "identifier" automatically so we can
     add this as an attribute in the message XML: @entity_ref="AB123#0001" for the 1st entity.
+        - Note: you will need to udpate the XSD.
     * After you re-write any code, check your examples and docstrings.
 """
 
