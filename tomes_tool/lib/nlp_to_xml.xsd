@@ -46,12 +46,11 @@ elementFormDefault="qualified">
 			the token matched against and that yielded the @entity in question.
 				
 		4. 	@group - the group identifier for each token; this value is shared by 
-			adjacent tokens with the same @entity value regardless of the value
-			of the @match_id.
+			adjacent tokens with the same @entity value regardless of the the 
+			@pattern value.
 			
-	Note that if any attribute exists, then the other two attributes must exist. In
-	other words, the three attributes must collectively exist or must collectively
-	not exist.
+	Note that if the @entity attribute exists, then the @authority and @group 
+	attributes must also exist. This is not enforced by the schema.
 
 	An example document is below:
 
