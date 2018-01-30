@@ -16,8 +16,8 @@ https://stackoverflow.com/a/417184
 # any number or letter.
 ([0-9a-zA-Z]){1,63}
 
-# period.
-\.
+# period OR at-sign OR colon.
+(\.|@|:)
 
 # any non-space character.
 ([^\s]){1,2000}
@@ -32,6 +32,10 @@ ftp://www.example.com/wpstyle/?p=364
 https://www.example.com/foo/?bar=baz&inga=42&quux
 http://foo.bar?q=Spaces Yield Partial Match (better than nothing for TOMES)
 http://123.123.123
+http://userid@example.com:8080/
+http://userid:password@example.com/
+http://142.42.1.1:8080/
+http://j.mp
 
 
 ### NON-MATCH
