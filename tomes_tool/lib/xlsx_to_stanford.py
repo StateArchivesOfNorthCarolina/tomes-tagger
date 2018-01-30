@@ -8,10 +8,6 @@ Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
         - I'm changing my answer to "YES" now!
-    * I think we want to prepend the XLSX checksum to the "identifier" automatically so we can
-    add this as an attribute in the message XML: @entity_ref="AB123#0001" for the 1st entity.
-        - Note: you will need to udpate the XSD.
-    * Look at your foo.py example to get a better way of doing things.
     * After you re-write any code, check your examples and docstrings.
 """
 
@@ -168,13 +164,6 @@ class XLSXToStanford():
         # open @stanford_file for writing.
         tsv = codecs.open(stanford_file, "w", encoding=self.charset)
 
-        # get checksum of @xlsx_file (in order to make an unique identifier for each row).
-        with open(xlsx_file, "rb") as xf:
-            xf_bytes = xf.read()
-            checksum = hashlib.sha1()
-            checksum.update(xf_bytes)
-            id_prefix = checksum.hexdigest()
-
         # iterate through rows; write data to @stanford_file.
         i = 0
         for row in entity_rows.values:
@@ -191,7 +180,6 @@ class XLSXToStanford():
             
             # get cell data.
             identifier, pattern, description, case_sensitive, label, authority = row
-            identifier = id_prefix + identifier
             pattern = self._get_pattern(pattern, case_sensitive)
             label = "::".join([identifier, authority, label])
 

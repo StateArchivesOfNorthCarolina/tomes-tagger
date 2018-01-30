@@ -32,38 +32,37 @@ class NLPToXML():
         self.ns_map  = {None: self.ns_uri}
 
 
-    def _split_authority(self, auth_tag):
-        """ Splits @auth_tag into the authority domain and NER tag.
+    def _split_entity(self, entity_tag):
+        """ Splits @entity_tag into the entity identifier, the authority domain, and the 
+        actual NER tag for the entity.
 
         Args:
-            - auth_tag (str): The forward-slash concatenated authority domain and NER tag.
+            - entity_tag (str): The double-colon concatenated NER tag consisted of the three
+            parts, above.
 
         Returns:
             tuple: The return value.
-            The first item is a string, i.e the authority domain.
-            The second item is a string, i.e. the NER tag.
+            The first item is a string, i.e. the entity identifier.
+            The second item is a string, i.e the authority domain.
+            The third item is a string, i.e. the NER tag.
         """
 
-        # verify @auth_tag is a string.
-        if not isinstance(auth_tag, str):
-            self.logger.error("Authority should be a string, got '{}' instead.".format(
-                type(auth_tag).__name__))
-            self.logger.warning("Falling back to empty authority and NER tag values.")
-            return ("", "")
+        # verify @entity_tag is a string.
+        if not isinstance(entity_tag, str):
+            self.logger.error("Entity should be a string, got '{}' instead.".format(
+                type(entity_tag).__name__))
+            self.logger.warning("Falling back to empty values.")
+            return ("", "", "")
 
-        # determine authority.
-        slash = auth_tag.find("/")
+        # split @entity_tag into its parts.
+        entity_parts = entity_tag.split("::")
         
-        if slash == -1:
-            authority, ner_tag = "", auth_tag
-        else:
-            authority, ner_tag = auth_tag[0:slash], auth_tag[slash+1:]
-
-        # if forward slashes are in @ner_tag, log a warning.
-        if "/" in ner_tag:
-            self.logger.warning("Forward slashes found in NER tag: {}".format(ner_tag))
+        # if too few or too many parts exist, fallback to assuming only a raw tag exists.
+        if len(parts) != 3:
+            entity_tag = entity_tag.replace("::", "_")
+            entity_parts = ("", "", entity_tag)
         
-        return (authority, ner_tag)
+        return entity_parts
 
 
     def validate_xml(self, xdoc):
@@ -163,12 +162,16 @@ class NLPToXML():
             # if NER tag exists, add attributes to token sub-element.
             if tag != "":
 
-                tag_authority, tag_value = self._split_authority(tag)
+                tag_id, tag_authority, tag_value = self._split_entity(tag)
                 
                 token_el.set("entity", tag_value)
                 token_el.set("group", str(tag_group))
 
-                # write attribute if it exists.
+                # write "identifier" attribute if it exists.
+                if tag_id != "": 
+                    token_el.set("identifier", tag_authority)
+
+                # write "authority" attribute if it exists.
                 if tag_authority != "": 
                     token_el.set("authority", tag_authority)
             
