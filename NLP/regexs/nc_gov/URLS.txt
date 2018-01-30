@@ -1,0 +1,49 @@
+### REFERENCES
+https://mathiasbynens.be/demo/url-regex (using modified form from @imme_emosol)
+https://stackoverflow.com/a/14402979
+https://stackoverflow.com/a/417184
+
+
+### REGEX
+(?x)
+
+# http OR https OR ftp.
+(http|https|ftp){1}
+
+# colon plus two forward slashes.
+(://)
+
+# any number or letter.
+([0-9a-zA-Z]){1,63}
+
+# period.
+\.
+
+# any non-space character.
+([^\s]){1,2000}
+
+
+### MATCH
+http://foo.com/blah_blah
+http://foo.com/blah_blah/
+http://foo.com/blah_blah_(wikipedia)
+http://foo.com/blah_blah_(wikipedia)_(again)
+ftp://www.example.com/wpstyle/?p=364
+https://www.example.com/foo/?bar=baz&inga=42&quux
+http://foo.bar?q=Spaces Yield Partial Match (better than nothing for TOMES)
+http://123.123.123
+
+
+### NON-MATCH
+http://
+http://.
+http://..
+http://../
+http://?
+http://??
+http://??/
+http://#
+http://##
+http://##/
+http://.www.foo.bar/
+http://3628126748

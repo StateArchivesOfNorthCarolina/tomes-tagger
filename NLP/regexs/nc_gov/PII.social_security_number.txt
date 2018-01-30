@@ -1,21 +1,37 @@
+### REFERENCES
+http://regexlib.com/REDetails.aspx?regexp_id=535
+
+
 ### REGEX
-# note: allows for illegal SSNs such as 000-12-1234, etc.
 (?x)
 
 # word boundary.
 \b
 
-# 3 digits.
-[0-9]{3}
+# exclude 3 zeros.
+(?!000)
 
-# space OR hyphen.
-[\s|-]
+# 0-6 plus 2 digits OR 7 plus 0-6 plus a digit OR 7 plus 0-2.
+(
+[0-6][0-9]{2}|
+7([0-6][0-9]{1}|
+7[012])
+)
 
-# 2 digits.
+# optional space or hyphen.
+([\s{1}-]){0,1}
+
+# exclude 2 zeros.
+(?!00)
+
+#  two digits.
 [0-9]{2}
 
-# space OR hyphen.
-[\s|-]
+# backreference to whether a space or hyphen was used.
+\3
+
+# exclude 4 zeros.
+(?!0000)
 
 # 4 digits.
 [0-9]{4}
@@ -25,10 +41,7 @@
 
 
 ### MATCH
-996 36 8070
 433-91-9072
-944 39 5643
-907 85 6893
 155 21 7104
 319-51-6119
 700-99-0513
@@ -37,14 +50,16 @@
 489 71 7878
 730 04 7552
 738-75-2148
-853-06-5240
 097 80 9084
 
 
 ### NON-MATCH
 959714676
-535234337
-433924327
-162310293
-364645920
+535-234337
 915422666
+996 36 8070
+944 39 5643
+907 85 6893
+000-91-9072
+433-00-9072
+433-91-0000
