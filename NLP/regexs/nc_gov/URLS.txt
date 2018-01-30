@@ -36,6 +36,7 @@ http://userid@example.com:8080/
 http://userid:password@example.com/
 http://142.42.1.1:8080/
 http://j.mp
+http://j.mp#foo
 
 
 ### NON-MATCH
