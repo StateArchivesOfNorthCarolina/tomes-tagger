@@ -33,8 +33,8 @@ class NLPToXML():
 
 
     def _split_entity(self, entity_tag):
-        """ Splits @entity_tag into the entity identifier, the authority domain, and the 
-        actual NER tag for the entity.
+        """ Splits @entity_tag into the match pattern identifier, the authority domain, and
+        the actual NER tag for the entity.
 
         Args:
             - entity_tag (str): The double-colon concatenated NER tag consisted of the three
@@ -42,7 +42,7 @@ class NLPToXML():
 
         Returns:
             tuple: The return value.
-            The first item is a string, i.e. the entity identifier.
+            The first item is a string, i.e. the match pattern identifier.
             The second item is a string, i.e the authority domain.
             The third item is a string, i.e. the NER tag.
         """
@@ -162,14 +162,14 @@ class NLPToXML():
             # if NER tag exists, add attributes to token sub-element.
             if tag != "":
 
-                tag_id, tag_authority, tag_value = self._split_entity(tag)
+                tag_pattern, tag_authority, tag_value = self._split_entity(tag)
                 
                 token_el.set("entity", tag_value)
                 token_el.set("group", str(tag_group))
 
-                # write "identifier" attribute if it exists.
-                if tag_id != "": 
-                    token_el.set("identifier", tag_id)
+                # write "pattern" attribute if it exists.
+                if tag_pattern != "": 
+                    token_el.set("pattern", tag_pattern)
 
                 # write "authority" attribute if it exists.
                 if tag_authority != "": 

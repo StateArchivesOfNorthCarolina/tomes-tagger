@@ -21,7 +21,7 @@ class Test_NLPToXML(unittest.TestCase):
        
     
     def test__authorities(self):
-        """ Does the authority splitter work for an NER tag with an authority? """
+        """ Does the authority splitter work for an NER tag? """
         
         # combine and then split authority and NER tag.
         data_in = "0001", "ncdcr.gov", "PII.email_address"

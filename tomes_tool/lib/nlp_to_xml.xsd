@@ -34,16 +34,20 @@ elementFormDefault="qualified">
 	The value of a "Token" element is a token (colloquially equivalent to a
 	"word") that has been "tagged" with a named entity via NLP.
 
-	The element has three optional attributes:
+	The element has four optional attributes:
 
 		1.	@entity - the name of the entity the token is recognized as
-			(PERSON, PLACE, etc.)
+			(PERSON, PLACE, etc.).
 
 		2.	@authority - the Internet domain of the organization reponsible for
-			the controlled vocabulary from which the @entity value derives.
+			the controlled vocabulary of the @entity applied to the token.
+			
+		3.	@pattern - the unique identifier for the particular pattern that
+			the token matched against and that yielded the @entity in question.
 				
-		3. 	@group - the identifier for each token; this value is shared by adjacent
-			tokens with the same @entity value.
+		4. 	@group - the group identifier for each token; this value is shared by 
+			adjacent tokens with the same @entity value regardless of the value
+			of the @match_id.
 			
 	Note that if any attribute exists, then the other two attributes must exist. In
 	other words, the three attributes must collectively exist or must collectively
@@ -56,10 +60,10 @@ elementFormDefault="qualified">
 	<![CDATA[
 	<?xml version='1.0' encoding='utf-8'?>
 	<Tokens xmlns="http://www.archives.ncdcr.gov/mail-account">
-		<Token>Good</Token> <Token>morning</Token> <Token entity="person.male" authority="foo.bar" group="1">John</Token><Token>!</Token>
+		<Token>Good</Token> <Token>morning</Token> <Token entity="person.male" authority="foo" pattern="101" group="1">John</Token><Token>!</Token>
 
 		<Token>Love</Token><Token>,</Token>
-		<Token entity="PERSON" authority="stanford.edu" group="2">Marsha</Token>
+		<Token entity="PERSON" authority="stanford.edu" pattern="0002" group="2">Marsha</Token>
 		
 		<BlockText>Marsha B.
 		Los Angeles, CA
@@ -76,6 +80,7 @@ elementFormDefault="qualified">
 		- Token -> span.class="Token"
 			- @entity -> @data-entity
 			- @authority -> @data-authority
+			- @pattern -> @data-pattern
 			- @group -> @data-group
 		- BlockText -> span.class="BlockText"
 		
@@ -83,10 +88,10 @@ elementFormDefault="qualified">
 	<!--
 	
 	<pre class="Tokens" style="text-align: left; white-space: pre-line;">
-	<span class="Token">Good</span> <span class="Token">morning</span> <span class="Token" data-entity="person.male" data-authority="foo.bar" data-group="1">John</span><span class="Token">!</span>
+	<span class="Token">Good</span> <span class="Token">morning</span> <span class="Token" data-entity="person.male" data-authority="foo" data-pattern="101" data-group="1">John</span><span class="Token">!</span>
 
 	<span class="Token">Love</span><span class="Token">,</span>
-	<span class="Token" data-entity="PERSON" data-authority="stanford.edu" data-group="2">Marsha</span>
+	<span class="Token" data-entity="PERSON" data-authority="stanford.edu" data-pattern="0002" data-group="2">Marsha</span>
 	
 	<span class="BlockText">Marsha B.
 	Los Angeles, CA
@@ -114,6 +119,7 @@ elementFormDefault="qualified">
 
 				<xs:attribute name="entity" type="xs:token" />
 				<xs:attribute name="authority" type="xs:token" />
+				<xs:attribute name="pattern" type="xs:token" />
 				<xs:attribute name="group" type="xs:integer" />
 
 			</xs:extension>
