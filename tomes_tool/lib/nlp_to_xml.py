@@ -169,7 +169,7 @@ class NLPToXML():
 
                 # write "identifier" attribute if it exists.
                 if tag_id != "": 
-                    token_el.set("identifier", tag_authority)
+                    token_el.set("identifier", tag_id)
 
                 # write "authority" attribute if it exists.
                 if tag_authority != "": 

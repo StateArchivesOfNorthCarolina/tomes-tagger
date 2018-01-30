@@ -353,9 +353,9 @@ class TextToNLP():
                 if tag in self.tags_to_remove:
                     tag = ""
 
-                # add authority domain if @tag is from Stanford.
+                # add blank identifier and authority domain if @tag is from Stanford.
                 if tag in self.stanford_tags:
-                    tag = "stanford.edu/" + tag
+                    tag = "::stanford.edu::" + tag
 
                 # append final values to @ner_output.
                 token_group = text, tag, tspace
