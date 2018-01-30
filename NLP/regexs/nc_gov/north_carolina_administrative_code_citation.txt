@@ -45,6 +45,9 @@ NCAC
 # 4 digit number.
 [0-9]{1,4}
 
+# word boundary.
+\b
+
 
 ### MATCH
 17 N.C. Admin. Code 5C.0703
@@ -52,3 +55,4 @@ NCAC
 
 
 ### NON-MATCH
+17 NCAC 5c.0703

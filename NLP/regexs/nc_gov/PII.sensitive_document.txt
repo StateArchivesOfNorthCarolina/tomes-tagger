@@ -3,39 +3,40 @@ http://www.thesaurus.com/browse/confidential (keywords mostly from this page)
 
 
 ### REGEX
+### DO NOT use this regex in the Entity Dictionary. It's just a test.
 (?x)
 
 # word boundary.
 \b
 
-(?i)between\sus|
-(?i)classified|
-(?i)confidential|
-(?i)discrete|
-(?i)eyes\sonly|
-(?i)eyes-only|
-(?i)hushed|
-(?i)hush\shush|
-(?i)hush-hush|
-(?i)in\sconfidence|
-(?i)intelligence|
-(?i)legal\sdisclaimer|
-(?i)NDA|
-(?i)non\sdisclosure|
-(?i)non-disclosure|
-(?i)not\sfor\spublication|
-(?i)not\spublic|
-(?i)not\sto\sbe\squoted|
-(?i)off\sthe\srecord|
-(?i)off-the-record|
-(?i)private|
-(?i)restricted|
-(?i)secret|
-(?i)sensitive|
-(?i)strictly\sprohibited|
-(?i)top\ssecret|
-(?i)under\sthe\stable|
-(?i)under-the-table|
+(?i)between\sus(?-i)|
+(?i)classified(?-i)|
+(?i)confidential(?-i)|
+(?i)discrete(?-i)|
+(?i)eyes\sonly(?-i)|
+(?i)eyes-only(?-i)|
+(?i)hushed(?-i)|
+(?i)hush\shush(?-i)|
+(?i)hush-hush(?-i)|
+(?i)in\sconfidence(?-i)|
+(?i)intelligence(?-i)|
+(?i)legal\sdisclaimer(?-i)|
+NDA|
+(?i)non\sdisclosure(?-i)|
+(?i)non-disclosure(?-i)|
+(?i)not\sfor\spublication(?-i)|
+(?i)not\spublic(?-i)|
+(?i)not\sto\sbe\squoted(?-i)|
+(?i)off\sthe\srecord(?-i)|
+(?i)off-the-record(?-i)|
+(?i)private(?-i)|
+(?i)restricted(?-i)|
+(?i)secret(?-i)|
+(?i)sensitive(?-i)|
+(?i)strictly\sprohibited(?-i)|
+(?i)top\ssecret(?-i)|
+(?i)under\sthe\stable(?-i)|
+(?i)under-the-table(?-i)|
 (?i)under\swraps
 
 # word boundary.
@@ -75,3 +76,4 @@ UndEr WRaPs
 
 
 ### NON-MATCH
+nDa

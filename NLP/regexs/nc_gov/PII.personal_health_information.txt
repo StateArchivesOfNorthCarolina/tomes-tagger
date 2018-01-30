@@ -1,21 +1,22 @@
 ### REGEX
+### DO NOT use this regex in the Entity Dictionary. It's just a test.
 (?x)
 
 # word boundary.
 \b
 
-(?i)deductible|
-(?i)diagnosis|
-(?i)FMLA|
-(?i)health\scondition|
-(?i)health\sinsurance|
-(?i)health\sissues|
-(?i)health\sproblems|
+(?i)deductible(?-i)|
+(?i)diagnosis(?-i)|
+FMLA|
+(?i)health\scondition(?-i)|
+(?i)health\sinsurance(?-i)|
+(?i)health\sissues(?-i)|
+(?i)health\sproblems(?-i)|
 (?i)HIPPA|
-(?i)medical\sleave|
-(?i)medical\srecords|
-(?i)patient|
-(?i)PHI|
+(?i)medical\sleave(?-i)|
+(?i)medical\srecords(?-i)|
+(?i)patient(?-i)|
+PHI|
 (?i)policy\snumber
 
 # word boundary.
@@ -25,17 +26,21 @@
 ### MATCH
 DEduCtible
 DIAGNOSiS
-fMla
+FMLA
 HeaLth COnDiTiON
 HeALtH InSURaNce
 HEALTH isSues
 health PrObleMS
-hIPpa
+HIPPA
 mediCal LeAVe
 meDICAL recOrDs
 PAtieNT
-PHi
+PHI
 poLiCY NuMber
 
 
 ### NON-MATCH
+fmLA
+phI
+
+
