@@ -58,7 +58,7 @@ class NLPToXML():
         entity_parts = entity_tag.split("::")
         
         # if too few or too many parts exist, fallback to assuming only a raw tag exists.
-        if len(parts) != 3:
+        if len(entity_parts) != 3:
             entity_tag = entity_tag.replace("::", "_")
             entity_parts = ("", "", entity_tag)
         

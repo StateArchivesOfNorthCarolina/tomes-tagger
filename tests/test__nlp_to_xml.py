@@ -24,11 +24,12 @@ class Test_NLPToXML(unittest.TestCase):
         """ Does the authority splitter work for an NER tag with an authority? """
         
         # combine and then split authority and NER tag.
-        auth_in, tag_in = "ncdcr.gov", "PII.email_address"
-        auth_out, tag_out = self.n2x._split_authority("{}/{}".format(auth_in, tag_in))
+        data_in = "0001", "ncdcr.gov", "PII.email_address"
+        data_out = self.n2x._split_entity("{}::{}::{}".format(data_in[0], data_in[1],
+            data_in[2]))
 
         # check if result is as expected.
-        self.assertTrue((auth_in, tag_in) == (auth_out, tag_out))
+        self.assertTrue(data_in, data_out)
 
 
     def test__validation(self):
