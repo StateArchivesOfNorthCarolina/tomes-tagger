@@ -382,7 +382,7 @@ class EAXSToTagged():
             - FileExistsError: If @tagged_eaxs_file already exists.
         """
 
-        # raise error if output file already exists.
+        # raise error if @tagged_eaxs_file already exists.
         if os.path.isfile(tagged_eaxs_file):
             err = "Destination file '{}' already exists.".format(tagged_eaxs_file)
             self.logger.error(err)
