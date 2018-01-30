@@ -195,7 +195,5 @@ class XLSXToStanford():
 
 
 if __name__ == "__main__":
-    #pass
-    x2s = XLSXToStanford()
-    x2s.convert_file("../../NLP/TOMES_Entity_Dictionary.xlsx", "ents.txt")
+    pass
 
