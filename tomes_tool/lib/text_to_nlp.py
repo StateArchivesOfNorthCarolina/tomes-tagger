@@ -176,7 +176,7 @@ class TextToNLP():
         # verify @response is a string; decode @response.
         if not isinstance(response, str):
             response = str(response)
-        response = response.encode(charset, errors="ignore").decode(charset, error="ignore")
+        response = response.encode(charset, errors="ignore").decode(charset, errors="ignore")
         
         # if needed, truncate @response.
         if len(response) > max_length:
