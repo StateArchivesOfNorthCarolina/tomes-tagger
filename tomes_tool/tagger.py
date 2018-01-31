@@ -10,10 +10,10 @@ import logging
 import logging.config
 import os
 import yaml
-from tomes_tool.lib.eaxs_tagger import EAXSToTagged
-from tomes_tool.lib.html_convertor import HTMLToText, ModifyHTML
+from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
+from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML
 from tomes_tool.lib.nlp_to_xml import NLPToXML
-from tomes_tool.lib.text_tagger import TextToNLP
+from tomes_tool.lib.text_to_nlp import TextToNLP
 
 
 class TOMESToolTagger():

@@ -44,6 +44,8 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 							</head>
 							<body>
 							<p>Hi Jane Doe!</p>
+							<p>Did you contact Jack and Jill re: their concern over the statute? I think it's G.S. 132-1.10???</p>
+							<p>I believe their email is jackAndjill@hill.ws ... in case you didn't know.</p>
 							</body>
 							</html>]]>
 						</Content>
@@ -101,7 +103,7 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 					<Charset>us-ascii</Charset>
 					<BodyContent>
 						<Content>
-							<![CDATA[Goodbye John D. Doe!
+							<![CDATA[Thanks John D. Doe!
 							Peace,
 							Jane.
 							
@@ -153,7 +155,7 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 					<Charset>us-ascii</Charset>
 					<BodyContent>
 						<Content>
-							<![CDATA[I meant it .... goodbye John!!! We'll always have Raleigh, North Carolina.]]>
+							<![CDATA[Oops, I forgot. I did contact Jack and Jill. Their currently residing in Raleigh, North Carolina! Small world.]]>
 						</Content>
 					</BodyContent>
 				</SingleBody>
