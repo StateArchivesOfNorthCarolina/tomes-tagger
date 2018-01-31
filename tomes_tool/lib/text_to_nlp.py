@@ -353,7 +353,7 @@ class TextToNLP():
                 if tag in self.tags_to_remove:
                     tag = ""
 
-                # add blank pattern and authority domain if @tag is from Stanford.
+                # if @tag is from Stanford, add null pattern plus .edu authority domain.
                 if tag in self.stanford_tags:
                     tag = "::stanford.edu::" + tag
 
