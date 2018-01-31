@@ -8,6 +8,7 @@ Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
         - I'm changing my answer to "YES" now!
+    * Remove "if main: stuff at the end when you are ready.
     * After you re-write any code, check your examples and docstrings.
 """
 
@@ -47,6 +48,29 @@ class XLSXToStanford():
         self.charset = charset
         self.required_headers = ("identifier", "pattern", "description", "case_sensitive",
                 "label", "authority")
+
+
+    def _get_hash_prefix(self, xlsx_file):
+        """ ??? this will be prepended to @identifier, below, in order to know the version
+        of the source Excel file used. (first 6 characters should still be unique enough)
+        
+        Args:
+            - ???
+            
+        Returns:
+            str: ???
+        """
+
+        # get checksum of @xlsx_file.
+        checksum = hashlib.sha256()
+        with open(xlsx_file, "rb") as xf:
+            xf_bytes = xf.read()
+        checksum.update(xf_bytes)
+
+        # truncate checksum.
+        hash_prefix = checksum.hexdigest()[:6] + "#"
+        
+        return hash_prefix 
 
 
     def _get_pattern(self, pattern, case_sensitive):
@@ -137,7 +161,39 @@ class XLSXToStanford():
         return entity_rows
 
 
-    def convert_file(self, xlsx_file, stanford_file):
+    def get_data(self, xlsx_file):
+        """ ???
+
+        Args:
+            - ???
+        
+        Returns:
+            list: ???
+            
+        """
+
+        # load workbook; get row data and modified checksum.
+        self.logger.info("Loading workbook: {}".format(xlsx_file))
+        entity_rows = self._get_rows(xlsx_file)
+        hash_prefix = self._get_hash_prefix(xlsx_file)
+
+        # get header.
+        for row in entity_rows:
+            header = [cell.value for cell in row]
+            break
+        
+        # ???
+        data = []
+        for row in entity_rows:
+            row_tuple = [(header[i], row[i].value) for i in range(0,len(header))]
+            row_dict = dict(row_tuple)
+            row_dict["identifier"] = hash_prefix + row_dict["identifier"]
+            data.append(row_dict)
+            
+        return data
+
+
+    def write_stanford(self, xlsx_file, stanford_file):
         """ Converts @xlsx_file to a CoreNLP mapping file (@stanford_file).
         
         Args:
@@ -157,22 +213,13 @@ class XLSXToStanford():
             self.logger.error(err)
             raise FileExistsError(err)
 
-        # load workbook; get row data.
+        # load workbook; get row data and modified checksum.
         self.logger.info("Loading workbook: {}".format(xlsx_file))
         entity_rows = self._get_rows(xlsx_file)
+        hash_prefix = self._get_hash_prefix(xlsx_file)
        
         # open @stanford_file for writing.
         tsv = codecs.open(stanford_file, "w", encoding=self.charset)
-
-        # get checksum of @xlsx_file (in order to make an unique identifier prefix).
-        checksum = hashlib.sha256()
-        with open(xlsx_file, "rb") as xf:
-            xf_bytes = xf.read()
-        checksum.update(xf_bytes)
-
-        # truncate checksum to make it more readable and (hopefully) still unique enough.
-        hash_prefix = checksum.hexdigest()[:6]
-        hash_prefix += "#"
 
         # iterate through rows; write data to @stanford_file.
         i = 0
@@ -206,5 +253,9 @@ class XLSXToStanford():
 
 
 if __name__ == "__main__":
-    pass
-
+    #pass
+    x2s = XLSXToStanford()
+    #x2s.write_stanford("../../NLP/TOMES_Entity_Dictionary.xlsx", "mapping.txt")
+    d = x2s.get_data("../../NLP/TOMES_Entity_Dictionary.xlsx")
+    import json
+    print(json.dumps(d, indent=2))
