@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """
-This module contains a class for converting an Excel 2007+ (.xlsx) file to a tab-delimited
-file containing NER mapping rules for Stanford CoreNLP.
+This module contains a class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary file
+to a Python list or a tab-delimited file containing NER mapping rules for Stanford CoreNLP.
 
 Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
@@ -22,12 +22,13 @@ from openpyxl import load_workbook
 
 
 class XLSXToStanford():
-    """ A class for converting an Excel 2007+ (.xlsx) file to a tab-delimited file containing
-    NER mapping rules for Stanford CoreNLP. 
+    """ A class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary file to a Python
+    list or a tab-delimited file containing NER mapping rules for Stanford CoreNLP.
     
     Example:
         >>> x2s = XLSXToStanford()
-        >>> x2s.convert_file("entities.xlsx", "entities.txt")
+        >>> #x2s.get_data("entities.xlsx") # returns list version of Excel file.
+        >>> x2s.write_stanford("entities.xlsx", "entities.txt") # creates mapping file.
     """
 
 
@@ -179,14 +180,14 @@ class XLSXToStanford():
         hash_prefix = self._get_hash_prefix(xlsx_file)
 
         # get header.
-        for row in entity_rows:
-            header = [cell.value for cell in row]
+        for row in entity_rows.values:
+            header = [cell for cell in row]
             break
         
         # ???
         data = []
-        for row in entity_rows:
-            row_tuple = [(header[i], row[i].value) for i in range(0,len(header))]
+        for row in entity_rows.values:
+            row_tuple = [(header[i], row[i]) for i in range(0,len(header))]
             row_dict = dict(row_tuple)
             row_dict["identifier"] = hash_prefix + row_dict["identifier"]
             data.append(row_dict)
