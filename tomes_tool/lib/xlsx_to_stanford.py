@@ -8,6 +8,7 @@ Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
         - I'm changing my answer to "YES" now!
+    * Added logging to get_data and use header validator.
     * Remove "if main: stuff at the end when you are ready.
     * After you re-write any code, check your examples and docstrings.
 """
