@@ -164,6 +164,16 @@ class XLSXToStanford():
         # open @stanford_file for writing.
         tsv = codecs.open(stanford_file, "w", encoding=self.charset)
 
+        # get checksum of @xlsx_file (in order to make an unique identifier prefix).
+        checksum = hashlib.sha256()
+        with open(xlsx_file, "rb") as xf:
+            xf_bytes = xf.read()
+        checksum.update(xf_bytes)
+
+        # truncate checksum to make it more readable and (hopefully) still unique enough.
+        hash_prefix = checksum.hexdigest()[:6]
+        hash_prefix += "#"
+
         # iterate through rows; write data to @stanford_file.
         i = 0
         for row in entity_rows.values:
@@ -180,6 +190,7 @@ class XLSXToStanford():
             
             # get cell data.
             identifier, pattern, description, case_sensitive, label, authority = row
+            identifier = hash_prefix + identifier
             pattern = self._get_pattern(pattern, case_sensitive)
             label = "::".join([identifier, authority, label])
 
