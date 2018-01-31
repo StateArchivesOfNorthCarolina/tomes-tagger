@@ -10,19 +10,20 @@ import logging
 import logging.config
 import os
 import yaml
-from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
-from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML
+from tomes_tool.lib.eaxs_tagger import EAXSToTagged
+from tomes_tool.lib.html_convertor import HTMLToText, ModifyHTML
 from tomes_tool.lib.nlp_to_xml import NLPToXML
-from tomes_tool.lib.text_to_nlp import TextToNLP
+from tomes_tool.lib.text_tagger import TextToNLP
 
 
 class TOMESToolTagger():
     """ A class to convert an EAXS file to a tagged EAXS document.
 
     Example:
-        >>> # write tagged EAXS to "tagged.xml".
+        >>> # write tagged EAXS version of EAXS file.
         >>> tagger = TOMESToolTagger()
-        >>> tagger.eaxs_to_tagged(eaxs_file, "tagged.xml")
+        >>> tagger.eaxs_tagger("sample_eaxs.xml") # outputs "sample_eaxs__tagged.xml".
+        >>> tagger.eaxs_tagger("sample_eaxs.xml", "out.xml") # outputs "out.xml".
     """
     
 
@@ -43,10 +44,10 @@ class TOMESToolTagger():
         self.h2t = HTMLToText()
         self.t2n = TextToNLP()
         self.n2x = NLPToXML()
-        self.e2t = EAXSToTagged(self.html_to_text, self.text_to_nlp, self.charset)
+        self.e2t = EAXSToTagged(self.html_convertor, self.text_tagger, self.charset)
 
 
-    def html_to_text(self, html):
+    def html_convertor(self, html):
         """ Converts @html string to a plain text.
         
         Args:
@@ -67,7 +68,7 @@ class TOMESToolTagger():
         return text
 
 
-    def text_to_nlp(self, text):
+    def text_tagger(self, text):
         """ Converts plain @text to NLP-tagged, TOMES-specific XML.
         
         Args:
@@ -83,7 +84,7 @@ class TOMESToolTagger():
         return nlp
 
     
-    def eaxs_to_tagged(self, eaxs_file, tagged_eaxs_file=None):
+    def eaxs_tagger(self, eaxs_file, tagged_eaxs_file=None):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
         
         Args:
@@ -137,7 +138,7 @@ def main(eaxs: "source EAXS file",
     
     # make tagged version of EAXS.
     tagger = TOMESToolTagger()
-    tagger.eaxs_to_tagged(eaxs, output)
+    tagger.eaxs_tagger(eaxs, output)
 
 
 if __name__ == "__main__":
