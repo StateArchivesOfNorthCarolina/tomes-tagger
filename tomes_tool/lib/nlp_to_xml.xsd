@@ -45,7 +45,7 @@ elementFormDefault="qualified">
 		3.	@pattern - the unique identifier for the particular pattern that
 			the token matched against and that yielded the @entity in question.
 			
-			It is receommended that the pattern consist of two parts: the first 
+			It is recommended that the pattern consist of two parts: the first 
 			six digits of the SHA256 hash for the source document from which the
 			@entity term originates, followed by the identifier value for the	
 			@entity as notated within the source document. A "#" mark should be
