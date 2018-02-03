@@ -44,6 +44,12 @@ elementFormDefault="qualified">
 			
 		3.	@pattern - the unique identifier for the particular pattern that
 			the token matched against and that yielded the @entity in question.
+			
+			It is receommended that the pattern consist of two parts: the first 
+			six digits of the SHA256 hash for the source document from which the
+			@entity term originates, followed by the identifier value for the	
+			@entity as notated within the source document. A "#" mark should be
+			used to delimit the two parts.
 				
 		4. 	@group - the group identifier for each token; this value is shared by 
 			adjacent tokens with the same @entity value regardless of the the 
@@ -59,10 +65,10 @@ elementFormDefault="qualified">
 	<![CDATA[
 	<?xml version='1.0' encoding='utf-8'?>
 	<Tokens xmlns="http://www.archives.ncdcr.gov/mail-account">
-		<Token>Good</Token> <Token>morning</Token> <Token entity="person.male" authority="foo" pattern="101" group="1">John</Token><Token>!</Token>
+		<Token>Good</Token> <Token>morning</Token> <Token entity="person.male" authority="foo" pattern="09fa0f#101" group="1">John</Token><Token>!</Token>
 
 		<Token>Love</Token><Token>,</Token>
-		<Token entity="PERSON" authority="stanford.edu" pattern="0002" group="2">Marsha</Token>
+		<Token entity="PERSON" authority="stanford.edu" pattern="09fa0f#0002" group="2">Marsha</Token>
 		
 		<BlockText>Marsha B.
 		Los Angeles, CA
@@ -87,10 +93,10 @@ elementFormDefault="qualified">
 	<!--
 	
 	<pre class="Tokens" style="text-align: left; white-space: pre-line;">
-	<span class="Token">Good</span> <span class="Token">morning</span> <span class="Token" data-entity="person.male" data-authority="foo" data-pattern="101" data-group="1">John</span><span class="Token">!</span>
+	<span class="Token">Good</span> <span class="Token">morning</span> <span class="Token" data-entity="person.male" data-authority="foo" data-pattern="09fa0f#101" data-group="1">John</span><span class="Token">!</span>
 
 	<span class="Token">Love</span><span class="Token">,</span>
-	<span class="Token" data-entity="PERSON" data-authority="stanford.edu" data-pattern="0002" data-group="2">Marsha</span>
+	<span class="Token" data-entity="PERSON" data-authority="stanford.edu" data-pattern="09fa0f#0002" data-group="2">Marsha</span>
 	
 	<span class="BlockText">Marsha B.
 	Los Angeles, CA
