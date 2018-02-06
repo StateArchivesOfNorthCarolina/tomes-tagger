@@ -5,6 +5,7 @@ The original source for the list is:
 """
 
 # modified as needed.
+# of course, some of these could be first names, but this is just for creating test data.
 _data = """
 A
 An
