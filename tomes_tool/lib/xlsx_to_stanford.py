@@ -9,7 +9,10 @@ Todo:
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
         - I'm changing my answer to "YES" now!
     * Added logging to get_data and use header validator.
+        - Header validator needs to raise an error, NOT the tsv method.
     * Remove "if main: stuff at the end when you are ready.
+    * Gotta pre-count rows now that using generator.
+    * Gotta handle lists being returned from get_pattern().
     * After you re-write any code, check your examples and docstrings.
 """
 
@@ -76,16 +79,16 @@ class XLSXToStanford():
 
 
     def _get_pattern(self, pattern, case_sensitive):
-        """ Returns @pattern without excess whitespace. If @case_sensitive is True, also 
-        alters @pattern to include case-insensitive regex markup.
+        """ Returns manifestations @pattern without excess whitespace. If @case_sensitive is
+        True, also alters @pattern to include case-insensitive regex markup.
         
         Args:
             - pattern (str): The "pattern" field value for a given row.
             - case_sensitive (bool): The "case_sensitive" field value for a given row.
 
         Returns:
-            str: The return value.
-            The altered version of @pattern.
+            list: The return value.
+            The altered versions of @pattern.
         """
 
         # remove excess whitespace from @pattern.
@@ -94,13 +97,43 @@ class XLSXToStanford():
             self.logger.warning("Removing excess whitespace in: {}".format(pattern))
             pattern = _pattern
         
-        # if specified, alter @pattern to be case-insensitive.
-        if not case_sensitive:
+        # ???
+        is_tomes_pattern = False
+        pattern_parts = pattern.split("tomes_pattern:")
+        if len(pattern_parts) == 2:
+            self.logger.info("???")
+            is_tomes_pattern = True
+            
+        # ???
+        if is_tomes_pattern:
+            self.logger.info("???")
+            try:
+                pattern_parts = eval(pattern_parts)
+            except SyntaxError as err:
+                self.logger.error(err)
+                self.logger.warning("??? falling back to ...")
+                return []
+            try:
+                patterns = [i for i in product(*pattern_parts)]
+                patterns.reverse()
+            except TypeError as err:
+                self.logger.error(err)
+                self.logger.warning("??? falling back to ...")
+                return []
+
+        # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
+        if not case_sensitive and not is_tomes_pattern:
             tokens = pattern.split(" ")
             pattern = ["(?i)" + token + "(?-i)" for token in tokens]
             pattern = " ".join(pattern)
+        elif not case_sensitive and is_tomes_pattern:
+            self.logger.warning("??? Ignoring case instruction because ...")
         
-        return pattern
+        # ???
+        if not is_tomes_pattern:
+            patterns = [pattern]
+            
+        return patterns
 
 
     def _validate_header(self, header_row):
@@ -112,6 +145,9 @@ class XLSXToStanford():
         Returns:
             bool: The return value.
             True if the header is valid, otherwise False.
+
+        Raises:
+            - ??? ... if invalid.
         """
         
         self.logger.info("Validating header row: {}".format(header_row))
@@ -146,7 +182,11 @@ class XLSXToStanford():
             - xlsx_file (str): The path to the Excel file to load.
 
         Returns:
-            openpyxl.worksheet.worksheet.Worksheet: The return value.    
+            openpyxl.worksheet.worksheet.Worksheet: The return value.
+            ??? It's a genererator now.
+
+        Raises:
+            - ???
         """
 
         # load workbook.
@@ -154,16 +194,17 @@ class XLSXToStanford():
         
         # verify that required worksheet exists.
         try:
-            entity_rows = workbook[self.entity_worksheet]
-        except KeyError:
-            self.logger.error("Missing required worksheet '{}' in workbook: {}".format(
+            entity_rows = workbook[self.entity_worksheet].iter_rows()
+        except KeyError as err:
+            self.logger.error(err)
+            self.logger.warning("Missing required worksheet '{}' in workbook: {}".format(
                     self.entity_worksheet, xlsx_file))
-            raise
+            raise err
 
         return entity_rows
 
 
-    def get_data(self, xlsx_file):
+    def get_data_dict(self, xlsx_file):
         """ ???
 
         Args:
@@ -180,19 +221,17 @@ class XLSXToStanford():
         hash_prefix = self._get_hash_prefix(xlsx_file)
 
         # get header.
-        for row in entity_rows.values:
-            header = [cell for cell in row]
-            break
+        row = next(entity_rows)
+        header = [cell.value for cell in row]
         
         # ???
-        data = []
-        for row in entity_rows.values:
-            row_tuple = [(header[i], row[i]) for i in range(0,len(header))]
+        for row in entity_rows:
+            row_tuple = [(header[i], row[i].value) for i in range(0,len(header))]
             row_dict = dict(row_tuple)
             row_dict["identifier"] = hash_prefix + row_dict["identifier"]
-            data.append(row_dict)
-            
-        return data
+            yield(row_dict)
+
+        return
 
 
     def write_stanford(self, xlsx_file, stanford_file):
@@ -217,38 +256,27 @@ class XLSXToStanford():
 
         # load workbook; get row data and modified checksum.
         self.logger.info("Loading workbook: {}".format(xlsx_file))
-        entity_rows = self._get_rows(xlsx_file)
+        entity_rows = self.get_data_dict(xlsx_file)
         hash_prefix = self._get_hash_prefix(xlsx_file)
        
         # open @stanford_file for writing.
         tsv = codecs.open(stanford_file, "w", encoding=self.charset)
 
         # iterate through rows; write data to @stanford_file.
+        #???self.logger.info("Writing to mapping file: {}".format(stanford_file))
         i = 0
-        for row in entity_rows.values:
-
-            # validate header row.
-            if i == 0:
-                if not self._validate_header(row):
-                    tsv.close()
-                    self._unlink_file(stanford_file)
-                    err = "Bad header in workbook: {}".format(xlsx_file)
-                    raise Exception(err)
-                else:
-                    self.logger.info("Writing to mapping file: {}".format(stanford_file))
+        total_rows = sum(1 for d in self.get_data_dict(xlsx_file))
+        for row in entity_rows:
             
             # get cell data.
-            identifier, pattern, description, case_sensitive, label, authority = row
-            identifier = hash_prefix + identifier
-            pattern = self._get_pattern(pattern, case_sensitive)
-            label = "::".join([identifier, authority, label])
+            identifier = row["identifier"]
+            pattern = self._get_pattern(row["pattern"], row["case_sensitive"])[0]
+            label = "::".join([identifier, row["authority"], row["label"]])
 
             # write row to file and avoid final linebreak (otherwise CoreNLP will crash).
-            if i != 0:
-                tsv.write("\t".join([pattern,label]))
-                if i != entity_rows.max_row - 1:
-                    tsv.write("\n")
-
+            tsv.write("\t".join([pattern,label]))
+            if i != total_rows - 1:
+                tsv.write("\n")
             i += 1
 
         return
@@ -257,7 +285,5 @@ class XLSXToStanford():
 if __name__ == "__main__":
     #pass
     x2s = XLSXToStanford()
-    #x2s.write_stanford("../../NLP/TOMES_Entity_Dictionary.xlsx", "mapping.txt")
-    d = x2s.get_data("../../NLP/TOMES_Entity_Dictionary.xlsx")
-    import json
-    print(json.dumps(d, indent=2))
+    x2s.write_stanford("../../NLP/TOMES_Entity_Dictionary.xlsx", "mapping.txt")
+    d = x2s.get_data_dict("../../NLP/TOMES_Entity_Dictionary.xlsx")
