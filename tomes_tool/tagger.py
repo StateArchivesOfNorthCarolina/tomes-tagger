@@ -108,7 +108,7 @@ class TOMESToolTagger():
         except Exception as err:
             err_name = type(err).__name__
             self.logger.error("{}: {}".format(err_name, err))
-            self.logger.warning("Can't tag EAXS file; aborting.")
+            self.logger.critical("Can't tag EAXS file; aborting.")
             return False
         
         self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
