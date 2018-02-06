@@ -4,18 +4,18 @@
 Parses an email into separate replies and attempts to get signatures for each reply.
 
 Todo:
-    - does sanitize_name() need to return a flat case name (all uppercase or all lower)?
-    - does checking against _titles.titles need to be case-insensitive?
-    - work on comments, function docs.
-    - make a wrapper function that returns a dict for each reply with the lines,
+    * does sanitize_name() need to return a flat case name (all uppercase or all lower)?
+    * does checking against _titles.titles need to be case*insensitive?
+    * work on comments, function docs.
+    * make a wrapper function that returns a dict for each reply with the lines,
       sender, and recepients.
-    - which functions need to be private?
-    - might need to regex a la "[*]{1,0}From:[*]{1,0} " instead of just "From: ", etc. for
-      Wiki-type formatting.
-    - will this work for all Outlook emails?
-    - how to do this for Gmail? There may be a clue in HTML version of Gmail
+    * which functions need to be private?
+    * might need to regex a la "[*]{1,0}From:[*]{1,0} " instead of just "From: ", etc. for
+      Wiki*type formatting.
+    * will this work for all Outlook emails?
+    * how to do this for Gmail? There may be a clue in HTML version of Gmail
       (div|blockquote.class=3D"gmail_quote").
-    - consider using Levenshtein distance to help determine if there's a likely name match.
+    * consider using Levenshtein distance to help determine if there's a likely name match.
 """
 
 ### import modules.
