@@ -107,7 +107,7 @@ import re
 regex_match = re.search(PATTERN, TEXT).group()
 ner_tag = lookup_tag(PATTERN)
 for result in locate(TEXT, regex_match):
-    tokens, start, stop = [t for t in result]
+    tokens, start, stop = [r for r in result]
     message = "Tagging each in {} with '{}'".format(tokens, ner_tag)
     print(message)
     concatenated = " ".join(tokenize(TEXT)[start:stop])
