@@ -19,7 +19,10 @@ def lookup_tag(regex_pattern):
     """ For each @regex_pattern we need a dict so we can lookup the associated NER tag. """
 
     lookup = {"[H|h]ello world": "GREETING"}
-    return lookup[regex_pattern]
+    try:
+        return lookup[regex_pattern]
+    except KeyError:
+        return None
 
 
 def get_map(tokens):
@@ -37,82 +40,69 @@ def get_map(tokens):
     return token_map
 
 
-def get_locations(haystack, needle):
+def get_combos(haystack, needle):
     """ @haystack is the text you are tokenizing/tagging and also running regexs over.
     @needle is the regex result obtained from running a regex over the text. """
 
     # ideally, these would be passed in rather than being computed here.
     haystack_tokens = tokenize(haystack)
     haystack_map = get_map(haystack_tokens)
+    
+    # we need this in order to find if/where it exists in @haystack_tokens as a subset.
     needle_tokens = tokenize(needle)
-    needle_map = get_map(needle_tokens)
 
-    # get positions of first and last token in @needle_tokens (i.e. the tokenized regex 
-    # results).
+    # get position of first token in @needle_tokens (i.e. the tokenized regex 
+    # results) and the total number of tokens in the regex results.
     try:
-        first, last = haystack_map[needle_tokens[0]], haystack_map[needle_tokens[-1]]
+        finds = haystack_map[needle_tokens[0]]
+        distance = len(needle_tokens)
     except KeyError:
         return None
 
-    # make a list of tokens in @haystack_tokens that have the same first/last tokens as the
-    # tokenized regex match (@needle_tokens).
+    # make a list of tokens sets in @haystack_tokens that match @needle_tokens.
     combos = []
-    
-    # only store results where the last haystack token's position is greater than the first 
-    # token because otherwise we know the concatenated string won't match the regex result.
-    for fir in first:
-        for las in last:
-            if las >= fir:
-                combos.append((fir, las + 1))
+    for find in finds:
+        combo = {"tokens": haystack_tokens[find:find + distance], "position": find}
+        if combo["tokens"] == needle_tokens:
+            combos.append(combo)
 
     return combos
 
 
-def locate(text, regex_result):
-    """ This returns a list of each token to tag as well as the start/stop position of the 
-    matching @regex_result inside a source @text. """
-    
-    try:
-        locations = get_locations(text, regex_result)
-    except TypeError:
-        return []
-
-    tokens = tokenize(text)
-    regex_tokens = tokenize(regex_result)
-        
-    # see if the token span in @locations matches @regex_tokens.
-    results = []
-    for start, distance in locations:
-        find = tokens[start:distance]
-        if find == regex_tokens:
-            result = find, start, distance
-            results.append(result)
-
-    return results
-
-
 # sample text and regex.
-TEXT = "... Hello world ..."
+TEXT = "... Hello world ... hello world again!"
 PATTERN = "[H|h]ello world"
 
 # test functions.
-##print(tokenize(TEXT))
-##print(lookup_tag(PATTERN))
-##print(get_map(tokenize(TEXT)))
-##print(get_locations(TEXT, "Hello world"))
+print(tokenize(TEXT))
+print(lookup_tag(PATTERN))
+print(get_map(tokenize(TEXT)))
+print(get_combos(TEXT, "Hello world"))
+print()
 
 # example usage.
 import re
 
-regex_match = re.search(PATTERN, TEXT).group()
 ner_tag = lookup_tag(PATTERN)
-for result in locate(TEXT, regex_match):
-    tokens, start, stop = [r for r in result]
-    message = "Tagging each in {} with '{}'".format(tokens, ner_tag)
-    print(message)
-    concatenated = " ".join(tokenize(TEXT)[start:stop])
-    print("Concatenated result: {}".format(concatenated))
+matches = re.findall(PATTERN, TEXT)
+print("Found {} matches.".format(len(matches)))
+for match in matches:
+    results = get_combos(TEXT, match)
+    for result in results:
+        message = "Tagging each token in {} with '{}'".format(result, ner_tag)
+        print(message)
+        concatenated = " ".join(result["tokens"])
+        message = "Concatenated tokens: {}".format(concatenated)
+        print(message)
     
-##Tagging each in ['Hello', 'world'] with 'GREETING'
-##Concatenated result: Hello world
 
+####['...', 'Hello', 'world', '...', 'hello', 'world', 'again!']
+####GREETING
+####{'...': [0, 3], 'Hello': [1], 'world': [2, 5], 'hello': [4], 'again!': [6]}
+####[{'tokens': ['Hello', 'world'], 'position': 1}]
+####
+####Found 2 matches.
+####Tagging each token in {'tokens': ['Hello', 'world'], 'position': 1} with 'GREETING'
+####Concatenated tokens: Hello world
+####Tagging each token in {'tokens': ['hello', 'world'], 'position': 4} with 'GREETING'
+####Concatenated tokens: hello world
