@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
 
 """
-This module contains a class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary file
-to a Python list or a tab-delimited file containing NER mapping rules for Stanford CoreNLP.
+This module contains a class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary 
+file to a Python list or a tab-delimited file containing NER mapping rules for Stanford
+CoreNLP.
 
 Todo:
     * Should you validate the data type for each row, i.e. "_validate_row()"?
         - No: Just trust that data is OK unless we start to see data entry errors. :-]
         - I'm changing my answer to "YES" now!
-    * Added logging to get_data and use header validator.
+    * Add logging to get_data and use header validator.
         - Header validator needs to raise an error, NOT the tsv method.
     * Remove "if main: stuff at the end when you are ready.
     * Gotta pre-count rows now that using generator.
+        - Create a method to do this.
     * Gotta handle lists being returned from get_pattern().
+        - Think this is OK now.
     * After you re-write any code, check your examples and docstrings.
 """
 
 # import modules.
 import codecs
 import hashlib
+import itertools
 import logging
 import os
 from openpyxl import load_workbook
@@ -30,7 +34,8 @@ class XLSXToStanford():
     
     Example:
         >>> x2s = XLSXToStanford()
-        >>> #x2s.get_data("entities.xlsx") # returns list version of Excel file.
+        >>> entities = x2s.get_entities("entities.xlsx")
+        >>> next(entities) # mapped dictionary for first data row in Excel file.
         >>> x2s.write_stanford("entities.xlsx", "entities.txt") # creates mapping file.
     """
 
@@ -39,8 +44,8 @@ class XLSXToStanford():
         """ Sets instance attributes.
         
         Args:
-            - entity_worksheet (str): The name of the worksheet to read from a given workbook,
-            i.e. an Excel file.
+            - entity_worksheet (str): The name of the worksheet to read from a given 
+            workbook, i.e. an Excel file.
             - charset (str): Encoding used when writing to file.
         """
         
@@ -66,15 +71,13 @@ class XLSXToStanford():
             str: ???
         """
 
-        # get checksum of @xlsx_file.
+        # get checksum of @xlsx_file; truncate it.
         checksum = hashlib.sha256()
         with open(xlsx_file, "rb") as xf:
             xf_bytes = xf.read()
         checksum.update(xf_bytes)
-
-        # truncate checksum.
         hash_prefix = checksum.hexdigest()[:6] + "#"
-        
+
         return hash_prefix 
 
 
@@ -102,23 +105,31 @@ class XLSXToStanford():
         pattern_parts = pattern.split("tomes_pattern:")
         if len(pattern_parts) == 2:
             self.logger.info("???")
+            pattern = pattern_parts[1]
             is_tomes_pattern = True
+        if is_tomes_pattern and len(pattern_parts) != 2:
+            # self.logger.warning("??? Expected 2, got {} parts ... falling back to ...")
+            return []
             
         # ???
         if is_tomes_pattern:
-            self.logger.info("???")
+            self.logger.info("??? it's a tomes pattern")
+
+            # ??? add comma ...
             try:
-                pattern_parts = eval(pattern_parts)
-            except SyntaxError as err:
+                if pattern[-1] != ",":
+                    pattern += ","
+                pattern = eval(pattern)
+            except (NameError, SyntaxError) as err:
                 self.logger.error(err)
-                self.logger.warning("??? falling back to ...")
+                self.logger.warning("??? Invalid syntax ... falling back to ...")
                 return []
             try:
-                patterns = [i for i in product(*pattern_parts)]
+                patterns = [i for i in itertools.product(*pattern)]
                 patterns.reverse()
             except TypeError as err:
                 self.logger.error(err)
-                self.logger.warning("??? falling back to ...")
+                self.logger.warning("??? Check syntax. falling back to ...")
                 return []
 
         # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
@@ -145,33 +156,33 @@ class XLSXToStanford():
         Returns:
             bool: The return value.
             True if the header is valid, otherwise False.
-
-        Raises:
-            - ??? ... if invalid.
         """
-        
+
         self.logger.info("Validating header row: {}".format(header_row))
         
-        # if header is value, return True.
+        # ???
+        is_valid = True
+        
+        # if header is 100 percent valid, return @is_valid.
         if header_row == self.required_headers:
             self.logger.info("Header row is valid.")
-            return True
-        
-        # otherwise, report on errors and return False.
-        
-        # find missing header fields.
-        missing_headers = [header for header in self.required_headers if header not in
-                header_row]
-        if len(missing_headers) != 0:
-            self.logger.warning("Missing headers: {}".format(missing_headers))
+            return is_valid
 
-        # find extra header fields.
+        # find any extra header fields.
         extra_headers = [header for header in header_row if header not in 
                 self.required_headers]
         if len(extra_headers) != 0:
             self.logger.warning("Found extra headers: {}".format(extra_headers))
+
+        # find any missing header fields.
+        missing_headers = [header for header in self.required_headers if header not in
+                header_row]
+        if len(missing_headers) != 0:
+            self.logger.error("??? no valid ")
+            self.logger.warning("Missing headers: {}".format(missing_headers))
+            is_valid = False
   
-        return False
+        return is_valid
 
         
     def _get_rows(self, xlsx_file):
@@ -204,15 +215,17 @@ class XLSXToStanford():
         return entity_rows
 
 
-    def get_data_dict(self, xlsx_file):
-        """ ???
+    def get_entities(self, xlsx_file):
+        """ ??? Adds key "manifestations" ...
 
         Args:
             - ???
         
         Returns:
             list: ???
-            
+
+        Raises:
+            - ???     
         """
 
         # load workbook; get row data and modified checksum.
@@ -220,18 +233,29 @@ class XLSXToStanford():
         entity_rows = self._get_rows(xlsx_file)
         hash_prefix = self._get_hash_prefix(xlsx_file)
 
-        # get header.
-        row = next(entity_rows)
-        header = [cell.value for cell in row]
-        
         # ???
-        for row in entity_rows:
-            row_tuple = [(header[i], row[i].value) for i in range(0,len(header))]
-            row_dict = dict(row_tuple)
-            row_dict["identifier"] = hash_prefix + row_dict["identifier"]
-            yield(row_dict)
+        def entities():
+        
+            # get header.
+            row = next(entity_rows)
+            header = [cell.value for cell in row]
+            header= tuple(header)
 
-        return
+            # validate header.
+            if not self._validate_header(header):
+                raise Exception # ??? TODO what kind?
+            
+            # ???
+            header_range = range(0,len(header))
+            for row in entity_rows:
+                row_tuple = [(header[i], row[i].value) for i in header_range]
+                row_dict = dict(row_tuple)
+                row_dict["identifier"] = hash_prefix + row_dict["identifier"]
+                manifestations = self._get_pattern(row_dict["pattern"], row_dict["case_sensitive"])
+                row_dict["manifestations"] = ["".join(m) for m in manifestations]
+                yield(row_dict)
+
+        return entities()
 
 
     def write_stanford(self, xlsx_file, stanford_file):
@@ -256,7 +280,7 @@ class XLSXToStanford():
 
         # load workbook; get row data and modified checksum.
         self.logger.info("Loading workbook: {}".format(xlsx_file))
-        entity_rows = self.get_data_dict(xlsx_file)
+        entity_rows = self.get_entities(xlsx_file)
         hash_prefix = self._get_hash_prefix(xlsx_file)
        
         # open @stanford_file for writing.
@@ -264,26 +288,33 @@ class XLSXToStanford():
 
         # iterate through rows; write data to @stanford_file.
         #???self.logger.info("Writing to mapping file: {}".format(stanford_file))
-        i = 0
-        total_rows = sum(1 for d in self.get_data_dict(xlsx_file))
+        row_count = 1
+        total_rows = sum(1 for d in self.get_entities(xlsx_file))
         for row in entity_rows:
             
             # get cell data.
-            identifier = row["identifier"]
-            pattern = self._get_pattern(row["pattern"], row["case_sensitive"])[0]
-            label = "::".join([identifier, row["authority"], row["label"]])
+            tag = row["identifier"], row["authority"], row["label"]
+            tag = "::".join(tag)
+            manifestations = row["manifestations"]
 
-            # write row to file and avoid final linebreak (otherwise CoreNLP will crash).
-            tsv.write("\t".join([pattern,label]))
-            if i != total_rows - 1:
-                tsv.write("\n")
-            i += 1
+            # ??? write row to file and avoid final linebreak (otherwise CoreNLP will crash).
+            for manifestation in manifestations:
+                tsv.write("\t".join([manifestation,tag]))
+                if row_count != total_rows:
+                    tsv.write("\n")
+            row_count += 1
 
         return
 
 
 if __name__ == "__main__":
     #pass
+    import logging
+    logging.basicConfig(level="DEBUG")
     x2s = XLSXToStanford()
-    x2s.write_stanford("../../NLP/TOMES_Entity_Dictionary.xlsx", "mapping.txt")
-    d = x2s.get_data_dict("../../NLP/TOMES_Entity_Dictionary.xlsx")
+    #x2s.write_stanford("../../NLP/TOMES_Entity_Dictionary.xlsx", "mapping.txt")
+    #entities = x2s.get_entities("../../NLP/TOMES_Entity_Dictionary.xlsx")
+    entities = x2s.get_entities("../../NLP/foo.xlsx")
+    #p = x2s._get_pattern("tomes_pattern:{'[A|a]'}, {'B'}", True)
+    #p = x2s._get_pattern("tomes_pattern:{'A', 'B'}, {'-',' '}, {'[0-9]{1,2}', '000'}", True)
+    #print(p)
