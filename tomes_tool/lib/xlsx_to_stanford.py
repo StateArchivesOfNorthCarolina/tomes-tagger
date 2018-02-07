@@ -6,14 +6,11 @@ file to a Python list or a tab-delimited file containing NER mapping rules for S
 CoreNLP.
 
 Todo:
-    * Should you validate the data type for each row, i.e. "_validate_row()"?
-        - No: Just trust that data is OK unless we start to see data entry errors. :-]
-        - I'm changing my answer to "YES" now!
-    * Add logging to get_data and use header validator.
-        - Header validator needs to raise an error, NOT the tsv method.
+    * Header validator needs to raise an error, NOT the tsv method.
     * Remove "if main: stuff at the end when you are ready.
+    * Flesh out logging.
     * Gotta pre-count rows now that using generator.
-        - Create a method to do this.
+        - Create a method to do this? Yes.
     * Gotta handle lists being returned from get_pattern().
         - Think this is OK now.
     * After you re-write any code, check your examples and docstrings.
@@ -56,8 +53,8 @@ class XLSXToStanford():
         # set attributes.
         self.entity_worksheet = entity_worksheet
         self.charset = charset
-        self.required_headers = ("identifier", "pattern", "description", "case_sensitive",
-                "label", "authority")
+        self.required_headers = {"identifier":str, "pattern":str, "description":str,
+                "case_sensitive":bool, "label":str, "authority":str}
 
 
     def _get_hash_prefix(self, xlsx_file):
@@ -78,73 +75,7 @@ class XLSXToStanford():
         checksum.update(xf_bytes)
         hash_prefix = checksum.hexdigest()[:6] + "#"
 
-        return hash_prefix 
-
-
-    def _get_pattern(self, pattern, case_sensitive):
-        """ Returns manifestations @pattern without excess whitespace. If @case_sensitive is
-        True, also alters @pattern to include case-insensitive regex markup.
-        
-        Args:
-            - pattern (str): The "pattern" field value for a given row.
-            - case_sensitive (bool): The "case_sensitive" field value for a given row.
-
-        Returns:
-            list: The return value.
-            The altered versions of @pattern.
-        """
-
-        # remove excess whitespace from @pattern.
-        _pattern = " ".join(pattern.strip().split())
-        if pattern != _pattern:
-            self.logger.warning("Removing excess whitespace in: {}".format(pattern))
-            pattern = _pattern
-        
-        # ???
-        is_tomes_pattern = False
-        pattern_parts = pattern.split("tomes_pattern:")
-        if len(pattern_parts) == 2:
-            self.logger.info("???")
-            pattern = pattern_parts[1]
-            is_tomes_pattern = True
-        if is_tomes_pattern and len(pattern_parts) != 2:
-            # self.logger.warning("??? Expected 2, got {} parts ... falling back to ...")
-            return []
-            
-        # ???
-        if is_tomes_pattern:
-            self.logger.info("??? it's a tomes pattern")
-
-            # ??? add comma ...
-            try:
-                if pattern[-1] != ",":
-                    pattern += ","
-                pattern = eval(pattern)
-            except (NameError, SyntaxError) as err:
-                self.logger.error(err)
-                self.logger.warning("??? Invalid syntax ... falling back to ...")
-                return []
-            try:
-                patterns = [i for i in itertools.product(*pattern)]
-                patterns.reverse()
-            except TypeError as err:
-                self.logger.error(err)
-                self.logger.warning("??? Check syntax. falling back to ...")
-                return []
-
-        # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
-        if not case_sensitive and not is_tomes_pattern:
-            tokens = pattern.split(" ")
-            pattern = ["(?i)" + token + "(?-i)" for token in tokens]
-            pattern = " ".join(pattern)
-        elif not case_sensitive and is_tomes_pattern:
-            self.logger.warning("??? Ignoring case instruction because ...")
-        
-        # ???
-        if not is_tomes_pattern:
-            patterns = [pattern]
-            
-        return patterns
+        return hash_prefix
 
 
     def _validate_header(self, header_row):
@@ -164,7 +95,7 @@ class XLSXToStanford():
         is_valid = True
         
         # if header is 100 percent valid, return @is_valid.
-        if header_row == self.required_headers:
+        if header_row == self.required_headers.keys():
             self.logger.info("Header row is valid.")
             return is_valid
 
@@ -183,6 +114,116 @@ class XLSXToStanford():
             is_valid = False
   
         return is_valid
+
+
+    def _validate_row(self, row, line):
+        """ ??? 
+        
+        Args:
+            - row (dict): ???
+            
+        Returns:
+            bool ???
+        """
+
+        # ???
+        is_valid = True
+
+        # ???
+        tests = []
+        for k,v in row.items():
+            test = isinstance(v, self.required_headers[k])
+            if not test:
+                self.logger.warning("??? Field {} in row # {} not valid ...".format(k,
+                    line))
+            tests.append(test)
+
+        # ???
+        if False in tests:
+            is_valid = False
+  
+        return is_valid
+
+
+    def _check_tomes_pattern(self, pattern):
+        """ """
+        
+        # ???
+        is_tomes_pattern = False
+        parts = pattern.split("tomes_pattern:")
+        
+        # ???
+        parts_len = len(parts)
+        if parts_len == 1:
+            tomes_pattern_check = is_tomes_pattern, pattern
+            return tomes_pattern_check
+        elif parts_len > 2:
+            self.logger.warning("??? Expected 2, got {} ... falling back to ...".format(
+                parts_len))
+            tomes_pattern_check = is_tomes_pattern, pattern
+            return tomes_pattern_check            
+        
+        # ???
+        pattern = parts[1]
+        is_tomes_pattern = True
+        self.logger.info("??? it's a tomes pattern ...")
+
+            
+        # ???
+        if pattern[-1] != ",":
+            pattern += ","
+        
+        # ???
+        try:
+            pattern = eval(pattern)
+        except (NameError, SyntaxError) as err:
+            self.logger.error(err)
+            self.logger.warning("??? Invalid syntax ... falling back to ...")
+        try:
+            patterns = [i for i in itertools.product(*pattern)]
+            patterns.reverse()
+        except TypeError as err:
+            self.logger.error(err)
+            self.logger.warning("??? Check syntax. falling back to ...")
+
+        return is_tomes_pattern, patterns
+
+
+    def _get_patterns(self, pattern, case_sensitive):
+        """ Returns manifestations @pattern without excess whitespace. If @case_sensitive is
+        True, also alters @pattern to include case-insensitive regex markup.
+        
+        Args:
+            - pattern (str): The "pattern" field value for a given row.
+            - case_sensitive (bool): The "case_sensitive" field value for a given row.
+
+        Returns:
+            list: The return value.
+            The altered versions of @pattern.
+        """
+
+        # remove excess whitespace from @pattern.
+        _pattern = " ".join(pattern.strip().split())
+        if pattern != _pattern:
+            self.logger.warning("Removing excess whitespace in: {}".format(pattern))
+            pattern = _pattern
+        
+        # ???
+        is_tomes_pattern, patterns = self._check_tomes_pattern(pattern)
+
+        # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
+        if not case_sensitive and not is_tomes_pattern:
+            tokens = pattern.split(" ")
+            pattern = ["(?i)" + token + "(?-i)" for token in tokens]
+            pattern = " ".join(pattern)
+        elif not case_sensitive and is_tomes_pattern:
+            self.logger.warning("??? Ignoring case instruction because ...")
+        
+        # ???
+        if not is_tomes_pattern:
+            patterns = [pattern]
+            
+        return patterns
 
         
     def _get_rows(self, xlsx_file):
@@ -246,14 +287,25 @@ class XLSXToStanford():
                 raise Exception # ??? TODO what kind?
             
             # ???
+            line_number = 1
             header_range = range(0,len(header))
             for row in entity_rows:
-                row_tuple = [(header[i], row[i].value) for i in header_range]
-                row_dict = dict(row_tuple)
-                row_dict["identifier"] = hash_prefix + row_dict["identifier"]
-                manifestations = self._get_pattern(row_dict["pattern"], row_dict["case_sensitive"])
-                row_dict["manifestations"] = ["".join(m) for m in manifestations]
-                yield(row_dict)
+                
+                # ???
+                row = [cell.value for cell in row]
+                row = [(header[i], row[i]) for i in header_range]
+                row = dict(row)
+
+                # ???
+                self._validate_row(row, line_number)
+                
+                row["identifier"] = hash_prefix + row["identifier"]
+                manifestations = self._get_patterns(row["pattern"], row["case_sensitive"])
+                row["manifestations"] = ["".join(m) for m in manifestations]
+                
+                # ???
+                line_number += 1
+                yield(row)
 
         return entities()
 
@@ -315,6 +367,7 @@ if __name__ == "__main__":
     #x2s.write_stanford("../../NLP/TOMES_Entity_Dictionary.xlsx", "mapping.txt")
     #entities = x2s.get_entities("../../NLP/TOMES_Entity_Dictionary.xlsx")
     entities = x2s.get_entities("../../NLP/foo.xlsx")
-    #p = x2s._get_pattern("tomes_pattern:{'[A|a]'}, {'B'}", True)
-    #p = x2s._get_pattern("tomes_pattern:{'A', 'B'}, {'-',' '}, {'[0-9]{1,2}', '000'}", True)
+    #p = x2s._get_patterns("tomes_pattern:{'[A|a]'}, {'B'}", True)
+    #p = x2s._get_patterns("tomes_pattern:{'A', 'B'}, {'-',' '}, {'[0-9]{1,2}', '000'}", True)
     #print(p)
+    for i in entities: print(i)
