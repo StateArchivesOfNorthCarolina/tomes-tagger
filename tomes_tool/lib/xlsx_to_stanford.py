@@ -129,13 +129,15 @@ class XLSXToStanford():
         # ???
         is_valid = True
 
-        # ???
+        # ??    
         tests = []
-        for k,v in row.items():
-            test = isinstance(v, self.required_headers[k])
+        for field, value in row.items():
+            test = isinstance(value, self.required_headers[field])
             if not test:
-                self.logger.warning("??? Field {} in row # {} not valid ...".format(k,
+                self.logger.warning("??? Field '{}' in line {} not valid ...".format(field,
                     line))
+                self.logger.info("Expected type '{}'; got '{}'.".format(type(field).__name__,
+                    type(value).__name__))
             tests.append(test)
 
         # ???
@@ -145,30 +147,25 @@ class XLSXToStanford():
         return is_valid
 
 
-    def _check_tomes_pattern(self, pattern):
+    def _get_tomes_pattern(self, pattern):
         """ """
         
         # ???
-        is_tomes_pattern = False
         parts = pattern.split("tomes_pattern:")
         
         # ???
         parts_len = len(parts)
         if parts_len == 1:
-            tomes_pattern_check = is_tomes_pattern, pattern
-            return tomes_pattern_check
+            return None
         elif parts_len > 2:
             self.logger.warning("??? Expected 2, got {} ... falling back to ...".format(
                 parts_len))
-            tomes_pattern_check = is_tomes_pattern, pattern
-            return tomes_pattern_check            
+            return None       
         
         # ???
-        pattern = parts[1]
-        is_tomes_pattern = True
         self.logger.info("??? it's a tomes pattern ...")
+        pattern = parts[1]
 
-            
         # ???
         if pattern[-1] != ",":
             pattern += ","
@@ -186,7 +183,7 @@ class XLSXToStanford():
             self.logger.error(err)
             self.logger.warning("??? Check syntax. falling back to ...")
 
-        return is_tomes_pattern, patterns
+        return patterns
 
 
     def _get_patterns(self, pattern, case_sensitive):
@@ -209,18 +206,18 @@ class XLSXToStanford():
             pattern = _pattern
         
         # ???
-        is_tomes_pattern, patterns = self._check_tomes_pattern(pattern)
+        patterns = self._get_tomes_pattern(pattern)
 
         # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
-        if not case_sensitive and not is_tomes_pattern:
+        if not case_sensitive and patterns is None:
             tokens = pattern.split(" ")
             pattern = ["(?i)" + token + "(?-i)" for token in tokens]
             pattern = " ".join(pattern)
-        elif not case_sensitive and is_tomes_pattern:
+        elif not case_sensitive and patterns is not None:
             self.logger.warning("??? Ignoring case instruction because ...")
         
         # ???
-        if not is_tomes_pattern:
+        if patterns is None:
             patterns = [pattern]
             
         return patterns
@@ -254,6 +251,11 @@ class XLSXToStanford():
             raise err
 
         return entity_rows
+
+
+    def count_entities(self, xslx_file):
+        """ """
+        pass
 
 
     def get_entities(self, xlsx_file):
