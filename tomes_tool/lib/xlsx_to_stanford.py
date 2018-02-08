@@ -6,13 +6,10 @@ file to a Python list or a tab-delimited file containing NER mapping rules for S
 CoreNLP.
 
 Todo:
-    * Header validator needs to raise an error, NOT the tsv method.
+    * Header validator needs to raise an error, NOT the tsv/entities method.
+        - Or: shouldn't the user method decied what to do instead of the validator?
     * Remove "if main: stuff at the end when you are ready.
     * Flesh out logging.
-    * Gotta pre-count rows now that using generator.
-        - Create a method to do this? Yes.
-    * Gotta handle lists being returned from get_pattern().
-        - Think this is OK now.
     * After you re-write any code, check your examples and docstrings.
 """
 
@@ -93,11 +90,11 @@ class XLSXToStanford():
         
         # ???
         is_valid = True
-        
+
         # if header is 100 percent valid, return @is_valid.
-        if header_row == self.required_headers.keys():
+        if header_row == tuple(self.required_headers.keys()):
             self.logger.info("Header row is valid.")
-            return is_valid
+        return is_valid
 
         # find any extra header fields.
         extra_headers = [header for header in header_row if header not in 
@@ -141,7 +138,7 @@ class XLSXToStanford():
             tests.append(test)
 
         # ???
-        if False in tests:
+        if False in tests:  
             is_valid = False
   
         return is_valid
@@ -151,6 +148,7 @@ class XLSXToStanford():
         """ """
         
         # ???
+        # TODO: use slice not split.
         parts = pattern.split("tomes_pattern:")
         
         # ???
@@ -198,12 +196,6 @@ class XLSXToStanford():
             list: The return value.
             The altered versions of @pattern.
         """
-
-        # remove excess whitespace from @pattern.
-        _pattern = " ".join(pattern.strip().split())
-        if pattern != _pattern:
-            self.logger.warning("Removing excess whitespace in: {}".format(pattern))
-            pattern = _pattern
         
         # ???
         patterns = self._get_tomes_pattern(pattern)
@@ -253,11 +245,6 @@ class XLSXToStanford():
         return entity_rows
 
 
-    def count_entities(self, xslx_file):
-        """ """
-        pass
-
-
     def get_entities(self, xlsx_file):
         """ ??? Adds key "manifestations" ...
 
@@ -295,11 +282,12 @@ class XLSXToStanford():
                 
                 # ???
                 row = [cell.value for cell in row]
+                row = [cell.strip() if isinstance(cell, str) else cell for cell in row]
                 row = [(header[i], row[i]) for i in header_range]
                 row = dict(row)
 
                 # ???
-                self._validate_row(row, line_number)
+                row_valid = self._validate_row(row, line_number)
                 
                 row["identifier"] = hash_prefix + row["identifier"]
                 manifestations = self._get_patterns(row["pattern"], row["case_sensitive"])
@@ -334,7 +322,6 @@ class XLSXToStanford():
 
         # load workbook; get row data and modified checksum.
         self.logger.info("Loading workbook: {}".format(xlsx_file))
-        entity_rows = self.get_entities(xlsx_file)
         hash_prefix = self._get_hash_prefix(xlsx_file)
        
         # open @stanford_file for writing.
@@ -343,13 +330,13 @@ class XLSXToStanford():
         # iterate through rows; write data to @stanford_file.
         #???self.logger.info("Writing to mapping file: {}".format(stanford_file))
         row_count = 1
-        total_rows = sum(1 for d in self.get_entities(xlsx_file))
-        for row in entity_rows:
+        total_rows = sum(1 for row in self._get_rows(xlsx_file))
+        for entity in self.get_entities(xlsx_file):
             
             # get cell data.
-            tag = row["identifier"], row["authority"], row["label"]
+            tag = entity["identifier"], entity["authority"], entity["label"]
             tag = "::".join(tag)
-            manifestations = row["manifestations"]
+            manifestations = entity["manifestations"]
 
             # ??? write row to file and avoid final linebreak (otherwise CoreNLP will crash).
             for manifestation in manifestations:

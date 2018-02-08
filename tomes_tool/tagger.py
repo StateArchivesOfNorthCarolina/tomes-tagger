@@ -2,7 +2,11 @@
 
 """ This module contains a class to convert an EAXS file to a tagged EAXS document in which
 message content has been run through an NLP application. The message and NER entities are
-encoded in a defined schema. """
+encoded in a defined schema. 
+
+Todo:
+    * Need constructor to take a @port arg for CoreNLP and also support in CLI.
+"""
 
 # import modules.
 import sys; sys.path.append("..")
