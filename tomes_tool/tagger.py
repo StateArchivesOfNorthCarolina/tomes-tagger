@@ -29,12 +29,12 @@ class Tagger():
     """
     
 
-    def __init__(self, server, is_command_line=False, charset="UTF-8"): 
+    def __init__(self, server, is_main=False, charset="UTF-8"): 
         """ Sets instance attributes.
         
         Args:
             - server (str): The URL for the (Core)NLP server.
-            - is_command_line (bool): Use True if using command line access to this script, 
+            - is_main (bool): Use True if using command line access to this script, 
             i.e. main().
             - charset (str): Optional encoding for tagged EAXS.
         """
@@ -50,7 +50,7 @@ class Tagger():
 
         # set attributes.
         self.server = server
-        self.is_command_line = is_command_line
+        self.is_main = is_main
         self.charset = charset
 
         # split server into host/port.
@@ -88,7 +88,7 @@ class Tagger():
         except requests.exceptions.RequestException as err:
             self.logger.error(err)
             self.logger.critical("Can't connect to NLP server.")
-            if self.is_command_line:
+            if self.is_main:
                 self.logger.info("Exiting.")
                 sys.exit(1)
             else:
@@ -189,7 +189,7 @@ def main(eaxs: "source EAXS file",
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
-    tagger = Tagger(server, is_command_line=True)
+    tagger = Tagger(server, is_main=True)
     tagger.eaxs_tagger(eaxs, output)
 
 
