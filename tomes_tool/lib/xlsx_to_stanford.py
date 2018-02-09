@@ -6,8 +6,7 @@ file to a Python list or a tab-delimited file containing NER mapping rules for S
 CoreNLP.
 
 Todo:
-    * Header validator needs to raise an error, NOT the tsv/entities method.
-        - Or: shouldn't the user method decied what to do instead of the validator?
+    * TOMES pattern method needs work.
     * Remove "if main: stuff at the end when you are ready.
     * Flesh out logging.
     * After you re-write any code, check your examples and docstrings.
@@ -50,20 +49,22 @@ class XLSXToStanford():
         # set attributes.
         self.entity_worksheet = entity_worksheet
         self.charset = charset
-        self.required_headers = {"identifier":str, "pattern":str, "description":str,
-                "case_sensitive":bool, "label":str, "authority":str}
+        self.required_headers = {"identifier": str, "pattern": str, "description": str,
+                "case_sensitive": bool, "label": str, "authority": str}
 
 
     def _get_hash_prefix(self, xlsx_file):
-        """ ??? this will be prepended to @identifier, below, in order to know the version
-        of the source Excel file used. (first 6 characters should still be unique enough)
+        """ Gets the first six characters of the SHA-256 hash of @xlsx_file.
         
         Args:
-            - ???
-            
+            - xlsx_file (str): The path to the Excel file to load.
+
         Returns:
-            str: ???
+            str: The return value.
         """
+
+        # placeholder value.
+        hash_prefix = ""
 
         # get checksum of @xlsx_file; truncate it.
         checksum = hashlib.sha256()
@@ -76,117 +77,114 @@ class XLSXToStanford():
 
 
     def _validate_header(self, header_row):
-        """ Determines if @header_row is equal to self.required_headers.
+        """ Determines if @header_row is contains all the fields in @self.required_headers.
         
         Args:
             - header_row (tuple): The row values for the presumed first row of data.
 
         Returns:
             bool: The return value.
-            True if the header is valid, otherwise False.
+            True if @header_row is valid, otherwise False.
         """
 
         self.logger.info("Validating header row: {}".format(header_row))
         
-        # ???
+        # assume value.
         is_valid = True
 
-        # if header is 100 percent valid, return @is_valid.
+        # if @header_row perfectly matches, return @is_valid.
         if header_row == tuple(self.required_headers.keys()):
             self.logger.info("Header row is valid.")
         return is_valid
 
-        # find any extra header fields.
+        # otherwise, look for any extra header fields.
         extra_headers = [header for header in header_row if header not in 
                 self.required_headers]
         if len(extra_headers) != 0:
             self.logger.warning("Found extra headers: {}".format(extra_headers))
 
-        # find any missing header fields.
+        # look for any missing header fields; set @is_valid to False.
         missing_headers = [header for header in self.required_headers if header not in
                 header_row]
         if len(missing_headers) != 0:
-            self.logger.error("??? no valid ")
-            self.logger.warning("Missing headers: {}".format(missing_headers))
+            self.logger.error("Header is invalid.")
+            self.logger.info("Missing headers: {}".format(missing_headers))
             is_valid = False
   
         return is_valid
 
 
-    def _validate_row(self, row, line):
-        """ ??? 
+    def _validate_row(self, row, row_number):
+        """ Determines if @row contains the correct data types per @self.required_headers. 
         
         Args:
-            - row (dict): ???
+            - row (dict): An item from self.get_entities().
+            - row_numbers (int): The index of @row.
             
         Returns:
-            bool ???
+            bool: The return value.
+            True if @row is valid, otherwise False.
         """
 
-        # ???
+        # assume value.
         is_valid = True
 
-        # ??    
+        # test if each field in @row has the correct data type.
         tests = []
         for field, value in row.items():
             test = isinstance(value, self.required_headers[field])
             if not test:
                 self.logger.warning("??? Field '{}' in line {} not valid ...".format(field,
-                    line))
+                    row_number))
                 self.logger.info("Expected type '{}'; got '{}'.".format(type(field).__name__,
                     type(value).__name__))
             tests.append(test)
 
-        # ???
-        if False in tests:  
+        # if any test failed, set @is_valid to False.
+        if False in tests:
             is_valid = False
   
         return is_valid
 
 
     def _get_tomes_pattern(self, pattern):
-        """ """
+        """ Interprets @pattern as a 'TOMES pattern', allowing for single row notation of more
+        complex regex patterns. For more information, see the documentation files. NOTE: this
+        uses eval()."""
         
-        # ???
-        # TODO: use slice not split.
-        parts = pattern.split("tomes_pattern:")
         
-        # ???
-        parts_len = len(parts)
-        if parts_len == 1:
-            return None
-        elif parts_len > 2:
-            self.logger.warning("??? Expected 2, got {} ... falling back to ...".format(
-                parts_len))
-            return None       
-        
-        # ???
-        self.logger.info("??? it's a tomes pattern ...")
-        pattern = parts[1]
+        # test for incorrect TOMES pattern usage.
+        if len(pattern) == 0:
+            self.logger.warning("TOMES pattern invalid; falling back to empty output.")
+            return []     
 
-        # ???
+        # make sure a trailing comma exists; this prevents itertools.product() from splitting
+        # something like "tomes_pattern:{'[A|B]'}" from being split as a simple string: '{' +
+        # 'A' + '|', etc.
         if pattern[-1] != ",":
             pattern += ","
         
-        # ???
+        # interpret the pattern.
+        patterns = []
         try:
             pattern = eval(pattern)
         except (NameError, SyntaxError) as err:
             self.logger.error(err)
-            self.logger.warning("??? Invalid syntax ... falling back to ...")
+            self.logger.warning("Invalid TOMES pattern syntax; falling back to empty output.")
+            self.logger.debug("TOMES pattern: {}".format(pattern))
         try:
             patterns = [i for i in itertools.product(*pattern)]
             patterns.reverse()
         except TypeError as err:
             self.logger.error(err)
-            self.logger.warning("??? Check syntax. falling back to ...")
+            self.logger.warning("Invalid TOMES pattern syntax; falling back to empty output.")
+            self.logger.debug("TOMES pattern: {}".format(pattern))
 
         return patterns
 
 
     def _get_patterns(self, pattern, case_sensitive):
-        """ Returns manifestations @pattern without excess whitespace. If @case_sensitive is
-        True, also alters @pattern to include case-insensitive regex markup.
+        """ Returns manifestations of @pattern.
         
         Args:
             - pattern (str): The "pattern" field value for a given row.
@@ -194,51 +192,61 @@ class XLSXToStanford():
 
         Returns:
             list: The return value.
-            The altered versions of @pattern.
+            The altered version(s) of @pattern.
         """
         
-        # ???
-        patterns = self._get_tomes_pattern(pattern)
+        # assume values.
+        patterns = []
+        is_tomes_pattern = False
+
+        # if @pattern is a TOMES pattern instance, alter it per self._get_tomes_pattern().
+        tomes_pattern = "tomes_pattern:"
+        tomes_pattern_len = len(tomes_pattern)
+        if pattern[:tomes_pattern_len + 1] == tomes_pattern:
+            is_tomes_pattern = True
+            pattern = pattern[tomes_pattern_len:]
+            patterns = self._get_tomes_pattern(pattern)
 
         # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
-        if not case_sensitive and patterns is None:
+        if not case_sensitive and not is_tomes_pattern:
             tokens = pattern.split(" ")
             pattern = ["(?i)" + token + "(?-i)" for token in tokens]
             pattern = " ".join(pattern)
-        elif not case_sensitive and patterns is not None:
-            self.logger.warning("??? Ignoring case instruction because ...")
+        elif not case_sensitive and is_tomes_pattern:
+            self.logger.warning("Ignoring case insensitivity instruction for TOMES pattern.")
         
-        # ???
-        if patterns is None:
+        # if @is_tomes_pattern is False, place @pattern into a list.
+        if is_tomes_pattern:
             patterns = [pattern]
             
         return patterns
 
         
     def _get_rows(self, xlsx_file):
-        """ Gets iterable version of row data for worksheet (self.entity_worksheet) for a 
-        given workbook (@xlsx_file).
+        """ Gets iterable version of row data for worksheet @self.entity_worksheet for a 
+        given workbook, @xlsx_file.
         
         Args:
             - xlsx_file (str): The path to the Excel file to load.
 
         Returns:
             openpyxl.worksheet.worksheet.Worksheet: The return value.
-            ??? It's a genererator now.
+            If the data can't be loaded, None is returned.
 
         Raises:
-            - ???
+            - KeyError: If @self.entity_worksheet is not present.
         """
 
         # load workbook.
         workbook = load_workbook(xlsx_file, read_only=False, data_only=True)
         
         # verify that required worksheet exists.
+        entity_rows = None
         try:
             entity_rows = workbook[self.entity_worksheet].iter_rows()
         except KeyError as err:
             self.logger.error(err)
-            self.logger.warning("Missing required worksheet '{}' in workbook: {}".format(
+            self.logger.warning("Missing required worksheet '{}' in workbook '{}'.".format(
                     self.entity_worksheet, xlsx_file))
             raise err
 
@@ -246,16 +254,17 @@ class XLSXToStanford():
 
 
     def get_entities(self, xlsx_file):
-        """ ??? Adds key "manifestations" ...
+        """ Gets rows in @xlsx_file and returns a generator. Each item in the generator is
+        a dictionary in which the field names are keys and the row data are values.
 
         Args:
-            - ???
+            - xlsx_file (str): The path to the Excel file to load.
         
         Returns:
-            list: ???
+            generator: The return value.
 
         Raises:
-            - ???     
+            - Warning: If the header is not valid.
         """
 
         # load workbook; get row data and modified checksum.
@@ -263,7 +272,7 @@ class XLSXToStanford():
         entity_rows = self._get_rows(xlsx_file)
         hash_prefix = self._get_hash_prefix(xlsx_file)
 
-        # ???
+        # create generator for each row.
         def entities():
         
             # get header.
@@ -273,27 +282,29 @@ class XLSXToStanford():
 
             # validate header.
             if not self._validate_header(header):
-                raise Exception # ??? TODO what kind?
+                err = "Invalid header row: {}.".format(header)
+                raise Warning(err)
             
-            # ???
+            # yield a dict for each non-header row.
             line_number = 1
             header_range = range(0,len(header))
             for row in entity_rows:
                 
-                # ???
+                # get row values.
                 row = [cell.value for cell in row]
                 row = [cell.strip() if isinstance(cell, str) else cell for cell in row]
                 row = [(header[i], row[i]) for i in header_range]
                 row = dict(row)
 
-                # ???
+                # run row validator.
                 row_valid = self._validate_row(row, line_number)
                 
+                # alter data as needed and create dict for row.
                 row["identifier"] = hash_prefix + row["identifier"]
                 manifestations = self._get_patterns(row["pattern"], row["case_sensitive"])
                 row["manifestations"] = ["".join(m) for m in manifestations]
                 
-                # ???
+                # yield dict.
                 line_number += 1
                 yield(row)
 
@@ -328,7 +339,7 @@ class XLSXToStanford():
         tsv = codecs.open(stanford_file, "w", encoding=self.charset)
 
         # iterate through rows; write data to @stanford_file.
-        #???self.logger.info("Writing to mapping file: {}".format(stanford_file))
+        self.logger.info("Writing mapping file: {}".format(stanford_file))
         row_count = 1
         total_rows = sum(1 for row in self._get_rows(xlsx_file))
         for entity in self.get_entities(xlsx_file):
@@ -338,7 +349,7 @@ class XLSXToStanford():
             tag = "::".join(tag)
             manifestations = entity["manifestations"]
 
-            # ??? write row to file and avoid final linebreak (otherwise CoreNLP will crash).
+            # write row to file and avoid final linebreak (otherwise CoreNLP will crash).
             for manifestation in manifestations:
                 tsv.write("\t".join([manifestation,tag]))
                 if row_count != total_rows:
