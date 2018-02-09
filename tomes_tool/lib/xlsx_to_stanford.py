@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
 
-"""
-This module contains a class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary 
-file to a Python list or a tab-delimited file containing NER mapping rules for Stanford
-CoreNLP.
-
-Todo:
-    * TOMES pattern method needs work.
-    * Remove "if main: stuff at the end when you are ready.
-    * Flesh out logging.
-    * After you re-write any code, check your examples and docstrings.
-"""
+""" This module contains a class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary
+file to a Python list or a tab-delimited file containing NER mapping rules for Stanford 
+CoreNLP. """
 
 # import modules.
 import codecs
@@ -134,10 +126,9 @@ class XLSXToStanford():
         for field, value in row.items():
             test = isinstance(value, self.required_headers[field])
             if not test:
-                self.logger.warning("??? Field '{}' in line {} not valid ...".format(field,
-                    row_number))
-                self.logger.info("Expected type '{}'; got '{}'.".format(type(field).__name__,
-                    type(value).__name__))
+                err = "Field '{}' in row {} not valid; expected '{}', got '{}'.".format(
+                        field, row_number, type(field).__name__, type(value).__name__)
+                self.logger.warning(err)
             tests.append(test)
 
         # if any test failed, set @is_valid to False.
@@ -150,8 +141,7 @@ class XLSXToStanford():
     def _get_tomes_pattern(self, pattern):
         """ Interprets @pattern as a 'TOMES pattern', allowing for single row notation of more
         complex regex patterns. For more information, see the documentation files. NOTE: this
-        uses eval()."""
-        
+        uses eval(). """
         
         # test for incorrect TOMES pattern usage.
         if len(pattern) == 0:
@@ -168,14 +158,9 @@ class XLSXToStanford():
         patterns = []
         try:
             pattern = eval(pattern)
-        except (NameError, SyntaxError) as err:
-            self.logger.error(err)
-            self.logger.warning("Invalid TOMES pattern syntax; falling back to empty output.")
-            self.logger.debug("TOMES pattern: {}".format(pattern))
-        try:
             patterns = [i for i in itertools.product(*pattern)]
             patterns.reverse()
-        except TypeError as err:
+        except (NameError, SyntaxError, TypeError) as err:
             self.logger.error(err)
             self.logger.warning("Invalid TOMES pattern syntax; falling back to empty output.")
             self.logger.debug("TOMES pattern: {}".format(pattern))
@@ -198,14 +183,16 @@ class XLSXToStanford():
         # assume values.
         patterns = []
         is_tomes_pattern = False
-
+        
         # if @pattern is a TOMES pattern instance, alter it per self._get_tomes_pattern().
         tomes_pattern = "tomes_pattern:"
         tomes_pattern_len = len(tomes_pattern)
-        if pattern[:tomes_pattern_len + 1] == tomes_pattern:
+        if pattern[:tomes_pattern_len] == tomes_pattern:
             is_tomes_pattern = True
-            pattern = pattern[tomes_pattern_len:]
+            pattern = pattern[tomes_pattern_len:].strip()
             patterns = self._get_tomes_pattern(pattern)
+        else:
+            pattern = pattern.strip()
 
         # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
         if not case_sensitive and not is_tomes_pattern:
@@ -216,9 +203,9 @@ class XLSXToStanford():
             self.logger.warning("Ignoring case insensitivity instruction for TOMES pattern.")
         
         # if @is_tomes_pattern is False, place @pattern into a list.
-        if is_tomes_pattern:
+        if not is_tomes_pattern:
             patterns = [pattern]
-            
+
         return patterns
 
         
@@ -360,14 +347,5 @@ class XLSXToStanford():
 
 
 if __name__ == "__main__":
-    #pass
-    import logging
-    logging.basicConfig(level="DEBUG")
-    x2s = XLSXToStanford()
-    #x2s.write_stanford("../../NLP/TOMES_Entity_Dictionary.xlsx", "mapping.txt")
-    #entities = x2s.get_entities("../../NLP/TOMES_Entity_Dictionary.xlsx")
-    entities = x2s.get_entities("../../NLP/foo.xlsx")
-    #p = x2s._get_patterns("tomes_pattern:{'[A|a]'}, {'B'}", True)
-    #p = x2s._get_patterns("tomes_pattern:{'A', 'B'}, {'-',' '}, {'[0-9]{1,2}', '000'}", True)
-    #print(p)
-    for i in entities: print(i)
+    pass
+
