@@ -2,11 +2,7 @@
 
 """ This module contains a class to extract tokens and their corresponding NER tags from a 
 given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp 
-(https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly. 
-
-Todo:
-    * Do os.path.isfile() for the mapping file and log/remove it if False.    
-"""
+(https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly. """
 
 # import modules.
 import json
