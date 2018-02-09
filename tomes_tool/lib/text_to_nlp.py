@@ -90,7 +90,7 @@ class CoreNLP():
 
 
     class Connection_Error(Exception):
-        """ A custom error class for trapping connection errors from pycorenlp. """
+        """ A custom error class for trapping connection errors from the requests module. """
         pass
 
 

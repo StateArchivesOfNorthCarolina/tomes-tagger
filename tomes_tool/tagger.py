@@ -57,15 +57,17 @@ class Tagger():
         colon = self.server.rfind(":")
         self.host = self.server[:colon]
         self.port = int(self.server[colon+1:])
-        
-        # verify NLP server is running.
-        self._check_server()
 
         # compose instances.
         self.h2t = HTMLToText()
         self.t2n = TextToNLP(self.host, self.port)
         self.n2x = NLPToXML()
         self.e2t = EAXSToTagged(self.html_convertor, self.text_tagger, self.charset)
+
+    
+    class Connection_Error(Exception):
+        """ A custom error class for trapping connection errors from the requests module. """
+        pass
 
 
     def _check_server(self):
@@ -76,9 +78,7 @@ class Tagger():
             None
             
         Raises:
-            - Connection exceptions from the requests module if unable to connect to
-            @self.server. For more information on these exceptions, see: 
-            "http://docs.python-requests.org/en/master/_modules/requests/exceptions/".
+            - self.Connection_Error: If a connection can't be made to @self.server.
         """
 
         self.logger.info("Testing if NLP server at '{}' exists.".format(self.server))
@@ -92,7 +92,7 @@ class Tagger():
                 self.logger.info("Exiting.")
                 sys.exit(1)
             else:
-                raise err
+                raise self.Connection_Error(err)
 
         return
 
@@ -148,8 +148,10 @@ class Tagger():
             True if the process completed. Otherwise, False.
         """
 
-        self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
+        # verify NLP server is running.
+        self._check_server()
 
+        self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
         # create tagged EAXS.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
@@ -166,7 +168,6 @@ class Tagger():
 
 
 # CLI.
-
 def main(eaxs: "source EAXS file", 
         output: ("tagged EAXS destination", "option", "o"),
         server:("URL for (Core)NLP server", "option", "s")="http://localhost:9003"):
