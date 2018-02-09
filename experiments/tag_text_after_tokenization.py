@@ -27,7 +27,7 @@ def lookup_tag(regex_pattern):
 
 def get_map(tokens):
     """ Returns a dictionary with each unique token in @tokens as keys. The values are lists:
-    the index/s of the position in @tokens that the token is found. """
+    the index of the position/s in global @TEXT that the token is found. """
 
     token_index = enumerate(tokens)
     token_map = {}
@@ -40,30 +40,25 @@ def get_map(tokens):
     return token_map
 
 
-def get_combos(haystack, needle):
-    """ @haystack is the text you are tokenizing/tagging and also running regexs over.
-    @needle is the regex result obtained from running a regex over the text. """
-
-    # ideally, these would be passed in rather than being computed here.
-    haystack_tokens = tokenize(haystack)
-    haystack_map = get_map(haystack_tokens)
+def get_combos(regex_result):
+    """ @regex_result: the regex result obtained from running a regex over global @TEXT. """
     
-    # we need this in order to find if/where it exists in @haystack_tokens as a subset.
-    needle_tokens = tokenize(needle)
+    # we need this in order to find if/where it exists in global @TEXT_TOKENS.
+    regex_result_tokens = tokenize(regex_result)
 
-    # get position of first token in @needle_tokens (i.e. the tokenized regex 
-    # results) and the total number of tokens in the regex results.
+    # get position of first token in @regex_result_tokens (i.e. the tokenized regex results)
+    # and the total number of tokens in the regex results.
     try:
-        finds = haystack_map[needle_tokens[0]]
-        distance = len(needle_tokens)
+        finds = TEXT_MAP[regex_result_tokens[0]]
+        total_tokens = len(regex_result_tokens)
     except KeyError:
         return None
 
-    # make a list of tokens sets in @haystack_tokens that match @needle_tokens.
+    # make a list of tokens sets in global @TEXT_TOKENS that match @regex_result_tokens.
     combos = []
     for find in finds:
-        combo = {"tokens": haystack_tokens[find:find + distance], "position": find}
-        if combo["tokens"] == needle_tokens:
+        combo = {"tokens": TEXT_TOKENS[find:find + total_tokens], "start": find}
+        if combo["tokens"] == regex_result_tokens:
             combos.append(combo)
 
     return combos
@@ -71,38 +66,42 @@ def get_combos(haystack, needle):
 
 # sample text and regex.
 TEXT = "... Hello world ... hello world again!"
+
+# let's assume we've tokenized @TEXT with our NER tagger.
+TEXT_TOKENS = tokenize(TEXT)
+
+# now let's get a map of the tokens.
+TEXT_MAP = get_map(TEXT_TOKENS)
+
+# this is the regex we want to run over @TEXT.
 PATTERN = "[H|h]ello world"
 
 # test functions.
 print(tokenize(TEXT))
 print(lookup_tag(PATTERN))
 print(get_map(tokenize(TEXT)))
-print(get_combos(TEXT, "Hello world"))
+print(get_combos("Hello world"))
 print()
 
 # example usage.
 import re
 
+# let's get the associated NER tag for the regex @PATTERN.
 ner_tag = lookup_tag(PATTERN)
+
+# run the regex.
 matches = re.findall(PATTERN, TEXT)
 print("Found {} matches.".format(len(matches)))
+
+# for each match, get the exact tokens in @TEXT and their starting position in @TEXT.
 for match in matches:
-    results = get_combos(TEXT, match)
+    results = get_combos(match)
     for result in results:
         message = "Tagging each token in {} with '{}'".format(result, ner_tag)
         print(message)
         concatenated = " ".join(result["tokens"])
         message = "Concatenated tokens: {}".format(concatenated)
         print(message)
-    
 
-####['...', 'Hello', 'world', '...', 'hello', 'world', 'again!']
-####GREETING
-####{'...': [0, 3], 'Hello': [1], 'world': [2, 5], 'hello': [4], 'again!': [6]}
-####[{'tokens': ['Hello', 'world'], 'position': 1}]
-####
-####Found 2 matches.
-####Tagging each token in {'tokens': ['Hello', 'world'], 'position': 1} with 'GREETING'
-####Concatenated tokens: Hello world
-####Tagging each token in {'tokens': ['hello', 'world'], 'position': 4} with 'GREETING'
-####Concatenated tokens: hello world
+# fin.
+
