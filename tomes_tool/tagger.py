@@ -2,17 +2,15 @@
 
 """ This module contains a class to convert an EAXS file to a tagged EAXS document in which
 message content has been run through an NLP application. The message and NER entities are
-encoded in a defined schema. 
-
-Todo:
-    * Need constructor to take a @port arg for CoreNLP and also support in CLI.
-"""
+encoded in a defined schema. """
 
 # import modules.
 import sys; sys.path.append("..")
 import logging
 import logging.config
 import os
+import requests
+import sys
 import yaml
 from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
 from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML
@@ -20,7 +18,7 @@ from tomes_tool.lib.nlp_to_xml import NLPToXML
 from tomes_tool.lib.text_to_nlp import TextToNLP
 
 
-class TOMESToolTagger():
+class Tagger():
     """ A class to convert an EAXS file to a tagged EAXS document.
 
     Example:
@@ -31,24 +29,72 @@ class TOMESToolTagger():
     """
     
 
-    def __init__(self, charset="UTF-8"): 
+    def __init__(self, server, is_command_line=False, charset="UTF-8"): 
         """ Sets instance attributes.
         
         Args:
+            - server (str): The URL for the (Core)NLP server.
+            - is_command_line (bool): Use True if using command line access to this script, 
+            i.e. main().
             - charset (str): Optional encoding for tagged EAXS.
         """
     
         # set logging.
         self.logger = logging.getLogger(__name__)        
+        self.logger.addHandler(logging.NullHandler())
+
+        # suppress third party logging that is not a warning or higher.
+        # per: https://stackoverflow.com/a/11029841
+        logging.getLogger("requests").setLevel(logging.WARNING)
+        logging.getLogger("urllib3").setLevel(logging.WARNING)
 
         # set attributes.
+        self.server = server
+        self.is_command_line = is_command_line
         self.charset = charset
+
+        # split server into host/port.
+        colon = self.server.rfind(":")
+        self.host = self.server[:colon]
+        self.port = int(self.server[colon+1:])
         
+        # verify NLP server is running.
+        self._check_server()
+
         # compose instances.
         self.h2t = HTMLToText()
-        self.t2n = TextToNLP()
+        self.t2n = TextToNLP(self.host, self.port)
         self.n2x = NLPToXML()
         self.e2t = EAXSToTagged(self.html_convertor, self.text_tagger, self.charset)
+
+
+    def _check_server(self):
+        """ Makes a test request to @self.server. If no connection exits AND the command line
+        is in use this will call sys.exit(), otherwise it will raise an exception (or two).
+        
+        Returns:
+            None
+            
+        Raises:
+            - Connection exceptions from the requests module if unable to connect to
+            @self.server. For more information on these exceptions, see: 
+            "http://docs.python-requests.org/en/master/_modules/requests/exceptions/".
+        """
+
+        self.logger.info("Testing if NLP server at '{}' exists.".format(self.server))
+        try:
+            requests.get(self.server)
+            self.logger.info("Initial connection to server was successful.")
+        except requests.exceptions.RequestException as err:
+            self.logger.error(err)
+            self.logger.critical("Can't connect to NLP server.")
+            if self.is_command_line:
+                self.logger.info("Exiting.")
+                sys.exit(1)
+            else:
+                raise err
+
+        return
 
 
     def html_convertor(self, html):
@@ -120,8 +166,10 @@ class TOMESToolTagger():
 
 
 # CLI.
-def main(eaxs: "source EAXS file",
-        output: ("tagged EAXS destination", "option", "o")):
+
+def main(eaxs: "source EAXS file", 
+        output: ("tagged EAXS destination", "option", "o"),
+        server:("URL for (Core)NLP server", "option", "s")="http://localhost:9003"):
 
     "Converts EAXS document to tagged EAXS.\
     \nexample: `py -3 tagger.py ../tests/sample_files/sampleEAXS.xml`"
@@ -141,7 +189,7 @@ def main(eaxs: "source EAXS file",
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
-    tagger = TOMESToolTagger()
+    tagger = Tagger(server, is_command_line=True)
     tagger.eaxs_tagger(eaxs, output)
 
 
