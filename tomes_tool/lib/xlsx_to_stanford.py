@@ -325,10 +325,12 @@ class XLSXToStanford():
         # open @stanford_file for writing.
         tsv = codecs.open(stanford_file, "w", encoding=self.charset)
 
-        # iterate through rows; write data to @stanford_file.
+        # prepare counting data for reporting.
         self.logger.info("Writing mapping file: {}".format(stanford_file))
         row_count = 1
         total_rows = sum(1 for row in self._get_rows(xlsx_file))
+        
+        # iterate through rows; write data to @stanford_file.
         for entity in self.get_entities(xlsx_file):
             
             # get cell data.
