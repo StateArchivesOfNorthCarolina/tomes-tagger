@@ -95,7 +95,7 @@ class TextToNLP():
     Stanford's CoreNLP. """
 
 
-    def __init__(self, host="http://localhost", port=9003, chunk_size=50000, 
+    def __init__(self, host="http://localhost", port=9003, chunk_size=50000, retry=True,
             mapping_file="regexner_TOMES/mappings.txt", tags_to_remove=["DATE", "DURATION",
                     "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "PERCENT", "SET", "TIME"]):
         """ Sets instance attributes.
@@ -105,6 +105,9 @@ class TextToNLP():
             - port (int): The port on which to run the CoreNLP server.
             - chunk_size (int): The maximum string length to send to CoreNLP at once. Increase
             it at your own risk.
+            - retry (bool) : If True and the call to self.get_NER() is an empty list, one more
+            attempt will be made to retrieve results. This is because occassional glitches in
+            the CoreNLP server result in empty results.
             - mapping_file (str): See "help(CoreNLP)" for more info.
             - tags_to_remove (list): If CoreNLP returns one on these NER tags, the tag will be
             replaced with an empty string.
@@ -119,6 +122,7 @@ class TextToNLP():
         self.port = port
         self.url = "{}:{}".format(host, port)
         self.chunk_size = chunk_size
+        self.retry = retry
         self.mapping_file = mapping_file
         self.tags_to_remove = tags_to_remove
         self.stanford_tags = ["DATE", "DURATION", "LOCATION", "MISC", "MONEY", "NUMBER", "O",
@@ -182,22 +186,21 @@ class TextToNLP():
         if len(response) > max_length:
             self.logger.debug("Response exceeds @max_length of '{}'; truncating.".format(
                 max_length))
-            response = response[:max_length] + " ..."
+            response = response[:max_length] + "..."
 
         return response
 
 
-    def __process_NER_requests(def__get_NER, retry=True):
+    def __process_NER_requests(def__get_NER):
         """ A decorator for @def__get_NER that splits text into chunks if the string passed
         to @def__get_NER exceeds self.chunk_size in length. This is due to size limitations
         in terms of how much data should be sent to @def__get_NER. This decorator also makes
-        one more call to @def__get_NER if @retry is True and @def__get_NER returns an empty
-        list, such as in cases where the NLP server doesn't respond due to a temporary glitch.
+        one more call to @def__get_NER if @self.retry is True and @def__get_NER returns an
+        empty list for a given chunk, such as in cases where the NLP server doesn't respond
+        due to a temporary glitch.
 
         Args:
             - def__get_NER (function): An alias intended for self.get_NER().
-            - retry (bool) : If True and the call to @def__get_NER is an empty list, one more
-            attempt will be made to retrieve results from @def__get_NER.
 
         Returns:
             function: The return value.
@@ -206,7 +209,7 @@ class TextToNLP():
             - TypeError: If @text passed to self.get_NER() is not a string.
         """
 
-        def processor(self, text, retry=retry):
+        def processor(self, text):
 
             # prepare output container.
             ner_output = []
@@ -245,6 +248,7 @@ class TextToNLP():
             total_chunks = len(text_list)
             
             for text_chunk in text_list:
+
                 self.logger.info("Getting NER tags for chunk {} of {}.".format(i, 
                     total_chunks))
                 try:
@@ -258,30 +262,33 @@ class TextToNLP():
                 # count tokens.
                 len_tokens = len(tokenized_tagged)
 
-                # if no tokens were found and @retry is False, report on giving up.
-                if len_tokens == 0 and not retry:
+                # if no tokens were returned and @self.retry is True, try again.
+                if len_tokens == 0 and self.retry:
+                    self.logger.info("Making another attempt to get NER tags for chunk.")
+                    tokenized_tagged = def__get_NER(self, text_chunk)
+                    len_tokens = len(tokenized_tagged)
+                
+                # if no tokens were returned, report on giving up.
+                if len_tokens == 0:
                     self.logger.warning("Falling back to empty output.")
                 
-                # but if no tokens were returned and @retry is True, try again.
-                elif len_tokens == 0 and retry:
-                    self.logger.info("Making another attempt to get NER tags for chunk.")
-                    return processor(self, text, retry=False)
-                    
-                # otherwise if tokens were found, append them to @ner_output.
+                # otherwise, if tokens were returned, add them to @ner_output.
                 else:
 
+                    # check for orphaned whitespace.
                     leading_space, trailing_space = self._get_outer_space(text_chunk)
                     
-                    # if missing, add leading whitespace.
+                    # if missing, add leading whitespace to @ner_output.
                     if leading_space != "":
                         ner_output += [("", "", leading_space)]
                     
+                    # add tokens to @ner_output.
                     ner_output += tokenized_tagged
                     
-                    # if missing, add trailing whitespace.
+                    # if missing, add trailing whitespace to @ner_output.
                     if trailing_space != "":
                         ner_output += [("", "", trailing_space)]
-                    
+                
                 i += 1
 
             return ner_output

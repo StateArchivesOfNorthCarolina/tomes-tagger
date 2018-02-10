@@ -52,7 +52,7 @@ def main(text="North Carolina", host="http://localhost", port=9003):
     \nexample: `py -3 test__text_to_nlp.py 'Jane Doe'`"
 
     # get/print NER results.
-    t2n = TextToNLP(host=host, port=port)
+    t2n = TextToNLP(host=host, port=port, chunk_size=1)
     ner = t2n.get_NER(text)
     print(ner)
 
