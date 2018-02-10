@@ -143,6 +143,9 @@ class XLSXToStanford():
         complex regex patterns. For more information, see the documentation files. NOTE: this
         uses eval(). """
         
+        # remove excess whitespace.
+        pattern = pattern.strip()
+
         # test for incorrect TOMES pattern usage.
         if len(pattern) == 0:
             self.logger.warning("TOMES pattern invalid; falling back to empty output.")
@@ -180,6 +183,9 @@ class XLSXToStanford():
             The altered version(s) of @pattern.
         """
         
+        # remove excess whitespace.
+        pattern = pattern.strip()
+
         # assume values.
         patterns = []
         is_tomes_pattern = False
@@ -189,10 +195,8 @@ class XLSXToStanford():
         tomes_pattern_len = len(tomes_pattern)
         if pattern[:tomes_pattern_len] == tomes_pattern:
             is_tomes_pattern = True
-            pattern = pattern[tomes_pattern_len:].strip()
+            pattern = pattern[tomes_pattern_len:]
             patterns = self._get_tomes_pattern(pattern)
-        else:
-            pattern = pattern.strip()
 
         # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
         if not case_sensitive and not is_tomes_pattern:
@@ -202,9 +206,9 @@ class XLSXToStanford():
         elif not case_sensitive and is_tomes_pattern:
             self.logger.warning("Ignoring case insensitivity instruction for TOMES pattern.")
         
-        # if @is_tomes_pattern is False, place @pattern into a list.
+        # if @is_tomes_pattern is False, append @pattern to output.
         if not is_tomes_pattern:
-            patterns = [pattern]
+            patterns.append(pattern)
 
         return patterns
 

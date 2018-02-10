@@ -187,12 +187,17 @@ class TextToNLP():
         return response
 
 
-    def __process_NER_requests(def__get_NER):
-        """ A decorator for self.get_NER() that splits text into chunks if the string passed
-        to self.get_NER() exceeds self.chunk_size in length.
-        
+    def __process_NER_requests(def__get_NER, retry=True):
+        """ A decorator for @def__get_NER that splits text into chunks if the string passed
+        to @def__get_NER exceeds self.chunk_size in length. This is due to size limitations
+        in terms of how much data should be sent to @def__get_NER. This decorator also makes
+        one more call to @def__get_NER if @retry is True and @def__get_NER returns an empty
+        list, such as in cases where the NLP server doesn't respond due to a temporary glitch.
+
         Args:
             - def__get_NER (function): An alias intended for self.get_NER().
+            - retry (bool) : If True and the call to @def__get_NER is an empty list, one more
+            attempt will be made to retrieve results from @def__get_NER.
 
         Returns:
             function: The return value.
@@ -201,7 +206,7 @@ class TextToNLP():
             - TypeError: If @text passed to self.get_NER() is not a string.
         """
 
-        def processor(self, text):
+        def processor(self, text, retry=retry):
 
             # prepare output container.
             ner_output = []
@@ -250,17 +255,30 @@ class TextToNLP():
                     self.logger.warning("Falling back to empty output for chunk.")
                     tokenized_tagged = []
                 
-                # if @tokenized_tagged is not empty, append it to @ner_output.
-                # if needed, also append orphaned whitespace before/after.
-                if len(tokenized_tagged) != 0:
+                # count tokens.
+                len_tokens = len(tokenized_tagged)
+
+                # if no tokens were found and @retry is False, report on giving up.
+                if len_tokens == 0 and not retry:
+                    self.logger.warning("Falling back to empty output.")
+                
+                # but if no tokens were returned and @retry is True, try again.
+                elif len_tokens == 0 and retry:
+                    self.logger.info("Making another attempt to get NER tags for chunk.")
+                    return processor(self, text, retry=False)
+                    
+                # otherwise if tokens were found, append them to @ner_output.
+                else:
 
                     leading_space, trailing_space = self._get_outer_space(text_chunk)
                     
+                    # if missing, add leading whitespace.
                     if leading_space != "":
                         ner_output += [("", "", leading_space)]
                     
                     ner_output += tokenized_tagged
                     
+                    # if missing, add trailing whitespace.
                     if trailing_space != "":
                         ner_output += [("", "", trailing_space)]
                     
@@ -294,14 +312,12 @@ class TextToNLP():
             results = self.corenlp.annotate(text)
         except self.corenlp.Connection_Error as err:
             self.logger.error(err)
-            self.logger.warning("Falling back to empty output.")
             return []
 
         # ensure @results is correct data type.
         if not isinstance(results, dict):
             self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary.".format(
                 type(results).__name__))
-            self.logger.warning("Falling back to empty output.")
             results_err = self._encode_bad_response(results)
             self.logger.debug("CoreNLP response: {}".format(results_err))
             return []
@@ -309,7 +325,6 @@ class TextToNLP():
         # verify @results contains required key.
         if "sentences" not in results:
             self.logger.warning("CoreNLP response is missing required field 'sentences'.")
-            self.logger.warning("Falling back to empty output.")
             results_err = self._encode_bad_response(results)
             self.logger.debug("CoreNLP response: {}".format(results_err))
             return []
