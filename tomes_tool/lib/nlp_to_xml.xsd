@@ -46,7 +46,7 @@ elementFormDefault="qualified">
 			the token matched against and that yielded the @entity in question.
 			
 			It is recommended that the pattern consist of two parts: the first 
-			six digits of the SHA256 hash for the source document from which the
+			six digits of the SHA-256 hash for the source document from which the
 			@entity term originates, followed by the identifier value for the	
 			@entity as notated within the source document. A "#" mark should be
 			used to delimit the two parts.
