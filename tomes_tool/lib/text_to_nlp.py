@@ -253,23 +253,17 @@ class TextToNLP():
                     total_chunks))
                 try:
                     tokenized_tagged = def__get_NER(self, text_chunk)
+                    if len(tokenized_tagged) == 0 and self.retry:
+                        self.logger.info("Making another attempt to get NER tags for chunk.")
+                        tokenized_tagged = def__get_NER(self, text_chunk)
                 except Exception as err:
                     self.logger.error(err)
                     self.logger.error("Failed to get NER tags for chunk.")
                     self.logger.warning("Falling back to empty output for chunk.")
                     tokenized_tagged = []
                 
-                # count tokens.
-                len_tokens = len(tokenized_tagged)
-
-                # if no tokens were returned and @self.retry is True, try again.
-                if len_tokens == 0 and self.retry:
-                    self.logger.info("Making another attempt to get NER tags for chunk.")
-                    tokenized_tagged = def__get_NER(self, text_chunk)
-                    len_tokens = len(tokenized_tagged)
-                
                 # if no tokens were returned, report on giving up.
-                if len_tokens == 0:
+                if len(tokenized_tagged) == 0:
                     self.logger.warning("Falling back to empty output.")
                 
                 # otherwise, if tokens were returned, add them to @ner_output.
