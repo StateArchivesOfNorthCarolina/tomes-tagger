@@ -2,10 +2,8 @@
 
     "If I use an NER tagger that tokenizes a given text, how can I use regular expressions 
     over the non-tokenized text and merge the results with the NER tagger results?"
-
-    This would need to be refactored to remove redundancy, but each function is attempting
-    to show logic rather than the most efficient way of passing the data around.
 """
+
 
 def tokenize(text):
     """ This takes the place of the tokenizer or tokenization algorithm used by CoreNLP (or 
