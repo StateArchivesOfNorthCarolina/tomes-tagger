@@ -4,6 +4,15 @@
 message content has been run through an NLP application. The message and NER entities are
 encoded in a defined schema. """
 
+"""
+TODO for Tuesday:
+    * take a port AND a url and only concat is port not None.
+    * this still return TRUE if nothing happens. So get rid of boolean return.
+    * just like here, in text_to_nlp ue ConnetionError and not a custom Error.
+    * just raise the error immediately, so that html_to_text won't create a temp folder.
+    * unit tests.
+"""
+
 # import modules.
 import sys; sys.path.append("..")
 import logging
@@ -64,21 +73,16 @@ class Tagger():
         self.n2x = NLPToXML()
         self.e2t = EAXSToTagged(self.html_convertor, self.text_tagger, self.charset)
 
-    
-    class Connection_Error(Exception):
-        """ A custom error class for trapping connection errors from the requests module. """
-        pass
-
 
     def _check_server(self):
         """ Makes a test request to @self.server. If no connection exits AND the command line
-        is in use this will call sys.exit(), otherwise it will raise an exception (or two).
+        is in use this will call sys.exit(), otherwise it will raise an error.
         
         Returns:
             None
             
         Raises:
-            - self.Connection_Error: If a connection can't be made to @self.server and if
+            - ConnectionError: If a connection can't be made to @self.server and if 
             self.is_main is False - otherwise it will call sys.exit().
         """
 
@@ -86,14 +90,15 @@ class Tagger():
         try:
             requests.get(self.server)
             self.logger.info("Initial connection to server was successful.")
-        except requests.exceptions.RequestException as err:
+        except requests.exceptions.ConnectionError as err:
             self.logger.error(err)
-            self.logger.critical("Can't connect to NLP server.")
+            msg = "Can't connect to NLP server at: {}".format(self.server)
+            self.logger.critical(msg)
             if self.is_main:
                 self.logger.info("Exiting.")
                 sys.exit(1)
             else:
-                raise self.Connection_Error(err)
+                raise ConnectionError(msg)
 
         return
 
