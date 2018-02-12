@@ -364,9 +364,5 @@ class XLSXToStanford():
 
 
 if __name__ == "__main__":
-    #pass
-    import logging
-    logging.basicConfig(level=logging.DEBUG)
-    x2s = XLSXToStanford()
-    tf = x2s.get_entities("../../NLP/foo.xlsx")
-    print(next(tf))
+    pass
+
