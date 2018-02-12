@@ -78,7 +78,8 @@ class Tagger():
             None
             
         Raises:
-            - self.Connection_Error: If a connection can't be made to @self.server.
+            - self.Connection_Error: If a connection can't be made to @self.server and if
+            self.is_main is False - otherwise it will call sys.exit().
         """
 
         self.logger.info("Testing if NLP server at '{}' exists.".format(self.server))

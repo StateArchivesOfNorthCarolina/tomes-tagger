@@ -84,25 +84,36 @@ class XLSXToStanford():
         # assume value.
         is_valid = True
 
-        # if @header_row perfectly matches, return @is_valid.
+        # check if @header_row is perfect.
         if header_row == tuple(self.required_headers.keys()):
-            self.logger.info("Header row is valid.")
-        return is_valid
+            self.logger.info("Header fields are in perfect order.")
 
-        # otherwise, look for any extra header fields.
-        extra_headers = [header for header in header_row if header not in 
-                self.required_headers]
-        if len(extra_headers) != 0:
-            self.logger.warning("Found extra headers: {}".format(extra_headers))
+        # if there are duplicate fields, invalidate header.
+        duplicate_headers = [header for header in header_row if header_row.count(header) != 1]
+        if len(duplicate_headers) != 0:
+            self.logger.warning("Found duplicate fields: {}".format(set(duplicate_headers)))
+            is_valid = False
 
-        # look for any missing header fields; set @is_valid to False.
+        # if there are missing header fields, invalidate header.
         missing_headers = [header for header in self.required_headers if header not in
                 header_row]
         if len(missing_headers) != 0:
-            self.logger.error("Header is invalid.")
-            self.logger.info("Missing headers: {}".format(missing_headers))
+            self.logger.warning("Missing fields: {}".format(missing_headers))
             is_valid = False
-  
+
+        # if there are extra fields, invalidate header.
+        extra_headers = [header for header in header_row if header not in 
+                self.required_headers]
+        if len(extra_headers) != 0:
+            self.logger.warning("Found extra fields: {}".format(extra_headers))
+            is_valid = False
+        
+        # report on validity.
+        if is_valid:
+            self.logger.info("Header is valid.")
+        else:
+            self.logger.error("Header is invalid.")
+        
         return is_valid
 
 
@@ -273,8 +284,8 @@ class XLSXToStanford():
 
             # validate header.
             if not self._validate_header(header):
-                err = "Invalid header row: {}.".format(header)
-                raise Warning(err)
+                msg = "Invalid header row: {}.".format(header)
+                raise Warning(msg)
             
             # yield a dict for each non-header row.
             line_number = 1
@@ -353,5 +364,9 @@ class XLSXToStanford():
 
 
 if __name__ == "__main__":
-    pass
-
+    #pass
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+    x2s = XLSXToStanford()
+    tf = x2s.get_entities("../../NLP/foo.xlsx")
+    print(next(tf))
