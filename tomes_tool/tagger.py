@@ -179,7 +179,7 @@ def main(eaxs: "source EAXS file",
 
     # get absolute path to logging config file.
     config_dir = os.path.dirname(os.path.abspath(__file__))
-    config_file = os.path.join(config_dir, "logger.yaml")
+    config_file = os.path.join(config_dir, "tagger_logger.yaml")
     
     # load logging config file.
     with open(config_file) as cf:
