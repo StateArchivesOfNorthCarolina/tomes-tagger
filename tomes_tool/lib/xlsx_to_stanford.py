@@ -113,7 +113,6 @@ class XLSXToStanford():
             self.logger.info("Header is valid.")
         else:
             self.logger.error("Header is invalid.")
-            is_valid = Falsee
         
         return is_valid
 
