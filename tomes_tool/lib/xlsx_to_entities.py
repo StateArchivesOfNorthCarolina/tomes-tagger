@@ -13,7 +13,7 @@ import os
 from openpyxl import load_workbook
 
 
-class XLSXToEntities):
+class XLSXToEntities():
     """ A class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary file to a Python
     generator where each item is a dict with headers as keys and row data as values.
     
