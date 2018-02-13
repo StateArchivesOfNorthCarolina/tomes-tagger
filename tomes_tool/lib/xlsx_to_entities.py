@@ -263,9 +263,7 @@ class XLSXToEntities():
         
         Returns:
             generator: The return value.
-
-        Raises:
-            - Warning: If the header is not valid.
+            Note: A invalid header will result in an empty generator.
         """
  
         self.logger.info("Loading workbook: {}".format(xlsx_file))
@@ -278,18 +276,18 @@ class XLSXToEntities():
         entity_rows = self._get_rows(xlsx_file)
         hash_prefix = self._get_hash_prefix(xlsx_file)
 
+        # get header.
+        row = next(entity_rows)
+        header = [cell.value for cell in row]
+        header= tuple(header)
+
+        # if header is invalid, return empty generator.
+        if not self._validate_header(header):
+            msg = "Invalid header row: {}.".format(header)
+            return (i for i in list())
+
         # create generator for each row.
         def entities():
-        
-            # get header.
-            row = next(entity_rows)
-            header = [cell.value for cell in row]
-            header= tuple(header)
-
-            # validate header.
-            if not self._validate_header(header):
-                msg = "Invalid header row: {}.".format(header)
-                raise Warning(msg)
             
             # start row numbering at 2 because the header row is the first.
             row_number = 2
@@ -297,7 +295,7 @@ class XLSXToEntities():
             # yield a dict for each non-header row.
             header_range = range(0,len(header))
             for row in entity_rows:
-                
+
                 # get row values.
                 row = [cell.value for cell in row]
                 row = [cell.strip() if isinstance(cell, str) else cell for cell in row]
