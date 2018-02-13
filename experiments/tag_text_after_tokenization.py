@@ -2,6 +2,16 @@
 
     "If I use an NER tagger that tokenizes a given text, how can I use regular expressions 
     over the non-tokenized text and merge the results with the NER tagger results?"
+
+    Note: there is ne major flaw with this (or any other second pass approach). Namely,
+    say you have thre tokens: A, B, C ...
+
+    If your NER tool tags both A and B as, say, "PERSON". What do you then do if your regex
+    matches on B and C? You don't know that A being a "PERSON" is necessarily dependent on
+    being followed by B and vice-versa. So simply re-tagging B and C could invalidate the tag
+    of A as "PERSON". The safest thing (rather than write over tags) then might be to have 1
+    to 2 tags per token, i.e. a tuple where the first item is your NER tagger's tag and the 
+    second item is reserved for your regex-based tags.
 """
 
 
