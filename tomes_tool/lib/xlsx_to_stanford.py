@@ -86,33 +86,10 @@ class XLSXToStanford():
 
         # check if @header_row is perfect.
         if header_row == tuple(self.required_headers.keys()):
-            self.logger.info("Header fields are in perfect order.")
-
-        # if there are missing header fields, invalidate header.
-        missing_headers = [header for header in self.required_headers if header not in
-                header_row]
-        if len(missing_headers) != 0:
-            self.logger.warning("Missing required fields: {}".format(missing_headers))
-            is_valid = False
-            
-        # if there are duplicate fields, invalidate header.
-        duplicate_headers = [header for header in header_row if header_row.count(header) != 1]
-        if len(duplicate_headers) != 0:
-            self.logger.warning("Found duplicate fields: {}".format(set(duplicate_headers)))
-            is_valid = False
-
-        # if there are extra fields, invalidate header.
-        extra_headers = [header for header in header_row if header not in 
-                self.required_headers]
-        if len(extra_headers) != 0:
-            self.logger.warning("Found extra fields: {}".format(extra_headers))
-            is_valid = False
-        
-        # report on validity.
-        if is_valid:
             self.logger.info("Header is valid.")
         else:
             self.logger.error("Header is invalid.")
+            is_valid = False
         
         return is_valid
 
@@ -135,10 +112,12 @@ class XLSXToStanford():
         # test if each field in @row has the correct data type.
         tests = []
         for field, value in row.items():
-            test = isinstance(value, self.required_headers[field])
+            value_type, header_type = (type(value).__name__, 
+                    self.required_headers[field].__name__)
+            test = value_type == header_type
             if not test:
                 err = "Field '{}' in row {} not valid; expected '{}', got '{}'.".format(
-                        field, row_number, type(field).__name__, type(value).__name__)
+                        field, row_number, header_type, value_type)
                 self.logger.debug(err)
             tests.append(test)
 
@@ -302,7 +281,8 @@ class XLSXToStanford():
                 row_valid = self._validate_row(row, row_number)
                 row_number += 1
                 if not row_valid:
-                    self.logger.warning("Skipping invalid row number: {}".format(row_number))
+                    self.logger.warning("Skipping invalid row number: {}".format(
+                        row_number - 1))
                     continue
                 
                 # alter data as needed and create dict for row.
