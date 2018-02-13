@@ -86,10 +86,34 @@ class XLSXToStanford():
 
         # check if @header_row is perfect.
         if header_row == tuple(self.required_headers.keys()):
+            self.logger.info("Header fields are in perfect order.")
+
+        # if there are missing header fields, invalidate header.
+        missing_headers = [header for header in self.required_headers if header not in
+                header_row]
+        if len(missing_headers) != 0:
+            self.logger.warning("Missing required fields: {}".format(missing_headers))
+            is_valid = False
+            
+        # if there are duplicate fields, invalidate header.
+        duplicate_headers = [header for header in header_row if header_row.count(header) != 1]
+        if len(duplicate_headers) != 0:
+            self.logger.warning("Found duplicate fields: {}".format(set(duplicate_headers)))
+            is_valid = False
+
+        # if there are extra fields, invalidate header.
+        extra_headers = [header for header in header_row if header not in 
+                self.required_headers]
+        if len(extra_headers) != 0:
+            self.logger.warning("Found extra fields: {}".format(extra_headers))
+            is_valid = False
+        
+        # report on validity.
+        if is_valid:
             self.logger.info("Header is valid.")
         else:
             self.logger.error("Header is invalid.")
-            is_valid = False
+            is_valid = Falsee
         
         return is_valid
 
