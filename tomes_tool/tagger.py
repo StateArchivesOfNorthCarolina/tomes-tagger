@@ -4,15 +4,6 @@
 message content has been run through an NLP application. The message and NER entities are
 encoded in a defined schema. """
 
-"""
-TODO for Tuesday:
-    * take a port AND a url and only concat is port not None.
-    * this still return TRUE if nothing happens. So get rid of boolean return.
-    * just like here, in text_to_nlp ue ConnetionError and not a custom Error.
-    * just raise the error immediately, so that html_to_text won't create a temp folder.
-    * unit tests.
-"""
-
 # import modules.
 import sys; sys.path.append("..")
 import logging
@@ -32,17 +23,19 @@ class Tagger():
 
     Example:
         >>> # write tagged EAXS version of EAXS file.
-        >>> tagger = TOMESToolTagger()
+        >>> tagger = TOMESToolTagger(host="http://localhost:9003", check_host=False)
         >>> tagger.eaxs_tagger("sample_eaxs.xml") # outputs "sample_eaxs__tagged.xml".
         >>> tagger.eaxs_tagger("sample_eaxs.xml", "out.xml") # outputs "out.xml".
     """
     
 
-    def __init__(self, server, is_main=False, charset="UTF-8"): 
+    def __init__(self, host, check_host=True, is_main=False, charset="UTF-8"): 
         """ Sets instance attributes.
         
         Args:
-            - server (str): The URL for the (Core)NLP server.
+            - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
+            - check_host (bool): If True, self.ping_host() will be executed automatically. 
+            Otherwise, False.
             - is_main (bool): Use True if using command line access to this script, 
             i.e. main().
             - charset (str): Optional encoding for tagged EAXS.
@@ -58,41 +51,41 @@ class Tagger():
         logging.getLogger("urllib3").setLevel(logging.WARNING)
 
         # set attributes.
-        self.server = server
+        self.host = host
+        self.check_host = check_host
         self.is_main = is_main
         self.charset = charset
 
-        # split server into host/port.
-        colon = self.server.rfind(":")
-        self.host = self.server[:colon]
-        self.port = int(self.server[colon+1:])
+        # if specified, verify @host is active before creating instances of modules.
+        if self.check_host:
+            self.ping_host()
 
         # compose instances.
         self.h2t = HTMLToText()
-        self.t2n = TextToNLP(self.host, self.port)
+        self.t2n = TextToNLP(self.host)
         self.n2x = NLPToXML()
         self.e2t = EAXSToTagged(self.html_convertor, self.text_tagger, self.charset)
 
 
-    def _check_server(self):
-        """ Makes a test request to @self.server. If no connection exits AND the command line
+    def ping_host(self):
+        """ Makes a test request to @self.host. If no connection exits AND the command line
         is in use this will call sys.exit(), otherwise it will raise an error.
         
         Returns:
             None
             
         Raises:
-            - ConnectionError: If a connection can't be made to @self.server and if 
+            - ConnectionError: If a connection can't be made to @self.host and if 
             self.is_main is False - otherwise it will call sys.exit().
         """
 
-        self.logger.info("Testing if NLP server at '{}' exists.".format(self.server))
+        self.logger.info("Testing if NLP server at '{}' exists.".format(self.host))
         try:
-            requests.get(self.server)
+            requests.get(self.host)
             self.logger.info("Initial connection to server was successful.")
         except requests.exceptions.ConnectionError as err:
             self.logger.error(err)
-            msg = "Can't connect to NLP server at: {}".format(self.server)
+            msg = "Can't connect to NLP server at: {}".format(self.host)
             self.logger.critical(msg)
             if self.is_main:
                 self.logger.info("Exiting.")
@@ -151,11 +144,9 @@ class Tagger():
 
         Returns:
             bool: The return value.
-            True if the process completed. Otherwise, False.
+            True if the tagging process completed. Otherwise, False. Note: True does not 
+            ensure that the tagging process was valid, only that it completed.
         """
-
-        # verify NLP server is running.
-        self._check_server()
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
         # create tagged EAXS.
@@ -176,7 +167,7 @@ class Tagger():
 # CLI.
 def main(eaxs: "source EAXS file", 
         output: ("tagged EAXS destination", "option", "o"),
-        server:("URL for (Core)NLP server", "option", "s")="http://localhost:9003"):
+        host:("URL for CoreNLP server", "option")="http://localhost:9003"):
 
     "Converts EAXS document to tagged EAXS.\
     \nexample: `py -3 tagger.py ../tests/sample_files/sampleEAXS.xml`"
@@ -196,7 +187,7 @@ def main(eaxs: "source EAXS file",
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
-    tagger = Tagger(server, is_main=True)
+    tagger = Tagger(host, is_main=True)
     tagger.eaxs_tagger(eaxs, output)
 
 

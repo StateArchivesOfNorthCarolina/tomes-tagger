@@ -15,11 +15,11 @@ class CoreNLP():
     """ A class to wrap pycorenlp (https://github.com/smilli/py-corenlp) and capture its 
     exceptions more explicitly. """
 
-    def __init__(self, url, mapping_file="", tags_to_override=[], *args, **kwargs):
+    def __init__(self, host, mapping_file="", tags_to_override=[], *args, **kwargs):
         """ Sets instance attributes.
 
         Args:
-            - url (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
+            - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
             - mapping_file (str): The relative path for the regexNER mapping file. This must
             be located within the CoreNLP server's file directory.
             - tags_to_override (list): The CoreNLP NER tag values to override if they 
@@ -37,7 +37,7 @@ class CoreNLP():
         logging.getLogger("urllib3").setLevel(logging.WARNING)
         
         # set CoreNLP server location and options.
-        self.url = url
+        self.host = host
         self.mapping_file = mapping_file
         self.tags_to_override = tags_to_override
         self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner", 
@@ -52,7 +52,7 @@ class CoreNLP():
             self.options["regexner.backgroundSymbol"] = ",".join(self.tags_to_override)
 
         # compose instance of main pycorenlp class.
-        self.nlp = pycorenlp.StanfordCoreNLP(self.url, *args, **kwargs)
+        self.nlp = pycorenlp.StanfordCoreNLP(self.host, *args, **kwargs)
 
    
     def annotate(self, text):
@@ -67,7 +67,7 @@ class CoreNLP():
 
         Raises:
             - TypeError: If @text is not a string.
-            - self.Connection_Error: If pycorenlp can't connect to the CoreNLP server.
+            - ConnectionError: If pycorenlp can't connect to the CoreNLP server.
         """
 
         # verify that @text is a string.
@@ -81,13 +81,8 @@ class CoreNLP():
             results = self.nlp.annotate(text, properties=self.options)
             return results
         except Exception as err:
-            msg = "Can't connect to CoreNLP at: {}".format(self.url)
-            raise self.Connection_Error(msg)
-
-
-    class Connection_Error(Exception):
-        """ A custom error class for trapping connection errors from the requests module. """
-        pass
+            msg = "Can't connect to CoreNLP at: {}".format(self.host)
+            raise ConnectionError(msg)
 
 
 class TextToNLP():
@@ -95,14 +90,13 @@ class TextToNLP():
     Stanford's CoreNLP. """
 
 
-    def __init__(self, host="http://localhost", port=9003, chunk_size=50000, retry=True,
+    def __init__(self, host="http://localhost:9003", chunk_size=50000, retry=True,
             mapping_file="regexner_TOMES/mappings.txt", tags_to_remove=["DATE", "DURATION",
                     "MISC", "MONEY", "NUMBER", "O", "ORDINAL", "PERCENT", "SET", "TIME"]):
         """ Sets instance attributes.
 
         Args:
-            - host (str): The base URL for the CoreNLP server.
-            - port (int): The port on which to run the CoreNLP server.
+            - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
             - chunk_size (int): The maximum string length to send to CoreNLP at once. Increase
             it at your own risk.
             - retry (bool) : If True and the call to self.get_NER() is an empty list, one more
@@ -119,8 +113,6 @@ class TextToNLP():
 
         # set attributes.
         self.host = host
-        self.port = port
-        self.url = "{}:{}".format(host, port)
         self.chunk_size = chunk_size
         self.retry = retry
         self.mapping_file = mapping_file
@@ -129,7 +121,7 @@ class TextToNLP():
                 "ORDINAL", "ORGANIZATION", "PERCENT", "PERSON", "SET", "TIME"]
         
         # compose instance of CoreNLP wrapper class.
-        self.corenlp = CoreNLP(self.url, mapping_file=self.mapping_file, 
+        self.corenlp = CoreNLP(self.host, mapping_file=self.mapping_file, 
                 tags_to_override=self.stanford_tags)
 
 

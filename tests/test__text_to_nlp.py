@@ -17,11 +17,9 @@ class Test_TextToNLP(unittest.TestCase):
     def setUp(self):
         
         # set attributes.
-        self.host = "http://localhost"
-        self.port = -1
-        self.url = "{}:{}".format(self.host, self.port)
-        self.corenlp = CoreNLP(url=self.url)
-        self.t2n = TextToNLP(host=self.host, port=self.port)
+        self.host = "http://localhost:-1"
+        self.corenlp = CoreNLP(host=self.host)
+        self.t2n = TextToNLP(host=self.host)
     
  
     def test__failed_annotate(self):
@@ -31,7 +29,7 @@ class Test_TextToNLP(unittest.TestCase):
         try:
             self.corenlp.annotate("")
             is_connection_error = False
-        except self.corenlp.Connection_Error as err:
+        except ConnectionError as err:
             is_connection_error = True
         
         # check if result is as expected.
