@@ -88,17 +88,17 @@ class XLSXToStanford():
         if header_row == tuple(self.required_headers.keys()):
             self.logger.info("Header fields are in perfect order.")
 
-        # if there are duplicate fields, invalidate header.
-        duplicate_headers = [header for header in header_row if header_row.count(header) != 1]
-        if len(duplicate_headers) != 0:
-            self.logger.warning("Found duplicate fields: {}".format(set(duplicate_headers)))
-            is_valid = False
-
         # if there are missing header fields, invalidate header.
         missing_headers = [header for header in self.required_headers if header not in
                 header_row]
         if len(missing_headers) != 0:
-            self.logger.warning("Missing fields: {}".format(missing_headers))
+            self.logger.warning("Missing required fields: {}".format(missing_headers))
+            is_valid = False
+            
+        # if there are duplicate fields, invalidate header.
+        duplicate_headers = [header for header in header_row if header_row.count(header) != 1]
+        if len(duplicate_headers) != 0:
+            self.logger.warning("Found duplicate fields: {}".format(set(duplicate_headers)))
             is_valid = False
 
         # if there are extra fields, invalidate header.
@@ -122,7 +122,7 @@ class XLSXToStanford():
         
         Args:
             - row (dict): An item from self.get_entities().
-            - row_numbers (int): The index of @row.
+            - row_number (int): The line number of @row within @self.entity_worksheet.
             
         Returns:
             bool: The return value.
@@ -139,7 +139,7 @@ class XLSXToStanford():
             if not test:
                 err = "Field '{}' in row {} not valid; expected '{}', got '{}'.".format(
                         field, row_number, type(field).__name__, type(value).__name__)
-                self.logger.warning(err)
+                self.logger.debug(err)
             tests.append(test)
 
         # if any test failed, set @is_valid to False.
@@ -233,17 +233,15 @@ class XLSXToStanford():
 
         Returns:
             openpyxl.worksheet.worksheet.Worksheet: The return value.
-            If the data can't be loaded, None is returned.
 
         Raises:
-            - KeyError: If @self.entity_worksheet is not present.
+            - KeyError: If @self.entity_worksheet is not present in @xlsx_file.
         """
 
         # load workbook.
         workbook = load_workbook(xlsx_file, read_only=False, data_only=True)
         
         # verify that required worksheet exists.
-        entity_rows = None
         try:
             entity_rows = workbook[self.entity_worksheet].iter_rows()
         except KeyError as err:
@@ -287,8 +285,10 @@ class XLSXToStanford():
                 msg = "Invalid header row: {}.".format(header)
                 raise Warning(msg)
             
+            # start row numbering at 2 because the header row is the first.
+            row_number = 2
+            
             # yield a dict for each non-header row.
-            line_number = 1
             header_range = range(0,len(header))
             for row in entity_rows:
                 
@@ -299,7 +299,11 @@ class XLSXToStanford():
                 row = dict(row)
 
                 # run row validator.
-                row_valid = self._validate_row(row, line_number)
+                row_valid = self._validate_row(row, row_number)
+                row_number += 1
+                if not row_valid:
+                    self.logger.warning("Skipping invalid row number: {}".format(row_number))
+                    continue
                 
                 # alter data as needed and create dict for row.
                 row["identifier"] = hash_prefix + row["identifier"]
@@ -307,7 +311,6 @@ class XLSXToStanford():
                 row["manifestations"] = ["".join(m) for m in manifestations]
                 
                 # yield dict.
-                line_number += 1
                 yield(row)
 
         return entities()
