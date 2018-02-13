@@ -23,19 +23,19 @@ class Tagger():
 
     Example:
         >>> # write tagged EAXS version of EAXS file.
-        >>> tagger = TOMESToolTagger(host="http://localhost:9003", check_host=False)
+        >>> tagger = TOMESToolTagger(host="http://localhost:9003")
         >>> tagger.eaxs_tagger("sample_eaxs.xml") # outputs "sample_eaxs__tagged.xml".
         >>> tagger.eaxs_tagger("sample_eaxs.xml", "out.xml") # outputs "out.xml".
     """
     
 
-    def __init__(self, host, check_host=True, is_main=False, charset="UTF-8"): 
+    def __init__(self, host, check_host=False, is_main=False, charset="UTF-8"): 
         """ Sets instance attributes.
         
         Args:
             - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
-            - check_host (bool): If True, self.ping_host() will be executed automatically. 
-            Otherwise, False.
+            - check_host (bool): Use True to automatically run self.ping_host(). Otherwise, 
+            use False.
             - is_main (bool): Use True if using command line access to this script, 
             i.e. main().
             - charset (str): Optional encoding for tagged EAXS.
@@ -187,7 +187,7 @@ def main(eaxs: "source EAXS file",
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
-    tagger = Tagger(host, is_main=True)
+    tagger = Tagger(host, check_host=True, is_main=True)
     tagger.eaxs_tagger(eaxs, output)
 
 
