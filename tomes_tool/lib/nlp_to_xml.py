@@ -109,7 +109,8 @@ class NLPToXML():
 
         # verify that @ner_data is not empty.
         if len(ner_data) == 0:
-            self.logger.warning("NER tag data is empty; XML output will be empty as well.")
+            self.logger.warning("NER tag data is empty.")
+            tagged_el.append(etree.Comment("WARNING: NER tag data was empty."))
 
         # iterate through @ner_data; append sub-elements to root.
         for token_group in ner_data:
