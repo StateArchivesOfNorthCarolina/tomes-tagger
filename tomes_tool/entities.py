@@ -28,14 +28,12 @@ class Entities():
     """
 
 
-    def __init__(self, xlsx_file, is_main=False):
+    def __init__(self, xlsx_file):
         """ Sets instance attributes.
 
         Args:
             - xlsx_file (str): The path to the Excel containing a valid TOMES "Entities" 
             worksheet.
-            - is_main (bool): Use True if using command line access to this script, i.e. 
-            main().
         """
 
         # set logging.
@@ -44,7 +42,6 @@ class Entities():
         
         # set attributes.
         self.xlsx_file = xlsx_file
-        self.is_main = is_main
         
         # compose instances.
         self.x2e = XLSXToEntities()
@@ -60,19 +57,14 @@ class Entities():
             None
         
         Raises:
-            FileExistsError: If @output_file already exists and if @self.is_main is False. 
-            Otherwise it will call sys.exit().
+            FileExistsError: If @output_file already exists.
         """
 
         # check if @output_file already exists.
         if os.path.isfile(output_file):
             err = "Destination file '{}' already exists.".format(output_file)
             self.logger.error(err)
-            if self.is_main:
-                self.logger.info("Exiting.")
-                sys.exit(1)
-            else:
-                raise FileExistsError(err)
+            raise FileExistsError(err)
 
         return
             
@@ -86,23 +78,15 @@ class Entities():
             Note: A invalid header will result in an empty generator.
 
         Raises:
-            - FileNotFoundError: If @self.xlsx_file doesn't exist and if @self.is_main is
-            False. Otherwise it will call sys.exit().
-            - KeyError: If the required "Entities" worksheet can't be retrieved and if
-            @self.is_main is False. Otherwise it will call sys.exit().
-            - self.x2e.SchemaError: If the worksheet header is invalid and if @self.is_main 
-            is False. Otherwise it will call sys.exit().
+            - FileNotFoundError: If @self.xlsx_file doesn't exist.
+            - KeyError: If the required "Entities" worksheet can't be retrieved.
+            - self.x2e.SchemaError: If the worksheet header is invalid.
         """
 
         # ensure @self.xlsx_file exists.
         if not os.path.isfile(self.xlsx_file):
             msg = "Can't find file: {}".format(self.xlsx_file)
-            if self.is_main:
-                self.logger.error(msg)
-                self.logger.info("Exiting.")
-                sys.exit(1)
-            else:
-                raise FileNotFoundError(msg)
+            raise FileNotFoundError(msg)
         
         # get entities from @self.xlsx_file.
         self.logger.info("Getting data from: {}".format(self.xlsx_file))
@@ -110,11 +94,7 @@ class Entities():
             entities = self.x2e.get_entities(self.xlsx_file)
         except (KeyError, self.x2e.SchemaError) as err:
             self.logger.error(err)
-            if self.is_main:
-                self.logger.info("Exiting.")
-                sys.exit(1)
-            else:
-                raise err
+            raise err
 
         return entities
 
@@ -198,7 +178,7 @@ class Entities():
 # CLI.
 def main(xlsx: ".xlsx entity dictionary file", 
         output: ("file destination (use '.json' extension for JSON)"),
-        silent: ("display only error messages", "flag", "s")):
+        silent: ("disable console logs", "flag", "s")):
 
     "Converts TOMES Entity Dictionary to Stanford file or JSON file.\
     \nexample: `py -3 entities.py ../tests/sample_files/sampleEntities.xlsx mappings.txt`"
@@ -216,15 +196,23 @@ def main(xlsx: ".xlsx entity dictionary file",
     with open(config_file) as cf:
         config = yaml.safe_load(cf.read())
     if silent:
-        config["handlers"]["console"]["level"] = "ERROR"
+        config["handlers"]["console"]["level"] = 100
     logging.config.dictConfig(config)
     
+    # create class instance.
+    entities = Entities(xlsx)
+    
     # if @output ends in ".json" write JSON file; otherwise write Stanford file.
-    entities = Entities(xlsx, is_main=True)
+    write_def = entities.write_stanford
     if output[-5:] == ".json":
-        entities.write_json(output)
-    else:
-        entities.write_stanford(output)
+        write_def = entities.write_json
+
+    # write @output.
+    try:
+        write_def(output)
+        sys.exit()
+    except Exception as err:
+        sys.exit(err)
         
 
 if __name__ == "__main__":
