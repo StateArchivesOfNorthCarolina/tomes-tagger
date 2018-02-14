@@ -29,6 +29,7 @@ class EAXSToTagged():
         >>> tagged = e2t.write_tagged(eaxs_file, "output.xml") # tagged EAXS to "output.xml".
     """
 
+
     def __init__(self, html_converter, nlp_tagger, charset="UTF-8"):
         """ Sets instance attributes.
 

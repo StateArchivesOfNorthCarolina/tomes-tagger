@@ -15,6 +15,7 @@ class CoreNLP():
     """ A class to wrap pycorenlp (https://github.com/smilli/py-corenlp) and capture its 
     exceptions more explicitly. """
 
+	
     def __init__(self, host, mapping_file="", tags_to_override=[], *args, **kwargs):
         """ Sets instance attributes.
 
