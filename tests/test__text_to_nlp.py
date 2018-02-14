@@ -3,6 +3,7 @@
 # import modules.
 import sys; sys.path.append("..")
 import logging
+import math
 import unittest
 from tomes_tool.lib.text_to_nlp import *
 
@@ -44,13 +45,14 @@ class Test_TextToNLP(unittest.TestCase):
 
 
 # CLI TEST.
-def main(text="North Carolina", host="http://localhost", port=9003):
-    
+def main(text="North Carolina.", host="http://localhost:9003"):
+
     "Prints list of NER results.\
     \nexample: `py -3 test__text_to_nlp.py 'Jane Doe'`"
 
     # get/print NER results.
-    t2n = TextToNLP(host=host, port=port, chunk_size=1)
+    chunk_size = math.floor(len(text)/2)
+    t2n = TextToNLP(host=host, chunk_size=chunk_size)
     ner = t2n.get_NER(text)
     print(ner)
 

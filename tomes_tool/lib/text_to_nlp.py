@@ -247,17 +247,17 @@ class TextToNLP():
                 try:
                     tokenized_tagged = def__get_NER(self, text_chunk)
                     if len(tokenized_tagged) == 0 and self.retry:
+                        self.logger.error("Failed to get NER tags for chunk.")
                         self.logger.info("Making another attempt to get NER tags for chunk.")
                         tokenized_tagged = def__get_NER(self, text_chunk)
                 except Exception as err:
                     self.logger.error(err)
-                    self.logger.error("Failed to get NER tags for chunk.")
-                    self.logger.warning("Falling back to empty output for chunk.")
                     tokenized_tagged = []
                 
                 # if no tokens were returned, report on giving up.
                 if len(tokenized_tagged) == 0:
                     self.logger.warning("Falling back to empty output.")
+                    return []
                 
                 # otherwise, if tokens were returned, add them to @ner_output.
                 else:
@@ -304,7 +304,7 @@ class TextToNLP():
         results = {}
         try:
             results = self.corenlp.annotate(text)
-        except self.corenlp.Connection_Error as err:
+        except ConnectionError as err:
             self.logger.error(err)
             return []
 
