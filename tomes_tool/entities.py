@@ -196,8 +196,9 @@ class Entities():
 
 
 # CLI.
-def main(xlsx: "Excel 2007+ entity dictionary file", 
-        output: ("file destination (use '.json' extension for JSON output)")):
+def main(xlsx: ".xlsx entity dictionary file", 
+        output: ("file destination (use '.json' extension for JSON)"),
+        silent: ("display only error messages", "flag", "s")):
 
     "Converts TOMES Entity Dictionary to Stanford file or JSON file.\
     \nexample: `py -3 entities.py ../tests/sample_files/sampleEntities.xlsx` mappings.txt"
@@ -214,6 +215,8 @@ def main(xlsx: "Excel 2007+ entity dictionary file",
     # load logging config file.
     with open(config_file) as cf:
         config = yaml.safe_load(cf.read())
+    if silent:
+        config["handlers"]["console"]["level"] = "ERROR"
     logging.config.dictConfig(config)
     
     # if @output ends in ".json" write JSON file; otherwise write Stanford file.

@@ -166,8 +166,9 @@ class Tagger():
 
 # CLI.
 def main(eaxs: "source EAXS file", 
+        silent: ("display only error messages", "flag", "s"),
         output: ("tagged EAXS destination", "option", "o"),
-        host:("URL for CoreNLP server", "option")="http://localhost:9003"):
+        host:("NLP server URL", "option")="http://localhost:9003"):
 
     "Converts EAXS document to tagged EAXS.\
     \nexample: `py -3 tagger.py ../tests/sample_files/sampleEAXS.xml`"
@@ -184,6 +185,8 @@ def main(eaxs: "source EAXS file",
     # load logging config file.
     with open(config_file) as cf:
         config = yaml.safe_load(cf.read())
+    if silent:
+        config["handlers"]["console"]["level"] = "ERROR"
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
