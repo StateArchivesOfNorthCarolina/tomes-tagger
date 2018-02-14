@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
 
 """ This module contain a class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary
-file to Stanford CoreNLP compliant text files or JSON files containing all the row data.
-
-Todo:
-    * If xlsx_file doesn't exist, you need to raise an error.
-    * Prevent files from beign written if no entities are found (len < 2). Otherwise, you 
-    get an end bracket with JSON. :-)
-"""
+file to Stanford CoreNLP compliant text files or JSON files. """
 
 # import modules.
 import sys; sys.path.append("..")
@@ -24,11 +18,11 @@ from tomes_tool.lib.xlsx_to_entities import XLSXToEntities
 
 class Entities():
     """ A class for converting a TOMES Excel 2007+ (.xlsx) entity dictionary file to Stanford
-    CoreNLP compliant text files or JSON files containing all the row data.
+    CoreNLP compliant text files or JSON files.
     
     Example:
     >>> entities = Entities("../NLP/foo.xlsx")
-    >>> entities.entities() # generator.
+    >>> #entities.entities() # generator.
     >>> entities.write_json("mappings.json")
     >>> entities.write_stanford("mappings.txt")
     """
@@ -41,7 +35,7 @@ class Entities():
             - xlsx_file (str): The path to the Excel containing a valid TOMES "Entities" 
             worksheet.
             - is_main (bool): Use True if using command line access to this script, i.e. 
-            main()
+            main().
         """
 
         # set logging.
@@ -55,6 +49,33 @@ class Entities():
         # compose instances.
         self.x2e = XLSXToEntities()
 
+
+    def _check_output(self, output_file):
+        """ Checks if @output_file already exists.
+
+        Args:
+            - output_file (str): The file to be written.
+
+        Returns
+            None
+        
+        Raises:
+            FileExistsError: If @output_file already exists and if @self.is_main is False. 
+            Otherwise it will call sys.exit().
+        """
+
+        # check if @output_file already exists.
+        if os.path.isfile(output_file):
+            err = "Destination file '{}' already exists.".format(output_file)
+            self.logger.error(err)
+            if self.is_main:
+                self.logger.info("Exiting.")
+                sys.exit(1)
+            else:
+                raise FileExistsError(err)
+
+        return
+            
     
     def entities(self):
         """ Returns a generator containing a mapped entity row (dict) for each row in 
@@ -65,10 +86,23 @@ class Entities():
             Note: A invalid header will result in an empty generator.
 
         Raises:
-            - KeyError: If the required "Entities" worksheet can't retrieved and if 
-            self.is_main is False. Otherwise it will call sys.exit().
+            - FileNotFoundError: If @self.xlsx_file doesn't exist and if @self.is_main is
+            False. Otherwise it will call sys.exit().
+            - KeyError: If the required "Entities" worksheet can't be retrieved and if
+            @self.is_main is False. Otherwise it will call sys.exit().
         """
 
+        # ensure @self.xlsx_file exists.
+        if not os.path.isfile(self.xlsx_file):
+            msg = "Can't find file: {}".format(self.xlsx_file)
+            if self.is_main:
+                self.logger.error(msg)
+                self.logger.info("Exiting.")
+                sys.exit(1)
+            else:
+                raise FileNotFoundError(msg)
+        
+        # get entities from @self.xlsx_file.
         self.logger.info("Getting data from: {}".format(self.xlsx_file))
         try:
             entities = self.x2e.get_entities(self.xlsx_file)
@@ -91,30 +125,19 @@ class Entities():
 
         Returns:
             None
-
-        Raises:
-            FileExistsError: If @stanford_file already exists and if self.is_main is False. 
-            Otherwise it will call sys.exit().
         """
 
-        # check if @stanford_file already exists.
-        if os.path.isfile(stanford_file):
-            err = "Destination file '{}' already exists.".format(stanford_file)
-            self.logger.error(err)
-            if self.is_main:
-                self.logger.info("Exiting.")
-                sys.exit(1)
-            else:
-                raise FileExistsError(err)
+        # ensure @stanford_file doesn't already exist.
+        self._check_output(stanford_file)
 
         # open @stanford_file for writing.
         self.logger.info("Writing Stanford file: {}".format(stanford_file))
         tsv = codecs.open(stanford_file, "w", encoding="utf-8")
-        
+
         # iterate through rows; write data to @stanford_file.
         linebreak = False
         for entity in self.entities():
-            
+
             # get cell data.
             tag = entity["identifier"], entity["authority"], entity["label"]
             tag = "::".join(tag)
@@ -127,50 +150,40 @@ class Entities():
                 else:
                     linebreak = True
                 tsv.write("\t".join([manifestation,tag]))
-        
+
         tsv.close()
         return
 
 
-    def write_json(self, json_file, charset="utf-8"):
+    def write_json(self, json_file):
         """ Converts @self.xlsx_file to a JSON file (@json_file).
         
         Args:
             - json_file (str): The output path for the converted file.
-            - charset (str): The encoding with which to write @json_file.
-                
+
         Returns:
             None
-            
-        Raises:
-            FileExistsError: If @json_file already exists and if self.is_main is False. 
-            Otherwise it will call sys.exit().
         """
 
-        # check if @json_file already exists.
-        if os.path.isfile(json_file):
-            err = "Destination file '{}' already exists.".format(json_file)
-            self.logger.error(err)
-            if self.is_main:
-                self.logger.info("Exiting.")
-                sys.exit(1)
-            else:
-                raise FileExistsError(err)
+        # ensure @json_file doesn't already exist.
+        self._check_output(json_file)
 
-        # write @json_file.
+        # open @json_file for writing.
         self.logger.info("Writing JSON file: {}".format(json_file))
+        jsv = codecs.open(json_file, "w", encoding="utf-8")
+        jsv.write("[")
+
+        # iterate through rows; write data to @json_file.
         bracket = True
-        with codecs.open(json_file, "w", encoding=charset) as jf:
+        for entity in self.entities():
+            if bracket:
+                bracket = False
+            else:
+                jsv.write(",\n")
+            jsv.write(json.dumps(entity, indent=2))
+        jsv.write("]")
 
-            for entity in self.entities():
-                if bracket:
-                    jf.write("[")
-                    bracket = False
-                else:
-                    jf.write(",\n")
-                jf.write(json.dumps(entity, indent=2))
-            jf.write("]")
-
+        jsv.close()
         return
 
 
