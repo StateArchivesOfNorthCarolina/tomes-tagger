@@ -29,15 +29,13 @@ class Tagger():
     """
     
 
-    def __init__(self, host, check_host=False, is_main=False, charset="UTF-8"): 
+    def __init__(self, host, check_host=False, charset="UTF-8"): 
         """ Sets instance attributes.
         
         Args:
             - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
             - check_host (bool): Use True to automatically run self.ping_host(). Otherwise, 
             use False.
-            - is_main (bool): Use True if using command line access to this script, 
-            i.e. main().
             - charset (str): Optional encoding for tagged EAXS.
         """
     
@@ -53,7 +51,6 @@ class Tagger():
         # set attributes.
         self.host = host
         self.check_host = check_host
-        self.is_main = is_main
         self.charset = charset
 
         # if specified, verify @host is active before creating instances of modules.
@@ -68,15 +65,13 @@ class Tagger():
 
 
     def ping_host(self):
-        """ Makes a test request to @self.host. If no connection exits AND the command line
-        is in use this will call sys.exit(), otherwise it will raise an error.
+        """ Makes a test request to @self.host.
         
         Returns:
             None
             
         Raises:
-            - ConnectionError: If a connection can't be made to @self.host and if 
-            @self.is_main is False. Otherwise, it will call sys.exit().
+            - ConnectionError: If a connection can't be made to @self.host.
         """
 
         self.logger.info("Testing if NLP server at '{}' exists.".format(self.host))
@@ -87,11 +82,7 @@ class Tagger():
             self.logger.error(err)
             msg = "Can't connect to NLP server at: {}".format(self.host)
             self.logger.critical(msg)
-            if self.is_main:
-                self.logger.info("Exiting.")
-                sys.exit(1)
-            else:
-                raise ConnectionError(msg)
+            raise ConnectionError(msg)
 
         return
 
@@ -143,31 +134,37 @@ class Tagger():
             "__tagged.xml".
 
         Returns:
-            bool: The return value.
-            True if the tagging process completed. Otherwise, False. Note: True does not 
-            ensure that the tagging process was valid, only that it completed.
+            None
+
+        Raises:
+            Exception: If an exception was raised during the tagging process. Note: this does
+            not ensure that the desired data was created, but only that no exceptions were
+            raised.
         """
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
-        # create tagged EAXS.
+        
+        # if needed, define output path.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
+        
+        # create tagged EAXS.
         try:
             tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         except Exception as err:
             err_name = type(err).__name__
-            self.logger.error("{}: {}".format(err_name, err))
-            self.logger.critical("Can't tag EAXS file.")
-            return False
+            msg = ("{}: {}".format(err_name, err))
+            self.logger.error(msg)
+            raise Exception(msg)
         
         self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
-        return True
+        return
 
 
 # CLI.
 def main(eaxs: "source EAXS file", 
         output: ("tagged EAXS destination"),
-        silent: ("display only error messages", "flag", "s"),
+        silent: ("disable console logs", "flag", "s"),
         host:("NLP server URL", "option")="http://localhost:9003"):
 
     "Converts EAXS document to tagged EAXS.\
@@ -186,12 +183,16 @@ def main(eaxs: "source EAXS file",
     with open(config_file) as cf:
         config = yaml.safe_load(cf.read())
     if silent:
-        config["handlers"]["console"]["level"] = "ERROR"
+        config["handlers"]["console"]["level"] = 100
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
-    tagger = Tagger(host, check_host=True, is_main=True)
-    tagger.eaxs_tagger(eaxs, output)
+    try:
+        tagger = Tagger(host, check_host=True)
+        tagger.eaxs_tagger(eaxs, output)
+        sys.exit()
+    except Exception as err:
+        sys.exit(err)
 
 
 if __name__ == "__main__":
