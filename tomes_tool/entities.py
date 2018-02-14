@@ -210,7 +210,7 @@ def main(xlsx: "Excel 2007+ entity dictionary file",
     
     # if @output ends in ".json" write JSON file; otherwise write Stanford file.
     entities = Entities(xlsx, is_main=True)
-    if output[-5:] == ".json":
+    if output[-5:].lower() == ".json":
         entities.write_json(output)
     else:
         entities.write_stanford(output)
