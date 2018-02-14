@@ -201,7 +201,7 @@ def main(xlsx: ".xlsx entity dictionary file",
         silent: ("display only error messages", "flag", "s")):
 
     "Converts TOMES Entity Dictionary to Stanford file or JSON file.\
-    \nexample: `py -3 entities.py ../tests/sample_files/sampleEntities.xlsx` mappings.txt"
+    \nexample: `py -3 entities.py ../tests/sample_files/sampleEntities.xlsx mappings.txt`"
 
     # make sure logging directory exists.
     logdir = "log"
