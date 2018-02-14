@@ -17,7 +17,7 @@ handlers:
         class: logging.handlers.RotatingFileHandler
         level: INFO
         formatter: simple
-        filename: log/tagger_info.log
+        filename: log/info.log
         maxBytes: 10485760 # 10MB
         backupCount: 20
         encoding: utf8
@@ -25,7 +25,7 @@ handlers:
         class: logging.handlers.RotatingFileHandler
         level: ERROR
         formatter: simple
-        filename: log/tagger_error.log
+        filename: log/error.log
         maxBytes: 10485760 # 10MB
         backupCount: 20
         encoding: utf8

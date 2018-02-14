@@ -90,6 +90,8 @@ class Entities():
             False. Otherwise it will call sys.exit().
             - KeyError: If the required "Entities" worksheet can't be retrieved and if
             @self.is_main is False. Otherwise it will call sys.exit().
+            - self.x2e.SchemaError: If the worksheet header is invalid and if @self.is_main 
+            is False. Otherwise it will call sys.exit().
         """
 
         # ensure @self.xlsx_file exists.
@@ -106,13 +108,13 @@ class Entities():
         self.logger.info("Getting data from: {}".format(self.xlsx_file))
         try:
             entities = self.x2e.get_entities(self.xlsx_file)
-        except KeyError as err:
+        except (KeyError, self.x2e.SchemaError) as err:
             self.logger.error(err)
             if self.is_main:
                 self.logger.info("Exiting.")
                 sys.exit(1)
             else:
-                raise KeyError(err)
+                raise err
 
         return entities
 
@@ -130,13 +132,16 @@ class Entities():
         # ensure @stanford_file doesn't already exist.
         self._check_output(stanford_file)
 
+        # get entities.
+        entities = self.entities()
+
         # open @stanford_file for writing.
         self.logger.info("Writing Stanford file: {}".format(stanford_file))
         tsv = codecs.open(stanford_file, "w", encoding="utf-8")
 
         # iterate through rows; write data to @stanford_file.
         linebreak = False
-        for entity in self.entities():
+        for entity in entities:
 
             # get cell data.
             tag = entity["identifier"], entity["authority"], entity["label"]
@@ -168,6 +173,9 @@ class Entities():
         # ensure @json_file doesn't already exist.
         self._check_output(json_file)
 
+        # get entities.
+        entities = self.entities()
+
         # open @json_file for writing.
         self.logger.info("Writing JSON file: {}".format(json_file))
         jsv = codecs.open(json_file, "w", encoding="utf-8")
@@ -175,7 +183,7 @@ class Entities():
 
         # iterate through rows; write data to @json_file.
         bracket = True
-        for entity in self.entities():
+        for entity in entities:
             if bracket:
                 bracket = False
             else:
@@ -201,7 +209,7 @@ def main(xlsx: "Excel 2007+ entity dictionary file",
 
     # get absolute path to logging config file.
     config_dir = os.path.dirname(os.path.abspath(__file__))
-    config_file = os.path.join(config_dir, "entities_logger.yaml")
+    config_file = os.path.join(config_dir, "logger.yaml")
     
     # load logging config file.
     with open(config_file) as cf:

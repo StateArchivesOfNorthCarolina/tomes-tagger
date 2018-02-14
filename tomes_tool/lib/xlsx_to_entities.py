@@ -85,33 +85,28 @@ class XLSXToEntities():
 
         # check if @header_row is perfect.
         if header_row == tuple(self.required_headers.keys()):
-            self.logger.info("Header fields are in perfect order.")
+            self.logger.info("Header is valid.")
+            return is_valid
+        else:
+            self.logger.error("Header is invalid.")
+            is_valid = False
 
-        # if there are missing header fields, invalidate header.
+        # report on any missing header fields.
         missing_headers = [header for header in self.required_headers if header not in
                 header_row]
         if len(missing_headers) != 0:
             self.logger.warning("Missing required fields: {}".format(missing_headers))
-            is_valid = False
             
-        # if there are duplicate fields, invalidate header.
+        # report on any duplicate fields.
         duplicate_headers = [header for header in header_row if header_row.count(header) != 1]
         if len(duplicate_headers) != 0:
             self.logger.warning("Found duplicate fields: {}".format(set(duplicate_headers)))
-            is_valid = False
 
-        # if there are extra fields, invalidate header.
+        # report on any extra fields.
         extra_headers = [header for header in header_row if header not in 
                 self.required_headers]
         if len(extra_headers) != 0:
             self.logger.warning("Found extra fields: {}".format(extra_headers))
-            is_valid = False
-        
-        # report on validity.
-        if is_valid:
-            self.logger.info("Header is valid.")
-        else:
-            self.logger.error("Header is invalid.")
         
         return is_valid
 
@@ -263,14 +258,16 @@ class XLSXToEntities():
         
         Returns:
             generator: The return value.
-            Note: A invalid header will result in an empty generator.
+        
+        Raises:
+            self.SchemaError: If the header is invalid.
         """
  
         self.logger.info("Loading workbook: {}".format(xlsx_file))
 
         # report on total rows.
         total_rows = sum(1 for row in self._get_rows(xlsx_file))
-        self.logger.info("Found '{}' rows.".format(total_rows))
+        self.logger.info("Found {} rows.".format(total_rows))
         
         # get row data and modified checksum.
         entity_rows = self._get_rows(xlsx_file)
@@ -284,7 +281,7 @@ class XLSXToEntities():
         # if header is invalid, return empty generator.
         if not self._validate_header(header):
             msg = "Invalid header row: {}.".format(header)
-            return (i for i in list())
+            raise self.SchemaError(msg)
 
         # create generator for each row.
         def entities():
@@ -319,6 +316,11 @@ class XLSXToEntities():
                 yield(row)
 
         return entities()
+
+
+    class SchemaError(Exception):
+        """ A custom error class for invalid headers in TOMES Entity Dictionaries. """
+        pass
 
 
 if __name__ == "__main__":
