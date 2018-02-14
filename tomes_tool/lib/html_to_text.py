@@ -146,14 +146,18 @@ class HTMLToText():
                 self.lynx_options[key] = val
         self.lynx_options["dump"] = True
 
-        # set temporary folder in which to write temporary files.
-        self.temp_dir = self._make_temp_dir()
+        # start with null output folder.
+        self.temp_dir = None
 
 
     def __del__(self):
-        """ Attempts to delete @self.temp_dir. """
+        """ Attempts to delete @self.temp_dir if it is not None. """
 
-        # remove folder.
+        # first make sure @self.temp_dir isn't None.
+        if self.temp_dir is None:
+            return
+
+        # otherwise, remove folder.
         try:
             self.temp_dir.cleanup()
         except Exception as err:
@@ -225,8 +229,7 @@ class HTMLToText():
             self.logger.error("Expected file path or string, found '{}' instead.".format(
                 type(html).__name__))
             self.logger.warning("Falling back to empty string.""")
-            return ""
-        
+            return ""   
         if not is_raw and not os.path.isfile(html):
             self.logger.error("Non-existant file path: {}".format(html))
             self.logger.warning("Falling back to empty string.""")
@@ -237,6 +240,10 @@ class HTMLToText():
         for key, val in self.lynx_options.items():
             if val:
                 cli_args.append("-{}".format(key))
+
+        # is @self.temp_dir is None, update it.
+        if self.temp_dir is None:
+            self.temp_dir = self._make_temp_dir()
 
         # if needed, write @html to a temporary file.
         if is_raw:
