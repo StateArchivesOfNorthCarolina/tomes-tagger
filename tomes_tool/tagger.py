@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-""" This module contains a class to convert an EAXS file to a tagged EAXS document in which
-message content has been run through an NLP application. The message and NER entities are
-encoded in a defined schema. """
+""" This module contains a class to convert an EAXS file to a tagged EAXS document. """
 
 # import modules.
 import sys; sys.path.append("..")
