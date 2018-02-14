@@ -166,12 +166,12 @@ class Tagger():
 
 # CLI.
 def main(eaxs: "source EAXS file", 
+        output: ("tagged EAXS destination"),
         silent: ("display only error messages", "flag", "s"),
-        output: ("tagged EAXS destination", "option", "o"),
         host:("NLP server URL", "option")="http://localhost:9003"):
 
     "Converts EAXS document to tagged EAXS.\
-    \nexample: `py -3 tagger.py ../tests/sample_files/sampleEAXS.xml`"
+    \nexample: `py -3 tagger.py ../tests/sample_files/sampleEAXS.xml tagged.xml`"
 
     # make sure logging directory exists.
     logdir = "log"
