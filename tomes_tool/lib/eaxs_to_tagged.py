@@ -380,8 +380,15 @@ class EAXSToTagged():
             None
 
         Raises:
+            - FileNotFoundError: If @eaxs_file doesn't exist.
             - FileExistsError: If @tagged_eaxs_file already exists.
         """
+
+        # raise error if @eaxs_file doesn't exist.
+        if not os.path.isfile(eaxs_file):
+            err = "Can't find file: {}".format(eaxs_file)
+            self.logger.error(err)
+            raise FileNotFoundError(err)
 
         # raise error if @tagged_eaxs_file already exists.
         if os.path.isfile(tagged_eaxs_file):

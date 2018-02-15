@@ -141,7 +141,7 @@ class Tagger():
         """
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
-        
+
         # if needed, define output path.
         if tagged_eaxs_file is None:
             tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
@@ -185,9 +185,11 @@ def main(eaxs: "source EAXS file",
     logging.config.dictConfig(config)
     
     # make tagged version of EAXS.
+    logging.info("Running CLI: " + " ".join(sys.argv))
     try:
         tagger = Tagger(host, check_host=True)
         tagger.eaxs_tagger(eaxs, output)
+        logging.info("Done.")
         sys.exit()
     except Exception as err:
         sys.exit(err)

@@ -206,10 +206,12 @@ def main(xlsx: ".xlsx entity dictionary file",
     write_def = entities.write_stanford
     if output[-5:] == ".json":
         write_def = entities.write_json
-
+    
     # write @output.
+    logging.info("Running CLI: " + " ".join(sys.argv))
     try:
         write_def(output)
+        logging.info("Done.")
         sys.exit()
     except Exception as err:
         sys.exit(err)

@@ -78,7 +78,7 @@ class XLSXToEntities():
             True if @header_row is valid, otherwise False.
         """
 
-        self.logger.info("Validating header row: {}".format(header_row))
+        self.logger.info("Validating header row.")
         
         # assume value.
         is_valid = True
