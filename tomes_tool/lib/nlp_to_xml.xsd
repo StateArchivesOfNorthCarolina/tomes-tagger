@@ -8,55 +8,49 @@ elementFormDefault="qualified">
 
 <xs:annotation>
     <xs:documentation xml:lang="en">
-    This "tagged content" schema proposes an XML structure to be added to the
-    State Archives of North Carolina XML Schema for a Single E-Mail Account
-    located at:
+    This "tagged content" schema proposes an XML structure to be added to the State Archives
+    of North Carolina XML Schema for a Single E-Mail Account located at:
     
         http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
 
-    Specifically, it is meant to be optionally inserted within the
+    Specifically, it is meant to be optionally inserted within the 
     "Message/MultiBody/SingleBody" element.
 
-    The proposed XML structure serves to annotate a plain-text representation of an
-    email message.
+    The proposed XML structure serves to annotate a plain-text representation of an email 
+    message.
 
-    Tokens recognized as named entities via Natural Language Processing (NLP)
-    techniques are to be enclosed within the "Token" sub-element. Non-tokens and 
-    leading/trailing whitespace are not encased within this sub-element. Note that 
-    whitespace between opening and closing "Token" elements *is*, therefore,
-    significant.
+    Tokens recognized as named entities via Natural Language Processing (NLP) techniques are
+    to be enclosed within the "Token" sub-element. Non-tokens and leading/trailing whitespace
+    are not encased within this sub-element. Note that whitespace between opening and closing
+    "Token" elements *is*, therefore, significant.
 
-    All content not subjected to NLP are to be enclosed in the "BlockText"
-    element. This is primarily intended to contain signature blocks. It may also be
-    used to preserve leading/trailing whitespace not preserved by the tokenization
-    process.
+    All content not subjected to NLP are to be enclosed in the "BlockText" element. This is 
+    primarily intended to contain signature blocks. It may also be used to preserve 
+    leading/trailing whitespace not preserved by the tokenization process.
 
-    The value of a "Token" element is a token (colloquially equivalent to a
-    "word") that has been "tagged" with a named entity via NLP.
+    The value of a "Token" element is a token (colloquially equivalent to a "word") that has
+    been "tagged" with a named entity via NLP.
 
     The element has four optional attributes:
 
-        1.    @entity - the name of the entity the token is recognized as
-            (PERSON, PLACE, etc.).
+        1.  @entity - the name of the entity the token is recognized as (PERSON, PLACE, etc.).
 
-        2.    @authority - the Internet domain of the organization reponsible for
-            the controlled vocabulary of the @entity applied to the token.
+        2.  @authority - the Internet domain of the organization reponsible for the controlled
+       	vocabulary of the @entity applied to the token.
             
-        3.    @pattern - the unique identifier for the particular pattern that
-            the token matched against and that yielded the @entity in question.
+        3.  @pattern - the unique identifier for the particular pattern that the token matched
+       	against and that yielded the @entity in question.
             
-            It is recommended that the pattern consist of two parts: the first 
-            six digits of the SHA-256 hash for the source document from which the
-            @entity term originates, followed by the identifier value for the    
-            @entity as notated within the source document. A "#" mark should be
-            used to delimit the two parts.
+        It is recommended that the pattern consist of two parts: the first six digits of the
+       	SHA-256 hash for the source document from which the @entity term originates, followed
+       	by the identifier value for the @entity as notated within the source document. A "#" 
+	mark should be used to delimit the two parts.
                 
-        4.     @group - the group identifier for each token; this value is shared by 
-            adjacent tokens with the same @entity value regardless of the the 
-            @pattern value.
+        4.  @group - the group identifier for each token; this value is shared by adjacent 
+	tokens with the same @entity value regardless of the the @pattern value.
             
-    Note that if the @entity attribute exists, then the @authority and @group 
-    attributes must also exist. This is not enforced by the schema.
+    Note that if the @entity attribute exists, then the @authority and @group attributes must
+    also exist. This is not enforced by the schema.
 
     An example document is below:
 
@@ -78,8 +72,8 @@ elementFormDefault="qualified">
         
     -->
     
-    For HTML-based display of this schema, the following mapping is recommended to
-    preservce whitespace:
+    For HTML-based display of this schema, the following mapping is recommended to preservce
+    whitespace:
     
         - Tokens -> pre.class="Tokens"
         - Token -> span.class="Token"
