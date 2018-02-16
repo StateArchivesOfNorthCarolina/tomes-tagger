@@ -45,28 +45,6 @@ class Entities():
         
         # compose instances.
         self.x2e = XLSXToEntities()
-
-
-    def _check_output(self, output_file):
-        """ Checks if @output_file already exists.
-
-        Args:
-            - output_file (str): The file to be written.
-
-        Returns
-            None
-        
-        Raises:
-            FileExistsError: If @output_file already exists.
-        """
-
-        # check if @output_file already exists.
-        if os.path.isfile(output_file):
-            err = "Destination file '{}' already exists.".format(output_file)
-            self.logger.error(err)
-            raise FileExistsError(err)
-
-        return
             
     
     def entities(self):
@@ -99,27 +77,33 @@ class Entities():
         return entities
 
 
-    def write_stanford(self, stanford_file):
-        """ Converts @self.xlsx_file to a CoreNLP mapping file (@stanford_file).
+    def write_stanford(self, output_file):
+        """ Converts @self.xlsx_file to a CoreNLP mapping file.
         
         Args:
-            - stanford_file (str): The output path for the converted file.
+            - output_file (str): The output path for the converted file.
 
         Returns:
             None
+
+        Raises:
+            FileExistsError: If @output_file already exists.
         """
 
-        # ensure @stanford_file doesn't already exist.
-        self._check_output(stanford_file)
+        # ensure @output_file doesn't already exist.
+        if os.path.isfile(output_file):
+            err = "Destination file '{}' already exists.".format(output_file)
+            self.logger.error(err)
+            raise FileExistsError(err)
 
         # get entities.
         entities = self.entities()
 
-        # open @stanford_file for writing.
-        self.logger.info("Writing Stanford file: {}".format(stanford_file))
-        tsv = codecs.open(stanford_file, "w", encoding="utf-8")
+        # open @output_file for writing.
+        self.logger.info("Writing Stanford file: {}".format(output_file))
+        tsv = codecs.open(output_file, "w", encoding="utf-8")
 
-        # iterate through rows; write data to @stanford_file.
+        # iterate through rows; write data to @output_file.
         linebreak = False
         for entity in entities:
 
@@ -140,28 +124,34 @@ class Entities():
         return
 
 
-    def write_json(self, json_file):
-        """ Converts @self.xlsx_file to a JSON file (@json_file).
+    def write_json(self, output_file):
+        """ Converts @self.xlsx_file to a JSON file.
         
         Args:
-            - json_file (str): The output path for the converted file.
+            - output_file (str): The output path for the converted file.
 
         Returns:
             None
+
+        Raises:
+            FileExistsError: If @output_file already exists.
         """
 
-        # ensure @json_file doesn't already exist.
-        self._check_output(json_file)
+        # ensure @output_file doesn't already exist.
+        if os.path.isfile(output_file):
+            err = "Destination file '{}' already exists.".format(output_file)
+            self.logger.error(err)
+            raise FileExistsError(err)
 
         # get entities.
         entities = self.entities()
 
-        # open @json_file for writing.
-        self.logger.info("Writing JSON file: {}".format(json_file))
-        jsv = codecs.open(json_file, "w", encoding="utf-8")
+        # open @output_file for writing.
+        self.logger.info("Writing JSON file: {}".format(output_file))
+        jsv = codecs.open(output_file, "w", encoding="utf-8")
         jsv.write("[")
 
-        # iterate through rows; write data to @json_file.
+        # iterate through rows; write data to @output_file.
         bracket = True
         for entity in entities:
             if bracket:
@@ -202,15 +192,15 @@ def main(xlsx: ".xlsx entity dictionary file",
     # create class instance.
     entities = Entities(xlsx)
     
-    # if @output ends in ".json" write JSON file; otherwise write Stanford file.
-    write_def = entities.write_stanford
+    # set write method depending on extension of @output.
+    write_func = entities.write_stanford
     if output[-5:] == ".json":
-        write_def = entities.write_json
+        write_func = entities.write_json
     
     # write @output.
     logging.info("Running CLI: " + " ".join(sys.argv))
     try:
-        write_def(output)
+        write_func(output)
         logging.info("Done.")
         sys.exit()
     except Exception as err:

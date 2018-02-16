@@ -34,7 +34,7 @@ class Tagger():
             - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
             - check_host (bool): Use True to automatically run self.ping_host(). Otherwise, 
             use False.
-            - charset (str): Optional encoding for tagged EAXS.
+            - charset (str): Optional encoding for the tagged EAXS.
         """
     
         # set logging.
