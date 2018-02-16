@@ -136,8 +136,8 @@ class Tagger():
 
         Raises:
             Exception: If an exception was raised during the tagging process. Note: this does
-            not ensure that the desired data was created, but only that no exceptions were
-            raised.
+            not ensure that the resulting tagged EAXS document actually contains all the 
+            corrent data.
         """
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
