@@ -58,10 +58,10 @@ Sample files are located in the "./tomes\_tool/tests/sample_files" directory.
 
 The sample files can be used with the command line options of some of the unit tests.
 
-# Main scripts
-TOMES Tool consists of two high level scripts:
+# Modules
+TOMES Tool consists of two high level modules:
 
-* tagger.py
+1. tagger.py
 	* This creates a "tagged" version of a source EAXS file.
 * entities.py
 	* This creates a Stanford CoreNLP compliant version of NER patterns from a source Microsoft Excel file.
@@ -82,18 +82,18 @@ Example:
 ## Using tagger.py from the command line
 
 1. Create an EAXS file via [DarcMailCLI](https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI).
-2. Start the CoreNLP server.
+* Start the CoreNLP server.
 	- Until further notice, it is assumed you will run the server on port 9003 with a lengthy timeout:
 	
 		`cd stanford-corenlp-full-2016-10-31`
 
      	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9003 -timeout 50000`
-3. From the "./tomes\_tool" directory do: `py -3 tagger.py -h` 
-4. Pass in your EAXS filepath (including the filename) per the help instructions.
-5. Let us know what happens.
+* From the "./tomes\_tool/tomes\_tool" directory do: `py -3 tagger.py -h` 
+* Pass in your EAXS filepath (including the filename) per the help instructions.
+* Let us know what happens.
 
 ## Using entities.py from the command line
 1. Create a TOMES Entity Dictionary in Excel per the instructions in "./tomes\_tool/NLP/entity\_dictionary__template.xlsx".
-2. From the "./tomes\_tool" directory do: `py -3 entities.py -h` 
-3. Pass in your entity dictionary path (including the filename) per the help instructions.
-4. Let us know what happens.
+* From the "./tomes\_tool/tomes\_tool" directory do: `py -3 entities.py -h` 
+* Pass in your entity dictionary path (including the filename) per the help instructions.
+* Let us know what happens.
