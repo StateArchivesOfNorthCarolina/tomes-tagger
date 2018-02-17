@@ -56,7 +56,7 @@ To see the options and usage examples simply call the scripts with the `-h` opti
 
 Sample files are located in the "./tomes\_tool/tests/sample_files" directory.
 
-The sample files can be used with the command line options of some of the Python unit test scripts.
+The sample files can be used with the command line options of some of the unit tests.
 
 # Main scripts
 TOMES Tool consists of two high level scripts:
@@ -64,12 +64,12 @@ TOMES Tool consists of two high level scripts:
 * tagger.py
 	* This creates a "tagged" version of a source EAXS file.
 * entities.py
-	* This creates a Stanford CoreNLP compliant dictionary of custom pattern for NER by reading the data in a defined Excel template.
+	* This creates a Stanford CoreNLP compliant version of NER patterns from a source Microsoft Excel file.
 
 Both scripts can be used as native Python classes or as command line scripts.
 
-## Using each module with Python
-To get started, import a module and run help().
+## Using modules with Python
+To get started, import a module and run help() from with in a Python interpreter.
 
 Example:
 
