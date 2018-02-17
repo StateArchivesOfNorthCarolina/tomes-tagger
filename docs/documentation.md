@@ -4,21 +4,16 @@
 
 It is written in Python.
 
-Its purpose is to:
+Its purpose is to create a "tagged" version of an [EAXS](http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_docs.html) file(s) - an XML schema for storing email account information.
 
-1. Create a "tagged" version of an [EAXS](http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_docs.html) file(s) - an XML schema for storing email account information.
-2. Package the original EAXS file(s) and the tagged EAXS file(s) into an Archival Information Package.
-
-The tagged version of the EAXS file is meant to contain email messages that have been tagged by Name Entity Recognition (NER) tools.
-
-The information package contents will contain not only the EAXS file(s), but also a [METS](http://www.loc.gov/standards/mets/mets-home.html) file, message attachments, statistical information, and other relevant data.
+The tagged version of the EAXS file is meant to contain email messages that have been tagged by Name Entity Recognition (NER) tools. It uses a modified version of the original EAXS format.
 
 ...
 
 **TOMES Tool**  is under active development by the [State Archives of North Carolina](http://archives.ncdcr.gov/) in conjunction with the [TOMES Project Team](https://www.ncdcr.gov/resources/records-management/tomes/team). Currently, it is not intended for use other than testing by the project team.
 
 
-## Dependencies
+# Dependencies
 
 TOMES Tool requires the following applications:
 
@@ -34,9 +29,14 @@ TOMES Tool requires the following applications:
 		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 
 
-## Quick Tests
+# Unit Tests
+While not true unit tests that test each function or method of a given module or class, basic unit tests help with testing overall module workflows.
 
-You can run all the unit tests in the "./tomes\_tool/tests" directory: `py -3 -m unittest`
+Unit tests reside in the "./tomes\_tool/tests" directory and start with "test__".
+
+## Running the tests
+
+To run all the unit tests do : `py -3 -m unittest`
 
 Specific unit tests of interest:
 
@@ -45,19 +45,41 @@ Specific unit tests of interest:
 - `py -3 -m unittest test__eaxs_to_tagged.py`
 	- This tests the EAXS to tagged EAXS workflow without actually calling CoreNLP or Lynx.
 
-You can also test CoreNLP by starting it and going to the correct local URL, i.e. "localhost:9003". To save time, it is recommended to only enter *very* short text (e.g. "George Washington").
+Of course, you can also test CoreNLP directly by starting it and going to the correct local URL, i.e. "localhost:9003". To save time, it is recommended to only enter *very* short text (e.g. "North Carolina").
 
 
-## Sample Files 
+## Using the command line
+
+All of the unit tests have command line options.
+
+To see the options and usage examples simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
 
 Sample files are located in the "./tomes\_tool/tests/sample_files" directory.
 
-The sample files can be used with the Python unit test scripts.
+The sample files can be used with the command line options of some of the Python unit test scripts.
 
-To test these scripts on sample files, simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
+# Main scripts
+TOMES Tool consists of two high level scripts:
 
+* tagger.py
+	* This creates a "tagged" version of a source EAXS file.
+* entities.py
+	* This creates a Stanford CoreNLP compliant dictionary of custom pattern for NER by reading the data in a defined Excel template.
 
-## tagger.py
+Both scripts can be used as native Python classes or as command line scripts.
+
+## Using each module with Python
+To get started, import a module and run help().
+
+Example:
+
+	Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 08:06:12) [MSC v.1900 64 bit (AM
+	D64)] on win32
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>> from tomes_tool import tagger
+	>>> help(tagger)
+
+## Using tagger.py from the command line
 
 1. Create an EAXS file via [DarcMailCLI](https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI).
 2. Start the CoreNLP server.
@@ -70,7 +92,7 @@ To test these scripts on sample files, simply call the scripts with the `-h` opt
 4. Pass in your EAXS filepath (including the filename) per the help instructions.
 5. Let us know what happens.
 
-## entities.py
+## Using entities.py from the command line
 1. Create a TOMES Entity Dictionary in Excel per the instructions in "./tomes\_tool/NLP/entity\_dictionary__template.xlsx".
 2. From the "./tomes\_tool" directory do: `py -3 entities.py -h` 
 3. Pass in your entity dictionary path (including the filename) per the help instructions.
