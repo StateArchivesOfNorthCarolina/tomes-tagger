@@ -8,7 +8,7 @@ import unittest
 from tomes_tool.lib.text_to_nlp import *
 
 # enable logging.
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
 
 
 class Test_TextToNLP(unittest.TestCase):

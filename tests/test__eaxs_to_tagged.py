@@ -11,11 +11,12 @@ import sys; sys.path.append("..")
 import unittest
 import logging
 import tempfile
+import warnings
 from lxml import etree
 from tomes_tool.lib.eaxs_to_tagged import *
 
 # enable logging.
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
 
 
 class Test_EAXSToTagged(unittest.TestCase):
@@ -43,10 +44,11 @@ class Test_EAXSToTagged(unittest.TestCase):
         os.close(tagged_handle)
         os.remove(tagged_path)
 
-        # make tagged EAXS.
-        # Note: this might produce a ResourceWarning in unittest. Just ignore it.
+        # make tagged EAXS and suppress ResourceWarning in unittest.
         e2t = EAXSToTagged(def_html, def_nlp)
-        e2t.write_tagged(self.sample_file, tagged_path)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            e2t.write_tagged(self.sample_file, tagged_path)
         
         # count total <Message> and <TaggedContent> elements in @tagged_path.
         message_count, tagged_count = 0, 0

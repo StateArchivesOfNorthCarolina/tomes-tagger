@@ -2,14 +2,12 @@
 
 # import modules.
 import sys; sys.path.append("..")
-import json
 import logging
 import unittest
-import random
 from tomes_tool.lib.xlsx_to_entities import *
 
 # enable logging.
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
 
 
 class Test_XLSXToEntities(unittest.TestCase):
@@ -23,9 +21,12 @@ class Test_XLSXToEntities(unittest.TestCase):
 
 
     def test__count_entities(self):
+        """ Is the number of pattern manifestations extracted from @self.sample_file correct?
+        """ 
         
-        # ???
         manifestations_count = 0
+
+        # count manifestations.
         entities = self.x2e.get_entities(self.sample_file)
         for entity in entities:
             manifestations = entity["manifestations"]
@@ -35,13 +36,21 @@ class Test_XLSXToEntities(unittest.TestCase):
 
 
 # CLI TEST.
-def main():
+def main(pattern: "the pattern to interpret", 
+        ignore_case: ("make pattern case-insensitive", "flag", "i")):
     
-    ".\
-    \nexample: `py -3 test__xlsx_to_entities"
+    "Prints manifestations for a given pattern.\
+    \nexample: `py -3 test__xlsx_to_entities \"tomes_pattern: {'A'}, {'-', ' '}, {'B'}\"\
+    "
 
-    # ???
+    # get flipped value of flag.
+    case = ignore_case != True
+
+    # print pattern.
     x2e = XLSXToEntities()
+    results = x2e._get_patterns(pattern, case, None)
+    for result in results:
+        print("".join(result))
 
 
 if __name__ == "__main__":

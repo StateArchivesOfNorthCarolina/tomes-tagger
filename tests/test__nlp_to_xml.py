@@ -9,7 +9,7 @@ import random
 from tomes_tool.lib.nlp_to_xml import *
 
 # enable logging.
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
 
 
 class Test_NLPToXML(unittest.TestCase):
