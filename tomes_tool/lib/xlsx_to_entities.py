@@ -178,12 +178,13 @@ class XLSXToEntities():
         return patterns
 
 
-    def _get_patterns(self, pattern, case_sensitive):
+    def _get_patterns(self, pattern, case_sensitive, row_number):
         """ Returns manifestations of @pattern.
         
         Args:
             - pattern (str): The "pattern" field value for a given row.
             - case_sensitive (bool): The "case_sensitive" field value for a given row.
+            - row_number (int): The line number of @row within @self.entity_worksheet.
 
         Returns:
             list: The return value.
@@ -201,6 +202,7 @@ class XLSXToEntities():
         tomes_pattern = "tomes_pattern:"
         tomes_pattern_len = len(tomes_pattern)
         if pattern[:tomes_pattern_len] == tomes_pattern:
+            self.logger.info("Found TOMES pattern in row: {}".format(row_number))
             is_tomes_pattern = True
             pattern = pattern[tomes_pattern_len:]
             patterns = self._get_tomes_pattern(pattern)
@@ -309,7 +311,8 @@ class XLSXToEntities():
                 
                 # alter data as needed and create dict for row.
                 row["identifier"] = hash_prefix + row["identifier"]
-                manifestations = self._get_patterns(row["pattern"], row["case_sensitive"])
+                manifestations = self._get_patterns(row["pattern"], row["case_sensitive"], 
+                        row_number)
                 row["manifestations"] = ["".join(m) for m in manifestations]
                 
                 # yield dict.

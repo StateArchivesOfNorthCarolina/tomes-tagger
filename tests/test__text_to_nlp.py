@@ -12,9 +12,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 class Test_TextToNLP(unittest.TestCase):
-    """ Since our primary concern is making sure we can handle failed NER attempts, we'll test
-    for those. """
 
+	
     def setUp(self):
         
         # set attributes.
@@ -24,7 +23,7 @@ class Test_TextToNLP(unittest.TestCase):
     
  
     def test__failed_annotate(self):
-        """ Since we can't connect to port -1, is a self.corenlp.Connection_Error raised? """
+        """ Since we can't connect to port -1, is a ConnectionError raised? """
         
         # test calling CoreNLP.
         try:
@@ -38,7 +37,7 @@ class Test_TextToNLP(unittest.TestCase):
 
 
     def test__gets_empty_list(self):
-        """ Since we can't connect to port -1, is an empty list returned? """
+        """ If we try and tag an empty string, is an empty list returned? """
 
         results = self.t2n.get_NER("")
         self.assertTrue(results == [])

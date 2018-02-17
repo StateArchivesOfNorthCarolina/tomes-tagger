@@ -10,6 +10,7 @@ Todo:
 import sys; sys.path.append("..")
 import unittest
 import logging
+import tempfile
 from lxml import etree
 from tomes_tool.lib.eaxs_to_tagged import *
 
@@ -18,35 +19,53 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 class Test_EAXSToTagged(unittest.TestCase):
-    """ ??? """
 
+    
     def setUp(self):
 
         # set attributes.
-        self.sample = "sample_files/sampleEAXS.xml"
-        self.tagged = "sample_files/sampleEAXS_tagged.xml"
-        #self.xsd = etree.parse("mail-account.xsd")
+        self.sample_file = "sample_files/sampleEAXS.xml"
+
+        # set namespace attributes.
+        self.ncdcr_prefix = "ncdcr"
+        self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
 
     
-    def test__validation(self):
-        """ Can I create a tagged EAXS that passes some light validation tests? """
+    def test__tagged(self):
+        """ Can I create a tagged EAXS and verify that each message was tagged? """
 
-        # function to return arg unaltered.
+        # dr run functions.
         def_html = lambda x: "HTML"
         def_nlp = lambda x: etree.Element("NLP")
+
+        # make temporary file, save the filename, then delete the file.
+        tagged_handle, tagged_path = tempfile.mkstemp(dir=".", suffix=".xml")
+        os.close(tagged_handle)
+        os.remove(tagged_path)
+
+        # make tagged EAXS.
+        # Note: this might produce a ResourceWarning in unittest. Just ignore it.
         e2t = EAXSToTagged(def_html, def_nlp)
+        e2t.write_tagged(self.sample_file, tagged_path)
+        
+        # count total <Message> and <TaggedContent> elements in @tagged_path.
+        message_count, tagged_count = 0, 0
+        for event, element in etree.iterparse(tagged_path, events=("end",)):
+            if element.tag == "{" + self.ncdcr_uri + "}Message":
+                message_count += 1
+            if element.tag == "{" + self.ncdcr_uri + "}TaggedContent":
+                tagged_count += 1
+            element.clear()
+        os.remove(tagged_path)
 
-        # quasi-validate tagged EAXS.
-        is_valid = True # temp override.
-
-        # check if result is as expected.
-        self.assertTrue(is_valid) 
+        # check if each <Message> element has been tagged.
+        self.assertTrue(message_count == tagged_count) 
 
 
 # CLI TEST.
 def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
     
-    "Converts EAXS document to tagged EAXS (dry run only).\
+    "Converts EAXS document to tagged EAXS (dry run).\
     \nexample: `py -3 test__eaxs_to_tagged.py ../tests/sample_files/sampleEAXS.xml out.xml`"
 
     # write tagged EAXS to file.

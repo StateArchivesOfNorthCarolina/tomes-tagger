@@ -11,8 +11,8 @@ logging.basicConfig(level=logging.DEBUG)
         
 
 class Test_HTMLToText(unittest.TestCase):
-    """ ??? """
-
+	
+    
     def setUp(self):
 
 	# set attributes.
