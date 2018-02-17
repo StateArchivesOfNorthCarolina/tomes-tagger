@@ -63,7 +63,7 @@ TOMES Tool consists of two high level modules:
 
 1. tagger.py
 	* This creates a "tagged" version of a source EAXS file.
-* entities.py
+2. entities.py
 	* This creates a Stanford CoreNLP compliant version of NER patterns from a source Microsoft Excel file.
 
 Both scripts can be used as native Python classes or as command line scripts.
