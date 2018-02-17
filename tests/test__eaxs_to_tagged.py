@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-Todo:
-    * Revamp unit test per https://sanc.teamwork.com/#tasks/9842212.
-        - Note your temp assertion override below.
-"""
-
 # import modules.
 import sys; sys.path.append("..")
 import unittest
