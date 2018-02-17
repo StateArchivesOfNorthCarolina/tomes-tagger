@@ -202,7 +202,7 @@ class XLSXToEntities():
         tomes_pattern = "tomes_pattern:"
         tomes_pattern_len = len(tomes_pattern)
         if pattern[:tomes_pattern_len] == tomes_pattern:
-            self.logger.info("Found TOMES pattern in row: {}".format(row_number))
+            self.logger.info("Found TOMES pattern in row {}.".format(row_number))
             is_tomes_pattern = True
             pattern = pattern[tomes_pattern_len:]
             patterns = self._get_tomes_pattern(pattern)
@@ -213,8 +213,10 @@ class XLSXToEntities():
             pattern = ["(?i)" + token + "(?-i)" for token in tokens]
             pattern = " ".join(pattern)
         elif not case_sensitive and is_tomes_pattern:
-            self.logger.warning("Ignoring case insensitivity instruction for TOMES pattern.")
-        
+            msg = "Ignoring case insensitivity instruction for TOMES pattern in row {}.\
+                    ".format(row_number)
+            self.logger.warning(msg)
+
         # if @is_tomes_pattern is False, append @pattern to output.
         if not is_tomes_pattern:
             patterns.append(pattern)
@@ -305,7 +307,7 @@ class XLSXToEntities():
                 row_valid = self._validate_row(row, row_number)
                 row_number += 1
                 if not row_valid:
-                    self.logger.warning("Skipping invalid row number: {}".format(
+                    self.logger.warning("Skipping row {}; row is invalid.".format(
                         row_number - 1))
                     continue
                 
