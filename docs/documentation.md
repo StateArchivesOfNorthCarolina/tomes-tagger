@@ -82,18 +82,18 @@ Example:
 ## Using tagger.py from the command line
 
 1. Create an EAXS file via [DarcMailCLI](https://github.com/StateArchivesOfNorthCarolina/DarcMailCLI).
-* Start the CoreNLP server.
+2. Start the CoreNLP server.
 	- Until further notice, it is assumed you will run the server on port 9003 with a lengthy timeout:
 	
 		`cd stanford-corenlp-full-2016-10-31`
 
      	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9003 -timeout 50000`
-* From the "./tomes\_tool/tomes\_tool" directory do: `py -3 tagger.py -h` 
-* Pass in your EAXS filepath (including the filename) per the help instructions.
-* Let us know what happens.
+3. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 tagger.py -h` 
+4. Pass in your EAXS filepath (including the filename) per the help instructions.
+5. Let us know what happens.
 
 ## Using entities.py from the command line
 1. Create a TOMES Entity Dictionary in Excel per the instructions in "./tomes\_tool/NLP/entity\_dictionary__template.xlsx".
-* From the "./tomes\_tool/tomes\_tool" directory do: `py -3 entities.py -h` 
-* Pass in your entity dictionary path (including the filename) per the help instructions.
-* Let us know what happens.
+2. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 entities.py -h` 
+3. Pass in your entity dictionary path (including the filename) per the help instructions.
+4. Let us know what happens.
