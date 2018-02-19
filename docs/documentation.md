@@ -78,6 +78,8 @@ Example:
 	Type "help", "copyright", "credits" or "license" for more information.
 	>>> from tomes_tool import tagger
 	>>> help(tagger)
+	>>> from tomes_tool import entities
+	>>> help(entities)
 
 ## Using tagger.py from the command line
 
