@@ -66,7 +66,7 @@ TOMES Tool consists of two high level modules:
 2. entities.py
 	* This creates a Stanford CoreNLP compliant version of NER patterns from a source Microsoft Excel file.
 
-Both scripts can be used as native Python classes or as command line scripts.
+Both modules can be used as native Python classes or as command line scripts.
 
 ## Using modules with Python
 To get started, import a module and run help() from with in a Python interpreter.
