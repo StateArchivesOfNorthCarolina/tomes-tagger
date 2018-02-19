@@ -45,7 +45,8 @@ class XLSXToEntities():
 
 
     def _get_hash_prefix(self, xlsx_file):
-        """ Gets the first six characters of the SHA-256 hash of @xlsx_file.
+        """ Gets the first six characters of the SHA-256 hash of @xlsx_file and 
+        adds a trailing hash mark.
         
         Args:
             - xlsx_file (str): The path to the Excel file to load.
