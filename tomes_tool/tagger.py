@@ -8,7 +8,6 @@ import logging
 import logging.config
 import os
 import requests
-import sys
 import yaml
 from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
 from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML

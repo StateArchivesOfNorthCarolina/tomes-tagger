@@ -11,7 +11,6 @@ import logging
 import logging.config
 import os
 import plac
-import sys
 import yaml
 from tomes_tool.lib.xlsx_to_entities import XLSXToEntities
 
