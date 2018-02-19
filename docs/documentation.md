@@ -69,7 +69,7 @@ TOMES Tool consists of two high level modules:
 Both modules can be used as native Python classes or as command line scripts.
 
 ## Using modules with Python
-To get started, import a module and run help() from with in a Python interpreter:
+To get started, import a module and run help():
 
 	Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 08:06:12) [MSC v.1900 64 bit (AM
 	D64)] on win32
