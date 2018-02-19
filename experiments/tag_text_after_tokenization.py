@@ -3,7 +3,7 @@
     "If I use an NER tagger that tokenizes a given text, how can I use regular expressions 
     over the non-tokenized text and merge the results with the NER tagger results?"
 
-    Note: there is ne major flaw with this (or any other second pass approach). Namely,
+    Note: there is a major flaw with this (or any other second pass approach). Namely,
     say you have thre tokens: A, B, C ...
 
     If your NER tool tags both A and B as, say, "PERSON". What do you then do if your regex
