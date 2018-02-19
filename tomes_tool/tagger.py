@@ -21,9 +21,10 @@ class Tagger():
 
     Example:
         >>> # write tagged EAXS version of EAXS file.
+        >>> sample = "../tests/sample_files/sampleEAXS.xml"
         >>> tagger = TOMESToolTagger(host="http://localhost:9003")
-        >>> tagger.eaxs_tagger("sample_eaxs.xml") # outputs "sample_eaxs__tagged.xml".
-        >>> tagger.eaxs_tagger("sample_eaxs.xml", "out.xml") # outputs "out.xml".
+        >>> #tagger.eaxs_tagger(sample) # "../tests/sample_files/sampleEAXS__tagged.xml".
+        >>> tagger.eaxs_tagger(sample, "output.xml") # returns "output.xml".
     """
     
 
@@ -132,7 +133,8 @@ class Tagger():
             "__tagged.xml".
 
         Returns:
-            None
+            str: The return value.
+            The filepath of the tagged EAXS document (@tagged_eaxs_file).
 
         Raises:
             Exception: If an exception was raised during the tagging process. Note: this does
@@ -156,7 +158,7 @@ class Tagger():
             raise Exception(msg)
         
         self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
-        return
+        return tagged_eaxs_file
 
 
 # CLI.

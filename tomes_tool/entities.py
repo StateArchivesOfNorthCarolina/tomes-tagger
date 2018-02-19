@@ -21,7 +21,7 @@ class Entities():
     CoreNLP compliant text files or JSON files.
     
     Example:
-    >>> entities = Entities("../NLP/foo.xlsx")
+    >>> entities = Entities("../tests/sample_files/sampleEntityDictionary.xlsx")
     >>> #entities.entities() # generator.
     >>> entities.write_json("mappings.json")
     >>> entities.write_stanford("mappings.txt")
