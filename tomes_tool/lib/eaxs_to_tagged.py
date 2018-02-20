@@ -330,7 +330,7 @@ class EAXSToTagged():
             if "entity" not in element.attrib:
                 continue
             if element.attrib["entity"][:4] == "PII.":
-                self.logger.info("Found PII; updating messages's @Restricted attribute.")
+                self.logger.info("Found PII tag; updating messages's @Restricted attribute.")
                 message_el.set("Restricted", "true")
                 break
 
