@@ -13,7 +13,7 @@ The tagged version of the EAXS file is meant to contain email messages that have
 **TOMES Tool**  is under active development by the [State Archives of North Carolina](http://archives.ncdcr.gov/) in conjunction with the [TOMES Project Team](https://www.ncdcr.gov/resources/records-management/tomes/team). Currently, it is not intended for use other than testing by the project team.
 
 
-# Dependencies
+# External Dependencies
 
 TOMES Tool requires the following applications:
 
@@ -29,6 +29,15 @@ TOMES Tool requires the following applications:
 		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 
 
+# Installation
+After installing the external dependencies above, you'll need to install some required Python packages.
+
+The required packages are listed in the "./requirements.txt" file. They can easily be installed via PIP <sup>[1]</sup>: `pip3 install -r requirements.txt`. You should now be able to use TOMES Tool from the command line.
+
+If you also want to install TOMES Tool as a Python package, do: `pip3 install . -r requirements.txt`.
+
+Running `pip3 uninstall tomes_tool` will uninstall the TOMES Tool package.
+
 # Unit Tests
 While not true unit tests that test each function or method of a given module or class, basic unit tests help with testing overall module workflows.
 
@@ -36,7 +45,7 @@ Unit tests reside in the "./tomes\_tool/tests" directory and start with "test__"
 
 ## Running the tests
 
-To run all the unit tests do : `py -3 -m unittest`
+To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest`
 
 Specific unit tests of interest:
 
@@ -94,3 +103,5 @@ To get started, import a module and run help():
 1. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 entities.py -h` 
 2. Try the example help command.
 
+-----
+*[1] Depending on your system configuration, you might be able to specify "py" and "pip" instead of "py -3" or "pip3" from the command line.*
