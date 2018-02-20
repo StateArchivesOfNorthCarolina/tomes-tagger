@@ -1,0 +1,16 @@
+# include documentation.
+include *.md
+include *.txt
+include docs/*.*
+
+# include NLP data and research files.
+include NLP/*.*
+recursive-include NLP/regexs *.*
+include NLP/research/*.*
+include NLP/stanford_edu/stanford-corenlp-full-2016-10-31/regexner_TOMES/mappings.txt
+
+# include test code.
+recursive-include tests *
+
+# include experimental code.
+recursive-include experiments *
