@@ -136,9 +136,7 @@ class Tagger():
             The filepath of the tagged EAXS document (@tagged_eaxs_file).
 
         Raises:
-            Exception: If an exception was raised during the tagging process. Note: this does
-            not ensure that the resulting tagged EAXS document actually contains all the 
-            corrent data.
+            Exception: If an exception was raised during the tagging process.
         """
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
