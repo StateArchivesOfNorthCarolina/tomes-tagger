@@ -359,7 +359,7 @@ class EAXSToTagged():
                     stripped_content_el.text = etree.CDATA(stripped_content.strip())
                 except ValueError as err:
                     self.logger.error(err)
-                    self.logger.warning("Cleaning stripped content in order to write CDATA.")
+                    self.logger.info("Cleaning stripped content in order to write CDATA.")
                     stripped_content = self._legalize_cdata_text(stripped_content, 
                             self.charset)
                     stripped_content_el.text = etree.CDATA(stripped_content.strip())

@@ -2,7 +2,12 @@
 
 """ This module contains a class to extract tokens and their corresponding NER tags from a 
 given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp 
-(https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly. """
+(https://github.com/smilli/py-corenlp) and capture its exceptions more explicitly. 
+
+Todo:
+    * I think we want some way of explicitly handling timeouts. I've experience CoreNLP
+    just hanging for several minutes. What can we do to address that situation?
+"""
 
 # import modules.
 import json
