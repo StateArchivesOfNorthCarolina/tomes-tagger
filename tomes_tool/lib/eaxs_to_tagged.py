@@ -75,9 +75,13 @@ class EAXSToTagged():
             str: The return value.
         """
 
+        # if @cdtext is the expected type, encode it.
+        # otherwise it's likely bytes and won't be encoded.
+        if isinstance(cdtext, str):
+            cdtext = cdtext.encode(charset, errors=error_handler) 
+            
         # legalize @cdtext for use with lxml.etree.CDATA().
-        cdtext = cdtext.encode(charset, errors=error_handler).decode(charset, 
-                errors=error_handler)
+        cdtext = cdtext.decode(charset, errors=error_handler)
         cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
         cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
             char in ("\r", "\t")])
