@@ -35,7 +35,7 @@ class Test_XLSXToEntities(unittest.TestCase):
         self.assertTrue(manifestations_count == 10)
 
 
-# CLI TEST.
+# CLI.
 def main(pattern: "the pattern to interpret", 
         ignore_case: ("make pattern case-insensitive", "flag", "i")):
     
@@ -48,7 +48,7 @@ def main(pattern: "the pattern to interpret",
 
     # print pattern.
     x2e = XLSXToEntities()
-    results = x2e._get_patterns(pattern, case, None)
+    results = x2e.get_manifestations(pattern, case, None)
     for result in results:
         print("".join(result))
 

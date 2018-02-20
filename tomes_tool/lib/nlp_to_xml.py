@@ -82,7 +82,7 @@ class NLPToXML():
         return is_valid
 
 
-    def get_XML(self, ner_data, validate=False):
+    def get_xml(self, ner_data, validate=False):
         """ Converts @ner_data to XML, i.e. a tagged XML message.
         
         Args:

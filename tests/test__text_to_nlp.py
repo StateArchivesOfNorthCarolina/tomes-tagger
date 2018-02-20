@@ -43,7 +43,7 @@ class Test_TextToNLP(unittest.TestCase):
         self.assertTrue(results == [])
 
 
-# CLI TEST.
+# CLI.
 def main(text="North Carolina.", host="http://localhost:9003"):
 
     "Prints list of NER results.\

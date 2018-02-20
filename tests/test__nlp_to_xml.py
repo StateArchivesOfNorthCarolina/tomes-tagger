@@ -38,14 +38,14 @@ class Test_NLPToXML(unittest.TestCase):
         
         # validate XML.
         ner = [("Jane", "stanford.edu/PERSON", " "), ("Doe", "stanford.edu/PERSON", "")]
-        xdoc = self.n2x.get_XML(ner)
+        xdoc = self.n2x.get_xml(ner)
         is_valid = self.n2x.validate_xml(xdoc)
         
         # check if result is as expected.
         self.assertTrue(is_valid)
 
 
-# CLI TEST.
+# CLI.
 def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):
     
     "Prints tagged message version of CSV-style NER text (line ending = '|'). \
@@ -56,7 +56,7 @@ def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):
 
     # convert @ner_data to XML.
     n2x = NLPToXML()
-    xdoc = n2x.get_XML(ner_data)
+    xdoc = n2x.get_xml(ner_data)
     xdoc = etree.tostring(xdoc).decode()
     
     print(xdoc)

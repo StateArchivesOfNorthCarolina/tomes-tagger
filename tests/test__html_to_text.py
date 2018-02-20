@@ -78,7 +78,7 @@ class Test_HTMLToText(unittest.TestCase):
         self.assertEqual([empty_01, empty_02], ["", ""])
 
 
-# CLI TEST.
+# CLI.
 def main(html_file: "HTML file"):
     
     "Prints plain text version of an HTML file.\

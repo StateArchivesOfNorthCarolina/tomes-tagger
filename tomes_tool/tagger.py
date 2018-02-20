@@ -22,8 +22,8 @@ class Tagger():
         >>> # write tagged EAXS version of EAXS file.
         >>> sample = "../tests/sample_files/sampleEAXS.xml"
         >>> tagger = TOMESToolTagger(host="http://localhost:9003")
-        >>> #tagger.eaxs_tagger(sample) # "../tests/sample_files/sampleEAXS__tagged.xml".
-        >>> tagger.eaxs_tagger(sample, "output.xml") # returns "output.xml".
+        >>> #tagger.write_tagged(sample) # "../tests/sample_files/sampleEAXS__tagged.xml".
+        >>> tagger.write_tagged(sample, "output.xml") # returns "output.xml".
     """
     
 
@@ -59,7 +59,7 @@ class Tagger():
         self.h2t = HTMLToText()
         self.t2n = TextToNLP(self.host)
         self.n2x = NLPToXML()
-        self.e2t = EAXSToTagged(self.html_convertor, self.text_tagger, self.charset)
+        self.e2t = EAXSToTagged(self._html_convertor, self._text_tagger, self.charset)
 
 
     def ping_host(self):
@@ -85,7 +85,7 @@ class Tagger():
         return
 
 
-    def html_convertor(self, html):
+    def _html_convertor(self, html):
         """ Converts @html string to a plain text.
         
         Args:
@@ -106,7 +106,7 @@ class Tagger():
         return text
 
 
-    def text_tagger(self, text):
+    def _text_tagger(self, text):
         """ Converts plain @text to NLP-tagged, TOMES-specific XML.
         
         Args:
@@ -118,11 +118,11 @@ class Tagger():
 
         # get NLP; convert to XML.
         nlp = self.t2n.get_NER(text)
-        nlp = self.n2x.get_XML(nlp)
+        nlp = self.n2x.get_xml(nlp)
         return nlp
 
     
-    def eaxs_tagger(self, eaxs_file, tagged_eaxs_file=None):
+    def write_tagged(self, eaxs_file, tagged_eaxs_file=None):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
         
         Args:
@@ -187,7 +187,7 @@ def main(eaxs: "source EAXS file",
     logging.info("Running CLI: " + " ".join(sys.argv))
     try:
         tagger = Tagger(host, check_host=True)
-        tagger.eaxs_tagger(eaxs, output)
+        tagger.write_tagged(eaxs, output)
         logging.info("Done.")
         sys.exit()
     except Exception as err:

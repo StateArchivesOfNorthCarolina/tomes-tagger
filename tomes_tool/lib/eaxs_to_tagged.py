@@ -6,7 +6,7 @@ This module contains a class for converting an EAXS file to a tagged EAXS docume
 Todo:
     * Do you need to support <ExtBodyContent> messages?
         - I think "yes" and you'll need to append attributes/elements accordingly.
-        - I think update_message MIGHT be doing this already?
+        - I think _update_message() MIGHT be doing this already?
             - Only one way to find out. :P
 """
 
@@ -228,7 +228,7 @@ class EAXSToTagged():
         return message_data
 
 
-    def tag_message(self, content_text, transfer_encoding_text, content_type_text):
+    def _tag_message(self, content_text, transfer_encoding_text, content_type_text):
         """ Tags a given <Message> element with a given text value (@content_text) and given
         @transfer_encoding_text and @content_type_text values.
 
@@ -283,7 +283,7 @@ class EAXSToTagged():
         return (tagged_el, stripped_content)
 
 
-    def update_message(self, message_el, folder_name):
+    def _update_message(self, message_el, folder_name):
         """ Updates a <Message> element's value with NER-tagged content. Affixes the 
         @folder_name as a new attribute.
 
@@ -317,7 +317,7 @@ class EAXSToTagged():
             return message_el
 
         # otherwise, get NER tags and a plain text version of the message body.
-        tagged_content, stripped_content = self.tag_message(content_text, 
+        tagged_content, stripped_content = self._tag_message(content_text, 
                 transfer_encoding_text, content_type_text)
 
         # if PII appears to exist in the message; update the @Restricted attribute.
@@ -429,7 +429,7 @@ class EAXSToTagged():
                     
                     # tag the message and write it to @xfile.
                     self.logger.info("Processing message with id: {}".format(message_id))
-                    tagged_message = self.update_message(element, folder_name)
+                    tagged_message = self._update_message(element, folder_name)
                     xfile.write(tagged_message)
                     element.clear()
                     

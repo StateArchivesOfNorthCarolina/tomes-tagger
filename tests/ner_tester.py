@@ -123,7 +123,7 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
     return 
         
 
-### let's test ...
+# CLI.
 def main(test_data:"path to tab-delimited test data", 
         report_file:"destination file for test results"):
     

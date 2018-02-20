@@ -179,7 +179,7 @@ class XLSXToEntities():
         return patterns
 
 
-    def _get_patterns(self, pattern, case_sensitive, row_number):
+    def get_manifestations(self, pattern, case_sensitive, row_number):
         """ Returns manifestations of @pattern.
         
         Args:
@@ -314,7 +314,7 @@ class XLSXToEntities():
                 
                 # alter data as needed and create dict for row.
                 row["identifier"] = hash_prefix + row["identifier"]
-                manifestations = self._get_patterns(row["pattern"], row["case_sensitive"], 
+                manifestations = self.get_manifestations(row["pattern"], row["case_sensitive"], 
                         row_number)
                 row["manifestations"] = ["".join(m) for m in manifestations]
                 

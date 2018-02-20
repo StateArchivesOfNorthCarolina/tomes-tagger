@@ -58,7 +58,7 @@ class Test_EAXSToTagged(unittest.TestCase):
         self.assertTrue(message_count == tagged_count) 
 
 
-# CLI TEST.
+# CLI.
 def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
     
     "Converts EAXS document to tagged EAXS (dry run).\
