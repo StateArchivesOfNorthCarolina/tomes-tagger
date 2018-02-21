@@ -32,9 +32,11 @@ TOMES Tool requires the following applications:
 # Installation
 After installing the external dependencies above, you'll need to install some required Python packages.
 
-The required packages are listed in the "./requirements.txt" file. They can easily be installed via PIP <sup>[1]</sup>: `pip3 install -r requirements.txt`. You should now be able to use TOMES Tool from the command line.
+The required packages are listed in the "./requirements.txt" file and can easily be installed via PIP <sup>[1]</sup>: `pip3 install -r requirements.txt`
 
-If you also want to install TOMES Tool as a Python package, do: `pip3 install . -r requirements.txt`.
+You should now be able to use TOMES Tool from the command line.
+
+If you also want to install TOMES Tool as a Python package, do: `pip3 install . -r requirements.txt`
 
 Running `pip3 uninstall tomes_tool` will uninstall the TOMES Tool package.
 
@@ -45,7 +47,7 @@ Unit tests reside in the "./tomes\_tool/tests" directory and start with "test__"
 
 ## Running the tests
 
-To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest`
+To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the "./tomes\_tool/tests" directory. 
 
 Specific unit tests of interest:
 
