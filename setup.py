@@ -10,12 +10,12 @@ setup(
     packages=setuptools.find_packages(),
     package_data={"tomes_tool.lib": ["nlp_to_xml.xsd"]},
     include_package_data=True,
+    python_requires=">=3",
     url="https://github.com/StateArchivesOfNorthCarolina/tomes_tool",
     license="LICENSE.txt",
     author="Nitin Arora",
     author_email="nitin.a.arora@ncdcr.gov",
     description="Part of the TOMES project: creates a 'tagged' version of an EAXS file.",
     long_description=doc(),
-    python_requires=">=3",
 )
 
