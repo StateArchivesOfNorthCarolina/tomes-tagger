@@ -59,19 +59,18 @@ class EAXSToTagged():
 
 
     @staticmethod
-    def _legalize_cdata_text(cdtext, charset):
+    def _legalize_cdata_text(cdtext):
         """ A static method that alters @cdtext by replacing vertical tabs and form feeds with
         line breaks and removing control characters except for carriage returns and tabs. This
         is so that @cdtext can be passed to lxml.etree.CDATA() without raising a ValueError.
         
         Args:
             - cdtext (str): The text to alter.
-            - charset (str): The encoding with which to encode @cdtext.
 
         Returns:
             str: The return value.
         """
-        
+
         # legalize @cdtext for use with lxml.etree.CDATA().
         cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
         cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
@@ -339,7 +338,7 @@ class EAXSToTagged():
         except ValueError as err:
             self.logger.error(err)
             self.logger.warning("Cleaning tagged content in order to write CDATA.")
-            tagged_content = self._legalize_cdata_text(tagged_content, self.charset)
+            tagged_content = self._legalize_cdata_text(tagged_content)
             tagged_content_el.text = etree.CDATA(tagged_content.strip())
         single_body_el.append(tagged_content_el)
 
@@ -352,8 +351,7 @@ class EAXSToTagged():
                 except ValueError as err:
                     self.logger.error(err)
                     self.logger.info("Cleaning stripped content in order to write CDATA.")
-                    stripped_content = self._legalize_cdata_text(stripped_content, 
-                            self.charset)
+                    stripped_content = self._legalize_cdata_text(stripped_content)
                     stripped_content_el.text = etree.CDATA(stripped_content.strip())
                 single_body_el.append(stripped_content_el)
 
