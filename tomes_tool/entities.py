@@ -52,7 +52,6 @@ class Entities():
         
         Returns:
             generator: The return value.
-            Note: A invalid header will result in an empty generator.
 
         Raises:
             - FileNotFoundError: If @self.xlsx_file doesn't exist.
