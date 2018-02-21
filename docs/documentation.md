@@ -34,9 +34,9 @@ After installing the external dependencies above, you'll need to install some re
 
 The required packages are listed in the "./requirements.txt" file and can easily be installed via PIP <sup>[1]</sup>: `pip3 install -r requirements.txt`
 
-You should now be able to use TOMES Tool from the command line.
+You should now be able to use TOMES Tool from the command line or as a locally importable Python module.
 
-If you also want to install TOMES Tool as a Python package, do: `pip3 install . -r requirements.txt`
+If you want to install TOMES Tool as a Python package, do: `pip3 install . -r requirements.txt`
 
 Running `pip3 uninstall tomes_tool` will uninstall the TOMES Tool package.
 
