@@ -59,7 +59,7 @@ class EAXSToTagged():
 
 
     @staticmethod
-    def _legalize_cdata_text(cdtext, charset, error_handler="backslashreplace"):
+    def _legalize_cdata_text(cdtext, charset):
         """ A static method that alters @cdtext by replacing vertical tabs and form feeds with
         line breaks and removing control characters except for carriage returns and tabs. This
         is so that @cdtext can be passed to lxml.etree.CDATA() without raising a ValueError.
@@ -67,21 +67,12 @@ class EAXSToTagged():
         Args:
             - cdtext (str): The text to alter.
             - charset (str): The encoding with which to encode @cdtext.
-            - error_handler (str): The "error" parameter value with which to encode/decode
-            @cdtext as it's converted to bytes and back to a string. See also:
-            "https://docs.python.org/3/howto/unicode.html#converting-to-bytes".
 
         Returns:
             str: The return value.
         """
-
-        # if @cdtext is the expected type, encode it.
-        # otherwise it's likely bytes and won't be encoded.
-        if isinstance(cdtext, str):
-            cdtext = cdtext.encode(charset, errors=error_handler) 
-            
+        
         # legalize @cdtext for use with lxml.etree.CDATA().
-        cdtext = cdtext.decode(charset, errors=error_handler)
         cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
         cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
             char in ("\r", "\t")])
@@ -342,6 +333,7 @@ class EAXSToTagged():
         tagged_content_el = etree.Element("{" + self.ncdcr_uri + "}TaggedContent", 
                 nsmap=self.ns_map)
         tagged_content = etree.tostring(tagged_content, encoding=self.charset)
+        tagged_content = tagged_content.decode(self.charset, errors="backslashreplace")
         try:
             tagged_content_el.text = etree.CDATA(tagged_content.strip())
         except ValueError as err:

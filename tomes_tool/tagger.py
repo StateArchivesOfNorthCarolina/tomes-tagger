@@ -32,8 +32,7 @@ class Tagger():
         
         Args:
             - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
-            - check_host (bool): Use True to automatically run self.ping_host(). Otherwise, 
-            use False.
+            - check_host (bool): Use True to automatically ping @host. Otherwise, use False.
             - charset (str): Optional encoding for the tagged EAXS.
         """
     
@@ -53,7 +52,7 @@ class Tagger():
 
         # if specified, verify @host is active before creating instances of modules.
         if self.check_host:
-            self.ping_host()
+            self._ping_host()
 
         # compose instances.
         self.h2t = HTMLToText()
@@ -62,7 +61,7 @@ class Tagger():
         self.e2t = EAXSToTagged(self._html_convertor, self._text_tagger, self.charset)
 
 
-    def ping_host(self):
+    def _ping_host(self):
         """ Makes a test request to @self.host.
         
         Returns:
