@@ -6,7 +6,9 @@ given text using Stanford's CoreNLP. It also contains a class to wrap pycorenlp
 
 Todo:
     * I think we want some way of explicitly handling timeouts. I've experience CoreNLP
-    just hanging for several minutes. What can we do to address that situation?
+    just hanging for several minutes. What can we do to address that situation? Obviously, we
+    can set a timeout when starting CoreNLP, so the question is about what this module needs
+    to do when a timeout happens.
 """
 
 # import modules.
@@ -158,6 +160,27 @@ class TextToNLP():
             trailing_space = text[-trailing_distance:]
 
         return (leading_space, trailing_space)
+
+
+    @staticmethod
+    def _legalize_json_text(jtext):
+        """ A static method that alters @jtext by replacing vertical tabs and form feeds with
+        line breaks and removing control characters except for carriage returns and tabs. This
+        is so that @jtext can be passed to json.loads() without raising a JSONDecodeError.
+        
+        Args:
+            - jtext (str): The text to alter.
+
+        Returns:
+            str: The return value.
+        """
+
+        # legalize @jtext for use with json.loads().
+        jtext = jtext.replace("\v", "\n").replace("\f", "\n")
+        jtext = "".join([char for char in jtext if unicodedata.category(char)[0] != "C" or
+            char in ("\r", "\t")])
+        
+        return jtext
 
 
     def _encode_bad_response(self, response, charset="ascii", max_length=500):
@@ -315,11 +338,19 @@ class TextToNLP():
 
         # ensure @results is correct data type.
         if not isinstance(results, dict):
-            self.logger.warning("CoreNLP wrapper returned '{}', expected dictionary.".format(
-                type(results).__name__))
-            results_err = self._encode_bad_response(results)
-            self.logger.debug("CoreNLP response: {}".format(results_err))
-            return []
+            result_type = type(results).__name__
+            self.logger.warning("CoreNLP wrapper returned '{}', expected dict.".format(
+                result_type))
+            self.logger.info("Trying to coerce '{}' to dict.".format(result_type))            
+            try:
+                results = _legalize_json_text(results)
+                results = json.loads(results)
+            except json.decoder.JSONDecodeError as err:
+                self.logger.error(err)
+                self.logger.warning("Failed to convert results to dict.")
+                results_err = self._encode_bad_response(results)
+                self.logger.debug("CoreNLP response: {}".format(results_err))
+                return []
 
         # verify @results contains required key.
         if "sentences" not in results:
