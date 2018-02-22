@@ -342,7 +342,7 @@ class TextToNLP():
             result_type = type(results).__name__
             self.logger.warning("CoreNLP wrapper returned '{}', expected dict.".format(
                 result_type))
-            self.logger.info("Trying to coerce '{}' to dict.".format(result_type))            
+            self.logger.info("Converting '{}' to dict.".format(result_type))            
             try:
                 results = self._legalize_json_text(results)
                 results = json.loads(results)
