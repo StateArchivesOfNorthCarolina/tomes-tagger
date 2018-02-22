@@ -5,6 +5,7 @@ per the tagged message schema, nlp_to_xml.xsd. """
 
 # import modules.
 import logging
+import unicodedata
 from lxml import etree
 
 
@@ -27,6 +28,28 @@ class NLPToXML():
         # set namespace attributes.
         self.ns_uri = "http://www.archives.ncdcr.gov/mail-account"
         self.ns_map  = {None: self.ns_uri}
+
+
+    @staticmethod
+    def _legalize_xml_text(xtext):
+        """ A static method that alters @xtext by replacing vertical tabs and form feeds with
+        line breaks and removing control characters except for carriage returns and tabs. This
+        is so that @xtext can be an etree._Element .text property without raising a 
+        ValueError.
+        
+        Args:
+            - xtext (str): The text to alter.
+
+        Returns:
+            str: The return value.
+        """
+
+        # legalize @xtext.
+        xtext = xtext.replace("\v", "\n").replace("\f", "\n")
+        xtext = "".join([char for char in xtext if unicodedata.category(char)[0] != "C" or
+            char in ("\r", "\t")])
+        
+        return xtext
 
 
     def _split_entity(self, entity_tag):
@@ -131,7 +154,7 @@ class NLPToXML():
                 text, tag, tspace = token_group
             except ValueError as err:
                 self.logger.error(err)
-                self.logger.warning("Skipping token group.")
+                self.logger.warning("Can't unpack token group; skipping token group.")
                 continue
 
             # add whitespace-only items to tree and continue.
@@ -144,7 +167,12 @@ class NLPToXML():
                 else:
                     block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
                             nsmap=self.ns_map)
-                    block_el.text = tspace
+                    try:
+                        block_el.text = tspace
+                    except ValueError as err:
+                        self.logger.error(err)
+                        self.logger.info("Legalizing text for <BlockText> element.")
+                        block_el.text = self._legalize_xml_text(tspace)
                 continue
 
             # if @tag is new, set new @current_tag value and increase group value.
@@ -174,8 +202,14 @@ class NLPToXML():
                     token_el.set("authority", tag_authority)
             
             # set token sub-element's text value and append whitespace.
-            token_el.text = text
-            token_el.tail = tspace
+            try:
+                token_el.text = text
+                token_el.tail = tspace
+            except ValueError as err:
+                self.logger.error(err)
+                self.logger.info("Legalizing text for <Token> element.")
+                token_el.text = self._legalize_xml_text(text)
+                token_el.tail = self._legalize_xml_text(tspace)
 
         # if requested, validate tagged message.
         if validate:
