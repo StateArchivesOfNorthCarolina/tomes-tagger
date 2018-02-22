@@ -4,8 +4,6 @@
 per the tagged message schema, nlp_to_xml.xsd. """
 
 # import modules.
-import io
-import json
 import logging
 from lxml import etree
 

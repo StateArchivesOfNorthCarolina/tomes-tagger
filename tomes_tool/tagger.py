@@ -146,7 +146,7 @@ class Tagger():
         
         # create tagged EAXS.
         try:
-            tagged = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
+            self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         except Exception as err:
             err_name = type(err).__name__
             msg = ("{}: {}".format(err_name, err))

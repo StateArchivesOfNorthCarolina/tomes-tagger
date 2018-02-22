@@ -68,7 +68,7 @@ def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
     def_html = lambda x: "HTML"
     def_nlp = lambda x: etree.Element("NLP")
     e2t = EAXSToTagged(def_html, def_nlp)
-    tagged = e2t.write_tagged(eaxs_file, tagged_file)
+    e2t.write_tagged(eaxs_file, tagged_file)
 
 
 if __name__ == "__main__":
