@@ -5,7 +5,6 @@ file to a Python generator where each item is a dict with headers as keys and ro
 values. """
 
 # import modules.
-import codecs
 import hashlib
 import itertools
 import logging

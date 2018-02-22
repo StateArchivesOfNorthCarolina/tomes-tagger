@@ -4,7 +4,6 @@
 per the tagged message schema, nlp_to_xml.xsd. """
 
 # import modules.
-import codecs
 import io
 import json
 import logging
