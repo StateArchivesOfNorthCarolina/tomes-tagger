@@ -344,7 +344,7 @@ class TextToNLP():
                 result_type))
             self.logger.info("Trying to coerce '{}' to dict.".format(result_type))            
             try:
-                results = _legalize_json_text(results)
+                results = self._legalize_json_text(results)
                 results = json.loads(results)
             except json.decoder.JSONDecodeError as err:
                 self.logger.error(err)
