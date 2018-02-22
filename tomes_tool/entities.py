@@ -5,7 +5,6 @@ file to Stanford CoreNLP compliant text files or JSON files. """
 
 # import modules.
 import sys; sys.path.append("..")
-import codecs
 import json
 import logging
 import logging.config
@@ -99,7 +98,7 @@ class Entities():
 
         # open @output_file for writing.
         self.logger.info("Writing Stanford file: {}".format(output_file))
-        tsv = codecs.open(output_file, "w", encoding="utf-8")
+        tsv = open(output_file, "w", encoding="utf-8")
 
         # iterate through rows; write data to @output_file.
         linebreak = False
@@ -146,7 +145,7 @@ class Entities():
 
         # open @output_file for writing.
         self.logger.info("Writing JSON file: {}".format(output_file))
-        jsv = codecs.open(output_file, "w", encoding="utf-8")
+        jsv = open(output_file, "w", encoding="utf-8")
         jsv.write("[")
 
         # iterate through rows; write data to @output_file.
