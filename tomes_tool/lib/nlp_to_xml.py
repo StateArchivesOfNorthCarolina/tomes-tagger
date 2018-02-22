@@ -11,7 +11,13 @@ from lxml import etree
 
 class NLPToXML():
     """ A class for converting a list of NER tuples (token, NER tag, trailing whitespace) to
-    XML per the tagged message schema, nlp_to_xml.xsd. """
+    XML per the tagged message schema, nlp_to_xml.xsd. 
+    
+    Example:
+        >>> ner = [("Jane", "stanford.edu/PERSON", " "), ("Doe", "stanford.edu/PERSON", "")]
+        >>> n2x = NLPToXML()
+        >>> n2x.get_xml(ner) # etree._Element.
+    """
 
 
     def __init__(self):

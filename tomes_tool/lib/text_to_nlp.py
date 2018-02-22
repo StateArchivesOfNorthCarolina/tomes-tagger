@@ -21,7 +21,12 @@ from textwrap import TextWrapper
 
 class CoreNLP():
     """ A class to wrap pycorenlp (https://github.com/smilli/py-corenlp) and capture its 
-    exceptions more explicitly. """
+    exceptions more explicitly.
+    
+    Example:
+        >>> tagger = CoreNLP(host="http://localhost:9003")
+        >>> tagger.annotate("North Carolina")
+    """
 
 	
     def __init__(self, host, mapping_file="", tags_to_override=[], *args, **kwargs):
@@ -96,7 +101,12 @@ class CoreNLP():
 
 class TextToNLP():
     """ A class to extract tokens and their corresponding NER tags from a given text using
-    Stanford's CoreNLP. """
+    Stanford's CoreNLP. 
+    
+    Example:
+        >>> t2n = TextToNLP()
+        >>> t2n.get_NER("North Carolina") # list.
+    """
 
 
     def __init__(self, host="http://localhost:9003", chunk_size=50000, retry=True,
