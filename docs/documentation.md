@@ -106,4 +106,4 @@ To get started, import a module and run help():
 2. Try the example help command.
 
 -----
-*[1] Depending on your system configuration, you might be able to specify "py" and "pip" instead of "py -3" or "pip3" from the command line.*
+*[1] Depending on your system configuration, you might be able to specify "python" and "pip" instead of "py -3" or "pip3" from the command line.*
