@@ -1,5 +1,7 @@
-#!/usr/bin/python 3
+#!/usr/bin/env python3
 
+
+# import modules.
 import os
 import plac
 import sys
