@@ -1,0 +1,45 @@
+This is the main reply.
+
+Thanks!
+PERSON1.first
+
+-----Original Message-----
+From: PERSON2.last, PERSON2.first XX YY ZZZ [PERSON2.first_PERSON2.last@foo.bar]
+
+Sent: SENT1
+To: PERSON1.last, PERSON1.first
+Cc: PERSON3.last, PERSON3.first
+Subject: SUBJECT1
+
+PERSON1.first,
+
+This is the second reply.
+
+PERSON2.first M. PERSON2.last XX YY ZZZ
+PERSON2.title
+123 PERSON2.street
+PERSON2.city, PERSON2.state 123456 
+Office: (555) 555-55555
+Fax: (555) 555-5555
+
+"QUOTE"
+
+----- Original Message -----
+From: PERSON4.last, Dr. PERSON4.first [PERSON4.first_PERSON4.last@foo.bar]
+To: PERSON2.last, PERSON2.first
+Cc: PERSON3.last, PERSON3.first
+
+Sent: SENT2
+Subject: SUBJECT2
+
+This is the third reply.
+
+Sincerely,
+
+Dr. PERSON4.first M. PERSON4.last
+PERSON4.title
+123 PERSON4.street
+PERSON4.city, PERSON4.state 123456 
+Office: (555) 555-55555
+Fax: (555) 555-5555
+
