@@ -54,7 +54,7 @@ def main(eaxs:"any EAXS file",
         message_id:"<MessageID> value or message position"):
     
     "Exports a single <Message> element from an EAXS or tagged EAXS file.\
-    \nexample: `py -3 export_message.py myEAXS.xml myEAXS__message_123abc.xml 123abc`\
+    \nexample: `py -3 export_message.py myEAXS.xml myEAXS__message_123abc.xml \"<123abc>\"`\
     \nexample: `py -3 export_message.py myEAXS.xml myEAXS__firstMessage.xml 1` "
 
     try:
