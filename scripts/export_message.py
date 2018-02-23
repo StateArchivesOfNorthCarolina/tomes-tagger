@@ -41,7 +41,7 @@ def export_message(eaxs, output_file, message_id):
                 message = element.getparent()
                 with open(output_file, "w", encoding="utf-8") as xf:
                     xf.write(etree.tostring(message).decode(encoding="utf-8"))
-                    break
+                break
             i += 1
         element.clear()
 
