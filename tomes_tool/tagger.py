@@ -21,7 +21,7 @@ class Tagger():
     Example:
         >>> # write tagged EAXS version of EAXS file.
         >>> sample = "../tests/sample_files/sampleEAXS.xml"
-        >>> tagger = TOMESToolTagger(host="http://localhost:9003")
+        >>> tagger = Tagger(host="http://localhost:9003")
         >>> #tagger.write_tagged(sample) # "../tests/sample_files/sampleEAXS__tagged.xml".
         >>> tagger.write_tagged(sample, "output.xml") # returns "output.xml".
     """
