@@ -19,7 +19,7 @@ import unicodedata
 from textwrap import TextWrapper
 
 
-class CoreNLP():
+class _CoreNLP():
     """ A class to wrap pycorenlp (https://github.com/smilli/py-corenlp) and capture its 
     exceptions more explicitly.
     
@@ -140,7 +140,7 @@ class TextToNLP():
                 "ORDINAL", "ORGANIZATION", "PERCENT", "PERSON", "SET", "TIME"]
         
         # compose instance of CoreNLP wrapper class.
-        self.corenlp = CoreNLP(self.host, mapping_file=self.mapping_file, 
+        self.corenlp = _CoreNLP(self.host, mapping_file=self.mapping_file, 
                 tags_to_override=self.stanford_tags)
 
 

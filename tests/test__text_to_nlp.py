@@ -18,16 +18,15 @@ class Test_TextToNLP(unittest.TestCase):
         
         # set attributes.
         self.host = "http://localhost:-1"
-        self.corenlp = CoreNLP(host=self.host)
         self.t2n = TextToNLP(host=self.host)
     
  
     def test__failed_annotate(self):
         """ Since we can't connect to port -1, is a ConnectionError raised? """
         
-        # test calling CoreNLP.
+        # call CoreNLP instance's annotator.
         try:
-            self.corenlp.annotate("")
+            self.t2n.corenlp.annotate("")
             is_connection_error = False
         except ConnectionError as err:
             is_connection_error = True
