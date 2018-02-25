@@ -159,7 +159,7 @@ class XLSXToEntities():
             return []     
 
         # make sure a trailing comma exists; this prevents itertools.product() from splitting
-        # something like "tomes_pattern:{'[A|B]'}" from being split as a simple string: '{' +
+        # something like "TOMES_PATTERN:{'[A|B]'}" from being split as a simple string: '{' +
         # 'A' + '|', etc.
         if pattern[-1] != ",":
             pattern += ","
@@ -199,7 +199,7 @@ class XLSXToEntities():
         is_tomes_pattern = False
         
         # if @pattern is a TOMES pattern instance, alter it per self._get_tomes_pattern().
-        tomes_pattern = "tomes_pattern:"
+        tomes_pattern = "TOMES_PATTERN:"
         tomes_pattern_len = len(tomes_pattern)
         if pattern[:tomes_pattern_len] == tomes_pattern:
             self.logger.info("Found TOMES pattern in row {}.".format(row_number))
