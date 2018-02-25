@@ -195,7 +195,7 @@ class XLSXToEntities():
         pattern = pattern.strip()
 
         # assume values.
-        patterns = []
+        manifestations = []
         is_tomes_pattern = False
         
         # if @pattern is a TOMES pattern instance, alter it per self._get_tomes_pattern().
@@ -205,7 +205,7 @@ class XLSXToEntities():
             self.logger.info("Found TOMES pattern in row {}.".format(row_number))
             is_tomes_pattern = True
             pattern = pattern[tomes_pattern_len:]
-            patterns = self._get_tomes_pattern(pattern)
+            manifestations = self._get_tomes_pattern(pattern)
 
         # if specified, alter @pattern to ignore case provided @is_tomes_pattern is False.
         if not case_sensitive and not is_tomes_pattern:
@@ -219,9 +219,9 @@ class XLSXToEntities():
 
         # if @is_tomes_pattern is False, append @pattern to output.
         if not is_tomes_pattern:
-            patterns.append(pattern)
+            manifestations.append(pattern)
 
-        return patterns
+        return sorted(manifestations)
 
         
     def _get_rows(self, xlsx_file):
