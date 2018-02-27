@@ -22,7 +22,7 @@ TOMES Tool requires the following applications:
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
 	- *We're currently using this for NER tagging.*
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
-	- You **must** place the "regexner\_TOMES" directory (found in in the "./tomes\_tool/NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
+	- If you want to use the TOMES Project NER mappings, you must place the "regexner\_TOMES" directory (found in in the "./tomes\_tool/NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
 	- *We're currently using this for HTML email to plain text conversion.*
 	- The "lynx" command must be executable from any directory on your system.
@@ -70,25 +70,16 @@ Sample files are located in the "./tomes\_tool/tests/sample_files" directory.
 The sample files can be used with the command line options of some of the unit tests.
 
 # Modules
-TOMES Tool consists of two high level modules:
+TOMES Tool consists of single-purpose high level module, *tagger.py*. This creates a "tagged" version of a source EAXS file. It can be used as native Python class or as command line script.
 
-1. tagger.py
-	* This creates a "tagged" version of a source EAXS file.
-2. entities.py
-	* This creates a Stanford CoreNLP compliant version of NER patterns from a source Microsoft Excel file.
-
-Both modules can be used as native Python classes or as command line scripts.
-
-## Using modules with Python
-To get started, import a module and run help():
+## Using tagger.py with Python
+To get started, import the module and run help():
 
 	Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 08:06:12) [MSC v.1900 64 bit (AM
 	D64)] on win32
 	Type "help", "copyright", "credits" or "license" for more information.
 	>>> from tomes_tool import tagger
 	>>> help(tagger)
-	>>> from tomes_tool import entities
-	>>> help(entities)
 
 ## Using tagger.py from the command line
 
@@ -100,10 +91,6 @@ To get started, import a module and run help():
      	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9003 -timeout 50000`
 2. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 tagger.py -h` 
 3. Try the example help command.
-
-## Using entities.py from the command line
-1. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 entities.py -h` 
-2. Try the example help command.
 
 -----
 *[1] Depending on your system configuration, you might be able to specify "python" and "pip" instead of "py -3" or "pip3" from the command line.*
