@@ -7,7 +7,7 @@ import unittest
 from tomes_tool.lib.html_to_text import *
 
 # enable logging.
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.DEBUG)
         
 
 class Test_HTMLToText(unittest.TestCase):

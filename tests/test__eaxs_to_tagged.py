@@ -10,7 +10,7 @@ from lxml import etree
 from tomes_tool.lib.eaxs_to_tagged import *
 
 # enable logging.
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.DEBUG)
 
 
 class Test_EAXSToTagged(unittest.TestCase):
