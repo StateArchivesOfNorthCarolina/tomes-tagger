@@ -7,9 +7,20 @@ import sys
 from lxml import etree
 
 
+HEADER = """<?xml version='1.0' encoding='UTF-8'?>
+<Account xmlns="http://www.archives.ncdcr.gov/mail-account"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd">
+<GlobalId>EXPORTED_MESSAGE</GlobalId>
+<Folder>
+"""
+
+FOOTER = "</Folder></Account>"
+
+
 def export_message(eaxs, output_file, message_id):
     """ Exports a <Message> element from a given EAXS or tagged EAXS file and writes the 
-    content to @output_file.
+    content to @output_file. Wraps the message in a valid EAXS structure.
 
     Args:
         - eaxs (str): The EAXS file from which to extract a <Message> element.
@@ -40,7 +51,9 @@ def export_message(eaxs, output_file, message_id):
                 is_found = True
                 message = element.getparent()
                 with open(output_file, "w", encoding="utf-8") as xf:
+                    xf.write(HEADER)
                     xf.write(etree.tostring(message).decode(encoding="utf-8"))
+                    xf.write(FOOTER)
                 break
             i += 1
         element.clear()

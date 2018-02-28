@@ -40,8 +40,7 @@ class NLPToXML():
     def _legalize_xml_text(xtext):
         """ A static method that alters @xtext by replacing vertical tabs and form feeds with
         line breaks and removing control characters except for carriage returns and tabs. This
-        is so that @xtext can be an etree._Element .text property without raising a 
-        ValueError.
+        is so that @xtext can be written to XML without raising a ValueError.
         
         Args:
             - xtext (str): The text to alter.

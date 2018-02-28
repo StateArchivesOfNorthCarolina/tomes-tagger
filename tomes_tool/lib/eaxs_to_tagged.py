@@ -59,24 +59,24 @@ class EAXSToTagged():
 
 
     @staticmethod
-    def _legalize_cdata_text(cdtext):
-        """ A static method that alters @cdtext by replacing vertical tabs and form feeds with
+    def _legalize_xml_text(xtext):
+        """ A static method that alters @xtext by replacing vertical tabs and form feeds with
         line breaks and removing control characters except for carriage returns and tabs. This
-        is so that @cdtext can be passed to lxml.etree.CDATA() without raising a ValueError.
-        
+        is so that @xtext can be written to XML without raising a ValueError.
+            
         Args:
-            - cdtext (str): The text to alter.
+            - xtext (str): The text to alter.
 
         Returns:
             str: The return value.
         """
 
-        # legalize @cdtext for use with lxml.etree.CDATA().
-        cdtext = cdtext.replace("\v", "\n").replace("\f", "\n")
-        cdtext = "".join([char for char in cdtext if unicodedata.category(char)[0] != "C" or
+        # legalize @xtext.
+        xtext = xtext.replace("\v", "\n").replace("\f", "\n")
+        xtext = "".join([char for char in xtext if unicodedata.category(char)[0] != "C" or
             char in ("\r", "\t")])
         
-        return cdtext
+        return xtext
     
 
     def _get_folder_name(self, message_el):
@@ -95,7 +95,13 @@ class EAXSToTagged():
         for ancestor in message_el.iterancestors():
             if ancestor.tag == "{" + self.ncdcr_uri + "}Folder":
                 name_el = ancestor.getchildren()[0]
-                folder_names.insert(0, name_el.text)
+                if name_el.tag == "{" + self.ncdcr_uri + "}Name":
+                    try:
+                        folder_names.insert(0, name_el.text)
+                    except ValueError as err:
+                        self.logger.error(err)
+                        self.logger.info("Cleaning folder <Name> element value.")
+                        folder_names.insert(0, self._legalize_xml_text(name_el.text))
             elif ancestor.tag == "{" + self.ncdcr_uri + "}Account":
                 break
     
@@ -338,7 +344,7 @@ class EAXSToTagged():
         except ValueError as err:
             self.logger.error(err)
             self.logger.warning("Cleaning tagged content in order to write CDATA.")
-            tagged_content = self._legalize_cdata_text(tagged_content)
+            tagged_content = self._legalize_xml_text(tagged_content)
             tagged_content_el.text = etree.CDATA(tagged_content.strip())
         single_body_el.append(tagged_content_el)
 
@@ -351,7 +357,7 @@ class EAXSToTagged():
                 except ValueError as err:
                     self.logger.error(err)
                     self.logger.info("Cleaning stripped content in order to write CDATA.")
-                    stripped_content = self._legalize_cdata_text(stripped_content)
+                    stripped_content = self._legalize_xml_text(stripped_content)
                     stripped_content_el.text = etree.CDATA(stripped_content.strip())
                 single_body_el.append(stripped_content_el)
 
