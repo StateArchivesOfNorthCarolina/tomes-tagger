@@ -168,7 +168,12 @@ class NLPToXML():
                 # append space to previous child; otherwise fall back to new element.
                 children = tagged_el.getchildren()
                 if len(children) != 0:
-                    children[-1].tail += tspace
+                    try:
+                        children[-1].tail += tspace
+                    except ValueError as err:
+                        self.logger.error(err)
+                        self.logger.info("Cleaning whitespace for XML tail of last element.")
+                        children[-1].tail += self._legalize_xml_text(tspace)
                 else:
                     block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
                             nsmap=self.ns_map)
@@ -176,7 +181,7 @@ class NLPToXML():
                         block_el.text = tspace
                     except ValueError as err:
                         self.logger.error(err)
-                        self.logger.info("Legalizing text for <BlockText> element.")
+                        self.logger.info("Cleaning text for <BlockText> element.")
                         block_el.text = self._legalize_xml_text(tspace)
                 continue
 
@@ -195,16 +200,34 @@ class NLPToXML():
 
                 tag_pattern, tag_authority, tag_value = self._split_entity(tag)
                 
-                token_el.set("entity", tag_value)
+                # set "entity" attribute.
+                try:
+                    token_el.set("entity", tag_value)
+                except ValueError as err:
+                    self.logger(err)
+                    self.logger.info("Cleaning @entity attribute value.")
+                    token_el.set("entity", self._legalize_xml_text(tag_value))
+                    
+                # set "group" attribute.
                 token_el.set("group", str(tag_group))
 
                 # write "pattern" attribute if it exists.
-                if tag_pattern != "": 
-                    token_el.set("pattern", tag_pattern)
+                if tag_pattern != "":
+                    try:
+                        token_el.set("pattern", tag_pattern)
+                    except ValueError as err:
+                        self.logger(err)
+                        self.logger.info("Cleaning @pattern attribute value.")
+                        token_el.set("pattern", self._legalize_xml_text(tag_pattern))
 
                 # write "authority" attribute if it exists.
                 if tag_authority != "": 
-                    token_el.set("authority", tag_authority)
+                    try:
+                        token_el.set("authority", tag_authority)
+                    except ValueError as err:
+                        self.logger(err)
+                        self.logger.info("Cleaning @authority attribute value.")
+                        token_el.set("authority", self._legalize_xml_text(tag_authority))
             
             # set token sub-element's text value and append whitespace.
             try:
@@ -212,7 +235,7 @@ class NLPToXML():
                 token_el.tail = tspace
             except ValueError as err:
                 self.logger.error(err)
-                self.logger.info("Legalizing text for <Token> element.")
+                self.logger.info("Cleaning element text and/or tail for <Token> element.")
                 token_el.text = self._legalize_xml_text(text)
                 token_el.tail = self._legalize_xml_text(tspace)
 
