@@ -271,8 +271,7 @@ class TextToNLP():
                     text_list = wrapper.wrap(text)
                 except Exception as err:
                     self.logger.error(err)
-                    self.logger.error("Failed to chunk text.")
-                    self.logger.warning("Falling back to empty output.")
+                    self.logger.warning("Failed to chunk text; falling back to empty output.")
                     return []
 
             # get NER tags for each item in @text_list.

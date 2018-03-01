@@ -411,7 +411,8 @@ class EAXSToTagged():
         remaining_messages = total_messages
 
         # open new @tagged_eaxs_file.
-        with etree.xmlfile(tagged_eaxs_file, encoding=self.charset) as xfile:
+        with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True, 
+                buffered=False) as xfile:
 
             # write XML header to @xfile; register namespace information.
             xfile.write_declaration()
