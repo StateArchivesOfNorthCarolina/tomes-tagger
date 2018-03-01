@@ -96,12 +96,7 @@ class EAXSToTagged():
             if ancestor.tag == "{" + self.ncdcr_uri + "}Folder":
                 name_el = ancestor.getchildren()[0]
                 if name_el.tag == "{" + self.ncdcr_uri + "}Name":
-                    try:
-                        folder_names.insert(0, name_el.text)
-                    except ValueError as err:
-                        self.logger.error(err)
-                        self.logger.info("Cleaning folder <Name> element value.")
-                        folder_names.insert(0, self._legalize_xml_text(name_el.text))
+                    folder_names.insert(0, name_el.text)
             elif ancestor.tag == "{" + self.ncdcr_uri + "}Account":
                 break
     
@@ -300,7 +295,12 @@ class EAXSToTagged():
         self.logger.info("Updating <Message> element tree.")
 
         # set new attributes and elements.
-        message_el.set("ParentFolder", folder_name)
+        try:
+            message_el.set("ParentFolder", folder_name)
+        except ValueError as err:
+            self.logger.error(err)
+            self.logger.info("Cleaning @ParentFolder attribute value.")
+            message_el.set("ParentFolder", self._legalize_xml_text(folder_name))
         message_el.set("Processed", "false")
         message_el.set("Record", "true")
         message_el.set("Restricted", "false")
@@ -400,8 +400,10 @@ class EAXSToTagged():
             eaxs_file, tagged_eaxs_file))
 
         # get count of <Message> elements; prepare data for progress updates.
+        msg = "Finding number of messages in source EAXS file; this may take a while."
+        self.logger.info(msg)
+        
         total_messages = 0
-        self.logger.info("Finding number of messages in source EAXS file.")
         for event, element in self._get_messages(eaxs_file):
             total_messages += 1
             element.clear()
@@ -409,7 +411,7 @@ class EAXSToTagged():
         remaining_messages = total_messages
 
         # open new @tagged_eaxs_file.
-        with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True) as xfile:
+        with etree.xmlfile(tagged_eaxs_file, encoding=self.charset) as xfile:
 
             # write XML header to @xfile; register namespace information.
             xfile.write_declaration()
@@ -432,6 +434,7 @@ class EAXSToTagged():
                     tagged_message = self._update_message(element, folder_name)
                     xfile.write(tagged_message)
                     element.clear()
+                    tagged_message.clear()
                     
                     # report on progress.
                     remaining_messages -= 1
