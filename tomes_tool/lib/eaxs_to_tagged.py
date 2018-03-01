@@ -95,7 +95,7 @@ class EAXSToTagged():
         for ancestor in message_el.iterancestors():
             if ancestor.tag == "{" + self.ncdcr_uri + "}Folder":
                 name_el = ancestor.getchildren()[0]
-                if name_el.tag == "{" + self.ncdcr_uri + "}Name":
+                if name_el.tag == "{" + self.ncdcr_uri + "}Name" and name_el.text != None:
                     folder_names.insert(0, name_el.text)
             elif ancestor.tag == "{" + self.ncdcr_uri + "}Account":
                 break
