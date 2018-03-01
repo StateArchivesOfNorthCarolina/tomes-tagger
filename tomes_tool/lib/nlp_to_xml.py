@@ -232,11 +232,15 @@ class NLPToXML():
             # set token sub-element's text value and append whitespace.
             try:
                 token_el.text = text
+            except ValueError as err:
+                self.logger.error(err)
+                self.logger.info("Cleaning text for <Token> element.")
+                token_el.text = self._legalize_xml_text(text)
+            try:
                 token_el.tail = tspace
             except ValueError as err:
                 self.logger.error(err)
-                self.logger.info("Cleaning element text and/or tail for <Token> element.")
-                token_el.text = self._legalize_xml_text(text)
+                self.logger.info("Cleaning element tail for <Token> element.")
                 token_el.tail = self._legalize_xml_text(tspace)
 
         # if requested, validate tagged message.
