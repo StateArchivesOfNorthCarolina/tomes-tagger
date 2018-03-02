@@ -13,7 +13,6 @@ from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
 from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML
 from tomes_tool.lib.nlp_to_xml import NLPToXML
 from tomes_tool.lib.text_to_nlp import TextToNLP
-from lxml import etree; import unicodedata # REMOVE ???
 
 
 class Tagger():
