@@ -78,7 +78,7 @@ class Tagger():
         except requests.exceptions.ConnectionError as err:
             self.logger.error(err)
             msg = "Can't connect to NLP server at: {}".format(self.host)
-            self.logger.critical(msg)
+            self.logger.error(msg)
             raise ConnectionError(msg)
 
         return
@@ -148,7 +148,7 @@ class Tagger():
         try:
             self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         except Exception as err:
-            self.logger.critical(err)
+            self.logger.error(err)
             raise err
         
         self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
