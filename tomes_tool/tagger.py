@@ -13,6 +13,7 @@ from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
 from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML
 from tomes_tool.lib.nlp_to_xml import NLPToXML
 from tomes_tool.lib.text_to_nlp import TextToNLP
+from lxml import etree; import unicodedata # REMOVE ???
 
 
 class Tagger():
@@ -148,10 +149,8 @@ class Tagger():
         try:
             self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         except Exception as err:
-            err_name = type(err).__name__
-            msg = ("{}: {}".format(err_name, err))
-            self.logger.error(msg)
-            raise Exception(msg)
+            self.logger.error(err)
+            raise err
         
         self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
         return tagged_eaxs_file
@@ -190,7 +189,7 @@ def main(eaxs: "source EAXS file",
         logging.info("Done.")
         sys.exit()
     except Exception as err:
-        sys.exit(err)
+        sys.exit(err.__repr__())
 
 
 if __name__ == "__main__":
