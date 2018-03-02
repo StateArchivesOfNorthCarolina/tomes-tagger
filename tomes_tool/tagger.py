@@ -148,7 +148,7 @@ class Tagger():
         try:
             self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
         except Exception as err:
-            self.logger.error(err)
+            self.logger.critical(err)
             raise err
         
         self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
@@ -188,6 +188,7 @@ def main(eaxs: "source EAXS file",
         logging.info("Done.")
         sys.exit()
     except Exception as err:
+        logging.critical(err)
         sys.exit(err.__repr__())
 
 
