@@ -39,7 +39,7 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 							<![CDATA[<!DOCTYPE html>
 							<html>
 							<head>
-							<title>Bye</title>
+							<title>Hi</title>
 							<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 							</head>
 							<body>
@@ -139,7 +139,7 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 			<To>
 				<![CDATA["John Doe" <john_doe@fake.nc.gov>]]>
 			</To>
-			<Subject>Bye</Subject>
+			<Subject>Hi again</Subject>
 			<Header>
 				<Name>Date</Name>
 				<Value>Fri, 10 Jan 2017 12:00:00 -0500</Value>
