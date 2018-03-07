@@ -165,15 +165,24 @@ class NLPToXML():
             # add whitespace-only items to tree and continue.
             if text == "":
             
-                # append space to previous child; otherwise fall back to new element.
+                # if a previous child element exists, append whitespace to its tail.
                 children = tagged_el.getchildren()
                 if len(children) != 0:
+                    
+                    # get previous child; if tail is None, make it a string.
+                    previous_child = children[-1]
+                    if previous_child.tail is None:
+                        previous_child.tail = ""
+                    
+                    # update tail of @previous_child.
                     try:
-                        children[-1].tail += tspace
+                        previous_child.tail += tspace
                     except ValueError as err:
                         self.logger.error(err)
                         self.logger.info("Cleaning whitespace for XML tail of last element.")
-                        children[-1].tail += self._legalize_xml_text(tspace)
+                        previous_child.tail += self._legalize_xml_text(tspace)
+
+                # otherwise, append a <BlockText> element to the root.
                 else:
                     block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
                             nsmap=self.ns_map)
