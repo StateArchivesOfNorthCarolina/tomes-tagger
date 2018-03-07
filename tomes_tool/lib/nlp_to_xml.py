@@ -50,9 +50,10 @@ class NLPToXML():
         """
 
         # legalize @xtext.
-        xtext = xtext.replace("\v", "\n").replace("\f", "\n")
+        for ws in ["\f","\r","\v"]:
+            xtext = xtext.replace(ws, "\n")
         xtext = "".join([char for char in xtext if unicodedata.category(char)[0] != "C" or
-            char in ("\r", "\t")])
+            char in ("\t", "\n")])
         
         return xtext
 
@@ -164,27 +165,15 @@ class NLPToXML():
 
             # add whitespace-only items to tree and continue.
             if text == "":
-            
-                # if a previous child element exists and has a tail, append whitespace to it.
-                children = tagged_el.getchildren()
-                if len(children) != 0 and isinstance(children[-1].tail, str):
-                    try:
-                        children[-1].tail += tspace
-                    except ValueError as err:
-                        self.logger.error(err)
-                        self.logger.info("Cleaning whitespace for XML tail of last element.")
-                        children[-1].tail += self._legalize_xml_text(tspace)
-
-                # otherwise, append a <BlockText> element to the root.
-                else:
-                    block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
-                            nsmap=self.ns_map)
-                    try:
-                        block_el.text = tspace
-                    except ValueError as err:
-                        self.logger.error(err)
-                        self.logger.info("Cleaning text for <BlockText> element.")
-                        block_el.text = self._legalize_xml_text(tspace)
+                
+                block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
+                        nsmap=self.ns_map)
+                try:
+                    block_el.text = tspace
+                except ValueError as err:
+                    self.logger.error(err)
+                    self.logger.info("Cleaning text for <BlockText> element.")
+                    block_el.text = self._legalize_xml_text(tspace)
                 continue
 
             # if @tag is new, set new @current_tag value and increase group value.
