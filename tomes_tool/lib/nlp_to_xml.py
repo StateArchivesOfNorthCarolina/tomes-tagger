@@ -165,22 +165,15 @@ class NLPToXML():
             # add whitespace-only items to tree and continue.
             if text == "":
             
-                # if a previous child element exists, append whitespace to its tail.
+                # if a previous child element exists and has a tail, append whitespace to it.
                 children = tagged_el.getchildren()
-                if len(children) != 0:
-                    
-                    # get previous child; if tail is None, make it a string.
-                    previous_child = children[-1]
-                    if previous_child.tail is None:
-                        previous_child.tail = ""
-                    
-                    # update tail of @previous_child.
+                if len(children) != 0 and isinstance(children[-1].tail, str):
                     try:
-                        previous_child.tail += tspace
+                        children[-1].tail += tspace
                     except ValueError as err:
                         self.logger.error(err)
                         self.logger.info("Cleaning whitespace for XML tail of last element.")
-                        previous_child.tail += self._legalize_xml_text(tspace)
+                        children[-1].tail += self._legalize_xml_text(tspace)
 
                 # otherwise, append a <BlockText> element to the root.
                 else:
