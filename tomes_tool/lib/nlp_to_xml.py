@@ -166,15 +166,37 @@ class NLPToXML():
             # add whitespace-only items to tree and continue.
             if text == "":
                 
-                block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
+                # if the last child is a <BlockText> element, append whitespace to it.
+                # for oddities re: += to an element's text, see:
+                # blog.humaneguitarist.org/2018/03/07/hightailing-it-out-of-none-with-lxml
+                children = tagged_el.getchildren()
+                if len(children) != 0 and children[-1].tag == "{" + self.ns_uri + \
+                "}BlockText" and children[-1].text is not None:
+                      
+                    # capture current value of element text.
+                    # Why? see: "https://goo.gl/CvRRkb".
+                    saved_text = children[-1].text
+                    try:
+                        children[-1].text += tspace
+                    except ValueError as err:
+                        self.logger.error(err)
+                        msg = "Cleaning whitespace to append to existing <BlockText> element."
+                        self.logger.info(msg)
+                        saved_text += self._legalize_xml_text(tspace)
+                        children[-1].text = saved_text
+                    continue
+
+                # otherwise, create a new <BlockText> element to contain the whitespace.
+                else:
+                    block_el = etree.SubElement(tagged_el, "{" + self.ns_uri + "}BlockText", 
                         nsmap=self.ns_map)
-                try:
-                    block_el.text = tspace
-                except ValueError as err:
-                    self.logger.error(err)
-                    self.logger.info("Cleaning text for <BlockText> element.")
-                    block_el.text = self._legalize_xml_text(tspace)
-                continue
+                    try:
+                        block_el.text = tspace
+                    except ValueError as err:
+                        self.logger.error(err)
+                        self.logger.info("Cleaning whitespace for new <BlockText> element.")
+                        block_el.text = self._legalize_xml_text(tspace)
+                    continue
 
             # if @tag is new, set new @current_tag value and increase group value.
             if tag != current_tag:

@@ -42,6 +42,20 @@ class Test_NLPToXML(unittest.TestCase):
         # check if result is as expected.
         self.assertTrue(is_valid)
 
+    def test__append_to_blocktext(self):
+        """ If a series of whitespace only token groups exist, can we avoid crashing?! :-)
+        For more info, see: 
+        http://blog.humaneguitarist.org/2018/03/07/hightailing-it-out-of-none-with-lxml/"""
+        
+        try:
+            elem = self.n2x.get_xml([("a","",""),("","","\v"),("","","\f")])
+            is_valid = self.n2x.validate_xml(elem)
+        except (TypeError, ValueError):
+            is_valid = False
+    
+        # check if result is as expected.
+        self.assertTrue(is_valid)
+
 
 # CLI.
 def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):

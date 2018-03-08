@@ -103,10 +103,10 @@ elementFormDefault="qualified">
 
 <xs:element name="Tokens">
     <xs:complexType mixed="true">
-        <xs:sequence>
+        <xs:choice maxOccurs="unbounded">
             <xs:element ref="Token" minOccurs="0" maxOccurs="unbounded" />
             <xs:element ref="BlockText" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
+        </xs:choice>
     </xs:complexType>
 </xs:element>
 
