@@ -167,8 +167,6 @@ class NLPToXML():
             if text == "":
                 
                 # if the last child is a <BlockText> element, append whitespace to it.
-                # for oddities re: += to an element's text, see:
-                # blog.humaneguitarist.org/2018/03/07/hightailing-it-out-of-none-with-lxml
                 children = tagged_el.getchildren()
                 if len(children) != 0 and children[-1].tag == "{" + self.ns_uri + \
                 "}BlockText" and children[-1].text is not None:
