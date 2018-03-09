@@ -187,9 +187,10 @@ class TextToNLP():
         """
 
         # legalize @jtext for use with json.loads().
-        jtext = jtext.replace("\v", "\n").replace("\f", "\n")
+        for ws in ["\f","\r","\v"]:
+            jtext = jtext.replace(ws, "\n")
         jtext = "".join([char for char in jtext if unicodedata.category(char)[0] != "C" or
-            char in ("\r", "\t")])
+            char in ("\t", "\n")])
         
         return jtext
 

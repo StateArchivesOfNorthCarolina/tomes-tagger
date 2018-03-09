@@ -72,9 +72,10 @@ class EAXSToTagged():
         """
 
         # legalize @xtext.
-        xtext = xtext.replace("\v", "\n").replace("\f", "\n")
+        for ws in ["\f","\r","\v"]:
+            xtext = xtext.replace(ws, "\n")
         xtext = "".join([char for char in xtext if unicodedata.category(char)[0] != "C" or
-            char in ("\r", "\t")])
+            char in ("\t", "\n")])
         
         return xtext
     
