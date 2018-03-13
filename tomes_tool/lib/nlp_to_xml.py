@@ -175,7 +175,8 @@ class NLPToXML():
                     # Why? see: "https://goo.gl/CvRRkb".
                     saved_text = children[-1].text
                     try:
-                        children[-1].text += tspace
+                        saved_text += tspace
+                        children[-1].text = saved_text
                     except ValueError as err:
                         self.logger.error(err)
                         msg = "Cleaning whitespace to append to existing <BlockText> element."
