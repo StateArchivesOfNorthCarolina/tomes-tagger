@@ -15,7 +15,7 @@ The tagged version of the EAXS file is meant to contain email messages that have
 # External Dependencies
 TOMES Tool requires the following applications:
 
-- [Python 3+](https://www.python.org/download/releases/3.0/) (using 3.6)
+- [Python 3.0+](https://www.python.org/download/releases/3.0/) (using 3.6)
 	- See the "./requirements.txt" file for additional module dependencies.
 	- You will also want to install [pip](https://pypi.python.org/pypi/pip) for Python 3.
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
