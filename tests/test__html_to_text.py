@@ -61,9 +61,10 @@ class Test_HTMLToText(unittest.TestCase):
         
         # convert to plain text.
         plain = self.h2t.get_text(html, is_raw=True)
+        plain = plain.strip()
         
         # check if result is as expected.
-        expected = "\nHello World!\n\n"
+        expected = "Hello World!"
         self.assertEqual(plain, expected)
 
 
