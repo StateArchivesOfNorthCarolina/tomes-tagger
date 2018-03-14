@@ -50,7 +50,9 @@ class Test_NLPToXML(unittest.TestCase):
         try:
             elem = self.n2x.get_xml([("a","",""),("","","\v"),("","","\f")])
             is_valid = self.n2x.validate_xml(elem)
-        except (TypeError, ValueError):
+        except ValueError:
+            is_valid = True
+        except Exception:
             is_valid = False
     
         # check if result is as expected.
