@@ -22,8 +22,7 @@ class Tagger():
         >>> # write tagged EAXS version of EAXS file.
         >>> sample = "../tests/sample_files/sampleEAXS.xml"
         >>> tagger = Tagger(host="http://localhost:9003")
-        >>> #tagger.write_tagged(sample) # "../tests/sample_files/sampleEAXS__tagged.xml".
-        >>> tagger.write_tagged(sample, "output.xml") # returns "output.xml".
+        >>> tagger.write_tagged(sample, "tagged.xml")
     """
     
 
@@ -121,45 +120,37 @@ class Tagger():
         return nlp
 
     
-    def write_tagged(self, eaxs_file, tagged_eaxs_file=None):
+    def write_tagged(self, eaxs_file, tagged_eaxs_file, *args, **kwargs):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
         
         Args:
-            - eaxs_file (str): The EAXS file to convert.
-            - tagged_eaxs_file (str): The tagged EAXS document will be written to this file.
-            If None, this value will be @eaxs_file with the ".xml" extension replaced with
-            "__tagged.xml".
+            - See tomes_tool.lib.eaxs_to_tagged.write_tagged() for more info.
 
         Returns:
-            str: The return value.
-            The filepath of the tagged EAXS document (@tagged_eaxs_file).
+            dict: The return value.
+            See tomes_tool.lib.eaxs_to_tagged.write_tagged() for more info.
 
         Raises:
-            Exception: If an exception was raised during the tagging process.
+            Exception: If an exception was raised.
         """
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
 
-        # if needed, define output path.
-        if tagged_eaxs_file is None:
-            tagged_eaxs_file = eaxs_file.replace(".xml", "__tagged.xml")
-        
         # create tagged EAXS.
+        results = []
         try:
-            self.e2t.write_tagged(eaxs_file, tagged_eaxs_file)
+            results = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file, *args, **kwargs)
         except Exception as err:
             self.logger.error(err)
             raise err
         
-        self.logger.info("Created tagged EAXS file: {}".format(tagged_eaxs_file))
-        return tagged_eaxs_file
-
+        return results
 
 # CLI.
-def main(eaxs: "source EAXS file", 
-        output: ("tagged EAXS destination"),
+def main(eaxs_file: ("source EAXS file"), 
+        tagged_eaxs_file: ("tagged EAXS destination"),
         silent: ("disable console logs", "flag", "s"),
-        host:("NLP server URL", "option")="http://localhost:9003"):
+        host: ("NLP server URL", "option")="http://localhost:9003"):
 
     "Converts EAXS document to tagged EAXS.\
     \nexample: `py -3 tagger.py ../tests/sample_files/sampleEAXS.xml tagged.xml`"
@@ -184,7 +175,8 @@ def main(eaxs: "source EAXS file",
     logging.info("Running CLI: " + " ".join(sys.argv))
     try:
         tagger = Tagger(host, check_host=True)
-        tagger.write_tagged(eaxs, output)
+        results = tagger.write_tagged(eaxs_file, tagged_eaxs_file)
+        logging.info("Results: {}".format(results))
         logging.info("Done.")
         sys.exit()
     except Exception as err:
