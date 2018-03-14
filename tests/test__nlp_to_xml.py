@@ -4,6 +4,7 @@
 import sys; sys.path.append("..")
 import logging
 import unittest
+from lxml import etree
 from tomes_tool.lib.nlp_to_xml import *
 
 # enable logging.
@@ -43,18 +44,15 @@ class Test_NLPToXML(unittest.TestCase):
         self.assertTrue(is_valid)
 
     def test__append_to_blocktext(self):
-        """ If a series of whitespace only token groups exist, can we avoid crashing?! :-)
-        For more info, see: 
-        http://blog.humaneguitarist.org/2018/03/07/hightailing-it-out-of-none-with-lxml/"""
+        """ If a series of whitespace only token groups exist and one contains an illegal XML
+        character, can we avoid a TypeError? For more info, see:
+        "http://blog.humaneguitarist.org/?p=6760/". """
         
-        try:
-            elem = self.n2x.get_xml([("a","",""),("","","\v"),("","","\f")])
-            is_valid = self.n2x.validate_xml(elem)
-        except ValueError:
-            is_valid = True
-        except Exception:
-            is_valid = False
-    
+        elem = self.n2x.get_xml([("","","\v"),("first TOKEN element","",""),("","","\v"),
+            ("","","\f")])
+        logging.debug(etree.tostring(elem))           
+        is_valid = self.n2x.validate_xml(elem)
+
         # check if result is as expected.
         self.assertTrue(is_valid)
 

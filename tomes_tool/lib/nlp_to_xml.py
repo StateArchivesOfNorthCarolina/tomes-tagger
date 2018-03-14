@@ -166,23 +166,23 @@ class NLPToXML():
             # add whitespace-only items to tree and continue.
             if text == "":
                 
-                # if the last child is a <BlockText> element, append whitespace to it.
+                # if a child exists, append whitespace to its tail.
                 children = tagged_el.getchildren()
-                if len(children) != 0 and children[-1].tag == "{" + self.ns_uri + \
-                "}BlockText" and children[-1].text is not None:
-                      
-                    # capture current value of element text.
-                    # Why? see: "https://goo.gl/CvRRkb".
-                    saved_text = children[-1].text
+                if len(children) != 0:
+                    
+                    # capture current value of element tail and ensure it's a string.
+                    # Why? see: "http://blog.humaneguitarist.org/?p=6760".
+                    saved_tail = children[-1].tail
+                    if saved_tail is None:
+                        saved_tail = ""
                     try:
-                        saved_text += tspace
-                        children[-1].text = saved_text
+                        children[-1].tail += tspace
                     except ValueError as err:
                         self.logger.error(err)
                         msg = "Cleaning whitespace to append to existing <BlockText> element."
                         self.logger.info(msg)
-                        saved_text += self._legalize_xml_text(tspace)
-                        children[-1].text = saved_text
+                        saved_tail += self._legalize_xml_text(tspace)
+                        children[-1].tail = saved_tail
                     continue
 
                 # otherwise, create a new <BlockText> element to contain the whitespace.
