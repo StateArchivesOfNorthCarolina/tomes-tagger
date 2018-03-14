@@ -1,5 +1,4 @@
 # Introduction
-
 **TOMES Tool** is part of the [TOMES](https://www.ncdcr.gov/resources/records-management/tomes) project.
 
 It is written in Python.
@@ -14,20 +13,19 @@ The tagged version of the EAXS file is meant to contain email messages that have
 
 
 # External Dependencies
-
 TOMES Tool requires the following applications:
 
 - [Python 3+](https://www.python.org/download/releases/3.0/) (using 3.6)
 	- See the "./requirements.txt" file for additional module dependencies.
-- [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
-	- *We're currently using this for NER tagging.*
-	- Please see the CoreNLP documentation for Java and memory requirements, etc.
-	- If you want to use the TOMES Project NER mappings, you must place the "regexner\_TOMES" directory (found in in the "./tomes\_tool/NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
+	- You will also want to install [pip](https://pypi.python.org/pypi/pip) for Python 3.
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
 	- *We're currently using this for HTML email to plain text conversion.*
 	- The "lynx" command must be executable from any directory on your system.
 		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
-
+- [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
+	- *We're currently using this for NER tagging.*
+	- Please see the CoreNLP documentation for Java and memory requirements, etc.
+	- If you want to use the TOMES Project NER mappings, you must place the "regexner\_TOMES" directory (found in in the "./tomes\_tool/NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 
 # Installation
 After installing the external dependencies above, you'll need to install some required Python packages.
@@ -46,7 +44,6 @@ While not true unit tests that test each function or method of a given module or
 Unit tests reside in the "./tomes\_tool/tests" directory and start with "test__".
 
 ## Running the tests
-
 To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the "./tomes\_tool/tests" directory. 
 
 Specific unit tests of interest:
@@ -60,7 +57,6 @@ Of course, you can also test CoreNLP directly by starting it and going to the co
 
 
 ## Using the command line
-
 All of the unit tests have command line options.
 
 To see the options and usage examples simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
@@ -82,7 +78,6 @@ To get started, import the module and run help():
 	>>> help(tagger)
 
 ## Using tagger.py from the command line
-
 1. Start the CoreNLP server.
 	- Until further notice, it is assumed you will run the server on port 9003 with a lengthy timeout:
 	
@@ -93,4 +88,4 @@ To get started, import the module and run help():
 3. Try the example help command.
 
 -----
-*[1] Depending on your system configuration, you might be able to specify "python" and "pip" instead of "py -3" or "pip3" from the command line.*
+*[1] Depending on your system configuration, you might need to specify "python3", etc. instead of "py -3" from the command line.*

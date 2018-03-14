@@ -7,7 +7,7 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 		<Name>bar</Name>
 		<Message>
 			<RelPath>.</RelPath>
-			<LocalId>1000</LocalId>
+			<LocalId>1001</LocalId>
 			<MessageId>
 				<![CDATA[<ED9695289A7864408173A11BEBDEB481014581D7>]]>
 			</MessageId>
