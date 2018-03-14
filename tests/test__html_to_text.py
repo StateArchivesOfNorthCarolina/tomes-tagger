@@ -83,7 +83,7 @@ class Test_HTMLToText(unittest.TestCase):
 def main(html_file: "HTML file"):
     
     "Prints plain text version of an HTML file.\
-    \nexample: `py -3 test__html_to_text ../tests/sample_files/sampleHTML.html`"
+    \nexample: `py -3 test__html_to_text sample_files/sampleHTML.html`"
 
     # read HTML file.
     html = open(html_file).read()
