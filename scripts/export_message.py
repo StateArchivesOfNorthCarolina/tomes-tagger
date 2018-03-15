@@ -87,7 +87,7 @@ def main(eaxs_file:"any EAXS file",
         print("Total messages found: {}".format(results))
         sys.exit()
     except Exception as err:
-        sys.exit(err)
+        sys.exit(err.__repr__())
 
 
 if __name__ == "__main__":
