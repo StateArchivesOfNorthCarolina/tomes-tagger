@@ -1,6 +1,0 @@
-phrase	returned_phrase	expected_tag	tags_found	is_match_expected	is_as_expected	exactness_score
-12345678	['12345678']	ncdcr.gov/PII.beacon_id	['ncdcr.gov/PII.beacon_id']	True	True	1.0
-12345678 123	['12345678', '123']	ncdcr.gov/PII.beacon_id	['ncdcr.gov/PII.beacon_id', '']	True	True	0.5
-123456	['123456']	ncdcr.gov/PII.beacon_id	['']	False	True	0
-1 234567	['1', '234567']	ncdcr.gov/PII.beacon_id	['', '']	False	True	0
-123456789	['123456789']	ncdcr.gov/PII.beacon_id	['ncdcr.gov/PII.passport_number']	False	True	0

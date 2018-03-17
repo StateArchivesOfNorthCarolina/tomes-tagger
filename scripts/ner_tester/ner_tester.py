@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 
-""" This script provides a way to test if NER tagging results are as expected. """
+""" This script creates a report file for NER tagging of test data. """
 
 # import modules.
-import sys; sys.path.append("..")
+import sys; sys.path.append("../../")
 import codecs
 import logging
 import os
 from glob import glob
-from tomes_tool.lib.text_to_nlp import *
+from tomes_tool.lib.text_to_nlp import TextToNLP
+
+
+# create tagger instance.
+t2n = TextToNLP()
 
 # enable logging.
 logging.basicConfig(level=logging.WARNING)
@@ -16,106 +20,70 @@ logger = logging.getLogger(__name__)
 logger.setLevel("INFO")
 
 
-def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_results.tsv"):
-    """ Tests NER patterns in @data_path and writes results to @results_path.
+def testDataFile(test_file, results_file):
+    """ Tests NER patterns in @test_file and writes results to @results_file.
     
     Args:
-        - data_path (str): The filepath with test data (in the required format).
-        - results_path (str): The filepath in which to write the test results.
+        - test_file (str): The filepath with test data (one phrase per line).
+        - results_file (str): The filepath to which to write the test results.
     
     Returns:
         None
 
     Raises:
-        FileExistsError: If @results_path already exists.
+        FileNotFoundError: If @test_file doesn't exist.
+        FileExistsError: If @results_file already exists.
     """
 
-    # test if @results_path already exists.
-    if os.path.isfile(results_path):
-        err = ("'{}' already exists.".format(results_path))
+    # test is @test_file exists.
+    if not os.path.isfile(test_file):
+        err = ("'{}' doesn't exists.".format(test_file))
         logger.error(err)
-        logger.warning("Delete file '{}' before running '{}'.".format(results_path, 
-            __file__))
+        raise FileNotFoundError(err)
+
+    # test if @results_file already exists.
+    if os.path.isfile(results_file):
+        err = ("'{}' already exists.".format(results_file))
+        logger.error(err)
+        logger.warning("Delete or rename: {}".format(results_file))
         raise FileExistsError(err)
     else:
-        logger.info("Creating new results file: {}".format(results_path))
-        results_file = open(results_path, "w", encoding="utf-8")
+        logger.info("Creating new results file: {}".format(results_file))
+        results_file = open(results_file, "w", encoding="utf-8")
 
-    # read @data_path.
-    logger.info("Testing data in: {}".format(data_path))    
-    with open(data_path) as f:
-        test_data = f.read().split("\n")
-    
-    # creat tagger instance.
-    t2n = TextToNLP()
+    # read @test_file.
+    logger.info("Testing data in: {}".format(test_file))    
+    with open(test_file, encoding="utf-8") as df:
+        test_data = df.read().split("\n")
 
-    # write header row.
-    header = ["phrase", "returned_phrase", "expected_tag", "tags_found", "is_match_expected",
-            "is_as_expected", "exactness_score"]
-    header = "\t".join(header) + "\n"
-    results_file.write(header)
-
-    # get NER tags for each line in @data_path; write results row.
+    # get NER tags for each line in @test_file; write results row.
     line_num = 0
     tested_lines = 0
     for line in test_data:
     
         line_num += 1
+        logger.info("Testing line: {}".format(line_num))
 
         # ignore blank lines and comment lines.
         if line == "":
-            logger.debug("Skipping blank line at line number: {}".format(line_num))
+            logger.info("Skipping blank line.".format(line_num))
             continue
-        if "#" in line:
-            logger.debug("Skipping comment line at line number: {}".format(line_num))
+        if line[0] == "#":
+            logger.info("Skipping comment line.".format(line_num))
             continue
+ 
+        # get NER tags as string.
+        results = ""
+        for ner_tag in t2n.get_NER(line):
+            results += "\t".join(ner_tag)
 
-        # split line.
-        logger.debug("Testing line: {}".format(line_num))
-        try:
-            phrase, expected_tag, is_match_expected = line.split("\t")
-            tested_lines += 1
-        except ValueError as err:
-            logger.error(err)
-            logger.error("Found {} tabs; expected 3.".format(line.count("\t")))
-            logger.warning("Skipping invalid line: {}".format(line_num))
-            continue
-        
-        # determine if @expected_tag SHOULD be returned via tagging.
-        if is_match_expected == "TRUE":
-            is_match_expected = True
-        else:
-            is_match_expected = False
+        # write test @results_file.
+        results_file.write(line)
+        results_file.write("\n")
+        results_file.write(results)
+        results_file.write("\n" * 3)
 
-        # get NER tags; format results.
-        ner_tags = t2n.get_NER(phrase)
-        tokens_found, tags_found = [], []
-        if len(ner_tags) != 0:
-            tokens_found = [n[0] for n in ner_tags]
-            tags_found = [n[1] for n in ner_tags]
-
-        # determine if matching went as expected. 
-        if is_match_expected and expected_tag == tags_found[0]:
-            is_as_expected = True
-        elif not is_match_expected and expected_tag != tags_found[0]:
-            is_as_expected = True
-        else:
-            is_as_expected = False
-
-        # determine how exactly the tag results matched the @expected_tag.
-        # "1" means only the @expected_tag was found while anything else greater than "0"
-        # likely means that the @phrase was tokenized and the matching tag applies to only 
-        # part of the @phrase.
-        exactness_score = 0
-        if expected_tag in tags_found:
-            exactness_score = 1/len(tags_found)
-        
-        # write test results row.
-        result = [phrase, tokens_found, expected_tag, tags_found, is_match_expected, 
-                is_as_expected, exactness_score]
-        result = [str(r) for r in result]
-        result = "\t".join(result) + "\n"
-        results_file.write(result)
+        tested_lines += 1
 
     # close file.
     results_file.close()
@@ -124,14 +92,15 @@ def testDataFile(data_path="ner_tester_data.tsv", results_path="ner_tester_resul
         
 
 # CLI.
-def main(test_data:"path to tab-delimited test data", 
-        report_file:"destination file for test results"):
+def main(test_file:"path to test file", 
+        results_file:"destination for results file"):
     
-    "Creates tab-delimited report file for NER tagging of test data.\
-    \nexample: `py -3 ner_tester.py test_data.tsv report_file.tsv`"
+    "Creates report file for NER tagging of test data.\
+    \nexample: `py -3 ner_tester.py test_file.txt results_file.txt`"
 
-    results_path = testDataFile(test_data, report_file)
-    logging.info("Created results file: {}".format(results_path))
+    results_file = testDataFile(test_file, results_file)
+    logging.info("Created results file: {}".format(results_file))
+
 
 if __name__ == "__main__":
     
