@@ -1,0 +1,153 @@
+#### utah_gov
+# PII.ut_employee_id
+123546
+
+# PII.ut_id_or_casefile_number
+123456789
+
+# PII.ut_university_id
+U12345678
+
+#### kshs_org
+# PII.drivers_license_number
+K00-00-0000
+K12-34-5678
+K98-76-5432
+K00000000
+K12345678
+K98765432
+
+# PII.ks_tax_clearance_certificate
+xxxx-xxxx-xxxx
+X1X1-X1X1-X1X1
+AS12-DF34-GH56
+123L-456K-789J
+POI1-UYT2-REW3
+1234-5678-9012
+
+#### nc_gov
+# code_of_federal_regulations_citation
+1 CFR 1
+1 CFR 123
+1 CFR 123.1234
+1 C.F.R 1
+1 C.F.R 123
+1 C.F.R 123.1234
+1 CFR § 1
+1 CFR § 123
+59 CFR § 123.1234
+
+# executive_order_citation
+# THIS ONE NEEDS WORK.
+Executive Order 123
+Executive Order No. 1
+EO123
+EO 123
+E.O. 123
+E. O. 123
+
+# general_statutes_citation
+General StatuTe 1
+GS1A
+GS 123
+G.S. §123
+G.S. § 123
+
+# house_bill_citation
+H123
+H1234
+House BiLl 123
+H.B. 123
+H. B. 1
+
+# north_carolina_administrative_code_citation
+# THIS ONE NEEDS WORK.
+17 N.C. Admin. Code 5C.0703
+17 NCAC 5C.0703
+
+# PII.bank_account_number
+# THIS ONE NEEDS WORK.
+123456789-123456
+123456789 123456
+223456789 12345678910131517
+1234-5678-9-123456
+1234-5678-9 123456
+223456789 123456
+223456789-123456
+223456789 12345678910131517
+123456789-123456
+223456789 123456
+223456789-123456
+
+# PII.credit_card_number
+1234-1234-1234-1234
+1234 1234 1234 1234
+4465-1234 5467-2341
+
+# PII.drivers_license_number
+000012345678
+
+# PII.employee_id
+# This will get overridden by the passport_number. Is what it is.
+12345678
+
+# PII.passport_number
+12345678
+a1234567
+A1234567
+
+# PII.social_security_number
+433-91-9072
+155 21 7104
+
+# PII.taxpayer_id
+12-1234567
+12-1234567A
+12-1234567001
+
+# senate_bill_citation
+S123
+S1234
+Senate BiLl 123
+senate bill12
+S.B. 123
+S. B. 1
+
+# session_law_citation
+# THIS ONE NEEDS WORK.
+Session Law 1234-1
+session lAw 1234-1
+SL 1234-134
+S.L. 1234-1
+S. L. 1234-1
+
+# TOMES.email_address
+single@foo.com
+dot.ted@foo.edu
+dot.ted@dot.ted.gov
+d.ot.ted@ws.ws
+ip.address@[127.0.0.1]
+UPPER@CASE.FOO
+
+# TOMES.URL
+# THIS ONE NEEDS WORK - FTP not working.
+http://foo.com/blah_blah
+http://foo.com/blah_blah/
+http://foo.com/blah_blah_(wikipedia)
+http://foo.com/blah_blah_(wikipedia)_(again)
+ftp://www.example.com/wpstyle/?p=364
+https://www.example.com/foo/?bar=baz&inga=42&quux
+
+# united_states_code_citation
+# THIS ONE NEEDS WORK.
+1 USC 1
+1 USC 123
+1 USC 123-1234
+1 U.S.C 1
+1 U.S.C 123
+1 U.S.C 123.1234
+1 USC § 1
+1 USC § 123
+59 USC §§ 123-1234
+1 USC 123-0234
+

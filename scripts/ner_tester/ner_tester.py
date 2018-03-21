@@ -64,18 +64,20 @@ def testDataFile(test_file, results_file):
         line_num += 1
         logger.info("Testing line: {}".format(line_num))
 
-        # ignore blank lines and comment lines.
+        # deal with blank and comment lines.
         if line == "":
-            logger.info("Skipping blank line.".format(line_num))
             continue
-        if line[0] == "#":
-            logger.info("Skipping comment line.".format(line_num))
+        elif line[0] == "#":
+            logger.info("Line {} is a non-test line.".format(line_num))
+            results_file.write(line + "\n")
             continue
  
         # get NER tags as string.
-        results = ""
-        for ner_tag in t2n.get_NER(line):
-            results += "\t".join(ner_tag)
+        results = ["\t"]
+        for ner in t2n.get_NER(line):
+            text, tag, ws = ner
+            results.append(text + "\t" + tag)
+        results = "\n\t".join(results)
 
         # write test @results_file.
         results_file.write(line)

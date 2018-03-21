@@ -1,0 +1,631 @@
+#### utah_gov
+# PII.ut_employee_id
+123546
+	
+	123546	1e06ea#0249::utah.gov::PII.employee_id
+
+
+# PII.ut_id_or_casefile_number
+123456789
+	
+	123456789	1e06ea#0250::utah.gov::PII.drivers_license_number
+
+
+# PII.ut_university_id
+U12345678
+	
+	U12345678	1e06ea#0248::utah.gov::PII.university_id
+
+
+#### kshs_org
+# PII.drivers_license_number
+K00-00-0000
+	
+	K00-00-0000	1e06ea#0251::kshs.org::PII.drivers_license_number
+
+
+K12-34-5678
+	
+	K12-34-5678	1e06ea#0251::kshs.org::PII.drivers_license_number
+
+
+K98-76-5432
+	
+	K98-76-5432	1e06ea#0251::kshs.org::PII.drivers_license_number
+
+
+K00000000
+	
+	K00000000	1e06ea#0251::kshs.org::PII.drivers_license_number
+
+
+K12345678
+	
+	K12345678	1e06ea#0251::kshs.org::PII.drivers_license_number
+
+
+K98765432
+	
+	K98765432	1e06ea#0251::kshs.org::PII.drivers_license_number
+
+
+# PII.ks_tax_clearance_certificate
+xxxx-xxxx-xxxx
+	
+	xxxx-xxxx-xxxx	1e06ea#0252::kshs.org::PII.tax_clearance_certificate
+
+
+X1X1-X1X1-X1X1
+	
+	X1X1-X1X1-X1X1	1e06ea#0252::kshs.org::PII.tax_clearance_certificate
+
+
+AS12-DF34-GH56
+	
+	AS12-DF34-GH56	1e06ea#0252::kshs.org::PII.tax_clearance_certificate
+
+
+123L-456K-789J
+	
+	123L-456K-789J	1e06ea#0252::kshs.org::PII.tax_clearance_certificate
+
+
+POI1-UYT2-REW3
+	
+	POI1-UYT2-REW3	1e06ea#0252::kshs.org::PII.tax_clearance_certificate
+
+
+1234-5678-9012
+	
+	1234-5678-9012	1e06ea#0252::kshs.org::PII.tax_clearance_certificate
+
+
+#### nc_gov
+# code_of_federal_regulations_citation
+1 CFR 1
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	CFR	1e06ea#0232::nc.gov::FEDERAL.governance
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+1 CFR 123
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	CFR	1e06ea#0232::nc.gov::FEDERAL.governance
+	123	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+1 CFR 123.1234
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	CFR	1e06ea#0232::nc.gov::FEDERAL.governance
+	123.1234	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+1 C.F.R 1
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	C.F.R	1e06ea#0232::nc.gov::FEDERAL.governance
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+1 C.F.R 123
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	C.F.R	1e06ea#0232::nc.gov::FEDERAL.governance
+	123	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+1 C.F.R 123.1234
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	C.F.R	1e06ea#0232::nc.gov::FEDERAL.governance
+	123.1234	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+1 CFR § 1
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	CFR	1e06ea#0232::nc.gov::FEDERAL.governance
+	§	1e06ea#0232::nc.gov::FEDERAL.governance
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+1 CFR § 123
+	
+	1	1e06ea#0232::nc.gov::FEDERAL.governance
+	CFR	1e06ea#0232::nc.gov::FEDERAL.governance
+	§	1e06ea#0232::nc.gov::FEDERAL.governance
+	123	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+59 CFR § 123.1234
+	
+	59	1e06ea#0232::nc.gov::FEDERAL.governance
+	CFR	1e06ea#0232::nc.gov::FEDERAL.governance
+	§	1e06ea#0232::nc.gov::FEDERAL.governance
+	123.1234	1e06ea#0232::nc.gov::FEDERAL.governance
+
+
+# executive_order_citation
+Executive Order 123
+	
+	Executive	1e06ea#0233::nc.gov::STATE.governance
+	Order	1e06ea#0233::nc.gov::STATE.governance
+	123	1e06ea#0233::nc.gov::STATE.governance
+
+
+Executive Order No. 1
+	
+	Executive	1e06ea#0233::nc.gov::STATE.governance
+	Order	1e06ea#0233::nc.gov::STATE.governance
+	No.	1e06ea#0233::nc.gov::STATE.governance
+	1	1e06ea#0233::nc.gov::STATE.governance
+
+
+EO123
+	
+	EO123	
+
+
+EO 123
+	
+	EO	1e06ea#0233::nc.gov::STATE.governance
+	123	1e06ea#0233::nc.gov::STATE.governance
+
+
+E.O. 123
+	
+	E.O.	1e06ea#0219::nc.gov::STATE.governance
+	123	
+
+
+E. O. 123
+	
+	E.	1e06ea#0233::nc.gov::STATE.governance
+	O.	1e06ea#0233::nc.gov::STATE.governance
+	123	1e06ea#0233::nc.gov::STATE.governance
+
+
+# general_statutes_citation
+General StatuTe 1
+	
+	General	1e06ea#0234::nc.gov::STATE.governance
+	StatuTe	1e06ea#0234::nc.gov::STATE.governance
+	1	1e06ea#0234::nc.gov::STATE.governance
+
+
+GS1A
+	
+	GS1A	1e06ea#0234::nc.gov::STATE.governance
+
+
+GS 123
+	
+	GS	1e06ea#0234::nc.gov::STATE.governance
+	123	1e06ea#0234::nc.gov::STATE.governance
+
+
+G.S. §123
+	
+	G.S.	1e06ea#0234::nc.gov::STATE.governance
+	§	1e06ea#0234::nc.gov::STATE.governance
+	123	1e06ea#0234::nc.gov::STATE.governance
+
+
+G.S. § 123
+	
+	G.S.	1e06ea#0234::nc.gov::STATE.governance
+	§	1e06ea#0234::nc.gov::STATE.governance
+	123	1e06ea#0234::nc.gov::STATE.governance
+
+
+# house_bill_citation
+H123
+	
+	H123	1e06ea#0235::nc.gov::STATE.governance
+
+
+H1234
+	
+	H1234	1e06ea#0235::nc.gov::STATE.governance
+
+
+House BiLl 123
+	
+	House	1e06ea#0235::nc.gov::STATE.governance
+	BiLl	1e06ea#0235::nc.gov::STATE.governance
+	123	1e06ea#0235::nc.gov::STATE.governance
+
+
+H.B. 123
+	
+	H.B.	1e06ea#0235::nc.gov::STATE.governance
+	123	1e06ea#0235::nc.gov::STATE.governance
+
+
+H. B. 1
+	
+	H.	1e06ea#0235::nc.gov::STATE.governance
+	B.	1e06ea#0235::nc.gov::STATE.governance
+	1	1e06ea#0235::nc.gov::STATE.governance
+
+
+# north_carolina_administrative_code_citation
+17 N.C. Admin. Code 5C.0703
+	
+	17	
+	N.C.	
+	Admin	
+	.	
+	Code	
+	5C	
+	.0703	
+
+
+17 NCAC 5C.0703
+	
+	17	
+	NCAC	1e06ea#0225::nc.gov::STATE.governance
+	5C	
+	.0703	
+
+
+# PII.bank_account_number
+123456789-123456
+	
+	123456789-123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+123456789 123456
+	
+	123456789	1e06ea#0253::nc.gov::PII.bank_account_number
+	123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+223456789 12345678910131517
+	
+	223456789	1e06ea#0253::nc.gov::PII.bank_account_number
+	12345678910131517	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+1234-5678-9-123456
+	
+	1234-5678-9-123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+1234-5678-9 123456
+	
+	1234-5678-9	1e06ea#0253::nc.gov::PII.bank_account_number
+	123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+223456789 123456
+	
+	223456789	1e06ea#0253::nc.gov::PII.bank_account_number
+	123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+223456789-123456
+	
+	223456789-123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+223456789 12345678910131517
+	
+	223456789	1e06ea#0253::nc.gov::PII.bank_account_number
+	12345678910131517	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+123456789-123456
+	
+	123456789-123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+223456789 123456
+	
+	223456789	1e06ea#0253::nc.gov::PII.bank_account_number
+	123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+223456789-123456
+	
+	223456789-123456	1e06ea#0253::nc.gov::PII.bank_account_number
+
+
+# PII.credit_card_number
+1234-1234-1234-1234
+	
+	1234-1234-1234-1234	1e06ea#0256::nc.gov::PII.credit_card_number
+
+
+1234 1234 1234 1234
+	
+	1234 1234 1234 1234	
+
+
+4465-1234 5467-2341
+	
+	4465-1234 5467-2341	
+
+
+# PII.drivers_license_number
+000012345678
+	
+	000012345678	1e06ea#0258::nc.gov::PII.drivers_license_number
+
+
+# PII.employee_id
+12345678
+	
+	12345678	1e06ea#0254::nc.gov::PII.passport_number
+
+
+# PII.passport_number
+12345678
+	
+	12345678	1e06ea#0254::nc.gov::PII.passport_number
+
+
+a1234567
+	
+	a1234567	1e06ea#0254::nc.gov::PII.passport_number
+
+
+A1234567
+	
+	A1234567	1e06ea#0254::nc.gov::PII.passport_number
+
+
+# PII.social_security_number
+433-91-9072
+	
+	433-91-9072	1e06ea#0259::nc.gov::PII.social_security_number
+
+
+155 21 7104
+	
+	155	1e06ea#0259::nc.gov::PII.social_security_number
+	21	1e06ea#0259::nc.gov::PII.social_security_number
+	7104	1e06ea#0259::nc.gov::PII.social_security_number
+
+
+# PII.taxpayer_id
+12-1234567
+	
+	12-1234567	1e06ea#0257::nc.gov::PII.taxpayer_id
+
+
+12-1234567A
+	
+	12-1234567A	1e06ea#0257::nc.gov::PII.taxpayer_id
+
+
+12-1234567001
+	
+	12-1234567001	1e06ea#0257::nc.gov::PII.taxpayer_id
+
+
+# senate_bill_citation
+S123
+	
+	S123	1e06ea#0246::nc.gov::STATE.governance
+
+
+S1234
+	
+	S1234	1e06ea#0246::nc.gov::STATE.governance
+
+
+Senate BiLl 123
+	
+	Senate	1e06ea#0246::nc.gov::STATE.governance
+	BiLl	1e06ea#0246::nc.gov::STATE.governance
+	123	1e06ea#0246::nc.gov::STATE.governance
+
+
+senate bill12
+	
+	senate	1e06ea#0246::nc.gov::STATE.governance
+	bill12	1e06ea#0246::nc.gov::STATE.governance
+
+
+S.B. 123
+	
+	S.B.	1e06ea#0246::nc.gov::STATE.governance
+	123	1e06ea#0246::nc.gov::STATE.governance
+
+
+S. B. 1
+	
+	S.	1e06ea#0246::nc.gov::STATE.governance
+	B.	1e06ea#0246::nc.gov::STATE.governance
+	1	1e06ea#0246::nc.gov::STATE.governance
+
+
+# session_law_citation
+Session Law 1234-1
+	
+	Session	1e06ea#0240::nc.gov::STATE.governance
+	Law	1e06ea#0240::nc.gov::STATE.governance
+	1234-1	
+
+
+session lAw 1234-1
+	
+	session	1e06ea#0240::nc.gov::STATE.governance
+	lAw	1e06ea#0240::nc.gov::STATE.governance
+	1234-1	
+
+
+SL 1234-134
+	
+	SL	1e06ea#0229::nc.gov::STATE.governance
+	1234-134	
+
+
+S.L. 1234-1
+	
+	S.L.	1e06ea#0230::nc.gov::STATE.governance
+	1234-1	
+
+
+S. L. 1234-1
+	
+	S.	1e06ea#0231::nc.gov::STATE.governance
+	L.	1e06ea#0231::nc.gov::STATE.governance
+	1234-1	
+
+
+# TOMES.email_address
+single@foo.com
+	
+	single@foo.com	1e06ea#0318::nc.gov::TOMES.email_address
+
+
+dot.ted@foo.edu
+	
+	dot.ted@foo.edu	1e06ea#0318::nc.gov::TOMES.email_address
+
+
+dot.ted@dot.ted.gov
+	
+	dot.ted@dot.ted.gov	1e06ea#0318::nc.gov::TOMES.email_address
+
+
+d.ot.ted@ws.ws
+	
+	d.ot.ted@ws.ws	1e06ea#0318::nc.gov::TOMES.email_address
+
+
+ip.address@[127.0.0.1]
+	
+	ip.address@[127.0.0.1]	1e06ea#0318::nc.gov::TOMES.email_address
+
+
+UPPER@CASE.FOO
+	
+	UPPER@CASE.FOO	1e06ea#0318::nc.gov::TOMES.email_address
+
+
+# TOMES.URL
+http://foo.com/blah_blah
+	
+	http://foo.com/blah_blah	1e06ea#0319::nc.gov::TOMES.URL
+
+
+http://foo.com/blah_blah/
+	
+	http://foo.com/blah_blah/	1e06ea#0319::nc.gov::TOMES.URL
+
+
+http://foo.com/blah_blah_(wikipedia)
+	
+	http://foo.com/blah_blah_	1e06ea#0319::nc.gov::TOMES.URL
+	(	
+	wikipedia	
+	)	
+
+
+http://foo.com/blah_blah_(wikipedia)_(again)
+	
+	http://foo.com/blah_blah_	1e06ea#0319::nc.gov::TOMES.URL
+	(	
+	wikipedia	
+	)	
+	_	
+	(	
+	again	
+	)	
+
+
+ftp://www.example.com/wpstyle/?p=364
+	
+	ftp	
+	:	
+	/	
+	/	
+	www.example.com/wpstyle/?p=364	
+
+
+https://www.example.com/foo/?bar=baz&inga=42&quux
+	
+	https://www.example.com/foo/?bar=baz&inga=42&quux	1e06ea#0319::nc.gov::TOMES.URL
+
+
+# united_states_code_citation
+1 USC 1
+	
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+	USC	1e06ea#0247::nc.gov::FEDERAL.governance
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+1 USC 123
+	
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+	USC	1e06ea#0247::nc.gov::FEDERAL.governance
+	123	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+1 USC 123-1234
+	
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+	USC	1e06ea#0247::nc.gov::FEDERAL.governance
+	123-1234	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+1 U.S.C 1
+	
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+	U.S.C	1e06ea#0247::nc.gov::FEDERAL.governance
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+1 U.S.C 123
+	
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+	U.S.C	1e06ea#0247::nc.gov::FEDERAL.governance
+	123	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+1 U.S.C 123.1234
+	
+	1	
+	U.S.C	::stanford.edu::ORGANIZATION
+	123.1234	
+
+
+1 USC § 1
+	
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+	USC	1e06ea#0247::nc.gov::FEDERAL.governance
+	§	1e06ea#0247::nc.gov::FEDERAL.governance
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+1 USC § 123
+	
+	1	1e06ea#0247::nc.gov::FEDERAL.governance
+	USC	1e06ea#0247::nc.gov::FEDERAL.governance
+	§	1e06ea#0247::nc.gov::FEDERAL.governance
+	123	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+59 USC §§ 123-1234
+	
+	59	1e06ea#0247::nc.gov::FEDERAL.governance
+	USC	1e06ea#0247::nc.gov::FEDERAL.governance
+	§	1e06ea#0247::nc.gov::FEDERAL.governance
+	§	1e06ea#0247::nc.gov::FEDERAL.governance
+	123-1234	1e06ea#0247::nc.gov::FEDERAL.governance
+
+
+1 USC 123-0234
+	
+	1	
+	USC	1e06ea#0050::nc.gov::FEDERAL.governance
+	123-0234	
+
+
