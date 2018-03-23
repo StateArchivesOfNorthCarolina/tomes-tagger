@@ -11,9 +11,6 @@ from glob import glob
 from tomes_tool.lib.text_to_nlp import TextToNLP
 
 
-# create tagger instance.
-t2n = TextToNLP()
-
 # enable logging.
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -55,6 +52,9 @@ def testDataFile(test_file, results_file):
     logger.info("Testing data in: {}".format(test_file))    
     with open(test_file, encoding="utf-8") as df:
         test_data = df.read().split("\n")
+
+    # create tagger instance.
+    t2n = TextToNLP()
 
     # get NER tags for each line in @test_file; write results row.
     line_num = 0

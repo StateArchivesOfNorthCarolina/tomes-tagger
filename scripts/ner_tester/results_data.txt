@@ -2038,6 +2038,7 @@ H. B. 1
 
 
 # north_carolina_administrative_code_citation
+# The first two will be partial matches because CoreNLP thinks "Admin." ends a sentence.
 17 NC Admin. Code 5C.0703
 	
 	17	8a29ef#0251::nc.gov::STATE.governance
