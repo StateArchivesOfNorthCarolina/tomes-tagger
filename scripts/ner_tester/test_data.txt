@@ -1,0 +1,448 @@
+#### non-expression patterns
+Attorney General
+AG
+Child and Family Services
+DCFS
+Workforce Services
+DWS
+Office of Recovery Services
+ORS
+Office of Management and Budget
+GOPB
+Constitution Hall
+Fort Hays
+Grinter Place
+Hollenberg Pony Express Station
+Kaw Mission
+Mine Creek Civil War Battlefront
+Pawnee Indian Museum
+Red Rocks
+Kansas State Capitol
+Kansas Museum of History
+Governor Sam Brownback
+Lieutenant Governor Jeff Colyer
+Capitol Preservation Committee
+Joint Committee on State Building Construction
+Legislative Coordinating Council
+House Appropriations Committee
+Senate Ways and Means
+House Education Committee
+Senate Education Committee
+State Historic Preservation Officer
+Secretary of Administration
+Division of the Budget
+Commissioner of Education
+Legislative Administrative Services
+Legislative Division of Post-Audit
+Revisor of Statutes
+EDPNC
+CMS
+FHWA
+DOJ
+DHHS
+DOT
+SBI
+SAC
+NEPA
+SEPA
+UBO
+CFR
+C.F.R.
+USC
+U.S.C.
+GS
+G.S.
+DOA
+HUB
+HUB Office
+HUB Director
+State Purchase Officer
+P&C
+HR Mgmt
+State Parking Director
+State Environmental Review Clearinghouse
+Eugenics Commission
+Eugenics Board
+Eugenics Compensation Task Force
+NC Eugenics Task Force
+Sterilization Victims Foundation
+Eugenics Compensation Program
+Sterilization Foundation 
+Project COPE
+Fiscal Mgmt
+State Fair
+Ag Statistics
+Vet Division
+S&W Cost Share Program
+S&W
+Local SWCDs
+Division of Soil & Water 
+NCFS
+Forest Protection
+Special Standards
+EP
+Meat and Poultry Division
+Board of Ag
+Old Health Building
+Rural Rehab
+WNC Farmers Market
+NCBiotech
+WNC Agricultural Center
+DPS
+NCDPS
+SHP
+North Carolina Highway Patrol
+ABC Commission
+NC JOIN
+JCPCs
+JCP Councils
+Coal Ash Commission
+SERC
+Hurricane Matthew
+Charlotte demonstrations
+Basic School
+Samarcand Manor
+Samarkand Manor
+Adult Probation and Parole
+Department of Correction
+Corrections
+Hammond Place
+Colonial Pipeline
+EAS
+Incident Action Plans
+North Carolina Emergency Management
+NCEM
+AHIMTs
+Albemarle Prison
+Alexander Prison
+Avery Mitchell Prison
+Bertie Prison
+Caldwell Prison
+Caledonia Prison
+Carteret Prison
+Caswell Prison
+Catawba Prison
+Columbus Prison
+Craggy Prison
+Craven Prison
+Dan River Prison
+Davidson Prison
+Eastern Prison
+Foothills Prison
+Forsyth Prison
+Franklin Prison
+Gaston Prison
+Greene Prison
+Harnett Prison
+Hoke Prison
+Hyde Prison
+Johnston Prison
+Lanesboro Prison
+Lincoln Prison
+Lumberton Prison
+Marion Prison
+Maury Prison
+Morrison Prison
+Mountain View Prison
+Nash Prison
+Neuse Prison
+New Hanover Prison
+Womens Prison
+Odom Prison
+Orange Prison
+Pamlico Prison
+Pasquotank Prison
+Pender Prison
+Piedmont Prison
+Polk Prison
+Randolph Prison
+Rutherford Prison
+Sampson Prison
+Sanford Prison
+Scotland Prison
+Southern Prison
+Swannanoa Prison
+Tabor Prison
+Tyrrell Prison
+Wake Prison
+Warren Prison
+Wilkes Prison 
+DIT
+State CIO
+CGIA
+VSOs
+DMVA
+DES
+Employment Security Commission
+NCHFA
+Administrative Office of the Courts
+AOC
+Judicial Branch
+Judicial Center
+RRK
+IDS
+DA
+FOIA
+DNCR
+DCR
+CWMTF
+SANC
+OSA
+OAH
+DPI
+Golden LEAF
+OBX
+Judge Mann
+Arts Council
+NCMOA
+NCMOH
+Fort Fisher
+Ft. Fisher
+Fort Dobbs
+Ft. Dobbs
+Tryon Palace
+Battleship North Carolina
+Bath
+Bennett Place
+House in the Horseshoe
+Reed Gold Mine
+Town Creek Indian Mound
+FERPA
+ESSA
+LEA
+IHE
+MTSS
+ESDB
+DST
+PIO
+EO
+E.O.
+E. O. 
+G. S.
+HB
+H.B.
+H. B.
+NCAC
+SB
+S.B.
+S. B.
+SL
+S.L.
+S. L.
+General Statute
+North Carolina Administrative Code
+United States Code
+Session Law
+House Bill
+Senate Bill
+General Statutes
+Executive Order
+Code of Federal Regulations
+deductible
+diagnosis
+EHR
+EMR
+ePHI 
+e-PHI 
+FMLA
+health condition
+medical records
+patient
+PHI
+policy number
+sick leave
+attorney client privilege
+attorney-client privilege
+BCP
+between us
+classified
+confidential
+COOP
+disaster plan
+disaster planning
+discreet
+discrete
+emergency response plan
+eyes only
+eyes-only
+grievance
+hush hush
+hushed
+hush-hush
+in confidence
+intelligence
+legal disclaimer
+military leave
+NDA
+non disclosure
+non-disclosure
+not a matter of public record
+not a public record
+not for publication
+not public
+not to be quoted
+off the record
+off-the-record
+private
+restricted
+sealed
+sealed bid
+secret
+sensitive
+strictly prohibited
+top secret
+trade secret
+under the table
+under wraps
+under-the-table
+vacation leave
+
+#### utah_gov
+# PII.ut_employee_id
+123546
+
+# PII.ut_id_or_casefile_number
+123456789
+
+# PII.ut_university_id
+U12345678
+
+#### kshs_org
+# PII.drivers_license_number
+K00-00-0000
+K12-34-5678
+K98-76-5432
+K00000000
+K12345678
+K98765432
+
+# PII.ks_tax_clearance_certificate
+xxxx-xxxx-xxxx
+X1X1-X1X1-X1X1
+AS12-DF34-GH56
+123L-456K-789J
+POI1-UYT2-REW3
+1234-5678-9012
+
+#### nc_gov
+# code_of_federal_regulations_citation
+1 CFR 1
+1 CFR 123
+1 CFR 123.1234
+1 C.F.R 1
+1 C.F.R 123
+1 C.F.R 123.1234
+1 CFR § 1
+1 CFR § 123
+59 CFR § 123.1234
+
+# executive_order_citation
+Executive Order 123
+Executive Order No. 1
+EO123
+EO 123
+E.O. 123
+E. O. 123
+
+# general_statutes_citation
+General StatuTe 1
+GS1A
+GS 123
+G.S. §123
+G.S. § 123
+
+# house_bill_citation
+H123
+H1234
+House BiLl 123
+H.B. 123
+H. B. 1
+
+# north_carolina_administrative_code_citation
+17 NC Admin. Code 5C.0703
+17 N.C. Admin. Code 5C.0703
+17 NCAC 5C.0703
+
+# PII.bank_account_number
+123456789-123456
+123456789 123456
+223456789 12345678910131517
+1234-5678-9-123456
+1234-5678-9 123456
+223456789 123456
+223456789-123456
+223456789 12345678910131517
+123456789-123456
+223456789 123456
+223456789-123456
+
+# PII.credit_card_number
+1234-1234-1234-1234
+1234 1234 1234 1234
+4465-1234 5467-2341
+
+# PII.drivers_license_number
+000012345678
+
+# PII.employee_id
+# This will get overridden by the passport_number. Is what it is.
+12345678
+
+# PII.passport_number
+12345678
+a1234567
+A1234567
+
+# PII.social_security_number
+433-91-9072
+155 21 7104
+
+# PII.taxpayer_id
+12-1234567
+12-1234567A
+12-1234567001
+
+# senate_bill_citation
+S123
+S1234
+Senate BiLl 123
+senate bill12
+S.B. 123
+S. B. 1
+
+# session_law_citation
+Session Law 1234-1
+session lAw 1234-1
+SL 1234-134
+S.L. 1234-1
+S. L. 1234-1
+
+# TOMES.email_address
+single@foo.com
+dot.ted@foo.edu
+dot.ted@dot.ted.gov
+d.ot.ted@ws.ws
+ip.address@[127.0.0.1]
+UPPER@CASE.FOO
+
+# TOMES.URL
+# This will miss the FTP pattern because CoreNLP appears to tokenize the colon and slashes following "ftp" (but not those after http|https).
+http://foo.com/blah_blah
+http://foo.com/blah_blah/
+http://foo.com/blah_blah_(wikipedia)
+http://foo.com/blah_blah_(wikipedia)_(again)
+ftp://www.example.com/wpstyle/?p=364
+https://www.example.com/foo/?bar=baz&inga=42&quux
+
+# united_states_code_citation
+1 USC 1
+1 USC 123
+1 USC 123-1234
+1 U.S.C 1
+1 U.S.C 123
+1 U.S.C 123.1234
+1 USC § 1
+1 USC § 123
+59 USC §§ 123-1234
+1 USC 123-0234
+

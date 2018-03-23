@@ -62,7 +62,6 @@ def testDataFile(test_file, results_file):
     for line in test_data:
     
         line_num += 1
-        logger.info("Testing line: {}".format(line_num))
 
         # deal with blank and comment lines.
         if line == "":
@@ -71,7 +70,9 @@ def testDataFile(test_file, results_file):
             logger.info("Line {} is a non-test line.".format(line_num))
             results_file.write(line + "\n")
             continue
- 
+
+        logger.info("Testing line: {}".format(line_num))
+        
         # get NER tags as string.
         results = ["\t"]
         for ner in t2n.get_NER(line):
@@ -100,8 +101,12 @@ def main(test_file:"path to test file",
     "Creates report file for NER tagging of test data.\
     \nexample: `py -3 ner_tester.py test_file.txt results_file.txt`"
 
-    results_file = testDataFile(test_file, results_file)
-    logging.info("Created results file: {}".format(results_file))
+    try:
+        results_file = testDataFile(test_file, results_file)
+        logging.info("Created results file: {}".format(results_file))
+    except Exception as err:
+        logging.critical(err)
+        sys.exit(err.__repr__())
 
 
 if __name__ == "__main__":

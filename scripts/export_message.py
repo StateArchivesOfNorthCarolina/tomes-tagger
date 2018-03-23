@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 
 # import modules.
+import logging
 import os
 import plac
 import sys
 from lxml import etree
 
 
+# enable logging.
+logging.basicConfig(level=logging.WARNING)
+logger = logging.getLogger(__name__)
+logger.setLevel("INFO")
+
+# establish XML header/footer.
 HEADER = """<?xml version='1.0' encoding='UTF-8'?>
 <Account xmlns="http://www.archives.ncdcr.gov/mail-account"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -14,7 +21,6 @@ xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail
 <GlobalId>EXPORTED_MESSAGES</GlobalId>
 <Folder>
 """
-
 FOOTER = "</Folder></Account>"
 
 
@@ -84,9 +90,10 @@ def main(eaxs_file:"any EAXS file",
     try:
         message_ids = message_ids.split(",")
         results = export_message(eaxs_file, output_file, message_ids)
-        print("Total messages found: {}".format(results))
+        logging.info("Total messages found: {}".format(results))
         sys.exit()
     except Exception as err:
+        logging.critical(err)
         sys.exit(err.__repr__())
 
 

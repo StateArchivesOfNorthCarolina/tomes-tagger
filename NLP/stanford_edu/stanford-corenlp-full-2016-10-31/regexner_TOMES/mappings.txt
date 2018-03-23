@@ -1,385 +1,338 @@
-Attorney General	1e06ea#0001::utah.gov::STATE.person
-AG	1e06ea#0002::utah.gov::STATE.person
-Child and Family Services	1e06ea#0003::utah.gov::STATE.department
-DCFS	1e06ea#0004::utah.gov::STATE.division
-Workforce Services	1e06ea#0005::utah.gov::STATE.department
-DWS	1e06ea#0006::utah.gov::STATE.department
-Office of Recovery Services	1e06ea#0007::utah.gov::STATE.department
-ORS	1e06ea#0008::utah.gov::STATE.department
-Office of Management and Budget	1e06ea#0009::utah.gov::STATE.office
-GOPB	1e06ea#0010::kshs.org::STATE.office
-Constitution Hall	1e06ea#0011::kshs.org::STATE.historic_site
-Fort Hays	1e06ea#0012::kshs.org::STATE.historic_site
-Grinter Place	1e06ea#0013::kshs.org::STATE.historic_site
-Hollenberg Pony Express Station	1e06ea#0014::kshs.org::STATE.historic_site
-Kaw Mission	1e06ea#0015::kshs.org::STATE.historic_site
-Mine Creek Civil War Battlefront	1e06ea#0016::kshs.org::STATE.historic_site
-Pawnee Indian Museum	1e06ea#0017::kshs.org::STATE.historic_site
-Red Rocks	1e06ea#0018::kshs.org::STATE.historic_site
-Kansas State Capitol	1e06ea#0019::kshs.org::STATE.building
-Kansas Museum of History	1e06ea#0020::kshs.org::STATE.building
-Governor Sam Brownback	1e06ea#0021::kshs.org::STATE.official
-Lieutenant Governor Jeff Colyer	1e06ea#0022::kshs.org::STATE.official
-Capitol Preservation Committee	1e06ea#0023::kshs.org::STATE.legislative_committee
-Joint Committee on State Building Construction	1e06ea#0024::kshs.org::STATE.legislative_committee
-Legislative Coordinating Council	1e06ea#0025::kshs.org::STATE.legislative_committee
-House Appropriations Committee	1e06ea#0026::kshs.org::STATE.legislative_committee
-Senate Ways and Means	1e06ea#0027::kshs.org::STATE.legislative_committee
-House Education Committee	1e06ea#0028::kshs.org::STATE.legislative_committee
-Senate Education Committee	1e06ea#0029::kshs.org::STATE.legislative_committee
-State Historic Preservation Officer	1e06ea#0030::kshs.org::STATE.official
-Secretary of Administration	1e06ea#0031::kshs.org::STATE.official
-Division of the Budget	1e06ea#0032::kshs.org::STATE.official
-Commissioner of Education	1e06ea#0033::kshs.org::STATE.official
-Legislative Administrative Services	1e06ea#0034::kshs.org::STATE.agency
-Legislative Division of Post-Audit	1e06ea#0035::kshs.org::STATE.agency
-Revisor of Statutes	1e06ea#0036::nc.gov::STATE.agency
-EDPNC	1e06ea#0037::nc.gov::STATE.organization
-CMS	1e06ea#0038::nc.gov::FEDERAL.organization
-FHWA	1e06ea#0039::nc.gov::FEDERAL.organization
-DOJ	1e06ea#0040::nc.gov::STATE.organization
-DHHS	1e06ea#0041::nc.gov::STATE.organization
-DOT	1e06ea#0042::nc.gov::STATE.organization
-SBI	1e06ea#0043::nc.gov::STATE.organization
-SAC	1e06ea#0044::nc.gov::STATE.person
-NEPA	1e06ea#0045::nc.gov::FEDERAL.governance
-SEPA	1e06ea#0046::nc.gov::STATE.governance
-UBO	1e06ea#0047::nc.gov::STATE.governance
-CFR	1e06ea#0048::nc.gov::FEDERAL.governance
-C.F.R.	1e06ea#0049::nc.gov::FEDERAL.governance
-USC	1e06ea#0050::nc.gov::FEDERAL.governance
-U.S.C.	1e06ea#0051::nc.gov::FEDERAL.governance
-GS	1e06ea#0052::nc.gov::STATE.governance
-G.S.	1e06ea#0053::nc.gov::STATE.governance
-DOA	1e06ea#0054::nc.gov::STATE.organization
-HUB	1e06ea#0055::nc.gov::STATE.organization
-HUB Office	1e06ea#0056::nc.gov::STATE.organization
-HUB Director	1e06ea#0057::nc.gov::STATE.person
-State Purchase Officer	1e06ea#0058::nc.gov::STATE.person
-P&C	1e06ea#0059::nc.gov::STATE.organization
-HR Mgmt	1e06ea#0060::nc.gov::STATE.organization
-State Parking Director	1e06ea#0061::nc.gov::STATE.organization
-State Environmental Review Clearinghouse	1e06ea#0062::nc.gov::STATE.organization
-Eugenics Commission	1e06ea#0063::nc.gov::STATE.organization
-Eugenics Board	1e06ea#0064::nc.gov::STATE.organization
-Eugenics Board (sterilization) Program	1e06ea#0065::nc.gov::STATE.organization
-Eugenics Compensation Task Force	1e06ea#0066::nc.gov::STATE.organization
-NC Eugenics Task Force	1e06ea#0067::nc.gov::STATE.organization
-Sterilization Victims Foundation	1e06ea#0068::nc.gov::STATE.organization
-Eugenics Compensation Program	1e06ea#0069::nc.gov::STATE.organization
-Sterilization Foundation	1e06ea#0070::nc.gov::STATE.organization
-Project COPE	1e06ea#0071::nc.gov::STATE.organization
-Fiscal Mgmt	1e06ea#0072::nc.gov::STATE.organization
-State Fair	1e06ea#0073::nc.gov::STATE.organization
-Ag Statistics	1e06ea#0074::nc.gov::STATE.organization
-Vet Division	1e06ea#0075::nc.gov::STATE.organization
-S&W Cost Share Program	1e06ea#0076::nc.gov::STATE.organization
-S&W	1e06ea#0077::nc.gov::STATE.organization
-Local SWCDs	1e06ea#0078::nc.gov::STATE.organization
-Division of Soil & Water	1e06ea#0079::nc.gov::STATE.organization
-NCFS	1e06ea#0080::nc.gov::STATE.organization
-Forest Protection	1e06ea#0081::nc.gov::STATE.organization
-Special Standards	1e06ea#0082::nc.gov::STATE.organization
-EP	1e06ea#0083::nc.gov::STATE.organization
-Meat and Poultry Division	1e06ea#0084::nc.gov::STATE.organization
-Board of Ag	1e06ea#0085::nc.gov::STATE.organization
-Old Health Building	1e06ea#0086::nc.gov::STATE.place
-Rural Rehab	1e06ea#0087::nc.gov::STATE.organization
-WNC Farmers Market	1e06ea#0088::nc.gov::STATE.place
-NCBiotech	1e06ea#0089::nc.gov::STATE.organization
-WNC Agricultural Center	1e06ea#0090::nc.gov::STATE.place
-DPS	1e06ea#0091::nc.gov::STATE.organization
-NCDPS	1e06ea#0092::nc.gov::STATE.organization
-SHP	1e06ea#0093::nc.gov::STATE.organization
-North Carolina Highway Patrol	1e06ea#0094::nc.gov::STATE.organization
-ABC Commission	1e06ea#0095::nc.gov::STATE.organization
-NC JOIN	1e06ea#0096::nc.gov::STATE.organization
-JCPCs	1e06ea#0097::nc.gov::STATE.organization
-JCP Councils	1e06ea#0098::nc.gov::STATE.organization
-Coal Ash Commission	1e06ea#0099::nc.gov::STATE.organization
-SERC	1e06ea#0100::nc.gov::STATE.organization
-Hurricane Matthew	1e06ea#0101::nc.gov::STATE.event
-Charlotte demonstrations	1e06ea#0102::nc.gov::STATE.event
-Basic School	1e06ea#0103::nc.gov::STATE.organization
-Samarcand Manor	1e06ea#0104::nc.gov::STATE.place
-Samarkand Manor	1e06ea#0105::nc.gov::STATE.place
-Adult Probation and Parole	1e06ea#0106::nc.gov::STATE.organization
-Department of Correction	1e06ea#0107::nc.gov::STATE.organization
-Corrections	1e06ea#0108::nc.gov::STATE.organization
-Hammond Place	1e06ea#0109::nc.gov::STATE.place
-Colonial Pipeline	1e06ea#0110::nc.gov::STATE.place
-EAS	1e06ea#0111::nc.gov::STATE.organization
-Incident Action Plans	1e06ea#0112::nc.gov::STATE.organization
-North Carolina Emergency Management	1e06ea#0113::nc.gov::STATE.organization
-NCEM	1e06ea#0114::nc.gov::STATE.organization
-AHIMTs	1e06ea#0115::nc.gov::STATE.organization
-Albemarle Prison	1e06ea#0116::nc.gov::STATE.place
-Alexander Prison	1e06ea#0117::nc.gov::STATE.place
-Avery Mitchell Prison	1e06ea#0118::nc.gov::STATE.place
-Bertie Prison	1e06ea#0119::nc.gov::STATE.place
-Caldwell Prison	1e06ea#0120::nc.gov::STATE.place
-Caledonia Prison	1e06ea#0121::nc.gov::STATE.place
-Carteret Prison	1e06ea#0122::nc.gov::STATE.place
-Caswell Prison	1e06ea#0123::nc.gov::STATE.place
-Catawba Prison	1e06ea#0124::nc.gov::STATE.place
-Columbus Prison	1e06ea#0125::nc.gov::STATE.place
-Craggy Prison	1e06ea#0126::nc.gov::STATE.place
-Craven Prison	1e06ea#0127::nc.gov::STATE.place
-Dan River Prison	1e06ea#0128::nc.gov::STATE.place
-Davidson Prison	1e06ea#0129::nc.gov::STATE.place
-Eastern Prison	1e06ea#0130::nc.gov::STATE.place
-Foothills Prison	1e06ea#0131::nc.gov::STATE.place
-Forsyth Prison	1e06ea#0132::nc.gov::STATE.place
-Franklin Prison	1e06ea#0133::nc.gov::STATE.place
-Gaston Prison	1e06ea#0134::nc.gov::STATE.place
-Greene Prison	1e06ea#0135::nc.gov::STATE.place
-Harnett Prison	1e06ea#0136::nc.gov::STATE.place
-Hoke Prison	1e06ea#0137::nc.gov::STATE.place
-Hyde Prison	1e06ea#0138::nc.gov::STATE.place
-Johnston Prison	1e06ea#0139::nc.gov::STATE.place
-Lanesboro Prison	1e06ea#0140::nc.gov::STATE.place
-Lincoln Prison	1e06ea#0141::nc.gov::STATE.place
-Lumberton Prison	1e06ea#0142::nc.gov::STATE.place
-Marion Prison	1e06ea#0143::nc.gov::STATE.place
-Maury Prison	1e06ea#0144::nc.gov::STATE.place
-Morrison Prison	1e06ea#0145::nc.gov::STATE.place
-Mountain View Prison	1e06ea#0146::nc.gov::STATE.place
-Nash Prison	1e06ea#0147::nc.gov::STATE.place
-Neuse Prison	1e06ea#0148::nc.gov::STATE.place
-New Hanover Prison	1e06ea#0149::nc.gov::STATE.place
-Womens Prison	1e06ea#0150::nc.gov::STATE.place
-Odom Prison	1e06ea#0151::nc.gov::STATE.place
-Orange Prison	1e06ea#0152::nc.gov::STATE.place
-Pamlico Prison	1e06ea#0153::nc.gov::STATE.place
-Pasquotank Prison	1e06ea#0154::nc.gov::STATE.place
-Pender Prison	1e06ea#0155::nc.gov::STATE.place
-Piedmont Prison	1e06ea#0156::nc.gov::STATE.place
-Polk Prison	1e06ea#0157::nc.gov::STATE.place
-Randolph Prison	1e06ea#0158::nc.gov::STATE.place
-Rutherford Prison	1e06ea#0159::nc.gov::STATE.place
-Sampson Prison	1e06ea#0160::nc.gov::STATE.place
-Sanford Prison	1e06ea#0161::nc.gov::STATE.place
-Scotland Prison	1e06ea#0162::nc.gov::STATE.place
-Southern Prison	1e06ea#0163::nc.gov::STATE.place
-Swannanoa Prison	1e06ea#0164::nc.gov::STATE.place
-Tabor Prison	1e06ea#0165::nc.gov::STATE.place
-Tyrrell Prison	1e06ea#0166::nc.gov::STATE.place
-Wake Prison	1e06ea#0167::nc.gov::STATE.place
-Warren Prison	1e06ea#0168::nc.gov::STATE.place
-Wilkes Prison	1e06ea#0169::nc.gov::STATE.place
-DIT	1e06ea#0170::nc.gov::STATE.organization
-State CIO	1e06ea#0171::nc.gov::STATE.person
-CGIA	1e06ea#0172::nc.gov::STATE.organization
-VSOs	1e06ea#0173::nc.gov::STATE.organization
-DMVA	1e06ea#0174::nc.gov::STATE.organization
-DES	1e06ea#0175::nc.gov::STATE.organization
-Employment Security Commission	1e06ea#0176::nc.gov::STATE.organization
-NCHFA	1e06ea#0177::nc.gov::STATE.organization
-Administrative Office of the Courts	1e06ea#0178::nc.gov::STATE.organization
-AOC	1e06ea#0179::nc.gov::STATE.organization
-Judicial Branch	1e06ea#0180::nc.gov::STATE.organization
-Judicial Center	1e06ea#0181::nc.gov::STATE.place
-RRK	1e06ea#0182::nc.gov::STATE.organization
-IDS	1e06ea#0183::nc.gov::STATE.organization
-DA	1e06ea#0184::nc.gov::STATE.person
-FOIA	1e06ea#0185::nc.gov::FEDERAL.governance
-DNCR	1e06ea#0186::nc.gov::STATE.organization
-DCR	1e06ea#0187::nc.gov::STATE.organization
-CWMTF	1e06ea#0188::nc.gov::STATE.organization
-SANC	1e06ea#0189::nc.gov::STATE.organization
-OSA	1e06ea#0190::nc.gov::STATE.organization
-OAH	1e06ea#0191::nc.gov::STATE.organization
-DPI	1e06ea#0192::nc.gov::STATE.organization
-(?i)Golden(?-i) (?i)LEAF(?-i)	1e06ea#0193::nc.gov::STATE.organization
-OBX	1e06ea#0194::nc.gov::STATE.place
-Judge Mann	1e06ea#0195::nc.gov::STATE.person
-Arts Council	1e06ea#0196::nc.gov::STATE.organization
-NCMOA	1e06ea#0197::nc.gov::STATE.organization
-NCMOH	1e06ea#0198::nc.gov::STATE.organization
-Fort Fisher	1e06ea#0199::nc.gov::STATE.place
-Ft. Fisher	1e06ea#0200::nc.gov::STATE.place
-Fort Dobbs	1e06ea#0201::nc.gov::STATE.place
-Ft. Dobbs	1e06ea#0202::nc.gov::STATE.place
-Tryon Palace	1e06ea#0203::nc.gov::STATE.place
-Battleship North Carolina	1e06ea#0204::nc.gov::STATE.place
-Bath	1e06ea#0205::nc.gov::STATE.place
-Bennett Place	1e06ea#0206::nc.gov::STATE.place
-House in the Horseshoe	1e06ea#0207::nc.gov::STATE.place
-Reed Gold Mine	1e06ea#0208::nc.gov::STATE.place
-Town Creek Indian Mound	1e06ea#0209::nc.gov::STATE.place
-FERPA	1e06ea#0210::nc.gov::FEDERAL.governance
-ESSA	1e06ea#0211::nc.gov::FEDERAL.governance
-LEA	1e06ea#0212::nc.gov::STATE.local_organization
-IHE	1e06ea#0213::nc.gov::STATE.organization
-MTSS	1e06ea#0214::nc.gov::STATE.governance
-ESDB	1e06ea#0215::nc.gov::STATE.organization
-DST	1e06ea#0216::nc.gov::STATE.governance
-PIO	1e06ea#0217::nc.gov::STATE.person
-EO	1e06ea#0218::nc.gov::STATE.governance
-E.O.	1e06ea#0219::nc.gov::STATE.governance
-E. O.	1e06ea#0220::nc.gov::STATE.governance
-G. S.	1e06ea#0221::nc.gov::STATE.governance
-HB	1e06ea#0222::nc.gov::STATE.governance
-H.B.	1e06ea#0223::nc.gov::STATE.governance
-H. B.	1e06ea#0224::nc.gov::STATE.governance
-NCAC	1e06ea#0225::nc.gov::STATE.governance
-SB	1e06ea#0226::nc.gov::STATE.governance
-S.B.	1e06ea#0227::nc.gov::STATE.governance
-S. B.	1e06ea#0228::nc.gov::STATE.governance
-SL	1e06ea#0229::nc.gov::STATE.governance
-S.L.	1e06ea#0230::nc.gov::STATE.governance
-S. L.	1e06ea#0231::nc.gov::STATE.governance
-([1-9]|[1-5][0-9]) (CFR|C\.F\.R) [0-9]{1,4}(\.[1-9]{1,4}){0,1}	1e06ea#0232::nc.gov::FEDERAL.governance
-([1-9]|[1-5][0-9]) (CFR|C\.F\.R) § [0-9]{1,4}(\.[1-9]{1,4}){0,1}	1e06ea#0232::nc.gov::FEDERAL.governance
-(?i)Executive(?-i) (?i)Order(?-i) [0-9]{1,3}	1e06ea#0233::nc.gov::STATE.governance
-(?i)Executive(?-i) (?i)Order(?-i) (?i)No(?-i). [0-9]{1,3}	1e06ea#0233::nc.gov::STATE.governance
-E. O. [0-9]{1,3}	1e06ea#0233::nc.gov::STATE.governance
-EO [0-9]{1,3}	1e06ea#0233::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statute(?-i)[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statute(?-i)§[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statute(?-i)§ [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statute(?-i) [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statute(?-i) §[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statute(?-i) § [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G. S.[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G. S.§[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G. S.§ [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G. S. [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G. S. §[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G. S. § [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G.S.[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G.S.§[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G.S.§ [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G.S. [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G.S. §[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-G.S. § [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-GS[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-GS§[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-GS§ [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-GS [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-GS §[12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-GS § [12][0-9]{0,2}[a-zA-Z]{0,1}	1e06ea#0234::nc.gov::STATE.governance
-(?i)House(?-i) (?i)Bill(?-i)[0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-(?i)House(?-i) (?i)Bill(?-i) [0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-H[0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-H [0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-H. B.[0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-H. B. [0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-H.B.[0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-H.B. [0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-HB[0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-HB [0-9]{1,4}	1e06ea#0235::nc.gov::STATE.governance
-([1-9]|[1-3][0-9])[A-Z]{0,1} N.C. Admin Code [1-9][0-9]{0,1}[A-Z]\.[0-9]{1,4}	1e06ea#0236::nc.gov::STATE.governance
-([1-9]|[1-3][0-9])[A-Z]{0,1} NC Admin Code [1-9][0-9]{0,1}[A-Z]\.[0-9]{1,4}	1e06ea#0236::nc.gov::STATE.governance
-([1-9]|[1-3][0-9])[A-Z]{0,1} NCAC [1-9][0-9]{0,1}[A-Z]\.[0-9]{1,4}	1e06ea#0236::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statute(?-i)	1e06ea#0237::nc.gov::STATE.governance
-(?i)North(?-i) (?i)Carolina(?-i) (?i)Administrative(?-i) (?i)Code(?-i)	1e06ea#0238::nc.gov::STATE.governance
-(?i)United(?-i) (?i)States(?-i) (?i)Code(?-i)	1e06ea#0239::nc.gov::FEDERAL.governance
-(?i)Session(?-i) (?i)Law(?-i)	1e06ea#0240::nc.gov::STATE.governance
-(?i)House(?-i) (?i)Bill(?-i)	1e06ea#0241::nc.gov::STATE.governance
-(?i)Senate(?-i) (?i)Bill(?-i)	1e06ea#0242::nc.gov::STATE.governance
-(?i)General(?-i) (?i)Statutes(?-i)	1e06ea#0243::nc.gov::STATE.governance
-(?i)Executive(?-i) (?i)Order(?-i)	1e06ea#0244::nc.gov::STATE.governance
-(?i)Code(?-i) (?i)of(?-i) (?i)Federal(?-i) (?i)Regulations(?-i)	1e06ea#0245::nc.gov::FEDERAL.governance
-(?i)Senate(?-i) (?i)Bill(?-i)[0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-(?i)Senate(?-i) (?i)Bill(?-i) [0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-S[0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-S [0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-S. B.[0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-S. B. [0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-S.B.[0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-S.B. [0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-SB[0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-SB [0-9]{1,4}	1e06ea#0246::nc.gov::STATE.governance
-([1-9]|[1-5][0-9]) (USC|U\.S\.C) [1-9][0-9]{0,2}(-[1-9][0-9]{0,3}){0,1}	1e06ea#0247::nc.gov::FEDERAL.governance
-([1-9]|[1-5][0-9]) (USC|U\.S\.C) § [1-9][0-9]{0,2}(-[1-9][0-9]{0,3}){0,1}	1e06ea#0247::nc.gov::FEDERAL.governance
-([1-9]|[1-5][0-9]) (USC|U\.S\.C) § § [1-9][0-9]{0,2}(-[1-9][0-9]{0,3}){0,1}	1e06ea#0247::nc.gov::FEDERAL.governance
-[U]{1}[0-9]{8}	1e06ea#0248::utah.gov::PII.university_id
-[0-9]{6}	1e06ea#0249::utah.gov::PII.employee_id
-[0-9]{9}	1e06ea#0250::utah.gov::PII.drivers_license_number
-[K]{1}([0-9]{4}|[0-9]{2}[-]{1}[0-9]{2}[-]{1})[0-9]{4}	1e06ea#0251::kshs.org::PII.drivers_license_number
-[a-zA-Z0-9]{4}[-]{1}[a-zA-Z0-9]{4}[-]{1}[a-zA-Z0-9]{4}	1e06ea#0252::kshs.org::PII.tax_clearance_certificate
-((0[0-9])|(1[0-2])|(2[1-9])|(3[0-2])|(6[1-9])|(7[0-2])|80)[0-9]{2}-{0,1}[0-9]{4}-{0,1}[0-9] [0-9]{6,17}	1e06ea#0253::nc.gov::PII.bank_account_number
-((0[0-9])|(1[0-2])|(2[1-9])|(3[0-2])|(6[1-9])|(7[0-2])|80)[0-9]{2}-{0,1}[0-9]{4}-{0,1}[0-9]-[0-9]{6,17}	1e06ea#0253::nc.gov::PII.bank_account_number
-([0-9]{8,9}|[a-zA-Z][0-9]{7})	1e06ea#0254::nc.gov::PII.passport_number
-[0-9]{8}	1e06ea#0255::nc.gov::PII.employee_id
-[0-9]{4} [0-9]{4} [0-9]{4}[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4} [0-9]{4} [0-9]{4}-[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4} [0-9]{4}-[0-9]{4}[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4} [0-9]{4}-[0-9]{4} [0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4} [0-9]{4}-[0-9]{4}-[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4}-[0-9]{4} [0-9]{4}[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4}-[0-9]{4} [0-9]{4} [0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4}-[0-9]{4} [0-9]{4}-[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4}-[0-9]{4}-[0-9]{4}[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4}-[0-9]{4}-[0-9]{4} [0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}	1e06ea#0256::nc.gov::PII.credit_card_number
-[0-9]{2}-[0-9]{7}([a-zA-Z]|[0-9]{3}){0,1}	1e06ea#0257::nc.gov::PII.taxpayer_id
-[0]{4}[0-9]{8}	1e06ea#0258::nc.gov::PII.drivers_license_number
-(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))(?!00)[0-9]{2} (?!0000)[0-9]{4}	1e06ea#0259::nc.gov::PII.social_security_number
-(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))(?!00)[0-9]{2}-(?!0000)[0-9]{4}	1e06ea#0259::nc.gov::PII.social_security_number
-(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012])) (?!00)[0-9]{2} (?!0000)[0-9]{4}	1e06ea#0259::nc.gov::PII.social_security_number
-(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012])) (?!00)[0-9]{2}-(?!0000)[0-9]{4}	1e06ea#0259::nc.gov::PII.social_security_number
-(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))-(?!00)[0-9]{2} (?!0000)[0-9]{4}	1e06ea#0259::nc.gov::PII.social_security_number
-(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))-(?!00)[0-9]{2}-(?!0000)[0-9]{4}	1e06ea#0259::nc.gov::PII.social_security_number
-(?i)deductible(?-i)	1e06ea#0260::nc.gov::PII.personal_health_information
-(?i)diagnosis(?-i)	1e06ea#0261::nc.gov::PII.personal_health_information
-EHR	1e06ea#0262::nc.gov::PII.personal_health_information
-EMR	1e06ea#0263::nc.gov::PII.personal_health_information
-ePHI	1e06ea#0264::nc.gov::PII.personal_health_information
-e-PHI	1e06ea#0265::nc.gov::PII.personal_health_information
-FMLA	1e06ea#0266::nc.gov::PII.personal_health_information
-(?i)health(?-i) (?i)condition(?-i)	1e06ea#0267::nc.gov::PII.personal_health_information
-(?i)medical(?-i) (?i)records(?-i)	1e06ea#0268::nc.gov::PII.personal_health_information
-(?i)patient(?-i)	1e06ea#0269::nc.gov::PII.personal_health_information
-PHI	1e06ea#0270::nc.gov::PII.personal_health_information
-(?i)policy(?-i) (?i)number(?-i)	1e06ea#0271::nc.gov::PII.personal_health_information
-(?i)sick(?-i) (?i)leave(?-i)	1e06ea#0272::nc.gov::PII.personal_health_information
-(?i)attorney(?-i) (?i)client(?-i) (?i)privilege(?-i)	1e06ea#0273::nc.gov::PII.sensitive_document
-(?i)attorney-client(?-i) (?i)privilege(?-i)	1e06ea#0274::nc.gov::PII.sensitive_document
-BCP	1e06ea#0275::nc.gov::PII.sensitive_document
-(?i)between(?-i) (?i)us(?-i)	1e06ea#0276::nc.gov::PII.sensitive_document
-(?i)classified(?-i)	1e06ea#0277::nc.gov::PII.sensitive_document
-(?i)confidential(?-i)	1e06ea#0278::nc.gov::PII.sensitive_document
-COOP	1e06ea#0279::nc.gov::PII.sensitive_document
-(?i)disaster(?-i) (?i)plan(?-i)	1e06ea#0280::nc.gov::PII.sensitive_document
-(?i)disaster(?-i) (?i)planning(?-i)	1e06ea#0281::nc.gov::PII.sensitive_document
-(?i)discreet(?-i)	1e06ea#0282::nc.gov::PII.sensitive_document
-(?i)discrete(?-i)	1e06ea#0283::nc.gov::PII.sensitive_document
-(?i)emergency(?-i) (?i)response(?-i) (?i)plan(?-i)	1e06ea#0284::nc.gov::PII.sensitive_document
-(?i)eyes(?-i) (?i)only(?-i)	1e06ea#0285::nc.gov::PII.sensitive_document
-(?i)eyes-only(?-i)	1e06ea#0286::nc.gov::PII.sensitive_document
-(?i)grievance(?-i)	1e06ea#0287::nc.gov::PII.sensitive_document
-(?i)hush(?-i) (?i)hush(?-i)	1e06ea#0288::nc.gov::PII.sensitive_document
-(?i)hushed(?-i)	1e06ea#0289::nc.gov::PII.sensitive_document
-(?i)hush-hush(?-i)	1e06ea#0290::nc.gov::PII.sensitive_document
-(?i)in(?-i) (?i)confidence(?-i)	1e06ea#0291::nc.gov::PII.sensitive_document
-(?i)intelligence(?-i)	1e06ea#0292::nc.gov::PII.sensitive_document
-(?i)legal(?-i) (?i)disclaimer(?-i)	1e06ea#0293::nc.gov::PII.sensitive_document
-(?i)military(?-i) (?i)leave(?-i)	1e06ea#0294::nc.gov::PII.sensitive_document
-NDA	1e06ea#0295::nc.gov::PII.sensitive_document
-(?i)non(?-i) (?i)disclosure(?-i)	1e06ea#0296::nc.gov::PII.sensitive_document
-(?i)non-disclosure(?-i)	1e06ea#0297::nc.gov::PII.sensitive_document
-(?i)not(?-i) (?i)a(?-i) (?i)matter(?-i) (?i)of(?-i) (?i)public(?-i) (?i)record(?-i)	1e06ea#0298::nc.gov::PII.sensitive_document
-(?i)not(?-i) (?i)a(?-i) (?i)public(?-i) (?i)record(?-i)	1e06ea#0299::nc.gov::PII.sensitive_document
-(?i)not(?-i) (?i)for(?-i) (?i)publication(?-i)	1e06ea#0300::nc.gov::PII.sensitive_document
-(?i)not(?-i) (?i)public(?-i)	1e06ea#0301::nc.gov::PII.sensitive_document
-(?i)not(?-i) (?i)to(?-i) (?i)be(?-i) (?i)quoted(?-i)	1e06ea#0302::nc.gov::PII.sensitive_document
-(?i)off(?-i) (?i)the(?-i) (?i)record(?-i)	1e06ea#0303::nc.gov::PII.sensitive_document
-(?i)off-the-record(?-i)	1e06ea#0304::nc.gov::PII.sensitive_document
-(?i)private(?-i)	1e06ea#0305::nc.gov::PII.sensitive_document
-(?i)restricted(?-i)	1e06ea#0306::nc.gov::PII.sensitive_document
-(?i)sealed(?-i)	1e06ea#0307::nc.gov::PII.sensitive_document
-(?i)sealed(?-i) (?i)bid(?-i)	1e06ea#0308::nc.gov::PII.sensitive_document
-(?i)secret(?-i)	1e06ea#0309::nc.gov::PII.sensitive_document
-(?i)sensitive(?-i)	1e06ea#0310::nc.gov::PII.sensitive_document
-(?i)strictly(?-i) (?i)prohibited(?-i)	1e06ea#0311::nc.gov::PII.sensitive_document
-(?i)top(?-i) (?i)secret(?-i)	1e06ea#0312::nc.gov::PII.sensitive_document
-(?i)trade(?-i) (?i)secret(?-i)	1e06ea#0313::nc.gov::PII.sensitive_document
-(?i)under(?-i) (?i)the(?-i) (?i)table(?-i)	1e06ea#0314::nc.gov::PII.sensitive_document
-(?i)under(?-i) (?i)wraps(?-i)	1e06ea#0315::nc.gov::PII.sensitive_document
-(?i)under-the-table(?-i)	1e06ea#0316::nc.gov::PII.sensitive_document
-(?i)vacation(?-i) (?i)leave(?-i)	1e06ea#0317::nc.gov::PII.sensitive_document
-["'\[{<]{0,1}[a-zA-Z0-9_\-\.]{1,100}@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)["'\]}>]{0,1}	1e06ea#0318::nc.gov::TOMES.email_address
-(http|https|ftp){1}(://)([0-9a-zA-Z]){1,63}(\.|@|:)([^\s]){1,2000}	1e06ea#0319::nc.gov::TOMES.URL
+Capitol Preservation Committee	8a29ef#0001::kshs.org::STATE.legislative_committee
+Commissioner of Education	8a29ef#0002::kshs.org::STATE.official
+Constitution Hall	8a29ef#0003::kshs.org::STATE.historic_site
+Division of the Budget	8a29ef#0004::kshs.org::STATE.official
+Fort Hays	8a29ef#0005::kshs.org::STATE.historic_site
+GOPB	8a29ef#0006::kshs.org::STATE.office
+Governor Sam Brownback	8a29ef#0007::kshs.org::STATE.official
+Grinter Place	8a29ef#0008::kshs.org::STATE.historic_site
+Hollenberg Pony Express Station	8a29ef#0009::kshs.org::STATE.historic_site
+House Appropriations Committee	8a29ef#0010::kshs.org::STATE.legislative_committee
+House Education Committee	8a29ef#0011::kshs.org::STATE.legislative_committee
+Joint Committee on State Building Construction	8a29ef#0012::kshs.org::STATE.legislative_committee
+Kansas Museum of History	8a29ef#0013::kshs.org::STATE.building
+Kansas State Capitol	8a29ef#0014::kshs.org::STATE.building
+Kaw Mission	8a29ef#0015::kshs.org::STATE.historic_site
+Legislative Administrative Services	8a29ef#0016::kshs.org::STATE.agency
+Legislative Coordinating Council	8a29ef#0017::kshs.org::STATE.legislative_committee
+Legislative Division of Post-Audit	8a29ef#0018::kshs.org::STATE.agency
+Lieutenant Governor Jeff Colyer	8a29ef#0019::kshs.org::STATE.official
+Mine Creek Civil War Battlefront	8a29ef#0020::kshs.org::STATE.historic_site
+Pawnee Indian Museum	8a29ef#0021::kshs.org::STATE.historic_site
+Red Rocks	8a29ef#0022::kshs.org::STATE.historic_site
+Secretary of Administration	8a29ef#0023::kshs.org::STATE.official
+Senate Education Committee	8a29ef#0024::kshs.org::STATE.legislative_committee
+Senate Ways and Means	8a29ef#0025::kshs.org::STATE.legislative_committee
+State Historic Preservation Officer	8a29ef#0026::kshs.org::STATE.official
+[a-zA-Z0-9]{4}[-]{1}[a-zA-Z0-9]{4}[-]{1}[a-zA-Z0-9]{4}	8a29ef#0027::kshs.org::PII.tax_clearance_certificate
+[K]{1}([0-9]{4}|[0-9]{2}[-]{1}[0-9]{2}[-]{1})[0-9]{4}	8a29ef#0028::kshs.org::PII.drivers_license_number
+ABC Commission	8a29ef#0029::nc.gov::STATE.organization
+Administrative Office of the Courts	8a29ef#0030::nc.gov::STATE.organization
+Adult Probation and Parole	8a29ef#0031::nc.gov::STATE.organization
+Ag Statistics	8a29ef#0032::nc.gov::STATE.organization
+AHIMTs	8a29ef#0033::nc.gov::STATE.organization
+AOC	8a29ef#0034::nc.gov::STATE.organization
+Arts Council	8a29ef#0035::nc.gov::STATE.organization
+(?i)attorney(?-i) (?i)client(?-i) (?i)privilege(?-i)	8a29ef#0036::nc.gov::PII.sensitive_document
+(?i)attorney-client(?-i) (?i)privilege(?-i)	8a29ef#0037::nc.gov::PII.sensitive_document
+Basic School	8a29ef#0038::nc.gov::STATE.organization
+Bath	8a29ef#0039::nc.gov::STATE.place
+Battleship North Carolina	8a29ef#0040::nc.gov::STATE.place
+BCP	8a29ef#0041::nc.gov::PII.sensitive_document
+Bennett Place	8a29ef#0042::nc.gov::STATE.place
+(?i)between(?-i) (?i)us(?-i)	8a29ef#0043::nc.gov::PII.sensitive_document
+Board of Ag	8a29ef#0044::nc.gov::STATE.organization
+C.F.R.	8a29ef#0045::nc.gov::FEDERAL.governance
+CFR	8a29ef#0046::nc.gov::FEDERAL.governance
+CGIA	8a29ef#0047::nc.gov::STATE.organization
+Charlotte demonstrations	8a29ef#0048::nc.gov::STATE.event
+(?i)classified(?-i)	8a29ef#0049::nc.gov::PII.sensitive_document
+CMS	8a29ef#0050::nc.gov::FEDERAL.organization
+Coal Ash Commission	8a29ef#0051::nc.gov::STATE.organization
+(?i)Code(?-i) (?i)of(?-i) (?i)Federal(?-i) (?i)Regulations(?-i)	8a29ef#0052::nc.gov::FEDERAL.governance
+Colonial Pipeline	8a29ef#0053::nc.gov::STATE.place
+(?i)confidential(?-i)	8a29ef#0054::nc.gov::PII.sensitive_document
+COOP	8a29ef#0055::nc.gov::PII.sensitive_document
+Corrections	8a29ef#0056::nc.gov::STATE.organization
+CWMTF	8a29ef#0057::nc.gov::STATE.organization
+DA	8a29ef#0058::nc.gov::STATE.person
+DCR	8a29ef#0059::nc.gov::STATE.organization
+(?i)deductible(?-i)	8a29ef#0060::nc.gov::PII.personal_health_information
+Department of Correction	8a29ef#0061::nc.gov::STATE.organization
+DES	8a29ef#0062::nc.gov::STATE.organization
+DHHS	8a29ef#0063::nc.gov::STATE.organization
+(?i)diagnosis(?-i)	8a29ef#0064::nc.gov::PII.personal_health_information
+(?i)disaster(?-i) (?i)plan(?-i)	8a29ef#0065::nc.gov::PII.sensitive_document
+(?i)disaster(?-i) (?i)planning(?-i)	8a29ef#0066::nc.gov::PII.sensitive_document
+(?i)discreet(?-i)	8a29ef#0067::nc.gov::PII.sensitive_document
+(?i)discrete(?-i)	8a29ef#0068::nc.gov::PII.sensitive_document
+DIT	8a29ef#0069::nc.gov::STATE.organization
+Division of Soil & Water	8a29ef#0070::nc.gov::STATE.organization
+DMVA	8a29ef#0071::nc.gov::STATE.organization
+DNCR	8a29ef#0072::nc.gov::STATE.organization
+DOA	8a29ef#0073::nc.gov::STATE.organization
+DOJ	8a29ef#0074::nc.gov::STATE.organization
+DOT	8a29ef#0075::nc.gov::STATE.organization
+DPI	8a29ef#0076::nc.gov::STATE.organization
+DPS	8a29ef#0077::nc.gov::STATE.organization
+DST	8a29ef#0078::nc.gov::STATE.governance
+E. O.	8a29ef#0079::nc.gov::STATE.governance
+E.O.	8a29ef#0080::nc.gov::STATE.governance
+EAS	8a29ef#0081::nc.gov::STATE.organization
+EDPNC	8a29ef#0082::nc.gov::STATE.organization
+EHR	8a29ef#0083::nc.gov::PII.personal_health_information
+(?i)emergency(?-i) (?i)response(?-i) (?i)plan(?-i)	8a29ef#0084::nc.gov::PII.sensitive_document
+Employment Security Commission	8a29ef#0085::nc.gov::STATE.organization
+EMR	8a29ef#0086::nc.gov::PII.personal_health_information
+EO	8a29ef#0087::nc.gov::STATE.governance
+EP	8a29ef#0088::nc.gov::STATE.organization
+ePHI	8a29ef#0089::nc.gov::PII.personal_health_information
+e-PHI	8a29ef#0090::nc.gov::PII.personal_health_information
+ESDB	8a29ef#0091::nc.gov::STATE.organization
+ESSA	8a29ef#0092::nc.gov::FEDERAL.governance
+Eugenics Board	8a29ef#0093::nc.gov::STATE.organization
+Eugenics Commission	8a29ef#0094::nc.gov::STATE.organization
+Eugenics Compensation Program	8a29ef#0095::nc.gov::STATE.organization
+Eugenics Compensation Task Force	8a29ef#0096::nc.gov::STATE.organization
+(?i)Executive(?-i) (?i)Order(?-i)	8a29ef#0097::nc.gov::STATE.governance
+(?i)eyes(?-i) (?i)only(?-i)	8a29ef#0098::nc.gov::PII.sensitive_document
+(?i)eyes-only(?-i)	8a29ef#0099::nc.gov::PII.sensitive_document
+FERPA	8a29ef#0100::nc.gov::FEDERAL.governance
+FHWA	8a29ef#0101::nc.gov::FEDERAL.organization
+Fiscal Mgmt	8a29ef#0102::nc.gov::STATE.organization
+FMLA	8a29ef#0103::nc.gov::PII.personal_health_information
+FOIA	8a29ef#0104::nc.gov::FEDERAL.governance
+Forest Protection	8a29ef#0105::nc.gov::STATE.organization
+Fort Dobbs	8a29ef#0106::nc.gov::STATE.place
+Fort Fisher	8a29ef#0107::nc.gov::STATE.place
+Ft. Dobbs	8a29ef#0108::nc.gov::STATE.place
+Ft. Fisher	8a29ef#0109::nc.gov::STATE.place
+G. S.	8a29ef#0110::nc.gov::STATE.governance
+G.S.	8a29ef#0111::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statute(?-i)	8a29ef#0112::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statutes(?-i)	8a29ef#0113::nc.gov::STATE.governance
+(?i)Golden(?-i) (?i)LEAF(?-i)	8a29ef#0114::nc.gov::STATE.organization
+(?i)grievance(?-i)	8a29ef#0115::nc.gov::PII.sensitive_document
+GS	8a29ef#0116::nc.gov::STATE.governance
+H. B.	8a29ef#0117::nc.gov::STATE.governance
+H.B.	8a29ef#0118::nc.gov::STATE.governance
+Hammond Place	8a29ef#0119::nc.gov::STATE.place
+HB	8a29ef#0120::nc.gov::STATE.governance
+(?i)health(?-i) (?i)condition(?-i)	8a29ef#0121::nc.gov::PII.personal_health_information
+(?i)House(?-i) (?i)Bill(?-i)	8a29ef#0122::nc.gov::STATE.governance
+House in the Horseshoe	8a29ef#0123::nc.gov::STATE.place
+HR Mgmt	8a29ef#0124::nc.gov::STATE.organization
+HUB	8a29ef#0125::nc.gov::STATE.organization
+HUB Director	8a29ef#0126::nc.gov::STATE.person
+HUB Office	8a29ef#0127::nc.gov::STATE.organization
+Hurricane Matthew	8a29ef#0128::nc.gov::STATE.event
+(?i)hush(?-i) (?i)hush(?-i)	8a29ef#0129::nc.gov::PII.sensitive_document
+(?i)hushed(?-i)	8a29ef#0130::nc.gov::PII.sensitive_document
+(?i)hush-hush(?-i)	8a29ef#0131::nc.gov::PII.sensitive_document
+IDS	8a29ef#0132::nc.gov::STATE.organization
+IHE	8a29ef#0133::nc.gov::STATE.organization
+(?i)in(?-i) (?i)confidence(?-i)	8a29ef#0134::nc.gov::PII.sensitive_document
+Incident Action Plans	8a29ef#0135::nc.gov::STATE.organization
+(?i)intelligence(?-i)	8a29ef#0136::nc.gov::PII.sensitive_document
+JCP Councils	8a29ef#0137::nc.gov::STATE.organization
+JCPCs	8a29ef#0138::nc.gov::STATE.organization
+Judge Mann	8a29ef#0139::nc.gov::STATE.person
+Judicial Branch	8a29ef#0140::nc.gov::STATE.organization
+Judicial Center	8a29ef#0141::nc.gov::STATE.place
+LEA	8a29ef#0142::nc.gov::STATE.local_organization
+(?i)legal(?-i) (?i)disclaimer(?-i)	8a29ef#0143::nc.gov::PII.sensitive_document
+Local SWCDs	8a29ef#0144::nc.gov::STATE.organization
+Meat and Poultry Division	8a29ef#0145::nc.gov::STATE.organization
+(?i)medical(?-i) (?i)records(?-i)	8a29ef#0146::nc.gov::PII.personal_health_information
+(?i)military(?-i) (?i)leave(?-i)	8a29ef#0147::nc.gov::PII.sensitive_document
+MTSS	8a29ef#0148::nc.gov::STATE.governance
+NC Eugenics Task Force	8a29ef#0149::nc.gov::STATE.organization
+NC JOIN	8a29ef#0150::nc.gov::STATE.organization
+NCAC	8a29ef#0151::nc.gov::STATE.governance
+NCBiotech	8a29ef#0152::nc.gov::STATE.organization
+NCDPS	8a29ef#0153::nc.gov::STATE.organization
+NCEM	8a29ef#0154::nc.gov::STATE.organization
+NCFS	8a29ef#0155::nc.gov::STATE.organization
+NCHFA	8a29ef#0156::nc.gov::STATE.organization
+NCMOA	8a29ef#0157::nc.gov::STATE.organization
+NCMOH	8a29ef#0158::nc.gov::STATE.organization
+NDA	8a29ef#0159::nc.gov::PII.sensitive_document
+NEPA	8a29ef#0160::nc.gov::FEDERAL.governance
+(?i)non(?-i) (?i)disclosure(?-i)	8a29ef#0161::nc.gov::PII.sensitive_document
+(?i)non-disclosure(?-i)	8a29ef#0162::nc.gov::PII.sensitive_document
+(?i)North(?-i) (?i)Carolina(?-i) (?i)Administrative(?-i) (?i)Code(?-i)	8a29ef#0163::nc.gov::STATE.governance
+North Carolina Emergency Management	8a29ef#0164::nc.gov::STATE.organization
+North Carolina Highway Patrol	8a29ef#0165::nc.gov::STATE.organization
+(?i)not(?-i) (?i)a(?-i) (?i)matter(?-i) (?i)of(?-i) (?i)public(?-i) (?i)record(?-i)	8a29ef#0166::nc.gov::PII.sensitive_document
+(?i)not(?-i) (?i)a(?-i) (?i)public(?-i) (?i)record(?-i)	8a29ef#0167::nc.gov::PII.sensitive_document
+(?i)not(?-i) (?i)for(?-i) (?i)publication(?-i)	8a29ef#0168::nc.gov::PII.sensitive_document
+(?i)not(?-i) (?i)public(?-i)	8a29ef#0169::nc.gov::PII.sensitive_document
+(?i)not(?-i) (?i)to(?-i) (?i)be(?-i) (?i)quoted(?-i)	8a29ef#0170::nc.gov::PII.sensitive_document
+OAH	8a29ef#0171::nc.gov::STATE.organization
+OBX	8a29ef#0172::nc.gov::STATE.place
+(?i)off(?-i) (?i)the(?-i) (?i)record(?-i)	8a29ef#0173::nc.gov::PII.sensitive_document
+(?i)off-the-record(?-i)	8a29ef#0174::nc.gov::PII.sensitive_document
+Old Health Building	8a29ef#0175::nc.gov::STATE.place
+OSA	8a29ef#0176::nc.gov::STATE.organization
+P&C	8a29ef#0177::nc.gov::STATE.organization
+(?i)patient(?-i)	8a29ef#0178::nc.gov::PII.personal_health_information
+PHI	8a29ef#0179::nc.gov::PII.personal_health_information
+PIO	8a29ef#0180::nc.gov::STATE.person
+(?i)policy(?-i) (?i)number(?-i)	8a29ef#0181::nc.gov::PII.personal_health_information
+(?i)private(?-i)	8a29ef#0182::nc.gov::PII.sensitive_document
+Project COPE	8a29ef#0183::nc.gov::STATE.organization
+Reed Gold Mine	8a29ef#0184::nc.gov::STATE.place
+(?i)restricted(?-i)	8a29ef#0185::nc.gov::PII.sensitive_document
+Revisor of Statutes	8a29ef#0186::nc.gov::STATE.agency
+RRK	8a29ef#0187::nc.gov::STATE.organization
+Rural Rehab	8a29ef#0188::nc.gov::STATE.organization
+S&W	8a29ef#0189::nc.gov::STATE.organization
+S&W Cost Share Program	8a29ef#0190::nc.gov::STATE.organization
+S. B.	8a29ef#0191::nc.gov::STATE.governance
+S. L.	8a29ef#0192::nc.gov::STATE.governance
+S.B.	8a29ef#0193::nc.gov::STATE.governance
+S.L.	8a29ef#0194::nc.gov::STATE.governance
+SAC	8a29ef#0195::nc.gov::STATE.person
+Samarcand Manor	8a29ef#0196::nc.gov::STATE.place
+Samarkand Manor	8a29ef#0197::nc.gov::STATE.place
+SANC	8a29ef#0198::nc.gov::STATE.organization
+SB	8a29ef#0199::nc.gov::STATE.governance
+SBI	8a29ef#0200::nc.gov::STATE.organization
+(?i)sealed(?-i)	8a29ef#0201::nc.gov::PII.sensitive_document
+(?i)sealed(?-i) (?i)bid(?-i)	8a29ef#0202::nc.gov::PII.sensitive_document
+(?i)secret(?-i)	8a29ef#0203::nc.gov::PII.sensitive_document
+(?i)Senate(?-i) (?i)Bill(?-i)	8a29ef#0204::nc.gov::STATE.governance
+(?i)sensitive(?-i)	8a29ef#0205::nc.gov::PII.sensitive_document
+SEPA	8a29ef#0206::nc.gov::STATE.governance
+SERC	8a29ef#0207::nc.gov::STATE.organization
+(?i)Session(?-i) (?i)Law(?-i)	8a29ef#0208::nc.gov::STATE.governance
+SHP	8a29ef#0209::nc.gov::STATE.organization
+(?i)sick(?-i) (?i)leave(?-i)	8a29ef#0210::nc.gov::PII.personal_health_information
+SL	8a29ef#0211::nc.gov::STATE.governance
+Special Standards	8a29ef#0212::nc.gov::STATE.organization
+State CIO	8a29ef#0213::nc.gov::STATE.person
+State Environmental Review Clearinghouse	8a29ef#0214::nc.gov::STATE.organization
+State Fair	8a29ef#0215::nc.gov::STATE.organization
+State Parking Director	8a29ef#0216::nc.gov::STATE.organization
+State Purchase Officer	8a29ef#0217::nc.gov::STATE.person
+Sterilization Foundation	8a29ef#0218::nc.gov::STATE.organization
+Sterilization Victims Foundation	8a29ef#0219::nc.gov::STATE.organization
+(?i)strictly(?-i) (?i)prohibited(?-i)	8a29ef#0220::nc.gov::PII.sensitive_document
+(?i)top(?-i) (?i)secret(?-i)	8a29ef#0221::nc.gov::PII.sensitive_document
+Town Creek Indian Mound	8a29ef#0222::nc.gov::STATE.place
+(?i)trade(?-i) (?i)secret(?-i)	8a29ef#0223::nc.gov::PII.sensitive_document
+Tryon Palace	8a29ef#0224::nc.gov::STATE.place
+U.S.C.	8a29ef#0225::nc.gov::FEDERAL.governance
+UBO	8a29ef#0226::nc.gov::STATE.governance
+(?i)under(?-i) (?i)the(?-i) (?i)table(?-i)	8a29ef#0227::nc.gov::PII.sensitive_document
+(?i)under(?-i) (?i)wraps(?-i)	8a29ef#0228::nc.gov::PII.sensitive_document
+(?i)under-the-table(?-i)	8a29ef#0229::nc.gov::PII.sensitive_document
+(?i)United(?-i) (?i)States(?-i) (?i)Code(?-i)	8a29ef#0230::nc.gov::FEDERAL.governance
+USC	8a29ef#0231::nc.gov::FEDERAL.governance
+(?i)vacation(?-i) (?i)leave(?-i)	8a29ef#0232::nc.gov::PII.sensitive_document
+Vet Division	8a29ef#0233::nc.gov::STATE.organization
+VSOs	8a29ef#0234::nc.gov::STATE.organization
+WNC Agricultural Center	8a29ef#0235::nc.gov::STATE.place
+WNC Farmers Market	8a29ef#0236::nc.gov::STATE.place
+([0-9]{8,9}|[a-zA-Z][0-9]{7})	8a29ef#0237::nc.gov::PII.passport_number
+(http|https|ftp){1}(://)([0-9a-zA-Z]){1,63}(\.|@|:)([^\s]){1,2000}	8a29ef#0238::nc.gov::TOMES.URL
+["'\[{<]{0,1}[a-zA-Z0-9_\-\.]{1,100}@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)["'\]}>]{0,1}	8a29ef#0239::nc.gov::TOMES.email_address
+[0]{4}[0-9]{8}	8a29ef#0240::nc.gov::PII.drivers_license_number
+[0-9]{2}-[0-9]{7}([a-zA-Z]|[0-9]{3}){0,1}	8a29ef#0241::nc.gov::PII.taxpayer_id
+[0-9]{8}	8a29ef#0242::nc.gov::PII.employee_id
+[A-Z][a-z]{2,14} Prison	8a29ef#0243::nc.gov::STATE.place
+Avery [A-Z][a-z]{2,14} Prison	8a29ef#0243::nc.gov::STATE.place
+Dan [A-Z][a-z]{2,14} Prison	8a29ef#0243::nc.gov::STATE.place
+Mountain [A-Z][a-z]{2,14} Prison	8a29ef#0243::nc.gov::STATE.place
+New [A-Z][a-z]{2,14} Prison	8a29ef#0243::nc.gov::STATE.place
+((0[0-9])|(1[0-2])|(2[1-9])|(3[0-2])|(6[1-9])|(7[0-2])|80)[0-9]{2}-{0,1}[0-9]{4}-{0,1}[0-9] [0-9]{6,17}	8a29ef#0244::nc.gov::PII.bank_account_number
+((0[0-9])|(1[0-2])|(2[1-9])|(3[0-2])|(6[1-9])|(7[0-2])|80)[0-9]{2}-{0,1}[0-9]{4}-{0,1}[0-9]-[0-9]{6,17}	8a29ef#0244::nc.gov::PII.bank_account_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))(?!00)[0-9]{2}(?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))(?!00)[0-9]{2} (?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))(?!00)[0-9]{2}-(?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012])) (?!00)[0-9]{2}(?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012])) (?!00)[0-9]{2} (?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012])) (?!00)[0-9]{2}-(?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))-(?!00)[0-9]{2}(?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))-(?!00)[0-9]{2} (?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?!000)([0-6][0-9]{2}|7([0-6][0-9]{1}|7[012]))-(?!00)[0-9]{2}-(?!0000)[0-9]{4}	8a29ef#0245::nc.gov::PII.social_security_number
+(?i)Executive(?-i) (?i)Order(?-i)[0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+(?i)Executive(?-i) (?i)Order(?-i) [0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+(?i)Executive(?-i) (?i)Order(?-i) (?i)No(?-i).[0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+(?i)Executive(?-i) (?i)Order(?-i) (?i)No(?-i). [0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+E. O.[0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+E. O. [0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+E.O.[0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+E.O. [0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+EO[0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+EO [0-9]{1,3}	8a29ef#0246::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statute(?-i)[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statute(?-i)§[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statute(?-i)§ [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statute(?-i) [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statute(?-i) §[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+(?i)General(?-i) (?i)Statute(?-i) § [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G. S.[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G. S.§[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G. S.§ [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G. S. [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G. S. §[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G. S. § [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G.S.[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G.S.§[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G.S.§ [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G.S. [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G.S. §[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+G.S. § [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+GS[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+GS§[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+GS§ [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+GS [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+GS §[12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+GS § [12][0-9]{0,2}[a-zA-Z]{0,1}	8a29ef#0247::nc.gov::STATE.governance
+(?i)House(?-i) (?i)Bill(?-i)[0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+(?i)House(?-i) (?i)Bill(?-i) [0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+H[0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+H [0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+H. B.[0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+H. B. [0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+H.B.[0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+H.B. [0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+HB[0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+HB [0-9]{1,4}	8a29ef#0248::nc.gov::STATE.governance
+(?i)Senate(?-i) (?i)Bill(?-i)[0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+(?i)Senate(?-i) (?i)Bill(?-i) [0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+S[0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+S [0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+S. B.[0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+S. B. [0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+S.B.[0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+S.B. [0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+SB[0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+SB [0-9]{1,4}	8a29ef#0249::nc.gov::STATE.governance
+(?i)Session(?-i) (?i)Law(?-i) [1,2][0-9]{3}-[0-9]{1,3}	8a29ef#0250::nc.gov::STATE.governance
+S. L. [1,2][0-9]{3}-[0-9]{1,3}	8a29ef#0250::nc.gov::STATE.governance
+S.L. [1,2][0-9]{3}-[0-9]{1,3}	8a29ef#0250::nc.gov::STATE.governance
+SL [1,2][0-9]{3}-[0-9]{1,3}	8a29ef#0250::nc.gov::STATE.governance
+([1-9]|[1-3][0-9])[A-Z]{0,1} N.C. Admin	8a29ef#0251::nc.gov::STATE.governance
+([1-9]|[1-3][0-9])[A-Z]{0,1} NC Admin	8a29ef#0251::nc.gov::STATE.governance
+([1-9]|[1-3][0-9])[A-Z]{0,1} NCAC [1-9][0-9]{0,1}[A-Z] \.[0-9]{1,4}	8a29ef#0251::nc.gov::STATE.governance
+([1-9]|[1-5][0-9]) (CFR|C\.F\.R) [0-9]{1,4}(\.[1-9]{1,4}){0,1}	8a29ef#0252::nc.gov::FEDERAL.governance
+([1-9]|[1-5][0-9]) (CFR|C\.F\.R) § [0-9]{1,4}(\.[1-9]{1,4}){0,1}	8a29ef#0252::nc.gov::FEDERAL.governance
+([1-9]|[1-5][0-9]) (USC|U\.S\.C) [1-9][0-9]{0,2}([\.,-]([1-9]|[0-9]{2,4})){0,1}	8a29ef#0253::nc.gov::FEDERAL.governance
+([1-9]|[1-5][0-9]) (USC|U\.S\.C) § [1-9][0-9]{0,2}([\.,-]([1-9]|[0-9]{2,4})){0,1}	8a29ef#0253::nc.gov::FEDERAL.governance
+([1-9]|[1-5][0-9]) (USC|U\.S\.C) § § [1-9][0-9]{0,2}([\.,-]([1-9]|[0-9]{2,4})){0,1}	8a29ef#0253::nc.gov::FEDERAL.governance
+[0-9]{4}[^a-zA-Z0-9][0-9]{4}[^a-zA-Z0-9][0-9]{4}[0-9]{4}	8a29ef#0254::nc.gov::PII.credit_card_number
+[0-9]{4}[^a-zA-Z0-9][0-9]{4}[^a-zA-Z0-9][0-9]{4}[^a-zA-Z0-9][0-9]{4}	8a29ef#0254::nc.gov::PII.credit_card_number
+AG	8a29ef#0255::utah.gov::STATE.person
+Attorney General	8a29ef#0256::utah.gov::STATE.person
+Child and Family Services	8a29ef#0257::utah.gov::STATE.department
+DCFS	8a29ef#0258::utah.gov::STATE.division
+DWS	8a29ef#0259::utah.gov::STATE.department
+Office of Management and Budget	8a29ef#0260::utah.gov::STATE.office
+Office of Recovery Services	8a29ef#0261::utah.gov::STATE.department
+ORS	8a29ef#0262::utah.gov::STATE.department
+Workforce Services	8a29ef#0263::utah.gov::STATE.department
+[0-9]{6}	8a29ef#0264::utah.gov::PII.employee_id
+[0-9]{9}	8a29ef#0265::utah.gov::PII.drivers_license_number
+[U]{1}[0-9]{8}	8a29ef#0266::utah.gov::PII.university_id
