@@ -54,7 +54,8 @@ class _CoreNLP():
         self.host = host
         self.mapping_file = mapping_file
         self.tags_to_override = tags_to_override
-        self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner", 
+        self.options = {"annotators": "tokenize, ssplit, pos, ner, regexner",
+                "ner.useSUTime": "false", "ner.applyNumericClassifiers": "false", 
                 "outputFormat": "json"}
 
         # if specified, add option to use mapping file.

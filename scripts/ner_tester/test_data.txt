@@ -302,6 +302,7 @@ vacation leave
 123546
 
 # PII.ut_id_or_casefile_number
+# This will get overridden by the passport_number. Is what it is.
 123456789
 
 # PII.ut_university_id
