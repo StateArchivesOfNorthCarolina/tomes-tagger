@@ -398,6 +398,8 @@ A1234567
 # PII.social_security_number
 433-91-9072
 155 21 7104
+# the following is a zip code and SHOULD NOT match as an SSN.
+27405-5012
 
 # PII.taxpayer_id
 12-1234567
