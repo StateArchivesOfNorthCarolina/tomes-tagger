@@ -26,11 +26,17 @@ class EAXSToTagged():
         >>> html2text = def html2text(html) ... # convert HTML to plain text.
         >>> text2nlp = def text2nlp(text) ... # convert plain text to NLP/NER output.
         >>> e2t = EAXSToTagged(html2text, text2nlp)
-        >>> tagged = e2t.write_tagged(eaxs_file, "output.xml") # tagged EAXS to "output.xml".
+        >>> e2t.write_tagged(eaxs_file, "tagged.xml") # create "tagged.xml".
+        >>> e2t.write_tagged(eaxs_file, "tagged.xml", split=True) # create one tagged XML file
+        >>> # per message with the form "tagged_01.xml", etc.
+        >>> e2t.write_tagged(eaxs_file, "tagged.xml", restrictions=[1,2]) # only output tagged
+        >>> # versions of the first two messages.
+        >>> e2t.write_tagged(eaxs_file, "tagged.xml", split=True, restrictions=[1,2], 
+        >>> inclusive=False) # output tagged versions of all but the first two messages.
     """
 
 
-    def __init__(self, html_converter, nlp_tagger, charset="UTF-8"):
+    def __init__(self, html_converter, nlp_tagger, charset="UTF-8", buffered=False):
         """ Sets instance attributes.
 
         Args:
@@ -41,6 +47,9 @@ class EAXSToTagged():
             - charset (str): Encoding with which to update EAXS message content. This is also
             the encoding used to write a tagged EAXS file with the @self.write_tagged() 
             method.
+            - buffered (bool): Use True to write tagged EAXS files with buffering. Otherwise,
+            use False. For more information, see: 
+            http://lxml.de/api/lxml.etree.xmlfile-class.html.
         """
 
         # set logger; suppress logging by default.
@@ -51,6 +60,7 @@ class EAXSToTagged():
         self.html_converter = html_converter
         self.nlp_tagger = nlp_tagger
         self.charset = charset
+        self.buffered = buffered
 
         # set namespace attributes.
         self.ncdcr_prefix = "ncdcr"
@@ -78,7 +88,7 @@ class EAXSToTagged():
             char in ("\t", "\n")])
         
         return xtext
-    
+
 
     def _get_folder_name(self, message_el):
         """ Gets the folder name for a given <Message> element. Subfolders are preceeded by
@@ -368,28 +378,94 @@ class EAXSToTagged():
 
         return message_el
 
+    
+    def _get_tagged_messages(self, eaxs_file, total_messages, restrictions=[], 
+            inclusive=True):
+        """ Tags <Message> elements in a given @eaxs_file.
+        
+        Args:
+            - eaxs_file (str): The filepath for the EAXS file.
+            - total_messages (int): The total number of <Message> elements in @eaxs_file.
+            - restrictions (list): The position of the messages to exclusively tag OR those
+            to skip from tagging. Note: the first message's value is 1. Leave this empty to
+            tag all messages.
+            - inclusive (bool): Use True to only tag messages whose position values are in
+            @restrictions. Otherwise, use False to tag all messages except the ones listed in
+            @restrictions. If @restrictions is empty, this value is ignored.
+            
+        Returns:
+            generator: The return value.
+            The yielded data is a tuple.
+            The first item is a string, the zero-padded position of the given message (first =
+            1). The second item is the <MessageId> value. The third item is the tagged 
+            lxml.etree._Element or None if the tagging workflow failed.
+        """
+        
+        self.logger.info("Tagging messages in EAXS file: {}".format(eaxs_file))
 
-    def write_tagged(self, eaxs_file, tagged_eaxs_file):
-        """ Converts an @eaxs_file to a @tagged_eaxs_file.
+        # tag each <Message> element.
+        message_index = 0
+        for event, element in self._get_messages(eaxs_file):
+
+            message_index += 1
+            
+            # if @restrictions is not empty; filter results as requested.            
+            if len(restrictions) != 0:
+                msg = "Skipping message {} as requested.".format(message_index)
+                if inclusive and message_index not in restrictions:
+                    self.logger.info(msg)
+                    continue
+                elif not inclusive and message_index in restrictions:
+                    self.logger.info(msg)
+                    continue
+            
+            # get needed values from the message element.
+            message_id = self._get_message_id(element)
+            folder_name = self._get_folder_name(element)
+
+            # tag the message.
+            self.logger.info("Tagging message with id: {}".format(message_id))
+            try:
+                tagged_message = self._update_message(element, folder_name)
+            except Exception as err:
+                self.logger.error(err)
+                self.logger.warning("Failed to complete tagging workflow.")
+                tagged_message = None
+
+            # report on progress.
+            remaining_messages = total_messages - message_index
+            self.logger.info("Processed {} of {} messages.".format(message_index, 
+                total_messages))
+            if remaining_messages > 0:
+                self.logger.info("Messages left to process: {}".format(remaining_messages))
+            
+            # yield the tagged message tuple.
+            yield (message_index, message_id, tagged_message)
+            
+            # clear original @element (must follow yield!).
+            element.clear()
+
+        return
+
+
+    def _write_xml(self, eaxs_file, tagged_eaxs_file, tagged_messages, global_id):
+        """ Writes @tagged_eaxs_file as an XML file.
 
         Args:
             - eaxs_file (str): The filepath for the EAXS file.
-            - tagged_eaxs_file (str): The filepath that the tagged EAXS document will be
-            written to.
+            - tagged_eaxs_file (str): The filepath to which the tagged EAXS document will be
+            written.
+            - tagged_messages (generator): The tagged message tuple as returned by 
+            self._get_tagged_messages().
+            - global_id (str): The value of self._get_global_id(@eaxs_file).
 
         Returns:
-            None
+            list: The return value.
+            The message indexes for messages that failed to finish the tagging process.
 
         Raises:
-            - FileNotFoundError: If @eaxs_file doesn't exist.
             - FileExistsError: If @tagged_eaxs_file already exists.
         """
-
-        # raise error if @eaxs_file doesn't exist.
-        if not os.path.isfile(eaxs_file):
-            err = "Can't find file: {}".format(eaxs_file)
-            self.logger.error(err)
-            raise FileNotFoundError(err)
 
         # raise error if @tagged_eaxs_file already exists.
         if os.path.isfile(tagged_eaxs_file):
@@ -397,23 +473,12 @@ class EAXSToTagged():
             self.logger.error(err)
             raise FileExistsError(err)
 
-        self.logger.info("Converting '{}' EAXS file to tagged EAXS file: {}".format(
-            eaxs_file, tagged_eaxs_file))
-
-        # get count of <Message> elements; prepare data for progress updates.
-        msg = "Finding number of messages in source EAXS file; this may take a while."
-        self.logger.info(msg)
+        # create placeholder for untagged messages.
+        untagged_messages = []
         
-        total_messages = 0
-        for event, element in self._get_messages(eaxs_file):
-            total_messages += 1
-            element.clear()
-        self.logger.info("Found {} messages.".format(total_messages))
-        remaining_messages = total_messages
-
         # open new @tagged_eaxs_file.
         with etree.xmlfile(tagged_eaxs_file, encoding=self.charset, close=True, 
-                buffered=False) as xfile:
+                buffered=self.buffered) as xfile:
 
             # write XML header to @xfile; register namespace information.
             xfile.write_declaration()
@@ -421,35 +486,122 @@ class EAXSToTagged():
 
             # write root <Account> element; append tagged <Message> elements.
             account_tag = "{ns}:Account".format(ns=self.ncdcr_prefix)
-            with xfile.element(account_tag, GlobalId=self._get_global_id(eaxs_file), 
-                    SourceEAXS=os.path.basename(eaxs_file), nsmap=self.ns_map):
+            with xfile.element(account_tag, GlobalId=global_id, SourceEAXS=eaxs_file, 
+            nsmap=self.ns_map):
                 
-                # tag each <Message> element from source @eaxs_file.
-                for event, element in self._get_messages(eaxs_file):
+                # write tagged message to file.
+                for message_index, message_id, tagged_message in tagged_messages:
                     
-                    # get needed values.
-                    message_id = self._get_message_id(element)
-                    folder_name = self._get_folder_name(element)
+                    # if message wasn't tagged, append index to @untagged_messages.
+                    if tagged_message is None:
+                        untagged_messages.append(message_index)
                     
-                    # tag the message and write it to @xfile.
-                    self.logger.info("Processing message with id: {}".format(message_id))
-                    tagged_message = self._update_message(element, folder_name)
-                    xfile.write(tagged_message)
-                    element.clear()
-                    tagged_message.clear()
-                    
-                    # report on progress.
-                    remaining_messages -= 1
-                    self.logger.info("Processing complete for {} of {} messages.".format(
-                        (total_messages - remaining_messages), total_messages))
-                    if remaining_messages > 0:
-                        self.logger.info("Messages left to process: {}".format(
-                            remaining_messages))
+                    # otherwise, write message.
+                    else:
+                        xfile.write(tagged_message)
+                        tagged_message.clear()
+            
+            return untagged_messages
+
+
+    def write_tagged(self, eaxs_file, tagged_eaxs_file, split=False, restrictions=[], 
+            inclusive=True):
+        """ Converts an @eaxs_file to one or many tagged EAXS file/s.
+            
+        Args:
+            - eaxs_file (str): The filepath for the EAXS file.
+            - tagged_eaxs_file (str): The filepath that the tagged EAXS document will be
+            written to. If @split is True, this value will have an underscore and the
+            zero-padded position of each message placed before the file extension.
+            - split (bool): Use True to create one tagged EAXS file per message. Otherwise,
+            use False.
+            - restrictions (list): The position of the messages to exclusively tag OR those
+            to skip from tagging. Note: the first message's value is 1. Leave this empty to
+            tag all messages.
+            - inclusive (bool): Use True to only tag messages whose position values are in
+            @restrictions. Otherwise, use False to tag all messages except the ones listed in
+            @restrictions. If @restrictions is empty, this value is ignored.
         
-        # report on completion.
-        self.logger.info("Finished writing tagged EAXS file: {}".format(tagged_eaxs_file))
-        return
-  
+        Returns:
+            dict: The return type.
+            The "message_count" key's value is and int, the total number of messages in 
+            @eaxs_file. The "untagged_messages" key's value is a list of ints - the message
+            indexes of <Message> elements that didn't make it through the tagging workflow.
+
+        Raises:
+            - FileNotFoundError: If @eaxs_file doesn't exist or if the containing folder for 
+            @tagged_eaxs_file doesn't exist.
+        """
+
+        # raise error if @eaxs_file doesn't exist.
+        if not os.path.isfile(eaxs_file):
+            err = "Can't find EAXS file: {}".format(eaxs_file)
+            self.logger.error(err)
+            raise FileNotFoundError(err)
+
+        # raise error if containing folder for @tagged_eaxs_file does not exist.
+        container = os.path.split(tagged_eaxs_file)[0]
+        if container != "" and not os.path.isdir(container):
+            err = "Destination folder '{}' does not exist.".format(container)
+            self.logger.error(err)
+            raise FileNotFoundError(err)
+        
+        # get count of <Message> elements.
+        msg = "Finding number of messages in '{}'; this may take a while.".format(eaxs_file)
+        self.logger.info(msg) 
+        total_messages = 0
+        for event, element in self._get_messages(eaxs_file):
+            total_messages += 1
+            element.clear()
+        self.logger.info("Found {} messages.".format(total_messages))
+        
+        # get needed values for @eaxs_file.
+        global_id = self._get_global_id(eaxs_file)
+        source_eaxs = os.path.basename(eaxs_file)
+        
+        # launch generator to tag all messages.
+        tagged_messages = self._get_tagged_messages(eaxs_file, total_messages, restrictions,
+                inclusive)
+
+        # create placeholder dict to return.
+        results = {"total_messages": total_messages, "untagged_messages": []}
+
+        # create function to write one file per message.
+        def multi_file_writer():
+
+            # determine padding length based on @total_messages.
+            padding_length = 1 + len(str(total_messages))
+            
+            # lambda functions to return a padded version of @tagged_eaxs_file.
+            pad_indx = lambda indx: "_" + str(indx).zfill(padding_length) 
+            pad_file = lambda fname, pad: pad.join(os.path.splitext(fname))
+            
+            # write one file per each message.
+            for tagged_message in tagged_messages:
+                msg_indx = tagged_message[0]
+                fname = pad_file(tagged_eaxs_file, pad_indx(msg_indx))
+                untagged = self._write_xml(source_eaxs, fname, [tagged_message], global_id)
+                results["untagged_messages"] += untagged
+            
+            return results
+
+        # create function to write only one file.
+        def single_file_writer():
+            
+            untagged = self._write_xml(source_eaxs, tagged_eaxs_file, tagged_messages, 
+                    global_id)
+            results["untagged_messages"] = untagged
+            
+            return results
+
+        # execute the appropriate function depending on the value of @split.
+        if split:
+            results = multi_file_writer()
+        else:
+            results = single_file_writer()
+
+        return results
+
 
 if __name__ == "__main__":
     pass

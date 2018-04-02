@@ -376,7 +376,7 @@ class TextToNLP():
 
         # if @sentences is null, return tuple with @text value as last item.
         # Why? It appears CoreNLP will return a null when asked to tag only whitespace.
-        if sentences == []:
+        if sentences == [] and text.strip() == "":
             ner_output.append(("", "", text))
             return ner_output
 

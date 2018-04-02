@@ -68,6 +68,8 @@ The sample files can be used with the command line options of some of the unit t
 # Modules
 TOMES Tool consists of single-purpose high level module, *tagger.py*. This creates a "tagged" version of a source EAXS file. It can be used as native Python class or as command line script.
 
+*Before creating a "tagged" EAXS file, please make sure that you have free disk space that is approximately 1.5 to 2 times greater than the size of your source EAXS file.*
+
 ## Using tagger.py with Python
 To get started, import the module and run help():
 

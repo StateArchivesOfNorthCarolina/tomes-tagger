@@ -125,11 +125,12 @@ class HTMLToText():
     
     def __init__(self, lynx_command="lynx", lynx_options=None):
         """ Sets instance attributes.
-        
+    
         Args:
             - lynx_command (str): The path to the "lynx" executable.
             - lynx_options (dict): Any additional command line options for the Lynx "dump"
-            command. See: "http://goo.gl/e55eNp". 
+            command. See: 
+            "http://lynx.invisible-island.net/release/lynx_help/Lynx_users_guide.html#Invoking". 
         """
 
         # set logger; suppress logging by default. 

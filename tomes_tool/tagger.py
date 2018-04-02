@@ -122,13 +122,16 @@ class Tagger():
     
     def write_tagged(self, eaxs_file, tagged_eaxs_file, *args, **kwargs):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
+        This is a wrapper around tomes_tool.lib.eaxs_to_tagged.EAXSToTagged.write_tagged(). 
+        For more information do "help(tagger.EAXSToTagged.write_tagged)".
         
         Args:
-            - See tomes_tool.lib.eaxs_to_tagged.write_tagged() for more info.
+            - eaxs_file (str): The filepath for the EAXS file.
+            - tagged_eaxs_file (str): The filepath to which the tagged EAXS document will be
+            written to.
 
         Returns:
             dict: The return value.
-            See tomes_tool.lib.eaxs_to_tagged.write_tagged() for more info.
 
         Raises:
             Exception: If an exception was raised.
@@ -137,9 +140,10 @@ class Tagger():
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
 
         # create tagged EAXS.
-        results = []
+        results = {}
         try:
             results = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file, *args, **kwargs)
+            self.logger.info("Created file: {}".format(tagged_eaxs_file)) 
         except Exception as err:
             self.logger.error(err)
             raise err
