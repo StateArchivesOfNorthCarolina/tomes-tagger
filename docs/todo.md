@@ -16,7 +16,7 @@
 
 	For those who only want notifaction when processing starts/stops, passing in "0" as the int should be the way to make that happen.
 
-- Consider working on signature extraction and omitting signatures from NLP/NER recognition in favor of just tagging them as "signatures". See "./scripts/experiments/signatures".
+- Consider working on signature extraction and omitting signatures from NLP/NER recognition in favor of just tagging them as "signatures". See "./scripts/experiments/signatures". See also: [http://blog.humaneguitarist.org/2017/05/06/spotting-the-john-hancock-in-emails/](http://blog.humaneguitarist.org/2017/05/06/spotting-the-john-hancock-in-emails/).
 
 - Consider using Python to process regular expressions instead of CoreNLP. See "./scripts/experiments/tag\_text\_after\_tokenization". *Note: this requires the same tokenizer as CoreNLP but does not require parts-of-speech tagging or NLP analysis, etc. as that will only add additional processing overhead.*
 
