@@ -115,7 +115,7 @@ class HTMLToText():
     """ A class to convert HTML files OR strings to plain text via the Lynx browser 
     (http://lynx.invisible-island.net/).
     
-    Examples:
+    Example:
         >>> h2t = HTMLToText()
         >>> h2t.get_text("sample.html", is_raw=False)
         # returns plain text version of "sample.html".
