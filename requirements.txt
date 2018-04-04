@@ -4,4 +4,5 @@ lxml>=3.7.2
 plac>=0.9.6
 pycorenlp>=0.3.0
 PyYAML>=3.12
+requests>=2.18
 setuptools>=36
