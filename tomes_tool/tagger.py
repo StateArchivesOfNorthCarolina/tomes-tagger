@@ -22,7 +22,8 @@ class Tagger():
         >>> # write tagged EAXS version of EAXS file.
         >>> sample = "../tests/sample_files/sampleEAXS.xml"
         >>> tagger = Tagger(host="http://localhost:9003")
-        >>> tagger.write_tagged(sample, "tagged.xml")
+        >>> results = tagger.write_tagged(sample, "tagged.xml")
+        >>> print(results) # dict.
     """
     
 
