@@ -18,7 +18,7 @@ TOMES Tool requires the following:
 		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
-	- If you want to use the TOMES Project NER mappings, you must place the "regexner\_TOMES" directory (found in in the "./tomes\_tool/NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
+	- If you want to use the TOMES Project NER mappings, you must place the "regexner\_TOMES" directory (found in the "./NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 
 # Installation
 After installing the external dependencies above, you'll need to install some required Python packages.
@@ -34,10 +34,10 @@ Running `pip3 uninstall tomes_tool` will uninstall the TOMES Tool package.
 # Unit Tests
 While not true unit tests that test each function or method of a given module or class, basic unit tests help with testing overall module workflows.
 
-Unit tests reside in the "./tomes\_tool/tests" directory and start with "test__".
+Unit tests reside in the "./tests" directory and start with "test__".
 
 ## Running the tests
-To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the "./tomes\_tool/tests" directory. 
+To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the "./tests" directory. 
 
 Specific unit tests of interest:
 
@@ -54,12 +54,12 @@ All of the unit tests have command line options.
 
 To see the options and usage examples simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
 
-Sample files are located in the "./tomes\_tool/tests/sample_files" directory.
+Sample files are located in the "./tests/sample_files" directory.
 
 The sample files can be used with the command line options of some of the unit tests.
 
 # Modules
-TOMES Tool consists of single-purpose high level module, *tagger.py*. This creates a tagged version of a source EAXS file. It can be used as native Python class or as command line script.
+TOMES Tool consists of single-purpose high level module, **tagger.py**. This creates a tagged version of a source EAXS file. It can be used as native Python class or as command line script.
 
 *Before creating a tagged EAXS file, please make sure that you have free disk space that is approximately 1.5 to 2 times greater than the size of your source EAXS file.*
 
@@ -72,12 +72,12 @@ To get started, import the module and run help():
 	>>> from tomes_tool import tagger
 	>>> help(tagger)
 
-To create tagged EAXS files, the CoreNLP server will need to be started (default port = 9003). You can use the one of the startup scripts: "./tomes_tool/NLP/stanford\_edu/start\_server.[bat|sh]".
+To create tagged EAXS files, the CoreNLP server will need to be started (default port = 9003). You can use the one of the startup scripts: "./NLP/stanford\_edu/start\_server.[bat|sh]".
 
 ## Using tagger.py from the command line
-1. Start the CoreNLP server with one of the startup scripts: "./tomes_tool/NLP/stanford\_edu/start\_server.[bat|sh]".
+1. Start the CoreNLP server with one of the startup scripts: "./NLP/stanford\_edu/start\_server.[bat|sh]".
 2. Open another terminal instance.
-3. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 tagger.py -h` to see an example command.
+3. From the "./tomes\_tool" directory do: `py -3 tagger.py -h` to see an example command.
 3. Run the example command.
 
 -----
