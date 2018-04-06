@@ -38,16 +38,16 @@ elementFormDefault="qualified">
         2.  @authority - the Internet domain of the organization reponsible for the controlled
        	vocabulary of the @entity applied to the token.
             
-        3.  @pattern - the unique identifier for the particular pattern that the token matched
-       	against and that yielded the @entity in question.
-            
+        3.  @pattern - the unique identifier for the particular pattern (string literal or 
+        regex) that the token matched against and that yielded the @entity in question.
+
         It is recommended that the pattern consist of two parts: the first six digits of the
        	SHA-256 hash for the source document from which the @entity term originates, followed
        	by the identifier value for the @entity as notated within the source document. A "#" 
-	mark should be used to delimit the two parts.
-                
+        mark should be used to delimit the two parts.
+         
         4.  @group - the group identifier for each token; this value is shared by adjacent 
-	tokens with the same @entity value regardless of the the @pattern value.
+        tokens with the same @entity value regardless of the the @pattern value.
             
     Note that if the @entity attribute exists, then the @authority and @group attributes must
     also exist. This is not enforced by the schema.

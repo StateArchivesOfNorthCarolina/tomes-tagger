@@ -27,6 +27,7 @@ class Features():
             signature (str): An email signature block.
             sender_address (str): The email address for the signature's author.
         """
+		
         self.signature = signature
         self.sender_address = sender_address
 
@@ -35,6 +36,7 @@ class Features():
         """ Returns 1 if sender_address is present in self.signature.
             Otherwise, returns 0.
         """
+		
         if self.sender_address == None:
             x = False
         else:

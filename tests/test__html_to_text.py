@@ -15,7 +15,7 @@ class Test_HTMLToText(unittest.TestCase):
     
     def setUp(self):
 
-	# set attributes.
+        # set attributes.
         self.h2t = HTMLToText()
         self.sample = "<html><head></head><body><a href=\"http://h.w\">{}</a></body></html>"
     
@@ -104,4 +104,3 @@ if __name__ == "__main__":
     
     import plac
     plac.call(main)
-

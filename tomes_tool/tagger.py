@@ -19,11 +19,9 @@ class Tagger():
     """ A class to convert an EAXS file to a tagged EAXS document.
 
     Example:
-        >>> # write tagged EAXS version of EAXS file.
         >>> sample = "../tests/sample_files/sampleEAXS.xml"
         >>> tagger = Tagger(host="http://localhost:9003")
-        >>> results = tagger.write_tagged(sample, "tagged.xml")
-        >>> print(results) # dict.
+        >>> tagger.write_tagged(sample, "tagged.xml")
     """
     
 
@@ -54,7 +52,7 @@ class Tagger():
         if self.check_host:
             self._ping_host()
 
-        # compose instances.
+        # compose module instances.
         self.h2t = HTMLToText()
         self.t2n = TextToNLP(self.host)
         self.n2x = NLPToXML()
@@ -151,6 +149,7 @@ class Tagger():
         
         return results
 
+
 # CLI.
 def main(eaxs_file: ("source EAXS file"), 
         tagged_eaxs_file: ("tagged EAXS destination"),
@@ -193,4 +192,3 @@ if __name__ == "__main__":
     
     import plac
     plac.call(main)
-

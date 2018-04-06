@@ -29,7 +29,7 @@ class Test_EAXSToTagged(unittest.TestCase):
     def test__tagged(self):
         """ Can I create a tagged EAXS and verify that each message was tagged? """
 
-        # dr run functions.
+        # dry run functions.
         def_html = lambda x: "HTML"
         def_nlp = lambda x: etree.Element("NLP")
 

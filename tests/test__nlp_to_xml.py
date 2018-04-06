@@ -43,6 +43,7 @@ class Test_NLPToXML(unittest.TestCase):
         # check if result is as expected.
         self.assertTrue(is_valid)
 
+
     def test__append_to_blocktext(self):
         """ If a series of whitespace only token groups exist and one contains an illegal XML
         character, can we avoid a TypeError? For more info, see:
@@ -70,7 +71,6 @@ def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):
     n2x = NLPToXML()
     xdoc = n2x.get_xml(ner_data)
     xdoc = etree.tostring(xdoc).decode()
-    
     print(xdoc)
 
 
@@ -78,4 +78,3 @@ if __name__ == "__main__":
     
     import plac
     plac.call(main)
-

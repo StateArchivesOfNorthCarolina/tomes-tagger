@@ -7,23 +7,16 @@ Its purpose is to create a "tagged" version of an [EAXS](http://www.history.ncdc
 
 The tagged version of the EAXS file is meant to contain email messages that have been tagged by Name Entity Recognition (NER) tools. It uses a modified version of the original EAXS format.
 
-...
-
-**TOMES Tool**  is under active development by the [State Archives of North Carolina](http://archives.ncdcr.gov/) in conjunction with the [TOMES Project Team](https://www.ncdcr.gov/resources/records-management/tomes/team). Currently, it is not intended for use other than testing by the project team.
-
-
 # External Dependencies
-TOMES Tool requires the following applications:
+TOMES Tool requires the following:
 
-- [Python](https://www.python.org/download/releases/3.0/) 3.0+ (using 3.5+)
+- [Python](https://www.python.org) 3.0+ (using 3.5+)
 	- See the "./requirements.txt" file for additional module dependencies.
 	- You will also want to install [pip](https://pypi.python.org/pypi/pip) for Python 3.
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
-	- *We're currently using this for HTML email to plain text conversion.*
 	- The "lynx" command must be executable from any directory on your system.
 		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
-	- *We're currently using this for NER tagging.*
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
 	- If you want to use the TOMES Project NER mappings, you must place the "regexner\_TOMES" directory (found in in the "./tomes\_tool/NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 
@@ -66,9 +59,9 @@ Sample files are located in the "./tomes\_tool/tests/sample_files" directory.
 The sample files can be used with the command line options of some of the unit tests.
 
 # Modules
-TOMES Tool consists of single-purpose high level module, *tagger.py*. This creates a "tagged" version of a source EAXS file. It can be used as native Python class or as command line script.
+TOMES Tool consists of single-purpose high level module, *tagger.py*. This creates a tagged version of a source EAXS file. It can be used as native Python class or as command line script.
 
-*Before creating a "tagged" EAXS file, please make sure that you have free disk space that is approximately 1.5 to 2 times greater than the size of your source EAXS file.*
+*Before creating a tagged EAXS file, please make sure that you have free disk space that is approximately 1.5 to 2 times greater than the size of your source EAXS file.*
 
 ## Using tagger.py with Python
 To get started, import the module and run help():
@@ -79,15 +72,13 @@ To get started, import the module and run help():
 	>>> from tomes_tool import tagger
 	>>> help(tagger)
 
-## Using tagger.py from the command line
-1. Start the CoreNLP server.
-	- Until further notice, it is assumed you will run the server on port 9003 with a lengthy timeout:
-	
-		`cd stanford-corenlp-full-2016-10-31`
+To create tagged EAXS files, the CoreNLP server will need to be started (default port = 9003). You can use the one of the startup scripts: "./tomes_tool/NLP/stanford\_edu/start\_server.[bat|sh]".
 
-     	`java -mx2g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9003 -timeout 50000`
-2. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 tagger.py -h` 
-3. Try the example help command.
+## Using tagger.py from the command line
+1. Start the CoreNLP server with one of the startup scripts: "./tomes_tool/NLP/stanford\_edu/start\_server.[bat|sh]".
+2. Open another terminal instance.
+3. From the "./tomes\_tool/tomes\_tool" directory do: `py -3 tagger.py -h` to see an example command.
+3. Run the example command.
 
 -----
-*[1] Depending on your system configuration, you might need to specify "python3", etc. instead of "py -3" from the command line.*
+*[1] Depending on your system configuration, you might need to specify "python3", etc. instead of "py -3" from the command line. Similar differences might apply for PIP.*

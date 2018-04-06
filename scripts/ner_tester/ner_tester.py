@@ -21,7 +21,8 @@ def testDataFile(test_file, results_file):
     """ Tests NER patterns in @test_file and writes results to @results_file.
     
     Args:
-        - test_file (str): The filepath with test data (one phrase per line).
+        - test_file (str): The filepath with test data (one phrase per line). Blank lines and
+        comment lines (must start with #) are OK.
         - results_file (str): The filepath to which to write the test results.
     
     Returns:

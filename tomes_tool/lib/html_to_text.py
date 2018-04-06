@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
-""" This module contains classes for manipulating HTML and converting HTML to plain text. """
+""" This module contains classes for manipulating HTML and converting HTML to plain text. 
+
+Todo:
+    * ModifyHTML.remove_images() should probably not have a @preserve_alt option. It should be
+    set in __init__() because one instance is created per HTML document.
+"""
 
 # import modules.
 import codecs
@@ -65,7 +70,7 @@ class ModifyHTML():
             
             # get @href; ignore non-http|https values. 
             href = a_tag["href"]
-            if href[0:4].lower() == "http": # case insensitive.
+            if href[0:4].lower() == "http":
                 text = a_tag.string + " [" + href + "]"  
                 a_tag.string.replace_with(text)
 
@@ -186,7 +191,7 @@ class HTMLToText():
             - OSError: If the container "./_temp" folder does not exist AND can't be created. 
         """
 
-        # get absoluate path of container folder.
+        # get absolute path of container folder.
         container_dir = os.path.dirname(os.path.abspath(__file__))
         container_dir = os.path.join(container_dir, "_temp")
         
@@ -284,4 +289,3 @@ class HTMLToText():
 
 if __name__ == "__main__":    
     pass
-

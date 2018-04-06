@@ -16,17 +16,18 @@
 
 
 def tokenize(text):
-    """ This takes the place of the tokenizer or tokenization algorithm used by CoreNLP (or 
-    some other NER tagger being used). It returns a list of tokens in @text. """
+    """ Pretend this uses the EXACT same tokenization algorithm used by CoreNLP (or some other
+    NER tagger being used). It returns a list of tokens in @text. """
 
     tokens = text.split()
     return tokens
 
 
 def lookup_tag(regex_pattern):
-    """ For each @regex_pattern we need a dict so we can lookup the associated NER tag. """
+    """ For each @regex_pattern we need a dict so we can lookup the associated string to tag
+    it with. """
 
-    lookup = {"[H|h]ello world": "GREETING"}
+    lookup = {"[H|h]ello world": "GREETING_TAG"}
     try:
         return lookup[regex_pattern]
     except KeyError:
@@ -63,9 +64,11 @@ def get_combos(regex_result):
         return None
 
     # make a list of tokens sets in global @TEXT_TOKENS that match @regex_result_tokens.
+    # Note: the "index" key equals the position in @TEXT_TOKENS for the first token in each
+    # match occurrence.
     combos = []
     for find in finds:
-        combo = {"tokens": TEXT_TOKENS[find:find + total_tokens], "start": find}
+        combo = {"tokens": TEXT_TOKENS[find:find + total_tokens], "index": find}
         if combo["tokens"] == regex_result_tokens:
             combos.append(combo)
 
@@ -91,7 +94,7 @@ print(get_map(tokenize(TEXT)))
 print(get_combos("Hello world"))
 print()
 
-# example usage.
+# example usage:
 import re
 
 # let's get the associated NER tag for the regex @PATTERN.

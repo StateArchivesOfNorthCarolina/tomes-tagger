@@ -13,6 +13,7 @@ logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 logger.setLevel("INFO")
 
+
 # establish XML header/footer.
 HEADER = """<?xml version='1.0' encoding='UTF-8'?>
 <Account xmlns="http://www.archives.ncdcr.gov/mail-account"
@@ -85,7 +86,7 @@ def main(eaxs_file:"any EAXS file",
         message_ids:"comma-delimited list of <MessageID> values OR message positions"):
     
     "Exports a single <Message> element from an EAXS or tagged EAXS file.\
-    \nexample: `py -3 export_message.py myEAXS.xml myEAXS__firstMessage.xml \"1,2\"` "
+    \nexample: `py -3 export_message.py myEAXS.xml myEAXS__first2Messages.xml \"1,2\"` "
 
     try:
         message_ids = message_ids.split(",")

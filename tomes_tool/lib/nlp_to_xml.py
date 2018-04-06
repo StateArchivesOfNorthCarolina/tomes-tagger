@@ -1,7 +1,17 @@
 #!/usr/bin/env python3
 
 """ This module converts a list of NER tuples (token, NER tag, trailing whitespace) to XML 
-per the tagged message schema, nlp_to_xml.xsd. """
+per the tagged message schema, nlp_to_xml.xsd. 
+
+Todo:
+    * The <Token> element's @group attribute probably SHOULD increment if the @pattern value
+    changes even though the @entity value remains the same. This is because we could have the
+    same @entity across a set of tokens where the regex, etc. that created the match is 
+    different across those tokens - IOW, different concepts yielding the same label.
+        - Note: if the code gets updated to do this, the XSD file's documentation needs to be
+        updated as well.
+    * The option to validate the XML should be set in __init__(), not get_xml().
+"""
 
 # import modules.
 import logging
@@ -38,9 +48,10 @@ class NLPToXML():
 
     @staticmethod
     def _legalize_xml_text(xtext):
-        """ A static method that alters @xtext by replacing vertical tabs and form feeds with
-        line breaks and removing control characters except for carriage returns and tabs. This
-        is so that @xtext can be written to XML without raising a ValueError.
+        """ A static method that alters @xtext by replacing vertical tabs, form feeds, and
+        carriage returns with line breaks and by removing control characters except for line 
+        breaks and tabs. This is so that @xtext can be written to XML without raising a 
+        ValueError.
         
         Args:
             - xtext (str): The text to alter.
@@ -64,7 +75,7 @@ class NLPToXML():
 
         Args:
             - entity_tag (str): The double-colon concatenated NER tag consisted of the three
-            parts, above.
+            parts, as described above.
 
         Returns:
             tuple: The return value.
@@ -223,7 +234,7 @@ class NLPToXML():
                 # set "group" attribute.
                 token_el.set("group", str(tag_group))
 
-                # write "pattern" attribute if it exists.
+                # write "pattern" attribute if a pattern exists.
                 if tag_pattern != "":
                     try:
                         token_el.set("pattern", tag_pattern)
@@ -232,7 +243,7 @@ class NLPToXML():
                         self.logger.info("Cleaning @pattern attribute value.")
                         token_el.set("pattern", self._legalize_xml_text(tag_pattern))
 
-                # write "authority" attribute if it exists.
+                # write "authority" attribute if an authority exists.
                 if tag_authority != "": 
                     try:
                         token_el.set("authority", tag_authority)
@@ -267,4 +278,3 @@ class NLPToXML():
 
 if __name__ == "__main__":
     pass
-

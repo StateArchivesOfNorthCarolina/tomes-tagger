@@ -48,7 +48,7 @@ def main(text="North Carolina.", host="http://localhost:9003"):
     "Prints list of NER results.\
     \nexample: `py -3 test__text_to_nlp.py 'Jane Doe'`"
 
-    # get/print NER results.
+    # print NER results.
     t2n = TextToNLP(host=host)
     ner = t2n.get_NER(text)
     print(ner)
@@ -58,4 +58,3 @@ if __name__ == "__main__":
     
     import plac
     plac.call(main)
-

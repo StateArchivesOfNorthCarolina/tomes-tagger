@@ -43,7 +43,8 @@ class EAXSToTagged():
             - html_converter (function): Any function that accepts HTML text (str) as its
             only required argument and returns a plain text version (str).
             - nlp_tagger (function): Any function that accepts plain text (str) as its only
-            required argument and returns an NER-tagged XML message (lxml.etree_Element).
+            required argument and returns an NER-tagged XML message (lxml.etree_Element) per
+            ./nlp_to_xml.xsd.
             - charset (str): Encoding with which to update EAXS message content. This is also
             the encoding used to write a tagged EAXS file with the @self.write_tagged() 
             method.
@@ -70,9 +71,10 @@ class EAXSToTagged():
 
     @staticmethod
     def _legalize_xml_text(xtext):
-        """ A static method that alters @xtext by replacing vertical tabs and form feeds with
-        line breaks and removing control characters except for carriage returns and tabs. This
-        is so that @xtext can be written to XML without raising a ValueError.
+        """ A static method that alters @xtext by replacing vertical tabs, form feeds, and
+        carriage returns with line breaks and by removing control characters except for line 
+        breaks and tabs. This is so that @xtext can be written to XML without raising a 
+        ValueError.
             
         Args:
             - xtext (str): The text to alter.
@@ -397,8 +399,10 @@ class EAXSToTagged():
             generator: The return value.
             The yielded data is a tuple.
             The first item is a string, the zero-padded position of the given message (first =
-            1). The second item is the <MessageId> value. The third item is the tagged 
-            lxml.etree._Element or None if the tagging workflow failed.
+            1).
+            The second item is the <MessageId> value.
+            The third item is the tagged lxml.etree._Element or None if the tagging workflow
+            failed.
         """
         
         self.logger.info("Tagging messages in EAXS file: {}".format(eaxs_file))
@@ -605,4 +609,3 @@ class EAXSToTagged():
 
 if __name__ == "__main__":
     pass
-

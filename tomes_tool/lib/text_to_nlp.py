@@ -25,7 +25,7 @@ class _CoreNLP():
     
     Example:
         >>> tagger = CoreNLP(host="http://localhost:9003")
-        >>> tagger.annotate("North Carolina")
+        >>> tagger.annotate("North Carolina") # dict.
     """
 
 	
@@ -122,7 +122,7 @@ class TextToNLP():
             - retry (bool) : If True and the call to self.get_NER() is an empty list, one more
             attempt will be made to retrieve results. This is because occassional glitches in
             the CoreNLP server result in empty results.
-            - mapping_file (str): See "help(CoreNLP)" for more info.
+            - mapping_file (str): See "help(_CoreNLP)" for more info.
             - tags_to_remove (list): If CoreNLP returns one on these NER tags, the tag will be
             replaced with an empty string.
         """
@@ -176,9 +176,10 @@ class TextToNLP():
 
     @staticmethod
     def _legalize_json_text(jtext):
-        """ A static method that alters @jtext by replacing vertical tabs and form feeds with
-        line breaks and removing control characters except for carriage returns and tabs. This
-        is so that @jtext can be passed to json.loads() without raising a JSONDecodeError.
+        """ A static method that alters @jtext by replacing vertical tabs, form feeds, and
+        carriage returns with line breaks and by removing control characters except for line 
+        breaks and tabs. This is so that @jtext can be passed to json.loads() without raising
+        a JSONDecodeError.
         
         Args:
             - jtext (str): The text to alter.
@@ -227,7 +228,7 @@ class TextToNLP():
 
     def __process_NER_requests(def__get_NER):
         """ A decorator for @def__get_NER that splits text into chunks if the string passed
-        to @def__get_NER exceeds self.chunk_size in length. This is due to size limitations
+        to @def__get_NER exceeds @self.chunk_size in length. This is due to size limitations
         in terms of how much data should be sent to @def__get_NER. This decorator also makes
         one more call to @def__get_NER if @self.retry is True and @def__get_NER returns an
         empty list for a given chunk, such as in cases where the NLP server doesn't respond
@@ -406,11 +407,11 @@ class TextToNLP():
                     self.logger.warning("Token data not found; nothing to append to output.")
                     continue
                 
-                # overwrite CoreNLP's use of "O" for a null NER tag.
+                # remove built-in CoreNLP tags as required.
                 if tag in self.tags_to_remove:
                     tag = ""
 
-                # if @tag is from Stanford, add null pattern plus .edu authority domain.
+                # if @tag is from Stanford, prepend null pattern ID and authority domain.
                 if tag in self.stanford_tags:
                     tag = "::stanford.edu::" + tag
 
@@ -423,4 +424,3 @@ class TextToNLP():
 
 if __name__ == "__main__":
     pass
-
