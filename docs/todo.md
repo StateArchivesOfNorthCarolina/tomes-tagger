@@ -2,9 +2,9 @@
 
 - These three modules have a static method to remove control characters:	
 
-	- ./tomes_tool/lib.eaxs\_to\_tagged
-	- ./tomes_tool/lib.nlp\_to\_xml
-	- ./tomes_tool/lib.text\_to\_nlp
+	- ./tomes_tagger/lib.eaxs\_to\_tagged
+	- ./tomes_tagger/lib.nlp\_to\_xml
+	- ./tomes_tagger/lib.text\_to\_nlp
 	
 	Consider centralizing this function into a standalone module.
 

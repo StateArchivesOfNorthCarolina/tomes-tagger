@@ -8,7 +8,7 @@ import codecs
 import logging
 import os
 from glob import glob
-from tomes_tool.lib.text_to_nlp import TextToNLP
+from tomes_tagger.lib.text_to_nlp import TextToNLP
 
 
 # enable logging.

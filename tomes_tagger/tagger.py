@@ -9,10 +9,10 @@ import logging.config
 import os
 import requests
 import yaml
-from tomes_tool.lib.eaxs_to_tagged import EAXSToTagged
-from tomes_tool.lib.html_to_text import HTMLToText, ModifyHTML
-from tomes_tool.lib.nlp_to_xml import NLPToXML
-from tomes_tool.lib.text_to_nlp import TextToNLP
+from tomes_tagger.lib.eaxs_to_tagged import EAXSToTagged
+from tomes_tagger.lib.html_to_text import HTMLToText, ModifyHTML
+from tomes_tagger.lib.nlp_to_xml import NLPToXML
+from tomes_tagger.lib.text_to_nlp import TextToNLP
 
 
 class Tagger():
@@ -121,7 +121,7 @@ class Tagger():
     
     def write_tagged(self, eaxs_file, tagged_eaxs_file, *args, **kwargs):
         """ Writes tagged version of @eaxs_file to @tagged_eaxs_file.
-        This is a wrapper around tomes_tool.lib.eaxs_to_tagged.EAXSToTagged.write_tagged(). 
+        This is a wrapper around tomes_tagger.lib.eaxs_to_tagged.EAXSToTagged.write_tagged(). 
         For more information do "help(tagger.EAXSToTagged.write_tagged)".
         
         Args:

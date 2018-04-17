@@ -1,5 +1,5 @@
 # Introduction
-**TOMES Tool** is part of the [TOMES](https://www.ncdcr.gov/resources/records-management/tomes) project.
+**TOMES Tagger** is part of the [TOMES](https://www.ncdcr.gov/resources/records-management/tomes) project.
 
 It is written in Python.
 
@@ -8,7 +8,7 @@ Its purpose is to create a "tagged" version of an [EAXS](http://www.history.ncdc
 The tagged version of the EAXS file is meant to contain email messages that have been tagged by Name Entity Recognition (NER) tools. It uses a modified version of the original EAXS format.
 
 # External Dependencies
-TOMES Tool requires the following:
+TOMES Tagger requires the following:
 
 - [Python](https://www.python.org) 3.0+ (using 3.5+)
 	- See the "./requirements.txt" file for additional module dependencies.
@@ -25,11 +25,11 @@ After installing the external dependencies above, you'll need to install some re
 
 The required packages are listed in the "./requirements.txt" file and can easily be installed via PIP <sup>[1]</sup>: `pip3 install -r requirements.txt`
 
-You should now be able to use TOMES Tool from the command line or as a locally importable Python module.
+You should now be able to use TOMES Tagger from the command line or as a locally importable Python module.
 
-If you want to install TOMES Tool as a Python package, do: `pip3 install . -r requirements.txt`
+If you want to install TOMES Tagger as a Python package, do: `pip3 install . -r requirements.txt`
 
-Running `pip3 uninstall tomes_tool` will uninstall the TOMES Tool package.
+Running `pip3 uninstall tomes_tagger` will uninstall the TOMES Tagger package.
 
 # Unit Tests
 While not true unit tests that test each function or method of a given module or class, basic unit tests help with testing overall module workflows.
@@ -42,7 +42,7 @@ To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the
 Specific unit tests of interest:
 
 - `py -3 -m unittest test__html_to_text.py`
-	- This primarily tests that Lynx can be called by TOMES Tool.
+	- This primarily tests that Lynx can be called by TOMES Tagger.
 - `py -3 -m unittest test__eaxs_to_tagged.py`
 	- This tests the EAXS to tagged EAXS workflow without actually calling CoreNLP or Lynx.
 
@@ -59,7 +59,7 @@ Sample files are located in the "./tests/sample_files" directory.
 The sample files can be used with the command line options of some of the unit tests.
 
 # Modules
-TOMES Tool consists of single-purpose high, level module, **tagger.py**. This creates a tagged version of a source EAXS file. It can be used as native Python class or as command line script.
+TOMES Tagger consists of single-purpose high, level module, **tagger.py**. This creates a tagged version of a source EAXS file. It can be used as native Python class or as command line script.
 
 *Before creating a tagged EAXS file, please make sure that you have free disk space that is approximately 1.5 to 2 times greater than the size of your source EAXS file.*
 
@@ -69,7 +69,7 @@ To get started, import the module and run help():
 	Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 08:06:12) [MSC v.1900 64 bit (AM
 	D64)] on win32
 	Type "help", "copyright", "credits" or "license" for more information.
-	>>> from tomes_tool import tagger
+	>>> from tomes_tagger import tagger
 	>>> help(tagger)
 
 To create tagged EAXS files, the CoreNLP server will need to be started (default port = 9003). You can use the one of the startup scripts: "./NLP/stanford\_edu/start\_server.[bat|sh]".
@@ -77,7 +77,7 @@ To create tagged EAXS files, the CoreNLP server will need to be started (default
 ## Using tagger.py from the command line
 1. Start the CoreNLP server with one of the startup scripts: "./NLP/stanford\_edu/start\_server.[bat|sh]".
 2. Open another terminal instance.
-3. From the "./tomes\_tool" directory do: `py -3 tagger.py -h` to see an example command.
+3. From the "./tomes\_tagger" directory do: `py -3 tagger.py -h` to see an example command.
 3. Run the example command.
 
 -----

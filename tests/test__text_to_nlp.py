@@ -5,7 +5,7 @@ import sys; sys.path.append("..")
 import logging
 import math
 import unittest
-from tomes_tool.lib.text_to_nlp import *
+from tomes_tagger.lib.text_to_nlp import *
 
 # enable logging.
 logging.basicConfig(level=logging.DEBUG)

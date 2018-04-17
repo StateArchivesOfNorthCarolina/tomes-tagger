@@ -5,7 +5,7 @@ import sys; sys.path.append("..")
 import logging
 import unittest
 from lxml import etree
-from tomes_tool.lib.nlp_to_xml import *
+from tomes_tagger.lib.nlp_to_xml import *
 
 # enable logging.
 logging.basicConfig(level=logging.DEBUG)

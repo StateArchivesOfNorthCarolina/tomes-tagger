@@ -7,7 +7,7 @@ import logging
 import tempfile
 import warnings
 from lxml import etree
-from tomes_tool.lib.eaxs_to_tagged import *
+from tomes_tagger.lib.eaxs_to_tagged import *
 
 # enable logging.
 logging.basicConfig(level=logging.DEBUG)
