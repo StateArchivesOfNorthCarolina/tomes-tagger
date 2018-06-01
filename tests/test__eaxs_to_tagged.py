@@ -4,6 +4,7 @@
 import sys; sys.path.append("..")
 import unittest
 import logging
+import os
 import tempfile
 import warnings
 from lxml import etree
