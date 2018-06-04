@@ -2,10 +2,10 @@
 
 # import modules.
 import sys; sys.path.append("..")
-import unittest
 import logging
 import os
 import tempfile
+import unittest
 import warnings
 from lxml import etree
 from tomes_tagger.lib.eaxs_to_tagged import *
