@@ -6,7 +6,15 @@ disable_existing_loggers: False
 formatters:
     simple:
         format: "%(asctime)s - %(name)s - [%(filename)s:%(lineno)d] - %(levelname)s - %(message)s"
+    events:
+        format: "%(asctime)s: %(message)s"
+        datefmt: "'%Y-%m-%dT%H:%M:%S%z'" 
 
+filters:
+    event_filter:
+        (): logging.Filter
+        name: event_logger
+        
 handlers:
     console:
         class: logging.StreamHandler
@@ -29,13 +37,25 @@ handlers:
         maxBytes: 10485760 # 10MB
         backupCount: 20
         encoding: utf8
+    event_file_handler:
+        class: logging.FileHandler
+        level: INFO
+        mode: w
+        formatter: events
+        filename: log/events.log
+        encoding: utf8
+        filters: [event_filter]
 
 loggers:
     console_info:
         level: DEBUG
         handlers: [console]
         propagate: no
+    event_logger:
+        level: INFO
+        handlers: [event_file_handler]
+        propagate: no
 
 root:
     level: DEBUG
-    handlers: [console, info_file_handler, error_file_handler]
+    handlers: [console, info_file_handler, error_file_handler, event_file_handler]
