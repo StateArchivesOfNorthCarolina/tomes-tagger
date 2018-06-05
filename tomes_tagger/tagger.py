@@ -2,12 +2,12 @@
 
 """ This module contains a class to convert an EAXS file to a tagged EAXS document. """
 
-__author__ = "Nitin Arora",
-__author_email__ = "nitin.a.arora@ncdcr.gov",
-__description__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
-__name__ ="tomes_tagger"
-__version__ = '0.0.1'
-__url__ = "https://github.com/StateArchivesOfNorthCarolina/tomes-tagger"
+__NAME__ = "tomes_tagger"
+__DESCRIPTION__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
+__VERSION__ = '0.0.1'
+__URL__ = "https://github.com/StateArchivesOfNorthCarolina/tomes-tagger"
+__AUTHOR__ = "Nitin Arora",
+__AUTHOR_EMAIL__ = "nitin.a.arora@ncdcr.gov",
 
 # import modules.
 import sys; sys.path.append("..")
