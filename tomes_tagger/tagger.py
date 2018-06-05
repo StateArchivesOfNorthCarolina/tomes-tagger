@@ -4,8 +4,8 @@
 
 __NAME__ = "tomes_tagger"
 __DESCRIPTION__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
-__VERSION__ = '0.0.1'
 __URL__ = "https://github.com/StateArchivesOfNorthCarolina/tomes-tagger"
+__VERSION__ = '0.0.1'
 __AUTHOR__ = "Nitin Arora",
 __AUTHOR_EMAIL__ = "nitin.a.arora@ncdcr.gov",
 
@@ -201,3 +201,4 @@ if __name__ == "__main__":
     
     import plac
     plac.call(main)
+
