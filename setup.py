@@ -1,22 +1,22 @@
-import tomes_tagger.tagger as tagger
 from setuptools import setup, setuptools
+from tomes_tagger.tagger import __NAME__, __FULLNAME__, __DESCRIPTION__, __URL__, __VERSION__,
+__AUTHOR__, __AUTHOR_EMAIL__
 
 def doc():
     with open("docs/documentation.md") as d:
         return d.read()
 		
 setup(
-    name = tagger.__NAME__,
-    description = tagger.__DESCRIPTION__,
-    url = tagger.__URL__,
-    version = tagger.__VERSION__,
-    author = tagger.__AUTHOR__,
-    author_email = tagger.__AUTHOR_EMAIL__,
+    name = __NAME__,
+    description = __DESCRIPTION__,
+    url = __URL__,
+    version = __VERSION__,
+    author = __AUTHOR__,
+    author_email = __AUTHOR_EMAIL__,
     packages = setuptools.find_packages(),
-    package_data = {"tomes_tagger.lib": ["nlp_to_xml.xsd"]},
+    package_data = {"tomes_lib": ["nlp_to_xml.xsd"]},
     include_package_data = True,
     python_requires = ">=3",
     license = "LICENSE.txt",
     long_description = doc(),
 )
-
