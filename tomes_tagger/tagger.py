@@ -148,7 +148,6 @@ class Tagger():
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
 
-
         # create tagged EAXS.
         results = {}
         try:
