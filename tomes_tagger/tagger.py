@@ -2,6 +2,13 @@
 
 """ This module contains a class to convert an EAXS file to a tagged EAXS document. """
 
+__author__ = "Nitin Arora",
+__author_email__ = "nitin.a.arora@ncdcr.gov",
+__description__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
+__name__ ="tomes_tagger"
+__version__ = '0.0.1'
+__url__ = "https://github.com/StateArchivesOfNorthCarolina/tomes-tagger"
+
 # import modules.
 import sys; sys.path.append("..")
 import logging
@@ -37,6 +44,8 @@ class Tagger():
         # set logging.
         self.logger = logging.getLogger(__name__)        
         self.logger.addHandler(logging.NullHandler())
+        self.event_logger = logging.getLogger("event_logger")
+        self.event_logger.addHandler(logging.NullHandler())
 
         # suppress third party logging that is not a warning or higher.
         # per: https://stackoverflow.com/a/11029841

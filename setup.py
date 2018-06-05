@@ -1,3 +1,4 @@
+import tomes_tagger.tagger as tagger
 from setuptools import setup, setuptools
 
 def doc():
@@ -5,17 +6,17 @@ def doc():
         return d.read()
 		
 setup(
-    name="tomes_tagger",
-    version="0.0.1",
-    packages=setuptools.find_packages(),
-    package_data={"tomes_tagger.lib": ["nlp_to_xml.xsd"]},
-    include_package_data=True,
-    python_requires=">=3",
-    url="https://github.com/StateArchivesOfNorthCarolina/tomes-tagger",
-    license="LICENSE.txt",
-    author="Nitin Arora",
-    author_email="nitin.a.arora@ncdcr.gov",
-    description="Part of the TOMES project: creates a 'tagged' version of an EAXS file.",
-    long_description=doc(),
+    author = tagger.__author__,
+    author_email = tagger.__author_email__,
+    description = tagger.__description__,
+    name = tagger.__name__,
+    url = tagger.__url__,
+    version = tagger.__version__,
+    packages = setuptools.find_packages(),
+    package_data = {"tomes_tagger.lib": ["nlp_to_xml.xsd"]},
+    include_package_data = True,
+    python_requires = ">=3",
+    license = "LICENSE.txt",
+    long_description = doc(),
 )
 
