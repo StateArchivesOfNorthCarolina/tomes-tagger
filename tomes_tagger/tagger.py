@@ -3,6 +3,7 @@
 """ This module contains a class to convert an EAXS file to a tagged EAXS document. """
 
 __NAME__ = "tomes_tagger"
+__FULLNAME__ = "TOMES Tagger"
 __DESCRIPTION__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
 __URL__ = "https://github.com/StateArchivesOfNorthCarolina/tomes-tagger"
 __VERSION__ = '0.0.1'
@@ -147,11 +148,18 @@ class Tagger():
 
         self.logger.info("Attempting to tag EAXS file: {}".format(eaxs_file))
 
+
         # create tagged EAXS.
         results = {}
         try:
             results = self.e2t.write_tagged(eaxs_file, tagged_eaxs_file, *args, **kwargs)
-            self.logger.info("Created file: {}".format(tagged_eaxs_file)) 
+            self.logger.info("Created file: {}".format(tagged_eaxs_file))
+            self.event_logger.info({"entity": "agent", "name": __NAME__, 
+                    "fullname": __FULLNAME__, "uri": __URL__, "version": __VERSION__})
+            self.event_logger.info({"entity": "event", "name": "eaxs_to_tagged", 
+                "agent": __NAME__, "object": "tagged_eaxs"})
+            self.event_logger.info({"entity": "object", "name": "tagged_eaxs", 
+                    "category": "representation"})
         except Exception as err:
             self.logger.error(err)
             raise err
