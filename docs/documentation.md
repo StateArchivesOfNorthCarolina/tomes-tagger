@@ -74,7 +74,7 @@ To get started, import the module and run help():
 
 To create tagged EAXS files, the CoreNLP server will need to be started (default port = 9003). You can start it manually or use one of the startup scripts (see below).
 
-*Note: the docstring examples may reference sample files that are NOT included in the installed Python package. Please use appropriate paths to sample files as needed.*
+*Note: docstring and command line examples may reference sample and data files that are NOT included in the installed Python package. Please use appropriate paths to sample and data files as needed.*
 
 ## Using tagger.py from the command line
 1. Start the CoreNLP server with one of the startup scripts: "./NLP/stanford\_edu/start\_server.[bat|sh]".
