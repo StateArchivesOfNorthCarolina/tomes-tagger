@@ -13,7 +13,7 @@ setup(
     author = __AUTHOR__,
     author_email = __AUTHOR_EMAIL__,
     packages = setuptools.find_packages(),
-    data_files = [("tomes_tagger/lib", ["tomes_tagger/lib/nlp_to_xml.xsd"])],
+    include_package_data=True,
     python_requires = ">=3",
     license = "LICENSE.txt",
     long_description = doc(),
