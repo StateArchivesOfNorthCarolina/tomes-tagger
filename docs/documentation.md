@@ -77,7 +77,7 @@ To create tagged EAXS files, the CoreNLP server will need to be started (default
 1. Start the CoreNLP server with one of the startup scripts: "./NLP/stanford\_edu/start\_server.[bat|sh]".
 2. Open another terminal instance.
 3. From the "./tomes\_tagger" directory do: `py -3 tagger.py -h` to see an example command.
-3. Run the example command.
+4. Run the example command.
 
 -----
 *[1] Depending on your system configuration, you might need to specify "python3", etc. instead of "py -3" from the command line. Similar differences might apply for PIP.*
