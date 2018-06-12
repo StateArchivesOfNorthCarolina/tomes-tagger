@@ -155,7 +155,7 @@ class Tagger():
             self.logger.info("Created file: {}".format(tagged_eaxs_file))
             self.event_logger.info({"entity": "agent", "name": __NAME__, 
                     "fullname": __FULLNAME__, "uri": __URL__, "version": __VERSION__})
-            self.event_logger.info({"entity": "event", "name": "eaxs_to_tagged", 
+            self.event_logger.info({"entity": "event", "name": "eaxs_to_tagged_eaxs", 
                 "agent": __NAME__, "object": "tagged_eaxs"})
             self.event_logger.info({"entity": "object", "name": "tagged_eaxs", 
                     "category": "representation"})
