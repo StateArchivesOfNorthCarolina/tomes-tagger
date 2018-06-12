@@ -66,9 +66,6 @@ TOMES Tagger consists of single-purpose high, level module, **tagger.py**. This 
 ## Using tagger.py with Python
 To get started, import the module and run help():
 
-	Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 08:06:12) [MSC v.1900 64 bit (AM
-	D64)] on win32
-	Type "help", "copyright", "credits" or "license" for more information.
 	>>> from tomes_tagger import tagger
 	>>> help(tagger)
 
