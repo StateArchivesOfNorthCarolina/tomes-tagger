@@ -157,6 +157,8 @@ class Tagger():
                     "fullname": __FULLNAME__, "uri": __URL__, "version": __VERSION__})
             self.event_logger.info({"entity": "event", "name": "eaxs_to_tagged_eaxs", 
                 "agent": __NAME__, "object": "tagged_eaxs"})
+            self.event_logger.info({"entity": "object", "name": "eaxs", 
+                "category": "representation"})
             self.event_logger.info({"entity": "object", "name": "tagged_eaxs", 
                     "category": "representation"})
         except Exception as err:
