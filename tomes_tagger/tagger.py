@@ -7,7 +7,7 @@ __FULLNAME__ = "TOMES Tagger"
 __DESCRIPTION__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
 __URL__ = "https://github.com/StateArchivesOfNorthCarolina/tomes-tagger"
 __VERSION__ = "0.0.1"
-__AUTHOR__ = "Nitin Arora",
+__AUTHOR__ = "Nitin Arora"
 __AUTHOR_EMAIL__ = "nitin.a.arora@ncdcr.gov"
 
 # import modules.
