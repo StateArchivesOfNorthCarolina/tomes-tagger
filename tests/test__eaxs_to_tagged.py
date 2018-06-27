@@ -76,4 +76,3 @@ def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
 if __name__ == "__main__":
 
     plac.call(main)
-
