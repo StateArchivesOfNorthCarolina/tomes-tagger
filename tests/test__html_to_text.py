@@ -102,5 +102,4 @@ def main(html_file: "HTML file"):
 
 
 if __name__ == "__main__":
-    
     plac.call(main)

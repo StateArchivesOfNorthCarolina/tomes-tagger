@@ -76,5 +76,4 @@ def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):
 
 
 if __name__ == "__main__":
-    
     plac.call(main)

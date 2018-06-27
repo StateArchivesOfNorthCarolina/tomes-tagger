@@ -112,5 +112,4 @@ def main(test_file:"path to test file",
 
 
 if __name__ == "__main__":
-    
     plac.call(main)

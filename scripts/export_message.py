@@ -99,5 +99,4 @@ def main(eaxs_file:"any EAXS file",
 
 
 if __name__ == "__main__":
-
     plac.call(main)
