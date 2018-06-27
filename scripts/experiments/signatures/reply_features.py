@@ -108,4 +108,3 @@ class Features():
         
         feature_vector = [f for f in self.get_features().values()]
         return feature_vector
-
