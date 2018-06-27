@@ -15,6 +15,7 @@ import sys; sys.path.append("..")
 import logging
 import logging.config
 import os
+import plac
 import requests
 import yaml
 from tomes_tagger.lib.eaxs_to_tagged import EAXSToTagged
@@ -208,6 +209,5 @@ def main(eaxs_file: ("source EAXS file"),
 
 if __name__ == "__main__":
     
-    import plac
     plac.call(main)
 

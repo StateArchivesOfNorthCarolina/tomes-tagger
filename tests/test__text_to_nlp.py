@@ -4,6 +4,7 @@
 import sys; sys.path.append("..")
 import logging
 import math
+import plac
 import unittest
 from tomes_tagger.lib.text_to_nlp import *
 
@@ -56,5 +57,4 @@ def main(text="North Carolina.", host="http://localhost:9003"):
 
 if __name__ == "__main__":
     
-    import plac
     plac.call(main)

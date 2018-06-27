@@ -7,6 +7,7 @@ import sys; sys.path.append("../../")
 import codecs
 import logging
 import os
+import plac
 from glob import glob
 from tomes_tagger.lib.text_to_nlp import TextToNLP
 
@@ -112,6 +113,4 @@ def main(test_file:"path to test file",
 
 if __name__ == "__main__":
     
-    import plac
     plac.call(main)
-

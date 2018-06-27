@@ -4,6 +4,7 @@
 import sys; sys.path.append("..")
 import logging
 import os
+import plac
 import tempfile
 import unittest
 import warnings
@@ -74,6 +75,5 @@ def main(eaxs_file: "source EAXS file", tagged_file: "tagged EAXS destination"):
 
 if __name__ == "__main__":
 
-    import plac
     plac.call(main)
 

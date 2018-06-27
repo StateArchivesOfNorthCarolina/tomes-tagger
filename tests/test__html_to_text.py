@@ -3,6 +3,7 @@
 # import modules.
 import sys; sys.path.append("..")
 import logging
+import plac
 import unittest
 from tomes_tagger.lib.html_to_text import *
 
@@ -102,5 +103,4 @@ def main(html_file: "HTML file"):
 
 if __name__ == "__main__":
     
-    import plac
     plac.call(main)

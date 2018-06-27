@@ -3,6 +3,7 @@
 # import modules.
 import sys; sys.path.append("..")
 import logging
+import plac
 import unittest
 from lxml import etree
 from tomes_tagger.lib.nlp_to_xml import *
@@ -76,5 +77,4 @@ def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):
 
 if __name__ == "__main__":
     
-    import plac
     plac.call(main)
