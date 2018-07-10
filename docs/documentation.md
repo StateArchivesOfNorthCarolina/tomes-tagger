@@ -3,7 +3,7 @@
 
 It is written in Python.
 
-Its purpose is to create a "tagged" version of an [EAXS](http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_docs.html) file(s) - an XML schema for storing email account information.
+Its purpose is to create a "tagged" version of EAXS.
 
 The tagged version of the EAXS file is meant to contain email messages that have been tagged by Name Entity Recognition (NER) tools. It uses a modified version of the original EAXS format.
 

@@ -65,7 +65,7 @@ class EAXSToTagged():
 
         # set namespace attributes.
         self.ncdcr_prefix = "ncdcr"
-        self.ncdcr_uri = "http://www.archives.ncdcr.gov/mail-account"
+        self.ncdcr_uri = "https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs"
         self.ns_map  = {self.ncdcr_prefix : self.ncdcr_uri}
 
 

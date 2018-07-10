@@ -42,7 +42,7 @@ class NLPToXML():
         self.xsd = etree.parse(self.xsd_file)
         
         # set namespace attributes.
-        self.ns_uri = "http://www.archives.ncdcr.gov/mail-account"
+        self.ns_uri = "https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs"
         self.ns_map  = {None: self.ns_uri}
 
 

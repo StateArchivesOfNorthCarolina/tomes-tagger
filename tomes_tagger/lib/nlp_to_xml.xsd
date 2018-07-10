@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema
-targetNamespace="http://www.archives.ncdcr.gov/mail-account"
-xmlns="http://www.archives.ncdcr.gov/mail-account"
+targetNamespace="https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs"
+xmlns="https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs"
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 elementFormDefault="qualified">
 
 <xs:annotation>
     <xs:documentation xml:lang="en">
-    This "tagged content" schema proposes an XML structure to be added to the State Archives
-    of North Carolina XML Schema for a Single E-Mail Account located at:
-    
-        http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account_single.xsd
+    This "tagged content" schema proposes an XML structure to be added to the EAXS schema.
 
     Specifically, it is meant to be optionally inserted within the 
     "Message/MultiBody/SingleBody" element.
@@ -58,7 +55,7 @@ elementFormDefault="qualified">
 
     <![CDATA[
     <?xml version='1.0' encoding='utf-8'?>
-    <Tokens xmlns="http://www.archives.ncdcr.gov/mail-account">
+    <Tokens xmlns="https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs">
         <Token>Good</Token> <Token>morning</Token> <Token entity="person.male" authority="foo" pattern="09fa0f#101" group="1">John</Token><Token>!</Token>
 
         <Token>Love</Token><Token>,</Token>

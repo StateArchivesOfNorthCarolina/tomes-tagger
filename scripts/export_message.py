@@ -16,9 +16,9 @@ logger.setLevel("INFO")
 
 # establish XML header/footer.
 HEADER = """<?xml version='1.0' encoding='UTF-8'?>
-<Account xmlns="http://www.archives.ncdcr.gov/mail-account"
+<Account xmlns="https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd">
+xsi:schemaLocation="https://raw.githubusercontent.com/StateArchivesOfNorthCarolina/tomes-eaxs/master/eaxs_schema.xsd">
 <GlobalId>EXPORTED_MESSAGES</GlobalId>
 <Folder>
 """
@@ -60,7 +60,7 @@ def export_message(eaxs_file, output_file, message_ids):
     total_found = 0
 
     for event, element in etree.iterparse(eaxs_file, huge_tree=True, strip_cdata=False):
-        if element.tag == "{http://www.archives.ncdcr.gov/mail-account}MessageId":
+        if element.tag == "{https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs}MessageId":
             i += 1
             if element.text in message_ids or str(i) in message_ids:
                 total_found += 1

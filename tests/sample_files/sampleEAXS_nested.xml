@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Account xmlns="http://www.archives.ncdcr.gov/mail-account"
+<Account xmlns="https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.history.ncdcr.gov/SHRAB/ar/emailpreservation/mail-account/mail-account.xsd">
+xsi:schemaLocation="https://raw.githubusercontent.com/StateArchivesOfNorthCarolina/tomes-eaxs/master/eaxs_schema.xsd">
 	<GlobalId>foo</GlobalId>
 	<Folder>
 		<Name>bar</Name>
