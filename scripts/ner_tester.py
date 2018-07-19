@@ -3,7 +3,7 @@
 """ This script creates a report file for NER tagging of test data. """
 
 # import modules.
-import sys; sys.path.append("../../")
+import sys; sys.path.append("..")
 import codecs
 import logging
 import os
@@ -101,7 +101,7 @@ def main(test_file:"path to test file",
         results_file:"destination for results file"):
     
     "Creates report file for NER tagging of test data.\
-    \nexample: `py -3 ner_tester.py test_file.txt results_file.txt`"
+    \nexample: `py -3 ner_tester.py ner_tester_tests.txt ner_tester_results.txt`"
 
     try:
         results_file = testDataFile(test_file, results_file)
