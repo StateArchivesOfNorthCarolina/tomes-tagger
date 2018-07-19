@@ -1,6 +1,6 @@
 # Ideas for Future Work
 
-1. These three modules have a static method to remove control characters:	
+- These three modules have a static method to remove control characters:	
 
 	- ./tomes_tagger/lib.eaxs\_to\_tagged
 	- ./tomes_tagger/lib.nlp\_to\_xml
