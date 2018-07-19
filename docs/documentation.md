@@ -11,19 +11,19 @@ The tagged version of the EAXS file is meant to contain email messages that have
 TOMES Tagger requires the following:
 
 - [Python](https://www.python.org) 3.0+ (using 3.5+)
-	- See the "./requirements.txt" file for additional module dependencies.
+	- See the `./requirements.txt` file for additional module dependencies.
 	- You will also want to install [pip](https://pypi.python.org/pypi/pip) for Python 3.
 - [Lynx](http://lynx.browser.org/) 2.8.8+ (using 2.8.8)
 	- The "lynx" command must be executable from any directory on your system.
 		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
 	- Please see the CoreNLP documentation for Java and memory requirements, etc.
-	- If you want to use the TOMES Project NER mappings, you must place the "regexner\_TOMES" directory (found in the "./NLP/stanford_edu/stanford-corenlp-full-2016-10-31" directory) and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
+	- If you want to use the TOMES Project NER mappings, you must place the `./NLP/stanford_edu/stanford-corenlp-full-2016-10-31/regexner_TOMES` directory and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 
 # Installation
 After installing the external dependencies above, you'll need to install some required Python packages.
 
-The required packages are listed in the "./requirements.txt" file and can easily be installed via PIP <sup>[1]</sup>: `pip3 install -r requirements.txt`
+The required packages are listed in the `./requirements.txt` file and can easily be installed via PIP <sup>[1]</sup>: `pip3 install -r requirements.txt`
 
 You should now be able to use TOMES Tagger from the command line or as a locally importable Python module.
 
@@ -34,10 +34,10 @@ Running `pip3 uninstall tomes_tagger` will uninstall the TOMES Tagger package.
 # Unit Tests
 While not true unit tests that test each function or method of a given module or class, basic unit tests help with testing overall module workflows.
 
-Unit tests reside in the "./tests" directory and start with "test__".
+Unit tests reside in the `./tests` directory and start with "test__".
 
 ## Running the tests
-To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the "./tests" directory. 
+To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the `./tests` directory. 
 
 Specific unit tests of interest:
 
@@ -54,7 +54,7 @@ All of the unit tests have command line options.
 
 To see the options and usage examples simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
 
-Sample files are located in the "./tests/sample_files" directory.
+Sample files are located in the `./tests/sample_files` directory.
 
 The sample files can be used with the command line options of some of the unit tests.
 
@@ -74,9 +74,9 @@ To create tagged EAXS files, the CoreNLP server will need to be started (default
 *Note: docstring and command line examples may reference sample and data files that are NOT included in the installed Python package. Please use appropriate paths to sample and data files as needed.*
 
 ## Using tagger.py from the command line
-1. Start the CoreNLP server with one of the startup scripts: "./NLP/stanford\_edu/start\_server.[bat|sh]".
+1. Start the CoreNLP server with one of the startup scripts: `./NLP/stanford_edu/start_server.[bat|sh]`.
 2. Open another terminal instance.
-3. From the "./tomes\_tagger" directory do: `py -3 tagger.py -h` to see an example command.
+3. From the `./tomes_tagger` directory do: `py -3 tagger.py -h` to see an example command.
 4. Run the example command.
 
 -----
