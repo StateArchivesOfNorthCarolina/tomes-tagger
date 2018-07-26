@@ -86,7 +86,7 @@ def main(eaxs_file:"any EAXS file",
         message_ids:"comma-delimited list of <MessageID> values OR message positions"):
     
     "Exports a single <Message> element from an EAXS or tagged EAXS file.\
-    \nexample: `py -3 export_message.py myEAXS.xml myEAXS__first2Messages.xml \"1,2\"` "
+    \nexample: `python3 export_message.py myEAXS.xml myEAXS__first2Messages.xml \"1,2\"` "
 
     try:
         message_ids = message_ids.split(",")

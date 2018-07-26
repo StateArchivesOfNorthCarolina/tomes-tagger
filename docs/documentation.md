@@ -38,13 +38,13 @@ While not true unit tests that test each function or method of a given module or
 Unit tests reside in the `./tests` directory and start with "test__".
 
 ## Running the tests
-To run all the unit tests do <sup>[1]</sup>: `py -3 -m unittest` from within the `./tests` directory. 
+To run all the unit tests do <sup>[1]</sup>: `python3 -m unittest` from within the `./tests` directory. 
 
 Specific unit tests of interest:
 
-- `py -3 -m unittest test__html_to_text.py`
+- `python3 -m unittest test__html_to_text.py`
 	- This primarily tests that Lynx can be called by TOMES Tagger.
-- `py -3 -m unittest test__eaxs_to_tagged.py`
+- `python3 -m unittest test__eaxs_to_tagged.py`
 	- This tests the EAXS to tagged EAXS workflow without actually calling CoreNLP or Lynx.
 
 Of course, you can also test CoreNLP directly by starting it and going to the correct local URL, i.e. "localhost:9003". To save time, it is recommended to only enter *very* short text (e.g. "North Carolina").
@@ -53,7 +53,7 @@ Of course, you can also test CoreNLP directly by starting it and going to the co
 ## Using the command line
 All of the unit tests have command line options.
 
-To see the options and usage examples simply call the scripts with the `-h` option: `py -3 test__[rest of filename].py -h` and try the example.
+To see the options and usage examples simply call the scripts with the `-h` option: `python3 test__[rest of filename].py -h` and try the example.
 
 Sample files are located in the `./tests/sample_files` directory.
 
@@ -77,8 +77,8 @@ To create tagged EAXS files, the CoreNLP server will need to be started (default
 ## Using tagger.py from the command line
 1. Start the CoreNLP server with one of the startup scripts: `./NLP/stanford_edu/start_server.[bat|sh]`.
 2. Open another terminal instance.
-3. From the `./tomes_tagger` directory do: `py -3 tagger.py -h` to see an example command.
+3. From the `./tomes_tagger` directory do: `python3 tagger.py -h` to see an example command.
 4. Run the example command.
 
 -----
-*[1] Depending on your system configuration, you might need to specify "python3", etc. instead of "py -3" from the command line. Similar differences might apply for PIP.*
+*[1] Depending on your system configuration, you might need to specify "py -3", etc. instead of "python3" from the command line. Similar differences might apply for PIP.*

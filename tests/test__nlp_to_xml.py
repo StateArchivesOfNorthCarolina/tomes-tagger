@@ -63,7 +63,7 @@ class Test_NLPToXML(unittest.TestCase):
 def main(CSV_NER="Jane,stanford.edu/PERSON,|Doe,stanford.edu/PERSON,"):
     
     "Prints tagged message version of CSV-style NER text (line ending = '|'). \
-    \nexample: `py -3 test__nlp_to_xml.py 'Jane,PERSON, |Doe,PERSON,'`"
+    \nexample: `python3 test__nlp_to_xml.py 'Jane,PERSON, |Doe,PERSON,'`"
 
     # convert @CSV_NER to list of tuples.
     ner_data = [tuple(t.split(",")) for t in CSV_NER.split("|")]

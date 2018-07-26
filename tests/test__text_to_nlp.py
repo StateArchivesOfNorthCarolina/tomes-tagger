@@ -47,7 +47,7 @@ class Test_TextToNLP(unittest.TestCase):
 def main(text="North Carolina.", host="http://localhost:9003"):
 
     "Prints list of NER results.\
-    \nexample: `py -3 test__text_to_nlp.py 'Jane Doe'`"
+    \nexample: `python3 test__text_to_nlp.py 'Jane Doe'`"
 
     # print NER results.
     t2n = TextToNLP(host=host)
