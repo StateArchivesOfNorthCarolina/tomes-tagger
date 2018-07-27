@@ -18,7 +18,7 @@ logger.setLevel("INFO")
 HEADER = """<?xml version='1.0' encoding='UTF-8'?>
 <Account xmlns="https://github.com/StateArchivesOfNorthCarolina/tomes-eaxs"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://raw.githubusercontent.com/StateArchivesOfNorthCarolina/tomes-eaxs/master/eaxs_schema.xsd">
+xsi:schemaLocation="https://raw.githubusercontent.com/StateArchivesOfNorthCarolina/tomes-eaxs/master/versions/1/eaxs_schema_v1.xsd">
 <GlobalId>EXPORTED_MESSAGES</GlobalId>
 <Folder>
 """
