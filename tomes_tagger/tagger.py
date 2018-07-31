@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
-""" This module contains a class to convert an EAXS file to a tagged EAXS document. """
+""" This module contains a class for converting EAXS to 'tagged' EAXS. """
 
-__NAME__ = "tomes_tagger"
-__FULLNAME__ = "TOMES Tagger"
-__DESCRIPTION__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
-__URL__ = "https://github.com/StateArchivesOfNorthCarolina/tomes-tagger"
-__VERSION__ = "0.0.1"
-__AUTHOR__ = "Nitin Arora"
-__AUTHOR_EMAIL__ = "nitin.a.arora@ncdcr.gov"
+__name__ = "tomes_tagger"
+__fullname__ = "tomes tagger"
+__description__ = "part of the tomes project: creates a 'tagged' version of an eaxs file."
+__url__ = "https://github.com/statearchivesofnorthcarolina/tomes-tagger"
+__version__ = "0.0.1"
+__author__ = "nitin arora"
+__author_email__ = "nitin.a.arora@ncdcr.gov"
 
 # import modules.
 import sys; sys.path.append("..")
@@ -25,7 +25,7 @@ from tomes_tagger.lib.text_to_nlp import TextToNLP
 
 
 class Tagger():
-    """ A class to convert an EAXS file to a tagged EAXS document.
+    """ A class for converting EAXS to 'tagged' EAXS.
 
     Example:
         >>> sample = "../tests/sample_files/sampleEAXS.xml"
