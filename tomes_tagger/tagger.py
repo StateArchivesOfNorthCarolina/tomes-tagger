@@ -34,7 +34,7 @@ class Tagger():
     """
     
 
-    def __init__(self, host, check_host=False, charset="UTF-8"): 
+    def __init__(self, host, check_host=False, charset="utf-8"): 
         """ Sets instance attributes.
         
         Args:

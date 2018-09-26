@@ -36,7 +36,7 @@ class EAXSToTagged():
     """
 
 
-    def __init__(self, html_converter, nlp_tagger, charset="UTF-8", buffered=False):
+    def __init__(self, html_converter, nlp_tagger, charset="utf-8", buffered=False):
         """ Sets instance attributes.
 
         Args:
