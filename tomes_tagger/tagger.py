@@ -4,7 +4,7 @@
 
 __NAME__ = "tomes_tagger"
 __FULLNAME__ = "TOMES Tagger"
-__DESRIPTION__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
+__DESCRIPTION__ = "Part of the TOMES project: creates a 'tagged' version of an EAXS file."
 __URL__ = "https://github.com/statearchivesofnorthcarolina/tomes-tagger"
 __VERSION__ = "0.0.1"
 __AUTHOR__ = "Nitin Arora"
