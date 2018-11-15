@@ -34,7 +34,7 @@ class Tagger():
     """
     
 
-    def __init__(self, host, lynx="lynx", check_host=False, charset="utf-8"): 
+    def __init__(self, host, lynx_command="lynx", check_host=False, charset="utf-8"): 
         """ Sets instance attributes.
         
         Args:
@@ -58,7 +58,7 @@ class Tagger():
         # set attributes.
         self.host = host
         self.check_host = check_host
-        self.lynx = lynx
+        self.lynx_command = lynx_command
         self.charset = charset
 
         # if specified, verify host is active before creating instances of modules.
@@ -66,7 +66,7 @@ class Tagger():
             self._ping_host()
 
         # compose module instances.
-        self.h2t = HTMLToText(self.lynx)
+        self.h2t = HTMLToText(self.lynx_command)
         self.t2n = TextToNLP(self.host)
         self.n2x = NLPToXML()
         self.e2t = EAXSToTagged(self._html_convertor, self._text_tagger, self.charset)
