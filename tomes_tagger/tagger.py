@@ -34,12 +34,13 @@ class Tagger():
     """
     
 
-    def __init__(self, host, check_host=False, charset="utf-8"): 
+    def __init__(self, host, lynx="lynx", check_host=False, charset="utf-8"): 
         """ Sets instance attributes.
         
         Args:
             - host (str): The URL for the CoreNLP server (ex: "http://localhost:9003").
             - check_host (bool): Use True to test if @host is active. Otherwise, use False.
+            - lynx_command (str): The path to the "lynx" executable. 
             - charset (str): Optional encoding for the tagged EAXS.
         """
     
@@ -57,6 +58,7 @@ class Tagger():
         # set attributes.
         self.host = host
         self.check_host = check_host
+        self.lynx = lynx
         self.charset = charset
 
         # if specified, verify host is active before creating instances of modules.
@@ -64,7 +66,7 @@ class Tagger():
             self._ping_host()
 
         # compose module instances.
-        self.h2t = HTMLToText()
+        self.h2t = HTMLToText(self.lynx)
         self.t2n = TextToNLP(self.host)
         self.n2x = NLPToXML()
         self.e2t = EAXSToTagged(self._html_convertor, self._text_tagger, self.charset)

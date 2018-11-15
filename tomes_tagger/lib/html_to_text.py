@@ -181,8 +181,8 @@ class HTMLToText():
 
 
     def _make_temp_dir(self):
-        """ Creates a temporary folder inside "./_temp" in which to write temporary files for
-        the duration of the class instance.
+        """ Creates a temporary folder inside the current working directory + "./_temp" in 
+        which to write temporary files for the duration of the class instance.
         
         Returns:
             tempfile.TemporaryDirectory: The return value.
@@ -192,7 +192,7 @@ class HTMLToText():
         """
 
         # get absolute path of container folder.
-        container_dir = os.path.dirname(os.path.abspath(__file__))
+        container_dir = os.path.abspath(os.getcwd())
         container_dir = os.path.join(container_dir, "_temp")
         
         # verify container folder exists; if needed, create it.
@@ -227,7 +227,7 @@ class HTMLToText():
             str: The return value.
 
         Raises:
-            - FileNotFoundError: If the "lynx" command can't be called.
+            - RuntimeError: If the "lynx" command can't be called successfully.
         """
     
         # verify @html is a string or a file.
@@ -268,10 +268,11 @@ class HTMLToText():
             cmd = subprocess.run(cli_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, 
                     check=True)
             text = cmd.stdout.decode(encoding=charset, errors="backslashreplace")
-        except FileNotFoundError as err:
-            self.logger.error(err)
+        except subprocess.CalledProcessError as err:
             self.logger.warning("Couldn't convert HTML. Is Lynx installed and working?")
-            raise FileNotFoundError(err)
+            self.logger.error("stderr: {}".format(err.stderr))
+            self.logger.error(err)
+            raise RuntimeError(err)
           
         # if a temporary file was made, delete it. 
         # deletion method per: "https://www.logilab.org/blogentry/17873".
