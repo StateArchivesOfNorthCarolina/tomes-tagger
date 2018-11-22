@@ -15,6 +15,7 @@ Todo:
 
 # import modules.
 import logging
+import os
 import unicodedata
 from lxml import etree
 
@@ -38,7 +39,7 @@ class NLPToXML():
         self.logger.addHandler(logging.NullHandler())
         
         # get XSD filepath and parse XSD.
-        self.xsd_file = __file__.replace(".py", ".xsd")
+        self.xsd_file = os.path.splitext(__file__)[0] + ".xsd"
         self.xsd = etree.parse(self.xsd_file)
         
         # set namespace attributes.
