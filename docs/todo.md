@@ -1,6 +1,7 @@
 # Ideas for Future Work
 
 - Add a description about the difference between a "tagged" EAXS file and the original. This should probably go into a new Markdown file.
+- Because of workflow decisions, the tagging process continues even if a message or messages cannot be tagged (due to not having Lynx, timeouts, etc.) but the information about skipped messages that are skipped is in the log files. This should probably be outputted to the event logger and any METS templates in the `TOMES Packager` repository should be adjusted so that this information is stored in the PREMIS event related to tagging.
 - These three modules have a static method to remove control characters:	
 
 	- `./tomes_tagger/lib.eaxs_to_tagged`
