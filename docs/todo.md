@@ -1,5 +1,6 @@
 # Ideas for Future Work
 
+- Add a description about the difference between a "tagged" EAXS file and the original. This should probably go into a new Markdown file.
 - These three modules have a static method to remove control characters:	
 
 	- `./tomes_tagger/lib.eaxs_to_tagged`
