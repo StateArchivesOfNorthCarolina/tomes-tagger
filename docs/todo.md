@@ -9,7 +9,7 @@
 	- `./tomes_tagger/lib.text_to_nlp`
 	
 	Consider centralizing this function into a standalone module.
-- Both `./tomes_tagger/lib/eaxs_to_tagged.py` and `./tomes_tagger/lib/nlp_to_xml.py` declare the GitHub namespace URI for EAXS. Given that this URL might be volatile going forward, it might be better to establish this in `./tomes_tagger/tagger.py` and pass it down into those modules.
+- Both `./tomes_tagger/lib/eaxs_to_tagged.py` and `./tomes_tagger/lib/nlp_to_xml.py` declare the GitHub namespace URI for EAXS. Given that this URL might be volatile going forward, it might be better to establish this in `./tomes_tagger/tagger.py` and pass it down into those modules. This would also make it possible to pass a different URI via the command line.
 
 - It's possible that we could see improvements by using a different library to wrap CoreNLP. But we will need to investigate how this changes error handling, etc. In other words, this may not be a trivial change.
 
