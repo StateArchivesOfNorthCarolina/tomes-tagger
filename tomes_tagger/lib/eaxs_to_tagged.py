@@ -128,8 +128,15 @@ class EAXSToTagged():
             
         Returns:
             str: The return value.
+
+        Raises:
+            - ValueError: If the <GlobalId> is not found, indicating either a missing element
+            or a namespace URI that doesn't match @self.ncdcr_uri.
         """
 
+        # create placeholder for global identifier.
+        global_id = None
+        
         # find <GlobalId> element value and break immediately (to avoid memory spikes!).
         global_id_tag = "{" + self.ncdcr_uri + "}GlobalId"
         for event, element in etree.iterparse(eaxs_file, events=("end",), strip_cdata=False,
@@ -138,6 +145,12 @@ class EAXSToTagged():
             global_id = global_id_el.text
             element.clear()
             break
+
+        # if needed, raise an exception.
+        if global_id is None:
+            msg = "Can't find <GlobalId> element."
+            self.logger.error(msg)
+            raise TypeError(msg)
 
         return global_id
 
@@ -535,6 +548,8 @@ class EAXSToTagged():
         Raises:
             - FileNotFoundError: If @eaxs_file doesn't exist or if the containing folder for 
             @tagged_eaxs_file doesn't exist.
+            - ValueError: If a <Message> element is found with a namespace URI that doesn't 
+            match @self.ncdcr_uri.
         """
 
         # raise error if @eaxs_file doesn't exist.
@@ -549,14 +564,26 @@ class EAXSToTagged():
             err = "Destination folder '{}' does not exist.".format(container)
             self.logger.error(err)
             raise FileNotFoundError(err)
-        
+ 
+        self.logger.info("Finding number of messages in '{}'; this may take a while.".format(
+            eaxs_file)) 
+
         # get count of <Message> elements.
-        msg = "Finding number of messages in '{}'; this may take a while.".format(eaxs_file)
-        self.logger.info(msg) 
         total_messages = 0
         for event, element in self._get_messages(eaxs_file):
+
+            # test for the correct namespace URI.
+            if self.ncdcr_uri not in element.nsmap.values():
+                self.logger.warning("Namespace URI appears to be obsolete.")
+                msg = "Expected namespace URI '{}' not found in namespace map: {}".format(
+                        self.ncdcr_uri, element.nsmap)
+                self.logger.error(msg)
+                raise ValueError(msg)
+
+            # augment message count.
             total_messages += 1
             element.clear()
+
         self.logger.info("Found {} messages.".format(total_messages))
         
         # get needed values for @eaxs_file.
