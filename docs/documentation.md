@@ -8,6 +8,8 @@ Its purpose is to create a "tagged" version of EAXS.
 
 The tagged version of the EAXS file is meant to contain email messages that have been tagged by Name Entity Recognition (NER) tools. It uses a modified version of the original EAXS format.
 
+*For more information on individual messages with the tagged EAXS file, see the `tagged_eaxs_message_example.md` file located in the same directory as this documentation file.*
+
 # External Dependencies
 TOMES Tagger requires the following:
 
