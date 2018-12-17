@@ -20,7 +20,7 @@ TOMES Tagger requires the following:
 	- The "lynx" command must be executable from any directory on your system.
 		- For Windows, this will likely require editing your Environmental Variables "PATH" to include the path to the lynx.exe file.
 - [Stanford CoreNLP](https://stanfordnlp.github.io/CoreNLP/) 3.7+ (using 3.7.0)
-	- Please see the CoreNLP documentation for Java and memory requirements, etc.
+	- Please see the CoreNLP documentation for Java and memory requirements, etc. A minimum of 8 gigs of RAM is recommended.
 	- If you want to use the TOMES Project NER mappings, you must place the `./NLP/stanford_edu/stanford-corenlp-full-2016-10-31/regexner_TOMES` directory and its files into the CoreNLP directory that contains the master JAR file (~"stanford-corenlp-3.7.0.jar").
 
 # Installation
