@@ -1,4 +1,4 @@
-#Tagged EAXS: message example
+# Tagged EAXS: message example
 
 Let's consider a basic messages within an EAXS file:
 
