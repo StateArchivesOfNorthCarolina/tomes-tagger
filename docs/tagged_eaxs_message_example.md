@@ -26,6 +26,6 @@ Note that whitespace within the original message is considered significant. Ther
 ### StrippedContent element
 The `StrippedContent` element is simply a plain-text version of the message found within the tagged EAXS file **if** the message was originally in HTML format.
 
-If the original message was in HTML format, it is this "stripped" version of the original message that is subjected to Named Entity Recognition.
+If the original message was in HTML format, it is this "stripped" version of the original message that is subjected to Named Entity Recognition. Otherwise, entities are found within the original, plain-text message.
 
 
