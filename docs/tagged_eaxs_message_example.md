@@ -2,7 +2,7 @@
 
 Consider this basic example message within an EAXS file:
 
-> `TOMES is a multi-state partnership that includes Kansas <http://www.kshs.org/>, Utah <http://archives.utah.gov/> and North Carolina <http://archives.ncdcr.gov/> ...`
+>`TOMES is a multi-state partnership that includes Kansas <http://www.kshs.org/>, Utah <http://archives.utah.gov/> and North Carolina <http://archives.ncdcr.gov/> ...`
 
 This message would be found within the `/Account/Folder/Message/MultiBody/SingleBody/BodyContent/Content` EAXS XML element.
 
