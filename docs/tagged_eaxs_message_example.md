@@ -6,13 +6,15 @@ Let's consider a basic messages within an EAXS file:
 g/, Utah <http://archives.utah.gov/ and North Carolina <http://archives=
 .ncdcr.gov/ ...
 
-This message would be found within the EAXS XML element `/Account/Folder/Message/MultiBody/SingleBody/BodyContent/Content`.
+This message would be found within the EAXS XML element:
+
+- `/Account/Folder/Message/MultiBody/SingleBody/BodyContent/Content`
 
 ## Tagged EAXS elements
 Tagged EAXS files contain two additional message-related XML elements:
 
-1. `/ncdcr:Account/Message/MultiBody/SingleBody/TaggedContent`
-2. `/ncdcr:Account/Message/MultiBody/SingleBody/StrippedContent`
+1. `/Account/Message/MultiBody/SingleBody/TaggedContent`
+2. `/Account/Message/MultiBody/SingleBody/StrippedContent`
 
 ### TaggedContent element
 The `TaggedContent` element's value would contain a semantic version of the message as follows:
@@ -27,5 +29,3 @@ Note that whitespace within the original message is considered significant. Ther
 The `StrippedContent` element is simply a plain-text version of the message found within the tagged EAXS file **if** the message was originally in HTML format.
 
 If the original message was in HTML format, it is this "stripped" version of the original message that is subjected to Named Entity Recognition. Otherwise, entities are found within the original, plain-text message.
-
-
