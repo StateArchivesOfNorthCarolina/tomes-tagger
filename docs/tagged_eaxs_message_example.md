@@ -8,8 +8,8 @@ g/, Utah <http://archives.utah.gov/ and North Carolina <http://archives=
 
 This message would be found within the EAXS XML element `/Account/Folder/Message/MultiBody/SingleBody/BodyContent/Content`.
 
-## TOMES Tagger elements
-Using **TOMES Tagger**, a tagged EAXS file would contain two additional message-related XML elements:
+## Tagged EAXS elements
+Tagged EAXS files contain two additional message-related XML elements:
 
 1. `/ncdcr:Account/Message/MultiBody/SingleBody/TaggedContent`
 2. `/ncdcr:Account/Message/MultiBody/SingleBody/StrippedContent`
@@ -26,6 +26,6 @@ Note that whitespace within the original message is considered significant. Ther
 ### StrippedContent element
 The `StrippedContent` element is simply a plain-text version of the message found within the tagged EAXS file **if** the message was originally in HTML format.
 
-If the original message was in HTML format, it is this "stripped" version of the original message that is subjected to Named Entity Recognition.
+If the original message was in HTML format, it is this "stripped" version of the original message that is subjected to Named Entity Recognition. Otherwise, entities are found within the original, plain-text message.
 
 
