@@ -8,8 +8,8 @@ g/, Utah <http://archives.utah.gov/ and North Carolina <http://archives=
 
 This message would be found within the EAXS XML element `/Account/Folder/Message/MultiBody/SingleBody/BodyContent/Content`.
 
-## TOMES Tagger elements
-Using **TOMES Tagger**, a tagged EAXS file would contain two additional message-related XML elements:
+## Tagged EAXS elements
+Tagged EAXS files contain two additional message-related XML elements:
 
 1. `/ncdcr:Account/Message/MultiBody/SingleBody/TaggedContent`
 2. `/ncdcr:Account/Message/MultiBody/SingleBody/StrippedContent`
