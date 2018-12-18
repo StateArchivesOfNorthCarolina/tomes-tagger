@@ -1,6 +1,6 @@
 # Tagged EAXS: message example
 
-Let's consider a basic messages within an EAXS file:
+Consider this basic example message within an EAXS file:
 
 > TOMES is a multi-state partnership that includes Kansas <http://www.kshs.or=
 g/, Utah <http://archives.utah.gov/ and North Carolina <http://archives=
