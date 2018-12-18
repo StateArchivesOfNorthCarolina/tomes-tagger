@@ -6,7 +6,9 @@ Let's consider a basic messages within an EAXS file:
 g/, Utah <http://archives.utah.gov/ and North Carolina <http://archives=
 .ncdcr.gov/ ...
 
-This message would be found within the EAXS XML element `/Account/Folder/Message/MultiBody/SingleBody/BodyContent/Content`.
+This message would be found within the EAXS XML element:
+
+- `/Account/Folder/Message/MultiBody/SingleBody/BodyContent/Content`
 
 ## Tagged EAXS elements
 Tagged EAXS files contain two additional message-related XML elements:
