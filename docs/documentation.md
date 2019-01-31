@@ -67,7 +67,7 @@ TOMES Tagger consists of single-purpose high, level module, `tagger.py`. It can 
 *Before creating a tagged EAXS file, please make sure that you have free disk space that is approximately 1.5 to 2 times greater than the size of your source EAXS file.*
 
 ## Using tagger.py with Python
-To get started, import the module and run help():
+To get started, import the module and run `help()`:
 
 	>>> from tomes_tagger import tagger
 	>>> help(tagger)
